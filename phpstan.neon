@@ -10,6 +10,7 @@ parameters:
 	paths:
 		- app
 		- system
+		- libraries
 	excludePaths:
 		- app/log/*
 		- system/log/*
