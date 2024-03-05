@@ -1,7 +1,7 @@
 {
     "name": "luminovang/luminova",
-    "description": "Luminova PHP framework design for speed",
-    "keywords": ["Framework","PHP","MVC","PHP Framework", "Luminova", "PHP Luminova Framework", "Luminova Ng", "PHP Luminova"],
+    "description": "PHP Luminova framework, simple yet powerful framework design for speed",
+    "keywords": ["Framework", "PHP", "MVC", "PHP Framework", "Luminova", "PHP Luminova Framework", "Luminova Ng", "PHP Luminova"],
     "license": "MIT",
     "type": "project",
     "homepage": "https://github.com/luminovang/luminova",
@@ -13,9 +13,9 @@
         "ext-json": "*",
         "ext-mbstring": "*",
         "luminovang/framework": "^1.0",
+        "psr/cache": "^3.0",
         "psr/log": "^1.1",
-        "psr/simple-cache": "^3.0",
-        "psr/cache": "^3.0"
+        "psr/simple-cache": "^3.0"
     },
     "require-dev": {
         "phpstan/extension-installer": "^1.3",
@@ -28,7 +28,7 @@
     "suggest": {
         "ext-curl": "Needed if you use CURLRequest class",
         "ext-exif": "Needed if you run Image class tests",
-        "ext-fileinfo": "Needed to improve mime type detection for files",
+        "ext-fileinfo": "Needed to improves mime type detection for files",
         "ext-gd": "Needed if you use Image class GDHandler",
         "ext-imagick": "Needed if you use Image class ImageMagickHandler",
         "ext-memcache": "Needed if you use Cache class MemcachedHandler with Memcache",
@@ -45,8 +45,12 @@
             "libraries/sys/helpers.php"
         ],
         "psr-4": {
+            "Luminova\\": "system/",
             "App\\Controllers\\": "app/Controllers/"
-        }
+        },
+        "exclude-from-classmap": [
+            "system/plugins/luminovang/framework/"
+        ]
     }, 
     "autoload-dev": {
         "psr-4": {
@@ -60,7 +64,7 @@
         "optimize-autoloader": true,
         "sort-packages": true,
         "preferred-install": "dist",
-        "vendor-dir": "system"
+        "vendor-dir": "system/plugins"
     },
     "extra": {
         "branch-alias": {
@@ -69,10 +73,12 @@
     },
     "scripts": {
         "post-update-cmd": [
-            "Luminova\\Composer\\Updater::AfterUpdate"
+            "Composer\\Config::disableProcessTimeout",
+            "Luminova\\Composer\\Updater::update"
         ],                        
         "post-create-project-cmd": [
-            "Luminova\\Composer\\Updater::InstallFiles"
+            "Composer\\Config::disableProcessTimeout",
+            "Luminova\\Composer\\Updater::install"
         ],
         "analyze-app": [
             "Composer\\Config::disableProcessTimeout",
@@ -81,14 +87,23 @@
         "analyze-code": [
             "Composer\\Config::disableProcessTimeout",
             "rector process --dry-run"
+        ],
+        "build-app": [
+            "Composer\\Config::disableProcessTimeout",
+            "php builder.phar --type=build"
+        ],
+        "archive-app": [
+            "Composer\\Config::disableProcessTimeout",
+            "php builder.phar --type=zip"
         ]
     },
     "scripts-descriptions": {
+        "post-update-cmd": "Update framework",
+        "post-create-project-cmd": "Install and configure project",
         "analyze-app": "Run static analysis",
         "analyze-code": "Analyze coding style",
         "build-app": "Build project for production",
-        "archive-app": "Export project files as zip",
-        "test": "Run unit tests"
+        "archive-app": "Export project files as zip"
     },
     "minimum-stability": "stable",
     "prefer-stable": true
