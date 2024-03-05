@@ -3,10 +3,24 @@
 /** @var \App\Controllers\Application $app */
 
 
-$router->get('/', 'PageController::index');
+/**
+ * Register Before Middleware
+ * A global middleware that run before each request
+ * If you return STATUS_ERROR the operation will be terminated else STATUS_OK
+ * 
+ * @example $router->before('GET|POST', '/*.', 'YourMiddleware::security');
+ * @example 
+ * $router->before('GET|POST', '/.*', function() use($app){
+ *      if($app->session->online()){
+ *          $app->view('login)->render();
+ *          return STATUS_OK;
+ *      } 
+ *      return STATUS_OK;
+ * });
+ *
+*/
 
-$router->bind('/docs', function() use($router) {
-    $router->get('/', 'PageController::docs');
-    $router->get('/([0-9-.]+)', 'PageController::docs');
-    $router->get('/([0-9-.]+)/([a-zA-Z0-9-]+)', 'PageController::doc');
-});
+ /**
+  * Register router main page view
+ */
+$router->get('/', 'Welcome::page');
