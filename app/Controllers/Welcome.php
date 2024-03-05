@@ -29,7 +29,6 @@ class Welcome extends BaseViewController
                 "code" => 200,
                 "version" => BaseConfig::version(),
                 "framework" => BaseConfig::copyright(),
-                //"details" => "The endpoint [" . $this->getView() . "] you are trying to access does not exist.",
                 "timestamp" => date("Y-m-d H:i:s")
             ]
         ]);
