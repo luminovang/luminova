@@ -543,19 +543,21 @@ if (!function_exists('is_associative')) {
 if (!function_exists('to_array')) {
     /**
      * Convert an object to an array.
+     * Convert string list to array 
+     * Convert any input supplied to an array
      *
-     * @param mixed $object The object to convert to an array.
+     * @param mixed $input The object to convert to an array.
      * 
      * @return array $array Finalized array representation of the object
      */
-    function to_array(mixed $object): array 
+    function to_array(mixed $input): array 
     {
-        if (!is_object($object)) {
-            return (array) $object;
+        if (!is_object($input)) {
+            return (array) $input;
         }
     
         $array = [];
-        foreach ($object as $key => $value) {
+        foreach ($input as $key => $value) {
             $array[$key] = is_object($value) ? to_array($value) : $value;
         }
 
@@ -564,24 +566,90 @@ if (!function_exists('to_array')) {
     
 }
 
-if (!function_exists('to_array')) {
+if (!function_exists('to_object')) {
     /**
      * Convert an array to json object
      *
-     * @param array $arrayArray to convert
+     * @param array|string $input Array or String list to convert
      * 
      * @return object $object
      */
-    function to_object(array $array): object 
+    function to_object(array $input): object 
     {
 
-        if ($array === []) {
+        if ($input === []) {
             return (object) [];
         }
     
-        $object = json_decode(json_encode($array));
+        $object = json_decode(json_encode($input));
 
         return $object;
+    }
+}
+
+if (!function_exists('list_to_array')) {
+    /**
+     * Convert string list to array 
+     * 
+     * @example list_to_array('a,b,c') => ['a', 'b', 'c']
+     * @example list_to_array('"a","b","c"') => ['a', 'b', 'c']
+     * 
+     * @param string $list string list
+     * @return array $matches
+    */
+    function list_to_array(string $list): array 
+    {
+        if($list === ''){
+            return [];
+        }
+
+        $matches = [];
+
+        preg_match_all("/'([^']+)'/", $list, $matches);
+    
+        if (!empty($matches[1])) {
+            return $matches[1];
+        }
+
+        preg_match_all('/(\w+)/', $list, $matches);
+
+        if (!empty($matches[1])) {
+            return $matches[1];
+        }
+
+        return [];
+    }
+}
+
+if (!function_exists('list_in_array')) {
+   /**
+     * Check if string list exist in array 
+     * If any of the list doesn't exist in array it will return false
+     * First it will have to convert the list to array using list_to_array()
+     * 
+     * @param string $list string list
+     * @param array $array Array to map list to
+     * 
+     * @return bool exist or not
+    */
+    function list_in_array(string $list, array $array = []): bool 
+    {
+        if($array === [] && $list === ''){
+            return true;
+        }
+
+        if($array === [] || $list === ''){
+            return false;
+        }
+
+        $map = list_to_array($list);
+        foreach ($map as $item) {
+            if (!in_array($item, $array)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
 
