@@ -26,4 +26,4 @@ parameters:
 	treatPhpDocTypesAsCertain: false
 
 services:
-	- Luminova\Config\PHPStanRules
+	- Luminova\Debugger\PHPStanRules
