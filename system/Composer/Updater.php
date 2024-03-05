@@ -133,7 +133,6 @@ class Updater
     {
         if (!file_exists($destination)) {
             copy($source, $destination);
-            echo "Copied: $source to $destination\n";
         }
     }
 
@@ -227,7 +226,6 @@ class Updater
     {
         if (!is_dir($path)) {
             mkdir($path, 0755, true);
-            echo "Created directory: " . dirname($path) . "\n";
         }
     }
 
