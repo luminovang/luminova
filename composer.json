@@ -1,0 +1,112 @@
+{
+    "name": "nanoblocktech/luminova",
+    "description": "Luminova PHP framework design for speed",
+    "keywords": ["framework","php","api","router", "luminova", "php luminova framework", "php framework", "php luminova"],
+    "license": "MIT",
+    "type": "project",
+    "homepage": "https://github.com/nanoblocktech/luminova",
+    "support": {
+        "source": "https://github.com/nanoblocktech/luminova/"
+    },
+    "require": {
+        "php": "^8.0",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "nanoblocktech/markdown": "^1.4",
+        "peterujah/php-google-translator": "^2.7",
+        "psr/cache": "^3.0",
+        "psr/log": "^1.1",
+        "psr/simple-cache": "^3.0",
+        "nanoblocktech/psr-cache": "^1.0"
+    },
+    "require-dev": {
+        "phpstan/extension-installer": "^1.3",
+        "phpstan/phpstan": "^1.10.2",
+        "nikic/php-parser": "^4.17.1",
+        "rector/rector": "0.18.3",
+        "phpunit/phpunit": "^9.1",
+        "smarty/smarty": "^4.3"
+    },
+    "suggest": {
+        "ext-curl": "Needed if you use CURLRequest class",
+        "ext-exif": "Needed if you run Image class tests",
+        "ext-fileinfo": "Needed to improves mime type detection for files",
+        "ext-gd": "Needed if you use Image class GDHandler",
+        "ext-imagick": "Needed if you use Image class ImageMagickHandler",
+        "ext-memcache": "Needed if you use Cache class MemcachedHandler with Memcache",
+        "ext-memcached": "Needed if you use Cache class MemcachedHandler with Memcached",
+        "ext-mysqli": "Needed if you use MySQL",
+        "ext-intl": "Needed if you use Local",
+        "psr/log": "Needed to use PSR logging",
+        "phpmailer/phpmailer": "Needed if you use Mailer",
+        "smarty/smarty": "Needed if you use Template engine"
+    },
+    "autoload": {
+        "files": [
+            "libraries/sys/functions.php",
+            "libraries/sys/helpers.php"
+        ],
+        "psr-4": {
+            "Luminova\\": "system/",
+            "App\\Controllers\\": "app/Controllers/"
+        },
+        "exclude-from-classmap": [
+            "system/plugins/nanoblocktech/psr-cache/"
+        ]
+    }, 
+    "autoload-dev": {
+        "psr-4": {
+            "Luminova\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        },
+        "optimize-autoloader": true,
+        "sort-packages": true,
+        "vendor-dir": "system/plugins"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-develop": "1.x-dev"
+        }
+    },
+    "scripts": {
+        "pre-update-cmd": [
+            "Luminova\\Composer\\Updater::BeforeUpdate"
+        ], 
+        "post-update-cmd": [
+            "Luminova\\Composer\\Updater::AfterUpdate"
+        ],                        
+        "post-create-project-cmd": [
+            "Luminova\\Composer\\Updater::InstallFiles"
+        ],
+        "analyze-app": [
+            "Composer\\Config::disableProcessTimeout",
+            "bash -c \"XDEBUG_MODE=off phpstan analyse --memory-limit 3000M\""
+        ],
+        "analyze-code": [
+            "Composer\\Config::disableProcessTimeout",
+            "rector process --dry-run"
+        ],
+        "build-app": [
+            "Composer\\Config::disableProcessTimeout",
+            "php builder.phar --type=build"
+        ],
+        "archive-app": [
+            "Composer\\Config::disableProcessTimeout",
+            "php builder.phar --type=zip"
+        ],
+        "test": "phpunit"
+    },
+    "scripts-descriptions": {
+        "analyze-app": "Run static analysis",
+        "analyze-code": "Analyze coding style",
+        "build-app": "Build project for production",
+        "archive-app": "Export project files as zip",
+        "test": "Run unit tests"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
