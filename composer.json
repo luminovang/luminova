@@ -1,23 +1,19 @@
 {
-    "name": "nanoblocktech/luminova",
+    "name": "luminovang/luminova",
     "description": "Luminova PHP framework design for speed",
-    "keywords": ["framework","php","api","router", "luminova", "php luminova framework", "php framework", "php luminova"],
+    "keywords": ["Framework","PHP","MVC","PHP Framework", "Luminova", "PHP Luminova Framework", "Luminova Ng", "PHP Luminova"],
     "license": "MIT",
     "type": "project",
-    "homepage": "https://github.com/nanoblocktech/luminova",
+    "homepage": "https://github.com/luminovang/luminova",
     "support": {
-        "source": "https://github.com/nanoblocktech/luminova/"
+        "source": "https://github.com/luminovang/luminova/"
     },
     "require": {
         "php": "^8.0",
         "ext-json": "*",
         "ext-mbstring": "*",
-        "nanoblocktech/markdown": "^1.4",
-        "peterujah/php-google-translator": "^2.7",
-        "psr/cache": "^3.0",
-        "psr/log": "^1.1",
-        "psr/simple-cache": "^3.0",
-        "nanoblocktech/psr-cache": "^1.0"
+        "luminovang/framework": "^1.0",
+        "psr/log": "^1.1"
     },
     "require-dev": {
         "phpstan/extension-installer": "^1.3",
@@ -30,7 +26,7 @@
     "suggest": {
         "ext-curl": "Needed if you use CURLRequest class",
         "ext-exif": "Needed if you run Image class tests",
-        "ext-fileinfo": "Needed to improves mime type detection for files",
+        "ext-fileinfo": "Needed to improve mime type detection for files",
         "ext-gd": "Needed if you use Image class GDHandler",
         "ext-imagick": "Needed if you use Image class ImageMagickHandler",
         "ext-memcache": "Needed if you use Cache class MemcachedHandler with Memcache",
@@ -73,9 +69,6 @@
         }
     },
     "scripts": {
-        "pre-update-cmd": [
-            "Luminova\\Composer\\Updater::BeforeUpdate"
-        ], 
         "post-update-cmd": [
             "Luminova\\Composer\\Updater::AfterUpdate"
         ],                        
@@ -89,16 +82,7 @@
         "analyze-code": [
             "Composer\\Config::disableProcessTimeout",
             "rector process --dry-run"
-        ],
-        "build-app": [
-            "Composer\\Config::disableProcessTimeout",
-            "php builder.phar --type=build"
-        ],
-        "archive-app": [
-            "Composer\\Config::disableProcessTimeout",
-            "php builder.phar --type=zip"
-        ],
-        "test": "phpunit"
+        ]
     },
     "scripts-descriptions": {
         "analyze-app": "Run static analysis",
