@@ -114,7 +114,9 @@ class Updater
     */
     private static function isUpdater(string $dest): bool 
     {
-        if(in_array($dest, ['Composer/Updater.php', '/Composer/Updater.php', 'system/Composer/Updater.php'])){
+        $file = 'Composer/Updater.php';
+
+        if(in_array($dest, [$file, '/' . $file, 'system/' . $file, '/system/' . $file])){
             return true;
         }
 
