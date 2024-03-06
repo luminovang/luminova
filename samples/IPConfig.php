@@ -10,10 +10,15 @@
 
 namespace App\Controllers\Config;
 
+/**
+ * This IPConfig class is responsible 
+ * for retrieving client ip address information
+ * Using a third party api Service like https://ipapi.co or https://iphub.info
+*/
 final class IPConfig
 {
     /**
-     * Specify the IP address api provide 
+     * Specify the IP address information API provide 
      * Available are ipapi and iphub
      * 
      * @var string $apiProvider ['ipapi', 'iphub']
@@ -33,5 +38,5 @@ final class IPConfig
      * 
      * @var string $apiKey
     */
-    public static string $apiKey = 'MjMyNDU6YWhJY045WGtqWHdhZVlybE5peEhpUGFpZ0ZEZkpuSWY=';
+    public static string $apiKey = '';
  }

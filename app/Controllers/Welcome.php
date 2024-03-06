@@ -9,8 +9,8 @@
  */
 namespace App\Controllers;
 
-use Luminova\Base\BaseViewController;
-use Luminova\Base\BaseConfig;
+use \Luminova\Base\BaseViewController;
+use \App\Controllers\Config\Config;
 
 class Welcome extends BaseViewController 
 {
@@ -27,8 +27,8 @@ class Welcome extends BaseViewController
             "error" => [
                 "status" => "OK",
                 "code" => 200,
-                "version" => BaseConfig::version(),
-                "framework" => BaseConfig::copyright(),
+                "version" => Config::version(),
+                "framework" => Config::copyright(),
                 "timestamp" => date("Y-m-d H:i:s")
             ]
         ]);

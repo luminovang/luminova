@@ -428,22 +428,24 @@ if(!function_exists('import')) {
      * Translate multiple languages it supports nested array
      *
      * @param string $lookup line to lookup
-     * @param string $default Fallback translation if not found
+     * @param string|null $default Fallback translation if not found
+     * @param string|null $locale
      * @param array $placeholders Matching placeholders for translation
      *    - @example array ['Peter', 'peter@foo.com] "Error name {0} and email {1}"
      *    - @example array ['name' => 'Peter', 'email' => 'peter@foo.com] "Error name {name} and email {email}"
-     * @param ?string $locale
+     * 
      * 
      * @return string $translation
      * @throws Exception if translation is not found and default is not provided
      */
     function lang(
         string $lookup, 
-        string $default = '', 
-        array $placeholders = [], 
-        ?string $locale = null
+        ?string $default = null, 
+        ?string $locale = null,
+        array $placeholders = []
     ): string
     {
+        $default ??= '';
         $language = Services::language();
 
         $defaultLocal = $language->getLocale();
