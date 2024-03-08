@@ -9,7 +9,6 @@
  */
 use \Luminova\Application\Services;
 use \Luminova\Http\Request;
-use \Luminova\Logger\NovaLogger;
 use \Luminova\Cookies\Cookie;
 use \Luminova\Functions\Functions;
 use \Countable;
@@ -419,7 +418,8 @@ if(!function_exists('import')) {
      */
     function logger(string $level, string $message, array $context = []): void
     {
-        (new NovaLogger())->log($level, $message, $context);
+        $logger = Services::logger();
+        $logger->log($level, $message, $context);
     }
  }
 
@@ -500,6 +500,26 @@ if (!function_exists('root')) {
     }
 }
 
+if (!function_exists('path')) {
+    /**
+    * Get directory if name is null Paths instance will be returned
+    * 
+    * @param string|null $name Path name to return [system, plugins, library, controllers, writeable, logs, caches,
+    *          public, assets, views, routes, languages]
+    * 
+    * @return string|Paths|Services::paths 
+   */
+   function path(null|string $name = null): string|object
+   {
+        $path = Services::paths();
+        if ($name === null) {
+            return $path;
+        }
+        
+        return $path->{$name} ?? ''; 
+   }
+}
+
 if (!function_exists('is_nested')) {
      /**
      * Check if array is a nested array
@@ -513,7 +533,7 @@ if (!function_exists('is_nested')) {
         if ($array === []) {
             return false;
         }
-        
+
         foreach ($array as $value) {
             if (is_array($value)) {
                 return true; 
