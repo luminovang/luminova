@@ -1,6 +1,5 @@
 .DS_Store
 /test
-/tests
 /log
 /dump
 /writeable/caches
@@ -13,3 +12,11 @@ cli.help
 .fleet
 .idea
 .vscode
+# Ignore all folders within /system/
+/system/*/
+
+# Except for 
+!.gitkeep
+!/system/Composer/
+!/system/Debugger/
+!/system/plugins/

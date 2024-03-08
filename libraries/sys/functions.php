@@ -513,7 +513,7 @@ if (!function_exists('is_nested')) {
         if ($array === []) {
             return false;
         }
-
+        
         foreach ($array as $value) {
             if (is_array($value)) {
                 return true; 
@@ -578,7 +578,6 @@ if (!function_exists('to_object')) {
      */
     function to_object(array $input): object 
     {
-
         if ($input === []) {
             return (object) [];
         }

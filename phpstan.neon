@@ -12,8 +12,8 @@ parameters:
 		- system
 		- libraries
 	excludePaths:
-		- app/log/*
-		- system/log/*
+		- writeable/*
+		- samples/*
 		- system/plugins/*
 		- builds/*
 		- dump/*

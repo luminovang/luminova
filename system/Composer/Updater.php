@@ -133,7 +133,7 @@ class Updater
     */
     private static function checkAndCopyFile(string $destination, string $source): void
     {
-        if (!file_exists($destination)) {
+        if (file_exists($source) && !file_exists($destination)) {
             copy($source, $destination);
         }
     }

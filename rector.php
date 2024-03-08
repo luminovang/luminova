@@ -56,7 +56,7 @@ return static function (RectorConfig $rectorConfig): void {
         __DIR__ . '/resources',
         __DIR__ . '/routes',
         __DIR__ . '/libraries',
-        __DIR__ . '/bootstrap',
+        __DIR__ . '/public',
     ]);
 
     $rectorConfig->phpstanConfigs([

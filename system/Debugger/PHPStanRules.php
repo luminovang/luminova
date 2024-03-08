@@ -8,7 +8,7 @@
  * @license See LICENSE file
  */
 declare(strict_types=1);
-namespace Luminova\Debugger;
+namespace Luminova\Debugger; 
 
 use \PhpParser\Comment\Doc;
 use \PhpParser\Node;

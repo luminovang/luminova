@@ -8,7 +8,7 @@
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
  */
-require_once(__DIR__ . '/system/plugins/autoload.php');
+require __DIR__ . '/bootstrap/cli.php';
 
 $options = getopt('', ["type:"]);
 
