@@ -36,7 +36,9 @@ class Updater
     public static function update(): void 
     {
         if (getenv('LM_DEBUG_MODE') === false) { 
-            static::onInstallAndUpdateFramework('system/', static::$frameworkPath, 'src/');
+            if(static::onInstallAndUpdate('libraries/sys/', static::$frameworkPath, 'libraries/sys/')){
+                static::onInstallAndUpdate('system/', static::$frameworkPath, 'src/', true);
+            }
         }
     }
 
@@ -48,7 +50,7 @@ class Updater
     public static function install(): void 
     {
         if (getenv('LM_DEBUG_MODE') === false) {
-            static::onInstallAndUpdateFramework('system/', static::$frameworkPath, 'src/');
+            static::onInstallAndUpdate('system/', static::$frameworkPath, 'src/', true);
             static::checkAndCopyFile('.env', 'samples/.env');
             static::checkAndCopyFile('meta.config.json', 'samples/meta.config.json');
             static::checkAndCopyFile('class.config.php', 'samples/class.config.php');
@@ -250,10 +252,11 @@ class Updater
      * @param string $destination
      * @param string $source
      * @param string $codes sub folder to start looking
+     * @param bool $complete complete
      * 
-     * @return void  
+     * @return bool  
     */
-    private static function onInstallAndUpdateFramework(string $destination, string $source,  string $codes): void
+    private static function onInstallAndUpdate(string $destination, string $source,  string $codes, bool $complete = false): bool
     {
         $fullSource = $source . $codes;
         if(file_exists($fullSource)){
@@ -286,15 +289,36 @@ class Updater
                 }
             }
 
-            static::removeRecursive(dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . $source, 'framework');
-            exec('LM_DEBUG_MODE=1 composer dumpautoload', $output, $returnCode);
-            foreach ($output as $line) {
-                static::cli()?->writeln('Dumping:   ' . $line);
-            }
 
-            if ($returnCode === 0) {
-                static::cli()?->writeln('Update was completed version [' . BaseConfig::$version??'1.5.0' . ']', 'green');
+            if($complete){
+                $base = dirname(__DIR__, 2) . DIRECTORY_SEPARATOR;
+                $toDos = $base . $source . 'TODO.md';
+                $currentTodo = $base . 'TODO.md';
+                $hasTodo = false;
+
+                if(file_exists($toDos) && static::fileChanged($toDos, $currentTodo)){
+                    $hasTodo = true;
+                    if (copy($toDos, $currentTodo)) {
+                        unlink($toDos);
+                    }
+                }
+
+                static::removeRecursive($base . $source, 'framework');
+                exec('LM_DEBUG_MODE=1 composer dumpautoload', $output, $returnCode);
+                foreach ($output as $line) {
+                    static::cli()?->writeln('Dumping:   ' . $line);
+                }
+
+                if ($returnCode === 0) {
+                    static::cli()?->writeln('Update was completed version [' . BaseConfig::$version??'1.5.0' . ']', 'green');
+                    if($hasTodo){
+                        static::cli()?->writeln('TODO ATTENTION!', 'red');
+                        static::cli()?->writeln('Please see /TODO.md to few manual associated with the current version update');
+                    }
+                }
             }
         }
+
+        return true;
     }
 }

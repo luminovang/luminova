@@ -6,13 +6,13 @@ Installing via Composer is recommended because it keeps Framework up to date eas
 ##### Installation via composer 
 
 ```bash
-composer create-project luminova/luminova project-root
+composer create-project luminovang/luminova project-root
 ```
 
 ##### Installation via git
 
 ```bash
-$ git clone https://github.com/luminova/luminova
+$ git clone https://github.com/luminovang/luminova
 $ composer install
 $ composer test
 ```

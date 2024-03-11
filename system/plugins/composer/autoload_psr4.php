@@ -6,6 +6,9 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname(dirname($vendorDir));
 
 return array(
-    'Luminova\\' => array($baseDir . '/system'),
+    'Psr\\SimpleCache\\' => array($vendorDir . '/psr/simple-cache/src'),
+    'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
+    'Psr\\Cache\\' => array($vendorDir . '/psr/cache/src'),
+    'Luminova\\' => array($baseDir . '/system', $vendorDir . '/luminovang/framework/src'),
     'App\\Controllers\\' => array($baseDir . '/app/Controllers'),
 );

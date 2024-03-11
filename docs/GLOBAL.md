@@ -47,19 +47,21 @@ Sets or retrieves cookie values.
  * @param string $name    The name of the cookie.
  * @param string $value   The value of the cookie.
  * @param array  $options Additional options for the cookie.
+ * 
+ * @return Cookie
  */
-cookie(string $name, string $value = '', array $options = [])
+cookie(string $name, string $value = '', array $options = []): Cookie
 ```
 
-Provides access to various services.
+Provides access to various factories.
 
 ```php 
 /**
  *
- * @param string $context The context of the service to retrieve.
+ * @param string $context The context of the factory to retrieve.
  * @param mixed  ...$params Additional parameters.
  */
-service(string $context, ...$params)
+factory(string $context, ...$params)
 ```
 
 Converts plain text to HTML entities.

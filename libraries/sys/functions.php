@@ -7,7 +7,7 @@
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
  */
-use \Luminova\Application\Services;
+use \Luminova\Application\Factory;
 use \Luminova\Http\Request;
 use \Luminova\Cookies\Cookie;
 use \Luminova\Functions\Functions;
@@ -241,11 +241,11 @@ if(!function_exists('session')) {
      *
      * @param string $key 
      *
-     * @return mixed
+     * @return mixed|Session|Factory::session
      */
-    function session(?string $key = null)
+    function session(?string $key = null): mixed
     {
-        $session = Services::session();
+        $session = Factory::session();
 
         if (is_string($key) && $key !== '') {
             return $session->get($key);
@@ -263,6 +263,7 @@ if (!function_exists('cookie')) {
      * @param string $value Value of the cookie
      * @param array  $options Options to be passed to the cookie
      * 
+     * @return Cookie
      */
     function cookie(string $name, string $value = '', array $options = []): Cookie
     {
@@ -270,49 +271,70 @@ if (!function_exists('cookie')) {
     }
 }
 
-if(!function_exists('service')) {
+if(!function_exists('factory')) {
     /**
      * Returns a shared instance of the class
-     * Or service instance if context is null
+     * Or factory instance if context is null
      *
      * Same as:
-     * @example $config = service('config')
-     * @example $config = \Luminova\Application\Services::config();
+     * @example $config = factory('config')
+     * @example $config = \Luminova\Application\Factory::config();
      * @example $config = new \Luminova\Config\Configuration();
      * 
      * @param string|null $context The class name to load
      * @param mixed ...$params
      * 
-     * @return Services|object|null
+     * @return Factory|object|null
      */
-    function service(string|null $context, ...$params): ?object
+    function factory(string|null $context, ...$params): object|null
     {
         if($context === null){
-            return new Services();
+            return new Factory();
         }
 
-        return Services::$context(...$params);
+        return Factory::$context(...$params);
     }
 }
 
-if(!function_exists('add_service')) {
+if(!function_exists('add_factory')) {
     /**
-     * Add a class to service a shared instance
+     * Add a class to factory a shared instance
      * The identifier will be converted to lower case
      *
      * Usages:
-     * @example add_service(Configuration::class, 'config) as $config = service('config)
-     * @example add_service('\Luminova\Config\Configuration', 'config) as $config = service('config)
-     * @example add_service(Configuration::class) as $config = service('configuration)
+     * @example add_factory(Configuration::class, 'config) as $config = factory('config)
+     * @example add_factory('\Luminova\Config\Configuration', 'config) as $config = factory('config)
+     * @example add_factory(Configuration::class) as $config = factory('configuration)
      * 
      * @param string $className The class name to add
      * @param string|null $identifier The identifier for the class 
      * 
-     * @return void
+     * @return bool If class was added 
+     * @throws RuntimeException If class already exists
      */
-    function add_service(string $className, ?string $identifier = null): void
+    function add_factory(string $className, ?string $identifier = null): bool
     {
-        Services::add($className, $identifier);
+        return Factory::add($className, $identifier);
+    }
+}
+
+if(!function_exists('remove_factory')) {
+    /**
+     * Delete or clear factory
+     * If no class was passed clear all cached instances of factory classes.
+     * Else delete a specific factory instance and clear its cached instances
+     * 
+     * @param string $className The class name to delete and clear it cached
+     * 
+     * @return bool 
+     */
+    function remove_factory(?string $className = null): bool
+    {
+        if($className === null){
+            return Factory::clear();
+        }
+
+        return Factory::delete($className);
     }
 }
 
@@ -398,7 +420,7 @@ if(!function_exists('import')) {
      */
     function import(string $library): bool
     {
-        $instance = Services::import();
+        $instance = Factory::import();
         $import = $instance::import($library);
  
         return $import;
@@ -415,10 +437,11 @@ if(!function_exists('import')) {
      * @param array $context Additional context data (optional).
      *
      * @return void
+     * @throws InvalidArgumentException
      */
     function logger(string $level, string $message, array $context = []): void
     {
-        $logger = Services::logger();
+        $logger = Factory::logger();
         $logger->log($level, $message, $context);
     }
  }
@@ -436,7 +459,7 @@ if(!function_exists('import')) {
      * 
      * 
      * @return string $translation
-     * @throws Exception if translation is not found and default is not provided
+     * @throws NotFoundException if translation is not found and default is not provided
      */
     function lang(
         string $lookup, 
@@ -446,7 +469,7 @@ if(!function_exists('import')) {
     ): string
     {
         $default ??= '';
-        $language = Services::language();
+        $language = Factory::language();
 
         $defaultLocal = $language->getLocale();
 
@@ -507,11 +530,11 @@ if (!function_exists('path')) {
     * @param string|null $name Path name to return [system, plugins, library, controllers, writeable, logs, caches,
     *          public, assets, views, routes, languages]
     * 
-    * @return string|Paths|Services::paths 
+    * @return string|Paths|Factory::paths 
    */
    function path(null|string $name = null): string|object
    {
-        $path = Services::paths();
+        $path = Factory::paths();
         if ($name === null) {
             return $path;
         }
@@ -703,5 +726,48 @@ if (!function_exists('write_content')) {
         fclose($handler);
 
         return $result !== false;
+    }
+}
+
+if (!function_exists('validate')) {
+    /**
+     * Validate input fields or get validation instance 
+     * Return true or false if input and rules are specified 
+     * else return validation instance if NULL is passed on $inputs and $rules
+     *
+     * @param array $inputs Inout fields to validate on 
+     *      @example [$_POST, $_GET or $this->request->getBody()]
+     * @param array $rules Validation filter rules to apply on each input field 
+     *      @example ['email' => 'required|email|max|min|length']
+     * @param array $messages Validation error messages to apply on each filter on input field
+     *      @example [
+     *          'email' => [
+     *              'required' => 'email is required',
+     *              'email' => 'Invalid [value] while validating [rule] on [field]'
+     *          ]
+     *        }
+     * 
+     * @return bool|Validator|Factory::validate Return true or false else return validation instance
+     */
+    function validate(?array $inputs, ?array $rules, array $messages = []): bool|object 
+    {
+        if ($inputs === []) {
+            return false;
+        }
+
+        if ($rules === []) {
+            return true;
+        }
+
+        $validate = Factory::validate();
+
+        if ($inputs === null && $rules === null) {
+            return $validate;
+        }
+
+        $validate->setMessages($messages);
+        $check = $validate->validate($inputs, $rules);
+
+        return $check->isPassed();
     }
 }
