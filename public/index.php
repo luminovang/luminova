@@ -43,7 +43,7 @@ if (getcwd() . DIRECTORY_SEPARATOR !== PUBLIC_CONTROLLER) {
  * @return void 
 */
 $web_error = function () use ($app): void {
-    $app->render("404")->view([
+    $app->view("404")->render([
         "error_view" => $app->getView()
     ]);
 };
