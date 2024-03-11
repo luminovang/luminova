@@ -26,7 +26,7 @@ The routing bootstrap `$app->router->bootstraps()` method accepts arguments of `
 The below route can be accessed in browser by visiting `https://example.com/panel/`, every request that starts with `panel` will be handles by `routes/panel.php`
 
 ```php
-$app->router->bootstraps($app,new Bootstrap("panel", function() use ($app){
+$app->router->bootstraps($app, new Bootstrap("panel", function() use ($app){
     $app->view("panelError")->render();
 }));
 ```

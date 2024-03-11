@@ -6,7 +6,6 @@ Once you have setup the database configuration in your `.env` file.
 
 #### Extending Luminova\Database\Connection
 
-
 Examples 
 
 ```php
@@ -185,21 +184,21 @@ class MyQuery extends Query
 
 Method                                |  Description
 --------------------------------------|--------------------------
-table(string $table): self            | Table name to query
-join(string $table, string $type = "INNER"): self            | Table name to join
+table(string $table, string $alias = ''): self            | Table name to query
+join(string $table, string $type = 'INNER', string $alias = ''): self            | Table name to join
 on(array $seeds): self  | Table join `ON` condition 
-innerJoin(string $table): self  | Inner join, shorthand for join with second parameter
-leftJoin(string $table): self | Left join, shorthand for join with second parameter
-limit(int $offset = 0, int $count = 50): self  | Limit with offset and count
+innerJoin(string $table, string $alias = ''): self  | Inner join, shorthand for join with second parameter
+leftJoin(string $table, string $alias = ''): self | Left join, shorthand for join with second parameter
+limit(int $limit = 50, int $offset = 0): self  | Limit with offset and count
 order(string $order): self  | Table sorting by order
 group(string $group): self | Table grouping column by order
-where(string $column, string $key): self  | table `WHERE` clause
-and(string $column, string $key): self  | Table `AND` clause
+where(string $column, string $operator, string $key): self  | table `WHERE` clause
+and(string $column, string $operator, string $key): self  | Table `AND` clause
 set(string $column, mixed $value): self | Update table set value with column and value
-or(string $column, string $key): self  | Table `OR` clause 
-andOr(string $column, string $key, string $columnOr, string $keyOr): self  | Table `(AND OR)` clause
+or(string $column, string $operator, string $key): self  | Table `OR` clause 
+andOr(string $column, string $operator, string $key, string $orColumn, string $orOperator string $orKey): self  | Table `(AND OR)` clause
 in(string $column, array $list): self | Find in List using `IN` selector 
-inset(string $search, array $list, string $method = '='): self  | Find in set using `IN_SET` selector 
+inset(string $search, string $operator, array $list): self  | Find in set using `IN_SET` selector 
 cache(string $storage, ?string $key = '', ?string $uid = '', int $expiry = 7 * 24 * 60 * 60): self  | Cache table response and return cache next time till expiration. The cache method must be called before `find or select` method
 insert(array $values, bool $bind = true): int  | Insert into table. optional second parameter to use prepared statement or query execution
 select(array $columns = ["*"]): mixed  | Retrieve records from table, optional parameter to specify columns

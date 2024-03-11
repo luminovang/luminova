@@ -165,9 +165,9 @@ if(!function_exists('escape')){
     * @param string|null $encoding The character encoding to use. Defaults to null.
     * 
     * @return mixed The escaped string or array of strings.
-    * @throws InvalidArgumentException When an invalid escape context is provided.
-    * @throws Exception;
-    * @throws RuntimeException;
+    * @throws InvalidArgumentException When an invalid or blank encoding is provided.
+    * @throws BadMethodCallException When an invalid context is called
+    * @throws RuntimeException When the string is not valid UTF-8 or cannot be converted.
     */
     function escape(string|array $input, string $context = 'html', ?string $encoding = null): mixed 
     {
@@ -239,7 +239,7 @@ if(!function_exists('session')) {
     /**
      * Return session data if key is present else return session instance
      *
-     * @param string $key 
+     * @param string $key Key to retrieve the data
      *
      * @return mixed|Session|Factory::session
      */
@@ -257,7 +257,7 @@ if(!function_exists('session')) {
 
 if (!function_exists('cookie')) {
     /**
-     * Create Cookie instance.
+     * Create and return cookie instance.
      *
      * @param string $name Name of the cookie
      * @param string $value Value of the cookie
@@ -366,7 +366,6 @@ if(!function_exists('browser')) {
 if (!function_exists('text2html')) {
     /**
      * Converts text characters in a string to HTML entities. 
-     * This is useful when you want to display text in an HTML textarea while preserving the original line breaks.
      * 
      * @param string $text A string containing the text to be processed.
      * 
@@ -525,21 +524,21 @@ if (!function_exists('root')) {
 
 if (!function_exists('path')) {
     /**
-    * Get directory if name is null Paths instance will be returned
+    * Get directory if context name is null Paths instance will be returned
     * 
-    * @param string|null $name Path name to return [system, plugins, library, controllers, writeable, logs, caches,
+    * @param string|null $context Path context name to return [system, plugins, library, controllers, writeable, logs, caches,
     *          public, assets, views, routes, languages]
     * 
     * @return string|Paths|Factory::paths 
    */
-   function path(null|string $name = null): string|object
+   function path(null|string $context = null): string|object
    {
         $path = Factory::paths();
-        if ($name === null) {
+        if ($context === null) {
             return $path;
         }
         
-        return $path->{$name} ?? ''; 
+        return $path->{$context} ?? ''; 
    }
 }
 
@@ -588,8 +587,6 @@ if (!function_exists('is_associative')) {
 if (!function_exists('to_array')) {
     /**
      * Convert an object to an array.
-     * Convert string list to array 
-     * Convert any input supplied to an array
      *
      * @param mixed $input The object to convert to an array.
      * 
@@ -613,16 +610,20 @@ if (!function_exists('to_array')) {
 
 if (!function_exists('to_object')) {
     /**
-     * Convert an array to json object
+     * Convert an array or string list to json object
      *
      * @param array|string $input Array or String list to convert
      * 
      * @return object $object
      */
-    function to_object(array $input): object 
+    function to_object(array|string $input): object 
     {
-        if ($input === []) {
+        if ($input === [] || $input === '') {
             return (object) [];
+        }
+
+        if (is_string($input)) {
+            $input = list_to_array($input);
         }
     
         $object = json_decode(json_encode($input));
@@ -639,29 +640,27 @@ if (!function_exists('list_to_array')) {
      * @example list_to_array('"a","b","c"') => ['a', 'b', 'c']
      * 
      * @param string $list string list
-     * @return array $matches
+     * @return array|bool $matches
     */
-    function list_to_array(string $list): array 
+    function list_to_array(string $list): array|bool 
     {
-        if($list === ''){
-            return [];
+        if ($list === '') {
+            return false;
         }
-
-        $matches = [];
-
-        preg_match_all("/'([^']+)'/", $list, $matches);
     
-        if (!empty($matches[1])) {
-            return $matches[1];
+        if (strpos($list, "'") !== false) {
+            preg_match_all("/'([^']+)'/", $list, $matches);
+            if (!empty($matches[1])) {
+                return $matches[1];
+            }
         }
-
+    
         preg_match_all('/(\w+)/', $list, $matches);
-
         if (!empty($matches[1])) {
             return $matches[1];
         }
-
-        return [];
+    
+        return false;
     }
 }
 
@@ -687,6 +686,11 @@ if (!function_exists('list_in_array')) {
         }
 
         $map = list_to_array($list);
+
+        if( $map === false){
+            return false;
+        }
+
         foreach ($map as $item) {
             if (!in_array($item, $array)) {
                 return false;
@@ -697,9 +701,39 @@ if (!function_exists('list_in_array')) {
     }
 }
 
+if (!function_exists('is_list')) {
+    /**
+     * Check if string is a valid list format
+     * 
+     * @param string $input string to check
+     * @param bool $trim Trim whitespace around the values  
+     * 
+     * @return bool true or false on failure.
+    */
+    function is_list(string $input, bool $trim = false):bool 
+    {
+
+        if ($trim) {
+            $input = preg_replace('/\s*,\s*/', ',', $input);
+    
+            $input = preg_replace_callback('/"([^"]+)"/', function($matches) {
+                return '"' . trim($matches[1]) . '"';
+            }, $input);
+        }
+    
+        if ($input === '') {
+            return false;
+        }
+
+        $pattern = '/^(\s*"?[^\s"]+"?\s*,)*\s*"?[^\s"]+"?\s*$/';
+
+        return preg_match($pattern, $input);
+    }
+}
+
 if (!function_exists('write_content')) {
     /**
-     * Save content to file 
+     * Write, append contents to file.
      * @param string $filename — Path to the file where to write the data.
      * @param mixed $content
      * @param int $flags [optional] The value of flags can be any combination of the following flags (with some restrictions), joined with the binary OR (|) operator.
@@ -735,7 +769,7 @@ if (!function_exists('validate')) {
      * Return true or false if input and rules are specified 
      * else return validation instance if NULL is passed on $inputs and $rules
      *
-     * @param array $inputs Inout fields to validate on 
+     * @param array $inputs Input fields to validate on 
      *      @example [$_POST, $_GET or $this->request->getBody()]
      * @param array $rules Validation filter rules to apply on each input field 
      *      @example ['email' => 'required|email|max|min|length']

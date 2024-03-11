@@ -37,13 +37,13 @@ If you didn't specify the array of error messages on `setRules`, you can also se
 ```php
 $this->validate->setMessages([
     'name' => [
-         'required' => 'Error message for required',
+        'required' => 'Error message for required',
         'max_length' => 'Error message for max_length',
         'alphanumeric' => 'Error message for alphanumeric'
     ],
     'email' => [
         'required' => 'The email field is required.',
-        'email' => 'The email address is not valid.'
+        'email' => 'The email address [value] is not valid.'
     ],
     'age' => [
         'required' => 'The age field is required.',
@@ -54,14 +54,22 @@ $this->validate->setMessages([
 ]);
 ```
 
+### Message Formatting Placeholders 
+`[field]` Replaced with the input field name.
+`[value]` Replaced with the input field value.
+`[rule]` Replaced with the input field validation rule line.  
+
+Example: `'Validation failed for [value] on [field] while validating [rule].';`
+> Outputs: Validation failed for peter@example.com on userEmail while validating email.';
+
 ##### Available Validations
 
 Rule           | Parameter    | Description
 ---------------|--------------|------------------------------------------------
 none           |  Void        | Ignore filed and return true
 required       |  Void        | Field is required, it cannot be empty
-max_length()   |  Integer     | Field maximum allowed length
-min_length()   |  Integer     | Field minimum allowed length
+max_length()   |  Integer     | Field maximum allowed length alisa `max()`
+min_length()   |  Integer     | Field minimum allowed length alisa `min()`
 alphanumeric   |  Void        | Field should must be only alphanumeric [aZ-Az-0-9]
 email          |  Void        | Field should must be a valid email address
 integer()      |  String      | Field should must an integer value, optional parameter [positive or negative] [-0-9]
@@ -69,8 +77,9 @@ equals()       |  String      | Field value must match with anther specified fie
 url            |  Void        | Field must be a valid URL
 alphabet       |  Void        | Field must be only an alphabet [aZ-Az]
 uuid()         |  Integer     | Field value must be uuid string, optional parameter for uuid version 
-exact_length() |  Integer     | Field value must be exact length
+exact_length() |  Integer     | Field value must be exact length alisa `length()`
 in_array()     |  String      | Field value must be in array list
+is_list        |  Void        | Filed value must be a valid string list
 keys_exist()   |  String      | Field array values must match in validation list
 callback()     |  Callable    | Callback myFunction(value, field) return boolean value
 ip()           |  Integer     | Field value must be a valid IP address, optional parameter for ip version
@@ -91,6 +100,7 @@ scheme()       |  String       | Check if field value url scheme matched with th
 Method Name            |    Description 
 -----------------------|------------------------------------------------
 validateEntries(array $input, array $rules = []): bool  | To validate input entries, it return true or false. The second parameter is optional.
+validate(array $input, array $rules = []): self  | To validate input entries, it return instance if Validation class
 validateField(string $ruleName, string $value, string $rule, mixed $param = null): bool  | To validate fields processed by `validateEntries` method it return true or false. The third parameter is optional
 getErrors(): array | Get validation error messages 
 getError(string $field): string | Get validation error message by field name
@@ -100,8 +110,7 @@ addRule(string $field, string $rules, array $messages = []): self | Add validati
 addError(string $field, string $ruleName, string $message): self | Add a single validation error to field
 setMessages(array $messages): self | Set validation messages
 addMessage(string $field, array $messages): self | Add validation message to field
-listToArray(string $list): array | Convert string list to array `a,b,c` to `[a, b, c]`
-listInArray(string $list, array $map): bool | Check if list elements exists in an array 
+isPassed(): bool | Check if validation passed or failed 
 
 ##### Implementing Validation 
 

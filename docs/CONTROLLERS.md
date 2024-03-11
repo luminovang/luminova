@@ -122,14 +122,12 @@ Since you are going to be working on `UserController`, make sure to initialize i
 ```php
 namespace App\Controllers;
 
-use Luminova\Base\BaseController;
-use App\Controllers\Models\UserModel;
+use \Luminova\Base\BaseController;
+use \App\Controllers\Models\UserModel;
 
 class UserController extends BaseController
 {
-    public function __construct(){
-        parent::__construct();
-
+    protected function onCreate(){
         $this->validate->setRules([
             'name' => 'required',
             'age' => 'required|integer|min_length(2)|max_length(3)',
@@ -155,6 +153,11 @@ class UserController extends BaseController
 
     public function update(): void
     {
+        $response = [
+            'status' => 301,
+            'message' => 'Invalid request'
+        ];
+
         if ($this->request->getMethod() === 'post') {
             if ( $this->validate->validateEntries($this->request->getBody()) ) {
                 $model = new UserModel();
@@ -166,21 +169,32 @@ class UserController extends BaseController
                 ];
 
                 if ($model->updateRecord($this->request->getPost("id"), $data)) {
+                    $response = [
+                        'status' => 200,
+                        'message' => 'Data updated successfully'
+                    ];
                     /**
                     * Do your business here 
                     * $this->app->view("profile")->render(['userInfo' => $data]); Render view
                     * $this->app->redirect("/"); Redirect to main view or any view
                     */
                 } else {
-                    echo "Failed to update ";
+                    $response = [
+                        'status' => 201,
+                        'message' => 'Failed to update'
+                    ];
                 }
            }else{
-               /**
-                * Get the validation error information  
-               */
-                print_r($this->validate->getErrors());
+               $response = [
+                    'status' => 201,
+                    'input' => $this->validate->getCurrentErrorField(),
+                    'message' => $this->validate->getErrorLine()
+                ];
+                //print_r($this->validate->getErrors());
            }
         }
+
+        $this->app->respond(json_encode($response), 'json');
     }
 
     public function profile($userId)
@@ -194,6 +208,36 @@ class UserController extends BaseController
             return;
         }
         $this->app->view("profile")->render(['userInfo' => $userInfo]);
+    }
+}
+```
+
+### BaseViewController
+
+`BaseController` and `BaseViewController` are similar except that with `BaseViewController`, you have to initialize `validate(), request() and app()` before using it as its not initialized by default.
+
+> This is suitable to use in your page controllers where you might not need `validate` and `request` instance.
+
+```php
+namespace App\Controllers;
+
+use \Luminova\Base\BaseViewController;
+use \App\Controllers\Application;
+use \Luminova\Http\Request;
+use \Luminova\Security\InputValidator;
+
+class UserController extends BaseViewController
+{
+
+    protected ?Application $app = null;
+    protected ?InputValidator $validate = null;
+    protected ?Request $request = null;
+
+    protected function onCreate(): void
+    {
+        $this->app ??= parent::app();
+        $this->validate ??= parent::validate();
+        $this->request = parent::request();
     }
 }
 ```

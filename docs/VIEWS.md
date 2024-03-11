@@ -1,7 +1,7 @@
 ### Application Routing & Controllers
 
 To create your html template view, you must do that inside `resources/views` or if you have s sub custom directory inside.
-When you pass an array parameter to your `$app->render('foo')->view([...])`, you can get the values in your template by simply echoing the key using `$this` keyword and underscore prefix `_`, before the key name. example `echo $this->_name`.
+When you pass an array parameter to your `$app->view('foo')->render([...])`, you can get the values in your template by simply echoing the key using `$this` keyword and underscore prefix `_`, before the key name. example `echo $this->_name`.
 
 To access a class instance you registered in your application controller you don't need underscore `_`, You can just call `$this->MyClass->doSomething()` depending on the name you have registered your class instance with.
 
