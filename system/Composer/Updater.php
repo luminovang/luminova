@@ -59,6 +59,7 @@ class Updater
             static::checkAndCopyFile('app/Controllers/Config/Config.php', 'samples/Config.php');
             static::checkAndCopyFile('app/Controllers/Config/Template.php', 'samples/Template.php');
             static::checkAndCopyFile('app/Controllers/Config/IPConfig.php', 'samples/IPConfig.php');
+            static::checkAndCopyFile('app/Controllers/Config/Files.php', 'samples/Files.php');
             static::checkAndCopyFile('app/Controllers/Utils/Global.php', 'samples/Global.php');
             static::checkAndCopyFile('app/Controllers/Utils/Func.php', 'samples/Func.php');
             static::checkAndCopyFile('app/Controllers/Application.php', 'samples/Application.php');

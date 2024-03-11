@@ -17,14 +17,14 @@ final class Session
      * 
      * @var string $cookieName;
      */
-    public static string $cookieName = "PHPSESSID"; 
+    public static string $cookieName = 'PHPSESSID'; 
 
     /**
      * The path where session files are stored on the server.
      * 
      * @var string $savePath;
      */
-    public static string $savePath = ""; 
+    public static string $savePath = ''; 
 
     /**
      * The lifetime of the session in seconds.
@@ -38,14 +38,14 @@ final class Session
      * 
      * @var string $sessionPath;
      */
-    public static string $sessionPath = "/"; 
+    public static string $sessionPath = '/'; 
 
     /**
      * The domain to use for the session cookie.
      * 
      * @var string $sessionDomain;
      */
-    public static string $sessionDomain = ".localhost";
+    public static string $sessionDomain = '.localhost';
 
      /**
      * Set the session cookie security level.
@@ -53,7 +53,7 @@ final class Session
      * 
      * @var string $sameSite;
      */
-    public static string $sameSite = "Lax";
+    public static string $sameSite = 'Lax';
 
      /**
      * Enable strict session IP authentication.

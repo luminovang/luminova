@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="robots" content="noindex">
-    <link rel="shortcut icon" type="image/png" href="<?php echo $this->_base??'/';?>favicon.png">
+    <link rel="shortcut icon" type="image/png" href="./favicon.png">
     <title>Error</title>
 
     <style>
