@@ -13,8 +13,7 @@ require_once __DIR__ . '/../system/plugins/autoload.php';
 /**
  * Don't display errors on page 
 */
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
+ini_set('display_errors', '0');
 
 /**
  * Check php requirements 
