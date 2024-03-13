@@ -28,7 +28,7 @@ class Services extends BaseServices
     */
     public static function bootstrap(): void
     {
-        static::addService(ServiceTest::class, "Test Argument", true, true);
+        //static::addService(ServiceTest::class, "Test Argument", true, true);
         //static::addService(MoreService::class, "Test Argument", true, true);
         //static::addService(new AnotherService(), "Test Argument", true, true);
     }
