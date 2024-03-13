@@ -47,21 +47,6 @@ if (strpos(PHP_SAPI, 'cgi') === 0) {
 }
 
 /**
- * @var int STATUS_OK success status code
-*/
-defined('STATUS_OK') || define('STATUS_OK', 0);
-
-/**
- * @var int STATUS_ERROR error status code
-*/
-defined('STATUS_ERROR') || define('STATUS_ERROR', 1);
-
-/**
- * @var string ENVIRONMENT application development state
-*/
-defined('ENVIRONMENT') || define('ENVIRONMENT', env('app.environment.mood', 'development'));
-
-/**
  * @var string CLI_ENVIRONMENT application cli development state
 */
 defined('CLI_ENVIRONMENT') || define('CLI_ENVIRONMENT', env('cli.environment.mood', 'testing'));
@@ -95,17 +80,3 @@ defined('PUBLIC_PATH') || define('PUBLIC_PATH', realpath(HOME_PATH . 'public') .
  * @var string FRONT_CONTROLLER Front controller path
 */
 defined('FRONT_CONTROLLER') || define('FRONT_CONTROLLER', __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR);
-
-/**
- * Developer application Global.php file .
- * 
- * @var string $__global_dev
-*/
-$__global_dev = __DIR__ . '/../app/Controllers/Utils/Global.php';
-
-/**
- * Require developer application Global.php file if exists.
-*/
-if(file_exists($__global_dev)){
-    require_once $__global_dev;
-}

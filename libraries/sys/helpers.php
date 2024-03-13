@@ -76,6 +76,22 @@ if(!function_exists('is_feature')){
 date_default_timezone_set(env("app.timezone", 'UTC'));
 
 /**
+ * @var int STATUS_OK success status code
+*/
+defined('STATUS_OK') || define('STATUS_OK', 0);
+
+/**
+ * @var int STATUS_ERROR error status code
+*/
+defined('STATUS_ERROR') || define('STATUS_ERROR', 1);
+
+/**
+ * @var string ENVIRONMENT application development state
+*/
+defined('ENVIRONMENT') || define('ENVIRONMENT', env('app.environment.mood', 'development'));
+
+
+/**
  * Initialize services
 */
 if(is_feature('feature.app.services', true)){
@@ -89,10 +105,11 @@ if(is_feature('feature.app.services', true)){
 */
 
 (function(): void {
-    if(is_feature('feature.app.class.aliases', false)){
+    if(is_feature('feature.app.class.aliases', false) && !defined('INIT_DEV_MODULES')){
         $modules = path('controllers') . 'Config' . DIRECTORY_SEPARATOR . 'Modules.php';
         if(file_exists($modules)){
-            $config = require_once $modules;
+            define('INIT_DEV_MODULES', true);
+            $config = require $modules;
 
             if(isset($config['aliases'])){
                 foreach ($config['aliases'] as $alias => $namespace) {
@@ -101,6 +118,19 @@ if(is_feature('feature.app.services', true)){
                     }
                 }
             }
+        }
+    }
+
+    if(is_feature('feature.app.dev.functions', true) && !defined('INIT_DEV_FUNCTIONS')){
+        /**
+         * Require developer application Global.php file if exists.
+        */
+
+        $global = path('controllers') . 'Utils' . DIRECTORY_SEPARATOR . 'Global.php';
+
+        if(file_exists($global)){
+            define('INIT_DEV_FUNCTIONS', true);
+            require $global;
         }
     }
 })();
