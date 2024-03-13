@@ -100,6 +100,7 @@ if(is_feature('feature.app.services', true)){
 
 /**
  * Anonymous function to register class configuration
+ * @param string $path Controller path 
  * 
  * @return void 
 */
