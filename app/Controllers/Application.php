@@ -17,7 +17,8 @@ class Application extends BaseApplication
      * @var Session $session;
      * protected $session;
     */
-    public function __construct(string $dir = __DIR__){
+    public function __construct(string $dir = __DIR__)
+    {
         /**
          *  Initialize session manager if you want to make use of sessions
          *  @example $this->session = new Session(new SessionManager());
@@ -49,7 +50,7 @@ class Application extends BaseApplication
         /**
         * Set default the canonical url version for your application
         * Before settings, make sure to register Meta Class 
-        * @example $this->registerClass(new Meta(parent::appName(), $this->getRootDir(), parent::baseUrl()));
+        * @example $this->registerClass(new Meta(parent::appName(), parent::baseUrl()));
         *
         * @example $this->Meta->setCanonicalVersion("https://example.com/", $this->getView());
         * @example $this->Meta->setCanonicalVersion("https://www.example.com/", $this->getView());

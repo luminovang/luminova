@@ -13,28 +13,6 @@ use \Luminova\Cookies\Cookie;
 use \Luminova\Functions\Functions;
 use \Countable;
 
-if(!function_exists('env')){
-    /**
-     * Get environment variables.
-     *
-     * @param string $key The key to retrieve.
-     * @param mixed $default The default value to return if the key is not found.
-     * 
-     * @return mixed
-     */
-    function env(string $key, mixed $default = null): mixed 
-    {
-        if (getenv($key) !== false) {
-            $env = getenv($key);
-        }elseif (isset($_ENV[$key])) {
-            $env = $_ENV[$key];
-        }elseif (isset($_SERVER[$key])) {
-            $env = $_SERVER[$key];
-        }
-
-        return $env ?? $default;
-    }
-}
 
 if(!function_exists('setenv')){
     /**
@@ -83,28 +61,6 @@ if(!function_exists('setenv')){
         }
     }
     
-}
-
-if(!function_exists('locale')){
-    /**
-    * Set locale or return local 
-    *
-    * @param ?string $locale If locale is present it will set it else return default locale
-    *
-    * @return string|bool;
-    */
-    function locale(?string $locale = null): string|bool 
-    {
-        if($locale === null){
-            $locale = env('app.locale', 'en');
-
-            return $locale;
-        }else{
-            setenv('app.locale', $locale, true);
-        }
-
-        return true;
-    }
 }
 
 if (!function_exists('func')) {
@@ -273,7 +229,7 @@ if (!function_exists('cookie')) {
 
 if(!function_exists('factory')) {
     /**
-     * Returns a shared instance of the class
+     * Returns a shared instance of a class in factory
      * Or factory instance if context is null
      *
      * Same as:
@@ -282,59 +238,66 @@ if(!function_exists('factory')) {
      * @example $config = new \Luminova\Config\Configuration();
      * 
      * @param string|null $context The class name to load
-     * @param mixed ...$params
+     * @param mixed ...$arguments The last bool argument indicate wether to return a shared instance
      * 
-     * @return Factory|object|null
+     * @return Factory|mixed
      */
-    function factory(string|null $context, ...$params): object|null
+    function factory(string|null $context = null, ...$arguments): mixed
     {
-        if($context === null){
+        if($context === null || $context === ''){
             return new Factory();
         }
 
-        return Factory::$context(...$params);
+        return Factory::$context(...$arguments);
     }
 }
 
-if(!function_exists('add_factory')) {
+if(!function_exists('service')) {
     /**
-     * Add a class to factory a shared instance
-     * The identifier will be converted to lower case
+     * Returns a shared instance of a class in services
+     * Or service instance if context is null
      *
-     * Usages:
-     * @example add_factory(Configuration::class, 'config) as $config = factory('config)
-     * @example add_factory('\Luminova\Config\Configuration', 'config) as $config = factory('config)
-     * @example add_factory(Configuration::class) as $config = factory('configuration)
+     * Same as:
+     * @example $config = service('config')
+     * @example $config = \Luminova\Application\Services::config();
+     * @example $config = new \Luminova\Config\Configuration();
      * 
-     * @param string $className The class name to add
-     * @param string|null $identifier The identifier for the class 
+     * @param string|null $service The service context name
+     * @param mixed ...$arguments The last bool argument indicate wether to return a shared instance
      * 
-     * @return bool If class was added 
-     * @throws RuntimeException If class already exists
+     * @return Services|mixed
      */
-    function add_factory(string $className, ?string $identifier = null): bool
+    function service(string|null $service = null, ...$arguments): mixed
     {
-        return Factory::add($className, $identifier);
+        $instance = Factory::services();
+
+        if($service === null || $service === ''){
+            return $instance;
+        }
+
+        return $instance::$service(...$arguments);
     }
 }
 
-if(!function_exists('remove_factory')) {
+if(!function_exists('remove_service')) {
     /**
-     * Delete or clear factory
-     * If no class was passed clear all cached instances of factory classes.
-     * Else delete a specific factory instance and clear its cached instances
+     * Delete a service or clear all services
+     * If no service name was passed clear all cached instances of services classes.
+     * Else delete a specific services instance and clear it's cached instances
      * 
-     * @param string $className The class name to delete and clear it cached
+     * @param string $service The class name to delete and clear it cached
      * 
      * @return bool 
      */
-    function remove_factory(?string $className = null): bool
+    function remove_service(?string $service = null): bool
     {
-        if($className === null){
-            return Factory::clear();
+        $instance = Factory::services();
+
+        if($service === null){
+            return $instance::clear();
         }
 
-        return Factory::delete($className);
+        return $instance::delete($service);
     }
 }
 
@@ -527,7 +490,7 @@ if (!function_exists('path')) {
     * Get directory if context name is null Paths instance will be returned
     * 
     * @param string|null $context Path context name to return [system, plugins, library, controllers, writeable, logs, caches,
-    *          public, assets, views, routes, languages]
+    *          public, assets, views, routes, languages, services]
     * 
     * @return string|Paths|Factory::paths 
    */
@@ -803,5 +766,26 @@ if (!function_exists('validate')) {
         $check = $validate->validate($inputs, $rules);
 
         return $check->isPassed();
+    }
+}
+
+if (!function_exists('get_class_name')) {
+    /**
+     * Get class name from namespace or object
+     * 
+     * @param string|object $content 
+     * 
+     * @return string
+    */
+   function get_class_name(string|object $from): string 
+    {
+        if (is_string($from)) {
+            $pos = strrpos($from, '\\');
+            $className = ($pos !== false) ? substr($from, $pos + 1) : $from;
+        } else {
+            $className = get_class_name(get_class($from));
+        }
+
+        return $className;
     }
 }

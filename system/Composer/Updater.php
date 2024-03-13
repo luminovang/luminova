@@ -52,8 +52,9 @@ class Updater
         if (getenv('LM_DEBUG_MODE') === false) {
             static::onInstallAndUpdate('system/', static::$frameworkPath, 'src/', true);
             static::checkAndCopyFile('.env', 'samples/.env');
-            static::checkAndCopyFile('meta.config.json', 'samples/meta.config.json');
-            static::checkAndCopyFile('class.config.php', 'samples/class.config.php');
+            static::checkAndCopyFile('app/Controllers/Config/Services.php', 'samples/Services.php');
+            static::checkAndCopyFile('app/Controllers/Config/Meta.php', 'samples/Meta.php');
+            static::checkAndCopyFile('app/Controllers/Config/Modules.php', 'samples/Modules.php');
             static::checkAndCopyFile('app/Controllers/Config/Session.php', 'samples/Session.php');
             static::checkAndCopyFile('app/Controllers/Config/Cookie.php', 'samples/Cookie.php');
             static::checkAndCopyFile('app/Controllers/Config/Config.php', 'samples/Config.php');

@@ -12,7 +12,7 @@
         "php": "^8.0",
         "ext-json": "*",
         "ext-mbstring": "*",
-        "luminovang/framework": "^1.0",
+        "luminovang/framework": "^2.0",
         "psr/cache": "^3.0",
         "psr/log": "^1.1",
         "psr/simple-cache": "^3.0"
