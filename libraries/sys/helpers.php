@@ -104,9 +104,9 @@ if(is_feature('feature.app.services', true)){
  * @return void 
 */
 
-(function(): void {
+(function(string $path): void {
     if(is_feature('feature.app.class.aliases', false) && !defined('INIT_DEV_MODULES')){
-        $modules = path('controllers') . 'Config' . DIRECTORY_SEPARATOR . 'Modules.php';
+        $modules = $path . 'Config' . DIRECTORY_SEPARATOR . 'Modules.php';
         if(file_exists($modules)){
             define('INIT_DEV_MODULES', true);
             $config = require $modules;
@@ -122,15 +122,12 @@ if(is_feature('feature.app.services', true)){
     }
 
     if(is_feature('feature.app.dev.functions', true) && !defined('INIT_DEV_FUNCTIONS')){
-        /**
-         * Require developer application Global.php file if exists.
-        */
 
-        $global = path('controllers') . 'Utils' . DIRECTORY_SEPARATOR . 'Global.php';
+        $global = $path . 'Utils' . DIRECTORY_SEPARATOR . 'Global.php';
 
         if(file_exists($global)){
             define('INIT_DEV_FUNCTIONS', true);
             require $global;
         }
     }
-})();
+})(path('controllers'));
