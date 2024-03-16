@@ -6,10 +6,6 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname(dirname($vendorDir));
 
 return array(
-    '9b38cf48e83f5d8f60375221cd213eee' => $vendorDir . '/phpstan/phpstan/bootstrap.php',
-    '6124b4c8570aa390c21fafd04a26c69f' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
-    'ec07570ca5a812141189b1fa81503674' => $vendorDir . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
-    '38143a9afc50997d55e4815db8489d1c' => $vendorDir . '/rector/rector/bootstrap.php',
     'a2c9dda26e51c832b5344ac5c9ba205b' => $baseDir . '/libraries/sys/constants.php',
     '95fdf39a8122bf72f14ebe8df7aa8d5b' => $baseDir . '/libraries/sys/functions.php',
     '4cd8dfe243dbbe1b839b58622aac1bb3' => $baseDir . '/libraries/sys/helpers.php',
