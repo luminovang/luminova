@@ -53,6 +53,7 @@ class Updater
             static::onInstallAndUpdate('system/', static::$frameworkPath, 'src/', true);
             static::checkAndCopyFile('.env', 'samples/.env');
             static::checkAndCopyFile('app/Controllers/Config/Services.php', 'samples/Services.php');
+            static::checkAndCopyFile('app/Controllers/Config/Servers.php', 'samples/Servers.php');
             static::checkAndCopyFile('app/Controllers/Config/Meta.php', 'samples/Meta.php');
             static::checkAndCopyFile('app/Controllers/Config/Modules.php', 'samples/Modules.php');
             static::checkAndCopyFile('app/Controllers/Config/Session.php', 'samples/Session.php');
@@ -79,7 +80,7 @@ class Updater
     */
     private static function backwardProjectDirectory(): void 
     {
-        $composerJsonPath = dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'composer.json';
+        $composerJsonPath = APP_ROOT . DIRECTORY_SEPARATOR . 'composer.json';
 
         if (file_exists($composerJsonPath)) {
             $composerData = json_decode(file_get_contents($composerJsonPath), true);
@@ -293,7 +294,7 @@ class Updater
 
 
             if($complete){
-                $base = dirname(__DIR__, 2) . DIRECTORY_SEPARATOR;
+                $base = APP_ROOT . DIRECTORY_SEPARATOR;
                 $toDos = $base . $source . 'TODO.md';
                 $currentTodo = $base . 'TODO.md';
                 $hasTodo = false;

@@ -41,6 +41,7 @@
     },
     "autoload": {
         "files": [
+            "libraries/sys/constants.php",
             "libraries/sys/functions.php",
             "libraries/sys/helpers.php"
         ],

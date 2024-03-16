@@ -20,11 +20,6 @@ require __DIR__ . '/bootstrap/cli.php';
 chdir(FRONT_CONTROLLER);
 
 /**
- * Load environment settings from .env files into $_SERVER and $_ENV
-*/
-Luminova\Config\DotEnv::register(__DIR__ . DIRECTORY_SEPARATOR . '.env');
-
-/**
  * Show header information by default or if `--no-header` is passed suppress header.
 */
 if (($noHeader = array_search('--no-header', $_SERVER['argv'], true)) !== false) {
@@ -37,7 +32,7 @@ if (($noHeader = array_search('--no-header', $_SERVER['argv'], true)) !== false)
  * 
  * @var Console $console
 */
-$console = new  Luminova\Command\Console($noHeader);
+$console = new \Luminova\Command\Console($noHeader);
 
 /**
  * Run our console instance

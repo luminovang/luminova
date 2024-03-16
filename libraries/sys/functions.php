@@ -11,57 +11,6 @@ use \Luminova\Application\Factory;
 use \Luminova\Http\Request;
 use \Luminova\Cookies\Cookie;
 use \Luminova\Functions\Functions;
-use \Countable;
-
-
-if(!function_exists('setenv')){
-    /**
-     * Set an environment variable if it doesn't already exist.
-     *
-     * @param string $key The key of the environment variable.
-     * @param string $value The value of the environment variable.
-     * @param bool $add_to_env Save or update to .env file 
-     * 
-     * @return void
-     */
-    function setenv(string $key, string $value, bool $add_to_env = false): void
-    {
-        if (!getenv($key, true)) {
-            putenv("{$key}={$value}");
-        }
-    
-        if (empty($_ENV[$key])) {
-            $_ENV[$key] = $value;
-        }
-    
-        if (empty($_SERVER[$key])) {
-            $_SERVER[$key] = $value;
-        }
-    
-        if ($add_to_env) {
-            $envFile = dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . '.env';
-            $envContents = @file_get_contents($envFile);
-            if($envContents === false){
-                return;
-            }
-            $keyExists = (strpos($envContents, "$key=") !== false || strpos($envContents, "$key =") !== false);
-            //$keyValueExists = preg_match('/^' . preg_quote($key, '/') . '\s*=\s*.*$/m', $envContents);
-    
-            if (!$keyExists) {
-                @file_put_contents($envFile, "\n$key=$value", FILE_APPEND);
-            } else {
-                $newContents = preg_replace_callback('/(' . preg_quote($key, '/') . ')\s*=\s*(.*)/',
-                    function($match) use ($key, $value) {
-                        return $match[1] . '=' . $value;
-                    },
-                    $envContents
-                );
-                @file_put_contents($envFile, $newContents);
-            }
-        }
-    }
-    
-}
 
 if (!function_exists('func')) {
     /**
@@ -110,6 +59,42 @@ if(!function_exists('kebab_case')){
     }
 }
 
+if(!function_exists('locale')){
+    /**
+    * Set locale or return local 
+    *
+    * @param ?string $locale If locale is present it will set it else return default locale
+    *
+    * @return string|bool;
+    */
+    function locale(?string $locale = null): string|bool 
+    {
+        if($locale === null){
+            $locale = env('app.locale', 'en');
+
+            return $locale;
+        }else{
+            setenv('app.locale', $locale, true);
+        }
+
+        return true;
+    }
+}
+
+if(!function_exists('is_feature')){
+    /**
+    * Check if feature is enabled in env file 
+    *
+    * @param string $key Feature key name
+    * @param bool $default 
+    *
+    * @return bool
+    */
+    function is_feature(string $key, bool $default = false): bool 
+    {
+        return (bool) env($key, $default);
+    }
+}
 
 if(!function_exists('escape')){
     /**
@@ -175,6 +160,7 @@ if(!function_exists('ip_address')){
 if(!function_exists('is_empty')){
     /**
      * Check if values are empty.
+     * This will treat 0 as none empty if you want any other thing use php empty function instead
      * 
      * @param mixed ...$values Arguments.
      * 
@@ -183,12 +169,13 @@ if(!function_exists('is_empty')){
     function is_empty(mixed ...$values): bool 
     {
         foreach ($values as $value) {
-            if (is_null($value) || (is_string($value) && trim($value) === '') || empty($value) || (is_object($value) && $value instanceof Countable && count($value) === 0)) {
+            if (is_null($value) || (is_string($value) && trim($value) === '') || (is_numeric($value) && (int) $value !== 0 && empty($value)) || (is_object($value) && $value instanceof Countable && count($value) === 0)) {
                 return true;
             }
         }
         return false;
     }
+
 }
 
 if(!function_exists('session')) {
@@ -326,6 +313,32 @@ if(!function_exists('browser')) {
     }
 }
 
+if(!function_exists('is_platform')) {
+    /**
+     * Tells which platform your application is running on
+     * 
+     * @param string $os Platform name 
+     *      - [mac, windows, linux, freebsd, openbsd, solaris, aws, etc..]
+     * 
+     * @return bool
+     */
+    function is_platform(string $os): bool
+    { 
+        $os = strtolower($os);
+
+        return match($os) {
+            'mac' => strpos(PHP_OS, 'Darwin') !== false,
+            'windows' => strtoupper(substr(PHP_OS, 0, 3)) === 'WIN',
+            'freebsd' => strtoupper(PHP_OS) === 'FREEBSD',
+            'openbsd' => strtoupper(PHP_OS) === 'OPENBSD',
+            'solaris' => strtoupper(PHP_OS) === 'SOLARIS',
+            'linux' => strtoupper(PHP_OS) === 'LINUX',
+            'aws' => isset($_ENV['AWS_EXECUTION_ENV']),
+            default => stripos(php_uname('s'), $os) !== false
+        };
+    }
+}
+
 if (!function_exists('text2html')) {
     /**
      * Converts text characters in a string to HTML entities. 
@@ -446,42 +459,6 @@ if(!function_exists('import')) {
         }
 
         return $translation;
-    }
-}
-
-if (!function_exists('root')) {
-    /**
-     * Return to the root directory of your project.
-     *
-     * @param string $directory The directory to start searching for .env
-     * @param string $suffix Prepend a path to root directory.
-     * 
-     * @return string $path + $suffix
-     */
-    function root(string $directory = __DIR__, string $suffix = ''): string
-    {
-        $path = realpath($directory);
-
-        if ($path === false) {
-            return $suffix; 
-        }
-
-        do {
-            if (file_exists($path . DIRECTORY_SEPARATOR . '.env')) {
-                if(str_starts_with($suffix, DIRECTORY_SEPARATOR)){
-                    return $path . $suffix;
-                }
-
-                return $path . DIRECTORY_SEPARATOR . $suffix;
-            }
-            
-            $parent = dirname($path);
-            if ($parent === $path) {
-                return $suffix;
-            }
-
-            $path = $parent;
-        } while (true);
     }
 }
 
