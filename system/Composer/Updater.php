@@ -9,6 +9,9 @@
  */
 namespace Luminova\Composer;
 
+include_once __DIR__ . '/../../libraries/sys/constants.php';
+include_once __DIR__ . '/../../libraries/sys/functions.php';
+
 use \Luminova\Command\Terminal;
 use \Luminova\Base\BaseConfig;
 
@@ -313,7 +316,7 @@ class Updater
                 }
 
                 if ($returnCode === 0) {
-                    static::cli()?->writeln('Update was completed version [' . BaseConfig::$version??'1.5.0' . ']', 'green');
+                    static::cli()?->writeln('Update was completed version [' . (BaseConfig::$version??'1.5.0') . ']', 'green');
                     if($hasTodo){
                         static::cli()?->writeln('TODO ATTENTION!', 'red');
                         static::cli()?->writeln('Please see /TODO.md to few manual associated with the current version update');
