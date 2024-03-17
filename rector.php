@@ -48,14 +48,18 @@ return static function (RectorConfig $rectorConfig): void {
     ]);
 
     $rectorConfig->parallel();
-    
+    /*$rectorConfig->bootstrapFiles([
+        __DIR__ . '/system/Test/bootstrap.php',
+    ]);*/
+
+    //composer analyze-code
     $rectorConfig->paths([
         __DIR__ . '/app',
         __DIR__ . '/system',
         __DIR__ . '/bootstrap', 
         __DIR__ . '/resources',
         __DIR__ . '/routes',
-        __DIR__ . '/libraries',
+       // __DIR__ . '/libraries',
         __DIR__ . '/public',
     ]);
 
@@ -68,6 +72,7 @@ return static function (RectorConfig $rectorConfig): void {
         __DIR__ . '/builds',
         __DIR__ . '/dump',
         __DIR__ . '/samples',
+        __DIR__ . '/libraries',
         JsonThrowOnErrorRector::class,
         YieldDataProviderRector::class,
         CountOnNullRector::class,
@@ -75,6 +80,8 @@ return static function (RectorConfig $rectorConfig): void {
         SimplifyRegexPatternRector::class
     ]);
 
+    //$rectorConfig->importNames();
+    //$rectorConfig->removeUnusedImports();
 
     $rectorConfig->rule(TypedPropertyFromStrictConstructorRector::class);
     $rectorConfig->rule(SimplifyUselessVariableRector::class);

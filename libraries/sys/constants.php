@@ -9,8 +9,6 @@
  */
 /**
  * Check php requirements 
- * 
- * @throws trigger_error
 */
 if (version_compare(PHP_VERSION, 8.0, '<')) {
     $err = 'Your PHP version must be 8.0 or higher to run PHP Luminova framework. Current version: %s' . PHP_VERSION;
@@ -134,7 +132,7 @@ if(!function_exists('setenv')){
                 file_put_contents($envFile, "\n$key=$value", FILE_APPEND);
             } else {
                 $newContents = preg_replace_callback('/(' . preg_quote($key, '/') . ')\s*=\s*(.*)/',
-                    function($match) use ($key, $value) {
+                    function($match) use ($value) {
                         return $match[1] . '=' . $value;
                     },
                     $envContents
