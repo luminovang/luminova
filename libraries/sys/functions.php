@@ -766,3 +766,75 @@ if (!function_exists('get_class_name')) {
         return $className;
     }
 }
+
+if (!function_exists('filter_paths')) {
+    /**
+     * Filter the path to match to allowed in error directories preview.
+     *
+     * @param string $path The path to be filtered.
+     * 
+     * @return string
+     */
+    function filter_paths(string $path): string 
+    {
+        $matching = '';
+        $allowPreviews = ['system', 'app', 'resources', 'writable', 'libraries', 'routes', 'bootstrap'];
+        foreach ($allowPreviews as $directory) {
+            $separator = $directory . DIRECTORY_SEPARATOR; 
+            if (strpos($path, $separator) !== false) {
+                $matching = $separator;
+                break;
+            }
+        }
+
+        if ($matching !== '') {
+            $filter = substr($path, strpos($path, $matching));
+
+            return $filter;
+        }
+
+        return basename($path);
+    }
+}
+
+if (!function_exists('is_command')) {
+     /**
+     * Is CLI?
+     *
+     * Test to see if a request was made from the command line.
+     *
+     * @return bool
+    */
+    function is_command(): bool
+    {
+        return defined('STDIN') ||
+            (empty($_SERVER['REMOTE_ADDR']) && !isset($_SERVER['HTTP_USER_AGENT']) && count($_SERVER['argv']) > 0) ||
+            php_sapi_name() === 'cli' || array_key_exists('SHELL', $_ENV) || !array_key_exists('REQUEST_METHOD', $_SERVER);
+    }
+}
+
+if (!function_exists('is_dev_server')) {
+    /**
+     * Check if the application is running locally.
+     *
+     * @return bool
+    */
+    function is_dev_server(): bool
+    {
+        $serverName = $_SERVER['SERVER_NAME'] ?? '';
+
+        if(NOVAKIT_ENV !== null){
+            return true;
+        }
+
+        if ($serverName === '127.0.0.1' || $serverName === '::1') {
+            return true;
+        }
+        
+        if (strpos($serverName, 'localhost') !== false || strpos($serverName, '127.0.0.1') !== false) {
+            return true;
+        }
+        
+        return false;
+    }
+}

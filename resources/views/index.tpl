@@ -213,10 +213,10 @@
 
     <div class="info">
 
-        <h1>Welcome to {Luminova\Config\Configuration::copyright()}</h1>
+        <h1>Welcome to {Luminova\Base\BaseConfig::copyright()}</h1>
 
         <h2>Simple framework built for speed and keeping your existing coding skills going.</h2>
-        <p>Environment: {Luminova\Config\Configuration::getEnvironment()}</p>
+        <p>Environment: {constant("ENVIRONMENT")}</p>
 
     </div>
 
@@ -237,7 +237,8 @@
     <p>The corresponding controller for this page can be found at:</p>
 
     <pre><code>app/Controllers/Welcome.php</code></pre>
-    <p>{$smarty.server.LOCAL_SERVER_INSTANCE|default:'default'}</p>
+    <p>Development Server Context</p>
+    <pre><code>{$smarty.server.SERVER_SOFTWARE|default:'Unknown Development Server'}</code></pre>
 
 </section>
 

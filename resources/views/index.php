@@ -1,5 +1,5 @@
 <?php 
-use Luminova\Config\Configuration;
+use Luminova\Base\BaseConfig;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -216,10 +216,10 @@ use Luminova\Config\Configuration;
 
     <div class="info">
 
-        <h1>Welcome to <?= Configuration::copyright() ?></h1>
+        <h1>Welcome to <?= BaseConfig::copyright() ?></h1>
 
         <h2>Simple framework built for speed and keeping your existing coding skills going.</h2>
-        <p>Environment: <?= Configuration::getEnvironment() ?></p>
+        <p>Environment: <?= ENVIRONMENT ?></p>
 
     </div>
 
@@ -240,7 +240,9 @@ use Luminova\Config\Configuration;
     <p>The corresponding controller for this page can be found at:</p>
 
     <pre><code>app/Controllers/Welcome.php</code></pre>
-    <p><?php echo $_SERVER['LOCAL_SERVER_INSTANCE']??'default';?></p>
+
+    <p>Development Server Context</p>
+    <pre><code><?php echo $_SERVER['SERVER_SOFTWARE']??'Unknown Development Server';?></code></pre>
 
 </section>
 

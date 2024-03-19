@@ -84,7 +84,7 @@ if(!function_exists('env')){
         return match (strtolower($value)) {
             'true', 'enable' => true,
             'false', 'disable' => false,
-            'blank' => '',
+            'blank', => '',
             'null' => null,
             default => $value
         };
@@ -206,6 +206,45 @@ defined('PRODUCTION') || define('PRODUCTION', ENVIRONMENT === 'production');
 */
 defined('MAINTENANCE') || define('MAINTENANCE', (bool) env('app.maintenance.mood', false));
 
+/**
+ * @var string URL_PROTOCOL get request url protocol http or https 
+*/
+defined('URL_PROTOCOL') || define('URL_PROTOCOL', isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https://" : "http://");
+
+/**
+ * @var string SERVER_PROTOCOL get request server protocol HTTP/1.1
+*/
+defined('SERVER_PROTOCOL') || define('SERVER_PROTOCOL', isset($_SERVER['SERVER_PROTOCOL']) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.1');
+
+/**
+ * @var string APP_HOSTNAME get application hostname example.com
+*/
+defined('APP_HOSTNAME') || define('APP_HOSTNAME', env('app.hostname', 'example.com'));
+
+/**
+ * @var string APP_URL get application www hostname http://example.com
+*/
+defined('APP_URL') || define('APP_URL', URL_PROTOCOL . APP_HOSTNAME);
+
+/**
+ * @var string APP_WWW_HOSTNAME get application url www.example.com
+*/
+defined('APP_WWW_HOSTNAME') || define('APP_WWW_HOSTNAME', 'www.' . APP_HOSTNAME);
+
+/**
+ * @var string APP_WWW_URL get application www url https://www.example.com
+*/
+defined('APP_WWW_URL') || define('APP_WWW_URL', URL_PROTOCOL . APP_WWW_HOSTNAME);
+
+/**
+ * @var string REQUEST_HOSTNAME get application current request hostname https://www.example.com
+*/
+defined('REQUEST_HOSTNAME') || define('REQUEST_HOSTNAME', URL_PROTOCOL . $_SERVER['HTTP_HOST']);
+
+/**
+ * @var string REQUEST_URL get application current request url https://www.example.com/path/?query=
+*/
+defined('REQUEST_URL') || define('REQUEST_URL', REQUEST_HOSTNAME . ($_SERVER['REQUEST_URI']??''));
 
 /**
  * @var bool SHOW_DEBUG_BACKTRACE show debug tracer

@@ -17,7 +17,7 @@ use \App\Controllers\Application;
  * 
  * @var Application $app
 */
-$app = Application::getInstance(__DIR__);
+$app = Application::getInstance();
 
 /**
  * Define our public application front controller of not defined 
