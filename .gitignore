@@ -12,6 +12,7 @@ cli.help
 .idea
 .vscode
 /builds/*/
+!/build/.gitkeep
 # Ignore all folders within /system/
 /system/*/
 
