@@ -1,7 +1,6 @@
 <?php
-use Luminova\Http\Request;
-use Luminova\Functions\IPAddress;
-use Luminova\Config\Configuration;
+use \Luminova\Http\Request;
+use \Luminova\Base\BaseConfig;
 $errorId = uniqid('error', true);
 ?>
 <!doctype html>
@@ -192,7 +191,7 @@ $errorId = uniqid('error', true);
                         </tr>
                         <tr>
                             <td>IP Address</td>
-                            <td><?= escape(IPAddress::get()) ?></td>
+                            <td><?= escape(ip_address()) ?></td>
                         </tr>
                         <tr>
                             <td style="width: 10em">Is AJAX Request?</td>
@@ -200,7 +199,7 @@ $errorId = uniqid('error', true);
                         </tr>
                         <tr>
                             <td>Is CLI Request?</td>
-                            <td><?= $request->isCommandLine() ? 'yes' : 'no' ?></td>
+                            <td><?= is_command() ? 'yes' : 'no' ?></td>
                         </tr>
                         <tr>
                             <td>Is Secure Request?</td>
@@ -307,7 +306,7 @@ $errorId = uniqid('error', true);
             <p>
                 Displayed at <?= escape(date('H:i:sa')) ?> &mdash;
                 PHP: <?= escape(PHP_VERSION) ?>  &mdash;
-                Luminova: <?= escape(Configuration::$version) ?> --
+                Luminova: <?= escape(BaseConfig::$version) ?> --
                 Environment: <?= ENVIRONMENT ?>
             </p>
 

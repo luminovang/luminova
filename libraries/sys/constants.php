@@ -97,11 +97,11 @@ if(!function_exists('setenv')){
      *
      * @param string $key The key of the environment variable.
      * @param string $value The value of the environment variable.
-     * @param bool $add_to_env Save or update to .env file 
+     * @param bool $append_to_env Save or update to .env file 
      * 
      * @return bool true on success or false on failure.
      */
-    function setenv(string $key, string $value, bool $add_to_env = false): bool
+    function setenv(string $key, string $value, bool $append_to_env = false): bool
     {
         $count = 0;
         if (!getenv($key, true)) {
@@ -119,7 +119,7 @@ if(!function_exists('setenv')){
             $count++;
         }
     
-        if ($count > 0 && $add_to_env) {
+        if ($count > 0 && $append_to_env) {
             $envFile = APP_ROOT . DIRECTORY_SEPARATOR . '.env';
             $envContents = file_get_contents($envFile);
             if($envContents === false){
@@ -187,6 +187,11 @@ defined('STATUS_ERROR') || define('STATUS_ERROR', 1);
 defined('APP_VERSION') || define('APP_VERSION', env('app.version', '1.0.0'));
 
 /**
+ * @var string APP_FILE_VERSION application version
+*/
+defined('APP_FILE_VERSION') || define('APP_FILE_VERSION', env('app.file.version', '1.0.0'));
+
+/**
  * @var string APP_NAME application name
 */
 defined('APP_NAME') || define('APP_NAME', env('app.name', ''));
@@ -209,12 +214,12 @@ defined('MAINTENANCE') || define('MAINTENANCE', (bool) env('app.maintenance.mood
 /**
  * @var string URL_PROTOCOL get request url protocol http or https 
 */
-defined('URL_PROTOCOL') || define('URL_PROTOCOL', isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https://" : "http://");
+defined('URL_PROTOCOL') || define('URL_PROTOCOL', (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://'));
 
 /**
  * @var string SERVER_PROTOCOL get request server protocol HTTP/1.1
 */
-defined('SERVER_PROTOCOL') || define('SERVER_PROTOCOL', isset($_SERVER['SERVER_PROTOCOL']) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.1');
+defined('SERVER_PROTOCOL') || define('SERVER_PROTOCOL', (isset($_SERVER['SERVER_PROTOCOL']) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.1'));
 
 /**
  * @var string APP_HOSTNAME get application hostname example.com
@@ -239,12 +244,12 @@ defined('APP_WWW_URL') || define('APP_WWW_URL', URL_PROTOCOL . APP_WWW_HOSTNAME)
 /**
  * @var string REQUEST_HOSTNAME get application current request hostname https://www.example.com
 */
-defined('REQUEST_HOSTNAME') || define('REQUEST_HOSTNAME', URL_PROTOCOL . $_SERVER['HTTP_HOST']);
+defined('REQUEST_HOSTNAME') || define('REQUEST_HOSTNAME', URL_PROTOCOL . (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : APP_HOSTNAME));
 
 /**
  * @var string REQUEST_URL get application current request url https://www.example.com/path/?query=
 */
-defined('REQUEST_URL') || define('REQUEST_URL', REQUEST_HOSTNAME . ($_SERVER['REQUEST_URI']??''));
+defined('REQUEST_URL') || define('REQUEST_URL', REQUEST_HOSTNAME . (isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : ''));
 
 /**
  * @var bool SHOW_DEBUG_BACKTRACE show debug tracer
@@ -254,4 +259,4 @@ defined('SHOW_DEBUG_BACKTRACE') || define('SHOW_DEBUG_BACKTRACE', (bool) env("sh
 /**
  * @var bool NOVAKIT_ENV show debug tracer
 */
-defined('NOVAKIT_ENV') || define('NOVAKIT_ENV', isset($_SERVER['NOVAKIT_EXECUTION_ENV']) ? $_SERVER['NOVAKIT_EXECUTION_ENV'] : null);
+defined('NOVAKIT_ENV') || define('NOVAKIT_ENV', (isset($_SERVER['NOVAKIT_EXECUTION_ENV']) ? $_SERVER['NOVAKIT_EXECUTION_ENV'] : null));

@@ -145,15 +145,15 @@ if(!function_exists('ip_address')){
     */
     function ip_address(bool $ip_info = false, array $options = []): string|object|null
     {
-        $ip = Functions::ip()->get();
+        $ip = Functions::ip();
 
         if($ip_info){
-            $info = Functions::ip()->getInfo($ip, $options);
+            $info = $ip->getInfo(null, $options);
 
             return $info;
         }
 
-       return $ip;
+       return $ip->get();
     }
 }
 
@@ -815,19 +815,19 @@ if (!function_exists('is_command')) {
 
 if (!function_exists('is_dev_server')) {
     /**
-     * Check if the application is running locally.
+     * Check if the application is running locally on development server
      *
      * @return bool
     */
     function is_dev_server(): bool
     {
-        $serverName = $_SERVER['SERVER_NAME'] ?? '';
-
         if(NOVAKIT_ENV !== null){
             return true;
         }
 
-        if ($serverName === '127.0.0.1' || $serverName === '::1') {
+        $serverName = ($_SERVER['SERVER_NAME'] ?? '');
+
+        if ($serverName === '127.0.0.1' || $serverName === '::1' || $serverName === 'localhost') {
             return true;
         }
         

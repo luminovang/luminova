@@ -14,7 +14,7 @@ use \Luminova\Base\BaseViewController;
 class Home extends BaseViewController 
 {
     /** @var \Luminova\Http\Request $this->request() */
-    /** @var \Luminova\Application $this->app() */
+    /** @var \Luminova\Application $this->app */
     /** @var \Luminova\Security\InputValidator $this->validate() */
     /** @var \Luminova\Template\Template $this->view(string $view, array $options = []): int 0 */
     /** @var \Luminova\Library\Importer $this->library() */
@@ -26,7 +26,7 @@ class Home extends BaseViewController
         ]);
 
         /* Same as above
-        $this->app()->view("index")->render([
+        $this->app->view("index")->render([
             'foo' => 'bar'
         ]);
         */
