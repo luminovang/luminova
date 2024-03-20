@@ -7,7 +7,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
   array (
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/functions.php' => 
     array (
-      0 => '96fc55cd9ccb4137b6f3d91eda369ff3a8f076b9',
+      0 => '39ef8bd30e36242735495d32d29445a4c9912cc3',
       1 => 
       array (
       ),
@@ -44,6 +44,9 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
         28 => 'write_content',
         29 => 'validate',
         30 => 'get_class_name',
+        31 => 'filter_paths',
+        32 => 'is_command',
+        33 => 'is_dev_server',
       ),
       3 => 
       array (
@@ -51,7 +54,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/constants.php' => 
     array (
-      0 => '49f064191b228de3b206c14b188e489c5a352aa9',
+      0 => '5804711311d38e965f3976e9c0d2048ea5f86517',
       1 => 
       array (
       ),
@@ -68,12 +71,21 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
         2 => 'STATUS_SUCCESS',
         3 => 'STATUS_ERROR',
         4 => 'APP_VERSION',
-        5 => 'APP_NAME',
-        6 => 'ENVIRONMENT',
-        7 => 'PRODUCTION',
-        8 => 'MAINTENANCE',
-        9 => 'SHOW_DEBUG_BACKTRACE',
-        10 => 'NOVAKIT_ENV',
+        5 => 'APP_FILE_VERSION',
+        6 => 'APP_NAME',
+        7 => 'ENVIRONMENT',
+        8 => 'PRODUCTION',
+        9 => 'MAINTENANCE',
+        10 => 'URL_PROTOCOL',
+        11 => 'SERVER_PROTOCOL',
+        12 => 'APP_HOSTNAME',
+        13 => 'APP_URL',
+        14 => 'APP_WWW_HOSTNAME',
+        15 => 'APP_WWW_URL',
+        16 => 'REQUEST_HOSTNAME',
+        17 => 'REQUEST_URL',
+        18 => 'SHOW_DEBUG_BACKTRACE',
+        19 => 'NOVAKIT_ENV',
       ),
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/helpers.php' => 

@@ -13,28 +13,66 @@ use Luminova\Base\BaseCommand;
 
 class Command extends BaseCommand 
 {
+    /**
+     * @var string $group command group
+    */
+    protected string $group = 'test';
 
-    protected string $group = 'custom';
+    /**
+     * @var string $name command name
+    */
     protected string $name  = 'command';
-    protected string|array $usages  = 'php index.php command';
+
+    /**
+     * @var string|array $usage command usages
+    */
+    protected string|array $usages  = [
+        'php index.php command',
+        'php index.php command test'
+    ];
+
+    /**
+     * @var string $description command description
+    */
     protected string $description = 'Print command options';
+
+    /**
+     * Options
+     *
+     * @var array<string, string> $options
+    */
     protected array $options = [];
 
 
-    public function run(?array $params = []): int
+    /**
+     * @param array $options command options
+     * 
+     * @return int 
+    */
+    public function run(?array $options = []): int
     {
+        // Must call explain command first before calling getCommand(), getOptions(), getOption() etc..
+        $this->explain($options);
+
+        $command = trim($this->getCommand());
+
+        if($command === 'test'){
+            return $this->test();
+        }
+
         var_export($this->getOptions());
+
         $this->newLine();
+
         return STATUS_SUCCESS;
 
     }
 
-    public function test(?array $params = []): int
+    public function test(): int
     {
-        var_export($this->getOptions());
-        $this->newLine();
+        $this->print('This is a test command');
+
         return STATUS_SUCCESS;
 
     }
-    
 }

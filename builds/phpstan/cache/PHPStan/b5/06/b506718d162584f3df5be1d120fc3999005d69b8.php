@@ -2,6 +2,6 @@
 
 // variadic-method-Smarty_Internal_Data-__construct-/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/plugins/smarty/smarty/libs/sysplugins/smarty_internal_data.php
 return \PHPStan\Cache\CacheItem::__set_state(array(
-   'variableKey' => '1708955917-v4',
+   'variableKey' => '1710771547-v4',
    'data' => false,
 ));

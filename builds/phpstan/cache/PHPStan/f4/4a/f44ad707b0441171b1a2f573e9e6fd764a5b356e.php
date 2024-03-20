@@ -2,6 +2,6 @@
 
 // variadic-method-Luminova\Seo\Meta-getConfig-/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php
 return \PHPStan\Cache\CacheItem::__set_state(array(
-   'variableKey' => '1710364987-v4',
+   'variableKey' => '1710843134-v4',
    'data' => false,
 ));

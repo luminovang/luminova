@@ -2,6 +2,6 @@
 
 // variadic-method-Luminova\Languages\Translator-get-/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Languages/Translator.php
 return \PHPStan\Cache\CacheItem::__set_state(array(
-   'variableKey' => '1710156305-v4',
+   'variableKey' => '1710843313-v4',
    'data' => false,
 ));

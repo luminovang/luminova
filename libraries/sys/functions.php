@@ -778,7 +778,7 @@ if (!function_exists('filter_paths')) {
     function filter_paths(string $path): string 
     {
         $matching = '';
-        $allowPreviews = ['system', 'app', 'resources', 'writable', 'libraries', 'routes', 'bootstrap'];
+        $allowPreviews = ['system', 'app', 'resources', 'writable', 'libraries', 'routes', 'bootstrap', 'builds'];
         foreach ($allowPreviews as $directory) {
             $separator = $directory . DIRECTORY_SEPARATOR; 
             if (strpos($path, $separator) !== false) {

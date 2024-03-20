@@ -1,6 +1,7 @@
 <?php
 // source: phar:///Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/plugins/phpstan/phpstan/phpstan.phar/conf/config.neon
 // source: phar:///Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/plugins/phpstan/phpstan/phpstan.phar/conf/config.level6.neon
+// source: /Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/plugins/phpstan/extension-installer/src/../../phpstan-deprecation-rules/rules.neon
 // source: /Applications/XAMPP/xamppfiles/htdocs/luminova.fm/phpstan.neon
 // source: array
 
@@ -8,7 +9,7 @@
 
 declare(strict_types=1);
 
-class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
+class Container_1c82d8b241 extends _PHPStan_8c645376c\Nette\DI\Container
 {
 	protected $tags = [
 		'phpstan.parser.richParserNodeVisitor' => [
@@ -28,29 +29,28 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 		],
 		'phpstan.stubFilesExtension' => ['036' => true, '038' => true, '039' => true],
 		'phpstan.broker.methodsClassReflectionExtension' => ['093' => true, '097' => true],
-		'phpstan.broker.propertiesClassReflectionExtension' => ['094' => true, '099' => true, '0233' => true],
+		'phpstan.broker.propertiesClassReflectionExtension' => ['094' => true, '099' => true, '0234' => true],
 		'phpstan.broker.allowedSubTypesClassReflectionExtension' => ['098' => true],
 		'phpstan.broker.dynamicMethodReturnTypeExtension' => [
 			'0100' => true,
 			'0101' => true,
-			'0191' => true,
-			'0201' => true,
-			'0207' => true,
+			'0192' => true,
+			'0202' => true,
 			'0208' => true,
-			'0211' => true,
-			'0235' => true,
-			'0262' => true,
-			'0288' => true,
+			'0209' => true,
+			'0212' => true,
+			'0236' => true,
+			'0263' => true,
 			'0289' => true,
-			'0296' => true,
+			'0290' => true,
 			'0297' => true,
 			'0298' => true,
 			'0299' => true,
 			'0300' => true,
 			'0301' => true,
+			'0302' => true,
 		],
 		'phpstan.broker.dynamicFunctionReturnTypeExtension' => [
-			'0156' => true,
 			'0157' => true,
 			'0158' => true,
 			'0159' => true,
@@ -61,7 +61,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 			'0164' => true,
 			'0165' => true,
 			'0166' => true,
-			'0168' => true,
+			'0167' => true,
 			'0169' => true,
 			'0170' => true,
 			'0171' => true,
@@ -76,22 +76,22 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 			'0180' => true,
 			'0181' => true,
 			'0182' => true,
-			'0184' => true,
+			'0183' => true,
 			'0185' => true,
-			'0188' => true,
+			'0186' => true,
 			'0189' => true,
-			'0193' => true,
+			'0190' => true,
 			'0194' => true,
-			'0196' => true,
-			'0198' => true,
+			'0195' => true,
+			'0197' => true,
 			'0199' => true,
 			'0200' => true,
-			'0202' => true,
-			'0205' => true,
+			'0201' => true,
+			'0203' => true,
 			'0206' => true,
-			'0213' => true,
+			'0207' => true,
 			'0214' => true,
-			'0216' => true,
+			'0215' => true,
 			'0217' => true,
 			'0218' => true,
 			'0219' => true,
@@ -100,14 +100,14 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 			'0222' => true,
 			'0223' => true,
 			'0224' => true,
-			'0226' => true,
-			'0235' => true,
-			'0238' => true,
+			'0225' => true,
+			'0227' => true,
+			'0236' => true,
 			'0239' => true,
 			'0240' => true,
 			'0241' => true,
 			'0242' => true,
-			'0244' => true,
+			'0243' => true,
 			'0245' => true,
 			'0246' => true,
 			'0247' => true,
@@ -118,13 +118,13 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 			'0252' => true,
 			'0253' => true,
 			'0254' => true,
-			'0256' => true,
+			'0255' => true,
 			'0257' => true,
 			'0258' => true,
 			'0259' => true,
 			'0260' => true,
 			'0261' => true,
-			'0263' => true,
+			'0262' => true,
 			'0264' => true,
 			'0265' => true,
 			'0266' => true,
@@ -132,28 +132,28 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 			'0268' => true,
 			'0269' => true,
 			'0270' => true,
-			'0273' => true,
-			'0282' => true,
-			'0286' => true,
+			'0271' => true,
+			'0274' => true,
+			'0283' => true,
 			'0287' => true,
-			'0290' => true,
+			'0288' => true,
 			'0291' => true,
 			'0292' => true,
 			'0293' => true,
 			'0294' => true,
 			'0295' => true,
+			'0296' => true,
 		],
 		'phpstan.typeSpecifier.functionTypeSpecifyingExtension' => [
-			'0167' => true,
-			'0183' => true,
-			'0197' => true,
-			'0232' => true,
-			'0236' => true,
+			'0168' => true,
+			'0184' => true,
+			'0198' => true,
+			'0233' => true,
 			'0237' => true,
-			'0255' => true,
-			'0271' => true,
+			'0238' => true,
+			'0256' => true,
 			'0272' => true,
-			'0274' => true,
+			'0273' => true,
 			'0275' => true,
 			'0276' => true,
 			'0277' => true,
@@ -161,39 +161,39 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 			'0279' => true,
 			'0280' => true,
 			'0281' => true,
-			'0283' => true,
-			'0285' => true,
+			'0282' => true,
+			'0284' => true,
+			'0286' => true,
 		],
-		'phpstan.dynamicFunctionThrowTypeExtension' => ['0186' => true, '0225' => true, '0227' => true],
+		'phpstan.dynamicFunctionThrowTypeExtension' => ['0187' => true, '0226' => true, '0228' => true],
 		'phpstan.broker.dynamicStaticMethodReturnTypeExtension' => [
-			'0187' => true,
-			'0190' => true,
-			'0192' => true,
-			'0204' => true,
-			'0296' => true,
-			'0302' => true,
+			'0188' => true,
+			'0191' => true,
+			'0193' => true,
+			'0205' => true,
+			'0297' => true,
+			'0303' => true,
 		],
 		'phpstan.dynamicStaticMethodThrowTypeExtension' => [
-			'0203' => true,
-			'0209' => true,
+			'0204' => true,
 			'0210' => true,
-			'0228' => true,
+			'0211' => true,
 			'0229' => true,
 			'0230' => true,
 			'0231' => true,
-			'0234' => true,
+			'0232' => true,
+			'0235' => true,
 		],
-		'phpstan.dynamicMethodThrowTypeExtension' => ['0212' => true],
-		'phpstan.typeSpecifier.methodTypeSpecifyingExtension' => ['0243' => true],
+		'phpstan.dynamicMethodThrowTypeExtension' => ['0213' => true],
+		'phpstan.typeSpecifier.methodTypeSpecifyingExtension' => ['0244' => true],
 		'phpstan.rules.rule' => [
-			'0313' => true,
-			'0317' => true,
+			'0314' => true,
 			'0318' => true,
 			'0319' => true,
 			'0320' => true,
 			'0321' => true,
 			'0322' => true,
-			'0324' => true,
+			'0323' => true,
 			'0325' => true,
 			'0326' => true,
 			'0327' => true,
@@ -201,27 +201,27 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 			'0329' => true,
 			'0330' => true,
 			'0331' => true,
-			'0333' => true,
-			'0336' => true,
+			'0332' => true,
+			'0334' => true,
 			'0337' => true,
 			'0338' => true,
 			'0339' => true,
 			'0340' => true,
-			'0344' => true,
-			'0346' => true,
-			'0349' => true,
-			'0352' => true,
+			'0341' => true,
+			'0345' => true,
+			'0347' => true,
+			'0350' => true,
 			'0353' => true,
 			'0354' => true,
-			'0356' => true,
-			'0358' => true,
+			'0355' => true,
+			'0357' => true,
 			'0359' => true,
 			'0360' => true,
 			'0361' => true,
 			'0362' => true,
 			'0363' => true,
 			'0364' => true,
-			'0370' => true,
+			'0365' => true,
 			'0371' => true,
 			'0372' => true,
 			'0373' => true,
@@ -233,18 +233,19 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 			'0379' => true,
 			'0380' => true,
 			'0381' => true,
-			'0383' => true,
+			'0382' => true,
 			'0384' => true,
 			'0385' => true,
-			'0387' => true,
+			'0386' => true,
 			'0388' => true,
 			'0389' => true,
 			'0390' => true,
 			'0391' => true,
 			'0392' => true,
 			'0393' => true,
-			'0397' => true,
-			'0400' => true,
+			'0394' => true,
+			'0398' => true,
+			'0401' => true,
 			'rules.0' => true,
 			'rules.1' => true,
 			'rules.10' => true,
@@ -325,7 +326,23 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 			'rules.168' => true,
 			'rules.169' => true,
 			'rules.17' => true,
+			'rules.170' => true,
+			'rules.171' => true,
+			'rules.172' => true,
+			'rules.173' => true,
+			'rules.174' => true,
+			'rules.175' => true,
+			'rules.176' => true,
+			'rules.177' => true,
+			'rules.178' => true,
+			'rules.179' => true,
 			'rules.18' => true,
+			'rules.180' => true,
+			'rules.181' => true,
+			'rules.182' => true,
+			'rules.183' => true,
+			'rules.184' => true,
+			'rules.185' => true,
 			'rules.19' => true,
 			'rules.2' => true,
 			'rules.20' => true,
@@ -416,13 +433,14 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 			'rules.98' => true,
 			'rules.99' => true,
 		],
+		'phpstan.deprecations.deprecatedScopeResolver' => ['0408' => true],
 	];
 
-	protected $types = ['container' => '_PHPStan_de1c07ea6\Nette\DI\Container'];
+	protected $types = ['container' => '_PHPStan_8c645376c\Nette\DI\Container'];
 	protected $aliases = [];
 
 	protected $wiring = [
-		'_PHPStan_de1c07ea6\Nette\DI\Container' => [['container']],
+		'_PHPStan_8c645376c\Nette\DI\Container' => [['container']],
 		'PHPStan\Rules\Rule' => [
 			[
 				'0119',
@@ -430,7 +448,6 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 				'0122',
 				'0123',
 				'0136',
-				'0311',
 				'0312',
 				'0313',
 				'0314',
@@ -460,10 +477,10 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 				'0338',
 				'0339',
 				'0340',
-				'0342',
+				'0341',
 				'0343',
 				'0344',
-				'0346',
+				'0345',
 				'0347',
 				'0348',
 				'0349',
@@ -511,7 +528,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 				'0391',
 				'0392',
 				'0393',
-				'0396',
+				'0394',
 				'0397',
 				'0398',
 				'0399',
@@ -520,6 +537,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 				'0402',
 				'0403',
 				'0404',
+				'0409',
 			],
 			[
 				'rules.0',
@@ -692,6 +710,22 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 				'rules.167',
 				'rules.168',
 				'rules.169',
+				'rules.170',
+				'rules.171',
+				'rules.172',
+				'rules.173',
+				'rules.174',
+				'rules.175',
+				'rules.176',
+				'rules.177',
+				'rules.178',
+				'rules.179',
+				'rules.180',
+				'rules.181',
+				'rules.182',
+				'rules.183',
+				'rules.184',
+				'rules.185',
 			],
 		],
 		'PHPStan\Rules\Debug\DumpTypeRule' => [['rules.0']],
@@ -864,6 +898,22 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 		'PHPStan\Rules\Methods\MissingMethodParameterTypehintRule' => [['rules.167']],
 		'PHPStan\Rules\Methods\MissingMethodReturnTypehintRule' => [['rules.168']],
 		'PHPStan\Rules\Properties\MissingPropertyTypehintRule' => [['rules.169']],
+		'PHPStan\Rules\Deprecations\AccessDeprecatedPropertyRule' => [['rules.170']],
+		'PHPStan\Rules\Deprecations\AccessDeprecatedStaticPropertyRule' => [['rules.171']],
+		'PHPStan\Rules\Deprecations\CallToDeprecatedFunctionRule' => [['rules.172']],
+		'PHPStan\Rules\Deprecations\CallToDeprecatedMethodRule' => [['rules.173']],
+		'PHPStan\Rules\Deprecations\CallToDeprecatedStaticMethodRule' => [['rules.174']],
+		'PHPStan\Rules\Deprecations\FetchingClassConstOfDeprecatedClassRule' => [['rules.175']],
+		'PHPStan\Rules\Deprecations\FetchingDeprecatedConstRule' => [['rules.176']],
+		'PHPStan\Rules\Deprecations\ImplementationOfDeprecatedInterfaceRule' => [['rules.177']],
+		'PHPStan\Rules\Deprecations\InheritanceOfDeprecatedClassRule' => [['rules.178']],
+		'PHPStan\Rules\Deprecations\InheritanceOfDeprecatedInterfaceRule' => [['rules.179']],
+		'PHPStan\Rules\Deprecations\InstantiationOfDeprecatedClassRule' => [['rules.180']],
+		'PHPStan\Rules\Deprecations\TypeHintDeprecatedInClassMethodSignatureRule' => [['rules.181']],
+		'PHPStan\Rules\Deprecations\TypeHintDeprecatedInClosureSignatureRule' => [['rules.182']],
+		'PHPStan\Rules\Deprecations\TypeHintDeprecatedInFunctionSignatureRule' => [['rules.183']],
+		'PHPStan\Rules\Deprecations\UsageOfDeprecatedCastRule' => [['rules.184']],
+		'PHPStan\Rules\Deprecations\UsageOfDeprecatedTraitRule' => [['rules.185']],
 		'PhpParser\BuilderFactory' => [['01']],
 		'PHPStan\Parser\LexerFactory' => [['02']],
 		'PhpParser\NodeVisitorAbstract' => [
@@ -997,7 +1047,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 		'PHPStan\Reflection\InitializerExprTypeResolver' => [['080']],
 		'PHPStan\Reflection\MethodsClassReflectionExtension' => [['081', '091', '093', '095', '097']],
 		'PHPStan\Reflection\Annotations\AnnotationsMethodsClassReflectionExtension' => [['081']],
-		'PHPStan\Reflection\PropertiesClassReflectionExtension' => [['082', '092', '094', '095', '099', '0233']],
+		'PHPStan\Reflection\PropertiesClassReflectionExtension' => [['082', '092', '094', '095', '099', '0234']],
 		'PHPStan\Reflection\Annotations\AnnotationsPropertiesClassReflectionExtension' => [['082']],
 		'PHPStan\Reflection\BetterReflection\SourceLocator\CachingVisitor' => [['083']],
 		'PHPStan\Reflection\BetterReflection\SourceLocator\FileNodesFetcher' => [['084']],
@@ -1021,21 +1071,21 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 			[
 				'0100',
 				'0101',
-				'0191',
-				'0201',
-				'0207',
+				'0192',
+				'0202',
 				'0208',
-				'0211',
-				'0235',
-				'0262',
-				'0288',
+				'0209',
+				'0212',
+				'0236',
+				'0263',
 				'0289',
-				'0296',
+				'0290',
 				'0297',
 				'0298',
 				'0299',
 				'0300',
 				'0301',
+				'0302',
 			],
 		],
 		'PHPStan\Reflection\PHPStan\NativeReflectionEnumReturnDynamicReturnTypeExtension' => [['0100', '0101']],
@@ -1092,13 +1142,13 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 		'PHPStan\Rules\Properties\PropertyReflectionFinder' => [['0149']],
 		'PHPStan\Rules\RuleLevelHelper' => [['0150']],
 		'PHPStan\Rules\UnusedFunctionParametersCheck' => [['0151']],
-		'PHPStan\Type\FileTypeMapper' => [['0152']],
-		'PHPStan\Type\TypeAliasResolver' => [['0153']],
-		'PHPStan\Type\TypeAliasResolverProvider' => [['0154']],
-		'PHPStan\Type\BitwiseFlagHelper' => [['0155']],
+		'PHPStan\Rules\TooWideTypehints\TooWideParameterOutTypeCheck' => [['0152']],
+		'PHPStan\Type\FileTypeMapper' => [['0153']],
+		'PHPStan\Type\TypeAliasResolver' => [['0154']],
+		'PHPStan\Type\TypeAliasResolverProvider' => [['0155']],
+		'PHPStan\Type\BitwiseFlagHelper' => [['0156']],
 		'PHPStan\Type\DynamicFunctionReturnTypeExtension' => [
 			[
-				'0156',
 				'0157',
 				'0158',
 				'0159',
@@ -1109,7 +1159,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 				'0164',
 				'0165',
 				'0166',
-				'0168',
+				'0167',
 				'0169',
 				'0170',
 				'0171',
@@ -1124,22 +1174,22 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 				'0180',
 				'0181',
 				'0182',
-				'0184',
+				'0183',
 				'0185',
-				'0188',
+				'0186',
 				'0189',
-				'0193',
+				'0190',
 				'0194',
-				'0196',
-				'0198',
+				'0195',
+				'0197',
 				'0199',
 				'0200',
-				'0202',
-				'0205',
+				'0201',
+				'0203',
 				'0206',
-				'0213',
+				'0207',
 				'0214',
-				'0216',
+				'0215',
 				'0217',
 				'0218',
 				'0219',
@@ -1148,14 +1198,14 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 				'0222',
 				'0223',
 				'0224',
-				'0226',
-				'0235',
-				'0238',
+				'0225',
+				'0227',
+				'0236',
 				'0239',
 				'0240',
 				'0241',
 				'0242',
-				'0244',
+				'0243',
 				'0245',
 				'0246',
 				'0247',
@@ -1166,13 +1216,13 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 				'0252',
 				'0253',
 				'0254',
-				'0256',
+				'0255',
 				'0257',
 				'0258',
 				'0259',
 				'0260',
 				'0261',
-				'0263',
+				'0262',
 				'0264',
 				'0265',
 				'0266',
@@ -1180,41 +1230,41 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 				'0268',
 				'0269',
 				'0270',
-				'0273',
-				'0282',
-				'0286',
+				'0271',
+				'0274',
+				'0283',
 				'0287',
-				'0290',
+				'0288',
 				'0291',
 				'0292',
 				'0293',
 				'0294',
 				'0295',
+				'0296',
 			],
 		],
-		'PHPStan\Type\Php\ArgumentBasedFunctionReturnTypeExtension' => [['0156']],
-		'PHPStan\Type\Php\ArrayIntersectKeyFunctionReturnTypeExtension' => [['0157']],
-		'PHPStan\Type\Php\ArrayChunkFunctionReturnTypeExtension' => [['0158']],
-		'PHPStan\Type\Php\ArrayColumnFunctionReturnTypeExtension' => [['0159']],
-		'PHPStan\Type\Php\ArrayCombineFunctionReturnTypeExtension' => [['0160']],
-		'PHPStan\Type\Php\ArrayCurrentDynamicReturnTypeExtension' => [['0161']],
-		'PHPStan\Type\Php\ArrayFillFunctionReturnTypeExtension' => [['0162']],
-		'PHPStan\Type\Php\ArrayFillKeysFunctionReturnTypeExtension' => [['0163']],
-		'PHPStan\Type\Php\ArrayFilterFunctionReturnTypeReturnTypeExtension' => [['0164']],
-		'PHPStan\Type\Php\ArrayFlipFunctionReturnTypeExtension' => [['0165']],
-		'PHPStan\Type\Php\ArrayKeyDynamicReturnTypeExtension' => [['0166']],
+		'PHPStan\Type\Php\ArgumentBasedFunctionReturnTypeExtension' => [['0157']],
+		'PHPStan\Type\Php\ArrayIntersectKeyFunctionReturnTypeExtension' => [['0158']],
+		'PHPStan\Type\Php\ArrayChunkFunctionReturnTypeExtension' => [['0159']],
+		'PHPStan\Type\Php\ArrayColumnFunctionReturnTypeExtension' => [['0160']],
+		'PHPStan\Type\Php\ArrayCombineFunctionReturnTypeExtension' => [['0161']],
+		'PHPStan\Type\Php\ArrayCurrentDynamicReturnTypeExtension' => [['0162']],
+		'PHPStan\Type\Php\ArrayFillFunctionReturnTypeExtension' => [['0163']],
+		'PHPStan\Type\Php\ArrayFillKeysFunctionReturnTypeExtension' => [['0164']],
+		'PHPStan\Type\Php\ArrayFilterFunctionReturnTypeReturnTypeExtension' => [['0165']],
+		'PHPStan\Type\Php\ArrayFlipFunctionReturnTypeExtension' => [['0166']],
+		'PHPStan\Type\Php\ArrayKeyDynamicReturnTypeExtension' => [['0167']],
 		'PHPStan\Type\FunctionTypeSpecifyingExtension' => [
 			[
-				'0167',
-				'0183',
-				'0197',
-				'0232',
-				'0236',
+				'0168',
+				'0184',
+				'0198',
+				'0233',
 				'0237',
-				'0255',
-				'0271',
+				'0238',
+				'0256',
 				'0272',
-				'0274',
+				'0273',
 				'0275',
 				'0276',
 				'0277',
@@ -1222,23 +1272,23 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 				'0279',
 				'0280',
 				'0281',
-				'0283',
-				'0285',
+				'0282',
+				'0284',
+				'0286',
 			],
 		],
 		'PHPStan\Analyser\TypeSpecifierAwareExtension' => [
 			[
-				'0167',
-				'0183',
-				'0197',
-				'0232',
-				'0236',
+				'0168',
+				'0184',
+				'0198',
+				'0233',
 				'0237',
-				'0243',
-				'0255',
-				'0271',
+				'0238',
+				'0244',
+				'0256',
 				'0272',
-				'0274',
+				'0273',
 				'0275',
 				'0276',
 				'0277',
@@ -1246,151 +1296,152 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 				'0279',
 				'0280',
 				'0281',
-				'0283',
-				'0285',
-				'0287',
+				'0282',
+				'0284',
+				'0286',
+				'0288',
 			],
 		],
-		'PHPStan\Type\Php\ArrayKeyExistsFunctionTypeSpecifyingExtension' => [['0167']],
-		'PHPStan\Type\Php\ArrayKeyFirstDynamicReturnTypeExtension' => [['0168']],
-		'PHPStan\Type\Php\ArrayKeyLastDynamicReturnTypeExtension' => [['0169']],
-		'PHPStan\Type\Php\ArrayKeysFunctionDynamicReturnTypeExtension' => [['0170']],
-		'PHPStan\Type\Php\ArrayMapFunctionReturnTypeExtension' => [['0171']],
-		'PHPStan\Type\Php\ArrayMergeFunctionDynamicReturnTypeExtension' => [['0172']],
-		'PHPStan\Type\Php\ArrayNextDynamicReturnTypeExtension' => [['0173']],
-		'PHPStan\Type\Php\ArrayPopFunctionReturnTypeExtension' => [['0174']],
-		'PHPStan\Type\Php\ArrayRandFunctionReturnTypeExtension' => [['0175']],
-		'PHPStan\Type\Php\ArrayReduceFunctionReturnTypeExtension' => [['0176']],
-		'PHPStan\Type\Php\ArrayReplaceFunctionReturnTypeExtension' => [['0177']],
-		'PHPStan\Type\Php\ArrayReverseFunctionReturnTypeExtension' => [['0178']],
-		'PHPStan\Type\Php\ArrayShiftFunctionReturnTypeExtension' => [['0179']],
-		'PHPStan\Type\Php\ArraySliceFunctionReturnTypeExtension' => [['0180']],
-		'PHPStan\Type\Php\ArraySpliceFunctionReturnTypeExtension' => [['0181']],
-		'PHPStan\Type\Php\ArraySearchFunctionDynamicReturnTypeExtension' => [['0182']],
-		'PHPStan\Type\Php\ArraySearchFunctionTypeSpecifyingExtension' => [['0183']],
-		'PHPStan\Type\Php\ArrayValuesFunctionDynamicReturnTypeExtension' => [['0184']],
-		'PHPStan\Type\Php\ArraySumFunctionDynamicReturnTypeExtension' => [['0185']],
-		'PHPStan\Type\DynamicFunctionThrowTypeExtension' => [['0186', '0225', '0227']],
-		'PHPStan\Type\Php\AssertThrowTypeExtension' => [['0186']],
-		'PHPStan\Type\DynamicStaticMethodReturnTypeExtension' => [['0187', '0190', '0192', '0204', '0296', '0302']],
-		'PHPStan\Type\Php\BackedEnumFromMethodDynamicReturnTypeExtension' => [['0187']],
-		'PHPStan\Type\Php\Base64DecodeDynamicFunctionReturnTypeExtension' => [['0188']],
-		'PHPStan\Type\Php\BcMathStringOrNullReturnTypeExtension' => [['0189']],
-		'PHPStan\Type\Php\ClosureBindDynamicReturnTypeExtension' => [['0190']],
-		'PHPStan\Type\Php\ClosureBindToDynamicReturnTypeExtension' => [['0191']],
-		'PHPStan\Type\Php\ClosureFromCallableDynamicReturnTypeExtension' => [['0192']],
-		'PHPStan\Type\Php\CompactFunctionReturnTypeExtension' => [['0193']],
-		'PHPStan\Type\Php\ConstantFunctionReturnTypeExtension' => [['0194']],
-		'PHPStan\Type\Php\ConstantHelper' => [['0195']],
-		'PHPStan\Type\Php\CountFunctionReturnTypeExtension' => [['0196']],
-		'PHPStan\Type\Php\CountFunctionTypeSpecifyingExtension' => [['0197']],
-		'PHPStan\Type\Php\CurlGetinfoFunctionDynamicReturnTypeExtension' => [['0198']],
-		'PHPStan\Type\Php\CurlInitReturnTypeExtension' => [['0199']],
-		'PHPStan\Type\Php\DateFormatFunctionReturnTypeExtension' => [['0200']],
-		'PHPStan\Type\Php\DateFormatMethodReturnTypeExtension' => [['0201']],
-		'PHPStan\Type\Php\DateFunctionReturnTypeExtension' => [['0202']],
+		'PHPStan\Type\Php\ArrayKeyExistsFunctionTypeSpecifyingExtension' => [['0168']],
+		'PHPStan\Type\Php\ArrayKeyFirstDynamicReturnTypeExtension' => [['0169']],
+		'PHPStan\Type\Php\ArrayKeyLastDynamicReturnTypeExtension' => [['0170']],
+		'PHPStan\Type\Php\ArrayKeysFunctionDynamicReturnTypeExtension' => [['0171']],
+		'PHPStan\Type\Php\ArrayMapFunctionReturnTypeExtension' => [['0172']],
+		'PHPStan\Type\Php\ArrayMergeFunctionDynamicReturnTypeExtension' => [['0173']],
+		'PHPStan\Type\Php\ArrayNextDynamicReturnTypeExtension' => [['0174']],
+		'PHPStan\Type\Php\ArrayPopFunctionReturnTypeExtension' => [['0175']],
+		'PHPStan\Type\Php\ArrayRandFunctionReturnTypeExtension' => [['0176']],
+		'PHPStan\Type\Php\ArrayReduceFunctionReturnTypeExtension' => [['0177']],
+		'PHPStan\Type\Php\ArrayReplaceFunctionReturnTypeExtension' => [['0178']],
+		'PHPStan\Type\Php\ArrayReverseFunctionReturnTypeExtension' => [['0179']],
+		'PHPStan\Type\Php\ArrayShiftFunctionReturnTypeExtension' => [['0180']],
+		'PHPStan\Type\Php\ArraySliceFunctionReturnTypeExtension' => [['0181']],
+		'PHPStan\Type\Php\ArraySpliceFunctionReturnTypeExtension' => [['0182']],
+		'PHPStan\Type\Php\ArraySearchFunctionDynamicReturnTypeExtension' => [['0183']],
+		'PHPStan\Type\Php\ArraySearchFunctionTypeSpecifyingExtension' => [['0184']],
+		'PHPStan\Type\Php\ArrayValuesFunctionDynamicReturnTypeExtension' => [['0185']],
+		'PHPStan\Type\Php\ArraySumFunctionDynamicReturnTypeExtension' => [['0186']],
+		'PHPStan\Type\DynamicFunctionThrowTypeExtension' => [['0187', '0226', '0228']],
+		'PHPStan\Type\Php\AssertThrowTypeExtension' => [['0187']],
+		'PHPStan\Type\DynamicStaticMethodReturnTypeExtension' => [['0188', '0191', '0193', '0205', '0297', '0303']],
+		'PHPStan\Type\Php\BackedEnumFromMethodDynamicReturnTypeExtension' => [['0188']],
+		'PHPStan\Type\Php\Base64DecodeDynamicFunctionReturnTypeExtension' => [['0189']],
+		'PHPStan\Type\Php\BcMathStringOrNullReturnTypeExtension' => [['0190']],
+		'PHPStan\Type\Php\ClosureBindDynamicReturnTypeExtension' => [['0191']],
+		'PHPStan\Type\Php\ClosureBindToDynamicReturnTypeExtension' => [['0192']],
+		'PHPStan\Type\Php\ClosureFromCallableDynamicReturnTypeExtension' => [['0193']],
+		'PHPStan\Type\Php\CompactFunctionReturnTypeExtension' => [['0194']],
+		'PHPStan\Type\Php\ConstantFunctionReturnTypeExtension' => [['0195']],
+		'PHPStan\Type\Php\ConstantHelper' => [['0196']],
+		'PHPStan\Type\Php\CountFunctionReturnTypeExtension' => [['0197']],
+		'PHPStan\Type\Php\CountFunctionTypeSpecifyingExtension' => [['0198']],
+		'PHPStan\Type\Php\CurlGetinfoFunctionDynamicReturnTypeExtension' => [['0199']],
+		'PHPStan\Type\Php\CurlInitReturnTypeExtension' => [['0200']],
+		'PHPStan\Type\Php\DateFormatFunctionReturnTypeExtension' => [['0201']],
+		'PHPStan\Type\Php\DateFormatMethodReturnTypeExtension' => [['0202']],
+		'PHPStan\Type\Php\DateFunctionReturnTypeExtension' => [['0203']],
 		'PHPStan\Type\DynamicStaticMethodThrowTypeExtension' => [
-			['0203', '0209', '0210', '0228', '0229', '0230', '0231', '0234'],
+			['0204', '0210', '0211', '0229', '0230', '0231', '0232', '0235'],
 		],
-		'PHPStan\Type\Php\DateIntervalConstructorThrowTypeExtension' => [['0203']],
-		'PHPStan\Type\Php\DateIntervalDynamicReturnTypeExtension' => [['0204']],
-		'PHPStan\Type\Php\DateTimeCreateDynamicReturnTypeExtension' => [['0205']],
-		'PHPStan\Type\Php\DateTimeDynamicReturnTypeExtension' => [['0206']],
-		'PHPStan\Type\Php\DateTimeModifyReturnTypeExtension' => [['0207', '0208']],
-		'PHPStan\Type\Php\DateTimeConstructorThrowTypeExtension' => [['0209']],
-		'PHPStan\Type\Php\DateTimeZoneConstructorThrowTypeExtension' => [['0210']],
-		'PHPStan\Type\Php\DsMapDynamicReturnTypeExtension' => [['0211']],
-		'PHPStan\Type\DynamicMethodThrowTypeExtension' => [['0212']],
-		'PHPStan\Type\Php\DsMapDynamicMethodThrowTypeExtension' => [['0212']],
-		'PHPStan\Type\Php\DioStatDynamicFunctionReturnTypeExtension' => [['0213']],
-		'PHPStan\Type\Php\ExplodeFunctionDynamicReturnTypeExtension' => [['0214']],
-		'PHPStan\Type\Php\FilterFunctionReturnTypeHelper' => [['0215']],
-		'PHPStan\Type\Php\FilterInputDynamicReturnTypeExtension' => [['0216']],
-		'PHPStan\Type\Php\FilterVarDynamicReturnTypeExtension' => [['0217']],
-		'PHPStan\Type\Php\FilterVarArrayDynamicReturnTypeExtension' => [['0218']],
-		'PHPStan\Type\Php\GetCalledClassDynamicReturnTypeExtension' => [['0219']],
-		'PHPStan\Type\Php\GetClassDynamicReturnTypeExtension' => [['0220']],
-		'PHPStan\Type\Php\GetParentClassDynamicFunctionReturnTypeExtension' => [['0221']],
-		'PHPStan\Type\Php\GettypeFunctionReturnTypeExtension' => [['0222']],
-		'PHPStan\Type\Php\GettimeofdayDynamicFunctionReturnTypeExtension' => [['0223']],
-		'PHPStan\Type\Php\HashFunctionsReturnTypeExtension' => [['0224']],
-		'PHPStan\Type\Php\IntdivThrowTypeExtension' => [['0225']],
-		'PHPStan\Type\Php\IniGetReturnTypeExtension' => [['0226']],
-		'PHPStan\Type\Php\JsonThrowTypeExtension' => [['0227']],
-		'PHPStan\Type\Php\ReflectionClassConstructorThrowTypeExtension' => [['0228']],
-		'PHPStan\Type\Php\ReflectionFunctionConstructorThrowTypeExtension' => [['0229']],
-		'PHPStan\Type\Php\ReflectionMethodConstructorThrowTypeExtension' => [['0230']],
-		'PHPStan\Type\Php\ReflectionPropertyConstructorThrowTypeExtension' => [['0231']],
-		'PHPStan\Type\Php\StrContainingTypeSpecifyingExtension' => [['0232']],
-		'PHPStan\Type\Php\SimpleXMLElementClassPropertyReflectionExtension' => [['0233']],
-		'PHPStan\Type\Php\SimpleXMLElementConstructorThrowTypeExtension' => [['0234']],
-		'PHPStan\Type\Php\StatDynamicReturnTypeExtension' => [['0235']],
-		'PHPStan\Type\Php\MethodExistsTypeSpecifyingExtension' => [['0236']],
-		'PHPStan\Type\Php\PropertyExistsTypeSpecifyingExtension' => [['0237']],
-		'PHPStan\Type\Php\MinMaxFunctionReturnTypeExtension' => [['0238']],
-		'PHPStan\Type\Php\NumberFormatFunctionDynamicReturnTypeExtension' => [['0239']],
-		'PHPStan\Type\Php\PathinfoFunctionDynamicReturnTypeExtension' => [['0240']],
-		'PHPStan\Type\Php\PregFilterFunctionReturnTypeExtension' => [['0241']],
-		'PHPStan\Type\Php\PregSplitDynamicReturnTypeExtension' => [['0242']],
-		'PHPStan\Type\MethodTypeSpecifyingExtension' => [['0243']],
-		'PHPStan\Type\Php\ReflectionClassIsSubclassOfTypeSpecifyingExtension' => [['0243']],
-		'PHPStan\Type\Php\ReplaceFunctionsDynamicReturnTypeExtension' => [['0244']],
-		'PHPStan\Type\Php\ArrayPointerFunctionsDynamicReturnTypeExtension' => [['0245']],
-		'PHPStan\Type\Php\LtrimFunctionReturnTypeExtension' => [['0246']],
-		'PHPStan\Type\Php\MbFunctionsReturnTypeExtension' => [['0247']],
-		'PHPStan\Type\Php\MbConvertEncodingFunctionReturnTypeExtension' => [['0248']],
-		'PHPStan\Type\Php\MbSubstituteCharacterDynamicReturnTypeExtension' => [['0249']],
-		'PHPStan\Type\Php\MbStrlenFunctionReturnTypeExtension' => [['0250']],
-		'PHPStan\Type\Php\MicrotimeFunctionReturnTypeExtension' => [['0251']],
-		'PHPStan\Type\Php\HrtimeFunctionReturnTypeExtension' => [['0252']],
-		'PHPStan\Type\Php\ImplodeFunctionReturnTypeExtension' => [['0253']],
-		'PHPStan\Type\Php\NonEmptyStringFunctionsReturnTypeExtension' => [['0254']],
-		'PHPStan\Type\Php\SetTypeFunctionTypeSpecifyingExtension' => [['0255']],
-		'PHPStan\Type\Php\StrCaseFunctionsReturnTypeExtension' => [['0256']],
-		'PHPStan\Type\Php\StrlenFunctionReturnTypeExtension' => [['0257']],
-		'PHPStan\Type\Php\StrIncrementDecrementFunctionReturnTypeExtension' => [['0258']],
-		'PHPStan\Type\Php\StrPadFunctionReturnTypeExtension' => [['0259']],
-		'PHPStan\Type\Php\StrRepeatFunctionReturnTypeExtension' => [['0260']],
-		'PHPStan\Type\Php\SubstrDynamicReturnTypeExtension' => [['0261']],
-		'PHPStan\Type\Php\ThrowableReturnTypeExtension' => [['0262']],
-		'PHPStan\Type\Php\ParseUrlFunctionDynamicReturnTypeExtension' => [['0263']],
-		'PHPStan\Type\Php\TriggerErrorDynamicReturnTypeExtension' => [['0264']],
-		'PHPStan\Type\Php\VersionCompareFunctionDynamicReturnTypeExtension' => [['0265']],
-		'PHPStan\Type\Php\PowFunctionReturnTypeExtension' => [['0266']],
-		'PHPStan\Type\Php\RoundFunctionReturnTypeExtension' => [['0267']],
-		'PHPStan\Type\Php\StrtotimeFunctionReturnTypeExtension' => [['0268']],
-		'PHPStan\Type\Php\RandomIntFunctionReturnTypeExtension' => [['0269']],
-		'PHPStan\Type\Php\RangeFunctionReturnTypeExtension' => [['0270']],
-		'PHPStan\Type\Php\AssertFunctionTypeSpecifyingExtension' => [['0271']],
-		'PHPStan\Type\Php\ClassExistsFunctionTypeSpecifyingExtension' => [['0272']],
-		'PHPStan\Type\Php\ClassImplementsFunctionReturnTypeExtension' => [['0273']],
-		'PHPStan\Type\Php\DefineConstantTypeSpecifyingExtension' => [['0274']],
-		'PHPStan\Type\Php\DefinedConstantTypeSpecifyingExtension' => [['0275']],
-		'PHPStan\Type\Php\FunctionExistsFunctionTypeSpecifyingExtension' => [['0276']],
-		'PHPStan\Type\Php\InArrayFunctionTypeSpecifyingExtension' => [['0277']],
-		'PHPStan\Type\Php\IsArrayFunctionTypeSpecifyingExtension' => [['0278']],
-		'PHPStan\Type\Php\IsCallableFunctionTypeSpecifyingExtension' => [['0279']],
-		'PHPStan\Type\Php\IsIterableFunctionTypeSpecifyingExtension' => [['0280']],
-		'PHPStan\Type\Php\IsSubclassOfFunctionTypeSpecifyingExtension' => [['0281']],
-		'PHPStan\Type\Php\IteratorToArrayFunctionReturnTypeExtension' => [['0282']],
-		'PHPStan\Type\Php\IsAFunctionTypeSpecifyingExtension' => [['0283']],
-		'PHPStan\Type\Php\IsAFunctionTypeSpecifyingHelper' => [['0284']],
-		'PHPStan\Type\Php\CtypeDigitFunctionTypeSpecifyingExtension' => [['0285']],
-		'PHPStan\Type\Php\JsonThrowOnErrorDynamicReturnTypeExtension' => [['0286']],
-		'PHPStan\Type\Php\TypeSpecifyingFunctionsDynamicReturnTypeExtension' => [['0287']],
-		'PHPStan\Type\Php\SimpleXMLElementAsXMLMethodReturnTypeExtension' => [['0288']],
-		'PHPStan\Type\Php\SimpleXMLElementXpathMethodReturnTypeExtension' => [['0289']],
-		'PHPStan\Type\Php\StrSplitFunctionReturnTypeExtension' => [['0290']],
-		'PHPStan\Type\Php\StrTokFunctionReturnTypeExtension' => [['0291']],
-		'PHPStan\Type\Php\SprintfFunctionDynamicReturnTypeExtension' => [['0292']],
-		'PHPStan\Type\Php\SscanfFunctionDynamicReturnTypeExtension' => [['0293']],
-		'PHPStan\Type\Php\StrvalFamilyFunctionReturnTypeExtension' => [['0294']],
-		'PHPStan\Type\Php\StrWordCountFunctionDynamicReturnTypeExtension' => [['0295']],
-		'PHPStan\Type\Php\XMLReaderOpenReturnTypeExtension' => [['0296']],
-		'PHPStan\Type\Php\ReflectionGetAttributesMethodReturnTypeExtension' => [['0297', '0298', '0299', '0300', '0301']],
-		'PHPStan\Type\Php\DatePeriodConstructorReturnTypeExtension' => [['0302']],
-		'PHPStan\Type\ClosureTypeFactory' => [['0303']],
-		'PHPStan\Type\Constant\OversizedArrayBuilder' => [['0304']],
+		'PHPStan\Type\Php\DateIntervalConstructorThrowTypeExtension' => [['0204']],
+		'PHPStan\Type\Php\DateIntervalDynamicReturnTypeExtension' => [['0205']],
+		'PHPStan\Type\Php\DateTimeCreateDynamicReturnTypeExtension' => [['0206']],
+		'PHPStan\Type\Php\DateTimeDynamicReturnTypeExtension' => [['0207']],
+		'PHPStan\Type\Php\DateTimeModifyReturnTypeExtension' => [['0208', '0209']],
+		'PHPStan\Type\Php\DateTimeConstructorThrowTypeExtension' => [['0210']],
+		'PHPStan\Type\Php\DateTimeZoneConstructorThrowTypeExtension' => [['0211']],
+		'PHPStan\Type\Php\DsMapDynamicReturnTypeExtension' => [['0212']],
+		'PHPStan\Type\DynamicMethodThrowTypeExtension' => [['0213']],
+		'PHPStan\Type\Php\DsMapDynamicMethodThrowTypeExtension' => [['0213']],
+		'PHPStan\Type\Php\DioStatDynamicFunctionReturnTypeExtension' => [['0214']],
+		'PHPStan\Type\Php\ExplodeFunctionDynamicReturnTypeExtension' => [['0215']],
+		'PHPStan\Type\Php\FilterFunctionReturnTypeHelper' => [['0216']],
+		'PHPStan\Type\Php\FilterInputDynamicReturnTypeExtension' => [['0217']],
+		'PHPStan\Type\Php\FilterVarDynamicReturnTypeExtension' => [['0218']],
+		'PHPStan\Type\Php\FilterVarArrayDynamicReturnTypeExtension' => [['0219']],
+		'PHPStan\Type\Php\GetCalledClassDynamicReturnTypeExtension' => [['0220']],
+		'PHPStan\Type\Php\GetClassDynamicReturnTypeExtension' => [['0221']],
+		'PHPStan\Type\Php\GetParentClassDynamicFunctionReturnTypeExtension' => [['0222']],
+		'PHPStan\Type\Php\GettypeFunctionReturnTypeExtension' => [['0223']],
+		'PHPStan\Type\Php\GettimeofdayDynamicFunctionReturnTypeExtension' => [['0224']],
+		'PHPStan\Type\Php\HashFunctionsReturnTypeExtension' => [['0225']],
+		'PHPStan\Type\Php\IntdivThrowTypeExtension' => [['0226']],
+		'PHPStan\Type\Php\IniGetReturnTypeExtension' => [['0227']],
+		'PHPStan\Type\Php\JsonThrowTypeExtension' => [['0228']],
+		'PHPStan\Type\Php\ReflectionClassConstructorThrowTypeExtension' => [['0229']],
+		'PHPStan\Type\Php\ReflectionFunctionConstructorThrowTypeExtension' => [['0230']],
+		'PHPStan\Type\Php\ReflectionMethodConstructorThrowTypeExtension' => [['0231']],
+		'PHPStan\Type\Php\ReflectionPropertyConstructorThrowTypeExtension' => [['0232']],
+		'PHPStan\Type\Php\StrContainingTypeSpecifyingExtension' => [['0233']],
+		'PHPStan\Type\Php\SimpleXMLElementClassPropertyReflectionExtension' => [['0234']],
+		'PHPStan\Type\Php\SimpleXMLElementConstructorThrowTypeExtension' => [['0235']],
+		'PHPStan\Type\Php\StatDynamicReturnTypeExtension' => [['0236']],
+		'PHPStan\Type\Php\MethodExistsTypeSpecifyingExtension' => [['0237']],
+		'PHPStan\Type\Php\PropertyExistsTypeSpecifyingExtension' => [['0238']],
+		'PHPStan\Type\Php\MinMaxFunctionReturnTypeExtension' => [['0239']],
+		'PHPStan\Type\Php\NumberFormatFunctionDynamicReturnTypeExtension' => [['0240']],
+		'PHPStan\Type\Php\PathinfoFunctionDynamicReturnTypeExtension' => [['0241']],
+		'PHPStan\Type\Php\PregFilterFunctionReturnTypeExtension' => [['0242']],
+		'PHPStan\Type\Php\PregSplitDynamicReturnTypeExtension' => [['0243']],
+		'PHPStan\Type\MethodTypeSpecifyingExtension' => [['0244']],
+		'PHPStan\Type\Php\ReflectionClassIsSubclassOfTypeSpecifyingExtension' => [['0244']],
+		'PHPStan\Type\Php\ReplaceFunctionsDynamicReturnTypeExtension' => [['0245']],
+		'PHPStan\Type\Php\ArrayPointerFunctionsDynamicReturnTypeExtension' => [['0246']],
+		'PHPStan\Type\Php\LtrimFunctionReturnTypeExtension' => [['0247']],
+		'PHPStan\Type\Php\MbFunctionsReturnTypeExtension' => [['0248']],
+		'PHPStan\Type\Php\MbConvertEncodingFunctionReturnTypeExtension' => [['0249']],
+		'PHPStan\Type\Php\MbSubstituteCharacterDynamicReturnTypeExtension' => [['0250']],
+		'PHPStan\Type\Php\MbStrlenFunctionReturnTypeExtension' => [['0251']],
+		'PHPStan\Type\Php\MicrotimeFunctionReturnTypeExtension' => [['0252']],
+		'PHPStan\Type\Php\HrtimeFunctionReturnTypeExtension' => [['0253']],
+		'PHPStan\Type\Php\ImplodeFunctionReturnTypeExtension' => [['0254']],
+		'PHPStan\Type\Php\NonEmptyStringFunctionsReturnTypeExtension' => [['0255']],
+		'PHPStan\Type\Php\SetTypeFunctionTypeSpecifyingExtension' => [['0256']],
+		'PHPStan\Type\Php\StrCaseFunctionsReturnTypeExtension' => [['0257']],
+		'PHPStan\Type\Php\StrlenFunctionReturnTypeExtension' => [['0258']],
+		'PHPStan\Type\Php\StrIncrementDecrementFunctionReturnTypeExtension' => [['0259']],
+		'PHPStan\Type\Php\StrPadFunctionReturnTypeExtension' => [['0260']],
+		'PHPStan\Type\Php\StrRepeatFunctionReturnTypeExtension' => [['0261']],
+		'PHPStan\Type\Php\SubstrDynamicReturnTypeExtension' => [['0262']],
+		'PHPStan\Type\Php\ThrowableReturnTypeExtension' => [['0263']],
+		'PHPStan\Type\Php\ParseUrlFunctionDynamicReturnTypeExtension' => [['0264']],
+		'PHPStan\Type\Php\TriggerErrorDynamicReturnTypeExtension' => [['0265']],
+		'PHPStan\Type\Php\VersionCompareFunctionDynamicReturnTypeExtension' => [['0266']],
+		'PHPStan\Type\Php\PowFunctionReturnTypeExtension' => [['0267']],
+		'PHPStan\Type\Php\RoundFunctionReturnTypeExtension' => [['0268']],
+		'PHPStan\Type\Php\StrtotimeFunctionReturnTypeExtension' => [['0269']],
+		'PHPStan\Type\Php\RandomIntFunctionReturnTypeExtension' => [['0270']],
+		'PHPStan\Type\Php\RangeFunctionReturnTypeExtension' => [['0271']],
+		'PHPStan\Type\Php\AssertFunctionTypeSpecifyingExtension' => [['0272']],
+		'PHPStan\Type\Php\ClassExistsFunctionTypeSpecifyingExtension' => [['0273']],
+		'PHPStan\Type\Php\ClassImplementsFunctionReturnTypeExtension' => [['0274']],
+		'PHPStan\Type\Php\DefineConstantTypeSpecifyingExtension' => [['0275']],
+		'PHPStan\Type\Php\DefinedConstantTypeSpecifyingExtension' => [['0276']],
+		'PHPStan\Type\Php\FunctionExistsFunctionTypeSpecifyingExtension' => [['0277']],
+		'PHPStan\Type\Php\InArrayFunctionTypeSpecifyingExtension' => [['0278']],
+		'PHPStan\Type\Php\IsArrayFunctionTypeSpecifyingExtension' => [['0279']],
+		'PHPStan\Type\Php\IsCallableFunctionTypeSpecifyingExtension' => [['0280']],
+		'PHPStan\Type\Php\IsIterableFunctionTypeSpecifyingExtension' => [['0281']],
+		'PHPStan\Type\Php\IsSubclassOfFunctionTypeSpecifyingExtension' => [['0282']],
+		'PHPStan\Type\Php\IteratorToArrayFunctionReturnTypeExtension' => [['0283']],
+		'PHPStan\Type\Php\IsAFunctionTypeSpecifyingExtension' => [['0284']],
+		'PHPStan\Type\Php\IsAFunctionTypeSpecifyingHelper' => [['0285']],
+		'PHPStan\Type\Php\CtypeDigitFunctionTypeSpecifyingExtension' => [['0286']],
+		'PHPStan\Type\Php\JsonThrowOnErrorDynamicReturnTypeExtension' => [['0287']],
+		'PHPStan\Type\Php\TypeSpecifyingFunctionsDynamicReturnTypeExtension' => [['0288']],
+		'PHPStan\Type\Php\SimpleXMLElementAsXMLMethodReturnTypeExtension' => [['0289']],
+		'PHPStan\Type\Php\SimpleXMLElementXpathMethodReturnTypeExtension' => [['0290']],
+		'PHPStan\Type\Php\StrSplitFunctionReturnTypeExtension' => [['0291']],
+		'PHPStan\Type\Php\StrTokFunctionReturnTypeExtension' => [['0292']],
+		'PHPStan\Type\Php\SprintfFunctionDynamicReturnTypeExtension' => [['0293']],
+		'PHPStan\Type\Php\SscanfFunctionDynamicReturnTypeExtension' => [['0294']],
+		'PHPStan\Type\Php\StrvalFamilyFunctionReturnTypeExtension' => [['0295']],
+		'PHPStan\Type\Php\StrWordCountFunctionDynamicReturnTypeExtension' => [['0296']],
+		'PHPStan\Type\Php\XMLReaderOpenReturnTypeExtension' => [['0297']],
+		'PHPStan\Type\Php\ReflectionGetAttributesMethodReturnTypeExtension' => [['0298', '0299', '0300', '0301', '0302']],
+		'PHPStan\Type\Php\DatePeriodConstructorReturnTypeExtension' => [['0303']],
+		'PHPStan\Type\ClosureTypeFactory' => [['0304']],
+		'PHPStan\Type\Constant\OversizedArrayBuilder' => [['0305']],
 		'PHPStan\Analyser\TypeSpecifier' => [['typeSpecifier']],
 		'PHPStan\Analyser\TypeSpecifierFactory' => [['typeSpecifierFactory']],
 		'PHPStan\File\RelativePathHelper' => [
@@ -1445,12 +1496,12 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 		'PHPStan\BetterReflection\Reflector\FunctionReflector' => [2 => ['betterReflectionFunctionReflector']],
 		'PHPStan\BetterReflection\Reflector\ConstantReflector' => [2 => ['betterReflectionConstantReflector']],
 		'PHPStan\Reflection\BetterReflection\BetterReflectionProvider' => [2 => ['betterReflectionProvider']],
-		'PHPStan\Reflection\BetterReflection\BetterReflectionSourceLocatorFactory' => [['0305']],
-		'PHPStan\Reflection\BetterReflection\BetterReflectionProviderFactory' => [['0306']],
-		'PHPStan\Reflection\BetterReflection\SourceStubber\PhpStormStubsSourceStubberFactory' => [['0307']],
-		'PHPStan\BetterReflection\SourceLocator\SourceStubber\SourceStubber' => [1 => ['0308', '0309']],
-		'PHPStan\BetterReflection\SourceLocator\SourceStubber\PhpStormStubsSourceStubber' => [['0308']],
-		'PHPStan\BetterReflection\SourceLocator\SourceStubber\ReflectionSourceStubber' => [['0309']],
+		'PHPStan\Reflection\BetterReflection\BetterReflectionSourceLocatorFactory' => [['0306']],
+		'PHPStan\Reflection\BetterReflection\BetterReflectionProviderFactory' => [['0307']],
+		'PHPStan\Reflection\BetterReflection\SourceStubber\PhpStormStubsSourceStubberFactory' => [['0308']],
+		'PHPStan\BetterReflection\SourceLocator\SourceStubber\SourceStubber' => [1 => ['0309', '0310']],
+		'PHPStan\BetterReflection\SourceLocator\SourceStubber\PhpStormStubsSourceStubber' => [['0309']],
+		'PHPStan\BetterReflection\SourceLocator\SourceStubber\ReflectionSourceStubber' => [['0310']],
 		'PhpParser\Lexer\Emulative' => [2 => ['php8Lexer']],
 		'PHPStan\Parser\PathRoutingParser' => [2 => ['pathRoutingParser']],
 		'PHPStan\Command\ErrorFormatter\ErrorFormatter' => [
@@ -1465,9 +1516,9 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 				'errorFormatter.github',
 				'errorFormatter.teamcity',
 			],
-			['0310'],
+			['0311'],
 		],
-		'PHPStan\Command\ErrorFormatter\CiDetectedErrorFormatter' => [['0310']],
+		'PHPStan\Command\ErrorFormatter\CiDetectedErrorFormatter' => [['0311']],
 		'PHPStan\Command\ErrorFormatter\RawErrorFormatter' => [['errorFormatter.raw']],
 		'PHPStan\Command\ErrorFormatter\TableErrorFormatter' => [['errorFormatter.table']],
 		'PHPStan\Command\ErrorFormatter\CheckstyleErrorFormatter' => [['errorFormatter.checkstyle']],
@@ -1476,101 +1527,106 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 		'PHPStan\Command\ErrorFormatter\GitlabErrorFormatter' => [['errorFormatter.gitlab']],
 		'PHPStan\Command\ErrorFormatter\GithubErrorFormatter' => [['errorFormatter.github']],
 		'PHPStan\Command\ErrorFormatter\TeamcityErrorFormatter' => [['errorFormatter.teamcity']],
-		'PHPStan\Rules\Api\ApiClassConstFetchRule' => [['0311']],
-		'PHPStan\Rules\Api\ApiInstanceofRule' => [['0312']],
-		'PHPStan\Rules\Api\ApiInstanceofTypeRule' => [['0313']],
-		'PHPStan\Rules\Api\NodeConnectingVisitorAttributesRule' => [['0314']],
-		'PHPStan\Rules\Api\RuntimeReflectionFunctionRule' => [['0315']],
-		'PHPStan\Rules\Api\RuntimeReflectionInstantiationRule' => [['0316']],
-		'PHPStan\Rules\Classes\ExistingClassInClassExtendsRule' => [['0317']],
-		'PHPStan\Rules\Classes\ExistingClassInInstanceOfRule' => [['0318']],
-		'PHPStan\Rules\Exceptions\CaughtExceptionExistenceRule' => [['0319']],
-		'PHPStan\Rules\Functions\CallToNonExistentFunctionRule' => [['0320']],
-		'PHPStan\Rules\Constants\OverridingConstantRule' => [['0321']],
-		'PHPStan\Rules\Methods\OverridingMethodRule' => [['0322']],
-		'PHPStan\Rules\Methods\ConsistentConstructorRule' => [['0323']],
-		'PHPStan\Rules\Missing\MissingReturnRule' => [['0324']],
-		'PHPStan\Rules\Namespaces\ExistingNamesInGroupUseRule' => [['0325']],
-		'PHPStan\Rules\Namespaces\ExistingNamesInUseRule' => [['0326']],
-		'PHPStan\Rules\Operators\InvalidIncDecOperationRule' => [['0327']],
-		'PHPStan\Rules\Properties\AccessPropertiesRule' => [['0328']],
-		'PHPStan\Rules\Properties\AccessStaticPropertiesRule' => [['0329']],
-		'PHPStan\Rules\Properties\ExistingClassesInPropertiesRule' => [['0330']],
-		'PHPStan\Rules\Functions\FunctionCallableRule' => [['0331']],
-		'PHPStan\Rules\Properties\MissingReadOnlyByPhpDocPropertyAssignRule' => [['0332']],
-		'PHPStan\Rules\Properties\OverridingPropertyRule' => [['0333']],
-		'PHPStan\Rules\Properties\ReadOnlyByPhpDocPropertyRule' => [['0334']],
-		'PHPStan\Rules\Properties\UninitializedPropertyRule' => [['0335']],
-		'PHPStan\Rules\Properties\WritingToReadOnlyPropertiesRule' => [['0336']],
-		'PHPStan\Rules\Properties\ReadingWriteOnlyPropertiesRule' => [['0337']],
-		'PHPStan\Rules\Variables\CompactVariablesRule' => [['0338']],
-		'PHPStan\Rules\Variables\DefinedVariableRule' => [['0339']],
-		'PHPStan\Rules\Regexp\RegularExpressionPatternRule' => [['0340']],
-		'PHPStan\Reflection\ConstructorsHelper' => [['0341']],
-		'PHPStan\Rules\Methods\MissingMagicSerializationMethodsRule' => [['0342']],
-		'PHPStan\Rules\Constants\MagicConstantContextRule' => [['0343']],
-		'PHPStan\Rules\Classes\MixinRule' => [['0344']],
-		'PHPStan\Rules\PhpDoc\RequireExtendsCheck' => [['0345']],
-		'PHPStan\Rules\PhpDoc\RequireImplementsDefinitionTraitRule' => [['0346']],
-		'PHPStan\Rules\Functions\IncompatibleArrowFunctionDefaultParameterTypeRule' => [['0347']],
-		'PHPStan\Rules\Functions\IncompatibleClosureDefaultParameterTypeRule' => [['0348']],
-		'PHPStan\Rules\Functions\CallCallablesRule' => [['0349']],
-		'PHPStan\Rules\Methods\IllegalConstructorMethodCallRule' => [['0350']],
-		'PHPStan\Rules\Methods\IllegalConstructorStaticCallRule' => [['0351']],
-		'PHPStan\Rules\PhpDoc\InvalidPhpDocTagValueRule' => [['0352']],
-		'PHPStan\Rules\PhpDoc\InvalidPhpDocVarTagTypeRule' => [['0353']],
-		'PHPStan\Rules\PhpDoc\InvalidPHPStanDocTagRule' => [['0354']],
-		'PHPStan\Rules\PhpDoc\VarTagChangedExpressionTypeRule' => [['0355']],
-		'PHPStan\Rules\PhpDoc\WrongVariableNameInVarTagRule' => [['0356']],
-		'PHPStan\Rules\Generics\PropertyVarianceRule' => [['0357']],
-		'PHPStan\Rules\Arrays\InvalidKeyInArrayDimFetchRule' => [['0358']],
-		'PHPStan\Rules\Arrays\InvalidKeyInArrayItemRule' => [['0359']],
-		'PHPStan\Rules\Arrays\NonexistentOffsetInArrayDimFetchRule' => [['0360']],
-		'PHPStan\Rules\Exceptions\ThrowsVoidFunctionWithExplicitThrowPointRule' => [['0361']],
-		'PHPStan\Rules\Exceptions\ThrowsVoidMethodWithExplicitThrowPointRule' => [['0362']],
-		'PHPStan\Rules\Generators\YieldFromTypeRule' => [['0363']],
-		'PHPStan\Rules\Generators\YieldInGeneratorRule' => [['0364']],
-		'PHPStan\Rules\Arrays\ArrayUnpackingRule' => [['0365']],
-		'PHPStan\Rules\Properties\ReadOnlyByPhpDocPropertyAssignRefRule' => [['0366']],
-		'PHPStan\Rules\Properties\ReadOnlyByPhpDocPropertyAssignRule' => [['0367']],
-		'PHPStan\Rules\Variables\ParameterOutAssignedTypeRule' => [['0368']],
-		'PHPStan\Rules\Variables\ParameterOutExecutionEndTypeRule' => [['0369']],
-		'PHPStan\Rules\Classes\ImpossibleInstanceOfRule' => [['0370']],
-		'PHPStan\Rules\Comparison\BooleanAndConstantConditionRule' => [['0371']],
-		'PHPStan\Rules\Comparison\BooleanOrConstantConditionRule' => [['0372']],
-		'PHPStan\Rules\Comparison\BooleanNotConstantConditionRule' => [['0373']],
-		'PHPStan\Rules\DeadCode\NoopRule' => [['0374']],
-		'PHPStan\Rules\DeadCode\UnusedPrivatePropertyRule' => [['0375']],
-		'PHPStan\Rules\Comparison\DoWhileLoopConstantConditionRule' => [['0376']],
-		'PHPStan\Rules\Comparison\ElseIfConstantConditionRule' => [['0377']],
-		'PHPStan\Rules\Comparison\IfConstantConditionRule' => [['0378']],
-		'PHPStan\Rules\Comparison\ImpossibleCheckTypeFunctionCallRule' => [['0379']],
-		'PHPStan\Rules\Comparison\ImpossibleCheckTypeMethodCallRule' => [['0380']],
-		'PHPStan\Rules\Comparison\ImpossibleCheckTypeStaticMethodCallRule' => [['0381']],
-		'PHPStan\Rules\Comparison\LogicalXorConstantConditionRule' => [['0382']],
-		'PHPStan\Rules\Comparison\MatchExpressionRule' => [['0383']],
-		'PHPStan\Rules\Comparison\NumberComparisonOperatorsConstantConditionRule' => [['0384']],
-		'PHPStan\Rules\Comparison\StrictComparisonOfDifferentTypesRule' => [['0385']],
-		'PHPStan\Rules\Comparison\ConstantLooseComparisonRule' => [['0386']],
-		'PHPStan\Rules\Comparison\TernaryOperatorConstantConditionRule' => [['0387']],
-		'PHPStan\Rules\Comparison\UnreachableIfBranchesRule' => [['0388']],
-		'PHPStan\Rules\Comparison\UnreachableTernaryElseBranchRule' => [['0389']],
-		'PHPStan\Rules\Comparison\WhileLoopAlwaysFalseConditionRule' => [['0390']],
-		'PHPStan\Rules\Comparison\WhileLoopAlwaysTrueConditionRule' => [['0391']],
-		'PHPStan\Rules\TooWideTypehints\TooWideMethodReturnTypehintRule' => [['0392']],
-		'PHPStan\Rules\Properties\NullsafePropertyFetchRule' => [['0393']],
-		'PHPStan\Collectors\Collector' => [['0394', '0395']],
-		'PHPStan\Rules\Traits\TraitDeclarationCollector' => [['0394']],
-		'PHPStan\Rules\Traits\TraitUseCollector' => [['0395']],
-		'PHPStan\Rules\Traits\NotAnalysedTraitRule' => [['0396']],
-		'PHPStan\Rules\Exceptions\CatchWithUnthrownExceptionRule' => [['0397']],
-		'PHPStan\Rules\TooWideTypehints\TooWideFunctionParameterOutTypeRule' => [['0398']],
-		'PHPStan\Rules\TooWideTypehints\TooWideMethodParameterOutTypeRule' => [['0399']],
-		'PHPStan\Rules\Functions\RandomIntParametersRule' => [['0400']],
-		'PHPStan\Rules\Functions\ArrayFilterRule' => [['0401']],
-		'PHPStan\Rules\Functions\ArrayValuesRule' => [['0402']],
-		'PHPStan\Rules\Functions\CallUserFuncRule' => [['0403']],
-		'Luminova\Debugger\PHPStanRules' => [['0404']],
+		'PHPStan\Rules\Api\ApiClassConstFetchRule' => [['0312']],
+		'PHPStan\Rules\Api\ApiInstanceofRule' => [['0313']],
+		'PHPStan\Rules\Api\ApiInstanceofTypeRule' => [['0314']],
+		'PHPStan\Rules\Api\NodeConnectingVisitorAttributesRule' => [['0315']],
+		'PHPStan\Rules\Api\RuntimeReflectionFunctionRule' => [['0316']],
+		'PHPStan\Rules\Api\RuntimeReflectionInstantiationRule' => [['0317']],
+		'PHPStan\Rules\Classes\ExistingClassInClassExtendsRule' => [['0318']],
+		'PHPStan\Rules\Classes\ExistingClassInInstanceOfRule' => [['0319']],
+		'PHPStan\Rules\Exceptions\CaughtExceptionExistenceRule' => [['0320']],
+		'PHPStan\Rules\Functions\CallToNonExistentFunctionRule' => [['0321']],
+		'PHPStan\Rules\Constants\OverridingConstantRule' => [['0322']],
+		'PHPStan\Rules\Methods\OverridingMethodRule' => [['0323']],
+		'PHPStan\Rules\Methods\ConsistentConstructorRule' => [['0324']],
+		'PHPStan\Rules\Missing\MissingReturnRule' => [['0325']],
+		'PHPStan\Rules\Namespaces\ExistingNamesInGroupUseRule' => [['0326']],
+		'PHPStan\Rules\Namespaces\ExistingNamesInUseRule' => [['0327']],
+		'PHPStan\Rules\Operators\InvalidIncDecOperationRule' => [['0328']],
+		'PHPStan\Rules\Properties\AccessPropertiesRule' => [['0329']],
+		'PHPStan\Rules\Properties\AccessStaticPropertiesRule' => [['0330']],
+		'PHPStan\Rules\Properties\ExistingClassesInPropertiesRule' => [['0331']],
+		'PHPStan\Rules\Functions\FunctionCallableRule' => [['0332']],
+		'PHPStan\Rules\Properties\MissingReadOnlyByPhpDocPropertyAssignRule' => [['0333']],
+		'PHPStan\Rules\Properties\OverridingPropertyRule' => [['0334']],
+		'PHPStan\Rules\Properties\ReadOnlyByPhpDocPropertyRule' => [['0335']],
+		'PHPStan\Rules\Properties\UninitializedPropertyRule' => [['0336']],
+		'PHPStan\Rules\Properties\WritingToReadOnlyPropertiesRule' => [['0337']],
+		'PHPStan\Rules\Properties\ReadingWriteOnlyPropertiesRule' => [['0338']],
+		'PHPStan\Rules\Variables\CompactVariablesRule' => [['0339']],
+		'PHPStan\Rules\Variables\DefinedVariableRule' => [['0340']],
+		'PHPStan\Rules\Regexp\RegularExpressionPatternRule' => [['0341']],
+		'PHPStan\Reflection\ConstructorsHelper' => [['0342']],
+		'PHPStan\Rules\Methods\MissingMagicSerializationMethodsRule' => [['0343']],
+		'PHPStan\Rules\Constants\MagicConstantContextRule' => [['0344']],
+		'PHPStan\Rules\Classes\MixinRule' => [['0345']],
+		'PHPStan\Rules\PhpDoc\RequireExtendsCheck' => [['0346']],
+		'PHPStan\Rules\PhpDoc\RequireImplementsDefinitionTraitRule' => [['0347']],
+		'PHPStan\Rules\Functions\IncompatibleArrowFunctionDefaultParameterTypeRule' => [['0348']],
+		'PHPStan\Rules\Functions\IncompatibleClosureDefaultParameterTypeRule' => [['0349']],
+		'PHPStan\Rules\Functions\CallCallablesRule' => [['0350']],
+		'PHPStan\Rules\Methods\IllegalConstructorMethodCallRule' => [['0351']],
+		'PHPStan\Rules\Methods\IllegalConstructorStaticCallRule' => [['0352']],
+		'PHPStan\Rules\PhpDoc\InvalidPhpDocTagValueRule' => [['0353']],
+		'PHPStan\Rules\PhpDoc\InvalidPhpDocVarTagTypeRule' => [['0354']],
+		'PHPStan\Rules\PhpDoc\InvalidPHPStanDocTagRule' => [['0355']],
+		'PHPStan\Rules\PhpDoc\VarTagChangedExpressionTypeRule' => [['0356']],
+		'PHPStan\Rules\PhpDoc\WrongVariableNameInVarTagRule' => [['0357']],
+		'PHPStan\Rules\Generics\PropertyVarianceRule' => [['0358']],
+		'PHPStan\Rules\Arrays\InvalidKeyInArrayDimFetchRule' => [['0359']],
+		'PHPStan\Rules\Arrays\InvalidKeyInArrayItemRule' => [['0360']],
+		'PHPStan\Rules\Arrays\NonexistentOffsetInArrayDimFetchRule' => [['0361']],
+		'PHPStan\Rules\Exceptions\ThrowsVoidFunctionWithExplicitThrowPointRule' => [['0362']],
+		'PHPStan\Rules\Exceptions\ThrowsVoidMethodWithExplicitThrowPointRule' => [['0363']],
+		'PHPStan\Rules\Generators\YieldFromTypeRule' => [['0364']],
+		'PHPStan\Rules\Generators\YieldInGeneratorRule' => [['0365']],
+		'PHPStan\Rules\Arrays\ArrayUnpackingRule' => [['0366']],
+		'PHPStan\Rules\Properties\ReadOnlyByPhpDocPropertyAssignRefRule' => [['0367']],
+		'PHPStan\Rules\Properties\ReadOnlyByPhpDocPropertyAssignRule' => [['0368']],
+		'PHPStan\Rules\Variables\ParameterOutAssignedTypeRule' => [['0369']],
+		'PHPStan\Rules\Variables\ParameterOutExecutionEndTypeRule' => [['0370']],
+		'PHPStan\Rules\Classes\ImpossibleInstanceOfRule' => [['0371']],
+		'PHPStan\Rules\Comparison\BooleanAndConstantConditionRule' => [['0372']],
+		'PHPStan\Rules\Comparison\BooleanOrConstantConditionRule' => [['0373']],
+		'PHPStan\Rules\Comparison\BooleanNotConstantConditionRule' => [['0374']],
+		'PHPStan\Rules\DeadCode\NoopRule' => [['0375']],
+		'PHPStan\Rules\DeadCode\UnusedPrivatePropertyRule' => [['0376']],
+		'PHPStan\Rules\Comparison\DoWhileLoopConstantConditionRule' => [['0377']],
+		'PHPStan\Rules\Comparison\ElseIfConstantConditionRule' => [['0378']],
+		'PHPStan\Rules\Comparison\IfConstantConditionRule' => [['0379']],
+		'PHPStan\Rules\Comparison\ImpossibleCheckTypeFunctionCallRule' => [['0380']],
+		'PHPStan\Rules\Comparison\ImpossibleCheckTypeMethodCallRule' => [['0381']],
+		'PHPStan\Rules\Comparison\ImpossibleCheckTypeStaticMethodCallRule' => [['0382']],
+		'PHPStan\Rules\Comparison\LogicalXorConstantConditionRule' => [['0383']],
+		'PHPStan\Rules\Comparison\MatchExpressionRule' => [['0384']],
+		'PHPStan\Rules\Comparison\NumberComparisonOperatorsConstantConditionRule' => [['0385']],
+		'PHPStan\Rules\Comparison\StrictComparisonOfDifferentTypesRule' => [['0386']],
+		'PHPStan\Rules\Comparison\ConstantLooseComparisonRule' => [['0387']],
+		'PHPStan\Rules\Comparison\TernaryOperatorConstantConditionRule' => [['0388']],
+		'PHPStan\Rules\Comparison\UnreachableIfBranchesRule' => [['0389']],
+		'PHPStan\Rules\Comparison\UnreachableTernaryElseBranchRule' => [['0390']],
+		'PHPStan\Rules\Comparison\WhileLoopAlwaysFalseConditionRule' => [['0391']],
+		'PHPStan\Rules\Comparison\WhileLoopAlwaysTrueConditionRule' => [['0392']],
+		'PHPStan\Rules\TooWideTypehints\TooWideMethodReturnTypehintRule' => [['0393']],
+		'PHPStan\Rules\Properties\NullsafePropertyFetchRule' => [['0394']],
+		'PHPStan\Collectors\Collector' => [['0395', '0396']],
+		'PHPStan\Rules\Traits\TraitDeclarationCollector' => [['0395']],
+		'PHPStan\Rules\Traits\TraitUseCollector' => [['0396']],
+		'PHPStan\Rules\Traits\NotAnalysedTraitRule' => [['0397']],
+		'PHPStan\Rules\Exceptions\CatchWithUnthrownExceptionRule' => [['0398']],
+		'PHPStan\Rules\TooWideTypehints\TooWideFunctionParameterOutTypeRule' => [['0399']],
+		'PHPStan\Rules\TooWideTypehints\TooWideMethodParameterOutTypeRule' => [['0400']],
+		'PHPStan\Rules\Functions\RandomIntParametersRule' => [['0401']],
+		'PHPStan\Rules\Functions\ArrayFilterRule' => [['0402']],
+		'PHPStan\Rules\Functions\ArrayValuesRule' => [['0403']],
+		'PHPStan\Rules\Functions\CallUserFuncRule' => [['0404']],
+		'PHPStan\Rules\Deprecations\DeprecatedClassHelper' => [['0405']],
+		'PHPStan\DependencyInjection\LazyDeprecatedScopeResolverProvider' => [['0406']],
+		'PHPStan\Rules\Deprecations\DeprecatedScopeHelper' => [['0407']],
+		'PHPStan\Rules\Deprecations\DeprecatedScopeResolver' => [['0408']],
+		'PHPStan\Rules\Deprecations\DefaultDeprecatedScopeResolver' => [['0408']],
+		'Luminova\Debugger\PHPStanRules' => [['0409']],
 	];
 
 
@@ -1756,7 +1812,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 
 	public function createService028(): PHPStan\PhpDoc\PhpDocInheritanceResolver
 	{
-		return new PHPStan\PhpDoc\PhpDocInheritanceResolver($this->getService('0152'), $this->getService('stubPhpDocProvider'));
+		return new PHPStan\PhpDoc\PhpDocInheritanceResolver($this->getService('0153'), $this->getService('stubPhpDocProvider'));
 	}
 
 
@@ -1783,7 +1839,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 		return new PHPStan\PhpDoc\TypeNodeResolver(
 			$this->getService('033'),
 			$this->getService('0102'),
-			$this->getService('0154'),
+			$this->getService('0155'),
 			$this->getService('047'),
 			$this->getService('080')
 		);
@@ -1928,7 +1984,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 			$this->getService('nodeScopeResolverReflector'),
 			$this->getService('064'),
 			$this->getService('defaultAnalysisParser'),
-			$this->getService('0152'),
+			$this->getService('0153'),
 			$this->getService('stubPhpDocProvider'),
 			$this->getService('020'),
 			$this->getService('0108'),
@@ -1969,7 +2025,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 			private $container;
 
 
-			public function __construct(Container_b70fe01a1b $container)
+			public function __construct(Container_1c82d8b241 $container)
 			{
 				$this->container = $container;
 			}
@@ -2068,7 +2124,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 			$this->getService('043'),
 			$this->getParameter('analysedPaths'),
 			'/Applications/XAMPP/xamppfiles/htdocs/luminova.fm',
-			implode('', ['', sys_get_temp_dir(), '/phpstan-fixer']),
+			($this->getParameter('sysGetTempDir')) . '/phpstan-fixer',
 			['1.1.1.2']
 		);
 	}
@@ -2080,7 +2136,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 			$this->getService('069'),
 			$this->getService('reflectionProvider'),
 			$this->getService('059'),
-			$this->getService('0152')
+			$this->getService('0153')
 		);
 	}
 
@@ -2093,7 +2149,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 
 	public function createService059(): PHPStan\Dependency\ExportedNodeResolver
 	{
-		return new PHPStan\Dependency\ExportedNodeResolver($this->getService('0152'), $this->getService('017'));
+		return new PHPStan\Dependency\ExportedNodeResolver($this->getService('0153'), $this->getService('017'));
 	}
 
 
@@ -2122,6 +2178,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 			'/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/builds/phpstan',
 			[
 				'phar:///Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/plugins/phpstan/phpstan/phpstan.phar/conf/config.level6.neon',
+				'/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/plugins/phpstan/extension-installer/src/../../phpstan-deprecation-rules/rules.neon',
 				'/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/phpstan.neon',
 			],
 			$this->getParameter('analysedPaths'),
@@ -2198,7 +2255,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 			private $container;
 
 
-			public function __construct(Container_b70fe01a1b $container)
+			public function __construct(Container_1c82d8b241 $container)
 			{
 				$this->container = $container;
 			}
@@ -2260,7 +2317,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 			private $container;
 
 
-			public function __construct(Container_b70fe01a1b $container)
+			public function __construct(Container_1c82d8b241 $container)
 			{
 				$this->container = $container;
 			}
@@ -2314,7 +2371,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 			$this->getService('0102'),
 			$this->getService('020'),
 			$this->getService('067'),
-			$this->getService('0304'),
+			$this->getService('0305'),
 			false
 		);
 	}
@@ -2381,7 +2438,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 			private $container;
 
 
-			public function __construct(Container_b70fe01a1b $container)
+			public function __construct(Container_1c82d8b241 $container)
 			{
 				$this->container = $container;
 			}
@@ -2401,7 +2458,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 			private $container;
 
 
-			public function __construct(Container_b70fe01a1b $container)
+			public function __construct(Container_1c82d8b241 $container)
 			{
 				$this->container = $container;
 			}
@@ -2461,7 +2518,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 			$this->getService('defaultAnalysisParser'),
 			$this->getService('stubPhpDocProvider'),
 			$this->getService('0102'),
-			$this->getService('0152'),
+			$this->getService('0153'),
 			false
 		);
 	}
@@ -2473,7 +2530,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 			private $container;
 
 
-			public function __construct(Container_b70fe01a1b $container)
+			public function __construct(Container_1c82d8b241 $container)
 			{
 				$this->container = $container;
 			}
@@ -2578,7 +2635,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 		return new PHPStan\Reflection\SignatureMap\NativeFunctionReflectionProvider(
 			$this->getService('0108'),
 			$this->getService('betterReflectionReflector'),
-			$this->getService('0152'),
+			$this->getService('0153'),
 			$this->getService('stubPhpDocProvider')
 		);
 	}
@@ -2606,7 +2663,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 		return new PHPStan\Reflection\SignatureMap\Php8SignatureMapProvider(
 			$this->getService('0105'),
 			$this->getService('084'),
-			$this->getService('0152'),
+			$this->getService('0153'),
 			$this->getService('020'),
 			$this->getService('080')
 		);
@@ -2641,7 +2698,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 			$this->getService('reflectionProvider'),
 			$this->getService('0125'),
 			$this->getService('0112'),
-			false
+			true
 		);
 	}
 
@@ -2726,7 +2783,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 
 	public function createService0123(): PHPStan\Rules\Exceptions\TooWideMethodThrowTypeRule
 	{
-		return new PHPStan\Rules\Exceptions\TooWideMethodThrowTypeRule($this->getService('0152'), $this->getService('0124'));
+		return new PHPStan\Rules\Exceptions\TooWideMethodThrowTypeRule($this->getService('0153'), $this->getService('0124'));
 	}
 
 
@@ -2814,7 +2871,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 			$this->getService('reflectionProvider'),
 			$this->getService('0112'),
 			$this->getService('0130'),
-			$this->getService('0153'),
+			$this->getService('0154'),
 			true
 		);
 	}
@@ -2978,7 +3035,13 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 	}
 
 
-	public function createService0152(): PHPStan\Type\FileTypeMapper
+	public function createService0152(): PHPStan\Rules\TooWideTypehints\TooWideParameterOutTypeCheck
+	{
+		return new PHPStan\Rules\TooWideTypehints\TooWideParameterOutTypeCheck;
+	}
+
+
+	public function createService0153(): PHPStan\Type\FileTypeMapper
 	{
 		return new PHPStan\Type\FileTypeMapper(
 			$this->getService('0102'),
@@ -2991,7 +3054,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 	}
 
 
-	public function createService0153(): PHPStan\Type\TypeAliasResolver
+	public function createService0154(): PHPStan\Type\TypeAliasResolver
 	{
 		return new PHPStan\Type\UsefulTypeAliasResolver(
 			[],
@@ -3002,811 +3065,811 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 	}
 
 
-	public function createService0154(): PHPStan\Type\TypeAliasResolverProvider
+	public function createService0155(): PHPStan\Type\TypeAliasResolverProvider
 	{
 		return new PHPStan\Type\LazyTypeAliasResolverProvider($this->getService('061'));
 	}
 
 
-	public function createService0155(): PHPStan\Type\BitwiseFlagHelper
+	public function createService0156(): PHPStan\Type\BitwiseFlagHelper
 	{
 		return new PHPStan\Type\BitwiseFlagHelper($this->getService('reflectionProvider'));
 	}
 
 
-	public function createService0156(): PHPStan\Type\Php\ArgumentBasedFunctionReturnTypeExtension
+	public function createService0157(): PHPStan\Type\Php\ArgumentBasedFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ArgumentBasedFunctionReturnTypeExtension;
 	}
 
 
-	public function createService0157(): PHPStan\Type\Php\ArrayIntersectKeyFunctionReturnTypeExtension
+	public function createService0158(): PHPStan\Type\Php\ArrayIntersectKeyFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ArrayIntersectKeyFunctionReturnTypeExtension($this->getService('020'));
 	}
 
 
-	public function createService0158(): PHPStan\Type\Php\ArrayChunkFunctionReturnTypeExtension
+	public function createService0159(): PHPStan\Type\Php\ArrayChunkFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ArrayChunkFunctionReturnTypeExtension($this->getService('020'));
 	}
 
 
-	public function createService0159(): PHPStan\Type\Php\ArrayColumnFunctionReturnTypeExtension
+	public function createService0160(): PHPStan\Type\Php\ArrayColumnFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ArrayColumnFunctionReturnTypeExtension($this->getService('020'));
 	}
 
 
-	public function createService0160(): PHPStan\Type\Php\ArrayCombineFunctionReturnTypeExtension
+	public function createService0161(): PHPStan\Type\Php\ArrayCombineFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ArrayCombineFunctionReturnTypeExtension($this->getService('020'));
 	}
 
 
-	public function createService0161(): PHPStan\Type\Php\ArrayCurrentDynamicReturnTypeExtension
+	public function createService0162(): PHPStan\Type\Php\ArrayCurrentDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ArrayCurrentDynamicReturnTypeExtension;
 	}
 
 
-	public function createService0162(): PHPStan\Type\Php\ArrayFillFunctionReturnTypeExtension
+	public function createService0163(): PHPStan\Type\Php\ArrayFillFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ArrayFillFunctionReturnTypeExtension($this->getService('020'));
 	}
 
 
-	public function createService0163(): PHPStan\Type\Php\ArrayFillKeysFunctionReturnTypeExtension
+	public function createService0164(): PHPStan\Type\Php\ArrayFillKeysFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ArrayFillKeysFunctionReturnTypeExtension($this->getService('020'));
 	}
 
 
-	public function createService0164(): PHPStan\Type\Php\ArrayFilterFunctionReturnTypeReturnTypeExtension
+	public function createService0165(): PHPStan\Type\Php\ArrayFilterFunctionReturnTypeReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ArrayFilterFunctionReturnTypeReturnTypeExtension;
 	}
 
 
-	public function createService0165(): PHPStan\Type\Php\ArrayFlipFunctionReturnTypeExtension
+	public function createService0166(): PHPStan\Type\Php\ArrayFlipFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ArrayFlipFunctionReturnTypeExtension($this->getService('020'));
 	}
 
 
-	public function createService0166(): PHPStan\Type\Php\ArrayKeyDynamicReturnTypeExtension
+	public function createService0167(): PHPStan\Type\Php\ArrayKeyDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ArrayKeyDynamicReturnTypeExtension;
 	}
 
 
-	public function createService0167(): PHPStan\Type\Php\ArrayKeyExistsFunctionTypeSpecifyingExtension
+	public function createService0168(): PHPStan\Type\Php\ArrayKeyExistsFunctionTypeSpecifyingExtension
 	{
 		return new PHPStan\Type\Php\ArrayKeyExistsFunctionTypeSpecifyingExtension;
 	}
 
 
-	public function createService0168(): PHPStan\Type\Php\ArrayKeyFirstDynamicReturnTypeExtension
+	public function createService0169(): PHPStan\Type\Php\ArrayKeyFirstDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ArrayKeyFirstDynamicReturnTypeExtension;
 	}
 
 
-	public function createService0169(): PHPStan\Type\Php\ArrayKeyLastDynamicReturnTypeExtension
+	public function createService0170(): PHPStan\Type\Php\ArrayKeyLastDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ArrayKeyLastDynamicReturnTypeExtension;
 	}
 
 
-	public function createService0170(): PHPStan\Type\Php\ArrayKeysFunctionDynamicReturnTypeExtension
+	public function createService0171(): PHPStan\Type\Php\ArrayKeysFunctionDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ArrayKeysFunctionDynamicReturnTypeExtension($this->getService('020'));
 	}
 
 
-	public function createService0171(): PHPStan\Type\Php\ArrayMapFunctionReturnTypeExtension
+	public function createService0172(): PHPStan\Type\Php\ArrayMapFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ArrayMapFunctionReturnTypeExtension;
 	}
 
 
-	public function createService0172(): PHPStan\Type\Php\ArrayMergeFunctionDynamicReturnTypeExtension
+	public function createService0173(): PHPStan\Type\Php\ArrayMergeFunctionDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ArrayMergeFunctionDynamicReturnTypeExtension;
 	}
 
 
-	public function createService0173(): PHPStan\Type\Php\ArrayNextDynamicReturnTypeExtension
+	public function createService0174(): PHPStan\Type\Php\ArrayNextDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ArrayNextDynamicReturnTypeExtension;
 	}
 
 
-	public function createService0174(): PHPStan\Type\Php\ArrayPopFunctionReturnTypeExtension
+	public function createService0175(): PHPStan\Type\Php\ArrayPopFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ArrayPopFunctionReturnTypeExtension;
 	}
 
 
-	public function createService0175(): PHPStan\Type\Php\ArrayRandFunctionReturnTypeExtension
+	public function createService0176(): PHPStan\Type\Php\ArrayRandFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ArrayRandFunctionReturnTypeExtension;
 	}
 
 
-	public function createService0176(): PHPStan\Type\Php\ArrayReduceFunctionReturnTypeExtension
+	public function createService0177(): PHPStan\Type\Php\ArrayReduceFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ArrayReduceFunctionReturnTypeExtension;
 	}
 
 
-	public function createService0177(): PHPStan\Type\Php\ArrayReplaceFunctionReturnTypeExtension
+	public function createService0178(): PHPStan\Type\Php\ArrayReplaceFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ArrayReplaceFunctionReturnTypeExtension;
 	}
 
 
-	public function createService0178(): PHPStan\Type\Php\ArrayReverseFunctionReturnTypeExtension
+	public function createService0179(): PHPStan\Type\Php\ArrayReverseFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ArrayReverseFunctionReturnTypeExtension;
 	}
 
 
-	public function createService0179(): PHPStan\Type\Php\ArrayShiftFunctionReturnTypeExtension
+	public function createService0180(): PHPStan\Type\Php\ArrayShiftFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ArrayShiftFunctionReturnTypeExtension;
 	}
 
 
-	public function createService0180(): PHPStan\Type\Php\ArraySliceFunctionReturnTypeExtension
+	public function createService0181(): PHPStan\Type\Php\ArraySliceFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ArraySliceFunctionReturnTypeExtension;
 	}
 
 
-	public function createService0181(): PHPStan\Type\Php\ArraySpliceFunctionReturnTypeExtension
+	public function createService0182(): PHPStan\Type\Php\ArraySpliceFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ArraySpliceFunctionReturnTypeExtension;
 	}
 
 
-	public function createService0182(): PHPStan\Type\Php\ArraySearchFunctionDynamicReturnTypeExtension
+	public function createService0183(): PHPStan\Type\Php\ArraySearchFunctionDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ArraySearchFunctionDynamicReturnTypeExtension($this->getService('020'));
 	}
 
 
-	public function createService0183(): PHPStan\Type\Php\ArraySearchFunctionTypeSpecifyingExtension
+	public function createService0184(): PHPStan\Type\Php\ArraySearchFunctionTypeSpecifyingExtension
 	{
 		return new PHPStan\Type\Php\ArraySearchFunctionTypeSpecifyingExtension;
 	}
 
 
-	public function createService0184(): PHPStan\Type\Php\ArrayValuesFunctionDynamicReturnTypeExtension
+	public function createService0185(): PHPStan\Type\Php\ArrayValuesFunctionDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ArrayValuesFunctionDynamicReturnTypeExtension($this->getService('020'));
 	}
 
 
-	public function createService0185(): PHPStan\Type\Php\ArraySumFunctionDynamicReturnTypeExtension
+	public function createService0186(): PHPStan\Type\Php\ArraySumFunctionDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ArraySumFunctionDynamicReturnTypeExtension;
 	}
 
 
-	public function createService0186(): PHPStan\Type\Php\AssertThrowTypeExtension
+	public function createService0187(): PHPStan\Type\Php\AssertThrowTypeExtension
 	{
 		return new PHPStan\Type\Php\AssertThrowTypeExtension;
 	}
 
 
-	public function createService0187(): PHPStan\Type\Php\BackedEnumFromMethodDynamicReturnTypeExtension
+	public function createService0188(): PHPStan\Type\Php\BackedEnumFromMethodDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\BackedEnumFromMethodDynamicReturnTypeExtension;
 	}
 
 
-	public function createService0188(): PHPStan\Type\Php\Base64DecodeDynamicFunctionReturnTypeExtension
+	public function createService0189(): PHPStan\Type\Php\Base64DecodeDynamicFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\Base64DecodeDynamicFunctionReturnTypeExtension;
 	}
 
 
-	public function createService0189(): PHPStan\Type\Php\BcMathStringOrNullReturnTypeExtension
+	public function createService0190(): PHPStan\Type\Php\BcMathStringOrNullReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\BcMathStringOrNullReturnTypeExtension($this->getService('020'));
 	}
 
 
-	public function createService0190(): PHPStan\Type\Php\ClosureBindDynamicReturnTypeExtension
+	public function createService0191(): PHPStan\Type\Php\ClosureBindDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ClosureBindDynamicReturnTypeExtension;
 	}
 
 
-	public function createService0191(): PHPStan\Type\Php\ClosureBindToDynamicReturnTypeExtension
+	public function createService0192(): PHPStan\Type\Php\ClosureBindToDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ClosureBindToDynamicReturnTypeExtension;
 	}
 
 
-	public function createService0192(): PHPStan\Type\Php\ClosureFromCallableDynamicReturnTypeExtension
+	public function createService0193(): PHPStan\Type\Php\ClosureFromCallableDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ClosureFromCallableDynamicReturnTypeExtension;
 	}
 
 
-	public function createService0193(): PHPStan\Type\Php\CompactFunctionReturnTypeExtension
+	public function createService0194(): PHPStan\Type\Php\CompactFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\CompactFunctionReturnTypeExtension(true);
 	}
 
 
-	public function createService0194(): PHPStan\Type\Php\ConstantFunctionReturnTypeExtension
+	public function createService0195(): PHPStan\Type\Php\ConstantFunctionReturnTypeExtension
 	{
-		return new PHPStan\Type\Php\ConstantFunctionReturnTypeExtension($this->getService('0195'));
+		return new PHPStan\Type\Php\ConstantFunctionReturnTypeExtension($this->getService('0196'));
 	}
 
 
-	public function createService0195(): PHPStan\Type\Php\ConstantHelper
+	public function createService0196(): PHPStan\Type\Php\ConstantHelper
 	{
 		return new PHPStan\Type\Php\ConstantHelper;
 	}
 
 
-	public function createService0196(): PHPStan\Type\Php\CountFunctionReturnTypeExtension
+	public function createService0197(): PHPStan\Type\Php\CountFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\CountFunctionReturnTypeExtension;
 	}
 
 
-	public function createService0197(): PHPStan\Type\Php\CountFunctionTypeSpecifyingExtension
+	public function createService0198(): PHPStan\Type\Php\CountFunctionTypeSpecifyingExtension
 	{
 		return new PHPStan\Type\Php\CountFunctionTypeSpecifyingExtension;
 	}
 
 
-	public function createService0198(): PHPStan\Type\Php\CurlGetinfoFunctionDynamicReturnTypeExtension
+	public function createService0199(): PHPStan\Type\Php\CurlGetinfoFunctionDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\CurlGetinfoFunctionDynamicReturnTypeExtension($this->getService('reflectionProvider'));
 	}
 
 
-	public function createService0199(): PHPStan\Type\Php\CurlInitReturnTypeExtension
+	public function createService0200(): PHPStan\Type\Php\CurlInitReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\CurlInitReturnTypeExtension;
 	}
 
 
-	public function createService0200(): PHPStan\Type\Php\DateFormatFunctionReturnTypeExtension
+	public function createService0201(): PHPStan\Type\Php\DateFormatFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\DateFormatFunctionReturnTypeExtension;
 	}
 
 
-	public function createService0201(): PHPStan\Type\Php\DateFormatMethodReturnTypeExtension
+	public function createService0202(): PHPStan\Type\Php\DateFormatMethodReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\DateFormatMethodReturnTypeExtension;
 	}
 
 
-	public function createService0202(): PHPStan\Type\Php\DateFunctionReturnTypeExtension
+	public function createService0203(): PHPStan\Type\Php\DateFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\DateFunctionReturnTypeExtension;
 	}
 
 
-	public function createService0203(): PHPStan\Type\Php\DateIntervalConstructorThrowTypeExtension
+	public function createService0204(): PHPStan\Type\Php\DateIntervalConstructorThrowTypeExtension
 	{
 		return new PHPStan\Type\Php\DateIntervalConstructorThrowTypeExtension;
 	}
 
 
-	public function createService0204(): PHPStan\Type\Php\DateIntervalDynamicReturnTypeExtension
+	public function createService0205(): PHPStan\Type\Php\DateIntervalDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\DateIntervalDynamicReturnTypeExtension;
 	}
 
 
-	public function createService0205(): PHPStan\Type\Php\DateTimeCreateDynamicReturnTypeExtension
+	public function createService0206(): PHPStan\Type\Php\DateTimeCreateDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\DateTimeCreateDynamicReturnTypeExtension;
 	}
 
 
-	public function createService0206(): PHPStan\Type\Php\DateTimeDynamicReturnTypeExtension
+	public function createService0207(): PHPStan\Type\Php\DateTimeDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\DateTimeDynamicReturnTypeExtension;
 	}
 
 
-	public function createService0207(): PHPStan\Type\Php\DateTimeModifyReturnTypeExtension
+	public function createService0208(): PHPStan\Type\Php\DateTimeModifyReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\DateTimeModifyReturnTypeExtension('DateTime');
 	}
 
 
-	public function createService0208(): PHPStan\Type\Php\DateTimeModifyReturnTypeExtension
+	public function createService0209(): PHPStan\Type\Php\DateTimeModifyReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\DateTimeModifyReturnTypeExtension('DateTimeImmutable');
 	}
 
 
-	public function createService0209(): PHPStan\Type\Php\DateTimeConstructorThrowTypeExtension
+	public function createService0210(): PHPStan\Type\Php\DateTimeConstructorThrowTypeExtension
 	{
 		return new PHPStan\Type\Php\DateTimeConstructorThrowTypeExtension;
 	}
 
 
-	public function createService0210(): PHPStan\Type\Php\DateTimeZoneConstructorThrowTypeExtension
+	public function createService0211(): PHPStan\Type\Php\DateTimeZoneConstructorThrowTypeExtension
 	{
 		return new PHPStan\Type\Php\DateTimeZoneConstructorThrowTypeExtension;
 	}
 
 
-	public function createService0211(): PHPStan\Type\Php\DsMapDynamicReturnTypeExtension
+	public function createService0212(): PHPStan\Type\Php\DsMapDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\DsMapDynamicReturnTypeExtension;
 	}
 
 
-	public function createService0212(): PHPStan\Type\Php\DsMapDynamicMethodThrowTypeExtension
+	public function createService0213(): PHPStan\Type\Php\DsMapDynamicMethodThrowTypeExtension
 	{
 		return new PHPStan\Type\Php\DsMapDynamicMethodThrowTypeExtension;
 	}
 
 
-	public function createService0213(): PHPStan\Type\Php\DioStatDynamicFunctionReturnTypeExtension
+	public function createService0214(): PHPStan\Type\Php\DioStatDynamicFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\DioStatDynamicFunctionReturnTypeExtension;
 	}
 
 
-	public function createService0214(): PHPStan\Type\Php\ExplodeFunctionDynamicReturnTypeExtension
+	public function createService0215(): PHPStan\Type\Php\ExplodeFunctionDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ExplodeFunctionDynamicReturnTypeExtension($this->getService('020'));
 	}
 
 
-	public function createService0215(): PHPStan\Type\Php\FilterFunctionReturnTypeHelper
+	public function createService0216(): PHPStan\Type\Php\FilterFunctionReturnTypeHelper
 	{
 		return new PHPStan\Type\Php\FilterFunctionReturnTypeHelper($this->getService('reflectionProvider'), $this->getService('020'));
 	}
 
 
-	public function createService0216(): PHPStan\Type\Php\FilterInputDynamicReturnTypeExtension
+	public function createService0217(): PHPStan\Type\Php\FilterInputDynamicReturnTypeExtension
 	{
-		return new PHPStan\Type\Php\FilterInputDynamicReturnTypeExtension($this->getService('0215'));
+		return new PHPStan\Type\Php\FilterInputDynamicReturnTypeExtension($this->getService('0216'));
 	}
 
 
-	public function createService0217(): PHPStan\Type\Php\FilterVarDynamicReturnTypeExtension
+	public function createService0218(): PHPStan\Type\Php\FilterVarDynamicReturnTypeExtension
 	{
-		return new PHPStan\Type\Php\FilterVarDynamicReturnTypeExtension($this->getService('0215'));
+		return new PHPStan\Type\Php\FilterVarDynamicReturnTypeExtension($this->getService('0216'));
 	}
 
 
-	public function createService0218(): PHPStan\Type\Php\FilterVarArrayDynamicReturnTypeExtension
+	public function createService0219(): PHPStan\Type\Php\FilterVarArrayDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\FilterVarArrayDynamicReturnTypeExtension(
-			$this->getService('0215'),
+			$this->getService('0216'),
 			$this->getService('reflectionProvider')
 		);
 	}
 
 
-	public function createService0219(): PHPStan\Type\Php\GetCalledClassDynamicReturnTypeExtension
+	public function createService0220(): PHPStan\Type\Php\GetCalledClassDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\GetCalledClassDynamicReturnTypeExtension;
 	}
 
 
-	public function createService0220(): PHPStan\Type\Php\GetClassDynamicReturnTypeExtension
+	public function createService0221(): PHPStan\Type\Php\GetClassDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\GetClassDynamicReturnTypeExtension;
 	}
 
 
-	public function createService0221(): PHPStan\Type\Php\GetParentClassDynamicFunctionReturnTypeExtension
+	public function createService0222(): PHPStan\Type\Php\GetParentClassDynamicFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\GetParentClassDynamicFunctionReturnTypeExtension($this->getService('reflectionProvider'));
 	}
 
 
-	public function createService0222(): PHPStan\Type\Php\GettypeFunctionReturnTypeExtension
+	public function createService0223(): PHPStan\Type\Php\GettypeFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\GettypeFunctionReturnTypeExtension;
 	}
 
 
-	public function createService0223(): PHPStan\Type\Php\GettimeofdayDynamicFunctionReturnTypeExtension
+	public function createService0224(): PHPStan\Type\Php\GettimeofdayDynamicFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\GettimeofdayDynamicFunctionReturnTypeExtension;
 	}
 
 
-	public function createService0224(): PHPStan\Type\Php\HashFunctionsReturnTypeExtension
+	public function createService0225(): PHPStan\Type\Php\HashFunctionsReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\HashFunctionsReturnTypeExtension($this->getService('020'));
 	}
 
 
-	public function createService0225(): PHPStan\Type\Php\IntdivThrowTypeExtension
+	public function createService0226(): PHPStan\Type\Php\IntdivThrowTypeExtension
 	{
 		return new PHPStan\Type\Php\IntdivThrowTypeExtension;
 	}
 
 
-	public function createService0226(): PHPStan\Type\Php\IniGetReturnTypeExtension
+	public function createService0227(): PHPStan\Type\Php\IniGetReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\IniGetReturnTypeExtension;
 	}
 
 
-	public function createService0227(): PHPStan\Type\Php\JsonThrowTypeExtension
+	public function createService0228(): PHPStan\Type\Php\JsonThrowTypeExtension
 	{
-		return new PHPStan\Type\Php\JsonThrowTypeExtension($this->getService('reflectionProvider'), $this->getService('0155'));
+		return new PHPStan\Type\Php\JsonThrowTypeExtension($this->getService('reflectionProvider'), $this->getService('0156'));
 	}
 
 
-	public function createService0228(): PHPStan\Type\Php\ReflectionClassConstructorThrowTypeExtension
+	public function createService0229(): PHPStan\Type\Php\ReflectionClassConstructorThrowTypeExtension
 	{
 		return new PHPStan\Type\Php\ReflectionClassConstructorThrowTypeExtension;
 	}
 
 
-	public function createService0229(): PHPStan\Type\Php\ReflectionFunctionConstructorThrowTypeExtension
+	public function createService0230(): PHPStan\Type\Php\ReflectionFunctionConstructorThrowTypeExtension
 	{
 		return new PHPStan\Type\Php\ReflectionFunctionConstructorThrowTypeExtension($this->getService('reflectionProvider'));
 	}
 
 
-	public function createService0230(): PHPStan\Type\Php\ReflectionMethodConstructorThrowTypeExtension
+	public function createService0231(): PHPStan\Type\Php\ReflectionMethodConstructorThrowTypeExtension
 	{
 		return new PHPStan\Type\Php\ReflectionMethodConstructorThrowTypeExtension($this->getService('reflectionProvider'));
 	}
 
 
-	public function createService0231(): PHPStan\Type\Php\ReflectionPropertyConstructorThrowTypeExtension
+	public function createService0232(): PHPStan\Type\Php\ReflectionPropertyConstructorThrowTypeExtension
 	{
 		return new PHPStan\Type\Php\ReflectionPropertyConstructorThrowTypeExtension($this->getService('reflectionProvider'));
 	}
 
 
-	public function createService0232(): PHPStan\Type\Php\StrContainingTypeSpecifyingExtension
+	public function createService0233(): PHPStan\Type\Php\StrContainingTypeSpecifyingExtension
 	{
 		return new PHPStan\Type\Php\StrContainingTypeSpecifyingExtension;
 	}
 
 
-	public function createService0233(): PHPStan\Type\Php\SimpleXMLElementClassPropertyReflectionExtension
+	public function createService0234(): PHPStan\Type\Php\SimpleXMLElementClassPropertyReflectionExtension
 	{
 		return new PHPStan\Type\Php\SimpleXMLElementClassPropertyReflectionExtension;
 	}
 
 
-	public function createService0234(): PHPStan\Type\Php\SimpleXMLElementConstructorThrowTypeExtension
+	public function createService0235(): PHPStan\Type\Php\SimpleXMLElementConstructorThrowTypeExtension
 	{
 		return new PHPStan\Type\Php\SimpleXMLElementConstructorThrowTypeExtension;
 	}
 
 
-	public function createService0235(): PHPStan\Type\Php\StatDynamicReturnTypeExtension
+	public function createService0236(): PHPStan\Type\Php\StatDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\StatDynamicReturnTypeExtension;
 	}
 
 
-	public function createService0236(): PHPStan\Type\Php\MethodExistsTypeSpecifyingExtension
+	public function createService0237(): PHPStan\Type\Php\MethodExistsTypeSpecifyingExtension
 	{
 		return new PHPStan\Type\Php\MethodExistsTypeSpecifyingExtension;
 	}
 
 
-	public function createService0237(): PHPStan\Type\Php\PropertyExistsTypeSpecifyingExtension
+	public function createService0238(): PHPStan\Type\Php\PropertyExistsTypeSpecifyingExtension
 	{
 		return new PHPStan\Type\Php\PropertyExistsTypeSpecifyingExtension($this->getService('0149'));
 	}
 
 
-	public function createService0238(): PHPStan\Type\Php\MinMaxFunctionReturnTypeExtension
+	public function createService0239(): PHPStan\Type\Php\MinMaxFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\MinMaxFunctionReturnTypeExtension($this->getService('020'));
 	}
 
 
-	public function createService0239(): PHPStan\Type\Php\NumberFormatFunctionDynamicReturnTypeExtension
+	public function createService0240(): PHPStan\Type\Php\NumberFormatFunctionDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\NumberFormatFunctionDynamicReturnTypeExtension;
 	}
 
 
-	public function createService0240(): PHPStan\Type\Php\PathinfoFunctionDynamicReturnTypeExtension
+	public function createService0241(): PHPStan\Type\Php\PathinfoFunctionDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\PathinfoFunctionDynamicReturnTypeExtension($this->getService('reflectionProvider'));
 	}
 
 
-	public function createService0241(): PHPStan\Type\Php\PregFilterFunctionReturnTypeExtension
+	public function createService0242(): PHPStan\Type\Php\PregFilterFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\PregFilterFunctionReturnTypeExtension;
 	}
 
 
-	public function createService0242(): PHPStan\Type\Php\PregSplitDynamicReturnTypeExtension
+	public function createService0243(): PHPStan\Type\Php\PregSplitDynamicReturnTypeExtension
 	{
-		return new PHPStan\Type\Php\PregSplitDynamicReturnTypeExtension($this->getService('0155'));
+		return new PHPStan\Type\Php\PregSplitDynamicReturnTypeExtension($this->getService('0156'));
 	}
 
 
-	public function createService0243(): PHPStan\Type\Php\ReflectionClassIsSubclassOfTypeSpecifyingExtension
+	public function createService0244(): PHPStan\Type\Php\ReflectionClassIsSubclassOfTypeSpecifyingExtension
 	{
 		return new PHPStan\Type\Php\ReflectionClassIsSubclassOfTypeSpecifyingExtension;
 	}
 
 
-	public function createService0244(): PHPStan\Type\Php\ReplaceFunctionsDynamicReturnTypeExtension
+	public function createService0245(): PHPStan\Type\Php\ReplaceFunctionsDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ReplaceFunctionsDynamicReturnTypeExtension;
 	}
 
 
-	public function createService0245(): PHPStan\Type\Php\ArrayPointerFunctionsDynamicReturnTypeExtension
+	public function createService0246(): PHPStan\Type\Php\ArrayPointerFunctionsDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ArrayPointerFunctionsDynamicReturnTypeExtension;
 	}
 
 
-	public function createService0246(): PHPStan\Type\Php\LtrimFunctionReturnTypeExtension
+	public function createService0247(): PHPStan\Type\Php\LtrimFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\LtrimFunctionReturnTypeExtension;
 	}
 
 
-	public function createService0247(): PHPStan\Type\Php\MbFunctionsReturnTypeExtension
+	public function createService0248(): PHPStan\Type\Php\MbFunctionsReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\MbFunctionsReturnTypeExtension($this->getService('020'));
 	}
 
 
-	public function createService0248(): PHPStan\Type\Php\MbConvertEncodingFunctionReturnTypeExtension
+	public function createService0249(): PHPStan\Type\Php\MbConvertEncodingFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\MbConvertEncodingFunctionReturnTypeExtension;
 	}
 
 
-	public function createService0249(): PHPStan\Type\Php\MbSubstituteCharacterDynamicReturnTypeExtension
+	public function createService0250(): PHPStan\Type\Php\MbSubstituteCharacterDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\MbSubstituteCharacterDynamicReturnTypeExtension($this->getService('020'));
 	}
 
 
-	public function createService0250(): PHPStan\Type\Php\MbStrlenFunctionReturnTypeExtension
+	public function createService0251(): PHPStan\Type\Php\MbStrlenFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\MbStrlenFunctionReturnTypeExtension($this->getService('020'));
 	}
 
 
-	public function createService0251(): PHPStan\Type\Php\MicrotimeFunctionReturnTypeExtension
+	public function createService0252(): PHPStan\Type\Php\MicrotimeFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\MicrotimeFunctionReturnTypeExtension;
 	}
 
 
-	public function createService0252(): PHPStan\Type\Php\HrtimeFunctionReturnTypeExtension
+	public function createService0253(): PHPStan\Type\Php\HrtimeFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\HrtimeFunctionReturnTypeExtension;
 	}
 
 
-	public function createService0253(): PHPStan\Type\Php\ImplodeFunctionReturnTypeExtension
+	public function createService0254(): PHPStan\Type\Php\ImplodeFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ImplodeFunctionReturnTypeExtension;
 	}
 
 
-	public function createService0254(): PHPStan\Type\Php\NonEmptyStringFunctionsReturnTypeExtension
+	public function createService0255(): PHPStan\Type\Php\NonEmptyStringFunctionsReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\NonEmptyStringFunctionsReturnTypeExtension;
 	}
 
 
-	public function createService0255(): PHPStan\Type\Php\SetTypeFunctionTypeSpecifyingExtension
+	public function createService0256(): PHPStan\Type\Php\SetTypeFunctionTypeSpecifyingExtension
 	{
 		return new PHPStan\Type\Php\SetTypeFunctionTypeSpecifyingExtension;
 	}
 
 
-	public function createService0256(): PHPStan\Type\Php\StrCaseFunctionsReturnTypeExtension
+	public function createService0257(): PHPStan\Type\Php\StrCaseFunctionsReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\StrCaseFunctionsReturnTypeExtension;
 	}
 
 
-	public function createService0257(): PHPStan\Type\Php\StrlenFunctionReturnTypeExtension
+	public function createService0258(): PHPStan\Type\Php\StrlenFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\StrlenFunctionReturnTypeExtension;
 	}
 
 
-	public function createService0258(): PHPStan\Type\Php\StrIncrementDecrementFunctionReturnTypeExtension
+	public function createService0259(): PHPStan\Type\Php\StrIncrementDecrementFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\StrIncrementDecrementFunctionReturnTypeExtension;
 	}
 
 
-	public function createService0259(): PHPStan\Type\Php\StrPadFunctionReturnTypeExtension
+	public function createService0260(): PHPStan\Type\Php\StrPadFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\StrPadFunctionReturnTypeExtension;
 	}
 
 
-	public function createService0260(): PHPStan\Type\Php\StrRepeatFunctionReturnTypeExtension
+	public function createService0261(): PHPStan\Type\Php\StrRepeatFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\StrRepeatFunctionReturnTypeExtension;
 	}
 
 
-	public function createService0261(): PHPStan\Type\Php\SubstrDynamicReturnTypeExtension
+	public function createService0262(): PHPStan\Type\Php\SubstrDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\SubstrDynamicReturnTypeExtension;
 	}
 
 
-	public function createService0262(): PHPStan\Type\Php\ThrowableReturnTypeExtension
+	public function createService0263(): PHPStan\Type\Php\ThrowableReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ThrowableReturnTypeExtension;
 	}
 
 
-	public function createService0263(): PHPStan\Type\Php\ParseUrlFunctionDynamicReturnTypeExtension
+	public function createService0264(): PHPStan\Type\Php\ParseUrlFunctionDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ParseUrlFunctionDynamicReturnTypeExtension;
 	}
 
 
-	public function createService0264(): PHPStan\Type\Php\TriggerErrorDynamicReturnTypeExtension
+	public function createService0265(): PHPStan\Type\Php\TriggerErrorDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\TriggerErrorDynamicReturnTypeExtension($this->getService('020'));
 	}
 
 
-	public function createService0265(): PHPStan\Type\Php\VersionCompareFunctionDynamicReturnTypeExtension
+	public function createService0266(): PHPStan\Type\Php\VersionCompareFunctionDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\VersionCompareFunctionDynamicReturnTypeExtension;
 	}
 
 
-	public function createService0266(): PHPStan\Type\Php\PowFunctionReturnTypeExtension
+	public function createService0267(): PHPStan\Type\Php\PowFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\PowFunctionReturnTypeExtension;
 	}
 
 
-	public function createService0267(): PHPStan\Type\Php\RoundFunctionReturnTypeExtension
+	public function createService0268(): PHPStan\Type\Php\RoundFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\RoundFunctionReturnTypeExtension($this->getService('020'));
 	}
 
 
-	public function createService0268(): PHPStan\Type\Php\StrtotimeFunctionReturnTypeExtension
+	public function createService0269(): PHPStan\Type\Php\StrtotimeFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\StrtotimeFunctionReturnTypeExtension;
 	}
 
 
-	public function createService0269(): PHPStan\Type\Php\RandomIntFunctionReturnTypeExtension
+	public function createService0270(): PHPStan\Type\Php\RandomIntFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\RandomIntFunctionReturnTypeExtension;
 	}
 
 
-	public function createService0270(): PHPStan\Type\Php\RangeFunctionReturnTypeExtension
+	public function createService0271(): PHPStan\Type\Php\RangeFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\RangeFunctionReturnTypeExtension;
 	}
 
 
-	public function createService0271(): PHPStan\Type\Php\AssertFunctionTypeSpecifyingExtension
+	public function createService0272(): PHPStan\Type\Php\AssertFunctionTypeSpecifyingExtension
 	{
 		return new PHPStan\Type\Php\AssertFunctionTypeSpecifyingExtension;
 	}
 
 
-	public function createService0272(): PHPStan\Type\Php\ClassExistsFunctionTypeSpecifyingExtension
+	public function createService0273(): PHPStan\Type\Php\ClassExistsFunctionTypeSpecifyingExtension
 	{
 		return new PHPStan\Type\Php\ClassExistsFunctionTypeSpecifyingExtension;
 	}
 
 
-	public function createService0273(): PHPStan\Type\Php\ClassImplementsFunctionReturnTypeExtension
+	public function createService0274(): PHPStan\Type\Php\ClassImplementsFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ClassImplementsFunctionReturnTypeExtension;
 	}
 
 
-	public function createService0274(): PHPStan\Type\Php\DefineConstantTypeSpecifyingExtension
+	public function createService0275(): PHPStan\Type\Php\DefineConstantTypeSpecifyingExtension
 	{
 		return new PHPStan\Type\Php\DefineConstantTypeSpecifyingExtension;
 	}
 
 
-	public function createService0275(): PHPStan\Type\Php\DefinedConstantTypeSpecifyingExtension
+	public function createService0276(): PHPStan\Type\Php\DefinedConstantTypeSpecifyingExtension
 	{
-		return new PHPStan\Type\Php\DefinedConstantTypeSpecifyingExtension($this->getService('0195'));
+		return new PHPStan\Type\Php\DefinedConstantTypeSpecifyingExtension($this->getService('0196'));
 	}
 
 
-	public function createService0276(): PHPStan\Type\Php\FunctionExistsFunctionTypeSpecifyingExtension
+	public function createService0277(): PHPStan\Type\Php\FunctionExistsFunctionTypeSpecifyingExtension
 	{
 		return new PHPStan\Type\Php\FunctionExistsFunctionTypeSpecifyingExtension;
 	}
 
 
-	public function createService0277(): PHPStan\Type\Php\InArrayFunctionTypeSpecifyingExtension
+	public function createService0278(): PHPStan\Type\Php\InArrayFunctionTypeSpecifyingExtension
 	{
 		return new PHPStan\Type\Php\InArrayFunctionTypeSpecifyingExtension;
 	}
 
 
-	public function createService0278(): PHPStan\Type\Php\IsArrayFunctionTypeSpecifyingExtension
+	public function createService0279(): PHPStan\Type\Php\IsArrayFunctionTypeSpecifyingExtension
 	{
 		return new PHPStan\Type\Php\IsArrayFunctionTypeSpecifyingExtension(false);
 	}
 
 
-	public function createService0279(): PHPStan\Type\Php\IsCallableFunctionTypeSpecifyingExtension
+	public function createService0280(): PHPStan\Type\Php\IsCallableFunctionTypeSpecifyingExtension
 	{
-		return new PHPStan\Type\Php\IsCallableFunctionTypeSpecifyingExtension($this->getService('0236'));
+		return new PHPStan\Type\Php\IsCallableFunctionTypeSpecifyingExtension($this->getService('0237'));
 	}
 
 
-	public function createService0280(): PHPStan\Type\Php\IsIterableFunctionTypeSpecifyingExtension
+	public function createService0281(): PHPStan\Type\Php\IsIterableFunctionTypeSpecifyingExtension
 	{
 		return new PHPStan\Type\Php\IsIterableFunctionTypeSpecifyingExtension;
 	}
 
 
-	public function createService0281(): PHPStan\Type\Php\IsSubclassOfFunctionTypeSpecifyingExtension
+	public function createService0282(): PHPStan\Type\Php\IsSubclassOfFunctionTypeSpecifyingExtension
 	{
-		return new PHPStan\Type\Php\IsSubclassOfFunctionTypeSpecifyingExtension($this->getService('0284'));
+		return new PHPStan\Type\Php\IsSubclassOfFunctionTypeSpecifyingExtension($this->getService('0285'));
 	}
 
 
-	public function createService0282(): PHPStan\Type\Php\IteratorToArrayFunctionReturnTypeExtension
+	public function createService0283(): PHPStan\Type\Php\IteratorToArrayFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\IteratorToArrayFunctionReturnTypeExtension;
 	}
 
 
-	public function createService0283(): PHPStan\Type\Php\IsAFunctionTypeSpecifyingExtension
+	public function createService0284(): PHPStan\Type\Php\IsAFunctionTypeSpecifyingExtension
 	{
-		return new PHPStan\Type\Php\IsAFunctionTypeSpecifyingExtension($this->getService('0284'));
+		return new PHPStan\Type\Php\IsAFunctionTypeSpecifyingExtension($this->getService('0285'));
 	}
 
 
-	public function createService0284(): PHPStan\Type\Php\IsAFunctionTypeSpecifyingHelper
+	public function createService0285(): PHPStan\Type\Php\IsAFunctionTypeSpecifyingHelper
 	{
 		return new PHPStan\Type\Php\IsAFunctionTypeSpecifyingHelper;
 	}
 
 
-	public function createService0285(): PHPStan\Type\Php\CtypeDigitFunctionTypeSpecifyingExtension
+	public function createService0286(): PHPStan\Type\Php\CtypeDigitFunctionTypeSpecifyingExtension
 	{
 		return new PHPStan\Type\Php\CtypeDigitFunctionTypeSpecifyingExtension;
 	}
 
 
-	public function createService0286(): PHPStan\Type\Php\JsonThrowOnErrorDynamicReturnTypeExtension
+	public function createService0287(): PHPStan\Type\Php\JsonThrowOnErrorDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\JsonThrowOnErrorDynamicReturnTypeExtension(
 			$this->getService('reflectionProvider'),
-			$this->getService('0155')
+			$this->getService('0156')
 		);
 	}
 
 
-	public function createService0287(): PHPStan\Type\Php\TypeSpecifyingFunctionsDynamicReturnTypeExtension
+	public function createService0288(): PHPStan\Type\Php\TypeSpecifyingFunctionsDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\TypeSpecifyingFunctionsDynamicReturnTypeExtension(
 			$this->getService('reflectionProvider'),
@@ -3817,120 +3880,120 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 	}
 
 
-	public function createService0288(): PHPStan\Type\Php\SimpleXMLElementAsXMLMethodReturnTypeExtension
+	public function createService0289(): PHPStan\Type\Php\SimpleXMLElementAsXMLMethodReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\SimpleXMLElementAsXMLMethodReturnTypeExtension;
 	}
 
 
-	public function createService0289(): PHPStan\Type\Php\SimpleXMLElementXpathMethodReturnTypeExtension
+	public function createService0290(): PHPStan\Type\Php\SimpleXMLElementXpathMethodReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\SimpleXMLElementXpathMethodReturnTypeExtension;
 	}
 
 
-	public function createService0290(): PHPStan\Type\Php\StrSplitFunctionReturnTypeExtension
+	public function createService0291(): PHPStan\Type\Php\StrSplitFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\StrSplitFunctionReturnTypeExtension($this->getService('020'));
 	}
 
 
-	public function createService0291(): PHPStan\Type\Php\StrTokFunctionReturnTypeExtension
+	public function createService0292(): PHPStan\Type\Php\StrTokFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\StrTokFunctionReturnTypeExtension;
 	}
 
 
-	public function createService0292(): PHPStan\Type\Php\SprintfFunctionDynamicReturnTypeExtension
+	public function createService0293(): PHPStan\Type\Php\SprintfFunctionDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\SprintfFunctionDynamicReturnTypeExtension;
 	}
 
 
-	public function createService0293(): PHPStan\Type\Php\SscanfFunctionDynamicReturnTypeExtension
+	public function createService0294(): PHPStan\Type\Php\SscanfFunctionDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\SscanfFunctionDynamicReturnTypeExtension;
 	}
 
 
-	public function createService0294(): PHPStan\Type\Php\StrvalFamilyFunctionReturnTypeExtension
+	public function createService0295(): PHPStan\Type\Php\StrvalFamilyFunctionReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\StrvalFamilyFunctionReturnTypeExtension;
 	}
 
 
-	public function createService0295(): PHPStan\Type\Php\StrWordCountFunctionDynamicReturnTypeExtension
+	public function createService0296(): PHPStan\Type\Php\StrWordCountFunctionDynamicReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\StrWordCountFunctionDynamicReturnTypeExtension;
 	}
 
 
-	public function createService0296(): PHPStan\Type\Php\XMLReaderOpenReturnTypeExtension
+	public function createService0297(): PHPStan\Type\Php\XMLReaderOpenReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\XMLReaderOpenReturnTypeExtension;
 	}
 
 
-	public function createService0297(): PHPStan\Type\Php\ReflectionGetAttributesMethodReturnTypeExtension
+	public function createService0298(): PHPStan\Type\Php\ReflectionGetAttributesMethodReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ReflectionGetAttributesMethodReturnTypeExtension('ReflectionClass');
 	}
 
 
-	public function createService0298(): PHPStan\Type\Php\ReflectionGetAttributesMethodReturnTypeExtension
+	public function createService0299(): PHPStan\Type\Php\ReflectionGetAttributesMethodReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ReflectionGetAttributesMethodReturnTypeExtension('ReflectionClassConstant');
 	}
 
 
-	public function createService0299(): PHPStan\Type\Php\ReflectionGetAttributesMethodReturnTypeExtension
+	public function createService0300(): PHPStan\Type\Php\ReflectionGetAttributesMethodReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ReflectionGetAttributesMethodReturnTypeExtension('ReflectionFunctionAbstract');
 	}
 
 
-	public function createService0300(): PHPStan\Type\Php\ReflectionGetAttributesMethodReturnTypeExtension
+	public function createService0301(): PHPStan\Type\Php\ReflectionGetAttributesMethodReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ReflectionGetAttributesMethodReturnTypeExtension('ReflectionParameter');
 	}
 
 
-	public function createService0301(): PHPStan\Type\Php\ReflectionGetAttributesMethodReturnTypeExtension
+	public function createService0302(): PHPStan\Type\Php\ReflectionGetAttributesMethodReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\ReflectionGetAttributesMethodReturnTypeExtension('ReflectionProperty');
 	}
 
 
-	public function createService0302(): PHPStan\Type\Php\DatePeriodConstructorReturnTypeExtension
+	public function createService0303(): PHPStan\Type\Php\DatePeriodConstructorReturnTypeExtension
 	{
 		return new PHPStan\Type\Php\DatePeriodConstructorReturnTypeExtension;
 	}
 
 
-	public function createService0303(): PHPStan\Type\ClosureTypeFactory
+	public function createService0304(): PHPStan\Type\ClosureTypeFactory
 	{
 		return new PHPStan\Type\ClosureTypeFactory(
 			$this->getService('080'),
-			$this->getService('0309'),
+			$this->getService('0310'),
 			$this->getService('originalBetterReflectionReflector'),
 			$this->getService('currentPhpVersionPhpParser')
 		);
 	}
 
 
-	public function createService0304(): PHPStan\Type\Constant\OversizedArrayBuilder
+	public function createService0305(): PHPStan\Type\Constant\OversizedArrayBuilder
 	{
 		return new PHPStan\Type\Constant\OversizedArrayBuilder;
 	}
 
 
-	public function createService0305(): PHPStan\Reflection\BetterReflection\BetterReflectionSourceLocatorFactory
+	public function createService0306(): PHPStan\Reflection\BetterReflection\BetterReflectionSourceLocatorFactory
 	{
 		return new PHPStan\Reflection\BetterReflection\BetterReflectionSourceLocatorFactory(
 			$this->getService('phpParserDecorator'),
 			$this->getService('php8PhpParser'),
-			$this->getService('0308'),
 			$this->getService('0309'),
+			$this->getService('0310'),
 			$this->getService('090'),
 			$this->getService('087'),
 			$this->getService('085'),
@@ -3951,13 +4014,13 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 	}
 
 
-	public function createService0306(): PHPStan\Reflection\BetterReflection\BetterReflectionProviderFactory
+	public function createService0307(): PHPStan\Reflection\BetterReflection\BetterReflectionProviderFactory
 	{
 		return new class ($this) implements PHPStan\Reflection\BetterReflection\BetterReflectionProviderFactory {
 			private $container;
 
 
-			public function __construct(Container_b70fe01a1b $container)
+			public function __construct(Container_1c82d8b241 $container)
 			{
 				$this->container = $container;
 			}
@@ -3970,7 +4033,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 					$this->container->getService('080'),
 					$this->container->getService('064'),
 					$reflector,
-					$this->container->getService('0152'),
+					$this->container->getService('0153'),
 					$this->container->getService('028'),
 					$this->container->getService('020'),
 					$this->container->getService('0103'),
@@ -3979,7 +4042,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 					$this->container->getService('relativePathHelper'),
 					$this->container->getService('019'),
 					$this->container->getService('069'),
-					$this->container->getService('0308'),
+					$this->container->getService('0309'),
 					$this->container->getService('0108'),
 					['stdClass']
 				);
@@ -3988,7 +4051,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 	}
 
 
-	public function createService0307(): PHPStan\Reflection\BetterReflection\SourceStubber\PhpStormStubsSourceStubberFactory
+	public function createService0308(): PHPStan\Reflection\BetterReflection\SourceStubber\PhpStormStubsSourceStubberFactory
 	{
 		return new PHPStan\Reflection\BetterReflection\SourceStubber\PhpStormStubsSourceStubberFactory(
 			$this->getService('php8PhpParser'),
@@ -3998,19 +4061,19 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 	}
 
 
-	public function createService0308(): PHPStan\BetterReflection\SourceLocator\SourceStubber\PhpStormStubsSourceStubber
+	public function createService0309(): PHPStan\BetterReflection\SourceLocator\SourceStubber\PhpStormStubsSourceStubber
 	{
-		return $this->getService('0307')->create();
+		return $this->getService('0308')->create();
 	}
 
 
-	public function createService0309(): PHPStan\BetterReflection\SourceLocator\SourceStubber\ReflectionSourceStubber
+	public function createService0310(): PHPStan\BetterReflection\SourceLocator\SourceStubber\ReflectionSourceStubber
 	{
 		return new PHPStan\BetterReflection\SourceLocator\SourceStubber\ReflectionSourceStubber($this->getService('018'));
 	}
 
 
-	public function createService0310(): PHPStan\Command\ErrorFormatter\CiDetectedErrorFormatter
+	public function createService0311(): PHPStan\Command\ErrorFormatter\CiDetectedErrorFormatter
 	{
 		return new PHPStan\Command\ErrorFormatter\CiDetectedErrorFormatter(
 			$this->getService('errorFormatter.github'),
@@ -4019,43 +4082,43 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 	}
 
 
-	public function createService0311(): PHPStan\Rules\Api\ApiClassConstFetchRule
+	public function createService0312(): PHPStan\Rules\Api\ApiClassConstFetchRule
 	{
 		return new PHPStan\Rules\Api\ApiClassConstFetchRule($this->getService('0109'), $this->getService('reflectionProvider'));
 	}
 
 
-	public function createService0312(): PHPStan\Rules\Api\ApiInstanceofRule
+	public function createService0313(): PHPStan\Rules\Api\ApiInstanceofRule
 	{
 		return new PHPStan\Rules\Api\ApiInstanceofRule($this->getService('0109'), $this->getService('reflectionProvider'));
 	}
 
 
-	public function createService0313(): PHPStan\Rules\Api\ApiInstanceofTypeRule
+	public function createService0314(): PHPStan\Rules\Api\ApiInstanceofTypeRule
 	{
-		return new PHPStan\Rules\Api\ApiInstanceofTypeRule($this->getService('reflectionProvider'), false, false);
+		return new PHPStan\Rules\Api\ApiInstanceofTypeRule($this->getService('reflectionProvider'), false, true);
 	}
 
 
-	public function createService0314(): PHPStan\Rules\Api\NodeConnectingVisitorAttributesRule
+	public function createService0315(): PHPStan\Rules\Api\NodeConnectingVisitorAttributesRule
 	{
 		return new PHPStan\Rules\Api\NodeConnectingVisitorAttributesRule($this->getService('061'));
 	}
 
 
-	public function createService0315(): PHPStan\Rules\Api\RuntimeReflectionFunctionRule
+	public function createService0316(): PHPStan\Rules\Api\RuntimeReflectionFunctionRule
 	{
 		return new PHPStan\Rules\Api\RuntimeReflectionFunctionRule($this->getService('reflectionProvider'));
 	}
 
 
-	public function createService0316(): PHPStan\Rules\Api\RuntimeReflectionInstantiationRule
+	public function createService0317(): PHPStan\Rules\Api\RuntimeReflectionInstantiationRule
 	{
 		return new PHPStan\Rules\Api\RuntimeReflectionInstantiationRule($this->getService('reflectionProvider'));
 	}
 
 
-	public function createService0317(): PHPStan\Rules\Classes\ExistingClassInClassExtendsRule
+	public function createService0318(): PHPStan\Rules\Classes\ExistingClassInClassExtendsRule
 	{
 		return new PHPStan\Rules\Classes\ExistingClassInClassExtendsRule(
 			$this->getService('0112'),
@@ -4064,7 +4127,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 	}
 
 
-	public function createService0318(): PHPStan\Rules\Classes\ExistingClassInInstanceOfRule
+	public function createService0319(): PHPStan\Rules\Classes\ExistingClassInInstanceOfRule
 	{
 		return new PHPStan\Rules\Classes\ExistingClassInInstanceOfRule(
 			$this->getService('reflectionProvider'),
@@ -4074,7 +4137,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 	}
 
 
-	public function createService0319(): PHPStan\Rules\Exceptions\CaughtExceptionExistenceRule
+	public function createService0320(): PHPStan\Rules\Exceptions\CaughtExceptionExistenceRule
 	{
 		return new PHPStan\Rules\Exceptions\CaughtExceptionExistenceRule(
 			$this->getService('reflectionProvider'),
@@ -4084,19 +4147,19 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 	}
 
 
-	public function createService0320(): PHPStan\Rules\Functions\CallToNonExistentFunctionRule
+	public function createService0321(): PHPStan\Rules\Functions\CallToNonExistentFunctionRule
 	{
 		return new PHPStan\Rules\Functions\CallToNonExistentFunctionRule($this->getService('reflectionProvider'), false);
 	}
 
 
-	public function createService0321(): PHPStan\Rules\Constants\OverridingConstantRule
+	public function createService0322(): PHPStan\Rules\Constants\OverridingConstantRule
 	{
 		return new PHPStan\Rules\Constants\OverridingConstantRule(true);
 	}
 
 
-	public function createService0322(): PHPStan\Rules\Methods\OverridingMethodRule
+	public function createService0323(): PHPStan\Rules\Methods\OverridingMethodRule
 	{
 		return new PHPStan\Rules\Methods\OverridingMethodRule(
 			$this->getService('020'),
@@ -4111,19 +4174,19 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 	}
 
 
-	public function createService0323(): PHPStan\Rules\Methods\ConsistentConstructorRule
+	public function createService0324(): PHPStan\Rules\Methods\ConsistentConstructorRule
 	{
 		return new PHPStan\Rules\Methods\ConsistentConstructorRule($this->getService('0137'));
 	}
 
 
-	public function createService0324(): PHPStan\Rules\Missing\MissingReturnRule
+	public function createService0325(): PHPStan\Rules\Missing\MissingReturnRule
 	{
 		return new PHPStan\Rules\Missing\MissingReturnRule(false, true);
 	}
 
 
-	public function createService0325(): PHPStan\Rules\Namespaces\ExistingNamesInGroupUseRule
+	public function createService0326(): PHPStan\Rules\Namespaces\ExistingNamesInGroupUseRule
 	{
 		return new PHPStan\Rules\Namespaces\ExistingNamesInGroupUseRule(
 			$this->getService('reflectionProvider'),
@@ -4133,7 +4196,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 	}
 
 
-	public function createService0326(): PHPStan\Rules\Namespaces\ExistingNamesInUseRule
+	public function createService0327(): PHPStan\Rules\Namespaces\ExistingNamesInUseRule
 	{
 		return new PHPStan\Rules\Namespaces\ExistingNamesInUseRule(
 			$this->getService('reflectionProvider'),
@@ -4143,13 +4206,13 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 	}
 
 
-	public function createService0327(): PHPStan\Rules\Operators\InvalidIncDecOperationRule
+	public function createService0328(): PHPStan\Rules\Operators\InvalidIncDecOperationRule
 	{
 		return new PHPStan\Rules\Operators\InvalidIncDecOperationRule(false);
 	}
 
 
-	public function createService0328(): PHPStan\Rules\Properties\AccessPropertiesRule
+	public function createService0329(): PHPStan\Rules\Properties\AccessPropertiesRule
 	{
 		return new PHPStan\Rules\Properties\AccessPropertiesRule(
 			$this->getService('reflectionProvider'),
@@ -4160,7 +4223,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 	}
 
 
-	public function createService0329(): PHPStan\Rules\Properties\AccessStaticPropertiesRule
+	public function createService0330(): PHPStan\Rules\Properties\AccessStaticPropertiesRule
 	{
 		return new PHPStan\Rules\Properties\AccessStaticPropertiesRule(
 			$this->getService('reflectionProvider'),
@@ -4170,7 +4233,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 	}
 
 
-	public function createService0330(): PHPStan\Rules\Properties\ExistingClassesInPropertiesRule
+	public function createService0331(): PHPStan\Rules\Properties\ExistingClassesInPropertiesRule
 	{
 		return new PHPStan\Rules\Properties\ExistingClassesInPropertiesRule(
 			$this->getService('reflectionProvider'),
@@ -4183,7 +4246,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 	}
 
 
-	public function createService0331(): PHPStan\Rules\Functions\FunctionCallableRule
+	public function createService0332(): PHPStan\Rules\Functions\FunctionCallableRule
 	{
 		return new PHPStan\Rules\Functions\FunctionCallableRule(
 			$this->getService('reflectionProvider'),
@@ -4195,31 +4258,31 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 	}
 
 
-	public function createService0332(): PHPStan\Rules\Properties\MissingReadOnlyByPhpDocPropertyAssignRule
+	public function createService0333(): PHPStan\Rules\Properties\MissingReadOnlyByPhpDocPropertyAssignRule
 	{
-		return new PHPStan\Rules\Properties\MissingReadOnlyByPhpDocPropertyAssignRule($this->getService('0341'));
+		return new PHPStan\Rules\Properties\MissingReadOnlyByPhpDocPropertyAssignRule($this->getService('0342'));
 	}
 
 
-	public function createService0333(): PHPStan\Rules\Properties\OverridingPropertyRule
+	public function createService0334(): PHPStan\Rules\Properties\OverridingPropertyRule
 	{
 		return new PHPStan\Rules\Properties\OverridingPropertyRule(true, false);
 	}
 
 
-	public function createService0334(): PHPStan\Rules\Properties\ReadOnlyByPhpDocPropertyRule
+	public function createService0335(): PHPStan\Rules\Properties\ReadOnlyByPhpDocPropertyRule
 	{
 		return new PHPStan\Rules\Properties\ReadOnlyByPhpDocPropertyRule;
 	}
 
 
-	public function createService0335(): PHPStan\Rules\Properties\UninitializedPropertyRule
+	public function createService0336(): PHPStan\Rules\Properties\UninitializedPropertyRule
 	{
-		return new PHPStan\Rules\Properties\UninitializedPropertyRule($this->getService('0341'));
+		return new PHPStan\Rules\Properties\UninitializedPropertyRule($this->getService('0342'));
 	}
 
 
-	public function createService0336(): PHPStan\Rules\Properties\WritingToReadOnlyPropertiesRule
+	public function createService0337(): PHPStan\Rules\Properties\WritingToReadOnlyPropertiesRule
 	{
 		return new PHPStan\Rules\Properties\WritingToReadOnlyPropertiesRule(
 			$this->getService('0150'),
@@ -4230,7 +4293,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 	}
 
 
-	public function createService0337(): PHPStan\Rules\Properties\ReadingWriteOnlyPropertiesRule
+	public function createService0338(): PHPStan\Rules\Properties\ReadingWriteOnlyPropertiesRule
 	{
 		return new PHPStan\Rules\Properties\ReadingWriteOnlyPropertiesRule(
 			$this->getService('0148'),
@@ -4241,43 +4304,43 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 	}
 
 
-	public function createService0338(): PHPStan\Rules\Variables\CompactVariablesRule
+	public function createService0339(): PHPStan\Rules\Variables\CompactVariablesRule
 	{
 		return new PHPStan\Rules\Variables\CompactVariablesRule(true);
 	}
 
 
-	public function createService0339(): PHPStan\Rules\Variables\DefinedVariableRule
+	public function createService0340(): PHPStan\Rules\Variables\DefinedVariableRule
 	{
 		return new PHPStan\Rules\Variables\DefinedVariableRule(true, true);
 	}
 
 
-	public function createService0340(): PHPStan\Rules\Regexp\RegularExpressionPatternRule
+	public function createService0341(): PHPStan\Rules\Regexp\RegularExpressionPatternRule
 	{
 		return new PHPStan\Rules\Regexp\RegularExpressionPatternRule;
 	}
 
 
-	public function createService0341(): PHPStan\Reflection\ConstructorsHelper
+	public function createService0342(): PHPStan\Reflection\ConstructorsHelper
 	{
 		return new PHPStan\Reflection\ConstructorsHelper($this->getService('061'), []);
 	}
 
 
-	public function createService0342(): PHPStan\Rules\Methods\MissingMagicSerializationMethodsRule
+	public function createService0343(): PHPStan\Rules\Methods\MissingMagicSerializationMethodsRule
 	{
 		return new PHPStan\Rules\Methods\MissingMagicSerializationMethodsRule($this->getService('020'));
 	}
 
 
-	public function createService0343(): PHPStan\Rules\Constants\MagicConstantContextRule
+	public function createService0344(): PHPStan\Rules\Constants\MagicConstantContextRule
 	{
 		return new PHPStan\Rules\Constants\MagicConstantContextRule;
 	}
 
 
-	public function createService0344(): PHPStan\Rules\Classes\MixinRule
+	public function createService0345(): PHPStan\Rules\Classes\MixinRule
 	{
 		return new PHPStan\Rules\Classes\MixinRule(
 			$this->getService('reflectionProvider'),
@@ -4290,13 +4353,13 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 	}
 
 
-	public function createService0345(): PHPStan\Rules\PhpDoc\RequireExtendsCheck
+	public function createService0346(): PHPStan\Rules\PhpDoc\RequireExtendsCheck
 	{
 		return new PHPStan\Rules\PhpDoc\RequireExtendsCheck($this->getService('0112'), true);
 	}
 
 
-	public function createService0346(): PHPStan\Rules\PhpDoc\RequireImplementsDefinitionTraitRule
+	public function createService0347(): PHPStan\Rules\PhpDoc\RequireImplementsDefinitionTraitRule
 	{
 		return new PHPStan\Rules\PhpDoc\RequireImplementsDefinitionTraitRule(
 			$this->getService('reflectionProvider'),
@@ -4306,46 +4369,46 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 	}
 
 
-	public function createService0347(): PHPStan\Rules\Functions\IncompatibleArrowFunctionDefaultParameterTypeRule
+	public function createService0348(): PHPStan\Rules\Functions\IncompatibleArrowFunctionDefaultParameterTypeRule
 	{
 		return new PHPStan\Rules\Functions\IncompatibleArrowFunctionDefaultParameterTypeRule;
 	}
 
 
-	public function createService0348(): PHPStan\Rules\Functions\IncompatibleClosureDefaultParameterTypeRule
+	public function createService0349(): PHPStan\Rules\Functions\IncompatibleClosureDefaultParameterTypeRule
 	{
 		return new PHPStan\Rules\Functions\IncompatibleClosureDefaultParameterTypeRule;
 	}
 
 
-	public function createService0349(): PHPStan\Rules\Functions\CallCallablesRule
+	public function createService0350(): PHPStan\Rules\Functions\CallCallablesRule
 	{
 		return new PHPStan\Rules\Functions\CallCallablesRule($this->getService('0125'), $this->getService('0150'), false);
 	}
 
 
-	public function createService0350(): PHPStan\Rules\Methods\IllegalConstructorMethodCallRule
+	public function createService0351(): PHPStan\Rules\Methods\IllegalConstructorMethodCallRule
 	{
 		return new PHPStan\Rules\Methods\IllegalConstructorMethodCallRule;
 	}
 
 
-	public function createService0351(): PHPStan\Rules\Methods\IllegalConstructorStaticCallRule
+	public function createService0352(): PHPStan\Rules\Methods\IllegalConstructorStaticCallRule
 	{
 		return new PHPStan\Rules\Methods\IllegalConstructorStaticCallRule;
 	}
 
 
-	public function createService0352(): PHPStan\Rules\PhpDoc\InvalidPhpDocTagValueRule
+	public function createService0353(): PHPStan\Rules\PhpDoc\InvalidPhpDocTagValueRule
 	{
 		return new PHPStan\Rules\PhpDoc\InvalidPhpDocTagValueRule($this->getService('023'), $this->getService('026'), false, false);
 	}
 
 
-	public function createService0353(): PHPStan\Rules\PhpDoc\InvalidPhpDocVarTagTypeRule
+	public function createService0354(): PHPStan\Rules\PhpDoc\InvalidPhpDocVarTagTypeRule
 	{
 		return new PHPStan\Rules\PhpDoc\InvalidPhpDocVarTagTypeRule(
-			$this->getService('0152'),
+			$this->getService('0153'),
 			$this->getService('reflectionProvider'),
 			$this->getService('0112'),
 			$this->getService('0130'),
@@ -4357,43 +4420,43 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 	}
 
 
-	public function createService0354(): PHPStan\Rules\PhpDoc\InvalidPHPStanDocTagRule
+	public function createService0355(): PHPStan\Rules\PhpDoc\InvalidPHPStanDocTagRule
 	{
 		return new PHPStan\Rules\PhpDoc\InvalidPHPStanDocTagRule($this->getService('023'), $this->getService('026'), false);
 	}
 
 
-	public function createService0355(): PHPStan\Rules\PhpDoc\VarTagChangedExpressionTypeRule
+	public function createService0356(): PHPStan\Rules\PhpDoc\VarTagChangedExpressionTypeRule
 	{
 		return new PHPStan\Rules\PhpDoc\VarTagChangedExpressionTypeRule($this->getService('0145'));
 	}
 
 
-	public function createService0356(): PHPStan\Rules\PhpDoc\WrongVariableNameInVarTagRule
+	public function createService0357(): PHPStan\Rules\PhpDoc\WrongVariableNameInVarTagRule
 	{
-		return new PHPStan\Rules\PhpDoc\WrongVariableNameInVarTagRule($this->getService('0152'), $this->getService('0145'), false);
+		return new PHPStan\Rules\PhpDoc\WrongVariableNameInVarTagRule($this->getService('0153'), $this->getService('0145'), false);
 	}
 
 
-	public function createService0357(): PHPStan\Rules\Generics\PropertyVarianceRule
+	public function createService0358(): PHPStan\Rules\Generics\PropertyVarianceRule
 	{
 		return new PHPStan\Rules\Generics\PropertyVarianceRule($this->getService('0132'), false);
 	}
 
 
-	public function createService0358(): PHPStan\Rules\Arrays\InvalidKeyInArrayDimFetchRule
+	public function createService0359(): PHPStan\Rules\Arrays\InvalidKeyInArrayDimFetchRule
 	{
 		return new PHPStan\Rules\Arrays\InvalidKeyInArrayDimFetchRule($this->getService('0150'), false);
 	}
 
 
-	public function createService0359(): PHPStan\Rules\Arrays\InvalidKeyInArrayItemRule
+	public function createService0360(): PHPStan\Rules\Arrays\InvalidKeyInArrayItemRule
 	{
 		return new PHPStan\Rules\Arrays\InvalidKeyInArrayItemRule(false);
 	}
 
 
-	public function createService0360(): PHPStan\Rules\Arrays\NonexistentOffsetInArrayDimFetchRule
+	public function createService0361(): PHPStan\Rules\Arrays\NonexistentOffsetInArrayDimFetchRule
 	{
 		return new PHPStan\Rules\Arrays\NonexistentOffsetInArrayDimFetchRule(
 			$this->getService('0150'),
@@ -4403,7 +4466,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 	}
 
 
-	public function createService0361(): PHPStan\Rules\Exceptions\ThrowsVoidFunctionWithExplicitThrowPointRule
+	public function createService0362(): PHPStan\Rules\Exceptions\ThrowsVoidFunctionWithExplicitThrowPointRule
 	{
 		return new PHPStan\Rules\Exceptions\ThrowsVoidFunctionWithExplicitThrowPointRule(
 			$this->getService('exceptionTypeResolver'),
@@ -4412,7 +4475,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 	}
 
 
-	public function createService0362(): PHPStan\Rules\Exceptions\ThrowsVoidMethodWithExplicitThrowPointRule
+	public function createService0363(): PHPStan\Rules\Exceptions\ThrowsVoidMethodWithExplicitThrowPointRule
 	{
 		return new PHPStan\Rules\Exceptions\ThrowsVoidMethodWithExplicitThrowPointRule(
 			$this->getService('exceptionTypeResolver'),
@@ -4421,253 +4484,277 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 	}
 
 
-	public function createService0363(): PHPStan\Rules\Generators\YieldFromTypeRule
+	public function createService0364(): PHPStan\Rules\Generators\YieldFromTypeRule
 	{
 		return new PHPStan\Rules\Generators\YieldFromTypeRule($this->getService('0150'), false);
 	}
 
 
-	public function createService0364(): PHPStan\Rules\Generators\YieldInGeneratorRule
+	public function createService0365(): PHPStan\Rules\Generators\YieldInGeneratorRule
 	{
 		return new PHPStan\Rules\Generators\YieldInGeneratorRule(false);
 	}
 
 
-	public function createService0365(): PHPStan\Rules\Arrays\ArrayUnpackingRule
+	public function createService0366(): PHPStan\Rules\Arrays\ArrayUnpackingRule
 	{
 		return new PHPStan\Rules\Arrays\ArrayUnpackingRule($this->getService('020'), $this->getService('0150'));
 	}
 
 
-	public function createService0366(): PHPStan\Rules\Properties\ReadOnlyByPhpDocPropertyAssignRefRule
+	public function createService0367(): PHPStan\Rules\Properties\ReadOnlyByPhpDocPropertyAssignRefRule
 	{
 		return new PHPStan\Rules\Properties\ReadOnlyByPhpDocPropertyAssignRefRule($this->getService('0149'));
 	}
 
 
-	public function createService0367(): PHPStan\Rules\Properties\ReadOnlyByPhpDocPropertyAssignRule
+	public function createService0368(): PHPStan\Rules\Properties\ReadOnlyByPhpDocPropertyAssignRule
 	{
-		return new PHPStan\Rules\Properties\ReadOnlyByPhpDocPropertyAssignRule($this->getService('0149'), $this->getService('0341'));
+		return new PHPStan\Rules\Properties\ReadOnlyByPhpDocPropertyAssignRule($this->getService('0149'), $this->getService('0342'));
 	}
 
 
-	public function createService0368(): PHPStan\Rules\Variables\ParameterOutAssignedTypeRule
+	public function createService0369(): PHPStan\Rules\Variables\ParameterOutAssignedTypeRule
 	{
 		return new PHPStan\Rules\Variables\ParameterOutAssignedTypeRule($this->getService('0150'));
 	}
 
 
-	public function createService0369(): PHPStan\Rules\Variables\ParameterOutExecutionEndTypeRule
+	public function createService0370(): PHPStan\Rules\Variables\ParameterOutExecutionEndTypeRule
 	{
 		return new PHPStan\Rules\Variables\ParameterOutExecutionEndTypeRule($this->getService('0150'));
 	}
 
 
-	public function createService0370(): PHPStan\Rules\Classes\ImpossibleInstanceOfRule
+	public function createService0371(): PHPStan\Rules\Classes\ImpossibleInstanceOfRule
 	{
 		return new PHPStan\Rules\Classes\ImpossibleInstanceOfRule(false, false, false);
 	}
 
 
-	public function createService0371(): PHPStan\Rules\Comparison\BooleanAndConstantConditionRule
+	public function createService0372(): PHPStan\Rules\Comparison\BooleanAndConstantConditionRule
 	{
 		return new PHPStan\Rules\Comparison\BooleanAndConstantConditionRule($this->getService('0116'), false, false, false);
 	}
 
 
-	public function createService0372(): PHPStan\Rules\Comparison\BooleanOrConstantConditionRule
+	public function createService0373(): PHPStan\Rules\Comparison\BooleanOrConstantConditionRule
 	{
 		return new PHPStan\Rules\Comparison\BooleanOrConstantConditionRule($this->getService('0116'), false, false, false);
 	}
 
 
-	public function createService0373(): PHPStan\Rules\Comparison\BooleanNotConstantConditionRule
+	public function createService0374(): PHPStan\Rules\Comparison\BooleanNotConstantConditionRule
 	{
 		return new PHPStan\Rules\Comparison\BooleanNotConstantConditionRule($this->getService('0116'), false, false);
 	}
 
 
-	public function createService0374(): PHPStan\Rules\DeadCode\NoopRule
+	public function createService0375(): PHPStan\Rules\DeadCode\NoopRule
 	{
 		return new PHPStan\Rules\DeadCode\NoopRule($this->getService('017'), false);
 	}
 
 
-	public function createService0375(): PHPStan\Rules\DeadCode\UnusedPrivatePropertyRule
+	public function createService0376(): PHPStan\Rules\DeadCode\UnusedPrivatePropertyRule
 	{
 		return new PHPStan\Rules\DeadCode\UnusedPrivatePropertyRule($this->getService('0147'), [], [], false);
 	}
 
 
-	public function createService0376(): PHPStan\Rules\Comparison\DoWhileLoopConstantConditionRule
+	public function createService0377(): PHPStan\Rules\Comparison\DoWhileLoopConstantConditionRule
 	{
 		return new PHPStan\Rules\Comparison\DoWhileLoopConstantConditionRule($this->getService('0116'), false);
 	}
 
 
-	public function createService0377(): PHPStan\Rules\Comparison\ElseIfConstantConditionRule
+	public function createService0378(): PHPStan\Rules\Comparison\ElseIfConstantConditionRule
 	{
 		return new PHPStan\Rules\Comparison\ElseIfConstantConditionRule($this->getService('0116'), false, false);
 	}
 
 
-	public function createService0378(): PHPStan\Rules\Comparison\IfConstantConditionRule
+	public function createService0379(): PHPStan\Rules\Comparison\IfConstantConditionRule
 	{
 		return new PHPStan\Rules\Comparison\IfConstantConditionRule($this->getService('0116'), false);
 	}
 
 
-	public function createService0379(): PHPStan\Rules\Comparison\ImpossibleCheckTypeFunctionCallRule
+	public function createService0380(): PHPStan\Rules\Comparison\ImpossibleCheckTypeFunctionCallRule
 	{
 		return new PHPStan\Rules\Comparison\ImpossibleCheckTypeFunctionCallRule($this->getService('0117'), false, false, false);
 	}
 
 
-	public function createService0380(): PHPStan\Rules\Comparison\ImpossibleCheckTypeMethodCallRule
+	public function createService0381(): PHPStan\Rules\Comparison\ImpossibleCheckTypeMethodCallRule
 	{
 		return new PHPStan\Rules\Comparison\ImpossibleCheckTypeMethodCallRule($this->getService('0117'), false, false, false);
 	}
 
 
-	public function createService0381(): PHPStan\Rules\Comparison\ImpossibleCheckTypeStaticMethodCallRule
+	public function createService0382(): PHPStan\Rules\Comparison\ImpossibleCheckTypeStaticMethodCallRule
 	{
 		return new PHPStan\Rules\Comparison\ImpossibleCheckTypeStaticMethodCallRule($this->getService('0117'), false, false, false);
 	}
 
 
-	public function createService0382(): PHPStan\Rules\Comparison\LogicalXorConstantConditionRule
+	public function createService0383(): PHPStan\Rules\Comparison\LogicalXorConstantConditionRule
 	{
 		return new PHPStan\Rules\Comparison\LogicalXorConstantConditionRule($this->getService('0116'), false, false);
 	}
 
 
-	public function createService0383(): PHPStan\Rules\Comparison\MatchExpressionRule
+	public function createService0384(): PHPStan\Rules\Comparison\MatchExpressionRule
 	{
 		return new PHPStan\Rules\Comparison\MatchExpressionRule($this->getService('0116'), false, false, false, false);
 	}
 
 
-	public function createService0384(): PHPStan\Rules\Comparison\NumberComparisonOperatorsConstantConditionRule
+	public function createService0385(): PHPStan\Rules\Comparison\NumberComparisonOperatorsConstantConditionRule
 	{
 		return new PHPStan\Rules\Comparison\NumberComparisonOperatorsConstantConditionRule(false);
 	}
 
 
-	public function createService0385(): PHPStan\Rules\Comparison\StrictComparisonOfDifferentTypesRule
+	public function createService0386(): PHPStan\Rules\Comparison\StrictComparisonOfDifferentTypesRule
 	{
 		return new PHPStan\Rules\Comparison\StrictComparisonOfDifferentTypesRule(false, false, false);
 	}
 
 
-	public function createService0386(): PHPStan\Rules\Comparison\ConstantLooseComparisonRule
+	public function createService0387(): PHPStan\Rules\Comparison\ConstantLooseComparisonRule
 	{
 		return new PHPStan\Rules\Comparison\ConstantLooseComparisonRule(false, false, false);
 	}
 
 
-	public function createService0387(): PHPStan\Rules\Comparison\TernaryOperatorConstantConditionRule
+	public function createService0388(): PHPStan\Rules\Comparison\TernaryOperatorConstantConditionRule
 	{
 		return new PHPStan\Rules\Comparison\TernaryOperatorConstantConditionRule($this->getService('0116'), false);
 	}
 
 
-	public function createService0388(): PHPStan\Rules\Comparison\UnreachableIfBranchesRule
+	public function createService0389(): PHPStan\Rules\Comparison\UnreachableIfBranchesRule
 	{
 		return new PHPStan\Rules\Comparison\UnreachableIfBranchesRule($this->getService('0116'), false, false);
 	}
 
 
-	public function createService0389(): PHPStan\Rules\Comparison\UnreachableTernaryElseBranchRule
+	public function createService0390(): PHPStan\Rules\Comparison\UnreachableTernaryElseBranchRule
 	{
 		return new PHPStan\Rules\Comparison\UnreachableTernaryElseBranchRule($this->getService('0116'), false, false);
 	}
 
 
-	public function createService0390(): PHPStan\Rules\Comparison\WhileLoopAlwaysFalseConditionRule
+	public function createService0391(): PHPStan\Rules\Comparison\WhileLoopAlwaysFalseConditionRule
 	{
 		return new PHPStan\Rules\Comparison\WhileLoopAlwaysFalseConditionRule($this->getService('0116'), false);
 	}
 
 
-	public function createService0391(): PHPStan\Rules\Comparison\WhileLoopAlwaysTrueConditionRule
+	public function createService0392(): PHPStan\Rules\Comparison\WhileLoopAlwaysTrueConditionRule
 	{
 		return new PHPStan\Rules\Comparison\WhileLoopAlwaysTrueConditionRule($this->getService('0116'), false);
 	}
 
 
-	public function createService0392(): PHPStan\Rules\TooWideTypehints\TooWideMethodReturnTypehintRule
+	public function createService0393(): PHPStan\Rules\TooWideTypehints\TooWideMethodReturnTypehintRule
 	{
 		return new PHPStan\Rules\TooWideTypehints\TooWideMethodReturnTypehintRule(false, false);
 	}
 
 
-	public function createService0393(): PHPStan\Rules\Properties\NullsafePropertyFetchRule
+	public function createService0394(): PHPStan\Rules\Properties\NullsafePropertyFetchRule
 	{
 		return new PHPStan\Rules\Properties\NullsafePropertyFetchRule;
 	}
 
 
-	public function createService0394(): PHPStan\Rules\Traits\TraitDeclarationCollector
+	public function createService0395(): PHPStan\Rules\Traits\TraitDeclarationCollector
 	{
 		return new PHPStan\Rules\Traits\TraitDeclarationCollector;
 	}
 
 
-	public function createService0395(): PHPStan\Rules\Traits\TraitUseCollector
+	public function createService0396(): PHPStan\Rules\Traits\TraitUseCollector
 	{
 		return new PHPStan\Rules\Traits\TraitUseCollector;
 	}
 
 
-	public function createService0396(): PHPStan\Rules\Traits\NotAnalysedTraitRule
+	public function createService0397(): PHPStan\Rules\Traits\NotAnalysedTraitRule
 	{
 		return new PHPStan\Rules\Traits\NotAnalysedTraitRule;
 	}
 
 
-	public function createService0397(): PHPStan\Rules\Exceptions\CatchWithUnthrownExceptionRule
+	public function createService0398(): PHPStan\Rules\Exceptions\CatchWithUnthrownExceptionRule
 	{
 		return new PHPStan\Rules\Exceptions\CatchWithUnthrownExceptionRule($this->getService('exceptionTypeResolver'), true);
 	}
 
 
-	public function createService0398(): PHPStan\Rules\TooWideTypehints\TooWideFunctionParameterOutTypeRule
+	public function createService0399(): PHPStan\Rules\TooWideTypehints\TooWideFunctionParameterOutTypeRule
 	{
-		return new PHPStan\Rules\TooWideTypehints\TooWideFunctionParameterOutTypeRule;
+		return new PHPStan\Rules\TooWideTypehints\TooWideFunctionParameterOutTypeRule($this->getService('0152'));
 	}
 
 
-	public function createService0399(): PHPStan\Rules\TooWideTypehints\TooWideMethodParameterOutTypeRule
+	public function createService0400(): PHPStan\Rules\TooWideTypehints\TooWideMethodParameterOutTypeRule
 	{
-		return new PHPStan\Rules\TooWideTypehints\TooWideMethodParameterOutTypeRule;
+		return new PHPStan\Rules\TooWideTypehints\TooWideMethodParameterOutTypeRule($this->getService('0152'));
 	}
 
 
-	public function createService0400(): PHPStan\Rules\Functions\RandomIntParametersRule
+	public function createService0401(): PHPStan\Rules\Functions\RandomIntParametersRule
 	{
 		return new PHPStan\Rules\Functions\RandomIntParametersRule($this->getService('reflectionProvider'), false);
 	}
 
 
-	public function createService0401(): PHPStan\Rules\Functions\ArrayFilterRule
+	public function createService0402(): PHPStan\Rules\Functions\ArrayFilterRule
 	{
 		return new PHPStan\Rules\Functions\ArrayFilterRule($this->getService('reflectionProvider'), false);
 	}
 
 
-	public function createService0402(): PHPStan\Rules\Functions\ArrayValuesRule
+	public function createService0403(): PHPStan\Rules\Functions\ArrayValuesRule
 	{
 		return new PHPStan\Rules\Functions\ArrayValuesRule($this->getService('reflectionProvider'), false);
 	}
 
 
-	public function createService0403(): PHPStan\Rules\Functions\CallUserFuncRule
+	public function createService0404(): PHPStan\Rules\Functions\CallUserFuncRule
 	{
 		return new PHPStan\Rules\Functions\CallUserFuncRule($this->getService('reflectionProvider'), $this->getService('0125'));
 	}
 
 
-	public function createService0404(): Luminova\Debugger\PHPStanRules
+	public function createService0405(): PHPStan\Rules\Deprecations\DeprecatedClassHelper
+	{
+		return new PHPStan\Rules\Deprecations\DeprecatedClassHelper($this->getService('reflectionProvider'));
+	}
+
+
+	public function createService0406(): PHPStan\DependencyInjection\LazyDeprecatedScopeResolverProvider
+	{
+		return new PHPStan\DependencyInjection\LazyDeprecatedScopeResolverProvider($this->getService('061'));
+	}
+
+
+	public function createService0407(): PHPStan\Rules\Deprecations\DeprecatedScopeHelper
+	{
+		return $this->getService('0406')->get();
+	}
+
+
+	public function createService0408(): PHPStan\Rules\Deprecations\DefaultDeprecatedScopeResolver
+	{
+		return new PHPStan\Rules\Deprecations\DefaultDeprecatedScopeResolver;
+	}
+
+
+	public function createService0409(): Luminova\Debugger\PHPStanRules
 	{
 		return new Luminova\Debugger\PHPStanRules;
 	}
@@ -4698,7 +4785,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 			$this->getService('080'),
 			$this->getService('064'),
 			$this->getService('betterReflectionReflector'),
-			$this->getService('0152'),
+			$this->getService('0153'),
 			$this->getService('028'),
 			$this->getService('020'),
 			$this->getService('0103'),
@@ -4707,7 +4794,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 			$this->getService('relativePathHelper'),
 			$this->getService('019'),
 			$this->getService('069'),
-			$this->getService('0308'),
+			$this->getService('0309'),
 			$this->getService('0108'),
 			['stdClass']
 		);
@@ -4722,7 +4809,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 
 	public function createServiceBetterReflectionSourceLocator(): PHPStan\BetterReflection\SourceLocator\Type\SourceLocator
 	{
-		return $this->getService('0305')->create();
+		return $this->getService('0306')->create();
 	}
 
 
@@ -4744,7 +4831,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 	}
 
 
-	public function createServiceContainer(): Container_b70fe01a1b
+	public function createServiceContainer(): Container_1c82d8b241
 	{
 		return $this;
 	}
@@ -4839,7 +4926,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 		return new PHPStan\Command\ErrorFormatter\TableErrorFormatter(
 			$this->getService('relativePathHelper'),
 			$this->getService('simpleRelativePathHelper'),
-			$this->getService('0310'),
+			$this->getService('0311'),
 			true,
 			null,
 			null
@@ -4996,7 +5083,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 
 	public function createServiceRules__102(): PHPStan\Rules\Generics\FunctionTemplateTypeRule
 	{
-		return new PHPStan\Rules\Generics\FunctionTemplateTypeRule($this->getService('0152'), $this->getService('0131'));
+		return new PHPStan\Rules\Generics\FunctionTemplateTypeRule($this->getService('0153'), $this->getService('0131'));
 	}
 
 
@@ -5020,13 +5107,13 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 
 	public function createServiceRules__106(): PHPStan\Rules\Generics\MethodTemplateTypeRule
 	{
-		return new PHPStan\Rules\Generics\MethodTemplateTypeRule($this->getService('0152'), $this->getService('0131'));
+		return new PHPStan\Rules\Generics\MethodTemplateTypeRule($this->getService('0153'), $this->getService('0131'));
 	}
 
 
 	public function createServiceRules__107(): PHPStan\Rules\Generics\MethodTagTemplateTypeRule
 	{
-		return new PHPStan\Rules\Generics\MethodTagTemplateTypeRule($this->getService('0152'), $this->getService('0131'));
+		return new PHPStan\Rules\Generics\MethodTagTemplateTypeRule($this->getService('0153'), $this->getService('0131'));
 	}
 
 
@@ -5038,7 +5125,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 
 	public function createServiceRules__109(): PHPStan\Rules\Generics\TraitTemplateTypeRule
 	{
-		return new PHPStan\Rules\Generics\TraitTemplateTypeRule($this->getService('0152'), $this->getService('0131'));
+		return new PHPStan\Rules\Generics\TraitTemplateTypeRule($this->getService('0153'), $this->getService('0131'));
 	}
 
 
@@ -5050,7 +5137,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 
 	public function createServiceRules__110(): PHPStan\Rules\Generics\UsedTraitsRule
 	{
-		return new PHPStan\Rules\Generics\UsedTraitsRule($this->getService('0152'), $this->getService('0129'));
+		return new PHPStan\Rules\Generics\UsedTraitsRule($this->getService('0153'), $this->getService('0129'));
 	}
 
 
@@ -5129,7 +5216,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 	public function createServiceRules__122(): PHPStan\Rules\PhpDoc\IncompatiblePhpDocTypeRule
 	{
 		return new PHPStan\Rules\PhpDoc\IncompatiblePhpDocTypeRule(
-			$this->getService('0152'),
+			$this->getService('0153'),
 			$this->getService('0130'),
 			$this->getService('0143'),
 			$this->getService('0144')
@@ -5149,7 +5236,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 
 	public function createServiceRules__124(): PHPStan\Rules\PhpDoc\InvalidThrowsPhpDocValueRule
 	{
-		return new PHPStan\Rules\PhpDoc\InvalidThrowsPhpDocValueRule($this->getService('0152'));
+		return new PHPStan\Rules\PhpDoc\InvalidThrowsPhpDocValueRule($this->getService('0153'));
 	}
 
 
@@ -5179,7 +5266,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 
 	public function createServiceRules__129(): PHPStan\Rules\PhpDoc\RequireExtendsDefinitionClassRule
 	{
-		return new PHPStan\Rules\PhpDoc\RequireExtendsDefinitionClassRule($this->getService('0345'));
+		return new PHPStan\Rules\PhpDoc\RequireExtendsDefinitionClassRule($this->getService('0346'));
 	}
 
 
@@ -5193,7 +5280,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 	{
 		return new PHPStan\Rules\PhpDoc\RequireExtendsDefinitionTraitRule(
 			$this->getService('reflectionProvider'),
-			$this->getService('0345')
+			$this->getService('0346')
 		);
 	}
 
@@ -5284,7 +5371,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 
 	public function createServiceRules__144(): PHPStan\Rules\Properties\ReadOnlyPropertyAssignRule
 	{
-		return new PHPStan\Rules\Properties\ReadOnlyPropertyAssignRule($this->getService('0149'), $this->getService('0341'));
+		return new PHPStan\Rules\Properties\ReadOnlyPropertyAssignRule($this->getService('0149'), $this->getService('0342'));
 	}
 
 
@@ -5459,6 +5546,96 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 	}
 
 
+	public function createServiceRules__170(): PHPStan\Rules\Deprecations\AccessDeprecatedPropertyRule
+	{
+		return new PHPStan\Rules\Deprecations\AccessDeprecatedPropertyRule(
+			$this->getService('reflectionProvider'),
+			$this->getService('0407')
+		);
+	}
+
+
+	public function createServiceRules__171(): PHPStan\Rules\Deprecations\AccessDeprecatedStaticPropertyRule
+	{
+		return new PHPStan\Rules\Deprecations\AccessDeprecatedStaticPropertyRule(
+			$this->getService('reflectionProvider'),
+			$this->getService('0150'),
+			$this->getService('0407')
+		);
+	}
+
+
+	public function createServiceRules__172(): PHPStan\Rules\Deprecations\CallToDeprecatedFunctionRule
+	{
+		return new PHPStan\Rules\Deprecations\CallToDeprecatedFunctionRule(
+			$this->getService('reflectionProvider'),
+			$this->getService('0407')
+		);
+	}
+
+
+	public function createServiceRules__173(): PHPStan\Rules\Deprecations\CallToDeprecatedMethodRule
+	{
+		return new PHPStan\Rules\Deprecations\CallToDeprecatedMethodRule(
+			$this->getService('reflectionProvider'),
+			$this->getService('0407')
+		);
+	}
+
+
+	public function createServiceRules__174(): PHPStan\Rules\Deprecations\CallToDeprecatedStaticMethodRule
+	{
+		return new PHPStan\Rules\Deprecations\CallToDeprecatedStaticMethodRule(
+			$this->getService('reflectionProvider'),
+			$this->getService('0150'),
+			$this->getService('0407')
+		);
+	}
+
+
+	public function createServiceRules__175(): PHPStan\Rules\Deprecations\FetchingClassConstOfDeprecatedClassRule
+	{
+		return new PHPStan\Rules\Deprecations\FetchingClassConstOfDeprecatedClassRule(
+			$this->getService('reflectionProvider'),
+			$this->getService('0150'),
+			$this->getService('0407')
+		);
+	}
+
+
+	public function createServiceRules__176(): PHPStan\Rules\Deprecations\FetchingDeprecatedConstRule
+	{
+		return new PHPStan\Rules\Deprecations\FetchingDeprecatedConstRule(
+			$this->getService('reflectionProvider'),
+			$this->getService('0407')
+		);
+	}
+
+
+	public function createServiceRules__177(): PHPStan\Rules\Deprecations\ImplementationOfDeprecatedInterfaceRule
+	{
+		return new PHPStan\Rules\Deprecations\ImplementationOfDeprecatedInterfaceRule(
+			$this->getService('reflectionProvider'),
+			$this->getService('0407')
+		);
+	}
+
+
+	public function createServiceRules__178(): PHPStan\Rules\Deprecations\InheritanceOfDeprecatedClassRule
+	{
+		return new PHPStan\Rules\Deprecations\InheritanceOfDeprecatedClassRule(
+			$this->getService('reflectionProvider'),
+			$this->getService('0407')
+		);
+	}
+
+
+	public function createServiceRules__179(): PHPStan\Rules\Deprecations\InheritanceOfDeprecatedInterfaceRule
+	{
+		return new PHPStan\Rules\Deprecations\InheritanceOfDeprecatedInterfaceRule($this->getService('reflectionProvider'));
+	}
+
+
 	public function createServiceRules__18(): PHPStan\Rules\Classes\ClassConstantRule
 	{
 		return new PHPStan\Rules\Classes\ClassConstantRule(
@@ -5466,6 +5643,58 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 			$this->getService('0150'),
 			$this->getService('0112'),
 			$this->getService('020')
+		);
+	}
+
+
+	public function createServiceRules__180(): PHPStan\Rules\Deprecations\InstantiationOfDeprecatedClassRule
+	{
+		return new PHPStan\Rules\Deprecations\InstantiationOfDeprecatedClassRule(
+			$this->getService('reflectionProvider'),
+			$this->getService('0150'),
+			$this->getService('0407')
+		);
+	}
+
+
+	public function createServiceRules__181(): PHPStan\Rules\Deprecations\TypeHintDeprecatedInClassMethodSignatureRule
+	{
+		return new PHPStan\Rules\Deprecations\TypeHintDeprecatedInClassMethodSignatureRule(
+			$this->getService('0405'),
+			$this->getService('0407')
+		);
+	}
+
+
+	public function createServiceRules__182(): PHPStan\Rules\Deprecations\TypeHintDeprecatedInClosureSignatureRule
+	{
+		return new PHPStan\Rules\Deprecations\TypeHintDeprecatedInClosureSignatureRule(
+			$this->getService('0405'),
+			$this->getService('0407')
+		);
+	}
+
+
+	public function createServiceRules__183(): PHPStan\Rules\Deprecations\TypeHintDeprecatedInFunctionSignatureRule
+	{
+		return new PHPStan\Rules\Deprecations\TypeHintDeprecatedInFunctionSignatureRule(
+			$this->getService('0405'),
+			$this->getService('0407')
+		);
+	}
+
+
+	public function createServiceRules__184(): PHPStan\Rules\Deprecations\UsageOfDeprecatedCastRule
+	{
+		return new PHPStan\Rules\Deprecations\UsageOfDeprecatedCastRule($this->getService('0407'));
+	}
+
+
+	public function createServiceRules__185(): PHPStan\Rules\Deprecations\UsageOfDeprecatedTraitRule
+	{
+		return new PHPStan\Rules\Deprecations\UsageOfDeprecatedTraitRule(
+			$this->getService('reflectionProvider'),
+			$this->getService('0407')
 		);
 	}
 
@@ -5845,13 +6074,13 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 
 	public function createServiceRules__72(): PHPStan\Rules\Properties\AccessPropertiesInAssignRule
 	{
-		return new PHPStan\Rules\Properties\AccessPropertiesInAssignRule($this->getService('0328'));
+		return new PHPStan\Rules\Properties\AccessPropertiesInAssignRule($this->getService('0329'));
 	}
 
 
 	public function createServiceRules__73(): PHPStan\Rules\Properties\AccessStaticPropertiesInAssignRule
 	{
-		return new PHPStan\Rules\Properties\AccessStaticPropertiesInAssignRule($this->getService('0329'));
+		return new PHPStan\Rules\Properties\AccessStaticPropertiesInAssignRule($this->getService('0330'));
 	}
 
 
@@ -5863,7 +6092,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 
 	public function createServiceRules__75(): PHPStan\Rules\Properties\MissingReadOnlyPropertyAssignRule
 	{
-		return new PHPStan\Rules\Properties\MissingReadOnlyPropertyAssignRule($this->getService('0341'));
+		return new PHPStan\Rules\Properties\MissingReadOnlyPropertyAssignRule($this->getService('0342'));
 	}
 
 
@@ -6033,7 +6262,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 	{
 		return new PHPStan\PhpDoc\StubPhpDocProvider(
 			$this->getService('defaultAnalysisParser'),
-			$this->getService('0152'),
+			$this->getService('0153'),
 			$this->getService('037')
 		);
 	}
@@ -6189,7 +6418,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 			'checkTooWideReturnTypesInProtectedAndPublicMethods' => false,
 			'checkUninitializedProperties' => false,
 			'checkDynamicProperties' => false,
-			'deprecationRulesInstalled' => false,
+			'deprecationRulesInstalled' => true,
 			'inferPrivatePropertyTypeFromConstructor' => false,
 			'reportMaybes' => false,
 			'reportMaybesInMethodSignatures' => false,
@@ -6336,6 +6565,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 			'cliArgumentsVariablesRegistered' => true,
 			'additionalConfigFiles' => [
 				'phar:///Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/plugins/phpstan/phpstan/phpstan.phar/conf/config.level6.neon',
+				'/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/plugins/phpstan/extension-installer/src/../../phpstan-deprecation-rules/rules.neon',
 				'/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/phpstan.neon',
 			],
 			'allConfigFiles' => [
@@ -6347,6 +6577,7 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 				'phar:///Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/plugins/phpstan/phpstan/phpstan.phar/conf/config.level2.neon',
 				'phar:///Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/plugins/phpstan/phpstan/phpstan.phar/conf/config.level1.neon',
 				'phar:///Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/plugins/phpstan/phpstan/phpstan.phar/conf/config.level0.neon',
+				'/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/plugins/phpstan/phpstan-deprecation-rules/rules.neon',
 				'/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/phpstan.neon',
 				'/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/phpstan.includes.php',
 			],
@@ -6367,11 +6598,11 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 			case $key === 'analysedPaths': return null;
 			case $key === 'analysedPathsFromConfig': return null;
 			case $key === 'env': return null;
-			case $key === 'fixerTmpDir': return implode('', ['', sys_get_temp_dir(), '/phpstan-fixer']);
+			case $key === 'fixerTmpDir': return ($this->getParameter('sysGetTempDir')) . '/phpstan-fixer';
 			case $key === 'sysGetTempDir': return sys_get_temp_dir();
 			case $key === 'pro': return [
 			'dnsServers' => ['1.1.1.2'],
-			'tmpDir' => implode('', ['', sys_get_temp_dir(), '/phpstan-fixer']),
+			'tmpDir' => ($this->getParameter('sysGetTempDir')) . '/phpstan-fixer',
 		];
 			default: return parent::getDynamicParameter($key);
 		};
@@ -6380,7 +6611,14 @@ class Container_b70fe01a1b extends _PHPStan_de1c07ea6\Nette\DI\Container
 
 	public function getParameters(): array
 	{
-		array_map([$this, 'getParameter'], ['analysedPaths', 'analysedPathsFromConfig', 'env']);
+		array_map(function ($key) { $this->getParameter($key); }, [
+			'analysedPaths',
+			'analysedPathsFromConfig',
+			'env',
+			'fixerTmpDir',
+			'sysGetTempDir',
+			'pro',
+		]);
 		return parent::getParameters();
 	}
 }

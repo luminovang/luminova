@@ -20,7 +20,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/resources/views/index.php' => 
     array (
-      0 => '79afe7b2a7bd62069e41f116987d92f9ef1fcc53',
+      0 => 'b37bc70059bef32ab4d2a2d548588b6fff785a10',
       1 => 
       array (
       ),
@@ -59,7 +59,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/resources/views/system_errors/exceptions.php' => 
     array (
-      0 => 'd0bac48701fa269abceeb75edd12988a3bff813a',
+      0 => 'e24530e04575c7ecb234f045d7cfa054900d9597',
       1 => 
       array (
       ),

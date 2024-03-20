@@ -2,6 +2,6 @@
 
 // variadic-method-Luminova\Http\Request-getContentType-/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Http/Request.php
 return \PHPStan\Cache\CacheItem::__set_state(array(
-   'variableKey' => '1710599946-v4',
+   'variableKey' => '1710843867-v4',
    'data' => false,
 ));

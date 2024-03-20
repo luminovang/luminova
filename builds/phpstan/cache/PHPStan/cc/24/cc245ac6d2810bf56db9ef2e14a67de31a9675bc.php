@@ -7,14 +7,14 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
   array (
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/app/Controllers/Application.php' => 
     array (
-      0 => '4d95ef73aa862c02c103f9d97639d51017e92b26',
+      0 => 'ef577130d5be6fcfb6e60f28bdf0608fd50e9265',
       1 => 
       array (
         0 => 'app\\controllers\\application',
       ),
       2 => 
       array (
-        0 => 'app\\controllers\\__construct',
+        0 => 'app\\controllers\\oncreate',
       ),
       3 => 
       array (
@@ -161,7 +161,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/app/Controllers/Config/Template.php' => 
     array (
-      0 => '39bbd8f7d9e3bcbb31c43797f9cfb2148c20e0c6',
+      0 => 'b9499be51e98ddcc75fcfe2d4d2dd951e0afa5d4',
       1 => 
       array (
         0 => 'app\\controllers\\config\\template',

@@ -58,6 +58,7 @@ class BaseComposer extends BaseConfig
         $parts1 = explode('/', trim($path1, '/'));
         $parts2 = explode('/', trim($path2, '/'));
         $minLength = min(count($parts1), count($parts2));
+        
         for ($i = 0; $i < $minLength; $i++) {
             if ($parts1[$i] !== $parts2[$i]) {
                 return false;

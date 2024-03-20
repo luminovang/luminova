@@ -1,10 +1,10 @@
 <?php declare(strict_types = 1);
 
 return [
-	'lastFullAnalysisTime' => 1710601125,
+	'lastFullAnalysisTime' => 1710925674,
 	'meta' => array (
   'cacheVersion' => 'v10-collectedData',
-  'phpstanVersion' => '1.10.62',
+  'phpstanVersion' => '1.10.63',
   'phpVersion' => 80301,
   'projectConfig' => '{parameters: {phpVersion: 80100, tmpDir: /Applications/XAMPP/xamppfiles/htdocs/luminova.fm/builds/phpstan, level: 6, bootstrapFiles: [/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/plugins/autoload.php], paths: [/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/app, /Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system, /Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries], excludePaths: {analyseAndScan: [/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/writeable/*, /Applications/XAMPP/xamppfiles/htdocs/luminova.fm/samples/*, /Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/plugins/*, /Applications/XAMPP/xamppfiles/htdocs/luminova.fm/builds/*, /Applications/XAMPP/xamppfiles/htdocs/luminova.fm/dump/*], analyse: []}, scanDirectories: [/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/samples, /Applications/XAMPP/xamppfiles/htdocs/luminova.fm/resources/views], checkMissingIterableValueType: false, checkGenericClassInNonGenericObjectType: false, checkMissingCallableSignature: true, treatPhpDocTypesAsCertain: false}, services: [Luminova\\Debugger\\PHPStanRules]}',
   'analysedPaths' => 
@@ -16,9 +16,9 @@ return [
   'scannedFiles' => 
   array (
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/resources/views/404.php' => 'da1b6e7668ca30014e8725bdc72d62011fec7bc2',
-    '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/resources/views/index.php' => '79afe7b2a7bd62069e41f116987d92f9ef1fcc53',
+    '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/resources/views/index.php' => 'b37bc70059bef32ab4d2a2d548588b6fff785a10',
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/resources/views/system_errors/errors.php' => '5c8c51098eb8a4a1389183a37d5f772eefa945fd',
-    '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/resources/views/system_errors/exceptions.php' => 'd0bac48701fa269abceeb75edd12988a3bff813a',
+    '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/resources/views/system_errors/exceptions.php' => 'e24530e04575c7ecb234f045d7cfa054900d9597',
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/resources/views/system_errors/maintenance.php' => '6d171356205bfc4719b0e1d690b2afeeb035f5f9',
   ),
   'composerLocks' => 
@@ -115,47 +115,15 @@ return [
   array (
     0 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'PHPDoc tag @var above a method has no effect.',
+       'message' => 'PHPDoc tag @method has invalid value (#[\\Override] onCreate): Unexpected token "#[\\\\Override]", expected type at offset 19',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/app/Controllers/Application.php',
-       'line' => 20,
+       'line' => 19,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/app/Controllers/Application.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 20,
-       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    1 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'PHPDoc tag @var for variable $session contains unknown class App\\Controllers\\Session.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/app/Controllers/Application.php',
-       'line' => 20,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/app/Controllers/Application.php',
-       'traitFilePath' => NULL,
-       'tip' => 'Learn more at https://phpstan.org/user-guide/discovering-symbols',
-       'nodeLine' => 20,
+       'nodeLine' => 19,
        'nodeType' => 'PhpParser\\Node\\Stmt\\ClassMethod',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    2 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'PHPDoc tag @var for variable $session contains unknown class App\\Controllers\\Session.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/app/Controllers/Application.php',
-       'line' => 20,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/app/Controllers/Application.php',
-       'traitFilePath' => NULL,
-       'tip' => 'Learn more at https://phpstan.org/user-guide/discovering-symbols',
-       'nodeLine' => 20,
-       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -346,12 +314,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'PHPDoc tag @var does not specify variable name.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/constants.php',
-       'line' => 213,
+       'line' => 212,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/constants.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 213,
+       'nodeLine' => 212,
        'nodeType' => 'PhpParser\\Node\\Stmt\\Expression',
        'identifier' => NULL,
        'metadata' => 
@@ -362,12 +330,156 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'PHPDoc tag @var does not specify variable name.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/constants.php',
-       'line' => 218,
+       'line' => 217,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/constants.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 218,
+       'nodeLine' => 217,
+       'nodeType' => 'PhpParser\\Node\\Stmt\\Expression',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    13 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'PHPDoc tag @var does not specify variable name.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/constants.php',
+       'line' => 222,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/constants.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 222,
+       'nodeType' => 'PhpParser\\Node\\Stmt\\Expression',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    14 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'PHPDoc tag @var does not specify variable name.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/constants.php',
+       'line' => 227,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/constants.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 227,
+       'nodeType' => 'PhpParser\\Node\\Stmt\\Expression',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    15 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'PHPDoc tag @var does not specify variable name.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/constants.php',
+       'line' => 232,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/constants.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 232,
+       'nodeType' => 'PhpParser\\Node\\Stmt\\Expression',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    16 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'PHPDoc tag @var does not specify variable name.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/constants.php',
+       'line' => 237,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/constants.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 237,
+       'nodeType' => 'PhpParser\\Node\\Stmt\\Expression',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    17 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'PHPDoc tag @var does not specify variable name.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/constants.php',
+       'line' => 242,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/constants.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 242,
+       'nodeType' => 'PhpParser\\Node\\Stmt\\Expression',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    18 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'PHPDoc tag @var does not specify variable name.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/constants.php',
+       'line' => 247,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/constants.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 247,
+       'nodeType' => 'PhpParser\\Node\\Stmt\\Expression',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    19 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'PHPDoc tag @var does not specify variable name.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/constants.php',
+       'line' => 252,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/constants.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 252,
+       'nodeType' => 'PhpParser\\Node\\Stmt\\Expression',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    20 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'PHPDoc tag @var does not specify variable name.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/constants.php',
+       'line' => 257,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/constants.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 257,
+       'nodeType' => 'PhpParser\\Node\\Stmt\\Expression',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    21 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'PHPDoc tag @var does not specify variable name.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/constants.php',
+       'line' => 262,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/constants.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 262,
        'nodeType' => 'PhpParser\\Node\\Stmt\\Expression',
        'identifier' => NULL,
        'metadata' => 
@@ -525,883 +637,18 @@ return [
       ),
     )),
   ),
-  '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php' => 
-  array (
-    0 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'PHPDoc tag @param references unknown parameter: $dir',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'line' => 44,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 44,
-       'nodeType' => 'PhpParser\\Node\\Stmt\\ClassMethod',
-       'identifier' => 'phpDoc.unknownParameter',
-       'metadata' => 
-      array (
-        'parameterName' => 'dir',
-      ),
-    )),
-    1 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'PHPDoc tag @param references unknown parameter: $dir',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'line' => 86,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 86,
-       'nodeType' => 'PhpParser\\Node\\Stmt\\ClassMethod',
-       'identifier' => 'phpDoc.unknownParameter',
-       'metadata' => 
-      array (
-        'parameterName' => 'dir',
-      ),
-    )),
-    2 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Application\\Application::$instance through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'line' => 88,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 88,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    3 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe usage of new static().',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'line' => 88,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => NULL,
-       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-error-unsafe-usage-of-new-static',
-       'nodeLine' => 88,
-       'nodeType' => 'PhpParser\\Node\\Expr\\New_',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    4 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Application\\Application::$minifyContent through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 207,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 207,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    5 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Negated boolean expression is always true.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 208,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 208,
-       'nodeType' => 'PhpParser\\Node\\Expr\\BooleanNot',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    6 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Application\\Application::$publicOptions through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 224,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 224,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    7 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Application\\Application::$publicOptions through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 225,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 225,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    8 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Application\\Application::$publicClasses through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 228,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 228,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    9 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Application\\Application::$publicClasses through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 229,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 229,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    10 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Application\\Application::$publicClasses through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 244,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 244,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    11 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Application\\Application::$publicClasses through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 245,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 245,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    12 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Application\\Application::$publicClasses through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 260,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 260,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    13 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'PHPDoc tag @throws with type Luminova\\Exceptions\\InvalidArgumentException|Luminova\\Exceptions\\RuntimeException is not subtype of Throwable',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 490,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 490,
-       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    14 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Instantiated class Luminova\\Exceptions\\InvalidArgumentException not found.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 493,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => 'Learn more at https://phpstan.org/user-guide/discovering-symbols',
-       'nodeLine' => 493,
-       'nodeType' => 'PhpParser\\Node\\Expr\\New_',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    15 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Throwing object of an unknown class Luminova\\Exceptions\\InvalidArgumentException.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 493,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => 'Learn more at https://phpstan.org/user-guide/discovering-symbols',
-       'nodeLine' => 493,
-       'nodeType' => 'PhpParser\\Node\\Stmt\\Throw_',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    16 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Application\\Application::$publicClasses through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 506,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 506,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    17 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Application\\Application::$publicClasses through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 511,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 511,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    18 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Result of && is always false.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 533,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 533,
-       'nodeType' => 'PHPStan\\Node\\BooleanAndNode',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    19 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Strict comparison using === between int and \'_\' will always evaluate to false.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 533,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 533,
-       'nodeType' => 'PhpParser\\Node\\Expr\\BinaryOp\\Identical',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    20 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Application\\Application::$publicClasses through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 537,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 537,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    21 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Application\\Application::$publicOptions through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 541,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 541,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    22 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'PHPDoc tag @param references unknown parameter: $expire',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 598,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 598,
-       'nodeType' => 'PhpParser\\Node\\Stmt\\ClassMethod',
-       'identifier' => 'phpDoc.unknownParameter',
-       'metadata' => 
-      array (
-        'parameterName' => 'expire',
-      ),
-    )),
-    23 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Application\\Application::renderIsolation() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 622,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 622,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    24 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Application\\Application::isReadWritePermission() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 646,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 646,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    25 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Parameter #1 $callback of function ob_start expects callable(): mixed, bool given.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 652,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 652,
-       'nodeType' => 'PhpParser\\Node\\Expr\\FuncCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    26 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Parameter #1 $callback of function ob_start expects callable(): mixed, bool given.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 702,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 702,
-       'nodeType' => 'PhpParser\\Node\\Expr\\FuncCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    27 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Application\\Application::$minifyContent through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 718,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 718,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    28 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Application\\Application::newCompressed() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 719,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 719,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    29 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Application\\Application::getViewUri() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 752,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 752,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    30 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Application\\Application::setOptions() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 759,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 759,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    31 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Application\\Application::$minifyContent through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 768,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 768,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    32 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Application\\Application::newCompressed() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 770,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 770,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    33 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Application\\Application::requestHeaders() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 775,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 775,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    34 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Application\\Application::$publicClasses through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 811,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 811,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    35 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Variable $optimizer on left side of ??= always exists and is always null.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 814,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 814,
-       'nodeType' => 'PhpParser\\Node\\Expr\\AssignOp\\Coalesce',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    36 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Application\\Application::getViewUri() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 815,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 815,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    37 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Application\\Application::$minifyContent through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 831,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 831,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    38 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Application\\Application::newCompressed() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 832,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 832,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    39 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Variable $ContentType might not be defined.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 832,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 832,
-       'nodeType' => 'PhpParser\\Node\\Expr\\Variable',
-       'identifier' => 'variable.maybeUndefined',
-       'metadata' => 
-      array (
-        'variableName' => 'ContentType',
-        'statementDepth' => 5,
-        'statementOrder' => 0,
-        'depth' => 4,
-        'order' => 0,
-        'variables' => 
-        array (
-          0 => 'templateFile',
-          1 => 'shouldCache',
-          2 => 'cacheFile',
-          3 => 'options',
-          4 => 'ignore',
-          5 => 'copy',
-          6 => 'optimizer',
-          7 => 'finish',
-          8 => 'viewHeaderInfo',
-          9 => 'self',
-          10 => 'viewContents',
-        ),
-        'parentVariables' => 
-        array (
-        ),
-      ),
-    )),
-    40 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Application\\Application::requestHeaders() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 838,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 838,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    41 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Right side of && is always false.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 936,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 936,
-       'nodeType' => 'PHPStan\\Node\\BooleanAndNode',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    42 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'PHPDoc tag @throws with type Luminova\\Exceptions\\InvalidArgumentException is not subtype of Throwable',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 957,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 957,
-       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    43 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Application\\Application::calculateLevel() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 960,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 960,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    44 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Ternary operator condition is always false.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 961,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 961,
-       'nodeType' => 'PhpParser\\Node\\Expr\\Ternary',
-       'identifier' => 'deadCode.ternaryConstantCondition',
-       'metadata' => 
-      array (
-        'statementDepth' => 4,
-        'statementOrder' => 0,
-        'depth' => 1,
-        'order' => 1,
-        'value' => false,
-      ),
-    )),
-    45 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Instantiated class Luminova\\Exceptions\\InvalidArgumentException not found.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 973,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => 'Learn more at https://phpstan.org/user-guide/discovering-symbols',
-       'nodeLine' => 973,
-       'nodeType' => 'PhpParser\\Node\\Expr\\New_',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    46 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Throwing object of an unknown class Luminova\\Exceptions\\InvalidArgumentException.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 973,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => 'Learn more at https://phpstan.org/user-guide/discovering-symbols',
-       'nodeLine' => 973,
-       'nodeType' => 'PhpParser\\Node\\Stmt\\Throw_',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    47 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Application\\Application::toTitle() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 986,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 986,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    48 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Application\\Application::toTitle() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 990,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 990,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    49 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Application\\Application::getViewUri() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 1030,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 1030,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    50 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Negated boolean expression is always true.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 1033,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 1033,
-       'nodeType' => 'PhpParser\\Node\\Expr\\BooleanNot',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    51 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Right side of && is always false.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Application\\Application)',
-       'line' => 1039,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 1039,
-       'nodeType' => 'PHPStan\\Node\\BooleanAndNode',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-  ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php' => 
   array (
     0 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Application\\Factory::$factories through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
-       'line' => 81,
+       'line' => 78,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 81,
+       'nodeLine' => 78,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -1412,12 +659,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'PHPDoc tag @param references unknown parameter: $shared',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
-       'line' => 99,
+       'line' => 96,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 99,
+       'nodeLine' => 96,
        'nodeType' => 'PhpParser\\Node\\Stmt\\ClassMethod',
        'identifier' => 'phpDoc.unknownParameter',
        'metadata' => 
@@ -1429,12 +676,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Application\\Factory::get() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
-       'line' => 103,
+       'line' => 100,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 103,
+       'nodeLine' => 100,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
@@ -1445,12 +692,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Application\\Factory::get() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
-       'line' => 126,
+       'line' => 123,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 126,
+       'nodeLine' => 123,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
@@ -1461,12 +708,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Application\\Factory::$instances through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
-       'line' => 133,
+       'line' => 130,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 133,
+       'nodeLine' => 130,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -1477,12 +724,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Application\\Factory::$instances through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
-       'line' => 134,
+       'line' => 131,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 134,
+       'nodeLine' => 131,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -1493,12 +740,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Application\\Factory::$instances through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
-       'line' => 143,
+       'line' => 140,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 143,
+       'nodeLine' => 140,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -1509,12 +756,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Dead catch - ReflectionException is already caught above.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
-       'line' => 147,
+       'line' => 144,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 147,
+       'nodeLine' => 144,
        'nodeType' => 'PHPStan\\Node\\CatchWithUnthrownExceptionNode',
        'identifier' => NULL,
        'metadata' => 
@@ -1525,12 +772,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Application\\Factory::get() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
-       'line' => 163,
+       'line' => 160,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 163,
+       'nodeLine' => 160,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
@@ -1541,12 +788,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Application\\Factory::$factories through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
-       'line' => 179,
+       'line' => 176,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 179,
+       'nodeLine' => 176,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -1557,12 +804,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Application\\Factory::$factories through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
-       'line' => 180,
+       'line' => 177,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 180,
+       'nodeLine' => 177,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -1573,12 +820,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Application\\Factory::$instances through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
-       'line' => 184,
+       'line' => 181,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 184,
+       'nodeLine' => 181,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -1589,12 +836,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Application\\Factory::$instances through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
-       'line' => 185,
+       'line' => 182,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 185,
+       'nodeLine' => 182,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -1605,12 +852,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Application\\Factory::has() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
-       'line' => 211,
+       'line' => 208,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 211,
+       'nodeLine' => 208,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
@@ -1621,12 +868,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Application\\Factory::$factories through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
-       'line' => 215,
+       'line' => 212,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 215,
+       'nodeLine' => 212,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -1637,12 +884,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Application\\Factory::$factories through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
-       'line' => 217,
+       'line' => 214,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 217,
+       'nodeLine' => 214,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -1653,12 +900,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Application\\Factory::$instances through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
-       'line' => 227,
+       'line' => 224,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 227,
+       'nodeLine' => 224,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -1669,12 +916,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Application\\Factory::$instances through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
-       'line' => 229,
+       'line' => 226,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 229,
+       'nodeLine' => 226,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -1685,12 +932,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Application\\Factory::$instances through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
-       'line' => 259,
+       'line' => 256,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 259,
+       'nodeLine' => 256,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -1701,12 +948,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Application\\Factory::$instances through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
-       'line' => 260,
+       'line' => 257,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 260,
+       'nodeLine' => 257,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -1717,12 +964,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Application\\Factory::$instances through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
-       'line' => 266,
+       'line' => 263,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 266,
+       'nodeLine' => 263,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -1733,12 +980,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Dead catch - Luminova\\Exceptions\\RuntimeException is never thrown in the try block.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
-       'line' => 290,
+       'line' => 287,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 290,
+       'nodeLine' => 287,
        'nodeType' => 'PHPStan\\Node\\CatchWithUnthrownExceptionNode',
        'identifier' => NULL,
        'metadata' => 
@@ -1749,12 +996,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unreachable statement - code above always terminates.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
-       'line' => 334,
+       'line' => 331,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 334,
+       'nodeLine' => 331,
        'nodeType' => 'PHPStan\\Node\\UnreachableStatementNode',
        'identifier' => 'deadCode.unreachableStatement',
        'metadata' => 
@@ -2474,6 +1721,805 @@ return [
       ),
     )),
   ),
+  '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php' => 
+  array (
+    0 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method Luminova\\Base\\BaseApplication::getInstance() should return static(Luminova\\Base\\BaseApplication) but returns Luminova\\Base\\BaseApplication.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'line' => 67,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 67,
+       'nodeType' => 'PhpParser\\Node\\Stmt\\Return_',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    1 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Base\\BaseApplication::$instance through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'line' => 67,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 67,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    2 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe usage of new static().',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'line' => 67,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-error-unsafe-usage-of-new-static',
+       'nodeLine' => 67,
+       'nodeType' => 'PhpParser\\Node\\Expr\\New_',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    3 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Base\\BaseApplication::$minifyContent through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 207,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 207,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    4 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Negated boolean expression is always true.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 208,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 208,
+       'nodeType' => 'PhpParser\\Node\\Expr\\BooleanNot',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    5 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Base\\BaseApplication::$publicOptions through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 242,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 242,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    6 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Base\\BaseApplication::$publicOptions through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 243,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 243,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    7 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Base\\BaseApplication::$publicClasses through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 246,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 246,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    8 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Base\\BaseApplication::$publicClasses through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 247,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 247,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    9 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Base\\BaseApplication::$publicClasses through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 262,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 262,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    10 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Base\\BaseApplication::$publicClasses through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 274,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 274,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    11 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'PHPDoc tag @throws with type Luminova\\Exceptions\\InvalidArgumentException|Luminova\\Exceptions\\RuntimeException is not subtype of Throwable',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 505,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 505,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    12 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Instantiated class Luminova\\Exceptions\\InvalidArgumentException not found.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 508,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => 'Learn more at https://phpstan.org/user-guide/discovering-symbols',
+       'nodeLine' => 508,
+       'nodeType' => 'PhpParser\\Node\\Expr\\New_',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    13 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Throwing object of an unknown class Luminova\\Exceptions\\InvalidArgumentException.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 508,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => 'Learn more at https://phpstan.org/user-guide/discovering-symbols',
+       'nodeLine' => 508,
+       'nodeType' => 'PhpParser\\Node\\Stmt\\Throw_',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    14 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Base\\BaseApplication::$publicClasses through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 521,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 521,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    15 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Base\\BaseApplication::$publicClasses through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 526,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 526,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    16 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Result of && is always false.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 548,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 548,
+       'nodeType' => 'PHPStan\\Node\\BooleanAndNode',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    17 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Strict comparison using === between int and \'_\' will always evaluate to false.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 548,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 548,
+       'nodeType' => 'PhpParser\\Node\\Expr\\BinaryOp\\Identical',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    18 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Base\\BaseApplication::$publicClasses through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 552,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 552,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    19 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Base\\BaseApplication::$publicOptions through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 556,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 556,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    20 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'PHPDoc tag @param references unknown parameter: $expire',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 613,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 613,
+       'nodeType' => 'PhpParser\\Node\\Stmt\\ClassMethod',
+       'identifier' => 'phpDoc.unknownParameter',
+       'metadata' => 
+      array (
+        'parameterName' => 'expire',
+      ),
+    )),
+    21 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Base\\BaseApplication::renderIsolation() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 637,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 637,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    22 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Base\\BaseApplication::isReadWritePermission() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 661,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 661,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    23 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Base\\BaseApplication::$minifyContent through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 733,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 733,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    24 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Base\\BaseApplication::newCompressed() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 734,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 734,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    25 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Base\\BaseApplication::getViewUri() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 767,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 767,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    26 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Base\\BaseApplication::setOptions() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 774,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 774,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    27 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Base\\BaseApplication::$minifyContent through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 783,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 783,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    28 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Base\\BaseApplication::newCompressed() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 785,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 785,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    29 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Base\\BaseApplication::requestHeaders() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 790,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 790,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    30 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Base\\BaseApplication::$publicClasses through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 826,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 826,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    31 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Variable $optimizer on left side of ??= always exists and is always null.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 829,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 829,
+       'nodeType' => 'PhpParser\\Node\\Expr\\AssignOp\\Coalesce',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    32 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Base\\BaseApplication::getViewUri() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 830,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 830,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    33 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Base\\BaseApplication::$minifyContent through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 846,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 846,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    34 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Base\\BaseApplication::newCompressed() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 847,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 847,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    35 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Variable $ContentType might not be defined.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 847,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 847,
+       'nodeType' => 'PhpParser\\Node\\Expr\\Variable',
+       'identifier' => 'variable.maybeUndefined',
+       'metadata' => 
+      array (
+        'variableName' => 'ContentType',
+        'statementDepth' => 5,
+        'statementOrder' => 0,
+        'depth' => 4,
+        'order' => 0,
+        'variables' => 
+        array (
+          0 => 'templateFile',
+          1 => 'shouldCache',
+          2 => 'cacheFile',
+          3 => 'options',
+          4 => 'ignore',
+          5 => 'copy',
+          6 => 'optimizer',
+          7 => 'finish',
+          8 => 'viewHeaderInfo',
+          9 => 'self',
+          10 => 'viewContents',
+        ),
+        'parentVariables' => 
+        array (
+        ),
+      ),
+    )),
+    36 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Base\\BaseApplication::requestHeaders() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 853,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 853,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    37 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Right side of && is always false.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 950,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 950,
+       'nodeType' => 'PHPStan\\Node\\BooleanAndNode',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    38 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'PHPDoc tag @throws with type Luminova\\Exceptions\\InvalidArgumentException is not subtype of Throwable',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 971,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 971,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    39 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Base\\BaseApplication::calculateLevel() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 974,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 974,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    40 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Ternary operator condition is always false.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 975,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 975,
+       'nodeType' => 'PhpParser\\Node\\Expr\\Ternary',
+       'identifier' => 'deadCode.ternaryConstantCondition',
+       'metadata' => 
+      array (
+        'statementDepth' => 4,
+        'statementOrder' => 0,
+        'depth' => 1,
+        'order' => 1,
+        'value' => false,
+      ),
+    )),
+    41 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Instantiated class Luminova\\Exceptions\\InvalidArgumentException not found.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 987,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => 'Learn more at https://phpstan.org/user-guide/discovering-symbols',
+       'nodeLine' => 987,
+       'nodeType' => 'PhpParser\\Node\\Expr\\New_',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    42 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Throwing object of an unknown class Luminova\\Exceptions\\InvalidArgumentException.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 987,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => 'Learn more at https://phpstan.org/user-guide/discovering-symbols',
+       'nodeLine' => 987,
+       'nodeType' => 'PhpParser\\Node\\Stmt\\Throw_',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    43 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Base\\BaseApplication::toTitle() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 1000,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 1000,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    44 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Base\\BaseApplication::toTitle() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 1004,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 1004,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    45 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Base\\BaseApplication::getViewUri() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 1044,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 1044,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    46 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Negated boolean expression is always true.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 1047,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 1047,
+       'nodeType' => 'PhpParser\\Node\\Expr\\BooleanNot',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    47 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Right side of && is always false.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Base\\BaseApplication)',
+       'line' => 1053,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 1053,
+       'nodeType' => 'PHPStan\\Node\\BooleanAndNode',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+  ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseFunction.php' => 
   array (
     0 => 
@@ -2967,6 +3013,25 @@ return [
        'tip' => NULL,
        'nodeLine' => 697,
        'nodeType' => 'PhpParser\\Node\\Expr\\FuncCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+  ),
+  '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseServers.php' => 
+  array (
+    0 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'PHPDoc tag @return contains unresolvable type.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseServers.php',
+       'line' => 42,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseServers.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 42,
+       'nodeType' => 'PhpParser\\Node\\Stmt\\ClassMethod',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -3499,12 +3564,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Constant PUBLIC_PATH not found.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Novakit/Server.php',
-       'line' => 62,
+       'line' => 63,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Novakit/Server.php',
        'traitFilePath' => NULL,
        'tip' => 'Learn more at https://phpstan.org/user-guide/discovering-symbols',
-       'nodeLine' => 62,
+       'nodeLine' => 63,
        'nodeType' => 'PhpParser\\Node\\Expr\\ConstFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -3518,12 +3583,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Parameter #1 $resource of static method Luminova\\Command\\Terminal::isColorSupported() expects resource, string given.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Terminal.php',
-       'line' => 78,
+       'line' => 88,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Terminal.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 78,
+       'nodeLine' => 88,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
@@ -3534,12 +3599,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Method Luminova\\Command\\Terminal::progressWatch() has parameter $onFinish with no signature specified for callable.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Terminal.php',
-       'line' => 186,
+       'line' => 196,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Terminal.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 186,
+       'nodeLine' => 196,
        'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
        'identifier' => NULL,
        'metadata' => 
@@ -3550,12 +3615,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Method Luminova\\Command\\Terminal::progressWatch() has parameter $onProgress with no signature specified for callable.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Terminal.php',
-       'line' => 186,
+       'line' => 196,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Terminal.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 186,
+       'nodeLine' => 196,
        'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
        'identifier' => NULL,
        'metadata' => 
@@ -3566,12 +3631,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Variable $textOptions on left side of ?? always exists and is not nullable.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Terminal.php',
-       'line' => 261,
+       'line' => 271,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Terminal.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 261,
+       'nodeLine' => 271,
        'nodeType' => 'PhpParser\\Node\\Expr\\BinaryOp\\Coalesce',
        'identifier' => NULL,
        'metadata' => 
@@ -3580,15 +3645,15 @@ return [
     )),
     4 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Parameter #1 $options of static method Luminova\\Command\\Terminal::writeOptions() expects array<string, array<string, mixed>>, array<int, array<string, mixed>> given.',
+       'message' => 'PHPDoc tag @throws with type Luminova\\Exceptions\\InvalidArgumentException is not subtype of Throwable',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Terminal.php',
-       'line' => 328,
+       'line' => 313,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Terminal.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 328,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'nodeLine' => 313,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -3596,15 +3661,15 @@ return [
     )),
     5 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Command\\Terminal::writeOptions() through static::.',
+       'message' => 'Instantiated class Luminova\\Exceptions\\InvalidArgumentException not found.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Terminal.php',
-       'line' => 328,
+       'line' => 316,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Terminal.php',
        'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 328,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'tip' => 'Learn more at https://phpstan.org/user-guide/discovering-symbols',
+       'nodeLine' => 316,
+       'nodeType' => 'PhpParser\\Node\\Expr\\New_',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -3612,15 +3677,15 @@ return [
     )),
     6 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Command\\Terminal::getInputValues() through static::.',
+       'message' => 'Throwing object of an unknown class Luminova\\Exceptions\\InvalidArgumentException.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Terminal.php',
-       'line' => 343,
+       'line' => 316,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Terminal.php',
        'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 343,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'tip' => 'Learn more at https://phpstan.org/user-guide/discovering-symbols',
+       'nodeLine' => 316,
+       'nodeType' => 'PhpParser\\Node\\Stmt\\Throw_',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -3628,15 +3693,15 @@ return [
     )),
     7 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Strict comparison using === between \'development\' and \'testing\' will always evaluate to false.',
+       'message' => 'Parameter #1 $options of static method Luminova\\Command\\Terminal::writeOptions() expects array<string, array<string, mixed>>, array<int, array<string, mixed>> given.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Terminal.php',
-       'line' => 677,
+       'line' => 339,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Terminal.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 677,
-       'nodeType' => 'PhpParser\\Node\\Expr\\BinaryOp\\Identical',
+       'nodeLine' => 339,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -3644,14 +3709,14 @@ return [
     )),
     8 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Command\\Terminal::isColorDisabled() through static::.',
+       'message' => 'Unsafe call to private method Luminova\\Command\\Terminal::writeOptions() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Terminal.php',
-       'line' => 921,
+       'line' => 339,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Terminal.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 921,
+       'nodeLine' => 339,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
@@ -3660,14 +3725,62 @@ return [
     )),
     9 => 
     \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Command\\Terminal::getInputValues() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Terminal.php',
+       'line' => 354,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Terminal.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 354,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    10 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Strict comparison using === between \'development\' and \'testing\' will always evaluate to false.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Terminal.php',
+       'line' => 688,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Terminal.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 688,
+       'nodeType' => 'PhpParser\\Node\\Expr\\BinaryOp\\Identical',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    11 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Command\\Terminal::isColorDisabled() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Terminal.php',
+       'line' => 916,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Terminal.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 916,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    12 => 
+    \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe usage of new static().',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Terminal.php',
-       'line' => 984,
+       'line' => 979,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Terminal.php',
        'traitFilePath' => NULL,
        'tip' => 'See: https://phpstan.org/blog/solving-phpstan-error-unsafe-usage-of-new-static',
-       'nodeLine' => 984,
+       'nodeLine' => 979,
        'nodeType' => 'PhpParser\\Node\\Expr\\New_',
        'identifier' => NULL,
        'metadata' => 
@@ -3798,6 +3911,38 @@ return [
       ),
     )),
     3 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Call to an undefined static method Luminova\\Composer\\BaseComposer::appVersion().',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Composer/Builder.php',
+       'line' => 69,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Composer/Builder.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 69,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    4 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Call to an undefined static method Luminova\\Composer\\BaseComposer::appVersion().',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Composer/Builder.php',
+       'line' => 139,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Composer/Builder.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 139,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    5 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unreachable statement - code above always terminates.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Composer/Builder.php',
@@ -4531,7 +4676,7 @@ return [
     )),
     44 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Static property Luminova\\Config\\Configuration::$version (string) on left side of ?? is not nullable.',
+       'message' => 'Static property Luminova\\Base\\BaseConfig::$version (string) on left side of ?? is not nullable.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Composer/Updater.php',
        'line' => 319,
        'canBeIgnored' => true,
@@ -4642,83 +4787,19 @@ return [
       ),
     )),
   ),
-  '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Config/Configuration.php' => 
+  '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Config/DotEnv.php' => 
   array (
     0 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Negated boolean expression is always true.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Config/Configuration.php',
-       'line' => 213,
+       'message' => 'Unsafe call to private method Luminova\\Config\\DotEnv::getNotationConvention() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Config/DotEnv.php',
+       'line' => 60,
        'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Config/Configuration.php',
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Config/DotEnv.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 213,
-       'nodeType' => 'PhpParser\\Node\\Expr\\BooleanNot',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    1 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Config\\Configuration::$allowPreviews through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Config/Configuration.php',
-       'line' => 252,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Config/Configuration.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 252,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    2 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'PHPDoc tag @return with type bool is incompatible with native type int.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Config/Configuration.php',
-       'line' => 335,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Config/Configuration.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 335,
-       'nodeType' => 'PhpParser\\Node\\Stmt\\ClassMethod',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    3 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Strict comparison using === between mixed and \'1\' will always evaluate to false.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Config/Configuration.php',
-       'line' => 361,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Config/Configuration.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 361,
-       'nodeType' => 'PhpParser\\Node\\Expr\\BinaryOp\\Identical',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    4 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Method Luminova\\Config\\Configuration::getMixedNull() should return bool but returns null.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Config/Configuration.php',
-       'line' => 376,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Config/Configuration.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 376,
-       'nodeType' => 'PhpParser\\Node\\Stmt\\Return_',
+       'nodeLine' => 60,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -4902,6 +4983,22 @@ return [
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Cookies/Exception/CookieException.php' => 
   array (
     0 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Cookies\\Exception\\CookieException::$types through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Cookies/Exception/CookieException.php',
+       'line' => 40,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Cookies/Exception/CookieException.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 40,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    1 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe usage of new static().',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Cookies/Exception/CookieException.php',
@@ -6453,12 +6550,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe usage of new static().',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Exceptions/MailerException.php',
-       'line' => 41,
+       'line' => 37,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Exceptions/MailerException.php',
        'traitFilePath' => NULL,
        'tip' => 'See: https://phpstan.org/blog/solving-phpstan-error-unsafe-usage-of-new-static',
-       'nodeLine' => 41,
+       'nodeLine' => 37,
        'nodeType' => 'PhpParser\\Node\\Expr\\New_',
        'identifier' => NULL,
        'metadata' => 
@@ -6472,12 +6569,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Negated boolean expression is always true.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 75,
+       'line' => 76,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 75,
+       'nodeLine' => 76,
        'nodeType' => 'PhpParser\\Node\\Expr\\BooleanNot',
        'identifier' => NULL,
        'metadata' => 
@@ -6485,6 +6582,22 @@ return [
       ),
     )),
     1 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$client through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
+       'line' => 76,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 76,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    2 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$client through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
@@ -6500,7 +6613,39 @@ return [
       array (
       ),
     )),
-    2 => 
+    3 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$clients through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
+       'line' => 79,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 79,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    4 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Negated boolean expression is always true.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
+       'line' => 80,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 80,
+       'nodeType' => 'PhpParser\\Node\\Expr\\BooleanNot',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    5 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$client through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
@@ -6516,83 +6661,32 @@ return [
       array (
       ),
     )),
-    3 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$clients through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 81,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 81,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    4 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$client through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 82,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 82,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    5 => 
+    6 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Email\\Mailer::initialize() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 86,
+       'line' => 84,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 86,
+       'nodeLine' => 84,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
       array (
       ),
     )),
-    6 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'If condition is always true.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 88,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 88,
-       'nodeType' => 'PhpParser\\Node\\Stmt\\If_',
-       'identifier' => 'deadCode.ifConstantCondition',
-       'metadata' => 
-      array (
-        'depth' => 5,
-        'order' => 0,
-        'value' => true,
-      ),
-    )),
     7 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'PHPDoc tag @return has invalid value (static::$client The Mailer client instance.): Unexpected token "$client", expected * at offset 74',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 99,
+       'line' => 92,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 99,
+       'nodeLine' => 92,
        'nodeType' => 'PhpParser\\Node\\Stmt\\ClassMethod',
        'identifier' => NULL,
        'metadata' => 
@@ -6603,12 +6697,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$client through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 101,
+       'line' => 94,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 101,
+       'nodeLine' => 94,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -6619,12 +6713,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$instance through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 113,
+       'line' => 106,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 113,
+       'nodeLine' => 106,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -6635,12 +6729,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$instance through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 114,
+       'line' => 107,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 114,
+       'nodeLine' => 107,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -6651,12 +6745,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe usage of new static().',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 114,
+       'line' => 107,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
        'traitFilePath' => NULL,
        'tip' => 'See: https://phpstan.org/blog/solving-phpstan-error-unsafe-usage-of-new-static',
-       'nodeLine' => 114,
+       'nodeLine' => 107,
        'nodeType' => 'PhpParser\\Node\\Expr\\New_',
        'identifier' => NULL,
        'metadata' => 
@@ -6667,12 +6761,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$instance through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 117,
+       'line' => 110,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 117,
+       'nodeLine' => 110,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -6683,12 +6777,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$client through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 130,
+       'line' => 123,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 130,
+       'nodeLine' => 123,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -6699,12 +6793,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$client through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 143,
+       'line' => 136,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 143,
+       'nodeLine' => 136,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -6715,12 +6809,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$client through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 156,
+       'line' => 149,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 156,
+       'nodeLine' => 149,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -6731,12 +6825,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$client through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 169,
+       'line' => 162,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 169,
+       'nodeLine' => 162,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -6747,12 +6841,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$client through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 183,
+       'line' => 176,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 183,
+       'nodeLine' => 176,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -6763,12 +6857,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$client through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 193,
+       'line' => 186,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 193,
+       'nodeLine' => 186,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -6779,12 +6873,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$client through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 203,
+       'line' => 196,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 203,
+       'nodeLine' => 196,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -6795,12 +6889,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$client through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 213,
+       'line' => 206,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 213,
+       'nodeLine' => 206,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -6811,12 +6905,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$client through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 240,
+       'line' => 233,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 240,
+       'nodeLine' => 233,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -6827,12 +6921,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$client through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 251,
+       'line' => 244,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 251,
+       'nodeLine' => 244,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -6843,12 +6937,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$client through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 262,
+       'line' => 255,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 262,
+       'nodeLine' => 255,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -6859,12 +6953,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Email\\Mailer::shouldDebug() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 262,
+       'line' => 255,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 262,
+       'nodeLine' => 255,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
@@ -6875,12 +6969,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$client through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 263,
+       'line' => 256,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 263,
+       'nodeLine' => 256,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -6891,12 +6985,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Email\\Mailer::getCharset() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 263,
+       'line' => 256,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 263,
+       'nodeLine' => 256,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
@@ -6904,6 +6998,70 @@ return [
       ),
     )),
     27 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$client through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
+       'line' => 257,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 257,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    28 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$client through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
+       'line' => 259,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 259,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    29 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$client through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
+       'line' => 260,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 260,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    30 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$client through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
+       'line' => 261,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 261,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    31 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$client through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
@@ -6919,7 +7077,23 @@ return [
       array (
       ),
     )),
-    28 => 
+    32 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$client through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
+       'line' => 265,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 265,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    33 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$client through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
@@ -6935,39 +7109,39 @@ return [
       array (
       ),
     )),
-    29 => 
+    34 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$client through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 267,
+       'line' => 269,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 267,
+       'nodeLine' => 269,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
       array (
       ),
     )),
-    30 => 
+    35 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$client through static::.',
+       'message' => 'Unsafe call to private method Luminova\\Email\\Mailer::getEncryptionType() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 268,
+       'line' => 269,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 268,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'nodeLine' => 269,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
       array (
       ),
     )),
-    31 => 
+    36 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$client through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
@@ -6983,96 +7157,16 @@ return [
       array (
       ),
     )),
-    32 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$client through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 272,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 272,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    33 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$client through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 273,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 273,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    34 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$client through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 276,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 276,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    35 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Email\\Mailer::getEncryptionType() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 276,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 276,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    36 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$client through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 278,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 278,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
     37 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$client through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 281,
+       'line' => 274,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 281,
+       'nodeLine' => 274,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -7083,12 +7177,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$client through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 282,
+       'line' => 275,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 282,
+       'nodeLine' => 275,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -7099,12 +7193,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Email\\Mailer::$client through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 283,
+       'line' => 276,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 283,
+       'nodeLine' => 276,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -7115,12 +7209,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Negated boolean expression is always true.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 293,
+       'line' => 286,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 293,
+       'nodeLine' => 286,
        'nodeType' => 'PhpParser\\Node\\Expr\\BooleanNot',
        'identifier' => NULL,
        'metadata' => 
@@ -7131,12 +7225,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'PHPDoc tag @return with type int is incompatible with native type string.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 303,
+       'line' => 296,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 303,
+       'nodeLine' => 296,
        'nodeType' => 'PhpParser\\Node\\Stmt\\ClassMethod',
        'identifier' => NULL,
        'metadata' => 
@@ -7147,12 +7241,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'PHPDoc tag @return with type int is incompatible with native type string.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-       'line' => 320,
+       'line' => 313,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 320,
+       'nodeLine' => 313,
        'nodeType' => 'PhpParser\\Node\\Stmt\\ClassMethod',
        'identifier' => NULL,
        'metadata' => 
@@ -7166,12 +7260,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'If condition is always false.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Errors/Error.php',
-       'line' => 27,
+       'line' => 25,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Errors/Error.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 27,
+       'nodeLine' => 25,
        'nodeType' => 'PhpParser\\Node\\Stmt\\If_',
        'identifier' => 'deadCode.ifConstantCondition',
        'metadata' => 
@@ -7185,12 +7279,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Parameter #1 $callback of function set_error_handler expects (callable(int, string, string, int): bool)|null, array{class-string<static(Luminova\\Errors\\Error)>, \'handle\'} given.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Errors/Error.php',
-       'line' => 39,
+       'line' => 36,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Errors/Error.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 39,
+       'nodeLine' => 36,
        'nodeType' => 'PhpParser\\Node\\Expr\\FuncCall',
        'identifier' => NULL,
        'metadata' => 
@@ -7201,12 +7295,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Negated boolean expression is always true.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Errors/Error.php',
-       'line' => 114,
+       'line' => 110,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Errors/Error.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 114,
+       'nodeLine' => 110,
        'nodeType' => 'PhpParser\\Node\\Expr\\BooleanNot',
        'identifier' => NULL,
        'metadata' => 
@@ -7217,12 +7311,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Errors\\Error::isFatal() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Errors/Error.php',
-       'line' => 114,
+       'line' => 110,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Errors/Error.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 114,
+       'nodeLine' => 110,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
@@ -7233,12 +7327,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Errors\\Error::isFatal() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Errors/Error.php',
-       'line' => 130,
+       'line' => 126,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Errors/Error.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 130,
+       'nodeLine' => 126,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
@@ -7252,16 +7346,35 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'PHPDoc tag @param has invalid value (string message   The exception message (default: \'Database error\').): Unexpected token "message", expected variable at offset 69',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Exceptions/AppException.php',
-       'line' => 26,
+       'line' => 25,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Exceptions/AppException.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 26,
+       'nodeLine' => 25,
        'nodeType' => 'PhpParser\\Node\\Stmt\\ClassMethod',
        'identifier' => NULL,
        'metadata' => 
       array (
+      ),
+    )),
+    1 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'If condition is always false.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Exceptions/AppException.php',
+       'line' => 51,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Exceptions/AppException.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 51,
+       'nodeType' => 'PhpParser\\Node\\Stmt\\If_',
+       'identifier' => 'deadCode.ifConstantCondition',
+       'metadata' => 
+      array (
+        'depth' => 3,
+        'order' => 0,
+        'value' => false,
       ),
     )),
   ),
@@ -8297,12 +8410,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'PHPDoc tag @param references unknown parameter: $headerName',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Http/Request.php',
-       'line' => 687,
+       'line' => 674,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Http/Request.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 687,
+       'nodeLine' => 674,
        'nodeType' => 'PhpParser\\Node\\Stmt\\ClassMethod',
        'identifier' => 'phpDoc.unknownParameter',
        'metadata' => 
@@ -8314,12 +8427,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Class Luminova\\Http\\Header does not have a constructor and must be instantiated without any parameters.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Http/Request.php',
-       'line' => 702,
+       'line' => 689,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Http/Request.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 702,
+       'nodeLine' => 689,
        'nodeType' => 'PhpParser\\Node\\Expr\\New_',
        'identifier' => NULL,
        'metadata' => 
@@ -8462,6 +8575,22 @@ return [
     )),
     1 => 
     \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Call to static method getRootDirectory() on an unknown class Luminova\\Config\\Configuration.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Notifications/FirebasePusher.php',
+       'line' => 42,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Notifications/FirebasePusher.php',
+       'traitFilePath' => NULL,
+       'tip' => 'Learn more at https://phpstan.org/user-guide/discovering-symbols',
+       'nodeLine' => 42,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    2 => 
+    \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Call to method withServiceAccount() on an unknown class Kreait\\Firebase\\Factory.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Notifications/FirebasePusher.php',
        'line' => 45,
@@ -8476,7 +8605,7 @@ return [
       array (
       ),
     )),
-    2 => 
+    3 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Instantiated class Kreait\\Firebase\\Factory not found.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Notifications/FirebasePusher.php',
@@ -8492,7 +8621,7 @@ return [
       array (
       ),
     )),
-    3 => 
+    4 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Call to static method create() on an unknown class Kreait\\Firebase\\Messaging\\Notification.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Notifications/FirebasePusher.php',
@@ -8508,7 +8637,7 @@ return [
       array (
       ),
     )),
-    4 => 
+    5 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Call to static method withTarget() on an unknown class Kreait\\Firebase\\Messaging\\CloudMessage.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Notifications/FirebasePusher.php',
@@ -8524,7 +8653,7 @@ return [
       array (
       ),
     )),
-    5 => 
+    6 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Call to static method create() on an unknown class Kreait\\Firebase\\Messaging\\Notification.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Notifications/FirebasePusher.php',
@@ -8540,7 +8669,7 @@ return [
       array (
       ),
     )),
-    6 => 
+    7 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Call to static method withTarget() on an unknown class Kreait\\Firebase\\Messaging\\CloudMessage.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Notifications/FirebasePusher.php',
@@ -8556,7 +8685,7 @@ return [
       array (
       ),
     )),
-    7 => 
+    8 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Call to static method create() on an unknown class Kreait\\Firebase\\Messaging\\Notification.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Notifications/FirebasePusher.php',
@@ -8572,7 +8701,7 @@ return [
       array (
       ),
     )),
-    8 => 
+    9 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Call to static method new() on an unknown class Kreait\\Firebase\\Messaging\\CloudMessage.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Notifications/FirebasePusher.php',
@@ -8588,7 +8717,7 @@ return [
       array (
       ),
     )),
-    9 => 
+    10 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Call to static method create() on an unknown class Kreait\\Firebase\\Messaging\\Notification.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Notifications/FirebasePusher.php',
@@ -8604,7 +8733,7 @@ return [
       array (
       ),
     )),
-    10 => 
+    11 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Method Luminova\\Notifications\\FirebasePusher::push() should return mixed but return statement is missing.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Notifications/FirebasePusher.php',
@@ -8620,7 +8749,7 @@ return [
       array (
       ),
     )),
-    11 => 
+    12 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Method Luminova\\Notifications\\FirebasePusher::device() should return mixed but return statement is missing.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Notifications/FirebasePusher.php',
@@ -8636,7 +8765,7 @@ return [
       array (
       ),
     )),
-    12 => 
+    13 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Call to static method new() on an unknown class Kreait\\Firebase\\Messaging\\CloudMessage.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Notifications/FirebasePusher.php',
@@ -8854,13 +8983,29 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Method Luminova\\Routing\\Bootstrap::getErrorHandler() return type has no signature specified for callable.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Bootstrap.php',
-       'line' => 94,
+       'line' => 95,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Bootstrap.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 94,
+       'nodeLine' => 95,
        'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    3 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'PHPDoc tag @return contains unresolvable type.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Bootstrap.php',
+       'line' => 105,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Bootstrap.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 105,
+       'nodeType' => 'PhpParser\\Node\\Stmt\\ClassMethod',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -9225,12 +9370,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Right side of || is always true.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
-       'line' => 712,
+       'line' => 711,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 712,
+       'nodeLine' => 711,
        'nodeType' => 'PHPStan\\Node\\BooleanOrNode',
        'identifier' => NULL,
        'metadata' => 
@@ -9241,12 +9386,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Method Luminova\\Routing\\Router::addMiddleWare() has parameter $callback with no signature specified for callable.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
-       'line' => 734,
+       'line' => 733,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 734,
+       'nodeLine' => 733,
        'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
        'identifier' => NULL,
        'metadata' => 
@@ -9257,12 +9402,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Right side of && is always true.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
-       'line' => 837,
+       'line' => 836,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 837,
+       'nodeLine' => 836,
        'nodeType' => 'PHPStan\\Node\\BooleanAndNode',
        'identifier' => NULL,
        'metadata' => 
@@ -9273,12 +9418,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'PHPDoc tag @return with type void is incompatible with native type bool.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
-       'line' => 854,
+       'line' => 853,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 854,
+       'nodeLine' => 853,
        'nodeType' => 'PhpParser\\Node\\Stmt\\ClassMethod',
        'identifier' => NULL,
        'metadata' => 
@@ -9289,12 +9434,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Right side of && is always true.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
-       'line' => 870,
+       'line' => 869,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 870,
+       'nodeLine' => 869,
        'nodeType' => 'PHPStan\\Node\\BooleanAndNode',
        'identifier' => NULL,
        'metadata' => 
@@ -9305,12 +9450,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Right side of && is always true.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
-       'line' => 877,
+       'line' => 876,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 877,
+       'nodeLine' => 876,
        'nodeType' => 'PHPStan\\Node\\BooleanAndNode',
        'identifier' => NULL,
        'metadata' => 
@@ -9321,12 +9466,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Method Luminova\\Routing\\Router::execute() has parameter $callback with no signature specified for callable.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
-       'line' => 957,
+       'line' => 956,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 957,
+       'nodeLine' => 956,
        'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
        'identifier' => NULL,
        'metadata' => 
@@ -9337,12 +9482,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Offset 0 does not exist on array<bool>.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
-       'line' => 1011,
+       'line' => 1010,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 1011,
+       'nodeLine' => 1010,
        'nodeType' => 'PhpParser\\Node\\Expr\\Assign',
        'identifier' => NULL,
        'metadata' => 
@@ -9353,12 +9498,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Offset 1 does not exist on array<bool>.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
-       'line' => 1011,
+       'line' => 1010,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 1011,
+       'nodeLine' => 1010,
        'nodeType' => 'PhpParser\\Node\\Expr\\Assign',
        'identifier' => NULL,
        'metadata' => 
@@ -9369,12 +9514,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'If condition is always true.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
-       'line' => 1024,
+       'line' => 1023,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 1024,
+       'nodeLine' => 1023,
        'nodeType' => 'PhpParser\\Node\\Stmt\\If_',
        'identifier' => 'deadCode.ifConstantCondition',
        'metadata' => 
@@ -9388,12 +9533,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unreachable statement - code above always terminates.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
-       'line' => 1030,
+       'line' => 1029,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 1030,
+       'nodeLine' => 1029,
        'nodeType' => 'PHPStan\\Node\\UnreachableStatementNode',
        'identifier' => 'deadCode.unreachableStatement',
        'metadata' => 
@@ -9406,12 +9551,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'PHPDoc tag @return contains unresolvable type.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
-       'line' => 1043,
+       'line' => 1042,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 1043,
+       'nodeLine' => 1042,
        'nodeType' => 'PhpParser\\Node\\Stmt\\ClassMethod',
        'identifier' => NULL,
        'metadata' => 
@@ -9422,12 +9567,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Access to an undefined property object::$name.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
-       'line' => 1057,
+       'line' => 1056,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
        'traitFilePath' => NULL,
        'tip' => 'Learn more: <fg=cyan>https://phpstan.org/blog/solving-phpstan-access-to-undefined-property</>',
-       'nodeLine' => 1057,
+       'nodeLine' => 1056,
        'nodeType' => 'PhpParser\\Node\\Expr\\PropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -9437,6 +9582,22 @@ return [
     35 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Access to an undefined property object::$name.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
+       'line' => 1060,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
+       'traitFilePath' => NULL,
+       'tip' => 'Learn more: <fg=cyan>https://phpstan.org/blog/solving-phpstan-access-to-undefined-property</>',
+       'nodeLine' => 1060,
+       'nodeType' => 'PhpParser\\Node\\Expr\\PropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    36 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Access to an undefined property object::$options.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
        'line' => 1061,
        'canBeIgnored' => true,
@@ -9450,9 +9611,9 @@ return [
       array (
       ),
     )),
-    36 => 
+    37 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Access to an undefined property object::$options.',
+       'message' => 'Access to an undefined property object::$usages.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
        'line' => 1062,
        'canBeIgnored' => true,
@@ -9466,9 +9627,9 @@ return [
       array (
       ),
     )),
-    37 => 
+    38 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Access to an undefined property object::$usages.',
+       'message' => 'Access to an undefined property object::$description.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
        'line' => 1063,
        'canBeIgnored' => true,
@@ -9482,32 +9643,16 @@ return [
       array (
       ),
     )),
-    38 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Access to an undefined property object::$description.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
-       'line' => 1064,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
-       'traitFilePath' => NULL,
-       'tip' => 'Learn more: <fg=cyan>https://phpstan.org/blog/solving-phpstan-access-to-undefined-property</>',
-       'nodeLine' => 1064,
-       'nodeType' => 'PhpParser\\Node\\Expr\\PropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
     39 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'PHPDoc tag @return with type bool|string is not subtype of native type string|false.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
-       'line' => 1133,
+       'line' => 1132,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 1133,
+       'nodeLine' => 1132,
        'nodeType' => 'PhpParser\\Node\\Stmt\\ClassMethod',
        'identifier' => NULL,
        'metadata' => 
@@ -9805,14 +9950,14 @@ return [
   array (
     0 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$instance through static::.',
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 53,
+       'line' => 47,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 53,
+       'nodeLine' => 47,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -9821,15 +9966,15 @@ return [
     )),
     1 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$instance through static::.',
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::loadMeta() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 54,
+       'line' => 47,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 54,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'nodeLine' => 47,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -9837,15 +9982,15 @@ return [
     )),
     2 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe usage of new static().',
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$link through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 54,
+       'line' => 48,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
-       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-error-unsafe-usage-of-new-static',
-       'nodeLine' => 54,
-       'nodeType' => 'PhpParser\\Node\\Expr\\New_',
+       'tip' => NULL,
+       'nodeLine' => 48,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -9853,15 +9998,15 @@ return [
     )),
     3 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$instance through static::.',
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::loadDefaultConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 57,
+       'line' => 49,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 57,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'nodeLine' => 49,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -9869,14 +10014,14 @@ return [
     )),
     4 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$instance through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 70,
+       'line' => 59,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 70,
+       'nodeLine' => 59,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -9885,15 +10030,15 @@ return [
     )),
     5 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::loadMeta() through static::.',
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$instance through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 70,
+       'line' => 60,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 70,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'nodeLine' => 60,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -9901,15 +10046,15 @@ return [
     )),
     6 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$appName through static::.',
+       'message' => 'Unsafe usage of new static().',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 71,
+       'line' => 60,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 71,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-error-unsafe-usage-of-new-static',
+       'nodeLine' => 60,
+       'nodeType' => 'PhpParser\\Node\\Expr\\New_',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -9917,14 +10062,14 @@ return [
     )),
     7 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$link through static::.',
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$instance through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 72,
+       'line' => 63,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 72,
+       'nodeLine' => 63,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -9933,15 +10078,15 @@ return [
     )),
     8 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::loadDefaultConfig() through static::.',
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$defaultConfig through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 73,
+       'line' => 75,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 73,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'nodeLine' => 75,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -9949,14 +10094,14 @@ return [
     )),
     9 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$defaultConfig through static::.',
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$extendedConfig through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 85,
+       'line' => 89,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 85,
+       'nodeLine' => 89,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -9965,14 +10110,14 @@ return [
     )),
     10 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$extendedConfig through static::.',
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$defaultConfig through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 99,
+       'line' => 112,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 99,
+       'nodeLine' => 112,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -9983,12 +10128,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$defaultConfig through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 122,
+       'line' => 113,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 122,
+       'nodeLine' => 113,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -9999,12 +10144,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$defaultConfig through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 123,
+       'line' => 126,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 123,
+       'nodeLine' => 126,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -10015,12 +10160,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$defaultConfig through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 136,
+       'line' => 127,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 136,
+       'nodeLine' => 127,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -10031,12 +10176,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$defaultConfig through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 137,
+       'line' => 139,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 137,
+       'nodeLine' => 139,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -10045,14 +10190,14 @@ return [
     )),
     15 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$appName through static::.',
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$defaultConfig through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 148,
+       'line' => 141,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 148,
+       'nodeLine' => 141,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -10061,14 +10206,14 @@ return [
     )),
     16 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$appName through static::.',
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$defaultConfig through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 149,
+       'line' => 167,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 149,
+       'nodeLine' => 167,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -10077,14 +10222,14 @@ return [
     )),
     17 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$defaultConfig through static::.',
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$extendedConfig through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 149,
+       'line' => 167,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 149,
+       'nodeLine' => 167,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -10093,15 +10238,15 @@ return [
     )),
     18 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$defaultConfig through static::.',
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::shouldAddParam() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 151,
+       'line' => 173,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 151,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'nodeLine' => 173,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -10109,15 +10254,15 @@ return [
     )),
     19 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$defaultConfig through static::.',
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getQuery() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 177,
+       'line' => 174,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 177,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'nodeLine' => 174,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -10125,15 +10270,15 @@ return [
     )),
     20 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$extendedConfig through static::.',
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getQuery() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 177,
+       'line' => 195,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 177,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'nodeLine' => 195,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -10141,14 +10286,14 @@ return [
     )),
     21 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::shouldAddParam() through static::.',
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::has_query_parameter() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 183,
+       'line' => 195,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 183,
+       'nodeLine' => 195,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
@@ -10157,15 +10302,15 @@ return [
     )),
     22 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getQuery() through static::.',
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$defaultConfig through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 184,
+       'line' => 227,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 184,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'nodeLine' => 227,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -10173,15 +10318,15 @@ return [
     )),
     23 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getQuery() through static::.',
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 205,
+       'line' => 228,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 205,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'nodeLine' => 228,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -10189,15 +10334,15 @@ return [
     )),
     24 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::has_query_parameter() through static::.',
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$link through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 205,
+       'line' => 229,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 205,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'nodeLine' => 229,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -10205,7 +10350,87 @@ return [
     )),
     25 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$defaultConfig through static::.',
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 231,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 231,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    26 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 233,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 233,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    27 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 234,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 234,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    28 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 235,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 235,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    29 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 236,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 236,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    30 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'line' => 237,
        'canBeIgnored' => true,
@@ -10219,7 +10444,7 @@ return [
       array (
       ),
     )),
-    26 => 
+    31 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
@@ -10235,9 +10460,9 @@ return [
       array (
       ),
     )),
-    27 => 
+    32 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$link through static::.',
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'line' => 239,
        'canBeIgnored' => true,
@@ -10251,7 +10476,23 @@ return [
       array (
       ),
     )),
-    28 => 
+    33 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 240,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 240,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    34 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
@@ -10267,7 +10508,23 @@ return [
       array (
       ),
     )),
-    29 => 
+    35 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 242,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 242,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    36 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
@@ -10283,7 +10540,7 @@ return [
       array (
       ),
     )),
-    30 => 
+    37 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
@@ -10299,87 +10556,7 @@ return [
       array (
       ),
     )),
-    31 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 245,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 245,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    32 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 246,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 246,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    33 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 247,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 247,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    34 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 248,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 248,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    35 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 249,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 249,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    36 => 
+    38 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
@@ -10395,49 +10572,17 @@ return [
       array (
       ),
     )),
-    37 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 251,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 251,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    38 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 252,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 252,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
     39 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 253,
+       'line' => 267,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 253,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'nodeLine' => 267,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -10447,12 +10592,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 254,
+       'line' => 274,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 254,
+       'nodeLine' => 274,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -10461,15 +10606,15 @@ return [
     )),
     41 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 260,
+       'line' => 275,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 260,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'nodeLine' => 275,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -10477,7 +10622,23 @@ return [
     )),
     42 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$link through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 276,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 276,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    43 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'line' => 277,
        'canBeIgnored' => true,
@@ -10485,13 +10646,109 @@ return [
        'traitFilePath' => NULL,
        'tip' => NULL,
        'nodeLine' => 277,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    44 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 280,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 280,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    45 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 281,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 281,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    46 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 282,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 282,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    47 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 282,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 282,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
       array (
       ),
     )),
-    43 => 
+    48 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 283,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 283,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    49 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 283,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 283,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    50 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
@@ -10507,9 +10764,9 @@ return [
       array (
       ),
     )),
-    44 => 
+    51 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'line' => 285,
        'canBeIgnored' => true,
@@ -10517,118 +10774,6 @@ return [
        'traitFilePath' => NULL,
        'tip' => NULL,
        'nodeLine' => 285,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    45 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$link through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 286,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 286,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    46 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 287,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 287,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    47 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 290,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 290,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    48 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 291,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 291,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    49 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 292,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 292,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    50 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 292,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 292,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    51 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 293,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 293,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -10639,12 +10784,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 293,
+       'line' => 286,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 293,
+       'nodeLine' => 286,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
@@ -10652,6 +10797,22 @@ return [
       ),
     )),
     53 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 289,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 289,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    54 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
@@ -10667,9 +10828,9 @@ return [
       array (
       ),
     )),
-    54 => 
+    55 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$link through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'line' => 295,
        'canBeIgnored' => true,
@@ -10683,7 +10844,7 @@ return [
       array (
       ),
     )),
-    55 => 
+    56 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
@@ -10699,7 +10860,23 @@ return [
       array (
       ),
     )),
-    56 => 
+    57 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 297,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 297,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    58 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
@@ -10715,41 +10892,9 @@ return [
       array (
       ),
     )),
-    57 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 304,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 304,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    58 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$link through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 305,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 305,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
     59 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$link through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'line' => 306,
        'canBeIgnored' => true,
@@ -10757,7 +10902,7 @@ return [
        'traitFilePath' => NULL,
        'tip' => NULL,
        'nodeLine' => 306,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -10765,15 +10910,15 @@ return [
     )),
     60 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 307,
+       'line' => 311,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 307,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'nodeLine' => 311,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -10781,15 +10926,15 @@ return [
     )),
     61 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 309,
+       'line' => 315,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 309,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'nodeLine' => 315,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -10797,7 +10942,7 @@ return [
     )),
     62 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$link through static::.',
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'line' => 316,
        'canBeIgnored' => true,
@@ -10805,7 +10950,7 @@ return [
        'traitFilePath' => NULL,
        'tip' => NULL,
        'nodeLine' => 316,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -10813,21 +10958,53 @@ return [
     )),
     63 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 321,
+       'line' => 317,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 321,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'nodeLine' => 317,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
       array (
       ),
     )),
     64 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 319,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 319,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    65 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 322,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 322,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    66 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
@@ -10843,55 +11020,87 @@ return [
       array (
       ),
     )),
-    65 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 326,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 326,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    66 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 327,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 327,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
     67 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 329,
+       'line' => 328,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 329,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'nodeLine' => 328,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
       array (
       ),
     )),
     68 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 330,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 330,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    69 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 330,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 330,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    70 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 331,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 331,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    71 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::toDate() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 331,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 331,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    72 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
@@ -10907,7 +11116,39 @@ return [
       array (
       ),
     )),
-    69 => 
+    73 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::toDate() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 332,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 332,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    74 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 333,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 333,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    75 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
@@ -10923,113 +11164,17 @@ return [
       array (
       ),
     )),
-    70 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 338,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 338,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    71 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 340,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 340,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    72 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 340,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 340,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    73 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 341,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 341,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    74 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::toDate() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 341,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 341,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    75 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 342,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 342,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
     76 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::toDate() through static::.',
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 342,
+       'line' => 337,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 342,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'nodeLine' => 337,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -11039,12 +11184,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 343,
+       'line' => 341,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 343,
+       'nodeLine' => 341,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
@@ -11052,22 +11197,6 @@ return [
       ),
     )),
     78 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 345,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 345,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    79 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
@@ -11083,7 +11212,87 @@ return [
       array (
       ),
     )),
+    79 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 348,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 348,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
     80 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 349,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 349,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    81 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 349,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 349,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    82 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 350,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 350,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    83 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 350,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 350,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    84 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
@@ -11099,80 +11308,16 @@ return [
       array (
       ),
     )),
-    81 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 357,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 357,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    82 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 358,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 358,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    83 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 359,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 359,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    84 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 359,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 359,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
     85 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 360,
+       'line' => 352,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 360,
+       'nodeLine' => 352,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
@@ -11183,12 +11328,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 360,
+       'line' => 356,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 360,
+       'nodeLine' => 356,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
@@ -11197,37 +11342,21 @@ return [
     )),
     87 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 361,
+       'line' => 364,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 361,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'nodeLine' => 364,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
       array (
       ),
     )),
     88 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 362,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 362,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    89 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
@@ -11243,17 +11372,33 @@ return [
       array (
       ),
     )),
-    90 => 
+    89 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$link through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 374,
+       'line' => 367,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 374,
+       'nodeLine' => 367,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    90 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 375,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 375,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -11277,15 +11422,15 @@ return [
     )),
     92 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$link through static::.',
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 377,
+       'line' => 380,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 377,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'nodeLine' => 380,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -11293,21 +11438,37 @@ return [
     )),
     93 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 385,
+       'line' => 381,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 385,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'nodeLine' => 381,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
       array (
       ),
     )),
     94 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 384,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 384,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    95 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
@@ -11323,32 +11484,16 @@ return [
       array (
       ),
     )),
-    95 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 390,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 390,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
     96 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$link through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 391,
+       'line' => 387,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 391,
+       'nodeLine' => 387,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -11357,15 +11502,15 @@ return [
     )),
     97 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 394,
+       'line' => 391,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 394,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'nodeLine' => 391,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -11375,12 +11520,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 396,
+       'line' => 395,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 396,
+       'nodeLine' => 395,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
@@ -11389,7 +11534,7 @@ return [
     )),
     99 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$link through static::.',
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'line' => 397,
        'canBeIgnored' => true,
@@ -11397,7 +11542,7 @@ return [
        'traitFilePath' => NULL,
        'tip' => NULL,
        'nodeLine' => 397,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -11405,7 +11550,7 @@ return [
     )),
     100 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'line' => 401,
        'canBeIgnored' => true,
@@ -11413,7 +11558,7 @@ return [
        'traitFilePath' => NULL,
        'tip' => NULL,
        'nodeLine' => 401,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -11423,12 +11568,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 405,
+       'line' => 402,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 405,
+       'nodeLine' => 402,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
@@ -11436,6 +11581,38 @@ return [
       ),
     )),
     102 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 405,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 405,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    103 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 406,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 406,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    104 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
@@ -11451,9 +11628,41 @@ return [
       array (
       ),
     )),
-    103 => 
+    105 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 408,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 408,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    106 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 409,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 409,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    107 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$link through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'line' => 411,
        'canBeIgnored' => true,
@@ -11467,25 +11676,57 @@ return [
       array (
       ),
     )),
-    104 => 
+    108 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 412,
+       'line' => 413,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 412,
+       'nodeLine' => 413,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
       array (
       ),
     )),
-    105 => 
+    109 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 414,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 414,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    110 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::toDate() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 414,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 414,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    111 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'line' => 415,
        'canBeIgnored' => true,
@@ -11493,29 +11734,29 @@ return [
        'traitFilePath' => NULL,
        'tip' => NULL,
        'nodeLine' => 415,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
       array (
       ),
     )),
-    106 => 
+    112 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::toDate() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 416,
+       'line' => 415,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 416,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'nodeLine' => 415,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
       array (
       ),
     )),
-    107 => 
+    113 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
@@ -11531,113 +11772,17 @@ return [
       array (
       ),
     )),
-    108 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 418,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 418,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    109 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 419,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 419,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    110 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$link through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 421,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 421,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    111 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 423,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 423,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    112 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 424,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 424,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    113 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::toDate() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 424,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 424,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
     114 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 425,
+       'line' => 422,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 425,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'nodeLine' => 422,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -11645,7 +11790,7 @@ return [
     )),
     115 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::toDate() through static::.',
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'line' => 425,
        'canBeIgnored' => true,
@@ -11677,21 +11822,69 @@ return [
     )),
     117 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 432,
+       'line' => 427,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 432,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'nodeLine' => 427,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
       array (
       ),
     )),
     118 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 428,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 428,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    119 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 429,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 429,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    120 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 430,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 430,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    121 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
@@ -11707,39 +11900,7 @@ return [
       array (
       ),
     )),
-    119 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 437,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 437,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    120 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 437,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 437,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    121 => 
+    122 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
@@ -11749,22 +11910,6 @@ return [
        'traitFilePath' => NULL,
        'tip' => NULL,
        'nodeLine' => 438,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    122 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 439,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 439,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
@@ -11789,15 +11934,15 @@ return [
     )),
     124 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$link through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 445,
+       'line' => 448,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 445,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'nodeLine' => 448,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -11807,12 +11952,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 448,
+       'line' => 451,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 448,
+       'nodeLine' => 451,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
@@ -11821,15 +11966,15 @@ return [
     )),
     126 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 450,
+       'line' => 452,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 450,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'nodeLine' => 452,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -11837,7 +11982,39 @@ return [
     )),
     127 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$link through static::.',
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 453,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 453,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    128 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 454,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 454,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    129 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'line' => 458,
        'canBeIgnored' => true,
@@ -11845,13 +12022,13 @@ return [
        'traitFilePath' => NULL,
        'tip' => NULL,
        'nodeLine' => 458,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
       array (
       ),
     )),
-    128 => 
+    130 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
@@ -11867,7 +12044,7 @@ return [
       array (
       ),
     )),
-    129 => 
+    131 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
@@ -11883,7 +12060,7 @@ return [
       array (
       ),
     )),
-    130 => 
+    132 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
@@ -11899,7 +12076,7 @@ return [
       array (
       ),
     )),
-    131 => 
+    133 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
@@ -11915,7 +12092,23 @@ return [
       array (
       ),
     )),
-    132 => 
+    134 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 465,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 465,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    135 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
@@ -11931,23 +12124,7 @@ return [
       array (
       ),
     )),
-    133 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 471,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 471,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    134 => 
+    136 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
@@ -11963,7 +12140,7 @@ return [
       array (
       ),
     )),
-    135 => 
+    137 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
@@ -11979,7 +12156,7 @@ return [
       array (
       ),
     )),
-    136 => 
+    138 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
@@ -11995,48 +12172,16 @@ return [
       array (
       ),
     )),
-    137 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 475,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 475,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    138 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 478,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 478,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
     139 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 482,
+       'line' => 489,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 482,
+       'nodeLine' => 489,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
@@ -12047,12 +12192,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 483,
+       'line' => 490,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 483,
+       'nodeLine' => 490,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
@@ -12063,12 +12208,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 484,
+       'line' => 492,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 484,
+       'nodeLine' => 492,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
@@ -12076,6 +12221,86 @@ return [
       ),
     )),
     142 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 493,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 493,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    143 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 496,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 496,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    144 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 497,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 497,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    145 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 498,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 498,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    146 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::toDate() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 498,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 498,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    147 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
@@ -12091,25 +12316,25 @@ return [
       array (
       ),
     )),
-    143 => 
+    148 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::toDate() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 500,
+       'line' => 499,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 500,
+       'nodeLine' => 499,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
       array (
       ),
     )),
-    144 => 
+    149 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'line' => 502,
        'canBeIgnored' => true,
@@ -12117,29 +12342,45 @@ return [
        'traitFilePath' => NULL,
        'tip' => NULL,
        'nodeLine' => 502,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
       array (
       ),
     )),
-    145 => 
+    150 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 503,
+       'line' => 504,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 503,
+       'nodeLine' => 504,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
       array (
       ),
     )),
-    146 => 
+    151 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'line' => 505,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 505,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    152 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
@@ -12155,7 +12396,7 @@ return [
       array (
       ),
     )),
-    147 => 
+    153 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
@@ -12171,112 +12412,16 @@ return [
       array (
       ),
     )),
-    148 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 508,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 508,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    149 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::toDate() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 508,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 508,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    150 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 509,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 509,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    151 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::toDate() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 509,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 509,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    152 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 512,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 512,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    153 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 514,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 514,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
     154 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 515,
+       'line' => 508,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 515,
+       'nodeLine' => 508,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
@@ -12287,12 +12432,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 516,
+       'line' => 508,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 516,
+       'nodeLine' => 508,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
@@ -12303,12 +12448,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 517,
+       'line' => 509,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 517,
+       'nodeLine' => 509,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
@@ -12319,12 +12464,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 518,
+       'line' => 510,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 518,
+       'nodeLine' => 510,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
@@ -12335,12 +12480,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 518,
+       'line' => 511,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 518,
+       'nodeLine' => 511,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
@@ -12349,62 +12494,14 @@ return [
     )),
     159 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 519,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 519,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    160 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 520,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 520,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    161 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Seo\\Meta::getConfig() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 521,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 521,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    162 => 
-    \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Seo\\Meta::$manifest through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-       'line' => 523,
+       'line' => 513,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
        'traitFilePath' => NULL,
        'tip' => NULL,
-       'nodeLine' => 523,
+       'nodeLine' => 513,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -13147,38 +13244,6 @@ return [
   array (
     0 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Method Luminova\\Template\\Template::initialize() invoked with 2 parameters, 0-1 required.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
-       'line' => 21,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 21,
-       'nodeType' => 'PhpParser\\Node\\Expr\\MethodCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    1 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Parameter #1 $dir of method Luminova\\Template\\Template::initialize() expects string, null given.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
-       'line' => 21,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
-       'traitFilePath' => NULL,
-       'tip' => NULL,
-       'nodeLine' => 21,
-       'nodeType' => 'PhpParser\\Node\\Expr\\MethodCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    2 => 
-    \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Template\\Template::$minifyContent through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
        'line' => 207,
@@ -13193,7 +13258,7 @@ return [
       array (
       ),
     )),
-    3 => 
+    1 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Negated boolean expression is always true.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
@@ -13209,16 +13274,48 @@ return [
       array (
       ),
     )),
-    4 => 
+    2 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Template\\Template::$publicOptions through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 224,
+       'line' => 242,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
        'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
        'tip' => NULL,
-       'nodeLine' => 224,
+       'nodeLine' => 242,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    3 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Template\\Template::$publicOptions through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
+       'line' => 243,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 243,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    4 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Template\\Template::$publicClasses through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
+       'line' => 246,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 246,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -13227,14 +13324,14 @@ return [
     )),
     5 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Template\\Template::$publicOptions through static::.',
+       'message' => 'Unsafe access to private property Luminova\\Template\\Template::$publicClasses through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 225,
+       'line' => 247,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
        'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
        'tip' => NULL,
-       'nodeLine' => 225,
+       'nodeLine' => 247,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -13245,12 +13342,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Template\\Template::$publicClasses through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 228,
+       'line' => 262,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
        'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
        'tip' => NULL,
-       'nodeLine' => 228,
+       'nodeLine' => 262,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -13261,12 +13358,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Template\\Template::$publicClasses through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 229,
+       'line' => 274,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
        'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
        'tip' => NULL,
-       'nodeLine' => 229,
+       'nodeLine' => 274,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -13275,15 +13372,15 @@ return [
     )),
     8 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Template\\Template::$publicClasses through static::.',
+       'message' => 'PHPDoc tag @throws with type Luminova\\Exceptions\\InvalidArgumentException|Luminova\\Exceptions\\RuntimeException is not subtype of Throwable',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 244,
+       'line' => 505,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
        'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
        'tip' => NULL,
-       'nodeLine' => 244,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'nodeLine' => 505,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -13291,15 +13388,15 @@ return [
     )),
     9 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Template\\Template::$publicClasses through static::.',
+       'message' => 'Instantiated class Luminova\\Exceptions\\InvalidArgumentException not found.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 245,
+       'line' => 508,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
        'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 245,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'tip' => 'Learn more at https://phpstan.org/user-guide/discovering-symbols',
+       'nodeLine' => 508,
+       'nodeType' => 'PhpParser\\Node\\Expr\\New_',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -13307,15 +13404,15 @@ return [
     )),
     10 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Template\\Template::$publicClasses through static::.',
+       'message' => 'Throwing object of an unknown class Luminova\\Exceptions\\InvalidArgumentException.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 260,
+       'line' => 508,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
        'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 260,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'tip' => 'Learn more at https://phpstan.org/user-guide/discovering-symbols',
+       'nodeLine' => 508,
+       'nodeType' => 'PhpParser\\Node\\Stmt\\Throw_',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -13323,15 +13420,15 @@ return [
     )),
     11 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'PHPDoc tag @throws with type Luminova\\Exceptions\\InvalidArgumentException|Luminova\\Exceptions\\RuntimeException is not subtype of Throwable',
+       'message' => 'Unsafe access to private property Luminova\\Template\\Template::$publicClasses through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 490,
+       'line' => 521,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
        'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
        'tip' => NULL,
-       'nodeLine' => 490,
-       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'nodeLine' => 521,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -13339,15 +13436,15 @@ return [
     )),
     12 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Instantiated class Luminova\\Exceptions\\InvalidArgumentException not found.',
+       'message' => 'Unsafe access to private property Luminova\\Template\\Template::$publicClasses through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 493,
+       'line' => 526,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
        'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => 'Learn more at https://phpstan.org/user-guide/discovering-symbols',
-       'nodeLine' => 493,
-       'nodeType' => 'PhpParser\\Node\\Expr\\New_',
+       'tip' => NULL,
+       'nodeLine' => 526,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -13355,15 +13452,15 @@ return [
     )),
     13 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Throwing object of an unknown class Luminova\\Exceptions\\InvalidArgumentException.',
+       'message' => 'Result of && is always false.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 493,
+       'line' => 548,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
        'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => 'Learn more at https://phpstan.org/user-guide/discovering-symbols',
-       'nodeLine' => 493,
-       'nodeType' => 'PhpParser\\Node\\Stmt\\Throw_',
+       'tip' => NULL,
+       'nodeLine' => 548,
+       'nodeType' => 'PHPStan\\Node\\BooleanAndNode',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -13371,15 +13468,15 @@ return [
     )),
     14 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Template\\Template::$publicClasses through static::.',
+       'message' => 'Strict comparison using === between int and \'_\' will always evaluate to false.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 506,
+       'line' => 548,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
        'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
        'tip' => NULL,
-       'nodeLine' => 506,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'nodeLine' => 548,
+       'nodeType' => 'PhpParser\\Node\\Expr\\BinaryOp\\Identical',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -13389,12 +13486,12 @@ return [
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe access to private property Luminova\\Template\\Template::$publicClasses through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 511,
+       'line' => 552,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
        'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
        'tip' => NULL,
-       'nodeLine' => 511,
+       'nodeLine' => 552,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
@@ -13403,15 +13500,15 @@ return [
     )),
     16 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Result of && is always false.',
+       'message' => 'Unsafe access to private property Luminova\\Template\\Template::$publicOptions through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 533,
+       'line' => 556,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
        'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
        'tip' => NULL,
-       'nodeLine' => 533,
-       'nodeType' => 'PHPStan\\Node\\BooleanAndNode',
+       'nodeLine' => 556,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -13419,62 +13516,14 @@ return [
     )),
     17 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Strict comparison using === between int and \'_\' will always evaluate to false.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 533,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 533,
-       'nodeType' => 'PhpParser\\Node\\Expr\\BinaryOp\\Identical',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    18 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Template\\Template::$publicClasses through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 537,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 537,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    19 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Template\\Template::$publicOptions through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 541,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 541,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    20 => 
-    \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'PHPDoc tag @param references unknown parameter: $expire',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 598,
+       'line' => 613,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
        'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
        'tip' => NULL,
-       'nodeLine' => 598,
+       'nodeLine' => 613,
        'nodeType' => 'PhpParser\\Node\\Stmt\\ClassMethod',
        'identifier' => 'phpDoc.unknownParameter',
        'metadata' => 
@@ -13482,16 +13531,64 @@ return [
         'parameterName' => 'expire',
       ),
     )),
-    21 => 
+    18 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Template\\Template::renderIsolation() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 622,
+       'line' => 637,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
        'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
        'tip' => NULL,
-       'nodeLine' => 622,
+       'nodeLine' => 637,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    19 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Template\\Template::isReadWritePermission() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
+       'line' => 661,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 661,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    20 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe access to private property Luminova\\Template\\Template::$minifyContent through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
+       'line' => 733,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 733,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    21 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Template\\Template::newCompressed() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
+       'line' => 734,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 734,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
@@ -13500,14 +13597,14 @@ return [
     )),
     22 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Template\\Template::isReadWritePermission() through static::.',
+       'message' => 'Unsafe call to private method Luminova\\Template\\Template::getViewUri() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 646,
+       'line' => 767,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
        'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
        'tip' => NULL,
-       'nodeLine' => 646,
+       'nodeLine' => 767,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
@@ -13516,15 +13613,15 @@ return [
     )),
     23 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Parameter #1 $callback of function ob_start expects callable(): mixed, bool given.',
+       'message' => 'Unsafe call to private method Luminova\\Template\\Template::setOptions() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 652,
+       'line' => 774,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
        'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
        'tip' => NULL,
-       'nodeLine' => 652,
-       'nodeType' => 'PhpParser\\Node\\Expr\\FuncCall',
+       'nodeLine' => 774,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -13532,15 +13629,15 @@ return [
     )),
     24 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Parameter #1 $callback of function ob_start expects callable(): mixed, bool given.',
+       'message' => 'Unsafe access to private property Luminova\\Template\\Template::$minifyContent through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 702,
+       'line' => 783,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
        'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
        'tip' => NULL,
-       'nodeLine' => 702,
-       'nodeType' => 'PhpParser\\Node\\Expr\\FuncCall',
+       'nodeLine' => 783,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -13548,15 +13645,15 @@ return [
     )),
     25 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Template\\Template::$minifyContent through static::.',
+       'message' => 'Unsafe call to private method Luminova\\Template\\Template::newCompressed() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 718,
+       'line' => 785,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
        'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
        'tip' => NULL,
-       'nodeLine' => 718,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'nodeLine' => 785,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -13564,14 +13661,14 @@ return [
     )),
     26 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Template\\Template::newCompressed() through static::.',
+       'message' => 'Unsafe call to private method Luminova\\Template\\Template::requestHeaders() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 719,
+       'line' => 790,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
        'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
        'tip' => NULL,
-       'nodeLine' => 719,
+       'nodeLine' => 790,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
@@ -13580,15 +13677,15 @@ return [
     )),
     27 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Template\\Template::getViewUri() through static::.',
+       'message' => 'Unsafe access to private property Luminova\\Template\\Template::$publicClasses through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 752,
+       'line' => 826,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
        'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
        'tip' => NULL,
-       'nodeLine' => 752,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'nodeLine' => 826,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -13596,15 +13693,15 @@ return [
     )),
     28 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Template\\Template::setOptions() through static::.',
+       'message' => 'Variable $optimizer on left side of ??= always exists and is always null.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 759,
+       'line' => 829,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
        'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
        'tip' => NULL,
-       'nodeLine' => 759,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'nodeLine' => 829,
+       'nodeType' => 'PhpParser\\Node\\Expr\\AssignOp\\Coalesce',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -13612,15 +13709,15 @@ return [
     )),
     29 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Template\\Template::$minifyContent through static::.',
+       'message' => 'Unsafe call to private method Luminova\\Template\\Template::getViewUri() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 768,
+       'line' => 830,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
        'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
        'tip' => NULL,
-       'nodeLine' => 768,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
+       'nodeLine' => 830,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -13628,15 +13725,15 @@ return [
     )),
     30 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Template\\Template::newCompressed() through static::.',
+       'message' => 'Unsafe access to private property Luminova\\Template\\Template::$minifyContent through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 770,
+       'line' => 846,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
        'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
        'tip' => NULL,
-       'nodeLine' => 770,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'nodeLine' => 846,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -13644,14 +13741,14 @@ return [
     )),
     31 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Template\\Template::requestHeaders() through static::.',
+       'message' => 'Unsafe call to private method Luminova\\Template\\Template::newCompressed() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 775,
+       'line' => 847,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
        'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
        'tip' => NULL,
-       'nodeLine' => 775,
+       'nodeLine' => 847,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
@@ -13660,94 +13757,14 @@ return [
     )),
     32 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Template\\Template::$publicClasses through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 811,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 811,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    33 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Variable $optimizer on left side of ??= always exists and is always null.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 814,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 814,
-       'nodeType' => 'PhpParser\\Node\\Expr\\AssignOp\\Coalesce',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    34 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Template\\Template::getViewUri() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 815,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 815,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    35 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe access to private property Luminova\\Template\\Template::$minifyContent through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 831,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 831,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticPropertyFetch',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    36 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Template\\Template::newCompressed() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 832,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 832,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    37 => 
-    \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Variable $ContentType might not be defined.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 832,
+       'line' => 847,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
        'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
        'tip' => NULL,
-       'nodeLine' => 832,
+       'nodeLine' => 847,
        'nodeType' => 'PhpParser\\Node\\Expr\\Variable',
        'identifier' => 'variable.maybeUndefined',
        'metadata' => 
@@ -13776,80 +13793,80 @@ return [
         ),
       ),
     )),
-    38 => 
+    33 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Template\\Template::requestHeaders() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 838,
+       'line' => 853,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
        'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
        'tip' => NULL,
-       'nodeLine' => 838,
+       'nodeLine' => 853,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
       array (
       ),
     )),
-    39 => 
+    34 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Right side of && is always false.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 936,
+       'line' => 950,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
        'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
        'tip' => NULL,
-       'nodeLine' => 936,
+       'nodeLine' => 950,
        'nodeType' => 'PHPStan\\Node\\BooleanAndNode',
        'identifier' => NULL,
        'metadata' => 
       array (
       ),
     )),
-    40 => 
+    35 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'PHPDoc tag @throws with type Luminova\\Exceptions\\InvalidArgumentException is not subtype of Throwable',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 957,
+       'line' => 971,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
        'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
        'tip' => NULL,
-       'nodeLine' => 957,
+       'nodeLine' => 971,
        'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
        'identifier' => NULL,
        'metadata' => 
       array (
       ),
     )),
-    41 => 
+    36 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe call to private method Luminova\\Template\\Template::calculateLevel() through static::.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 960,
+       'line' => 974,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
        'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
        'tip' => NULL,
-       'nodeLine' => 960,
+       'nodeLine' => 974,
        'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
        'identifier' => NULL,
        'metadata' => 
       array (
       ),
     )),
-    42 => 
+    37 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Ternary operator condition is always false.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 961,
+       'line' => 975,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
        'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
        'tip' => NULL,
-       'nodeLine' => 961,
+       'nodeLine' => 975,
        'nodeType' => 'PhpParser\\Node\\Expr\\Ternary',
        'identifier' => 'deadCode.ternaryConstantCondition',
        'metadata' => 
@@ -13861,17 +13878,97 @@ return [
         'value' => false,
       ),
     )),
-    43 => 
+    38 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Instantiated class Luminova\\Exceptions\\InvalidArgumentException not found.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 973,
+       'line' => 987,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
        'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
        'tip' => 'Learn more at https://phpstan.org/user-guide/discovering-symbols',
-       'nodeLine' => 973,
+       'nodeLine' => 987,
        'nodeType' => 'PhpParser\\Node\\Expr\\New_',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    39 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Throwing object of an unknown class Luminova\\Exceptions\\InvalidArgumentException.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
+       'line' => 987,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => 'Learn more at https://phpstan.org/user-guide/discovering-symbols',
+       'nodeLine' => 987,
+       'nodeType' => 'PhpParser\\Node\\Stmt\\Throw_',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    40 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Template\\Template::toTitle() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
+       'line' => 1000,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 1000,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    41 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Template\\Template::toTitle() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
+       'line' => 1004,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 1004,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    42 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Unsafe call to private method Luminova\\Template\\Template::getViewUri() through static::.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
+       'line' => 1044,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 1044,
+       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
+       'identifier' => NULL,
+       'metadata' => 
+      array (
+      ),
+    )),
+    43 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Negated boolean expression is always true.',
+       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
+       'line' => 1047,
+       'canBeIgnored' => true,
+       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
+       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
+       'tip' => NULL,
+       'nodeLine' => 1047,
+       'nodeType' => 'PhpParser\\Node\\Expr\\BooleanNot',
        'identifier' => NULL,
        'metadata' => 
       array (
@@ -13879,94 +13976,14 @@ return [
     )),
     44 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Throwing object of an unknown class Luminova\\Exceptions\\InvalidArgumentException.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 973,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => 'Learn more at https://phpstan.org/user-guide/discovering-symbols',
-       'nodeLine' => 973,
-       'nodeType' => 'PhpParser\\Node\\Stmt\\Throw_',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    45 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Template\\Template::toTitle() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 986,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 986,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    46 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Template\\Template::toTitle() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 990,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 990,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    47 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Unsafe call to private method Luminova\\Template\\Template::getViewUri() through static::.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 1030,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 1030,
-       'nodeType' => 'PhpParser\\Node\\Expr\\StaticCall',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    48 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Negated boolean expression is always true.',
-       'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 1033,
-       'canBeIgnored' => true,
-       'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
-       'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
-       'tip' => NULL,
-       'nodeLine' => 1033,
-       'nodeType' => 'PhpParser\\Node\\Expr\\BooleanNot',
-       'identifier' => NULL,
-       'metadata' => 
-      array (
-      ),
-    )),
-    49 => 
-    \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Right side of && is always false.',
        'file' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php (in context of class Luminova\\Template\\Template)',
-       'line' => 1039,
+       'line' => 1053,
        'canBeIgnored' => true,
        'filePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
        'traitFilePath' => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php',
        'tip' => NULL,
-       'nodeLine' => 1039,
+       'nodeLine' => 1053,
        'nodeType' => 'PHPStan\\Node\\BooleanAndNode',
        'identifier' => NULL,
        'metadata' => 
@@ -14652,11 +14669,11 @@ return [
 	'dependencies' => array (
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/app/Controllers/Application.php' => 
   array (
-    'fileHash' => '4d95ef73aa862c02c103f9d97639d51017e92b26',
+    'fileHash' => 'ef577130d5be6fcfb6e60f28bdf0608fd50e9265',
     'dependentFiles' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseController.php',
-      1 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Controllers/ViewController.php',
+      1 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseViewController.php',
     ),
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/app/Controllers/Config/Config.php' => 
@@ -14741,10 +14758,10 @@ return [
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/app/Controllers/Config/Template.php' => 
   array (
-    'fileHash' => '39bbd8f7d9e3bcbb31c43797f9cfb2148c20e0c6',
+    'fileHash' => 'b9499be51e98ddcc75fcfe2d4d2dd951e0afa5d4',
     'dependentFiles' => 
     array (
-      0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
+      0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
       1 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
     ),
   ),
@@ -14785,14 +14802,14 @@ return [
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/constants.php' => 
   array (
-    'fileHash' => '49f064191b228de3b206c14b188e489c5a352aa9',
+    'fileHash' => '5804711311d38e965f3976e9c0d2048ea5f86517',
     'dependentFiles' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/functions.php',
-      1 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-      2 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Paths.php',
-      3 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Novakit/Generators.php',
-      4 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Config/Configuration.php',
+      1 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Paths.php',
+      2 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+      3 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseConfig.php',
+      4 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Novakit/Generators.php',
       5 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Config/DotEnv.php',
       6 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Database/Connection.php',
       7 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
@@ -14802,33 +14819,36 @@ return [
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/functions.php' => 
   array (
-    'fileHash' => '96fc55cd9ccb4137b6f3d91eda369ff3a8f076b9',
+    'fileHash' => '39ef8bd30e36242735495d32d29445a4c9912cc3',
     'dependentFiles' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/helpers.php',
-      1 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-      2 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
-      3 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Services.php',
+      1 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
+      2 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Services.php',
+      3 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
       4 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseFunction.php',
       5 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseServices.php',
       6 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Cache/FileCache.php',
-      7 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Cache/Optimizer.php',
+      7 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Cache/PageViewCache.php',
       8 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Novakit/Generators.php',
       9 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Terminal.php',
       10 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Database/Connection.php',
       11 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Database/Query.php',
       12 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Clients/NovaMailer.php',
       13 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Errors/Error.php',
-      14 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Functions/IPAddress.php',
-      15 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Functions/TorDetector.php',
-      16 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Languages/Translator.php',
-      17 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Library/Importer.php',
-      18 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Logger/NovaLogger.php',
-      19 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Security/InputValidator.php',
-      20 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
-      21 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Sessions/Session.php',
-      22 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Storage/S3.php',
-      23 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
+      14 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Exceptions/AppException.php',
+      15 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Functions/IPAddress.php',
+      16 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Functions/TorDetector.php',
+      17 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Http/Request.php',
+      18 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Languages/Translator.php',
+      19 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Library/Importer.php',
+      20 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Logger/NovaLogger.php',
+      21 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
+      22 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Security/InputValidator.php',
+      23 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php',
+      24 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Sessions/Session.php',
+      25 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Storage/S3.php',
+      26 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
     ),
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/helpers.php' => 
@@ -14840,19 +14860,14 @@ return [
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php' => 
   array (
-    'fileHash' => 'c9e2eba9c62da87fd827f837c208eab37511db34',
+    'fileHash' => '18abdae30e136efd1f15ff25c9a904ab90d45f95',
     'dependentFiles' => 
     array (
-      0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/app/Controllers/Application.php',
-      1 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
-      2 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseController.php',
-      3 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Controllers/ViewController.php',
-      4 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
     ),
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php' => 
   array (
-    'fileHash' => '60dffa6317df4057c5111e8dbc4efcedec0c43b9',
+    'fileHash' => '180ea07e63e12fa4cbfed63cad1d26fa27d13c1e',
     'dependentFiles' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/functions.php',
@@ -14869,7 +14884,7 @@ return [
       3 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Services.php',
       4 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BasePaths.php',
       5 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Cache/FileCache.php',
-      6 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Cache/Optimizer.php',
+      6 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Cache/PageViewCache.php',
       7 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Functions/Files.php',
       8 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Functions/IPAddress.php',
       9 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Functions/TorDetector.php',
@@ -14918,18 +14933,18 @@ return [
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php' => 
   array (
-    'fileHash' => 'e9c3cb86da16755aa67b8db963de4c541eac39f4',
+    'fileHash' => '866c92fae51f0e0c6b45951e7b36b1dc1ee1d155',
     'dependentFiles' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/app/Controllers/Application.php',
       1 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseController.php',
-      2 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Controllers/ViewController.php',
+      2 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseViewController.php',
       3 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
     ),
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseCommand.php' => 
   array (
-    'fileHash' => 'd07b3cdf7a4c10b6352df0ca4e34aa814fc1be05',
+    'fileHash' => '7d448537e952967ad3ed66cbbcd54b4741004e1f',
     'dependentFiles' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Commands.php',
@@ -14942,33 +14957,30 @@ return [
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseConfig.php' => 
   array (
-    'fileHash' => 'c1272ba08574af94be3f98bcab645809c34629da',
+    'fileHash' => 'dccc27cf1dc1647b383dcf825ab619a62755f572',
     'dependentFiles' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/app/Controllers/Config/Config.php',
       1 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/app/Controllers/Welcome.php',
-      2 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-      3 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Console.php',
-      4 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Composer/BaseComposer.php',
-      5 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Composer/Builder.php',
-      6 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Composer/Updater.php',
-      7 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-      8 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Errors/Error.php',
-      9 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Exceptions/AppException.php',
-      10 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Http/Header.php',
-      11 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
+      2 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+      3 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Composer/BaseComposer.php',
+      4 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Composer/Builder.php',
+      5 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Composer/Updater.php',
+      6 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
+      7 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Http/Header.php',
+      8 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
     ),
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseController.php' => 
   array (
-    'fileHash' => '2a0a1ac128570d0b8cce07e38d06f8941d809e04',
+    'fileHash' => 'c03fb77816a37f8c8e5e9b7943ba535d668fc8c9',
     'dependentFiles' => 
     array (
     ),
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseFunction.php' => 
   array (
-    'fileHash' => 'ecb95320efe9eabff5a2e9351faa1424652e6e0c',
+    'fileHash' => '3b579421629dece64b5ead04d44bf63c86fb2366',
     'dependentFiles' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/app/Controllers/Utils/Func.php',
@@ -14979,7 +14991,7 @@ return [
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseModel.php' => 
   array (
-    'fileHash' => '38a0703e49d774dd9ca8567087b439d74d6b391d',
+    'fileHash' => '7f1385e1f619558c9dea1458e95a6db6970d664a',
     'dependentFiles' => 
     array (
     ),
@@ -14994,7 +15006,7 @@ return [
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseServers.php' => 
   array (
-    'fileHash' => 'd6ca8f8a11988f74ca718d935e6d42f1553ed259',
+    'fileHash' => '9680778039c1beed2d24838ced5ebe795bd607a2',
     'dependentFiles' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/app/Controllers/Config/Servers.php',
@@ -15003,7 +15015,7 @@ return [
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseServices.php' => 
   array (
-    'fileHash' => '85c540faf539e1faba97fef44da0421eb6c4d604',
+    'fileHash' => 'c8d9a8a860d44f7841e571daf205c5b1f4ffe6c1',
     'dependentFiles' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/app/Controllers/Config/Services.php',
@@ -15013,10 +15025,12 @@ return [
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseViewController.php' => 
   array (
-    'fileHash' => 'a30cdeb9086edd8ba0b4f1011f61242e32f9632a',
+    'fileHash' => '5ba5c96f5f17fbb293903598cbbd9197d0385db7',
     'dependentFiles' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/app/Controllers/Welcome.php',
+      1 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseController.php',
+      2 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
     ),
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Cache/Cache.php' => 
@@ -15031,7 +15045,7 @@ return [
     'fileHash' => '9e455ffedeca6b55ae9166ff6d875f20151421d6',
     'dependentFiles' => 
     array (
-      0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
+      0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
       1 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
     ),
   ),
@@ -15044,13 +15058,6 @@ return [
       1 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Database/Query.php',
     ),
   ),
-  '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Cache/FileCacheItem.php' => 
-  array (
-    'fileHash' => '97f2fb30dca98d6bedbbfe54052d6ff7b7237fc8',
-    'dependentFiles' => 
-    array (
-    ),
-  ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Cache/MemoryCache.php' => 
   array (
     'fileHash' => 'f8e6f8919689bdf551abca4b235e9e3018b1cb50',
@@ -15059,12 +15066,12 @@ return [
       0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Cache/Cache.php',
     ),
   ),
-  '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Cache/Optimizer.php' => 
+  '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Cache/PageViewCache.php' => 
   array (
-    'fileHash' => '3ad34b8ce2be9c7bf5853c5564353716adf3bd73',
+    'fileHash' => '0b83dec32b2d56232df776d65dc7b9426844ea88',
     'dependentFiles' => 
     array (
-      0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
+      0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
       1 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
     ),
   ),
@@ -15078,7 +15085,7 @@ return [
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Commands.php' => 
   array (
-    'fileHash' => '96640ec620cb7c6938bb072a688a26ad299c41a2',
+    'fileHash' => 'c4432d529be8c42a1e1e1077ecbde1e7f39ed265',
     'dependentFiles' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Console.php',
@@ -15087,14 +15094,14 @@ return [
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Console.php' => 
   array (
-    'fileHash' => '8ba3073b1d1818e0e11dec385a5473e9f846f44f',
+    'fileHash' => '75897b39bb4685078209615b7c30f8945b3196e2',
     'dependentFiles' => 
     array (
     ),
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Novakit/AvailableCommands.php' => 
   array (
-    'fileHash' => 'ac36d9fac6384f676934c0150e37e4b7709dba79',
+    'fileHash' => '5d04d975033e81511c43f9bf539523e50e00dca7',
     'dependentFiles' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Commands.php',
@@ -15136,7 +15143,7 @@ return [
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Novakit/Server.php' => 
   array (
-    'fileHash' => '26b2c53020c7896e001c95be810069ceddd467c3',
+    'fileHash' => 'd24fed961515d1daf9184fd1bd45fc46ce8351da',
     'dependentFiles' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Commands.php',
@@ -15144,14 +15151,14 @@ return [
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Novakit/mod_rewrite.php' => 
   array (
-    'fileHash' => 'a8fcd572bb342bff31c9eb3f4fce403046c70b19',
+    'fileHash' => 'e90b4ff22a2da66e6fb0c3c87a2066ff5e58d15f',
     'dependentFiles' => 
     array (
     ),
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Terminal.php' => 
   array (
-    'fileHash' => '68e8ed2dced94ed30c13dd7116d0bcd78ca46bb2',
+    'fileHash' => '127950ba0d63c37d19d972a0308e49b6405782dd',
     'dependentFiles' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseCommand.php',
@@ -15206,29 +15213,6 @@ return [
     array (
     ),
   ),
-  '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Config/Configuration.php' => 
-  array (
-    'fileHash' => '18bb3760b5edbc0076040043e6d06f14fb3813ec',
-    'dependentFiles' => 
-    array (
-      0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/app/Controllers/Config/Config.php',
-      1 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/app/Controllers/Welcome.php',
-      2 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/functions.php',
-      3 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-      4 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
-      5 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseConfig.php',
-      6 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Console.php',
-      7 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Composer/BaseComposer.php',
-      8 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Composer/Builder.php',
-      9 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Composer/Updater.php',
-      10 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php',
-      11 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Errors/Error.php',
-      12 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Exceptions/AppException.php',
-      13 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Http/Header.php',
-      14 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Notifications/FirebasePusher.php',
-      15 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
-    ),
-  ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Config/Database.php' => 
   array (
     'fileHash' => 'aa0d7d78ee3dc0fe38015b695140937fcbae1192',
@@ -15241,7 +15225,7 @@ return [
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Config/DotEnv.php' => 
   array (
-    'fileHash' => '9641e142467bc23ca834ad9d902136e97708afa8',
+    'fileHash' => '804801facee8a2c77a41fa1f22bbbef77e2e8975',
     'dependentFiles' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/constants.php',
@@ -15269,17 +15253,6 @@ return [
     array (
     ),
   ),
-  '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Controllers/ViewController.php' => 
-  array (
-    'fileHash' => '17d0e6cc0f9df87aa5654ff490696490175ff1bc',
-    'dependentFiles' => 
-    array (
-      0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/app/Controllers/Welcome.php',
-      1 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseController.php',
-      2 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseViewController.php',
-      3 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
-    ),
-  ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Cookies/Cookie.php' => 
   array (
     'fileHash' => '8a265b102152a5fab93cf79c634d0af3f5893565',
@@ -15300,7 +15273,7 @@ return [
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Cookies/Exception/CookieException.php' => 
   array (
-    'fileHash' => '4615d8b06d8516a16a7261c2de4eea829f584d48',
+    'fileHash' => 'd472a1cd2ab9abc4e0fa1878a2671c74e2787f4d',
     'dependentFiles' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Cookies/Cookie.php',
@@ -15411,7 +15384,7 @@ return [
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Exceptions/MailerException.php' => 
   array (
-    'fileHash' => 'e618530d06705793416bd30404aca69faa855ade',
+    'fileHash' => 'b8f32eb734c40058c682ffc5d4f27523e2af4ed7',
     'dependentFiles' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Clients/NovaMailer.php',
@@ -15421,7 +15394,7 @@ return [
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Helpers/Helper.php' => 
   array (
-    'fileHash' => '8c01cab8b5419e3b1faeeb3bd87c2d38b8af336e',
+    'fileHash' => '88cb253a3bec826c8e7b394e5ba064d66eba9afc',
     'dependentFiles' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Clients/NovaMailer.php',
@@ -15430,7 +15403,7 @@ return [
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php' => 
   array (
-    'fileHash' => '4af76c287ec3222b95cb7e63d3353657619ee12f',
+    'fileHash' => '35d25d7e46442eb0480f944013c1310321adc770',
     'dependentFiles' => 
     array (
     ),
@@ -15444,19 +15417,19 @@ return [
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Errors/Error.php' => 
   array (
-    'fileHash' => 'ce4e973778d2fb82972bd238894ec8a4e61e4d8e',
+    'fileHash' => '31512c267cf9c6389337167e8e75a7ac02b188eb',
     'dependentFiles' => 
     array (
     ),
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Exceptions/AppException.php' => 
   array (
-    'fileHash' => '45baacb9b3f523733f0f78b504ef43d4d62c9fe2',
+    'fileHash' => '4f63f693e73323772cd1a3f73142d2b0417e70ac',
     'dependentFiles' => 
     array (
-      0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-      1 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
-      2 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Paths.php',
+      0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
+      1 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Paths.php',
+      2 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
       3 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Cache/Cache.php',
       4 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Cache/FileCache.php',
       5 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Config/DotEnv.php',
@@ -15591,9 +15564,9 @@ return [
     'fileHash' => 'a0f85c2adeee0b732cd85c55ceb79ba19b5fe2de',
     'dependentFiles' => 
     array (
-      0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-      1 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
-      2 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Paths.php',
+      0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
+      1 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Paths.php',
+      2 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
       3 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Functions/Escaper.php',
       4 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Library/Importer.php',
       5 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
@@ -15611,7 +15584,7 @@ return [
     'fileHash' => '21e35217512d77f198442d938b9a37815d9c6530',
     'dependentFiles' => 
     array (
-      0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
+      0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
       1 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
     ),
   ),
@@ -15790,11 +15763,11 @@ return [
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Http/Header.php' => 
   array (
-    'fileHash' => 'fe2e58d1c3997909dc931e23806231109745d9aa',
+    'fileHash' => '3b9ea847357243e8bceba8952cf455d77c805491',
     'dependentFiles' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Cache/Compress.php',
-      1 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Cache/Optimizer.php',
+      1 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Cache/PageViewCache.php',
       2 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Http/Request.php',
       3 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
     ),
@@ -15847,12 +15820,12 @@ return [
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Http/Request.php' => 
   array (
-    'fileHash' => '510e0454ae1479bd58bcd381d751b12fe5406f86',
+    'fileHash' => '420947dcb86a25ba61097ca0215974f98026945e',
     'dependentFiles' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/functions.php',
       1 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseController.php',
-      2 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Controllers/ViewController.php',
+      2 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseViewController.php',
     ),
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Interface/ServicesInterface.php' => 
@@ -15868,7 +15841,7 @@ return [
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Languages/Translator.php' => 
   array (
-    'fileHash' => 'db94a35ba43f8719f640e284a46df0e0fbaeb97d',
+    'fileHash' => 'f63ee328c08dba124472e8708b7e21c60f53964f',
     'dependentFiles' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/functions.php',
@@ -15882,7 +15855,8 @@ return [
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/functions.php',
       1 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
-      2 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Controllers/ViewController.php',
+      2 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseController.php',
+      3 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseViewController.php',
     ),
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Logger/Logger.php' => 
@@ -15944,7 +15918,7 @@ return [
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Bootstrap.php' => 
   array (
-    'fileHash' => 'f966b8749a1063b4ba6b19605a29ffbc50cea32f',
+    'fileHash' => '6dab537fbc8e1e23ef26415eb5230badb39ee03e',
     'dependentFiles' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
@@ -15952,10 +15926,10 @@ return [
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php' => 
   array (
-    'fileHash' => 'e534231a70b04f1e9f47b5100f10c6ba6fbdd2be',
+    'fileHash' => '6672d0ecfa1c78a802d772b65edcd3dd343f06d5',
     'dependentFiles' => 
     array (
-      0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
+      0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
     ),
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Security/Csrf.php' => 
@@ -15988,26 +15962,26 @@ return [
       0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/functions.php',
       1 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
       2 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseController.php',
-      3 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Terminal.php',
-      4 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Controllers/ViewController.php',
+      3 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseViewController.php',
+      4 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Terminal.php',
     ),
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Security/ValidatorInterface.php' => 
   array (
-    'fileHash' => 'bcb73f25d39b1ceed8dd4b405523b4e92dc0374a',
+    'fileHash' => '6ec475b517eea765b668633fe6410cc60a5d17ce',
     'dependentFiles' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/libraries/sys/functions.php',
       1 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php',
       2 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseController.php',
-      3 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Terminal.php',
-      4 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Controllers/ViewController.php',
+      3 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseViewController.php',
+      4 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Terminal.php',
       5 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Security/InputValidator.php',
     ),
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php' => 
   array (
-    'fileHash' => 'd3009cfc7d8b70f4efba38c4157c6b890b72fd5f',
+    'fileHash' => 'bf9ab07945cf0e4a617bed5c6363dda9316f8148',
     'dependentFiles' => 
     array (
     ),
@@ -16079,29 +16053,28 @@ return [
     'fileHash' => 'e99cb976e23967eb2483ba9c3120db2b4b31b119',
     'dependentFiles' => 
     array (
-      0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
+      0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
       1 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
     ),
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php' => 
   array (
-    'fileHash' => 'f8217ba3042fed9c0175aeadc7b16c8d57275d00',
+    'fileHash' => '0fc218d819243b6f3c275b40de255171d4af0ee3',
     'dependentFiles' => 
     array (
     ),
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php' => 
   array (
-    'fileHash' => '561bd8edd5300e4e4108955ac1d4a4d0b44ba74e',
+    'fileHash' => 'ce6ace2830f94c165b8347d0d558f51699664c54',
     'dependentFiles' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/app/Controllers/Application.php',
-      1 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php',
-      2 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
-      3 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseController.php',
-      4 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Controllers/ViewController.php',
-      5 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
-      6 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
+      1 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php',
+      2 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseController.php',
+      3 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseViewController.php',
+      4 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php',
+      5 => '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php',
     ),
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/ViewModel.php' => 
@@ -16165,12 +16138,11 @@ return [
       array (
         0 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => '__construct',
+           'name' => 'onCreate',
            'phpDoc' => 
           \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
              'phpDocString' => '/**
-     * @var Session $session;
-     * protected $session;
+     * @method #[\\Override] onCreate
     */',
              'namespace' => 'App\\Controllers',
              'uses' => 
@@ -16182,12 +16154,12 @@ return [
             ),
           )),
            'byRef' => false,
-           'public' => true,
+           'public' => false,
            'private' => false,
            'abstract' => false,
            'final' => false,
            'static' => false,
-           'returnType' => NULL,
+           'returnType' => 'void',
            'parameters' => 
           array (
           ),
@@ -17144,27 +17116,17 @@ return [
        'statements' => 
       array (
         0 => 
-        \PHPStan\Dependency\ExportedNode\ExportedClassConstantsNode::__set_state(array(
-           'constants' => 
+        \PHPStan\Dependency\ExportedNode\ExportedPropertiesNode::__set_state(array(
+           'names' => 
           array (
-            0 => 
-            \PHPStan\Dependency\ExportedNode\ExportedClassConstantNode::__set_state(array(
-               'name' => 'ENGINE',
-               'value' => '\'default\'',
-               'attributes' => 
-              array (
-              ),
-            )),
+            0 => 'templateEngine',
           ),
-           'public' => true,
-           'private' => false,
-           'final' => false,
            'phpDoc' => 
           \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
              'phpDocString' => '/** 
    * Application template engine
    * 
-   * @var string ENGINE [default, smarty] 
+   * @var string $templateEngine [default, smarty] 
   */',
              'namespace' => 'App\\Controllers\\Config',
              'uses' => 
@@ -17174,6 +17136,14 @@ return [
             array (
             ),
           )),
+           'type' => NULL,
+           'public' => true,
+           'private' => false,
+           'static' => true,
+           'readonly' => false,
+           'attributes' => 
+          array (
+          ),
         )),
         1 => 
         \PHPStan\Dependency\ExportedNode\ExportedPropertiesNode::__set_state(array(
@@ -17214,14 +17184,14 @@ return [
         \PHPStan\Dependency\ExportedNode\ExportedPropertiesNode::__set_state(array(
            'names' => 
           array (
-            0 => 'variablePrefix',
+            0 => 'useVariablePrefix',
           ),
            'phpDoc' => 
           \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
              'phpDocString' => '/** 
    * Disable or enable prefixing variable name with underscore while using $this keyword $this->_name 
    * 
-   * @var bool $viewIsolation 
+   * @var bool $useVariablePrefix 
   */',
              'namespace' => 'App\\Controllers\\Config',
              'uses' => 
@@ -17244,14 +17214,14 @@ return [
         \PHPStan\Dependency\ExportedNode\ExportedPropertiesNode::__set_state(array(
            'names' => 
           array (
-            0 => 'optimizerFolder',
+            0 => 'pageCacheFolder',
           ),
            'phpDoc' => 
           \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
              'phpDocString' => '/** 
-   * Application template optimized file directory path
+   * Application template page view cache file directory path
    * 
-   * @var string $optimizerFolder 
+   * @var string $pageCacheFolder 
   */',
              'namespace' => 'App\\Controllers\\Config',
              'uses' => 
@@ -17570,7 +17540,7 @@ return [
      *
      * @param string $key The key of the environment variable.
      * @param string $value The value of the environment variable.
-     * @param bool $add_to_env Save or update to .env file 
+     * @param bool $append_to_env Save or update to .env file 
      * 
      * @return bool true on success or false on failure.
      */',
@@ -17610,7 +17580,7 @@ return [
         )),
         2 => 
         \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
-           'name' => 'add_to_env',
+           'name' => 'append_to_env',
            'type' => 'bool',
            'byRef' => false,
            'variadic' => false,
@@ -19308,6 +19278,114 @@ return [
       array (
       ),
     )),
+    31 => 
+    \PHPStan\Dependency\ExportedNode\ExportedFunctionNode::__set_state(array(
+       'name' => 'filter_paths',
+       'phpDoc' => 
+      \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+         'phpDocString' => '/**
+     * Filter the path to match to allowed in error directories preview.
+     *
+     * @param string $path The path to be filtered.
+     * 
+     * @return string
+     */',
+         'namespace' => NULL,
+         'uses' => 
+        array (
+          'factory' => 'Luminova\\Application\\Factory',
+          'request' => 'Luminova\\Http\\Request',
+          'cookie' => 'Luminova\\Cookies\\Cookie',
+          'functions' => 'Luminova\\Functions\\Functions',
+        ),
+         'constUses' => 
+        array (
+        ),
+      )),
+       'byRef' => false,
+       'returnType' => 'string',
+       'parameters' => 
+      array (
+        0 => 
+        \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
+           'name' => 'path',
+           'type' => 'string',
+           'byRef' => false,
+           'variadic' => false,
+           'hasDefault' => false,
+           'attributes' => 
+          array (
+          ),
+        )),
+      ),
+       'attributes' => 
+      array (
+      ),
+    )),
+    32 => 
+    \PHPStan\Dependency\ExportedNode\ExportedFunctionNode::__set_state(array(
+       'name' => 'is_command',
+       'phpDoc' => 
+      \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+         'phpDocString' => '/**
+     * Is CLI?
+     *
+     * Test to see if a request was made from the command line.
+     *
+     * @return bool
+    */',
+         'namespace' => NULL,
+         'uses' => 
+        array (
+          'factory' => 'Luminova\\Application\\Factory',
+          'request' => 'Luminova\\Http\\Request',
+          'cookie' => 'Luminova\\Cookies\\Cookie',
+          'functions' => 'Luminova\\Functions\\Functions',
+        ),
+         'constUses' => 
+        array (
+        ),
+      )),
+       'byRef' => false,
+       'returnType' => 'bool',
+       'parameters' => 
+      array (
+      ),
+       'attributes' => 
+      array (
+      ),
+    )),
+    33 => 
+    \PHPStan\Dependency\ExportedNode\ExportedFunctionNode::__set_state(array(
+       'name' => 'is_dev_server',
+       'phpDoc' => 
+      \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+         'phpDocString' => '/**
+     * Check if the application is running locally on development server
+     *
+     * @return bool
+    */',
+         'namespace' => NULL,
+         'uses' => 
+        array (
+          'factory' => 'Luminova\\Application\\Factory',
+          'request' => 'Luminova\\Http\\Request',
+          'cookie' => 'Luminova\\Cookies\\Cookie',
+          'functions' => 'Luminova\\Functions\\Functions',
+        ),
+         'constUses' => 
+        array (
+        ),
+      )),
+       'byRef' => false,
+       'returnType' => 'bool',
+       'parameters' => 
+      array (
+      ),
+       'attributes' => 
+      array (
+      ),
+    )),
   ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php' => 
   array (
@@ -19323,183 +19401,12 @@ return [
       ),
        'usedTraits' => 
       array (
-        0 => 'Luminova\\Template\\TemplateTrait',
       ),
        'traitUseAdaptations' => 
       array (
       ),
        'statements' => 
       array (
-        0 => 
-        \PHPStan\Dependency\ExportedNode\ExportedPropertiesNode::__set_state(array(
-           'names' => 
-          array (
-            0 => 'router',
-          ),
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Router class instance
-     *
-     * @var Router $router
-     */',
-             'namespace' => 'Luminova\\Application',
-             'uses' => 
-            array (
-              'router' => 'Luminova\\Routing\\Router',
-              'templatetrait' => 'Luminova\\Template\\TemplateTrait',
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'type' => '?Luminova\\Routing\\Router',
-           'public' => true,
-           'private' => false,
-           'static' => false,
-           'readonly' => false,
-           'attributes' => 
-          array (
-          ),
-        )),
-        1 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => '__construct',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Initialize the base application constructor
-     *
-     * @param string $dir The project root directory
-     */',
-             'namespace' => 'Luminova\\Application',
-             'uses' => 
-            array (
-              'router' => 'Luminova\\Routing\\Router',
-              'templatetrait' => 'Luminova\\Template\\TemplateTrait',
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => false,
-           'returnType' => NULL,
-           'parameters' => 
-          array (
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        2 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'getView',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Get the current view paths, segments uri
-     *
-     * @return string
-     */',
-             'namespace' => 'Luminova\\Application',
-             'uses' => 
-            array (
-              'router' => 'Luminova\\Routing\\Router',
-              'templatetrait' => 'Luminova\\Template\\TemplateTrait',
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => false,
-           'returnType' => 'string',
-           'parameters' => 
-          array (
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        3 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'getBase',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Get application base path from router.
-     *
-     * @return string
-     */',
-             'namespace' => 'Luminova\\Application',
-             'uses' => 
-            array (
-              'router' => 'Luminova\\Routing\\Router',
-              'templatetrait' => 'Luminova\\Template\\TemplateTrait',
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => false,
-           'returnType' => 'string',
-           'parameters' => 
-          array (
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        4 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'getInstance',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Get the base application instance as a singleton.
-     *
-     * @param string $dir The project root directory
-     * 
-     * @return static
-     */',
-             'namespace' => 'Luminova\\Application',
-             'uses' => 
-            array (
-              'router' => 'Luminova\\Routing\\Router',
-              'templatetrait' => 'Luminova\\Template\\TemplateTrait',
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => true,
-           'returnType' => 'static',
-           'parameters' => 
-          array (
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
       ),
        'attributes' => 
       array (
@@ -19517,7 +19424,6 @@ return [
  * Factory methods classes.
  *
  * @method static Functions           functions(bool $shared = true)                        @return Functions
- * @method static Configuration       config(...$params, bool $shared = true)               @return Configuration
  * @method static Session             session(...$params, bool $shared = true)              @return Session
  * @method static Task                task(...$params, bool $shared = true)                 @return Task
  * @method static Importer            import(...$params, bool $shared = true)               @return Importer
@@ -19530,7 +19436,6 @@ return [
          'namespace' => 'Luminova\\Application',
          'uses' => 
         array (
-          'configuration' => 'Luminova\\Config\\Configuration',
           'task' => 'Luminova\\Time\\Task',
           'functions' => 'Luminova\\Functions\\Functions',
           'session' => 'Luminova\\Sessions\\Session',
@@ -19586,7 +19491,6 @@ return [
              'namespace' => 'Luminova\\Application',
              'uses' => 
             array (
-              'configuration' => 'Luminova\\Config\\Configuration',
               'task' => 'Luminova\\Time\\Task',
               'functions' => 'Luminova\\Functions\\Functions',
               'session' => 'Luminova\\Sessions\\Session',
@@ -19660,7 +19564,6 @@ return [
              'namespace' => 'Luminova\\Application',
              'uses' => 
             array (
-              'configuration' => 'Luminova\\Config\\Configuration',
               'task' => 'Luminova\\Time\\Task',
               'functions' => 'Luminova\\Functions\\Functions',
               'session' => 'Luminova\\Sessions\\Session',
@@ -19742,7 +19645,6 @@ return [
              'namespace' => 'Luminova\\Application',
              'uses' => 
             array (
-              'configuration' => 'Luminova\\Config\\Configuration',
               'task' => 'Luminova\\Time\\Task',
               'functions' => 'Luminova\\Functions\\Functions',
               'session' => 'Luminova\\Sessions\\Session',
@@ -19806,7 +19708,6 @@ return [
              'namespace' => 'Luminova\\Application',
              'uses' => 
             array (
-              'configuration' => 'Luminova\\Config\\Configuration',
               'task' => 'Luminova\\Time\\Task',
               'functions' => 'Luminova\\Functions\\Functions',
               'session' => 'Luminova\\Sessions\\Session',
@@ -19875,7 +19776,6 @@ return [
              'namespace' => 'Luminova\\Application',
              'uses' => 
             array (
-              'configuration' => 'Luminova\\Config\\Configuration',
               'task' => 'Luminova\\Time\\Task',
               'functions' => 'Luminova\\Functions\\Functions',
               'session' => 'Luminova\\Sessions\\Session',
@@ -19924,7 +19824,6 @@ return [
              'namespace' => 'Luminova\\Application',
              'uses' => 
             array (
-              'configuration' => 'Luminova\\Config\\Configuration',
               'task' => 'Luminova\\Time\\Task',
               'functions' => 'Luminova\\Functions\\Functions',
               'session' => 'Luminova\\Sessions\\Session',
@@ -19982,7 +19881,6 @@ return [
              'namespace' => 'Luminova\\Application',
              'uses' => 
             array (
-              'configuration' => 'Luminova\\Config\\Configuration',
               'task' => 'Luminova\\Time\\Task',
               'functions' => 'Luminova\\Functions\\Functions',
               'session' => 'Luminova\\Sessions\\Session',
@@ -20040,7 +19938,6 @@ return [
              'namespace' => 'Luminova\\Application',
              'uses' => 
             array (
-              'configuration' => 'Luminova\\Config\\Configuration',
               'task' => 'Luminova\\Time\\Task',
               'functions' => 'Luminova\\Functions\\Functions',
               'session' => 'Luminova\\Sessions\\Session',
@@ -20090,7 +19987,6 @@ return [
              'namespace' => 'Luminova\\Application',
              'uses' => 
             array (
-              'configuration' => 'Luminova\\Config\\Configuration',
               'task' => 'Luminova\\Time\\Task',
               'functions' => 'Luminova\\Functions\\Functions',
               'session' => 'Luminova\\Sessions\\Session',
@@ -21724,12 +21620,13 @@ return [
        'phpDoc' => NULL,
        'abstract' => true,
        'final' => false,
-       'extends' => 'Luminova\\Application\\Application',
+       'extends' => NULL,
        'implements' => 
       array (
       ),
        'usedTraits' => 
       array (
+        0 => 'Luminova\\Template\\TemplateTrait',
       ),
        'traitUseAdaptations' => 
       array (
@@ -21737,6 +21634,172 @@ return [
        'statements' => 
       array (
         0 => 
+        \PHPStan\Dependency\ExportedNode\ExportedPropertiesNode::__set_state(array(
+           'names' => 
+          array (
+            0 => 'router',
+          ),
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * Router class instance
+     *
+     * @var Router $router
+     */',
+             'namespace' => 'Luminova\\Base',
+             'uses' => 
+            array (
+              'router' => 'Luminova\\Routing\\Router',
+              'templatetrait' => 'Luminova\\Template\\TemplateTrait',
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
+           'type' => '?Luminova\\Routing\\Router',
+           'public' => true,
+           'private' => false,
+           'static' => false,
+           'readonly' => false,
+           'attributes' => 
+          array (
+          ),
+        )),
+        1 => 
+        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
+           'name' => '__construct',
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * Initialize the base application constructor
+     */',
+             'namespace' => 'Luminova\\Base',
+             'uses' => 
+            array (
+              'router' => 'Luminova\\Routing\\Router',
+              'templatetrait' => 'Luminova\\Template\\TemplateTrait',
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
+           'byRef' => false,
+           'public' => true,
+           'private' => false,
+           'abstract' => false,
+           'final' => false,
+           'static' => false,
+           'returnType' => NULL,
+           'parameters' => 
+          array (
+          ),
+           'attributes' => 
+          array (
+          ),
+        )),
+        2 => 
+        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
+           'name' => 'getInstance',
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * Get the base application instance as a singleton.
+     * 
+     * @return static
+     */',
+             'namespace' => 'Luminova\\Base',
+             'uses' => 
+            array (
+              'router' => 'Luminova\\Routing\\Router',
+              'templatetrait' => 'Luminova\\Template\\TemplateTrait',
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
+           'byRef' => false,
+           'public' => true,
+           'private' => false,
+           'abstract' => false,
+           'final' => false,
+           'static' => true,
+           'returnType' => 'static',
+           'parameters' => 
+          array (
+          ),
+           'attributes' => 
+          array (
+          ),
+        )),
+        3 => 
+        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
+           'name' => 'getView',
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * Get the current view paths, segments uri
+     *
+     * @return string
+     */',
+             'namespace' => 'Luminova\\Base',
+             'uses' => 
+            array (
+              'router' => 'Luminova\\Routing\\Router',
+              'templatetrait' => 'Luminova\\Template\\TemplateTrait',
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
+           'byRef' => false,
+           'public' => true,
+           'private' => false,
+           'abstract' => false,
+           'final' => false,
+           'static' => false,
+           'returnType' => 'string',
+           'parameters' => 
+          array (
+          ),
+           'attributes' => 
+          array (
+          ),
+        )),
+        4 => 
+        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
+           'name' => 'getBase',
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * Get application base path from router.
+     *
+     * @return string
+     */',
+             'namespace' => 'Luminova\\Base',
+             'uses' => 
+            array (
+              'router' => 'Luminova\\Routing\\Router',
+              'templatetrait' => 'Luminova\\Template\\TemplateTrait',
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
+           'byRef' => false,
+           'public' => true,
+           'private' => false,
+           'abstract' => false,
+           'final' => false,
+           'static' => false,
+           'returnType' => 'string',
+           'parameters' => 
+          array (
+          ),
+           'attributes' => 
+          array (
+          ),
+        )),
+        5 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => '__get',
            'phpDoc' => 
@@ -21752,7 +21815,8 @@ return [
              'namespace' => 'Luminova\\Base',
              'uses' => 
             array (
-              'application' => 'Luminova\\Application\\Application',
+              'router' => 'Luminova\\Routing\\Router',
+              'templatetrait' => 'Luminova\\Template\\TemplateTrait',
             ),
              'constUses' => 
             array (
@@ -21778,6 +21842,42 @@ return [
               array (
               ),
             )),
+          ),
+           'attributes' => 
+          array (
+          ),
+        )),
+        6 => 
+        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
+           'name' => 'onCreate',
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * On create method 
+     * 
+     * @overridable #[\\Override]
+     * 
+     * @return void 
+    */',
+             'namespace' => 'Luminova\\Base',
+             'uses' => 
+            array (
+              'router' => 'Luminova\\Routing\\Router',
+              'templatetrait' => 'Luminova\\Template\\TemplateTrait',
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
+           'byRef' => false,
+           'public' => false,
+           'private' => false,
+           'abstract' => false,
+           'final' => false,
+           'static' => false,
+           'returnType' => 'void',
+           'parameters' => 
+          array (
           ),
            'attributes' => 
           array (
@@ -22037,7 +22137,7 @@ return [
            'phpDoc' => 
           \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
              'phpDocString' => '/**
-     * Magic method getter
+     * Property getter
      *
      * @param string $key property key
      * 
@@ -22083,7 +22183,6 @@ return [
            'phpDoc' => 
           \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
              'phpDocString' => '/**
-     * Magic method isset
      * Check if property is set
      *
      * @param string $key property key
@@ -22138,7 +22237,7 @@ return [
        'phpDoc' => NULL,
        'abstract' => true,
        'final' => false,
-       'extends' => 'Luminova\\Config\\Configuration',
+       'extends' => NULL,
        'implements' => 
       array (
       ),
@@ -22150,6 +22249,292 @@ return [
       ),
        'statements' => 
       array (
+        0 => 
+        \PHPStan\Dependency\ExportedNode\ExportedPropertiesNode::__set_state(array(
+           'names' => 
+          array (
+            0 => 'version',
+          ),
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+    * @var string $version version name
+    */',
+             'namespace' => 'Luminova\\Base',
+             'uses' => 
+            array (
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
+           'type' => NULL,
+           'public' => true,
+           'private' => false,
+           'static' => true,
+           'readonly' => false,
+           'attributes' => 
+          array (
+          ),
+        )),
+        1 => 
+        \PHPStan\Dependency\ExportedNode\ExportedPropertiesNode::__set_state(array(
+           'names' => 
+          array (
+            0 => 'versionCode',
+          ),
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+    * @var int $versionCode version code
+    */',
+             'namespace' => 'Luminova\\Base',
+             'uses' => 
+            array (
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
+           'type' => NULL,
+           'public' => true,
+           'private' => false,
+           'static' => true,
+           'readonly' => false,
+           'attributes' => 
+          array (
+          ),
+        )),
+        2 => 
+        \PHPStan\Dependency\ExportedNode\ExportedClassConstantsNode::__set_state(array(
+           'constants' => 
+          array (
+            0 => 
+            \PHPStan\Dependency\ExportedNode\ExportedClassConstantNode::__set_state(array(
+               'name' => 'MIN_PHP_VERSION',
+               'value' => '\'8.0\'',
+               'attributes' => 
+              array (
+              ),
+            )),
+          ),
+           'public' => true,
+           'private' => false,
+           'final' => false,
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * Minimum required php version
+    * @var string MIN_PHP_VERSION 
+    */',
+             'namespace' => 'Luminova\\Base',
+             'uses' => 
+            array (
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
+        )),
+        3 => 
+        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
+           'name' => 'fileVersion',
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * Get the file version.
+     * 
+     * @deprecated Use global constant APP_FILE_VERSION instead
+     * @return string
+    */',
+             'namespace' => 'Luminova\\Base',
+             'uses' => 
+            array (
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
+           'byRef' => false,
+           'public' => true,
+           'private' => false,
+           'abstract' => false,
+           'final' => false,
+           'static' => true,
+           'returnType' => 'string',
+           'parameters' => 
+          array (
+          ),
+           'attributes' => 
+          array (
+          ),
+        )),
+        4 => 
+        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
+           'name' => 'shouldMinify',
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * Check if minification is enabled.
+     *
+     * @return int
+    */',
+             'namespace' => 'Luminova\\Base',
+             'uses' => 
+            array (
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
+           'byRef' => false,
+           'public' => true,
+           'private' => false,
+           'abstract' => false,
+           'final' => false,
+           'static' => true,
+           'returnType' => 'int',
+           'parameters' => 
+          array (
+          ),
+           'attributes' => 
+          array (
+          ),
+        )),
+        5 => 
+        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
+           'name' => 'getEnv',
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * Get environment configuration variables.
+     *
+     * @param string $key The key to retrieve.
+     * @param mixed $default The default value to return if the key is not found.
+     * @param string|null $return Optional return types 
+     *      - [bool, int, float, double, nullable, string]
+     * 
+     * @return mixed
+    */',
+             'namespace' => 'Luminova\\Base',
+             'uses' => 
+            array (
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
+           'byRef' => false,
+           'public' => true,
+           'private' => false,
+           'abstract' => false,
+           'final' => false,
+           'static' => true,
+           'returnType' => 'mixed',
+           'parameters' => 
+          array (
+            0 => 
+            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
+               'name' => 'key',
+               'type' => 'string',
+               'byRef' => false,
+               'variadic' => false,
+               'hasDefault' => false,
+               'attributes' => 
+              array (
+              ),
+            )),
+            1 => 
+            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
+               'name' => 'default',
+               'type' => '?mixed',
+               'byRef' => false,
+               'variadic' => false,
+               'hasDefault' => true,
+               'attributes' => 
+              array (
+              ),
+            )),
+            2 => 
+            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
+               'name' => 'return',
+               'type' => '?string',
+               'byRef' => false,
+               'variadic' => false,
+               'hasDefault' => true,
+               'attributes' => 
+              array (
+              ),
+            )),
+          ),
+           'attributes' => 
+          array (
+          ),
+        )),
+        6 => 
+        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
+           'name' => 'copyright',
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * Get the framework copyright information
+     *
+     * @return string
+    */',
+             'namespace' => 'Luminova\\Base',
+             'uses' => 
+            array (
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
+           'byRef' => false,
+           'public' => true,
+           'private' => false,
+           'abstract' => false,
+           'final' => false,
+           'static' => true,
+           'returnType' => 'string',
+           'parameters' => 
+          array (
+          ),
+           'attributes' => 
+          array (
+          ),
+        )),
+        7 => 
+        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
+           'name' => 'version',
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * Get the framework version number
+     *
+     * @return string
+    */',
+             'namespace' => 'Luminova\\Base',
+             'uses' => 
+            array (
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
+           'byRef' => false,
+           'public' => true,
+           'private' => false,
+           'abstract' => false,
+           'final' => false,
+           'static' => true,
+           'returnType' => 'string',
+           'parameters' => 
+          array (
+          ),
+           'attributes' => 
+          array (
+          ),
+        )),
       ),
        'attributes' => 
       array (
@@ -22164,7 +22549,7 @@ return [
        'phpDoc' => NULL,
        'abstract' => true,
        'final' => false,
-       'extends' => 'Luminova\\Controllers\\ViewController',
+       'extends' => 'Luminova\\Base\\BaseViewController',
        'implements' => 
       array (
       ),
@@ -22185,15 +22570,16 @@ return [
            'phpDoc' => 
           \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
              'phpDocString' => '/**
-     * HTTP request object 
-     * @var Request $request 
+      * HTTP request object 
+      * @var Request $request 
     */',
              'namespace' => 'Luminova\\Base',
              'uses' => 
             array (
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'baseviewcontroller' => 'Luminova\\Base\\BaseViewController',
               'request' => 'Luminova\\Http\\Request',
               'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'importer' => 'Luminova\\Library\\Importer',
               'application' => 'App\\Controllers\\Application',
             ),
              'constUses' => 
@@ -22218,15 +22604,16 @@ return [
            'phpDoc' => 
           \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
              'phpDocString' => '/**
-     * Input validation object 
-     * @var InputValidator $validate
+      * Input validation object 
+      * @var InputValidator $validate
     */',
              'namespace' => 'Luminova\\Base',
              'uses' => 
             array (
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'baseviewcontroller' => 'Luminova\\Base\\BaseViewController',
               'request' => 'Luminova\\Http\\Request',
               'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'importer' => 'Luminova\\Library\\Importer',
               'application' => 'App\\Controllers\\Application',
             ),
              'constUses' => 
@@ -22253,13 +22640,14 @@ return [
              'phpDocString' => '/**
       * Application instance
       * @var Application $app 
-     */',
+    */',
              'namespace' => 'Luminova\\Base',
              'uses' => 
             array (
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'baseviewcontroller' => 'Luminova\\Base\\BaseViewController',
               'request' => 'Luminova\\Http\\Request',
               'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'importer' => 'Luminova\\Library\\Importer',
               'application' => 'App\\Controllers\\Application',
             ),
              'constUses' => 
@@ -22276,6 +22664,40 @@ return [
           ),
         )),
         3 => 
+        \PHPStan\Dependency\ExportedNode\ExportedPropertiesNode::__set_state(array(
+           'names' => 
+          array (
+            0 => 'library',
+          ),
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+      * Importer instance
+      * @var Importer $library 
+    */',
+             'namespace' => 'Luminova\\Base',
+             'uses' => 
+            array (
+              'baseviewcontroller' => 'Luminova\\Base\\BaseViewController',
+              'request' => 'Luminova\\Http\\Request',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'importer' => 'Luminova\\Library\\Importer',
+              'application' => 'App\\Controllers\\Application',
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
+           'type' => '?Luminova\\Library\\Importer',
+           'public' => false,
+           'private' => false,
+           'static' => false,
+           'readonly' => false,
+           'attributes' => 
+          array (
+          ),
+        )),
+        4 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => '__construct',
            'phpDoc' => 
@@ -22287,43 +22709,10 @@ return [
              'namespace' => 'Luminova\\Base',
              'uses' => 
             array (
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'baseviewcontroller' => 'Luminova\\Base\\BaseViewController',
               'request' => 'Luminova\\Http\\Request',
               'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'application' => 'App\\Controllers\\Application',
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => false,
-           'returnType' => NULL,
-           'parameters' => 
-          array (
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        4 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => '__destruct',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Uninitialized controller instance
-    */',
-             'namespace' => 'Luminova\\Base',
-             'uses' => 
-            array (
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
-              'request' => 'Luminova\\Http\\Request',
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'importer' => 'Luminova\\Library\\Importer',
               'application' => 'App\\Controllers\\Application',
             ),
              'constUses' => 
@@ -22350,7 +22739,7 @@ return [
            'phpDoc' => 
           \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
              'phpDocString' => '/**
-     * Magic method getter
+     * Property getter
      *
      * @param string $key property key
      * 
@@ -22359,9 +22748,10 @@ return [
              'namespace' => 'Luminova\\Base',
              'uses' => 
             array (
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'baseviewcontroller' => 'Luminova\\Base\\BaseViewController',
               'request' => 'Luminova\\Http\\Request',
               'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'importer' => 'Luminova\\Library\\Importer',
               'application' => 'App\\Controllers\\Application',
             ),
              'constUses' => 
@@ -22399,7 +22789,6 @@ return [
            'phpDoc' => 
           \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
              'phpDocString' => '/**
-     * Magic method isset
      * Check if property is set
      *
      * @param string $key property key
@@ -22409,9 +22798,10 @@ return [
              'namespace' => 'Luminova\\Base',
              'uses' => 
             array (
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'baseviewcontroller' => 'Luminova\\Base\\BaseViewController',
               'request' => 'Luminova\\Http\\Request',
               'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'importer' => 'Luminova\\Library\\Importer',
               'application' => 'App\\Controllers\\Application',
             ),
              'constUses' => 
@@ -22477,7 +22867,7 @@ return [
           array (
             0 => 
             \PHPStan\Dependency\ExportedNode\ExportedClassConstantNode::__set_state(array(
-               'name' => 'INT',
+               'name' => 'RANDOM_INT',
                'value' => '"int"',
                'attributes' => 
               array (
@@ -22487,7 +22877,21 @@ return [
            'public' => true,
            'private' => false,
            'final' => false,
-           'phpDoc' => NULL,
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * @var string RANDOM_INT
+    */',
+             'namespace' => 'Luminova\\Base',
+             'uses' => 
+            array (
+              'functiontrait' => 'Luminova\\Functions\\FunctionTrait',
+              'stringtrait' => 'Luminova\\Functions\\StringTrait',
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
         )),
         1 => 
         \PHPStan\Dependency\ExportedNode\ExportedClassConstantsNode::__set_state(array(
@@ -22495,7 +22899,7 @@ return [
           array (
             0 => 
             \PHPStan\Dependency\ExportedNode\ExportedClassConstantNode::__set_state(array(
-               'name' => 'CHAR',
+               'name' => 'RANDOM_CHAR',
                'value' => '"char"',
                'attributes' => 
               array (
@@ -22505,7 +22909,21 @@ return [
            'public' => true,
            'private' => false,
            'final' => false,
-           'phpDoc' => NULL,
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * @var string RANDOM_CHAR
+    */',
+             'namespace' => 'Luminova\\Base',
+             'uses' => 
+            array (
+              'functiontrait' => 'Luminova\\Functions\\FunctionTrait',
+              'stringtrait' => 'Luminova\\Functions\\StringTrait',
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
         )),
         2 => 
         \PHPStan\Dependency\ExportedNode\ExportedClassConstantsNode::__set_state(array(
@@ -22513,7 +22931,7 @@ return [
           array (
             0 => 
             \PHPStan\Dependency\ExportedNode\ExportedClassConstantNode::__set_state(array(
-               'name' => 'STR',
+               'name' => 'RANDOM_STR',
                'value' => '"str"',
                'attributes' => 
               array (
@@ -22523,7 +22941,21 @@ return [
            'public' => true,
            'private' => false,
            'final' => false,
-           'phpDoc' => NULL,
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * @var string RANDOM_STR
+    */',
+             'namespace' => 'Luminova\\Base',
+             'uses' => 
+            array (
+              'functiontrait' => 'Luminova\\Functions\\FunctionTrait',
+              'stringtrait' => 'Luminova\\Functions\\StringTrait',
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
         )),
         3 => 
         \PHPStan\Dependency\ExportedNode\ExportedClassConstantsNode::__set_state(array(
@@ -22531,7 +22963,7 @@ return [
           array (
             0 => 
             \PHPStan\Dependency\ExportedNode\ExportedClassConstantNode::__set_state(array(
-               'name' => 'SALT',
+               'name' => 'RANDOM_SALT',
                'value' => '"salt"',
                'attributes' => 
               array (
@@ -22541,7 +22973,21 @@ return [
            'public' => true,
            'private' => false,
            'final' => false,
-           'phpDoc' => NULL,
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * @var string RANDOM_SALT
+    */',
+             'namespace' => 'Luminova\\Base',
+             'uses' => 
+            array (
+              'functiontrait' => 'Luminova\\Functions\\FunctionTrait',
+              'stringtrait' => 'Luminova\\Functions\\StringTrait',
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
         )),
         4 => 
         \PHPStan\Dependency\ExportedNode\ExportedClassConstantsNode::__set_state(array(
@@ -22549,7 +22995,7 @@ return [
           array (
             0 => 
             \PHPStan\Dependency\ExportedNode\ExportedClassConstantNode::__set_state(array(
-               'name' => 'SID',
+               'name' => 'RANDOM_SID',
                'value' => '"sid"',
                'attributes' => 
               array (
@@ -22559,7 +23005,21 @@ return [
            'public' => true,
            'private' => false,
            'final' => false,
-           'phpDoc' => NULL,
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * @var string RANDOM_SID
+    */',
+             'namespace' => 'Luminova\\Base',
+             'uses' => 
+            array (
+              'functiontrait' => 'Luminova\\Functions\\FunctionTrait',
+              'stringtrait' => 'Luminova\\Functions\\StringTrait',
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
         )),
         5 => 
         \PHPStan\Dependency\ExportedNode\ExportedClassConstantsNode::__set_state(array(
@@ -22567,7 +23027,7 @@ return [
           array (
             0 => 
             \PHPStan\Dependency\ExportedNode\ExportedClassConstantNode::__set_state(array(
-               'name' => 'UUI',
+               'name' => 'RANDOM_UUID',
                'value' => '"uui"',
                'attributes' => 
               array (
@@ -22577,7 +23037,21 @@ return [
            'public' => true,
            'private' => false,
            'final' => false,
-           'phpDoc' => NULL,
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * @var string RANDOM_UUID
+    */',
+             'namespace' => 'Luminova\\Base',
+             'uses' => 
+            array (
+              'functiontrait' => 'Luminova\\Functions\\FunctionTrait',
+              'stringtrait' => 'Luminova\\Functions\\StringTrait',
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
         )),
         6 => 
         \PHPStan\Dependency\ExportedNode\ExportedClassConstantsNode::__set_state(array(
@@ -22585,7 +23059,7 @@ return [
           array (
             0 => 
             \PHPStan\Dependency\ExportedNode\ExportedClassConstantNode::__set_state(array(
-               'name' => 'PASS',
+               'name' => 'RANDOM_PASS',
                'value' => '"pass"',
                'attributes' => 
               array (
@@ -22595,7 +23069,21 @@ return [
            'public' => true,
            'private' => false,
            'final' => false,
-           'phpDoc' => NULL,
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * @var string RANDOM_PASS
+    */',
+             'namespace' => 'Luminova\\Base',
+             'uses' => 
+            array (
+              'functiontrait' => 'Luminova\\Functions\\FunctionTrait',
+              'stringtrait' => 'Luminova\\Functions\\StringTrait',
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
         )),
       ),
        'attributes' => 
@@ -22822,7 +23310,7 @@ return [
              'phpDocString' => '/**
      * Get the value of the protected property $databaseServers
      *
-     * @return array
+     * @return array<T, array>
      */',
              'namespace' => 'Luminova\\Base',
              'uses' => 
@@ -22951,7 +23439,7 @@ return [
              'phpDocString' => '/**
      * Get queued services 
      * 
-     * @return array 
+     * @return array<string, array>
     */',
              'namespace' => 'Luminova\\Base',
              'uses' => 
@@ -22991,7 +23479,7 @@ return [
        'phpDoc' => NULL,
        'abstract' => true,
        'final' => false,
-       'extends' => 'Luminova\\Controllers\\ViewController',
+       'extends' => NULL,
        'implements' => 
       array (
       ),
@@ -23004,6 +23492,138 @@ return [
        'statements' => 
       array (
         0 => 
+        \PHPStan\Dependency\ExportedNode\ExportedPropertiesNode::__set_state(array(
+           'names' => 
+          array (
+            0 => 'request',
+          ),
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+      * HTTP request object 
+      * @var Request $request 
+    */',
+             'namespace' => 'Luminova\\Base',
+             'uses' => 
+            array (
+              'application' => 'App\\Controllers\\Application',
+              'request' => 'Luminova\\Http\\Request',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'importer' => 'Luminova\\Library\\Importer',
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
+           'type' => '?Luminova\\Http\\Request',
+           'public' => false,
+           'private' => false,
+           'static' => false,
+           'readonly' => false,
+           'attributes' => 
+          array (
+          ),
+        )),
+        1 => 
+        \PHPStan\Dependency\ExportedNode\ExportedPropertiesNode::__set_state(array(
+           'names' => 
+          array (
+            0 => 'validate',
+          ),
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+      * Input validation object 
+      * @var InputValidator $validate
+    */',
+             'namespace' => 'Luminova\\Base',
+             'uses' => 
+            array (
+              'application' => 'App\\Controllers\\Application',
+              'request' => 'Luminova\\Http\\Request',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'importer' => 'Luminova\\Library\\Importer',
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
+           'type' => '?Luminova\\Security\\InputValidator',
+           'public' => false,
+           'private' => false,
+           'static' => false,
+           'readonly' => false,
+           'attributes' => 
+          array (
+          ),
+        )),
+        2 => 
+        \PHPStan\Dependency\ExportedNode\ExportedPropertiesNode::__set_state(array(
+           'names' => 
+          array (
+            0 => 'app',
+          ),
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+      * Application instance
+      * @var Application $app 
+    */',
+             'namespace' => 'Luminova\\Base',
+             'uses' => 
+            array (
+              'application' => 'App\\Controllers\\Application',
+              'request' => 'Luminova\\Http\\Request',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'importer' => 'Luminova\\Library\\Importer',
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
+           'type' => '?App\\Controllers\\Application',
+           'public' => false,
+           'private' => false,
+           'static' => false,
+           'readonly' => false,
+           'attributes' => 
+          array (
+          ),
+        )),
+        3 => 
+        \PHPStan\Dependency\ExportedNode\ExportedPropertiesNode::__set_state(array(
+           'names' => 
+          array (
+            0 => 'library',
+          ),
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+      * Importer instance
+      * @var Importer $library 
+    */',
+             'namespace' => 'Luminova\\Base',
+             'uses' => 
+            array (
+              'application' => 'App\\Controllers\\Application',
+              'request' => 'Luminova\\Http\\Request',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'importer' => 'Luminova\\Library\\Importer',
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
+           'type' => '?Luminova\\Library\\Importer',
+           'public' => false,
+           'private' => false,
+           'static' => false,
+           'readonly' => false,
+           'attributes' => 
+          array (
+          ),
+        )),
+        4 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => '__construct',
            'phpDoc' => 
@@ -23014,7 +23634,10 @@ return [
              'namespace' => 'Luminova\\Base',
              'uses' => 
             array (
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'application' => 'App\\Controllers\\Application',
+              'request' => 'Luminova\\Http\\Request',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'importer' => 'Luminova\\Library\\Importer',
             ),
              'constUses' => 
             array (
@@ -23034,7 +23657,7 @@ return [
           array (
           ),
         )),
-        1 => 
+        5 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => '__destruct',
            'phpDoc' => 
@@ -23045,7 +23668,10 @@ return [
              'namespace' => 'Luminova\\Base',
              'uses' => 
             array (
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'application' => 'App\\Controllers\\Application',
+              'request' => 'Luminova\\Http\\Request',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'importer' => 'Luminova\\Library\\Importer',
             ),
              'constUses' => 
             array (
@@ -23065,13 +23691,13 @@ return [
           array (
           ),
         )),
-        2 => 
+        6 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => '__get',
            'phpDoc' => 
           \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
              'phpDocString' => '/**
-     * Magic method getter
+     * Property getter
      *
      * @param string $key property key
      * 
@@ -23080,7 +23706,10 @@ return [
              'namespace' => 'Luminova\\Base',
              'uses' => 
             array (
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'application' => 'App\\Controllers\\Application',
+              'request' => 'Luminova\\Http\\Request',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'importer' => 'Luminova\\Library\\Importer',
             ),
              'constUses' => 
             array (
@@ -23111,13 +23740,12 @@ return [
           array (
           ),
         )),
-        3 => 
+        7 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => '__isset',
            'phpDoc' => 
           \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
              'phpDocString' => '/**
-     * Magic method isset
      * Check if property is set
      *
      * @param string $key property key
@@ -23127,7 +23755,10 @@ return [
              'namespace' => 'Luminova\\Base',
              'uses' => 
             array (
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'application' => 'App\\Controllers\\Application',
+              'request' => 'Luminova\\Http\\Request',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'importer' => 'Luminova\\Library\\Importer',
             ),
              'constUses' => 
             array (
@@ -23153,6 +23784,291 @@ return [
               array (
               ),
             )),
+          ),
+           'attributes' => 
+          array (
+          ),
+        )),
+        8 => 
+        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
+           'name' => 'request',
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * Initializes the http request class
+     * @overridable #[\\Override]
+     * 
+     * @return Request $request http request object 
+    */',
+             'namespace' => 'Luminova\\Base',
+             'uses' => 
+            array (
+              'application' => 'App\\Controllers\\Application',
+              'request' => 'Luminova\\Http\\Request',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'importer' => 'Luminova\\Library\\Importer',
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
+           'byRef' => false,
+           'public' => false,
+           'private' => false,
+           'abstract' => false,
+           'final' => false,
+           'static' => false,
+           'returnType' => 'Luminova\\Http\\Request',
+           'parameters' => 
+          array (
+          ),
+           'attributes' => 
+          array (
+          ),
+        )),
+        9 => 
+        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
+           'name' => 'validate',
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * Initializes the input validator class
+     * @overridable #[\\Override]
+     * 
+     * @return InputValidator $validate input validation object 
+    */',
+             'namespace' => 'Luminova\\Base',
+             'uses' => 
+            array (
+              'application' => 'App\\Controllers\\Application',
+              'request' => 'Luminova\\Http\\Request',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'importer' => 'Luminova\\Library\\Importer',
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
+           'byRef' => false,
+           'public' => false,
+           'private' => false,
+           'abstract' => false,
+           'final' => false,
+           'static' => false,
+           'returnType' => 'Luminova\\Security\\InputValidator',
+           'parameters' => 
+          array (
+          ),
+           'attributes' => 
+          array (
+          ),
+        )),
+        10 => 
+        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
+           'name' => 'app',
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * Initializes the application class
+     * @overridable #[\\Override]
+     * 
+     * @return Application $app Application instance
+    */',
+             'namespace' => 'Luminova\\Base',
+             'uses' => 
+            array (
+              'application' => 'App\\Controllers\\Application',
+              'request' => 'Luminova\\Http\\Request',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'importer' => 'Luminova\\Library\\Importer',
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
+           'byRef' => false,
+           'public' => false,
+           'private' => false,
+           'abstract' => false,
+           'final' => false,
+           'static' => false,
+           'returnType' => 'App\\Controllers\\Application',
+           'parameters' => 
+          array (
+          ),
+           'attributes' => 
+          array (
+          ),
+        )),
+        11 => 
+        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
+           'name' => 'library',
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * Initializes the application class
+     * @overridable #[\\Override]
+     * 
+     * @return Importer $app Application instance
+    */',
+             'namespace' => 'Luminova\\Base',
+             'uses' => 
+            array (
+              'application' => 'App\\Controllers\\Application',
+              'request' => 'Luminova\\Http\\Request',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'importer' => 'Luminova\\Library\\Importer',
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
+           'byRef' => false,
+           'public' => false,
+           'private' => false,
+           'abstract' => false,
+           'final' => false,
+           'static' => false,
+           'returnType' => 'Luminova\\Library\\Importer',
+           'parameters' => 
+          array (
+          ),
+           'attributes' => 
+          array (
+          ),
+        )),
+        12 => 
+        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
+           'name' => 'view',
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * Render view
+     *
+     * @param string $view view name
+     * @param array $options view options
+     * 
+     * @return int STATUS_SUCCESS
+    */',
+             'namespace' => 'Luminova\\Base',
+             'uses' => 
+            array (
+              'application' => 'App\\Controllers\\Application',
+              'request' => 'Luminova\\Http\\Request',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'importer' => 'Luminova\\Library\\Importer',
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
+           'byRef' => false,
+           'public' => false,
+           'private' => false,
+           'abstract' => false,
+           'final' => false,
+           'static' => false,
+           'returnType' => 'int',
+           'parameters' => 
+          array (
+            0 => 
+            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
+               'name' => 'view',
+               'type' => 'string',
+               'byRef' => false,
+               'variadic' => false,
+               'hasDefault' => false,
+               'attributes' => 
+              array (
+              ),
+            )),
+            1 => 
+            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
+               'name' => 'options',
+               'type' => 'array',
+               'byRef' => false,
+               'variadic' => false,
+               'hasDefault' => true,
+               'attributes' => 
+              array (
+              ),
+            )),
+          ),
+           'attributes' => 
+          array (
+          ),
+        )),
+        13 => 
+        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
+           'name' => 'onCreate',
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * On create method 
+     * 
+     * @overridable #[\\Override]
+     * 
+     * @return void 
+    */',
+             'namespace' => 'Luminova\\Base',
+             'uses' => 
+            array (
+              'application' => 'App\\Controllers\\Application',
+              'request' => 'Luminova\\Http\\Request',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'importer' => 'Luminova\\Library\\Importer',
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
+           'byRef' => false,
+           'public' => false,
+           'private' => false,
+           'abstract' => false,
+           'final' => false,
+           'static' => false,
+           'returnType' => 'void',
+           'parameters' => 
+          array (
+          ),
+           'attributes' => 
+          array (
+          ),
+        )),
+        14 => 
+        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
+           'name' => 'onDestroy',
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * On destroy method 
+     * 
+     * @overridable #[\\Override]
+     * 
+     * @return void 
+    */',
+             'namespace' => 'Luminova\\Base',
+             'uses' => 
+            array (
+              'application' => 'App\\Controllers\\Application',
+              'request' => 'Luminova\\Http\\Request',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'importer' => 'Luminova\\Library\\Importer',
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
+           'byRef' => false,
+           'public' => false,
+           'private' => false,
+           'abstract' => false,
+           'final' => false,
+           'static' => false,
+           'returnType' => 'void',
+           'parameters' => 
+          array (
           ),
            'attributes' => 
           array (
@@ -26180,260 +27096,6 @@ return [
       ),
     )),
   ),
-  '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Cache/FileCacheItem.php' => 
-  array (
-    0 => 
-    \PHPStan\Dependency\ExportedNode\ExportedClassNode::__set_state(array(
-       'name' => 'Luminova\\Cache\\FileCacheItem',
-       'phpDoc' => NULL,
-       'abstract' => false,
-       'final' => false,
-       'extends' => NULL,
-       'implements' => 
-      array (
-      ),
-       'usedTraits' => 
-      array (
-      ),
-       'traitUseAdaptations' => 
-      array (
-      ),
-       'statements' => 
-      array (
-        0 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'setExpiry',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Set the expiration time for the cache item.
-     *
-     * @param int $expiry The expiration time in seconds.
-     * @return self
-    */',
-             'namespace' => 'Luminova\\Cache',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => false,
-           'returnType' => 'self',
-           'parameters' => 
-          array (
-            0 => 
-            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
-               'name' => 'expiry',
-               'type' => 'int',
-               'byRef' => false,
-               'variadic' => false,
-               'hasDefault' => false,
-               'attributes' => 
-              array (
-              ),
-            )),
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        1 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'setLock',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Set the lock status for the cache item.
-     *
-     * @param bool $lock The lock status (true for locked, false for unlocked).
-     * @return self
-    */',
-             'namespace' => 'Luminova\\Cache',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => false,
-           'returnType' => 'self',
-           'parameters' => 
-          array (
-            0 => 
-            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
-               'name' => 'lock',
-               'type' => 'bool',
-               'byRef' => false,
-               'variadic' => false,
-               'hasDefault' => false,
-               'attributes' => 
-              array (
-              ),
-            )),
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        2 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'setData',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Set the data for the cache item.
-     *
-     * @param mixed $data The data to be cached.
-     * @return self
-    */',
-             'namespace' => 'Luminova\\Cache',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => false,
-           'returnType' => 'self',
-           'parameters' => 
-          array (
-            0 => 
-            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
-               'name' => 'data',
-               'type' => 'mixed',
-               'byRef' => false,
-               'variadic' => false,
-               'hasDefault' => false,
-               'attributes' => 
-              array (
-              ),
-            )),
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        3 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'getExpiry',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Get the expiration time of the cache item.
-     *
-     * @return int The expiration time in seconds.
-    */',
-             'namespace' => 'Luminova\\Cache',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => false,
-           'returnType' => 'int',
-           'parameters' => 
-          array (
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        4 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'getLock',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Check if the cache item is locked.
-     *
-     * @return bool The lock status (true if locked, false if unlocked).
-    */',
-             'namespace' => 'Luminova\\Cache',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => false,
-           'returnType' => 'bool',
-           'parameters' => 
-          array (
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        5 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'getData',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Get the data stored in the cache item.
-     *
-     * @return mixed The cached data.
-    */',
-             'namespace' => 'Luminova\\Cache',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => false,
-           'returnType' => 'mixed',
-           'parameters' => 
-          array (
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-      ),
-       'attributes' => 
-      array (
-      ),
-    )),
-  ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Cache/MemoryCache.php' => 
   array (
     0 => 
@@ -27022,11 +27684,11 @@ return [
       ),
     )),
   ),
-  '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Cache/Optimizer.php' => 
+  '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Cache/PageViewCache.php' => 
   array (
     0 => 
     \PHPStan\Dependency\ExportedNode\ExportedClassNode::__set_state(array(
-       'name' => 'Luminova\\Cache\\Optimizer',
+       'name' => 'Luminova\\Cache\\PageViewCache',
        'phpDoc' => NULL,
        'abstract' => false,
        'final' => false,
@@ -27105,7 +27767,7 @@ return [
            'phpDoc' => 
           \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
              'phpDocString' => '/**
-     * Set Optimizer expiry ttl 
+     * Set cache expiry ttl 
      * @param int $expiration The expiration time for cached files in seconds (default: 24 hours).
      * 
      * @return self 
@@ -27151,7 +27813,7 @@ return [
            'phpDoc' => 
           \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
              'phpDocString' => '/**
-     * Set Optimizer directory
+     * Set cache directory
      * @param string $cacheDir The directory where cached files will be stored (default: \'cache\').
      * 
      * @return self 
@@ -27395,6 +28057,7 @@ return [
      *
      * @param string $content The content to be saved to the cache file.
      * @param string $info Framework copyright information
+     * @param array|null $cacheMetadata Cache information
      *
      * @return bool True if saving was successful; false otherwise.
      */',
@@ -27441,8 +28104,8 @@ return [
             )),
             2 => 
             \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
-               'name' => 'cacheData',
-               'type' => 'array',
+               'name' => 'cacheMetadata',
+               'type' => '?array',
                'byRef' => false,
                'variadic' => false,
                'hasDefault' => true,
@@ -27741,6 +28404,7 @@ return [
           \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
              'phpDocString' => '/**
      * Run console command
+     * 
      * @param Terminal $cli novakit cli instance
      * @param array $options Command options
      * 
@@ -27801,7 +28465,31 @@ return [
         1 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'getCommand',
-           'phpDoc' => NULL,
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * Get command information
+     * 
+     * @param string $command command name 
+     * 
+     * @return array
+    */',
+             'namespace' => 'Luminova\\Command',
+             'uses' => 
+            array (
+              'terminal' => 'Luminova\\Command\\Terminal',
+              'server' => 'Luminova\\Command\\Novakit\\Server',
+              'help' => 'Luminova\\Command\\Novakit\\Help',
+              'lists' => 'Luminova\\Command\\Novakit\\Lists',
+              'database' => 'Luminova\\Command\\Novakit\\Database',
+              'generators' => 'Luminova\\Command\\Novakit\\Generators',
+              'availablecommands' => 'Luminova\\Command\\Novakit\\AvailableCommands',
+              'closure' => 'Closure',
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
            'byRef' => false,
            'public' => true,
            'private' => false,
@@ -27830,7 +28518,31 @@ return [
         2 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'has',
-           'phpDoc' => NULL,
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * Check if command exist
+     * 
+     * @param string $command command name 
+     * 
+     * @return bool
+    */',
+             'namespace' => 'Luminova\\Command',
+             'uses' => 
+            array (
+              'terminal' => 'Luminova\\Command\\Terminal',
+              'server' => 'Luminova\\Command\\Novakit\\Server',
+              'help' => 'Luminova\\Command\\Novakit\\Help',
+              'lists' => 'Luminova\\Command\\Novakit\\Lists',
+              'database' => 'Luminova\\Command\\Novakit\\Database',
+              'generators' => 'Luminova\\Command\\Novakit\\Generators',
+              'availablecommands' => 'Luminova\\Command\\Novakit\\AvailableCommands',
+              'closure' => 'Closure',
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
            'byRef' => false,
            'public' => true,
            'private' => false,
@@ -27859,14 +28571,39 @@ return [
         3 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'get',
-           'phpDoc' => NULL,
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * Get command info if exist
+     * 
+     * @param string $command command name 
+     * @param string $key command key to retrieve 
+     * 
+     * @return mixed
+    */',
+             'namespace' => 'Luminova\\Command',
+             'uses' => 
+            array (
+              'terminal' => 'Luminova\\Command\\Terminal',
+              'server' => 'Luminova\\Command\\Novakit\\Server',
+              'help' => 'Luminova\\Command\\Novakit\\Help',
+              'lists' => 'Luminova\\Command\\Novakit\\Lists',
+              'database' => 'Luminova\\Command\\Novakit\\Database',
+              'generators' => 'Luminova\\Command\\Novakit\\Generators',
+              'availablecommands' => 'Luminova\\Command\\Novakit\\AvailableCommands',
+              'closure' => 'Closure',
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
            'byRef' => false,
            'public' => true,
            'private' => false,
            'abstract' => false,
            'final' => false,
            'static' => true,
-           'returnType' => 'array',
+           'returnType' => 'mixed',
            'parameters' => 
           array (
             0 => 
@@ -27935,7 +28672,6 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'baseconfig' => 'Luminova\\Base\\BaseConfig',
               'terminal' => 'Luminova\\Command\\Terminal',
               'commands' => 'Luminova\\Command\\Commands',
             ),
@@ -27981,7 +28717,6 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'baseconfig' => 'Luminova\\Base\\BaseConfig',
               'terminal' => 'Luminova\\Command\\Terminal',
               'commands' => 'Luminova\\Command\\Commands',
             ),
@@ -28017,7 +28752,6 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'baseconfig' => 'Luminova\\Base\\BaseConfig',
               'terminal' => 'Luminova\\Command\\Terminal',
               'commands' => 'Luminova\\Command\\Commands',
             ),
@@ -28087,7 +28821,7 @@ return [
              'phpDocString' => '/**
      * The found commands.
      *
-     * @var array
+     * @var array $commands
     */',
              'namespace' => 'Luminova\\Command\\Novakit',
              'uses' => 
@@ -28109,7 +28843,21 @@ return [
         1 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'getCommands',
-           'phpDoc' => NULL,
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * Get all available commands
+     * 
+     * @return array
+    */',
+             'namespace' => 'Luminova\\Command\\Novakit',
+             'uses' => 
+            array (
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
            'byRef' => false,
            'public' => true,
            'private' => false,
@@ -28127,7 +28875,23 @@ return [
         2 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'get',
-           'phpDoc' => NULL,
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * Get command information
+     * 
+     * @param string $key command name 
+     * 
+     * @return array
+    */',
+             'namespace' => 'Luminova\\Command\\Novakit',
+             'uses' => 
+            array (
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
            'byRef' => false,
            'public' => true,
            'private' => false,
@@ -28156,7 +28920,23 @@ return [
         3 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'has',
-           'phpDoc' => NULL,
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * Check if command exists
+     * 
+     * @param string $key command name 
+     * 
+     * @return bool
+    */',
+             'namespace' => 'Luminova\\Command\\Novakit',
+             'uses' => 
+            array (
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
            'byRef' => false,
            'public' => true,
            'private' => false,
@@ -28168,7 +28948,7 @@ return [
           array (
             0 => 
             \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
-               'name' => 'command',
+               'name' => 'key',
                'type' => 'string',
                'byRef' => false,
                'variadic' => false,
@@ -29109,6 +29889,72 @@ return [
         \PHPStan\Dependency\ExportedNode\ExportedPropertiesNode::__set_state(array(
            'names' => 
           array (
+            0 => 'version',
+          ),
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * @var string $version command line tool version
+    */',
+             'namespace' => 'Luminova\\Command',
+             'uses' => 
+            array (
+              'colors' => 'Luminova\\Command\\Colors',
+              'commands' => 'Luminova\\Command\\Commands',
+              'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
+           'type' => 'string',
+           'public' => true,
+           'private' => false,
+           'static' => true,
+           'readonly' => false,
+           'attributes' => 
+          array (
+          ),
+        )),
+        1 => 
+        \PHPStan\Dependency\ExportedNode\ExportedPropertiesNode::__set_state(array(
+           'names' => 
+          array (
+            0 => 'versionCode',
+          ),
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * @var int $version command line tool version code
+    */',
+             'namespace' => 'Luminova\\Command',
+             'uses' => 
+            array (
+              'colors' => 'Luminova\\Command\\Colors',
+              'commands' => 'Luminova\\Command\\Commands',
+              'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
+           'type' => 'int',
+           'public' => true,
+           'private' => false,
+           'static' => true,
+           'readonly' => false,
+           'attributes' => 
+          array (
+          ),
+        )),
+        2 => 
+        \PHPStan\Dependency\ExportedNode\ExportedPropertiesNode::__set_state(array(
+           'names' => 
+          array (
             0 => 'height',
           ),
            'phpDoc' => 
@@ -29121,11 +29967,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -29140,7 +29986,7 @@ return [
           array (
           ),
         )),
-        1 => 
+        3 => 
         \PHPStan\Dependency\ExportedNode\ExportedPropertiesNode::__set_state(array(
            'names' => 
           array (
@@ -29156,11 +30002,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -29175,7 +30021,7 @@ return [
           array (
           ),
         )),
-        2 => 
+        4 => 
         \PHPStan\Dependency\ExportedNode\ExportedPropertiesNode::__set_state(array(
            'names' => 
           array (
@@ -29191,11 +30037,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -29210,7 +30056,7 @@ return [
           array (
           ),
         )),
-        3 => 
+        5 => 
         \PHPStan\Dependency\ExportedNode\ExportedPropertiesNode::__set_state(array(
            'names' => 
           array (
@@ -29226,11 +30072,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -29245,7 +30091,7 @@ return [
           array (
           ),
         )),
-        4 => 
+        6 => 
         \PHPStan\Dependency\ExportedNode\ExportedPropertiesNode::__set_state(array(
            'names' => 
           array (
@@ -29261,11 +30107,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -29280,7 +30126,7 @@ return [
           array (
           ),
         )),
-        5 => 
+        7 => 
         \PHPStan\Dependency\ExportedNode\ExportedPropertiesNode::__set_state(array(
            'names' => 
           array (
@@ -29296,11 +30142,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -29315,7 +30161,7 @@ return [
           array (
           ),
         )),
-        6 => 
+        8 => 
         \PHPStan\Dependency\ExportedNode\ExportedPropertiesNode::__set_state(array(
            'names' => 
           array (
@@ -29332,11 +30178,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -29351,7 +30197,7 @@ return [
           array (
           ),
         )),
-        7 => 
+        9 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => '__construct',
            'phpDoc' => NULL,
@@ -29369,7 +30215,7 @@ return [
           array (
           ),
         )),
-        8 => 
+        10 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'waiting',
            'phpDoc' => 
@@ -29392,11 +30238,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -29438,7 +30284,7 @@ return [
           array (
           ),
         )),
-        9 => 
+        11 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'progress',
            'phpDoc' => 
@@ -29462,11 +30308,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -29519,7 +30365,7 @@ return [
           array (
           ),
         )),
-        10 => 
+        12 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'progressWatch',
            'phpDoc' => 
@@ -29545,11 +30391,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -29613,7 +30459,7 @@ return [
           array (
           ),
         )),
-        11 => 
+        13 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'beeps',
            'phpDoc' => 
@@ -29632,11 +30478,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -29667,7 +30513,7 @@ return [
           array (
           ),
         )),
-        12 => 
+        14 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'prompt',
            'phpDoc' => 
@@ -29693,11 +30539,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -29761,7 +30607,7 @@ return [
           array (
           ),
         )),
-        13 => 
+        15 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'chooser',
            'phpDoc' => 
@@ -29782,15 +30628,16 @@ return [
      * @param bool $required Require user to choose any option else the first array will be return as default
      *
      * @return array<string|int, mixed> $options The selected array keys and values
+     * @throws InvalidArgumentException
      */',
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -29843,7 +30690,7 @@ return [
           array (
           ),
         )),
-        14 => 
+        16 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'wrap',
            'phpDoc' => 
@@ -29860,11 +30707,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -29917,7 +30764,7 @@ return [
           array (
           ),
         )),
-        15 => 
+        17 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'getWidth',
            'phpDoc' => 
@@ -29930,11 +30777,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -29965,7 +30812,7 @@ return [
           array (
           ),
         )),
-        16 => 
+        18 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'getHeight',
            'phpDoc' => 
@@ -29978,11 +30825,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -30013,7 +30860,7 @@ return [
           array (
           ),
         )),
-        17 => 
+        19 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'getVisibleWindow',
            'phpDoc' => 
@@ -30026,11 +30873,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -30050,7 +30897,7 @@ return [
           array (
           ),
         )),
-        18 => 
+        20 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'input',
            'phpDoc' => 
@@ -30066,11 +30913,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -30101,7 +30948,7 @@ return [
           array (
           ),
         )),
-        19 => 
+        21 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'validate',
            'phpDoc' => 
@@ -30115,11 +30962,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -30161,7 +31008,7 @@ return [
           array (
           ),
         )),
-        20 => 
+        22 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'error',
            'phpDoc' => 
@@ -30178,11 +31025,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -30235,7 +31082,7 @@ return [
           array (
           ),
         )),
-        21 => 
+        23 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'writeln',
            'phpDoc' => 
@@ -30252,11 +31099,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -30309,7 +31156,7 @@ return [
           array (
           ),
         )),
-        22 => 
+        24 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'write',
            'phpDoc' => 
@@ -30326,11 +31173,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -30383,7 +31230,7 @@ return [
           array (
           ),
         )),
-        23 => 
+        25 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'print',
            'phpDoc' => 
@@ -30400,11 +31247,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -30457,7 +31304,7 @@ return [
           array (
           ),
         )),
-        24 => 
+        26 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'fwrite',
            'phpDoc' => 
@@ -30473,11 +31320,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -30519,7 +31366,7 @@ return [
           array (
           ),
         )),
-        25 => 
+        27 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'clear',
            'phpDoc' => 
@@ -30532,11 +31379,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -30556,7 +31403,7 @@ return [
           array (
           ),
         )),
-        26 => 
+        28 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'wipeout',
            'phpDoc' => 
@@ -30569,11 +31416,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -30593,7 +31440,7 @@ return [
           array (
           ),
         )),
-        27 => 
+        29 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'color',
            'phpDoc' => 
@@ -30612,11 +31459,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -30680,7 +31527,7 @@ return [
           array (
           ),
         )),
-        28 => 
+        30 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'newLine',
            'phpDoc' => 
@@ -30695,11 +31542,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -30730,7 +31577,7 @@ return [
           array (
           ),
         )),
-        29 => 
+        31 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'streamSupports',
            'phpDoc' => 
@@ -30747,11 +31594,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -30793,7 +31640,7 @@ return [
           array (
           ),
         )),
-        30 => 
+        32 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'registerCommands',
            'phpDoc' => 
@@ -30810,11 +31657,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -30856,7 +31703,7 @@ return [
           array (
           ),
         )),
-        31 => 
+        33 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'parseCommands',
            'phpDoc' => 
@@ -30871,11 +31718,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -30906,7 +31753,7 @@ return [
           array (
           ),
         )),
-        32 => 
+        34 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'getRequestCommands',
            'phpDoc' => 
@@ -30918,11 +31765,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -30942,7 +31789,7 @@ return [
           array (
           ),
         )),
-        33 => 
+        35 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'getArgument',
            'phpDoc' => 
@@ -30957,11 +31804,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -30992,7 +31839,7 @@ return [
           array (
           ),
         )),
-        34 => 
+        36 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'getArguments',
            'phpDoc' => 
@@ -31005,11 +31852,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -31029,7 +31876,7 @@ return [
           array (
           ),
         )),
-        35 => 
+        37 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'getCommand',
            'phpDoc' => 
@@ -31042,11 +31889,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -31066,7 +31913,7 @@ return [
           array (
           ),
         )),
-        36 => 
+        38 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'getCaller',
            'phpDoc' => 
@@ -31080,11 +31927,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -31104,7 +31951,7 @@ return [
           array (
           ),
         )),
-        37 => 
+        39 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'getOption',
            'phpDoc' => 
@@ -31119,99 +31966,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => true,
-           'returnType' => 'mixed',
-           'parameters' => 
-          array (
-            0 => 
-            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
-               'name' => 'name',
-               'type' => 'string',
-               'byRef' => false,
-               'variadic' => false,
-               'hasDefault' => false,
-               'attributes' => 
-              array (
-              ),
-            )),
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        38 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'getOptions',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Returns the array of options.
-     * 
-     * @return array static::$options[\'options\']
-    */',
-             'namespace' => 'Luminova\\Command',
-             'uses' => 
-            array (
               'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
-              'colors' => 'Luminova\\Command\\Colors',
-              'commands' => 'Luminova\\Command\\Commands',
-              'textutils' => 'Luminova\\Command\\TextUtils',
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => true,
-           'returnType' => 'array',
-           'parameters' => 
-          array (
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        39 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'getQuery',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Gets a single query command-line by name.
-     * If it doesn\'t exists return null
-     *
-     * @param string $name Option key name
-     * 
-     * @return string|array|null
-    */',
-             'namespace' => 'Luminova\\Command',
-             'uses' => 
-            array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
-              'colors' => 'Luminova\\Command\\Colors',
-              'commands' => 'Luminova\\Command\\Commands',
-              'textutils' => 'Luminova\\Command\\TextUtils',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -31244,22 +32003,22 @@ return [
         )),
         40 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'getQueries',
+           'name' => 'getOptions',
            'phpDoc' => 
           \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
              'phpDocString' => '/**
-     * Returns the raw array of requested query commands.
+     * Returns the array of options.
      * 
-     * @return array static::$commandsOptions
+     * @return array static::$options[\'options\']
     */',
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -31281,24 +32040,25 @@ return [
         )),
         41 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'isCommandLine',
+           'name' => 'getQuery',
            'phpDoc' => 
           \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
              'phpDocString' => '/**
-     * Is CLI?
+     * Gets a single query command-line by name.
+     * If it doesn\'t exists return null
      *
-     * Test to see if a request was made from the command line.
-     *
-     * @return bool
+     * @param string $name Option key name
+     * 
+     * @return string|array|null
     */',
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -31310,7 +32070,55 @@ return [
            'abstract' => false,
            'final' => false,
            'static' => true,
-           'returnType' => 'bool',
+           'returnType' => 'mixed',
+           'parameters' => 
+          array (
+            0 => 
+            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
+               'name' => 'name',
+               'type' => 'string',
+               'byRef' => false,
+               'variadic' => false,
+               'hasDefault' => false,
+               'attributes' => 
+              array (
+              ),
+            )),
+          ),
+           'attributes' => 
+          array (
+          ),
+        )),
+        42 => 
+        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
+           'name' => 'getQueries',
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * Returns the raw array of requested query commands.
+     * 
+     * @return array static::$commandsOptions
+    */',
+             'namespace' => 'Luminova\\Command',
+             'uses' => 
+            array (
+              'colors' => 'Luminova\\Command\\Colors',
+              'commands' => 'Luminova\\Command\\Commands',
+              'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
+           'byRef' => false,
+           'public' => true,
+           'private' => false,
+           'abstract' => false,
+           'final' => false,
+           'static' => true,
+           'returnType' => 'array',
            'parameters' => 
           array (
           ),
@@ -31318,7 +32126,7 @@ return [
           array (
           ),
         )),
-        42 => 
+        43 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'isColorSupported',
            'phpDoc' => 
@@ -31332,11 +32140,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -31367,7 +32175,7 @@ return [
           array (
           ),
         )),
-        43 => 
+        44 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'isMacTerminal',
            'phpDoc' => 
@@ -31380,11 +32188,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -31404,7 +32212,7 @@ return [
           array (
           ),
         )),
-        44 => 
+        45 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'isWindowsTerminal',
            'phpDoc' => 
@@ -31419,11 +32227,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -31454,7 +32262,7 @@ return [
           array (
           ),
         )),
-        45 => 
+        46 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'hasCommand',
            'phpDoc' => 
@@ -31470,11 +32278,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -31516,7 +32324,7 @@ return [
           array (
           ),
         )),
-        46 => 
+        47 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'printHelp',
            'phpDoc' => 
@@ -31531,11 +32339,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -31566,7 +32374,7 @@ return [
           array (
           ),
         )),
-        47 => 
+        48 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'getStatusCode',
            'phpDoc' => 
@@ -31579,11 +32387,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -31614,7 +32422,7 @@ return [
           array (
           ),
         )),
-        48 => 
+        49 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'header',
            'phpDoc' => 
@@ -31627,11 +32435,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -31662,7 +32470,7 @@ return [
           array (
           ),
         )),
-        49 => 
+        50 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'phpScript',
            'phpDoc' => 
@@ -31675,11 +32483,11 @@ return [
              'namespace' => 'Luminova\\Command',
              'uses' => 
             array (
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'invalidargumentexception' => 'InvalidArgumentException',
               'colors' => 'Luminova\\Command\\Colors',
               'commands' => 'Luminova\\Command\\Commands',
               'textutils' => 'Luminova\\Command\\TextUtils',
+              'inputvalidator' => 'Luminova\\Security\\InputValidator',
+              'invalidargumentexception' => 'Luminova\\Exceptions\\InvalidArgumentException',
             ),
              'constUses' => 
             array (
@@ -32600,1342 +33408,6 @@ return [
       ),
     )),
   ),
-  '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Config/Configuration.php' => 
-  array (
-    0 => 
-    \PHPStan\Dependency\ExportedNode\ExportedClassNode::__set_state(array(
-       'name' => 'Luminova\\Config\\Configuration',
-       'phpDoc' => NULL,
-       'abstract' => true,
-       'final' => false,
-       'extends' => NULL,
-       'implements' => 
-      array (
-      ),
-       'usedTraits' => 
-      array (
-      ),
-       'traitUseAdaptations' => 
-      array (
-      ),
-       'statements' => 
-      array (
-        0 => 
-        \PHPStan\Dependency\ExportedNode\ExportedPropertiesNode::__set_state(array(
-           'names' => 
-          array (
-            0 => 'version',
-          ),
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-    * @var string $version version name
-    */',
-             'namespace' => 'Luminova\\Config',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'type' => NULL,
-           'public' => true,
-           'private' => false,
-           'static' => true,
-           'readonly' => false,
-           'attributes' => 
-          array (
-          ),
-        )),
-        1 => 
-        \PHPStan\Dependency\ExportedNode\ExportedPropertiesNode::__set_state(array(
-           'names' => 
-          array (
-            0 => 'versionCode',
-          ),
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-    * @var int $versionCode version code
-    */',
-             'namespace' => 'Luminova\\Config',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'type' => NULL,
-           'public' => true,
-           'private' => false,
-           'static' => true,
-           'readonly' => false,
-           'attributes' => 
-          array (
-          ),
-        )),
-        2 => 
-        \PHPStan\Dependency\ExportedNode\ExportedClassConstantsNode::__set_state(array(
-           'constants' => 
-          array (
-            0 => 
-            \PHPStan\Dependency\ExportedNode\ExportedClassConstantNode::__set_state(array(
-               'name' => 'MIN_PHP_VERSION',
-               'value' => '\'8.0\'',
-               'attributes' => 
-              array (
-              ),
-            )),
-          ),
-           'public' => true,
-           'private' => false,
-           'final' => false,
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Minimum required php version
-    * @var string MIN_PHP_VERSION 
-    */',
-             'namespace' => 'Luminova\\Config',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-        )),
-        3 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => '__get',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Magic method to retrieve session properties.
-     *
-     * @param string $key The name of the property to retrieve.
-     * 
-     * @return mixed
-     */',
-             'namespace' => 'Luminova\\Config',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => false,
-           'returnType' => 'mixed',
-           'parameters' => 
-          array (
-            0 => 
-            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
-               'name' => 'key',
-               'type' => 'string',
-               'byRef' => false,
-               'variadic' => false,
-               'hasDefault' => false,
-               'attributes' => 
-              array (
-              ),
-            )),
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        4 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'appName',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Get the application name.
-     * @deprecated This method is deprecated and will be removed in future use global constant APP_NAME instead
-     * @return string
-     */',
-             'namespace' => 'Luminova\\Config',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => true,
-           'returnType' => 'string',
-           'parameters' => 
-          array (
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        5 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'hostName',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Get the host name.
-     *
-     * @return string
-     */',
-             'namespace' => 'Luminova\\Config',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => true,
-           'returnType' => 'string',
-           'parameters' => 
-          array (
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        6 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'baseUrl',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Get the base URL.
-     *
-     * @return string
-     */',
-             'namespace' => 'Luminova\\Config',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => true,
-           'returnType' => 'string',
-           'parameters' => 
-          array (
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        7 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'baseWwwUrl',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Get the base www URL.
-     *
-     * @return string
-     */',
-             'namespace' => 'Luminova\\Config',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => true,
-           'returnType' => 'string',
-           'parameters' => 
-          array (
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        8 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'appVersion',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Get the application version.
-     * @deprecated This method is deprecated and will be removed in future use global constant APP_VERSION instead
-     * @return string
-     */',
-             'namespace' => 'Luminova\\Config',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => true,
-           'returnType' => 'string',
-           'parameters' => 
-          array (
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        9 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'fileVersion',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Get the file version.
-     *
-     * @return string
-     */',
-             'namespace' => 'Luminova\\Config',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => true,
-           'returnType' => 'string',
-           'parameters' => 
-          array (
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        10 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'shouldMinify',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Check if minification is enabled.
-     *
-     * @return int
-     */',
-             'namespace' => 'Luminova\\Config',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => true,
-           'returnType' => 'int',
-           'parameters' => 
-          array (
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        11 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'urlProtocol',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Get the URL protocol (http or https).
-     *
-     * @return string
-     */',
-             'namespace' => 'Luminova\\Config',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => true,
-           'returnType' => 'string',
-           'parameters' => 
-          array (
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        12 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'getFullUrl',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Get the full URL.
-     *
-     * @return string
-     */',
-             'namespace' => 'Luminova\\Config',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => true,
-           'returnType' => 'string',
-           'parameters' => 
-          array (
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        13 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'getRequestHost',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Get the request host.
-     *
-     * @return string
-     */',
-             'namespace' => 'Luminova\\Config',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => true,
-           'returnType' => 'string',
-           'parameters' => 
-          array (
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        14 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'getEnvironment',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Get development environment
-     * @deprecated This method is deprecated and will be removed in future use global constant ENVIRONMENT instead
-     * @return string
-    */',
-             'namespace' => 'Luminova\\Config',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => true,
-           'returnType' => 'string',
-           'parameters' => 
-          array (
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        15 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'isMaintenance',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Check if app is on maintenance
-     * @deprecated This method is deprecated and will be removed in future use global constant MAINTENANCE instead
-     * @return bool
-    */',
-             'namespace' => 'Luminova\\Config',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => true,
-           'returnType' => 'bool',
-           'parameters' => 
-          array (
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        16 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'isProduction',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Check if the application is in production mode.
-     * @deprecated This method is deprecated and will be removed in future use global constant PRODUCTION instead
-     * @return bool
-     */',
-             'namespace' => 'Luminova\\Config',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => true,
-           'returnType' => 'bool',
-           'parameters' => 
-          array (
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        17 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'isLocal',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Check if the application is running locally.
-     *
-     * @return bool
-     */',
-             'namespace' => 'Luminova\\Config',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => true,
-           'returnType' => 'bool',
-           'parameters' => 
-          array (
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        18 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'isLocalServer',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Check if the application is running on local server.
-     * @deprecated This method is deprecated and will be removed in future use global constant NOVAKIT_ENV instead
-     * @return bool
-    */',
-             'namespace' => 'Luminova\\Config',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => true,
-           'returnType' => 'bool',
-           'parameters' => 
-          array (
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        19 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'usePublic',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Check if the application should use custom public as path 
-     * If the local server is not running and not on production server
-     * If the document root is not changed to "public", manually enable the app to use "public" as the default
-     * @deprecated This method is deprecated and will be removed in future 
-     * @return bool
-    */',
-             'namespace' => 'Luminova\\Config',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => true,
-           'returnType' => 'bool',
-           'parameters' => 
-          array (
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        20 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'root',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Get the root directory.
-     *
-     * @param string $directory The directory to start searching for composer.json or system directory.
-     * @deprecated This method is deprecated and will be removed in future use global function root() instead
-     * @return string
-     */',
-             'namespace' => 'Luminova\\Config',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => true,
-           'returnType' => 'string',
-           'parameters' => 
-          array (
-            0 => 
-            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
-               'name' => 'directory',
-               'type' => 'string',
-               'byRef' => false,
-               'variadic' => false,
-               'hasDefault' => true,
-               'attributes' => 
-              array (
-              ),
-            )),
-            1 => 
-            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
-               'name' => 'suffix',
-               'type' => 'string',
-               'byRef' => false,
-               'variadic' => false,
-               'hasDefault' => true,
-               'attributes' => 
-              array (
-              ),
-            )),
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        21 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'getRootDirectory',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Get the root directory.
-     *
-     * @param string $directory The directory to start searching for composer.json.
-     * 
-     * @deprecated This method has been deprecated use root($directory, $suffix) instead
-     * @return string|null
-     */',
-             'namespace' => 'Luminova\\Config',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => true,
-           'returnType' => '?string',
-           'parameters' => 
-          array (
-            0 => 
-            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
-               'name' => 'directory',
-               'type' => 'string',
-               'byRef' => false,
-               'variadic' => false,
-               'hasDefault' => false,
-               'attributes' => 
-              array (
-              ),
-            )),
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        22 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'filterPath',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Filter the path to match to allowed in error directories preview.
-     *
-     * @param string $path The path to be filtered.
-     * 
-     * @return string
-     */',
-             'namespace' => 'Luminova\\Config',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => true,
-           'returnType' => 'string',
-           'parameters' => 
-          array (
-            0 => 
-            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
-               'name' => 'path',
-               'type' => 'string',
-               'byRef' => false,
-               'variadic' => false,
-               'hasDefault' => false,
-               'attributes' => 
-              array (
-              ),
-            )),
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        23 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'get',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Get environment configuration variables.
-     *
-     * @param string $key The key to retrieve.
-     * @param mixed $default The default value to return if the key is not found.
-     * 
-     * @return mixed
-     */',
-             'namespace' => 'Luminova\\Config',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => true,
-           'returnType' => 'mixed',
-           'parameters' => 
-          array (
-            0 => 
-            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
-               'name' => 'key',
-               'type' => 'string',
-               'byRef' => false,
-               'variadic' => false,
-               'hasDefault' => false,
-               'attributes' => 
-              array (
-              ),
-            )),
-            1 => 
-            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
-               'name' => 'default',
-               'type' => '?mixed',
-               'byRef' => false,
-               'variadic' => false,
-               'hasDefault' => true,
-               'attributes' => 
-              array (
-              ),
-            )),
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        24 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'set',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Set an environment variable if it doesn\'t already exist.
-     *
-     * @param string $name The name of the environment variable.
-     * @param string $value The value of the environment variable.
-     * 
-     * @return void
-     */',
-             'namespace' => 'Luminova\\Config',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => true,
-           'returnType' => 'void',
-           'parameters' => 
-          array (
-            0 => 
-            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
-               'name' => 'name',
-               'type' => 'string',
-               'byRef' => false,
-               'variadic' => false,
-               'hasDefault' => false,
-               'attributes' => 
-              array (
-              ),
-            )),
-            1 => 
-            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
-               'name' => 'value',
-               'type' => 'string',
-               'byRef' => false,
-               'variadic' => false,
-               'hasDefault' => false,
-               'attributes' => 
-              array (
-              ),
-            )),
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        25 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'getVariables',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Get environment configuration variables.
-     *
-     * @param string $key The key to retrieve.
-     * @param mixed $default The default value to return if the key is not found.
-     * 
-     * @deprecated This method will be removed in the next major release use get instead
-     * @return mixed
-     */',
-             'namespace' => 'Luminova\\Config',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => true,
-           'returnType' => 'mixed',
-           'parameters' => 
-          array (
-            0 => 
-            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
-               'name' => 'key',
-               'type' => 'string',
-               'byRef' => false,
-               'variadic' => false,
-               'hasDefault' => false,
-               'attributes' => 
-              array (
-              ),
-            )),
-            1 => 
-            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
-               'name' => 'default',
-               'type' => '?mixed',
-               'byRef' => false,
-               'variadic' => false,
-               'hasDefault' => true,
-               'attributes' => 
-              array (
-              ),
-            )),
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        26 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'getString',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Get environment configuration variables.
-     *
-     * @param string $key The key to retrieve.
-     * @param string $default The default value to return if the key is not found.
-     * 
-     * @return string
-     */',
-             'namespace' => 'Luminova\\Config',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => true,
-           'returnType' => 'string',
-           'parameters' => 
-          array (
-            0 => 
-            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
-               'name' => 'key',
-               'type' => 'string',
-               'byRef' => false,
-               'variadic' => false,
-               'hasDefault' => false,
-               'attributes' => 
-              array (
-              ),
-            )),
-            1 => 
-            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
-               'name' => 'default',
-               'type' => 'string',
-               'byRef' => false,
-               'variadic' => false,
-               'hasDefault' => true,
-               'attributes' => 
-              array (
-              ),
-            )),
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        27 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'getInt',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Get environment variable as integer value
-     *
-     * @param string $key variable name
-     * @param int $default fallback to default
-     * @return bool
-    */',
-             'namespace' => 'Luminova\\Config',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => true,
-           'returnType' => 'int',
-           'parameters' => 
-          array (
-            0 => 
-            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
-               'name' => 'key',
-               'type' => 'string',
-               'byRef' => false,
-               'variadic' => false,
-               'hasDefault' => false,
-               'attributes' => 
-              array (
-              ),
-            )),
-            1 => 
-            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
-               'name' => 'default',
-               'type' => 'int',
-               'byRef' => false,
-               'variadic' => false,
-               'hasDefault' => true,
-               'attributes' => 
-              array (
-              ),
-            )),
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        28 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'getBoolean',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Get environment variable as boolean
-     *
-     * @param string $key variable name
-     * @param bool $default fallback to default
-     * @return bool
-    */',
-             'namespace' => 'Luminova\\Config',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => true,
-           'returnType' => 'bool',
-           'parameters' => 
-          array (
-            0 => 
-            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
-               'name' => 'key',
-               'type' => 'string',
-               'byRef' => false,
-               'variadic' => false,
-               'hasDefault' => false,
-               'attributes' => 
-              array (
-              ),
-            )),
-            1 => 
-            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
-               'name' => 'default',
-               'type' => 'bool',
-               'byRef' => false,
-               'variadic' => false,
-               'hasDefault' => true,
-               'attributes' => 
-              array (
-              ),
-            )),
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        29 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'getMixedNull',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Get environment variable as default null
-     *
-     * @param string $key variable name
-     * @param mixed|null $default fallback to default
-     * @return bool
-    */',
-             'namespace' => 'Luminova\\Config',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => true,
-           'returnType' => 'mixed',
-           'parameters' => 
-          array (
-            0 => 
-            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
-               'name' => 'key',
-               'type' => 'string',
-               'byRef' => false,
-               'variadic' => false,
-               'hasDefault' => false,
-               'attributes' => 
-              array (
-              ),
-            )),
-            1 => 
-            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
-               'name' => 'default',
-               'type' => '?mixed',
-               'byRef' => false,
-               'variadic' => false,
-               'hasDefault' => true,
-               'attributes' => 
-              array (
-              ),
-            )),
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        30 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'variableToNotation',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Convert variable to dot or underscore notation.
-     *
-     * @param string $input The input string .
-     * @param string $notation The conversion notion
-     * @return string
-    */',
-             'namespace' => 'Luminova\\Config',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => true,
-           'returnType' => 'string',
-           'parameters' => 
-          array (
-            0 => 
-            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
-               'name' => 'input',
-               'type' => 'string',
-               'byRef' => false,
-               'variadic' => false,
-               'hasDefault' => false,
-               'attributes' => 
-              array (
-              ),
-            )),
-            1 => 
-            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
-               'name' => 'notation',
-               'type' => 'string',
-               'byRef' => false,
-               'variadic' => false,
-               'hasDefault' => true,
-               'attributes' => 
-              array (
-              ),
-            )),
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        31 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'copyright',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Get the framework copyright information
-     *
-     * @return string
-     */',
-             'namespace' => 'Luminova\\Config',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => true,
-           'returnType' => 'string',
-           'parameters' => 
-          array (
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        32 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'version',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Get the framework version number
-     *
-     * @return string
-     */',
-             'namespace' => 'Luminova\\Config',
-             'uses' => 
-            array (
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => true,
-           'returnType' => 'string',
-           'parameters' => 
-          array (
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-      ),
-       'attributes' => 
-      array (
-      ),
-    )),
-  ),
   '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Config/Database.php' => 
   array (
     0 => 
@@ -34387,6 +33859,111 @@ return [
           array (
           ),
         )),
+        1 => 
+        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
+           'name' => 'get',
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * Magic method to retrieve session properties.
+     *
+     * @param string $key The name of the property to retrieve.
+     * 
+     * @return mixed
+     */',
+             'namespace' => 'Luminova\\Config',
+             'uses' => 
+            array (
+              'fileexception' => 'Luminova\\Exceptions\\FileException',
+              'splfileobject' => 'SplFileObject',
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
+           'byRef' => false,
+           'public' => true,
+           'private' => false,
+           'abstract' => false,
+           'final' => false,
+           'static' => true,
+           'returnType' => 'mixed',
+           'parameters' => 
+          array (
+            0 => 
+            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
+               'name' => 'key',
+               'type' => 'string',
+               'byRef' => false,
+               'variadic' => false,
+               'hasDefault' => false,
+               'attributes' => 
+              array (
+              ),
+            )),
+          ),
+           'attributes' => 
+          array (
+          ),
+        )),
+        2 => 
+        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
+           'name' => 'variableToNotation',
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * Convert variable to dot or underscore notation.
+     *
+     * @param string $input The input string .
+     * @param string $notation The conversion notion
+     * @return string
+    */',
+             'namespace' => 'Luminova\\Config',
+             'uses' => 
+            array (
+              'fileexception' => 'Luminova\\Exceptions\\FileException',
+              'splfileobject' => 'SplFileObject',
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
+           'byRef' => false,
+           'public' => true,
+           'private' => false,
+           'abstract' => false,
+           'final' => false,
+           'static' => true,
+           'returnType' => 'string',
+           'parameters' => 
+          array (
+            0 => 
+            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
+               'name' => 'input',
+               'type' => 'string',
+               'byRef' => false,
+               'variadic' => false,
+               'hasDefault' => false,
+               'attributes' => 
+              array (
+              ),
+            )),
+            1 => 
+            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
+               'name' => 'notation',
+               'type' => 'string',
+               'byRef' => false,
+               'variadic' => false,
+               'hasDefault' => true,
+               'attributes' => 
+              array (
+              ),
+            )),
+          ),
+           'attributes' => 
+          array (
+          ),
+        )),
       ),
        'attributes' => 
       array (
@@ -34711,313 +34288,6 @@ return [
       ),
        'statements' => 
       array (
-      ),
-       'attributes' => 
-      array (
-      ),
-    )),
-  ),
-  '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Controllers/ViewController.php' => 
-  array (
-    0 => 
-    \PHPStan\Dependency\ExportedNode\ExportedClassNode::__set_state(array(
-       'name' => 'Luminova\\Controllers\\ViewController',
-       'phpDoc' => NULL,
-       'abstract' => true,
-       'final' => false,
-       'extends' => NULL,
-       'implements' => 
-      array (
-      ),
-       'usedTraits' => 
-      array (
-      ),
-       'traitUseAdaptations' => 
-      array (
-      ),
-       'statements' => 
-      array (
-        0 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'request',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-    * Initializes the http request class
-    * Allows #[\\Override]
-    * 
-    * @return Request $request http request object 
-    */',
-             'namespace' => 'Luminova\\Controllers',
-             'uses' => 
-            array (
-              'application' => 'App\\Controllers\\Application',
-              'request' => 'Luminova\\Http\\Request',
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'importer' => 'Luminova\\Library\\Importer',
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => false,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => false,
-           'returnType' => 'Luminova\\Http\\Request',
-           'parameters' => 
-          array (
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        1 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'validate',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Initializes the input validator class
-    * Allows #[\\Override]
-    * 
-    * @return InputValidator $validate input validation object 
-    */',
-             'namespace' => 'Luminova\\Controllers',
-             'uses' => 
-            array (
-              'application' => 'App\\Controllers\\Application',
-              'request' => 'Luminova\\Http\\Request',
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'importer' => 'Luminova\\Library\\Importer',
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => false,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => false,
-           'returnType' => 'Luminova\\Security\\InputValidator',
-           'parameters' => 
-          array (
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        2 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'app',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Initializes the application class
-    * Allows #[\\Override]
-    * 
-    * @return Application $app Application instance
-    */',
-             'namespace' => 'Luminova\\Controllers',
-             'uses' => 
-            array (
-              'application' => 'App\\Controllers\\Application',
-              'request' => 'Luminova\\Http\\Request',
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'importer' => 'Luminova\\Library\\Importer',
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => false,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => false,
-           'returnType' => 'App\\Controllers\\Application',
-           'parameters' => 
-          array (
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        3 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'library',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Initializes the application class
-    * Allows #[\\Override]
-    * 
-    * @return Importer $app Application instance
-    */',
-             'namespace' => 'Luminova\\Controllers',
-             'uses' => 
-            array (
-              'application' => 'App\\Controllers\\Application',
-              'request' => 'Luminova\\Http\\Request',
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'importer' => 'Luminova\\Library\\Importer',
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => false,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => false,
-           'returnType' => 'Luminova\\Library\\Importer',
-           'parameters' => 
-          array (
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        4 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'view',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Render view
-     *
-     * @param string $view view name
-     * @param array $options view options
-     * 
-     * @return int STATUS_OK
-    */',
-             'namespace' => 'Luminova\\Controllers',
-             'uses' => 
-            array (
-              'application' => 'App\\Controllers\\Application',
-              'request' => 'Luminova\\Http\\Request',
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'importer' => 'Luminova\\Library\\Importer',
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => false,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => false,
-           'returnType' => 'int',
-           'parameters' => 
-          array (
-            0 => 
-            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
-               'name' => 'view',
-               'type' => 'string',
-               'byRef' => false,
-               'variadic' => false,
-               'hasDefault' => false,
-               'attributes' => 
-              array (
-              ),
-            )),
-            1 => 
-            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
-               'name' => 'options',
-               'type' => 'array',
-               'byRef' => false,
-               'variadic' => false,
-               'hasDefault' => true,
-               'attributes' => 
-              array (
-              ),
-            )),
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        5 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'onCreate',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * On create method 
-     * 
-     * @return void 
-    */',
-             'namespace' => 'Luminova\\Controllers',
-             'uses' => 
-            array (
-              'application' => 'App\\Controllers\\Application',
-              'request' => 'Luminova\\Http\\Request',
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'importer' => 'Luminova\\Library\\Importer',
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => false,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => false,
-           'returnType' => 'void',
-           'parameters' => 
-          array (
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        6 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'onDestroy',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * On destroy method 
-     * 
-     * @return void 
-    */',
-             'namespace' => 'Luminova\\Controllers',
-             'uses' => 
-            array (
-              'application' => 'App\\Controllers\\Application',
-              'request' => 'Luminova\\Http\\Request',
-              'inputvalidator' => 'Luminova\\Security\\InputValidator',
-              'importer' => 'Luminova\\Library\\Importer',
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => false,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => false,
-           'returnType' => 'void',
-           'parameters' => 
-          array (
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
       ),
        'attributes' => 
       array (
@@ -49601,7 +48871,6 @@ return [
              'namespace' => 'Luminova\\Errors',
              'uses' => 
             array (
-              'baseconfig' => 'Luminova\\Base\\BaseConfig',
             ),
              'constUses' => 
             array (
@@ -49647,7 +48916,6 @@ return [
              'namespace' => 'Luminova\\Errors',
              'uses' => 
             array (
-              'baseconfig' => 'Luminova\\Base\\BaseConfig',
             ),
              'constUses' => 
             array (
@@ -49694,7 +48962,6 @@ return [
              'namespace' => 'Luminova\\Errors',
              'uses' => 
             array (
-              'baseconfig' => 'Luminova\\Base\\BaseConfig',
             ),
              'constUses' => 
             array (
@@ -49755,7 +49022,6 @@ return [
              'namespace' => 'Luminova\\Errors',
              'uses' => 
             array (
-              'baseconfig' => 'Luminova\\Base\\BaseConfig',
             ),
              'constUses' => 
             array (
@@ -49843,7 +49109,6 @@ return [
              'namespace' => 'Luminova\\Errors',
              'uses' => 
             array (
-              'baseconfig' => 'Luminova\\Base\\BaseConfig',
             ),
              'constUses' => 
             array (
@@ -49880,7 +49145,6 @@ return [
              'namespace' => 'Luminova\\Errors',
              'uses' => 
             array (
-              'baseconfig' => 'Luminova\\Base\\BaseConfig',
             ),
              'constUses' => 
             array (
@@ -49976,7 +49240,6 @@ return [
             array (
               'exception' => 'Exception',
               'throwable' => 'Throwable',
-              'baseconfig' => 'Luminova\\Base\\BaseConfig',
               'logger' => 'Luminova\\Logger\\Logger',
             ),
              'constUses' => 
@@ -50045,7 +49308,6 @@ return [
             array (
               'exception' => 'Exception',
               'throwable' => 'Throwable',
-              'baseconfig' => 'Luminova\\Base\\BaseConfig',
               'logger' => 'Luminova\\Logger\\Logger',
             ),
              'constUses' => 
@@ -50081,7 +49343,6 @@ return [
             array (
               'exception' => 'Exception',
               'throwable' => 'Throwable',
-              'baseconfig' => 'Luminova\\Base\\BaseConfig',
               'logger' => 'Luminova\\Logger\\Logger',
             ),
              'constUses' => 
@@ -50118,7 +49379,6 @@ return [
             array (
               'exception' => 'Exception',
               'throwable' => 'Throwable',
-              'baseconfig' => 'Luminova\\Base\\BaseConfig',
               'logger' => 'Luminova\\Logger\\Logger',
             ),
              'constUses' => 
@@ -50159,7 +49419,6 @@ return [
             array (
               'exception' => 'Exception',
               'throwable' => 'Throwable',
-              'baseconfig' => 'Luminova\\Base\\BaseConfig',
               'logger' => 'Luminova\\Logger\\Logger',
             ),
              'constUses' => 
@@ -50231,7 +49490,6 @@ return [
             array (
               'exception' => 'Exception',
               'throwable' => 'Throwable',
-              'baseconfig' => 'Luminova\\Base\\BaseConfig',
               'logger' => 'Luminova\\Logger\\Logger',
             ),
              'constUses' => 
@@ -53219,7 +52477,7 @@ return [
         )),
         2 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'getServerVariable',
+           'name' => 'getServer',
            'phpDoc' => 
           \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
              'phpDocString' => '/**
@@ -60816,7 +60074,7 @@ return [
              'phpDocString' => '/**
      * Get bootstrap registered custom instance
      * 
-     * @return array static::$instances 
+     * @return array<T, string> static::$instances 
     */',
              'namespace' => 'Luminova\\Routing',
              'uses' => 
@@ -60884,14 +60142,14 @@ return [
              'uses' => 
             array (
               'header' => 'Luminova\\Http\\Header',
-              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
               'bootstrap' => 'Luminova\\Routing\\Bootstrap',
               'reflectionmethod' => 'ReflectionMethod',
               'reflectionexception' => 'ReflectionException',
               'reflectionclass' => 'ReflectionClass',
               'terminal' => 'Luminova\\Command\\Terminal',
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'baseviewcontroller' => 'Luminova\\Base\\BaseViewController',
               'baseapplication' => 'Luminova\\Base\\BaseApplication',
+              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
             ),
              'constUses' => 
             array (
@@ -60962,14 +60220,14 @@ return [
              'uses' => 
             array (
               'header' => 'Luminova\\Http\\Header',
-              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
               'bootstrap' => 'Luminova\\Routing\\Bootstrap',
               'reflectionmethod' => 'ReflectionMethod',
               'reflectionexception' => 'ReflectionException',
               'reflectionclass' => 'ReflectionClass',
               'terminal' => 'Luminova\\Command\\Terminal',
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'baseviewcontroller' => 'Luminova\\Base\\BaseViewController',
               'baseapplication' => 'Luminova\\Base\\BaseApplication',
+              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
             ),
              'constUses' => 
             array (
@@ -61040,14 +60298,14 @@ return [
              'uses' => 
             array (
               'header' => 'Luminova\\Http\\Header',
-              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
               'bootstrap' => 'Luminova\\Routing\\Bootstrap',
               'reflectionmethod' => 'ReflectionMethod',
               'reflectionexception' => 'ReflectionException',
               'reflectionclass' => 'ReflectionClass',
               'terminal' => 'Luminova\\Command\\Terminal',
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'baseviewcontroller' => 'Luminova\\Base\\BaseViewController',
               'baseapplication' => 'Luminova\\Base\\BaseApplication',
+              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
             ),
              'constUses' => 
             array (
@@ -61118,14 +60376,14 @@ return [
              'uses' => 
             array (
               'header' => 'Luminova\\Http\\Header',
-              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
               'bootstrap' => 'Luminova\\Routing\\Bootstrap',
               'reflectionmethod' => 'ReflectionMethod',
               'reflectionexception' => 'ReflectionException',
               'reflectionclass' => 'ReflectionClass',
               'terminal' => 'Luminova\\Command\\Terminal',
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'baseviewcontroller' => 'Luminova\\Base\\BaseViewController',
               'baseapplication' => 'Luminova\\Base\\BaseApplication',
+              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
             ),
              'constUses' => 
             array (
@@ -61196,14 +60454,14 @@ return [
              'uses' => 
             array (
               'header' => 'Luminova\\Http\\Header',
-              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
               'bootstrap' => 'Luminova\\Routing\\Bootstrap',
               'reflectionmethod' => 'ReflectionMethod',
               'reflectionexception' => 'ReflectionException',
               'reflectionclass' => 'ReflectionClass',
               'terminal' => 'Luminova\\Command\\Terminal',
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'baseviewcontroller' => 'Luminova\\Base\\BaseViewController',
               'baseapplication' => 'Luminova\\Base\\BaseApplication',
+              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
             ),
              'constUses' => 
             array (
@@ -61274,14 +60532,14 @@ return [
              'uses' => 
             array (
               'header' => 'Luminova\\Http\\Header',
-              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
               'bootstrap' => 'Luminova\\Routing\\Bootstrap',
               'reflectionmethod' => 'ReflectionMethod',
               'reflectionexception' => 'ReflectionException',
               'reflectionclass' => 'ReflectionClass',
               'terminal' => 'Luminova\\Command\\Terminal',
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'baseviewcontroller' => 'Luminova\\Base\\BaseViewController',
               'baseapplication' => 'Luminova\\Base\\BaseApplication',
+              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
             ),
              'constUses' => 
             array (
@@ -61351,14 +60609,14 @@ return [
              'uses' => 
             array (
               'header' => 'Luminova\\Http\\Header',
-              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
               'bootstrap' => 'Luminova\\Routing\\Bootstrap',
               'reflectionmethod' => 'ReflectionMethod',
               'reflectionexception' => 'ReflectionException',
               'reflectionclass' => 'ReflectionClass',
               'terminal' => 'Luminova\\Command\\Terminal',
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'baseviewcontroller' => 'Luminova\\Base\\BaseViewController',
               'baseapplication' => 'Luminova\\Base\\BaseApplication',
+              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
             ),
              'constUses' => 
             array (
@@ -61417,14 +60675,14 @@ return [
              'uses' => 
             array (
               'header' => 'Luminova\\Http\\Header',
-              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
               'bootstrap' => 'Luminova\\Routing\\Bootstrap',
               'reflectionmethod' => 'ReflectionMethod',
               'reflectionexception' => 'ReflectionException',
               'reflectionclass' => 'ReflectionClass',
               'terminal' => 'Luminova\\Command\\Terminal',
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'baseviewcontroller' => 'Luminova\\Base\\BaseViewController',
               'baseapplication' => 'Luminova\\Base\\BaseApplication',
+              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
             ),
              'constUses' => 
             array (
@@ -61483,14 +60741,14 @@ return [
              'uses' => 
             array (
               'header' => 'Luminova\\Http\\Header',
-              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
               'bootstrap' => 'Luminova\\Routing\\Bootstrap',
               'reflectionmethod' => 'ReflectionMethod',
               'reflectionexception' => 'ReflectionException',
               'reflectionclass' => 'ReflectionClass',
               'terminal' => 'Luminova\\Command\\Terminal',
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'baseviewcontroller' => 'Luminova\\Base\\BaseViewController',
               'baseapplication' => 'Luminova\\Base\\BaseApplication',
+              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
             ),
              'constUses' => 
             array (
@@ -61549,14 +60807,14 @@ return [
              'uses' => 
             array (
               'header' => 'Luminova\\Http\\Header',
-              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
               'bootstrap' => 'Luminova\\Routing\\Bootstrap',
               'reflectionmethod' => 'ReflectionMethod',
               'reflectionexception' => 'ReflectionException',
               'reflectionclass' => 'ReflectionClass',
               'terminal' => 'Luminova\\Command\\Terminal',
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'baseviewcontroller' => 'Luminova\\Base\\BaseViewController',
               'baseapplication' => 'Luminova\\Base\\BaseApplication',
+              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
             ),
              'constUses' => 
             array (
@@ -61615,14 +60873,14 @@ return [
              'uses' => 
             array (
               'header' => 'Luminova\\Http\\Header',
-              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
               'bootstrap' => 'Luminova\\Routing\\Bootstrap',
               'reflectionmethod' => 'ReflectionMethod',
               'reflectionexception' => 'ReflectionException',
               'reflectionclass' => 'ReflectionClass',
               'terminal' => 'Luminova\\Command\\Terminal',
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'baseviewcontroller' => 'Luminova\\Base\\BaseViewController',
               'baseapplication' => 'Luminova\\Base\\BaseApplication',
+              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
             ),
              'constUses' => 
             array (
@@ -61681,14 +60939,14 @@ return [
              'uses' => 
             array (
               'header' => 'Luminova\\Http\\Header',
-              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
               'bootstrap' => 'Luminova\\Routing\\Bootstrap',
               'reflectionmethod' => 'ReflectionMethod',
               'reflectionexception' => 'ReflectionException',
               'reflectionclass' => 'ReflectionClass',
               'terminal' => 'Luminova\\Command\\Terminal',
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'baseviewcontroller' => 'Luminova\\Base\\BaseViewController',
               'baseapplication' => 'Luminova\\Base\\BaseApplication',
+              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
             ),
              'constUses' => 
             array (
@@ -61747,14 +61005,14 @@ return [
              'uses' => 
             array (
               'header' => 'Luminova\\Http\\Header',
-              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
               'bootstrap' => 'Luminova\\Routing\\Bootstrap',
               'reflectionmethod' => 'ReflectionMethod',
               'reflectionexception' => 'ReflectionException',
               'reflectionclass' => 'ReflectionClass',
               'terminal' => 'Luminova\\Command\\Terminal',
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'baseviewcontroller' => 'Luminova\\Base\\BaseViewController',
               'baseapplication' => 'Luminova\\Base\\BaseApplication',
+              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
             ),
              'constUses' => 
             array (
@@ -61813,14 +61071,14 @@ return [
              'uses' => 
             array (
               'header' => 'Luminova\\Http\\Header',
-              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
               'bootstrap' => 'Luminova\\Routing\\Bootstrap',
               'reflectionmethod' => 'ReflectionMethod',
               'reflectionexception' => 'ReflectionException',
               'reflectionclass' => 'ReflectionClass',
               'terminal' => 'Luminova\\Command\\Terminal',
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'baseviewcontroller' => 'Luminova\\Base\\BaseViewController',
               'baseapplication' => 'Luminova\\Base\\BaseApplication',
+              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
             ),
              'constUses' => 
             array (
@@ -61879,14 +61137,14 @@ return [
              'uses' => 
             array (
               'header' => 'Luminova\\Http\\Header',
-              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
               'bootstrap' => 'Luminova\\Routing\\Bootstrap',
               'reflectionmethod' => 'ReflectionMethod',
               'reflectionexception' => 'ReflectionException',
               'reflectionclass' => 'ReflectionClass',
               'terminal' => 'Luminova\\Command\\Terminal',
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'baseviewcontroller' => 'Luminova\\Base\\BaseViewController',
               'baseapplication' => 'Luminova\\Base\\BaseApplication',
+              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
             ),
              'constUses' => 
             array (
@@ -61945,14 +61203,14 @@ return [
              'uses' => 
             array (
               'header' => 'Luminova\\Http\\Header',
-              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
               'bootstrap' => 'Luminova\\Routing\\Bootstrap',
               'reflectionmethod' => 'ReflectionMethod',
               'reflectionexception' => 'ReflectionException',
               'reflectionclass' => 'ReflectionClass',
               'terminal' => 'Luminova\\Command\\Terminal',
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'baseviewcontroller' => 'Luminova\\Base\\BaseViewController',
               'baseapplication' => 'Luminova\\Base\\BaseApplication',
+              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
             ),
              'constUses' => 
             array (
@@ -62001,14 +61259,14 @@ return [
              'uses' => 
             array (
               'header' => 'Luminova\\Http\\Header',
-              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
               'bootstrap' => 'Luminova\\Routing\\Bootstrap',
               'reflectionmethod' => 'ReflectionMethod',
               'reflectionexception' => 'ReflectionException',
               'reflectionclass' => 'ReflectionClass',
               'terminal' => 'Luminova\\Command\\Terminal',
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'baseviewcontroller' => 'Luminova\\Base\\BaseViewController',
               'baseapplication' => 'Luminova\\Base\\BaseApplication',
+              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
             ),
              'constUses' => 
             array (
@@ -62056,14 +61314,14 @@ return [
              'uses' => 
             array (
               'header' => 'Luminova\\Http\\Header',
-              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
               'bootstrap' => 'Luminova\\Routing\\Bootstrap',
               'reflectionmethod' => 'ReflectionMethod',
               'reflectionexception' => 'ReflectionException',
               'reflectionclass' => 'ReflectionClass',
               'terminal' => 'Luminova\\Command\\Terminal',
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'baseviewcontroller' => 'Luminova\\Base\\BaseViewController',
               'baseapplication' => 'Luminova\\Base\\BaseApplication',
+              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
             ),
              'constUses' => 
             array (
@@ -62121,14 +61379,14 @@ return [
              'uses' => 
             array (
               'header' => 'Luminova\\Http\\Header',
-              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
               'bootstrap' => 'Luminova\\Routing\\Bootstrap',
               'reflectionmethod' => 'ReflectionMethod',
               'reflectionexception' => 'ReflectionException',
               'reflectionclass' => 'ReflectionClass',
               'terminal' => 'Luminova\\Command\\Terminal',
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'baseviewcontroller' => 'Luminova\\Base\\BaseViewController',
               'baseapplication' => 'Luminova\\Base\\BaseApplication',
+              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
             ),
              'constUses' => 
             array (
@@ -62173,14 +61431,14 @@ return [
              'uses' => 
             array (
               'header' => 'Luminova\\Http\\Header',
-              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
               'bootstrap' => 'Luminova\\Routing\\Bootstrap',
               'reflectionmethod' => 'ReflectionMethod',
               'reflectionexception' => 'ReflectionException',
               'reflectionclass' => 'ReflectionClass',
               'terminal' => 'Luminova\\Command\\Terminal',
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'baseviewcontroller' => 'Luminova\\Base\\BaseViewController',
               'baseapplication' => 'Luminova\\Base\\BaseApplication',
+              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
             ),
              'constUses' => 
             array (
@@ -62214,14 +61472,14 @@ return [
              'uses' => 
             array (
               'header' => 'Luminova\\Http\\Header',
-              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
               'bootstrap' => 'Luminova\\Routing\\Bootstrap',
               'reflectionmethod' => 'ReflectionMethod',
               'reflectionexception' => 'ReflectionException',
               'reflectionclass' => 'ReflectionClass',
               'terminal' => 'Luminova\\Command\\Terminal',
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'baseviewcontroller' => 'Luminova\\Base\\BaseViewController',
               'baseapplication' => 'Luminova\\Base\\BaseApplication',
+              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
             ),
              'constUses' => 
             array (
@@ -62255,14 +61513,14 @@ return [
              'uses' => 
             array (
               'header' => 'Luminova\\Http\\Header',
-              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
               'bootstrap' => 'Luminova\\Routing\\Bootstrap',
               'reflectionmethod' => 'ReflectionMethod',
               'reflectionexception' => 'ReflectionException',
               'reflectionclass' => 'ReflectionClass',
               'terminal' => 'Luminova\\Command\\Terminal',
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'baseviewcontroller' => 'Luminova\\Base\\BaseViewController',
               'baseapplication' => 'Luminova\\Base\\BaseApplication',
+              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
             ),
              'constUses' => 
             array (
@@ -62296,14 +61554,14 @@ return [
              'uses' => 
             array (
               'header' => 'Luminova\\Http\\Header',
-              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
               'bootstrap' => 'Luminova\\Routing\\Bootstrap',
               'reflectionmethod' => 'ReflectionMethod',
               'reflectionexception' => 'ReflectionException',
               'reflectionclass' => 'ReflectionClass',
               'terminal' => 'Luminova\\Command\\Terminal',
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'baseviewcontroller' => 'Luminova\\Base\\BaseViewController',
               'baseapplication' => 'Luminova\\Base\\BaseApplication',
+              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
             ),
              'constUses' => 
             array (
@@ -62339,14 +61597,14 @@ return [
              'uses' => 
             array (
               'header' => 'Luminova\\Http\\Header',
-              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
               'bootstrap' => 'Luminova\\Routing\\Bootstrap',
               'reflectionmethod' => 'ReflectionMethod',
               'reflectionexception' => 'ReflectionException',
               'reflectionclass' => 'ReflectionClass',
               'terminal' => 'Luminova\\Command\\Terminal',
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'baseviewcontroller' => 'Luminova\\Base\\BaseViewController',
               'baseapplication' => 'Luminova\\Base\\BaseApplication',
+              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
             ),
              'constUses' => 
             array (
@@ -62391,14 +61649,14 @@ return [
              'uses' => 
             array (
               'header' => 'Luminova\\Http\\Header',
-              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
               'bootstrap' => 'Luminova\\Routing\\Bootstrap',
               'reflectionmethod' => 'ReflectionMethod',
               'reflectionexception' => 'ReflectionException',
               'reflectionclass' => 'ReflectionClass',
               'terminal' => 'Luminova\\Command\\Terminal',
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'baseviewcontroller' => 'Luminova\\Base\\BaseViewController',
               'baseapplication' => 'Luminova\\Base\\BaseApplication',
+              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
             ),
              'constUses' => 
             array (
@@ -62432,14 +61690,14 @@ return [
              'uses' => 
             array (
               'header' => 'Luminova\\Http\\Header',
-              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
               'bootstrap' => 'Luminova\\Routing\\Bootstrap',
               'reflectionmethod' => 'ReflectionMethod',
               'reflectionexception' => 'ReflectionException',
               'reflectionclass' => 'ReflectionClass',
               'terminal' => 'Luminova\\Command\\Terminal',
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'baseviewcontroller' => 'Luminova\\Base\\BaseViewController',
               'baseapplication' => 'Luminova\\Base\\BaseApplication',
+              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
             ),
              'constUses' => 
             array (
@@ -62473,14 +61731,14 @@ return [
              'uses' => 
             array (
               'header' => 'Luminova\\Http\\Header',
-              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
               'bootstrap' => 'Luminova\\Routing\\Bootstrap',
               'reflectionmethod' => 'ReflectionMethod',
               'reflectionexception' => 'ReflectionException',
               'reflectionclass' => 'ReflectionClass',
               'terminal' => 'Luminova\\Command\\Terminal',
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'baseviewcontroller' => 'Luminova\\Base\\BaseViewController',
               'baseapplication' => 'Luminova\\Base\\BaseApplication',
+              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
             ),
              'constUses' => 
             array (
@@ -62516,14 +61774,14 @@ return [
              'uses' => 
             array (
               'header' => 'Luminova\\Http\\Header',
-              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
               'bootstrap' => 'Luminova\\Routing\\Bootstrap',
               'reflectionmethod' => 'ReflectionMethod',
               'reflectionexception' => 'ReflectionException',
               'reflectionclass' => 'ReflectionClass',
               'terminal' => 'Luminova\\Command\\Terminal',
-              'viewcontroller' => 'Luminova\\Controllers\\ViewController',
+              'baseviewcontroller' => 'Luminova\\Base\\BaseViewController',
               'baseapplication' => 'Luminova\\Base\\BaseApplication',
+              'errorexception' => 'Luminova\\Exceptions\\ErrorException',
             ),
              'constUses' => 
             array (
@@ -64945,7 +64203,7 @@ return [
    * @param array $input array input to validate it fields
    * @param array $rules Optional passed rules as array
    * 
-   * @return self Use $validate->isPased() method to check the validity of
+   * @return self Use $validate->isPassed() method to check the validity of
   */',
              'namespace' => 'Luminova\\Security',
              'uses' => 
@@ -65600,6 +64858,38 @@ return [
       array (
         0 => 
         \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
+           'name' => '__construct',
+           'phpDoc' => 
+          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
+             'phpDocString' => '/**
+     * Initialize constructor
+     * 
+     */',
+             'namespace' => 'Luminova\\Seo',
+             'uses' => 
+            array (
+              'time' => 'Luminova\\Time\\Time',
+            ),
+             'constUses' => 
+            array (
+            ),
+          )),
+           'byRef' => false,
+           'public' => true,
+           'private' => false,
+           'abstract' => false,
+           'final' => false,
+           'static' => false,
+           'returnType' => NULL,
+           'parameters' => 
+          array (
+          ),
+           'attributes' => 
+          array (
+          ),
+        )),
+        1 => 
+        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
            'name' => 'getInstance',
            'phpDoc' => 
           \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
@@ -65626,64 +64916,6 @@ return [
            'returnType' => 'static',
            'parameters' => 
           array (
-          ),
-           'attributes' => 
-          array (
-          ),
-        )),
-        1 => 
-        \PHPStan\Dependency\ExportedNode\ExportedMethodNode::__set_state(array(
-           'name' => 'create',
-           'phpDoc' => 
-          \PHPStan\Dependency\ExportedNode\ExportedPhpDocNode::__set_state(array(
-             'phpDocString' => '/**
-     * Create object
-     *
-     * @param string $appName The name of the application.
-     * @param string $baseUrl The base URL of the application.
-     * 
-     * @return void 
-     */',
-             'namespace' => 'Luminova\\Seo',
-             'uses' => 
-            array (
-              'time' => 'Luminova\\Time\\Time',
-            ),
-             'constUses' => 
-            array (
-            ),
-          )),
-           'byRef' => false,
-           'public' => true,
-           'private' => false,
-           'abstract' => false,
-           'final' => false,
-           'static' => false,
-           'returnType' => 'void',
-           'parameters' => 
-          array (
-            0 => 
-            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
-               'name' => 'appName',
-               'type' => 'string',
-               'byRef' => false,
-               'variadic' => false,
-               'hasDefault' => false,
-               'attributes' => 
-              array (
-              ),
-            )),
-            1 => 
-            \PHPStan\Dependency\ExportedNode\ExportedParameterNode::__set_state(array(
-               'name' => 'baseUrl',
-               'type' => 'string',
-               'byRef' => false,
-               'variadic' => false,
-               'hasDefault' => false,
-               'attributes' => 
-              array (
-              ),
-            )),
           ),
            'attributes' => 
           array (

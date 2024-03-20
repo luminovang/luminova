@@ -487,54 +487,9 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
       array (
       ),
     ),
-    '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Cache/FileCacheItem.php' => 
-    array (
-      0 => '97f2fb30dca98d6bedbbfe54052d6ff7b7237fc8',
-      1 => 
-      array (
-        0 => 'luminova\\cache\\filecacheitem',
-      ),
-      2 => 
-      array (
-        0 => 'luminova\\cache\\setexpiry',
-        1 => 'luminova\\cache\\setlock',
-        2 => 'luminova\\cache\\setdata',
-        3 => 'luminova\\cache\\getexpiry',
-        4 => 'luminova\\cache\\getlock',
-        5 => 'luminova\\cache\\getdata',
-      ),
-      3 => 
-      array (
-      ),
-    ),
-    '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Cache/Optimizer.php' => 
-    array (
-      0 => '3ad34b8ce2be9c7bf5853c5564353716adf3bd73',
-      1 => 
-      array (
-        0 => 'luminova\\cache\\optimizer',
-      ),
-      2 => 
-      array (
-        0 => 'luminova\\cache\\__construct',
-        1 => 'luminova\\cache\\setexpiry',
-        2 => 'luminova\\cache\\setdirectory',
-        3 => 'luminova\\cache\\getcachelocation',
-        4 => 'luminova\\cache\\getcachefilepath',
-        5 => 'luminova\\cache\\hascache',
-        6 => 'luminova\\cache\\getfiletime',
-        7 => 'luminova\\cache\\getcache',
-        8 => 'luminova\\cache\\savecache',
-        9 => 'luminova\\cache\\getkey',
-        10 => 'luminova\\cache\\setkey',
-      ),
-      3 => 
-      array (
-      ),
-    ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Config/DotEnv.php' => 
     array (
-      0 => '9641e142467bc23ca834ad9d902136e97708afa8',
+      0 => '804801facee8a2c77a41fa1f22bbbef77e2e8975',
       1 => 
       array (
         0 => 'luminova\\config\\dotenv',
@@ -542,6 +497,9 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
       2 => 
       array (
         0 => 'luminova\\config\\register',
+        1 => 'luminova\\config\\get',
+        2 => 'luminova\\config\\variabletonotation',
+        3 => 'luminova\\config\\getnotationconvention',
       ),
       3 => 
       array (
@@ -587,50 +545,6 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
       ),
       2 => 
       array (
-      ),
-      3 => 
-      array (
-      ),
-    ),
-    '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Config/Configuration.php' => 
-    array (
-      0 => '18bb3760b5edbc0076040043e6d06f14fb3813ec',
-      1 => 
-      array (
-        0 => 'luminova\\config\\configuration',
-      ),
-      2 => 
-      array (
-        0 => 'luminova\\config\\__get',
-        1 => 'luminova\\config\\appname',
-        2 => 'luminova\\config\\hostname',
-        3 => 'luminova\\config\\baseurl',
-        4 => 'luminova\\config\\basewwwurl',
-        5 => 'luminova\\config\\appversion',
-        6 => 'luminova\\config\\fileversion',
-        7 => 'luminova\\config\\shouldminify',
-        8 => 'luminova\\config\\urlprotocol',
-        9 => 'luminova\\config\\getfullurl',
-        10 => 'luminova\\config\\getrequesthost',
-        11 => 'luminova\\config\\getenvironment',
-        12 => 'luminova\\config\\ismaintenance',
-        13 => 'luminova\\config\\isproduction',
-        14 => 'luminova\\config\\islocal',
-        15 => 'luminova\\config\\islocalserver',
-        16 => 'luminova\\config\\usepublic',
-        17 => 'luminova\\config\\root',
-        18 => 'luminova\\config\\getrootdirectory',
-        19 => 'luminova\\config\\filterpath',
-        20 => 'luminova\\config\\get',
-        21 => 'luminova\\config\\set',
-        22 => 'luminova\\config\\getvariables',
-        23 => 'luminova\\config\\getstring',
-        24 => 'luminova\\config\\getint',
-        25 => 'luminova\\config\\getboolean',
-        26 => 'luminova\\config\\getmixednull',
-        27 => 'luminova\\config\\variabletonotation',
-        28 => 'luminova\\config\\copyright',
-        29 => 'luminova\\config\\version',
       ),
       3 => 
       array (
@@ -744,7 +658,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Security/ValidatorInterface.php' => 
     array (
-      0 => 'bcb73f25d39b1ceed8dd4b405523b4e92dc0374a',
+      0 => '6ec475b517eea765b668633fe6410cc60a5d17ce',
       1 => 
       array (
         0 => 'luminova\\security\\validatorinterface',
@@ -834,7 +748,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/TemplateTrait.php' => 
     array (
-      0 => '561bd8edd5300e4e4108955ac1d4a4d0b44ba74e',
+      0 => 'ce6ace2830f94c165b8347d0d558f51699664c54',
       1 => 
       array (
         0 => 'luminova\\template\\templatetrait',
@@ -843,46 +757,47 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
       array (
         0 => 'luminova\\template\\initialize',
         1 => 'luminova\\template\\__get',
-        2 => 'luminova\\template\\getclass',
-        3 => 'luminova\\template\\hasclass',
-        4 => 'luminova\\template\\setlevel',
-        5 => 'luminova\\template\\shouldcacheview',
-        6 => 'luminova\\template\\setcompressignorecodeblock',
-        7 => 'luminova\\template\\allowcopycodeblock',
-        8 => 'luminova\\template\\setprojectbase',
-        9 => 'luminova\\template\\root',
-        10 => 'luminova\\template\\settemplatepath',
-        11 => 'luminova\\template\\usetemplateengine',
-        12 => 'luminova\\template\\typeoftemplate',
-        13 => 'luminova\\template\\setfolder',
-        14 => 'luminova\\template\\addcacheignore',
-        15 => 'luminova\\template\\redirect',
-        16 => 'luminova\\template\\moved',
-        17 => 'luminova\\template\\redirectto',
-        18 => 'luminova\\template\\documentroot',
-        19 => 'luminova\\template\\export',
-        20 => 'luminova\\template\\setoptions',
-        21 => 'luminova\\template\\getcontents',
-        22 => 'luminova\\template\\getviewfolder',
-        23 => 'luminova\\template\\geterrorfolder',
-        24 => 'luminova\\template\\getcachefolder',
-        25 => 'luminova\\template\\cache',
-        26 => 'luminova\\template\\renderviewcontent',
-        27 => 'luminova\\template\\inirendersetup',
-        28 => 'luminova\\template\\rendersmarty',
-        29 => 'luminova\\template\\respond',
-        30 => 'luminova\\template\\renderdefault',
-        31 => 'luminova\\template\\renderisolation',
-        32 => 'luminova\\template\\newcompressed',
-        33 => 'luminova\\template\\requestheaders',
-        34 => 'luminova\\template\\view',
-        35 => 'luminova\\template\\render',
-        36 => 'luminova\\template\\shouldcache',
-        37 => 'luminova\\template\\calculatelevel',
-        38 => 'luminova\\template\\getviewuri',
-        39 => 'luminova\\template\\handleexception',
-        40 => 'luminova\\template\\totitle',
-        41 => 'luminova\\template\\isreadwritepermission',
+        2 => 'luminova\\template\\attrgetter',
+        3 => 'luminova\\template\\getclass',
+        4 => 'luminova\\template\\hasclass',
+        5 => 'luminova\\template\\setlevel',
+        6 => 'luminova\\template\\shouldcacheview',
+        7 => 'luminova\\template\\setcompressignorecodeblock',
+        8 => 'luminova\\template\\allowcopycodeblock',
+        9 => 'luminova\\template\\setprojectbase',
+        10 => 'luminova\\template\\root',
+        11 => 'luminova\\template\\settemplatepath',
+        12 => 'luminova\\template\\usetemplateengine',
+        13 => 'luminova\\template\\typeoftemplate',
+        14 => 'luminova\\template\\setfolder',
+        15 => 'luminova\\template\\addcacheignore',
+        16 => 'luminova\\template\\redirect',
+        17 => 'luminova\\template\\moved',
+        18 => 'luminova\\template\\redirectto',
+        19 => 'luminova\\template\\documentroot',
+        20 => 'luminova\\template\\export',
+        21 => 'luminova\\template\\setoptions',
+        22 => 'luminova\\template\\getcontents',
+        23 => 'luminova\\template\\getviewfolder',
+        24 => 'luminova\\template\\geterrorfolder',
+        25 => 'luminova\\template\\getcachefolder',
+        26 => 'luminova\\template\\cache',
+        27 => 'luminova\\template\\renderviewcontent',
+        28 => 'luminova\\template\\inirendersetup',
+        29 => 'luminova\\template\\rendersmarty',
+        30 => 'luminova\\template\\respond',
+        31 => 'luminova\\template\\renderdefault',
+        32 => 'luminova\\template\\renderisolation',
+        33 => 'luminova\\template\\newcompressed',
+        34 => 'luminova\\template\\requestheaders',
+        35 => 'luminova\\template\\view',
+        36 => 'luminova\\template\\render',
+        37 => 'luminova\\template\\shouldcache',
+        38 => 'luminova\\template\\calculatelevel',
+        39 => 'luminova\\template\\getviewuri',
+        40 => 'luminova\\template\\handleexception',
+        41 => 'luminova\\template\\totitle',
+        42 => 'luminova\\template\\isreadwritepermission',
       ),
       3 => 
       array (
@@ -929,7 +844,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Template/Template.php' => 
     array (
-      0 => 'f8217ba3042fed9c0175aeadc7b16c8d57275d00',
+      0 => '0fc218d819243b6f3c275b40de255171d4af0ee3',
       1 => 
       array (
         0 => 'luminova\\template\\template',
@@ -1215,7 +1130,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Exceptions/AppException.php' => 
     array (
-      0 => '45baacb9b3f523733f0f78b504ef43d4d62c9fe2',
+      0 => '4f63f693e73323772cd1a3f73142d2b0417e70ac',
       1 => 
       array (
         0 => 'luminova\\exceptions\\appexception',
@@ -1397,7 +1312,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Languages/Translator.php' => 
     array (
-      0 => 'db94a35ba43f8719f640e284a46df0e0fbaeb97d',
+      0 => 'f63ee328c08dba124472e8708b7e21c60f53964f',
       1 => 
       array (
         0 => 'luminova\\languages\\translator',
@@ -1660,7 +1575,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Http/Request.php' => 
     array (
-      0 => '510e0454ae1479bd58bcd381d751b12fe5406f86',
+      0 => '420947dcb86a25ba61097ca0215974f98026945e',
       1 => 
       array (
         0 => 'luminova\\http\\request',
@@ -1717,7 +1632,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Http/Header.php' => 
     array (
-      0 => 'fe2e58d1c3997909dc931e23806231109745d9aa',
+      0 => '3b9ea847357243e8bceba8952cf455d77c805491',
       1 => 
       array (
         0 => 'luminova\\http\\header',
@@ -1725,7 +1640,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
       2 => 
       array (
         0 => 'luminova\\http\\getheaders',
-        1 => 'luminova\\http\\getservervariable',
+        1 => 'luminova\\http\\getserver',
         2 => 'luminova\\http\\getmethod',
         3 => 'luminova\\http\\getsystemheaders',
         4 => 'luminova\\http\\getcontenttype',
@@ -2192,7 +2107,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Terminal.php' => 
     array (
-      0 => '68e8ed2dced94ed30c13dd7116d0bcd78ca46bb2',
+      0 => '127950ba0d63c37d19d972a0308e49b6405782dd',
       1 => 
       array (
         0 => 'luminova\\command\\terminal',
@@ -2235,16 +2150,15 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
         33 => 'luminova\\command\\getoptions',
         34 => 'luminova\\command\\getquery',
         35 => 'luminova\\command\\getqueries',
-        36 => 'luminova\\command\\iscommandline',
-        37 => 'luminova\\command\\iscolorsupported',
-        38 => 'luminova\\command\\iscolordisabled',
-        39 => 'luminova\\command\\ismacterminal',
-        40 => 'luminova\\command\\iswindowsterminal',
-        41 => 'luminova\\command\\hascommand',
-        42 => 'luminova\\command\\printhelp',
-        43 => 'luminova\\command\\getstatuscode',
-        44 => 'luminova\\command\\header',
-        45 => 'luminova\\command\\phpscript',
+        36 => 'luminova\\command\\iscolorsupported',
+        37 => 'luminova\\command\\iscolordisabled',
+        38 => 'luminova\\command\\ismacterminal',
+        39 => 'luminova\\command\\iswindowsterminal',
+        40 => 'luminova\\command\\hascommand',
+        41 => 'luminova\\command\\printhelp',
+        42 => 'luminova\\command\\getstatuscode',
+        43 => 'luminova\\command\\header',
+        44 => 'luminova\\command\\phpscript',
       ),
       3 => 
       array (
@@ -2255,7 +2169,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Commands.php' => 
     array (
-      0 => '96640ec620cb7c6938bb072a688a26ad299c41a2',
+      0 => 'c4432d529be8c42a1e1e1077ecbde1e7f39ed265',
       1 => 
       array (
         0 => 'luminova\\command\\commands',
@@ -2273,7 +2187,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Console.php' => 
     array (
-      0 => '8ba3073b1d1818e0e11dec385a5473e9f846f44f',
+      0 => '75897b39bb4685078209615b7c30f8945b3196e2',
       1 => 
       array (
         0 => 'luminova\\command\\console',
@@ -2309,7 +2223,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Novakit/Server.php' => 
     array (
-      0 => '26b2c53020c7896e001c95be810069ceddd467c3',
+      0 => 'd24fed961515d1daf9184fd1bd45fc46ce8351da',
       1 => 
       array (
         0 => 'luminova\\command\\novakit\\server',
@@ -2324,7 +2238,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Novakit/AvailableCommands.php' => 
     array (
-      0 => 'ac36d9fac6384f676934c0150e37e4b7709dba79',
+      0 => '5d04d975033e81511c43f9bf539523e50e00dca7',
       1 => 
       array (
         0 => 'luminova\\command\\novakit\\availablecommands',
@@ -2356,7 +2270,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Command/Novakit/mod_rewrite.php' => 
     array (
-      0 => 'a8fcd572bb342bff31c9eb3f4fce403046c70b19',
+      0 => 'e90b4ff22a2da66e6fb0c3c87a2066ff5e58d15f',
       1 => 
       array (
       ),
@@ -2400,17 +2314,13 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Application.php' => 
     array (
-      0 => 'c9e2eba9c62da87fd827f837c208eab37511db34',
+      0 => '18abdae30e136efd1f15ff25c9a904ab90d45f95',
       1 => 
       array (
         0 => 'luminova\\application\\application',
       ),
       2 => 
       array (
-        0 => 'luminova\\application\\__construct',
-        1 => 'luminova\\application\\getview',
-        2 => 'luminova\\application\\getbase',
-        3 => 'luminova\\application\\getinstance',
       ),
       3 => 
       array (
@@ -2418,7 +2328,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Application/Factory.php' => 
     array (
-      0 => '60dffa6317df4057c5111e8dbc4efcedec0c43b9',
+      0 => '180ea07e63e12fa4cbfed63cad1d26fa27d13c1e',
       1 => 
       array (
         0 => 'luminova\\application\\factory',
@@ -2487,7 +2397,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Bootstrap.php' => 
     array (
-      0 => 'f966b8749a1063b4ba6b19605a29ffbc50cea32f',
+      0 => '6dab537fbc8e1e23ef26415eb5230badb39ee03e',
       1 => 
       array (
         0 => 'luminova\\routing\\bootstrap',
@@ -2505,7 +2415,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Routing/Router.php' => 
     array (
-      0 => 'e534231a70b04f1e9f47b5100f10c6ba6fbdd2be',
+      0 => '6672d0ecfa1c78a802d772b65edcd3dd343f06d5',
       1 => 
       array (
         0 => 'luminova\\routing\\router',
@@ -2581,7 +2491,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Errors/Error.php' => 
     array (
-      0 => 'ce4e973778d2fb82972bd238894ec8a4e61e4d8e',
+      0 => '31512c267cf9c6389337167e8e75a7ac02b188eb',
       1 => 
       array (
         0 => 'luminova\\errors\\error',
@@ -2602,15 +2512,15 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Seo/Meta.php' => 
     array (
-      0 => 'd3009cfc7d8b70f4efba38c4157c6b890b72fd5f',
+      0 => 'bf9ab07945cf0e4a617bed5c6363dda9316f8148',
       1 => 
       array (
         0 => 'luminova\\seo\\meta',
       ),
       2 => 
       array (
-        0 => 'luminova\\seo\\getinstance',
-        1 => 'luminova\\seo\\create',
+        0 => 'luminova\\seo\\__construct',
+        1 => 'luminova\\seo\\getinstance',
         2 => 'luminova\\seo\\setlink',
         3 => 'luminova\\seo\\setconfig',
         4 => 'luminova\\seo\\settitle',
@@ -2642,27 +2552,6 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
       ),
       2 => 
       array (
-      ),
-      3 => 
-      array (
-      ),
-    ),
-    '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Controllers/ViewController.php' => 
-    array (
-      0 => '17d0e6cc0f9df87aa5654ff490696490175ff1bc',
-      1 => 
-      array (
-        0 => 'luminova\\controllers\\viewcontroller',
-      ),
-      2 => 
-      array (
-        0 => 'luminova\\controllers\\request',
-        1 => 'luminova\\controllers\\validate',
-        2 => 'luminova\\controllers\\app',
-        3 => 'luminova\\controllers\\library',
-        4 => 'luminova\\controllers\\view',
-        5 => 'luminova\\controllers\\oncreate',
-        6 => 'luminova\\controllers\\ondestroy',
       ),
       3 => 
       array (
@@ -2802,7 +2691,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Mailer.php' => 
     array (
-      0 => '4af76c287ec3222b95cb7e63d3353657619ee12f',
+      0 => '35d25d7e46442eb0480f944013c1310321adc770',
       1 => 
       array (
         0 => 'luminova\\email\\mailer',
@@ -2833,7 +2722,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Exceptions/MailerException.php' => 
     array (
-      0 => 'e618530d06705793416bd30404aca69faa855ade',
+      0 => 'b8f32eb734c40058c682ffc5d4f27523e2af4ed7',
       1 => 
       array (
         0 => 'luminova\\email\\exceptions\\mailerexception',
@@ -2848,7 +2737,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Email/Helpers/Helper.php' => 
     array (
-      0 => '8c01cab8b5419e3b1faeeb3bd87c2d38b8af336e',
+      0 => '88cb253a3bec826c8e7b394e5ba064d66eba9afc',
       1 => 
       array (
         0 => 'luminova\\email\\helpers\\helper',
@@ -2864,14 +2753,19 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseApplication.php' => 
     array (
-      0 => 'e9c3cb86da16755aa67b8db963de4c541eac39f4',
+      0 => '866c92fae51f0e0c6b45951e7b36b1dc1ee1d155',
       1 => 
       array (
         0 => 'luminova\\base\\baseapplication',
       ),
       2 => 
       array (
-        0 => 'luminova\\base\\__get',
+        0 => 'luminova\\base\\__construct',
+        1 => 'luminova\\base\\getinstance',
+        2 => 'luminova\\base\\getview',
+        3 => 'luminova\\base\\getbase',
+        4 => 'luminova\\base\\__get',
+        5 => 'luminova\\base\\oncreate',
       ),
       3 => 
       array (
@@ -2879,7 +2773,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseCommand.php' => 
     array (
-      0 => 'd07b3cdf7a4c10b6352df0ca4e34aa814fc1be05',
+      0 => '7d448537e952967ad3ed66cbbcd54b4741004e1f',
       1 => 
       array (
         0 => 'luminova\\base\\basecommand',
@@ -2897,7 +2791,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseFunction.php' => 
     array (
-      0 => 'ecb95320efe9eabff5a2e9351faa1424652e6e0c',
+      0 => '3b579421629dece64b5ead04d44bf63c86fb2366',
       1 => 
       array (
         0 => 'luminova\\base\\basefunction',
@@ -2911,7 +2805,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseServices.php' => 
     array (
-      0 => '85c540faf539e1faba97fef44da0421eb6c4d604',
+      0 => 'c8d9a8a860d44f7841e571daf205c5b1f4ffe6c1',
       1 => 
       array (
         0 => 'luminova\\base\\baseservices',
@@ -2927,13 +2821,18 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseConfig.php' => 
     array (
-      0 => 'c1272ba08574af94be3f98bcab645809c34629da',
+      0 => 'dccc27cf1dc1647b383dcf825ab619a62755f572',
       1 => 
       array (
         0 => 'luminova\\base\\baseconfig',
       ),
       2 => 
       array (
+        0 => 'luminova\\base\\fileversion',
+        1 => 'luminova\\base\\shouldminify',
+        2 => 'luminova\\base\\getenv',
+        3 => 'luminova\\base\\copyright',
+        4 => 'luminova\\base\\version',
       ),
       3 => 
       array (
@@ -2955,7 +2854,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseServers.php' => 
     array (
-      0 => 'd6ca8f8a11988f74ca718d935e6d42f1553ed259',
+      0 => '9680778039c1beed2d24838ced5ebe795bd607a2',
       1 => 
       array (
         0 => 'luminova\\base\\baseservers',
@@ -2970,7 +2869,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseController.php' => 
     array (
-      0 => '2a0a1ac128570d0b8cce07e38d06f8941d809e04',
+      0 => 'c03fb77816a37f8c8e5e9b7943ba535d668fc8c9',
       1 => 
       array (
         0 => 'luminova\\base\\basecontroller',
@@ -2978,9 +2877,8 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
       2 => 
       array (
         0 => 'luminova\\base\\__construct',
-        1 => 'luminova\\base\\__destruct',
-        2 => 'luminova\\base\\__get',
-        3 => 'luminova\\base\\__isset',
+        1 => 'luminova\\base\\__get',
+        2 => 'luminova\\base\\__isset',
       ),
       3 => 
       array (
@@ -2988,7 +2886,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseViewController.php' => 
     array (
-      0 => 'a30cdeb9086edd8ba0b4f1011f61242e32f9632a',
+      0 => '5ba5c96f5f17fbb293903598cbbd9197d0385db7',
       1 => 
       array (
         0 => 'luminova\\base\\baseviewcontroller',
@@ -2999,6 +2897,13 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
         1 => 'luminova\\base\\__destruct',
         2 => 'luminova\\base\\__get',
         3 => 'luminova\\base\\__isset',
+        4 => 'luminova\\base\\request',
+        5 => 'luminova\\base\\validate',
+        6 => 'luminova\\base\\app',
+        7 => 'luminova\\base\\library',
+        8 => 'luminova\\base\\view',
+        9 => 'luminova\\base\\oncreate',
+        10 => 'luminova\\base\\ondestroy',
       ),
       3 => 
       array (
@@ -3006,7 +2911,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Base/BaseModel.php' => 
     array (
-      0 => '38a0703e49d774dd9ca8567087b439d74d6b391d',
+      0 => '7f1385e1f619558c9dea1458e95a6db6970d664a',
       1 => 
       array (
         0 => 'luminova\\base\\basemodel',
@@ -3117,7 +3022,7 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
     ),
     '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Cookies/Exception/CookieException.php' => 
     array (
-      0 => '4615d8b06d8516a16a7261c2de4eea829f584d48',
+      0 => 'd472a1cd2ab9abc4e0fa1878a2671c74e2787f4d',
       1 => 
       array (
         0 => 'luminova\\cookies\\exception\\cookieexception',
@@ -3125,6 +3030,31 @@ return \PHPStan\Cache\CacheItem::__set_state(array(
       2 => 
       array (
         0 => 'luminova\\cookies\\exception\\throwwith',
+      ),
+      3 => 
+      array (
+      ),
+    ),
+    '/Applications/XAMPP/xamppfiles/htdocs/luminova.fm/system/Cache/PageViewCache.php' => 
+    array (
+      0 => '0b83dec32b2d56232df776d65dc7b9426844ea88',
+      1 => 
+      array (
+        0 => 'luminova\\cache\\pageviewcache',
+      ),
+      2 => 
+      array (
+        0 => 'luminova\\cache\\__construct',
+        1 => 'luminova\\cache\\setexpiry',
+        2 => 'luminova\\cache\\setdirectory',
+        3 => 'luminova\\cache\\getcachelocation',
+        4 => 'luminova\\cache\\getcachefilepath',
+        5 => 'luminova\\cache\\hascache',
+        6 => 'luminova\\cache\\getfiletime',
+        7 => 'luminova\\cache\\getcache',
+        8 => 'luminova\\cache\\savecache',
+        9 => 'luminova\\cache\\getkey',
+        10 => 'luminova\\cache\\setkey',
       ),
       3 => 
       array (

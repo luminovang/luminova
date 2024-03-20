@@ -13,11 +13,11 @@ use \Luminova\Base\BaseViewController;
 
 class Home extends BaseViewController 
 {
-    /** @var \Luminova\Http\Request $this->request() */
-    /** @var \Luminova\Application $this->app */
-    /** @var \Luminova\Security\InputValidator $this->validate() */
-    /** @var \Luminova\Template\Template $this->view(string $view, array $options = []): int 0 */
-    /** @var \Luminova\Library\Importer $this->library() */
+    /** @method \Luminova\Http\Request $this->request() */
+    /** @method \Luminova\Application $this->app */
+    /** @method \Luminova\Security\InputValidator $this->validate() */
+    /** @method \Luminova\Template\Template $this->view(string $view, array $options = []): int 0 */
+    /** @method \Luminova\Library\Importer $this->library() */
     
     public function page(): void
     {
