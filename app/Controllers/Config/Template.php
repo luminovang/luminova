@@ -14,9 +14,9 @@ final class Template
   /** 
    * Application template engine
    * 
-   * @var string ENGINE [default, smarty] 
+   * @var string $templateEngine [default, smarty] 
   */
-  public const ENGINE = 'default';
+  public static $templateEngine = 'default';
 
   /** 
    * Access template view options as variable and render view in isolation mode
@@ -33,16 +33,16 @@ final class Template
   /** 
    * Disable or enable prefixing variable name with underscore while using $this keyword $this->_name 
    * 
-   * @var bool $viewIsolation 
+   * @var bool $useVariablePrefix 
   */
-  public static bool $variablePrefix = true;
+  public static bool $useVariablePrefix = true;
 
   /** 
-   * Application template optimized file directory path
+   * Application template page view cache file directory path
    * 
-   * @var string $optimizerFolder 
+   * @var string $pageCacheFolder 
   */
-  public static string $optimizerFolder = 'writeable/caches/optimize';
+  public static string $pageCacheFolder = 'writeable/caches/optimize';
 
   /** 
    * Holds smarty template compile folder
