@@ -11,6 +11,7 @@ cli.help
 .fleet
 .idea
 .vscode
+/builds
 # Ignore all folders within /system/
 /system/*/
 
