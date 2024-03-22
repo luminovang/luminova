@@ -8,8 +8,8 @@ $errorId = uniqid('error', true);
 <head>
     <meta charset="UTF-8">
     <meta name="robots" content="noindex">
-    <link rel="shortcut icon" type="image/png" href="<?php echo $this->_base;?>favicon.png">
-    <title><?= escape($this->_title ?? $exception::class) ?></title>
+    <link rel="shortcut icon" type="image/png" href="<?php echo $base;?>favicon.png">
+    <title><?= escape($title ?? $exception::class) ?></title>
     <style>
         <?= preg_replace('#[\r\n\t ]+#', ' ', file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'debug.css')) ?>
     </style>
@@ -19,16 +19,16 @@ $errorId = uniqid('error', true);
     <!-- Header -->
     <div class="header">
         <div class="container">
-            <h1><?= escape($this->_title ?? $exception::class), escape($exception->getCode() ? ' #' . $exception->getCode() : '') ?></h1>
+            <h1><?= escape($title ?? $exception::class), escape($exception->getCode() ? ' #' . $exception->getCode() : '') ?></h1>
             <p>
                 <?= nl2br(escape($exception->getMessage())) ?>
-                <a href="https://www.duckduckgo.com/?q=<?= urlencode($this->_title . ' ' . preg_replace('#\'.*\'|".*"#Us', '', $exception->getMessage())) ?>"
+                <a href="https://www.duckduckgo.com/?q=<?= urlencode($title . ' ' . preg_replace('#\'.*\'|".*"#Us', '', $exception->getMessage())) ?>"
                    rel="noreferrer" target="_blank">search &rarr;</a>
             </p>
         </div>
     </div>
 
-    <?php if (defined('SHOW_DEBUG_BACKTRACE') && SHOW_DEBUG_BACKTRACE) : ?>
+    <?php if (SHOW_DEBUG_BACKTRACE) : ?>
     <div class="container">
 
         <ul class="tabs" id="tabs">

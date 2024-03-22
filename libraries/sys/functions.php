@@ -11,6 +11,7 @@ use \Luminova\Application\Factory;
 use \Luminova\Http\Request;
 use \Luminova\Cookies\Cookie;
 use \Luminova\Functions\Functions;
+use \Luminova\Template\ViewResponse;
 
 if (!function_exists('func')) {
     /**
@@ -836,5 +837,23 @@ if (!function_exists('is_dev_server')) {
         }
         
         return false;
+    }
+}
+
+if (!function_exists('response')) {
+    /** 
+    * Response instance 
+    *
+    * @param int $status int $status HTTP status code (default: 200 OK)
+    *
+    * @return ViewResponse instance 
+    */
+    function response(int $status = 200): ViewResponse
+    {
+        static $response = null;
+
+        $response ??= new ViewResponse();
+
+        return $response->setStatus($status);
     }
 }
