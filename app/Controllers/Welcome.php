@@ -14,7 +14,6 @@ use \App\Controllers\Config\Config;
 
 class Welcome extends BaseViewController 
 {
-
     public function page(): void
     {
         $this->view('index');
@@ -31,7 +30,7 @@ class Welcome extends BaseViewController
                 "framework" => Config::copyright(),
                 "timestamp" => date("Y-m-d H:i:s")
             ]
-        ]);
+        ], JSON_PRETTY_PRINT);
     }
     
 }

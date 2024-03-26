@@ -12,6 +12,7 @@ use \Luminova\Http\Request;
 use \Luminova\Cookies\Cookie;
 use \Luminova\Functions\Functions;
 use \Luminova\Template\ViewResponse;
+use \App\Controllers\Config\Files;
 
 if (!function_exists('func')) {
     /**
@@ -723,7 +724,7 @@ if (!function_exists('validate')) {
      *        }
      * 
      * @return bool|Validator|Factory::validate Return true or false else return validation instance
-     */
+    */
     function validate(?array $inputs, ?array $rules, array $messages = []): bool|object 
     {
         if ($inputs === []) {
@@ -775,7 +776,7 @@ if (!function_exists('filter_paths')) {
      * @param string $path The path to be filtered.
      * 
      * @return string
-     */
+    */
     function filter_paths(string $path): string 
     {
         $matching = '';
@@ -799,12 +800,10 @@ if (!function_exists('filter_paths')) {
 }
 
 if (!function_exists('is_command')) {
-     /**
-     * Is CLI?
+    /**
+     * Find whether application is running in cli mode.
      *
-     * Test to see if a request was made from the command line.
-     *
-     * @return bool
+     * @return bool Return true if request is made in cli mode, false otherwise
     */
     function is_command(): bool
     {
@@ -855,5 +854,56 @@ if (!function_exists('response')) {
         $response ??= new ViewResponse();
 
         return $response->setStatus($status);
+    }
+}
+
+if (!function_exists('is_blob')) {
+    /**
+     * Find whether the type of a variable is blob
+     *
+     * @param mixed $value
+     * 
+     * @return bool 
+    */
+    function is_blob(mixed $value): bool 
+    {
+        return is_resource($value) && get_resource_type($value) === 'stream';
+    }
+}
+
+if (!function_exists('make_dir')) {
+    /**
+     * Attempts to create the directory specified by pathname if not exist.
+     * 
+     * @param string $path
+     * @param int $permissions 
+     * @param bool $recursive 
+     * 
+     * @return bool true if files existed or was created else false
+     * @throws RuntimeException If path is not readable
+    */
+    function make_dir(string $path, ?int $permissions = null, bool $recursive = true): bool 
+    {
+        if (!file_exists($path)) {
+            if(mkdir($path, $permissions ?? Files::$filePermissions, $recursive)){
+                return true;
+            }
+            
+            // Check if mkdir failed due to lack of write permission
+            if (!is_writable($path)) {
+                if (!is_readable($path)) {
+                    throw new RuntimeException("Folder '{$path}' is not readable and not writable, please grant appropriate permissions.");
+                } else {
+                    throw new RuntimeException("Folder '{$path}' is not writable, please grant write permission.");
+                }
+            }  
+            
+            // Check if mkdir failed due to lack of read permission
+            if (!is_readable($path)) {
+                throw new RuntimeException("Folder '{$path}' is not readable, please grant read permission.");
+            }
+        }
+
+        return true;
     }
 }

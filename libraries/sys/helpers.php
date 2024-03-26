@@ -8,11 +8,8 @@
  * @license See LICENSE file
 */
 
-/**
- * Initialize services
-*/
 if(is_feature('feature.app.services', true)){
-    factory('initializeServices');
+    factory('registerServices');
 }
 
 /**

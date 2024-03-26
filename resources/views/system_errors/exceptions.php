@@ -15,8 +15,6 @@ $errorId = uniqid('error', true);
     </style>
 </head>
 <body>
-
-    <!-- Header -->
     <div class="header">
         <div class="container">
             <h1><?= escape($title ?? $exception::class), escape($exception->getCode() ? ' #' . $exception->getCode() : '') ?></h1>

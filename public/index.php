@@ -78,7 +78,7 @@ $api_error = function () use($app): void {
  * @param Bootstrap ...$callbacks The Bootstrap instance to each routing
  * 
  * @example Bootstrap params
- *  - @param string $name Rout name any url that starts with $name will be routed to name.php in routes/name.php
+ *  - @param string $name Route name any url that starts with $name will be routed to name.php in routes/name.php
  *  - @param ?callable $onError Error Handler 
 */
 $app->router->bootstraps($app,

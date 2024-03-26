@@ -7,9 +7,6 @@
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
  */
-/**
- * Check php requirements 
-*/
 if (version_compare(PHP_VERSION, 8.0, '<')) {
     $err = 'Your PHP version must be 8.0 or higher to run PHP Luminova framework. Current version: %s' . PHP_VERSION;
     if (!ini_get('display_errors')) {
@@ -167,6 +164,7 @@ ignore_user_abort((bool) env('script.ignore.abort', true));
 
 /**
  * @var int STATUS_OK success status code
+ * 
  * @deprecated use STATUS_SUCCESS instead
 */
 defined('STATUS_OK') || define('STATUS_OK', 0);
@@ -254,9 +252,49 @@ defined('REQUEST_URL') || define('REQUEST_URL', REQUEST_HOSTNAME . (isset($_SERV
 /**
  * @var bool SHOW_DEBUG_BACKTRACE show debug tracer
 */
-defined('SHOW_DEBUG_BACKTRACE') || define('SHOW_DEBUG_BACKTRACE', (bool) env("show.debug.tracer", false));
+defined('SHOW_DEBUG_BACKTRACE') || define('SHOW_DEBUG_BACKTRACE', (bool) env('debug.show.tracer', false));
 
 /**
  * @var bool NOVAKIT_ENV show debug tracer
 */
 defined('NOVAKIT_ENV') || define('NOVAKIT_ENV', (isset($_SERVER['NOVAKIT_EXECUTION_ENV']) ? $_SERVER['NOVAKIT_EXECUTION_ENV'] : null));
+
+/**
+ * @var int FETCH_ASSOC Fetch as an associative array
+*/
+defined('FETCH_ASSOC') || define('FETCH_ASSOC', 0);
+
+/**
+ * @var int FETCH_NUM Fetch as an array integer index
+*/
+defined('FETCH_NUM') || define('FETCH_NUM', 1);
+
+/**
+ * @var int FETCH_BOTH Fetch as an array integer index and associative
+*/
+defined('FETCH_BOTH') || define('FETCH_BOTH', 2);
+
+/**
+ * @var int FETCH_OBJ Fetch as an object
+*/
+defined('FETCH_OBJ') || define('FETCH_OBJ', 3);
+
+/**
+ * @var int FETCH_COLUMN Fetch as an array columns integer index
+*/
+defined('FETCH_COLUMN') || define('FETCH_COLUMN', 4);
+
+/**
+ * @var int FETCH_NUM_OBJ Fetch as an object with string integer property names
+*/
+defined('FETCH_NUM_OBJ') || define('FETCH_NUM_OBJ', 5);
+
+/**
+ * @var int FETCH_ALL Fetch all as an associative array
+*/
+defined('FETCH_ALL') || define('FETCH_ALL', 6);
+
+/**
+ * @var int FETCH_COLUMN_ASSOC Fetch all as an associative array
+*/
+defined('FETCH_COLUMN_ASSOC') || define('FETCH_COLUMN_ASSOC', 7);

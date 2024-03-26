@@ -235,7 +235,7 @@ class Updater
     private static function makeDirectoryIfNotExist(string $path): void 
     {
         if (!is_dir($path)) {
-            mkdir($path, 0755, true);
+            make_dir($path, 0755, true);
         }
     }
 

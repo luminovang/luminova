@@ -82,7 +82,7 @@ class Builder extends BaseComposer
         $destinationDir = APP_ROOT . DIRECTORY_SEPARATOR . $destinationDir . DIRECTORY_SEPARATOR . 'v-' . APP_VERSION;
 
         if (!is_dir($destinationDir)) {
-            mkdir($destinationDir, 0755, true);
+            make_dir($destinationDir, 0755, true);
         }
 
         parent::progress(10, function ($step) use ($destinationDir) {
@@ -145,7 +145,7 @@ class Builder extends BaseComposer
    
         try {
             if(!is_dir($buildDir)){
-                mkdir($buildDir, 0755, true); 
+                make_dir($buildDir, 0755, true); 
             }
          
             if ($zip->open($buildFile, ZipArchive::CREATE | ZipArchive::OVERWRITE) !== true) {
