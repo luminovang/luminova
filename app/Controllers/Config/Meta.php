@@ -6,8 +6,7 @@
  * @author Ujah Chigozie Peter
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
- */
-
+*/
 return [
     'name' => 'Luminova Framework',
     'short_name' => 'Luminova',
