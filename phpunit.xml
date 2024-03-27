@@ -58,5 +58,6 @@
     <php>
         <const name="HOMEPATH" value="./"/>
         <const name="PUBLICPATH" value="./public/"/>
+        <env name="APP_ENV" value="dev"/>
     </php>
 </phpunit>
