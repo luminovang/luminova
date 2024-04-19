@@ -8,17 +8,25 @@
  * @license See LICENSE file
 */
 
+/**
+ * Autoload register psr-4 classes
+*/
+if(is_feature('feature.app.autoload.psr4', false)){
+    \Luminova\Library\Modules::register();
+}
+
+/**
+ * Register services 
+*/
 if(is_feature('feature.app.services', true)){
-    factory('registerServices');
+    factory('register');
 }
 
 /**
  * Initialize and register class modules and aliases
 */
-$ctlPath = APP_ROOT . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR .'Controllers' . DIRECTORY_SEPARATOR;
-
-if(is_feature('feature.app.class.modules', false) && !defined('INIT_DEV_MODULES')){
-    if(file_exists($modules = $ctlPath . 'Config' . DIRECTORY_SEPARATOR . 'Modules.php')){
+if(is_feature('feature.app.class.aliases', false) && !defined('INIT_DEV_MODULES')){
+    if (file_exists($modules = path('controllers') . 'Config' . DIRECTORY_SEPARATOR . 'Modules.php')) {
         define('INIT_DEV_MODULES', true);
         $config = require $modules;
 
@@ -35,8 +43,8 @@ if(is_feature('feature.app.class.modules', false) && !defined('INIT_DEV_MODULES'
 /**
  * Initialize dev global functions
 */
-if(is_feature('feature.app.dev.functions', true) && !defined('INIT_DEV_FUNCTIONS')){
-    if(file_exists($global = $ctlPath . 'Utils' . DIRECTORY_SEPARATOR . 'Global.php')){
+if(is_feature('feature.app.dev.functions', false) && !defined('INIT_DEV_FUNCTIONS')){
+    if(file_exists($global = path('controllers') . 'Utils' . DIRECTORY_SEPARATOR . 'Global.php')){
         define('INIT_DEV_FUNCTIONS', true);
         require $global;
     }

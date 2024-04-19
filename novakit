@@ -13,6 +13,8 @@
  * Location of the framework bootstrap file.
 */
 require __DIR__ . '/bootstrap/cli.php';
+use \Luminova\Command\Console;
+use \Luminova\Config\DotEnv;
 
 /**
  * Ensure the current directory is pointing to the front controller's directory
@@ -20,21 +22,11 @@ require __DIR__ . '/bootstrap/cli.php';
 chdir(FRONT_CONTROLLER);
 
 /**
- * Show header information by default or if `--no-header` is passed suppress header.
+ * Load environment settings from .env files into $_SERVER and $_ENV
 */
-if (($noHeader = array_search('--no-header', $_SERVER['argv'], true)) !== false) {
-    unset($_SERVER['argv'][$noHeader]);
-    $noHeader = true;
-}
+DotEnv::register(__DIR__ . DIRECTORY_SEPARATOR . '.env');
 
 /**
- * Initialize our Console, Initialize Terminal CLI
- * 
- * @var Console $console
+ * Initialize Terminal Console and Run console instance
 */
-$console = new \Luminova\Command\Console($noHeader);
-
-/**
- * Run our console instance
-*/
-$console->run($_SERVER['argv'] ?? []);
+(new Console())->run($_SERVER['argv'] ?? []);

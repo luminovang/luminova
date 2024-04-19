@@ -1,54 +1,50 @@
-<?php
-use \Luminova\Http\Request;
-use \Luminova\Base\BaseConfig;
-$errorId = uniqid('error', true);
+<?php 
+use \Luminova\Storage\Helper;
+use \Luminova\Debugger\Tracer;
+$parts = explode(" File:", $exception->getMessage());
 ?>
 <!doctype html>
-<html>
+<html lang="<?= str_replace('_', '-', locale());?>">
 <head>
     <meta charset="UTF-8">
     <meta name="robots" content="noindex">
-    <link rel="shortcut icon" type="image/png" href="<?php echo $base;?>favicon.png">
+    <link rel="shortcut icon" type="image/png" href="<?= $base;?>favicon.png">
     <title><?= escape($title ?? $exception::class) ?></title>
     <style>
-        <?= preg_replace('#[\r\n\t ]+#', ' ', file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'debug.css')) ?>
-    </style>
+        <?= preg_replace('#[\r\n\t ]+#', ' ', file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'debug.css')) ?> </style>
+    <script>
+        function toggle(id) {
+            event.preventDefault();
+            var element = document.getElementById(id);
+            if (element.style.display === "none") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="header">
         <div class="container">
-            <h1><?= escape($title ?? $exception::class), escape($exception->getCode() ? ' #' . $exception->getCode() : '') ?></h1>
+            <h1><?= escape(($title ?? $exception::class) . ($exception->getCode() ? ' #' . $exception->getCode() : '')); ?></h1>
             <p>
-                <?= nl2br(escape($exception->getMessage())) ?>
-                <a href="https://www.duckduckgo.com/?q=<?= urlencode($title . ' ' . preg_replace('#\'.*\'|".*"#Us', '', $exception->getMessage())) ?>"
-                   rel="noreferrer" target="_blank">search &rarr;</a>
+                <?= nl2br(escape($parts[0]??'')) ?>
+                <a href="https://www.duckduckgo.com/?q=<?= urlencode(preg_replace('#\'.*\'|".*"#Us', '', $parts[0]??'')) ?>" rel="noreferrer" target="_blank">Search Online &rarr;</a>
             </p>
+            <p>File: <?= escape($parts[1]??'');?></p>
         </div>
     </div>
 
     <?php if (SHOW_DEBUG_BACKTRACE) : ?>
-    <div class="container">
-
-        <ul class="tabs" id="tabs">
-            <li><a href="#backtrace">Backtrace</a></li>
-            <li><a href="#server">Server</a></li>
-            <li><a href="#request">Request</a></li>
-            <li><a href="#response">Response</a></li>
-            <li><a href="#files">Files</a></li>
-            <li><a href="#memory">Memory</a></li>
-        </ul>
-
+    <div class="container main-container">
         <div class="tab-content">
-
-            <!-- Backtrace -->
             <div class="content" id="backtrace">
-
+                <h3>BACKTRACE</h3>
                 <ol class="trace">
                 <?php foreach ($trace as $index => $row) : ?>
-
                     <li>
                         <p>
-                            <!-- Trace info -->
                             <?php if (isset($row['file']) && is_file($row['file'])) : ?>
                                 <?php
                                 if (isset($row['function']) && in_array($row['function'], ['include', 'include_once', 'require', 'require_once'], true)) {
@@ -61,13 +57,12 @@ $errorId = uniqid('error', true);
                                 {PHP internal code}
                             <?php endif; ?>
 
-                            <!-- Class/Method -->
                             <?php if (isset($row['class'])) : ?>
                                 &nbsp;&nbsp;&mdash;&nbsp;&nbsp;<?= escape($row['class'] . $row['type'] . $row['function']) ?>
                                 <?php if (! empty($row['args'])) : ?>
-                                    <?php $argsId = $errorId . 'args' . $index ?>
+                                    <?php $argsId = uniqid('error', true) . 'args' . $index ?>
                                     ( <a href="#" onclick="return toggle('<?= escape($argsId, 'attr') ?>');">arguments</a> )
-                                    <div class="args" id="<?= escape($argsId, 'attr') ?>">
+                                    <div style="display:none;" id="<?= escape($argsId, 'attr') ?>">
                                         <table cellspacing="0">
 
                                         <?php
@@ -98,18 +93,16 @@ $errorId = uniqid('error', true);
 
                         <?php if (isset($row['file']) && is_file($row['file']) && isset($row['class'])) : ?>
                             <div class="source">
-                                <?= $exception->highlightFile($row['file'], $row['line']) ?>
+                                <?= Tracer::highlight($row['file'], $row['line']) ?>
                             </div>
                         <?php endif; ?>
                     </li>
-
                 <?php endforeach; ?>
                 </ol>
-
             </div>
 
-            <!-- Server -->
             <div class="content" id="server">
+                <h3>SERVER</h3>
                 <?php foreach (['_SERVER', '_SESSION'] as $var) : ?>
                     <?php
                     if (empty($GLOBALS[$var]) || ! is_array($GLOBALS[$var])) {
@@ -146,7 +139,7 @@ $errorId = uniqid('error', true);
        
                 <?php $constants = get_defined_constants(true); ?>
                 <?php if (! empty($constants['user'])) : ?>
-                    <h3>Constants</h3>
+                    <h3>CONSTANTS</h3>
 
                     <table>
                         <thead>
@@ -162,6 +155,10 @@ $errorId = uniqid('error', true);
                                 <td>
                                     <?php if (is_string($value)) : ?>
                                         <?= escape($value) ?>
+                                    <?php elseif(is_bool($value)): ?>
+                                        <?= $value === true ? 'true' : 'false';?>
+                                    <?php elseif(is_int($value)): ?>
+                                        <?= $value;?>
                                     <?php else: ?>
                                         <pre><?= escape(print_r($value, true)) ?></pre>
                                     <?php endif; ?>
@@ -173,14 +170,13 @@ $errorId = uniqid('error', true);
                 <?php endif; ?>
             </div>
 
-            <!-- Request -->
             <div class="content" id="request">
-                <?php $request = new Request(); ?>
-
+                <h3>REQUEST</h3>
+                <?php $request = new \Luminova\Http\Request(); ?>
                 <table>
                     <tbody>
                         <tr>
-                            <td style="width: 10em">Path</td>
+                            <td style="width: 10em">URI</td>
                             <td><?= escape($request->getUri()) ?></td>
                         </tr>
                         <tr>
@@ -226,7 +222,7 @@ $errorId = uniqid('error', true);
                     <table style="width: 100%">
                         <thead>
                             <tr>
-                                <th>Key</th>
+                                <th width="25%">Key</th>
                                 <th>Value</th>
                             </tr>
                         </thead>
@@ -264,7 +260,7 @@ $errorId = uniqid('error', true);
                     <table>
                         <thead>
                             <tr>
-                                <th>Header</th>
+                                <th width="25%">Header</th>
                                 <th>Value</th>
                             </tr>
                         </thead>
@@ -283,6 +279,7 @@ $errorId = uniqid('error', true);
 
        
             <div class="content" id="files">
+                <h3>FILES</h3>
                 <?php $files = get_included_files(); ?>
 
                 <ol>
@@ -292,9 +289,28 @@ $errorId = uniqid('error', true);
                 </ol>
             </div>
 
+            <div class="content" id="memory">
+                <h3>MEMORY</h3>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Memory Usage</td>
+                            <td><?= escape(Helper::byteToUnit(memory_get_usage(true), true)) ?></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 12em">Peak Memory Usage:</td>
+                            <td><?= escape(Helper::byteToUnit(memory_get_peak_usage(true), true)) ?></td>
+                        </tr>
+                        <tr>
+                            <td>Memory Limit:</td>
+                            <td><?= escape(ini_get('memory_limit')) ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
 
         </div> 
-
     </div>
     <?php endif; ?>
 
@@ -302,14 +318,13 @@ $errorId = uniqid('error', true);
         <div class="container">
 
             <p>
-                Displayed at <?= escape(date('H:i:sa')) ?> &mdash;
-                PHP: <?= escape(PHP_VERSION) ?>  &mdash;
-                Luminova: <?= escape(BaseConfig::$version) ?> --
+                Displayed at <?= date('H:i:sA') ?> &mdash;
+                PHP: <?= PHP_VERSION ?>  &mdash;
+                Luminova: <?= \Luminova\Application\Foundation::VERSION ?> &mdash;
                 Environment: <?= ENVIRONMENT ?>
             </p>
 
         </div>
     </div>
-
 </body>
 </html>

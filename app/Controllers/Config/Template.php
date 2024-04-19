@@ -9,57 +9,58 @@
  */
 namespace App\Controllers\Config;
 
+/**
+ * @see https://luminova.ng/public/docs/0.0.0/templates/config
+*/
 final class Template 
 { 
   /** 
-   * Application template engine
+   * Specify template engine for rendering your application views.
    * 
    * @var string $templateEngine [default, smarty] 
   */
   public static $templateEngine = 'default';
 
   /** 
-   * Access template view options as variable and render view in isolation mode
-   * If set to true then view array options can be access as variable $name instead of $this->_name
-   * And $this keyword won't be available to call protected classes registered on App\Controller\Application 
-   * This will be use $self->name instead of $this->_name.
-   * And to make your class discoverable using $self you need to register your class in App\Controller\Application 
-   * @example $this->export(MyClass::class), $this->export(new MyClass()) or with aliases $this->export(new MyClass(), 'myclass')
+   * Enabling this property will render your view in isolation, allowing template view options to be accessed as variables example: $verName instead of $this->_verName.
+   * Additionally, access to protected properties registered in your App\Controller\Application class won't be possible using the $this keyword ($this->myClassName). 
+   * Instead, you can use the $self keyword ($self->myClassName).
    * 
    * @var bool $viewIsolation 
   */
   public static bool $viewIsolation = false;
 
   /** 
-   * Disable or enable prefixing variable name with underscore while using $this keyword $this->_name 
+   * This property controls the use of variable key prefixing with _ for view options. 
+   * When set to false, accessing view options with underscore prefixing will be disabled.
    * 
    * @var bool $useVariablePrefix 
   */
   public static bool $useVariablePrefix = true;
 
   /** 
-   * Application template page view cache file directory path
+   * Set your application template page view cache file directory path.
    * 
    * @var string $pageCacheFolder 
   */
   public static string $pageCacheFolder = 'writeable/caches/optimize';
 
   /** 
-   * Holds smarty template compile folder
+   * Set your application smarty template compile folder.
    * 
    * @var string $smartyCompileFolder 
   */
   public static string $smartyCompileFolder = 'writeable/smarty/compile';
 
   /** 
-   * Holds template config folder
+   * Set your application smarty template config folder.
    * 
    * @var string $smartyConfigFolder 
   */
   public static string $smartyConfigFolder = 'writeable/smarty/config';
 
   /** 
-   * Holds template cache folder
+   * Set your application smarty template page view cache file directory path.
    * 
    * @var string $smartyCacheFolder 
   */

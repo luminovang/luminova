@@ -36,7 +36,8 @@
         "ext-intl": "Needed if you use Local",
         "psr/log": "Needed to use PSR logging",
         "phpmailer/phpmailer": "Needed if you use Mailer",
-        "smarty/smarty": "Needed if you use Template engine"
+        "smarty/smarty": "Needed if you use Template engine",
+        "league/flysystem": "Needed if you use FileSystem storage"
     },
     "autoload": {
         "files": [

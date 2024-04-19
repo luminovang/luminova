@@ -10,7 +10,7 @@
 namespace Luminova\Composer;
 use Luminova\Base\BaseConfig;
 
-class BaseComposer extends BaseConfig
+class BaseComposer
 {
     /**
      * @param int $totalSteps

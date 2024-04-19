@@ -23,13 +23,25 @@ if (version_compare(PHP_VERSION, 8.0, '<')) {
 /**
  * @var string APP_ROOT system root 2 levels back
 */
-defined('APP_ROOT') || define('APP_ROOT', dirname(__DIR__, 2));
+defined('APP_ROOT') || define('APP_ROOT', dirname(__DIR__, 2) . DIRECTORY_SEPARATOR);
+
+/**
+ * Define our public application front controller of not defined 
+ * 
+ * @var string FRONT_CONTROLLER
+*/
+defined('FRONT_CONTROLLER') || define('FRONT_CONTROLLER', realpath(rtrim(getcwd(), '\\/ ')) . DIRECTORY_SEPARATOR);
+
+/**
+ * @var string DOCUMENT_ROOT document root directory path 
+*/
+defined('DOCUMENT_ROOT') || define('DOCUMENT_ROOT', realpath(FRONT_CONTROLLER . 'public') . DIRECTORY_SEPARATOR);
 
 if (!function_exists('root')) {
     /**
      * Return to the root directory of your project.
      *
-     * @param string $directory The directory to start searching for .env
+     * @param string $directory The directory of the file you are calling root from.
      * @param string $suffix Prepend a path to root directory.
      * 
      * @return string $path + $suffix
@@ -38,8 +50,12 @@ if (!function_exists('root')) {
     {
         $suffix = trim($suffix, DIRECTORY_SEPARATOR) . ($suffix ? DIRECTORY_SEPARATOR : '');
 
-        if (file_exists(APP_ROOT . DIRECTORY_SEPARATOR . '.env')) {
-           return APP_ROOT . DIRECTORY_SEPARATOR . $suffix;
+        if (file_exists(APP_ROOT . '.env')) {
+            return APP_ROOT . $suffix;
+        }
+
+        if (file_exists(DOCUMENT_ROOT . '.env')) {
+            return DOCUMENT_ROOT . $suffix;
         }
 
         $path = realpath($directory);
@@ -58,7 +74,6 @@ if (!function_exists('root')) {
 
         return ($path !== DIRECTORY_SEPARATOR) ? $path . DIRECTORY_SEPARATOR . $suffix : $suffix;
     }
-
 }
 
 if(!function_exists('env')){
@@ -116,17 +131,17 @@ if(!function_exists('setenv')){
             $count++;
         }
     
-        if ($count > 0 && $append_to_env) {
-            $envFile = APP_ROOT . DIRECTORY_SEPARATOR . '.env';
+        if ($append_to_env) {
+            $envFile = APP_ROOT . '.env';
             $envContents = file_get_contents($envFile);
             if($envContents === false){
                 return false;
             }
             $keyExists = (strpos($envContents, "$key=") !== false || strpos($envContents, "$key =") !== false);
             //$keyValueExists = preg_match('/^' . preg_quote($key, '/') . '\s*=\s*.*$/m', $envContents);
-    
+           
             if (!$keyExists) {
-                file_put_contents($envFile, "\n$key=$value", FILE_APPEND);
+                return file_put_contents($envFile, "\n$key=$value", FILE_APPEND) !== false;
             } else {
                 $newContents = preg_replace_callback('/(' . preg_quote($key, '/') . ')\s*=\s*(.*)/',
                     function($match) use ($value) {
@@ -134,7 +149,8 @@ if(!function_exists('setenv')){
                     },
                     $envContents
                 );
-                file_put_contents($envFile, $newContents);
+
+                return file_put_contents($envFile, $newContents) !== false;
             }
         }
 
@@ -145,7 +161,7 @@ if(!function_exists('setenv')){
 /**
  * Initialize and load the environment variables
 */
-\Luminova\Config\DotEnv::register(APP_ROOT . DIRECTORY_SEPARATOR . '.env');
+\Luminova\Config\DotEnv::register(APP_ROOT . '.env');
 
 /**
  * Set default timezone
@@ -255,7 +271,7 @@ defined('REQUEST_URL') || define('REQUEST_URL', REQUEST_HOSTNAME . (isset($_SERV
 defined('SHOW_DEBUG_BACKTRACE') || define('SHOW_DEBUG_BACKTRACE', (bool) env('debug.show.tracer', false));
 
 /**
- * @var bool NOVAKIT_ENV show debug tracer
+ * @var bool NOVAKIT_ENV NovaKit executable command
 */
 defined('NOVAKIT_ENV') || define('NOVAKIT_ENV', (isset($_SERVER['NOVAKIT_EXECUTION_ENV']) ? $_SERVER['NOVAKIT_EXECUTION_ENV'] : null));
 
@@ -298,3 +314,38 @@ defined('FETCH_ALL') || define('FETCH_ALL', 6);
  * @var int FETCH_COLUMN_ASSOC Fetch all as an associative array
 */
 defined('FETCH_COLUMN_ASSOC') || define('FETCH_COLUMN_ASSOC', 7);
+
+/**
+ * @var int RETURN_NEXT Fetch next or single record.
+*/
+defined('RETURN_NEXT') || define('RETURN_NEXT', 0);
+
+/**
+ * @var int RETURN_2D_NUM Fetch all as 2d array integers
+*/
+defined('RETURN_2D_NUM') || define('RETURN_2D_NUM', 1);
+
+/**
+ * @var int RETURN_ID Fetch last inserted id
+*/
+defined('RETURN_ID') || define('RETURN_ID', 2);
+
+/**
+ * @var int RETURN_INT Fetch count of records
+*/
+defined('RETURN_INT') || define('RETURN_INT', 3);
+
+/**
+ * @var int RETURN_COUNT Fetch number if affected rows.
+*/
+defined('RETURN_COUNT') || define('RETURN_COUNT', 4);
+
+/**
+ * @var int RETURN_COLUMN Fetch all result columns
+*/
+defined('RETURN_COLUMN') || define('RETURN_COLUMN', 5);
+
+/**
+ * @var int RETURN_ALL Fetch all as results
+*/
+defined('RETURN_ALL') || define('RETURN_ALL', 6);

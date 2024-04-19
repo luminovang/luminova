@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{locale}">
 <head>
     <meta charset="UTF-8">
     <title>Welcome to PHP Luminova</title>
     <meta name="description" content="Simple framework built for speed and keeping your existing coding skills going.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/png" href="{$base}favicon.png">
+    <link rel="shortcut icon" type="image/png" href="{href favicon.png}">
     <style>
         * {
             transition: background-color 300ms ease, color 300ms ease;
@@ -194,7 +194,7 @@
     <div class="menu">
         <ul>
             <li class="logo">
-                <a href="https://nanoblocktech.com/luminova" target="_blank">
+                <a href="https://luminova.ng/" target="_blank">
                    <svg aria-label="PHP Luminova" height="44" viewBox="0 0 660 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M69.2062 109.125H50.7938C49.8986 109.125 49.0402 109.481 48.4073 110.114C47.7743 110.746 47.4188 111.605 47.4188 112.5C47.4188 113.395 47.7743 114.254 48.4073 114.886C49.0402 115.519 49.8986 115.875 50.7938 115.875H69.2062C70.1014 115.875 70.9598 115.519 71.5927 114.886C72.2257 114.254 72.5812 113.395 72.5812 112.5C72.5812 111.605 72.2257 110.746 71.5927 110.114C70.9598 109.481 70.1014 109.125 69.2062 109.125ZM60 17.4825C60.8951 17.4825 61.7536 17.1269 62.3865 16.494C63.0194 15.8611 63.375 15.0026 63.375 14.1075V7.5C63.375 6.60489 63.0194 5.74645 62.3865 5.11351C61.7536 4.48058 60.8951 4.125 60 4.125C59.1049 4.125 58.2464 4.48058 57.6135 5.11351C56.9806 5.74645 56.625 6.60489 56.625 7.5V14.1075C56.625 15.0026 56.9806 15.8611 57.6135 16.494C58.2464 17.1269 59.1049 17.4825 60 17.4825ZM108.056 48.4087H101.449C100.554 48.4087 99.6952 48.7643 99.0623 49.3973C98.4293 50.0302 98.0737 50.8886 98.0737 51.7837C98.0737 52.6789 98.4293 53.5373 99.0623 54.1702C99.6952 54.8032 100.554 55.1587 101.449 55.1587H108.056C108.951 55.1587 109.81 54.8032 110.443 54.1702C111.076 53.5373 111.431 52.6789 111.431 51.7837C111.431 50.8886 111.076 50.0302 110.443 49.3973C109.81 48.7643 108.951 48.4087 108.056 48.4087ZM18.5475 48.4087H11.9437C11.0486 48.4087 10.1902 48.7643 9.55726 49.3973C8.92433 50.0302 8.56875 50.8886 8.56875 51.7837C8.56875 52.6789 8.92433 53.5373 9.55726 54.1702C10.1902 54.8032 11.0486 55.1587 11.9437 55.1587H18.5512C19.4464 55.1582 20.3046 54.8022 20.9372 54.1689C21.5698 53.5356 21.9249 52.677 21.9244 51.7819C21.9239 50.8868 21.5678 50.0285 20.9345 49.3959C20.3012 48.7634 19.4426 48.4083 18.5475 48.4087ZM30.9712 27.5288C31.284 27.8442 31.6561 28.0945 32.0661 28.2654C32.4761 28.4363 32.9158 28.5242 33.36 28.5242C33.8042 28.5242 34.2439 28.4363 34.6539 28.2654C35.0639 28.0945 35.436 27.8442 35.7487 27.5288C36.0626 27.2159 36.3116 26.8442 36.4815 26.4349C36.6514 26.0257 36.7389 25.5869 36.7389 25.1437C36.7389 24.7006 36.6514 24.2618 36.4815 23.8526C36.3116 23.4433 36.0626 23.0716 35.7487 22.7587L31.0725 18.0825C30.7618 17.7579 30.3894 17.4987 29.9772 17.3199C29.565 17.1412 29.1213 17.0466 28.672 17.0416C28.2227 17.0366 27.777 17.1213 27.3609 17.2909C26.9448 17.4604 26.5668 17.7114 26.249 18.0289C25.9311 18.3465 25.6799 18.7243 25.5101 19.1403C25.3402 19.5562 25.2551 20.0019 25.2597 20.4512C25.2643 20.9005 25.3586 21.3443 25.5371 21.7566C25.7155 22.169 25.9744 22.5416 26.2987 22.8525L30.9712 27.5288ZM88.9275 18.0825L84.255 22.755C83.7797 23.2258 83.4554 23.8275 83.3234 24.4834C83.1915 25.1393 83.2579 25.8196 83.5141 26.4376C83.7704 27.0556 84.205 27.5832 84.7624 27.9532C85.3198 28.3232 85.9747 28.5188 86.6437 28.515C87.0875 28.5157 87.5271 28.4286 87.937 28.2587C88.347 28.0888 88.7193 27.8394 89.0325 27.525L93.705 22.8525C95.025 21.5362 95.025 19.3988 93.705 18.0825C92.385 16.7663 90.2438 16.7663 88.9275 18.0825ZM60 27.9075C43.0312 27.8813 29.2275 41.6812 29.2275 58.68C29.2275 66.8625 32.4375 74.3063 37.6875 79.8C41.1712 83.4488 43.335 88.155 43.335 93.1988V96.075C43.335 97.0696 43.7301 98.0234 44.4333 98.7266C45.1366 99.4299 46.0904 99.825 47.085 99.825H72.915C73.9096 99.825 74.8634 99.4299 75.5666 98.7266C76.2699 98.0234 76.665 97.0696 76.665 96.075V93.1988C76.665 88.155 78.825 83.4488 82.3125 79.8C87.7527 74.1158 90.7841 66.548 90.7725 58.68C90.7725 41.6812 76.9688 27.8775 60 27.9075ZM56.9812 46.6425C54.7999 47.2007 52.8099 48.338 51.2217 49.9341C49.6335 51.5303 48.5061 53.5259 47.9587 55.71C47.7448 56.5788 47.1953 57.3274 46.4307 57.792C45.666 58.2565 44.7484 58.3992 43.8787 58.1888C43.0096 57.9757 42.2606 57.4263 41.7965 56.6612C41.3324 55.8961 41.1911 54.978 41.4038 54.1087C42.2253 50.7208 43.9597 47.6229 46.4185 45.1515C48.8772 42.6802 51.9663 40.93 55.35 40.0912C56.2035 39.9172 57.0911 40.0795 57.8278 40.5443C58.5645 41.009 59.0932 41.7403 59.3037 42.5855C59.5141 43.4307 59.3901 44.3245 58.9573 45.0805C58.5246 45.8364 57.8167 46.396 56.9812 46.6425Z" fill="#063CA9"/>
                         <g filter="url(#filter0_d_1_6)">
@@ -222,20 +222,18 @@
             </li>
             <li class="menu-item hidden"><a href="#">Home</a></li>
             </li>
-            <li class="menu-item hidden"><a href="https://github.com/nanoblocktech/luminova" target="_blank">GitHub</a></li>
-            <li class="menu-item hidden"><a href="https://nanoblocktech.com/luminova/documentations" target="_blank">Documentations</a></li>
-            <li class="menu-item hidden"><a
-                    href="https://github.com/nanoblocktech/luminova/docs/CONTRIBUTING.md" target="_blank">Contribute</a>
-            </li>
+            <li class="menu-item hidden"><a href="https://github.com/luminovang/luminova" target="_blank">GitHub</a></li>
+            <li class="menu-item hidden"><a href="https://luminova.ng/docs/" target="_blank">Documentations</a></li>
+            <li class="menu-item hidden"><a href="https://github.com/luminovang/luminova/docs/CONTRIBUTING.md" target="_blank">Contribute</a></li>
         </ul>
     </div>
 
     <div class="info">
 
-        <h1>Welcome to {Luminova\Base\BaseConfig::copyright()}</h1>
+        <h1>Welcome to {app()->copyright()}</h1>
 
         <h2>Simple framework built for speed and keeping your existing coding skills going.</h2>
-        <p>Environment: {constant("ENVIRONMENT")}</p>
+        <p>Environment: {$smarty.const.ENVIRONMENT}</p>
 
     </div>
 
@@ -265,7 +263,7 @@
 <footer>
     <div class="copyrights">
 
-        <p>&copy; <?= date('Y') ?> <a href="https://nanoblocktech.com/" target="_blank">Nanoblock Technology Ltd</a>. PHP Luminova is open source project released under the MIT open source license.</p>
+        <p>&copy; {$smarty.now|date_format:"%Y"} <a href="https://nanoblocktech.com/" target="_blank">Nanoblock Technology Ltd</a>. PHP Luminova is open source project released under the MIT open source license.</p>
 
     </div>
 

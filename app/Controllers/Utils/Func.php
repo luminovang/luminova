@@ -13,5 +13,5 @@ use \Luminova\Base\BaseFunction;
 
 class Func extends BaseFunction
 {
-
+    
 }

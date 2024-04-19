@@ -12,8 +12,8 @@
 </head>
 <body id="e_all">
     <div class="container text-center main-container">
-        <h1 class="headline"><?= escape($name) ?> (code: <?= escape($stack->getCode()); ?>)</h1>
-        <p class="lead" style="margin-bottom:0px;"><?= escape($stack->getMessage()); ?>: <?= escape($stack->getFile());?></p>
+        <h1 class="headline">404</h1>
+        <p class="lead">Error Page</p>
     </div>
     <div class="footer">
         <div class="container">

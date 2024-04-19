@@ -13,7 +13,7 @@ include_once __DIR__ . '/../../libraries/sys/constants.php';
 include_once __DIR__ . '/../../libraries/sys/functions.php';
 
 use \Luminova\Command\Terminal;
-use \Luminova\Base\BaseConfig;
+use \Luminova\Application\Foundation;
 
 class Updater
 {
@@ -235,7 +235,7 @@ class Updater
     private static function makeDirectoryIfNotExist(string $path): void 
     {
         if (!is_dir($path)) {
-            make_dir($path, 0755, true);
+            mkdir($path, 0755, true);
         }
     }
 
@@ -316,9 +316,9 @@ class Updater
                 }
 
                 if ($returnCode === 0) {
-                    static::cli()?->writeln('Update was completed version [' . (BaseConfig::$version??'1.5.0') . ']', 'green');
+                    static::cli()?->success('Update was completed version [' . (Foundation::VERSION??'1.5.0') . ']');
                     if($hasTodo){
-                        static::cli()?->writeln('TODO ATTENTION!', 'red');
+                        static::cli()?->writeln('TODO ATTENTION!', 'yellow');
                         static::cli()?->writeln('Please see /TODO.md to few manual associated with the current version update');
                     }
                 }

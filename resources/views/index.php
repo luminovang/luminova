@@ -1,14 +1,11 @@
-<?php 
-use Luminova\Base\BaseConfig;
-?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?= locale();?>">
 <head>
     <meta charset="UTF-8">
     <title>Welcome to PHP Luminova</title>
     <meta name="description" content="Simple framework built for speed and keeping your existing coding skills going.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/png" href="<?php echo $this->_base;?>favicon.png">
+    <link rel="shortcut icon" type="image/png" href="<?= href('favicon.png');?>">
     <style>
         * {
             transition: background-color 300ms ease, color 300ms ease;
@@ -235,7 +232,7 @@ use Luminova\Base\BaseConfig;
 
     <div class="info">
 
-        <h1>Welcome to <?= BaseConfig::copyright() ?></h1>
+        <h1>Welcome to <?= app()->copyright() ?></h1>
 
         <h2>Simple framework built for speed and keeping your existing coding skills going.</h2>
         <p>Environment: <?= ENVIRONMENT ?></p>
@@ -261,7 +258,7 @@ use Luminova\Base\BaseConfig;
     <pre><code>app/Controllers/Welcome.php</code></pre>
 
     <p>Development Server Context</p>
-    <pre><code><?php echo $_SERVER['SERVER_SOFTWARE']??'Unknown Development Server';?></code></pre>
+    <pre><code><?= $_SERVER['SERVER_SOFTWARE']??'Unknown Development Server';?></code></pre>
 
 </section>
 

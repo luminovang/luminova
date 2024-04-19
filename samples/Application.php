@@ -48,9 +48,9 @@ class Application extends BaseApplication
         * Before settings, make sure to register Meta Class 
         * @example $this->export(Meta::class);
         *
-        * @example $this->Meta->setCanonicalVersion("https://example.com/", $this->getView());
-        * @example $this->Meta->setCanonicalVersion("https://www.example.com/", $this->getView());
-        * @example $this->Meta->setCanonicalVersion(parent::baseUrl(), $this->getView());
+        * @example $this->Meta->setCanonical("https://example.com/", $this->getView());
+        * @example $this->Meta->setCanonical("https://www.example.com/", $this->getView());
+        * @example $this->Meta->setCanonical(parent::baseUrl(), $this->getView());
         */
 	}
 

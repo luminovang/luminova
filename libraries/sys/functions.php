@@ -10,17 +10,36 @@
 use \Luminova\Application\Factory;
 use \Luminova\Http\Request;
 use \Luminova\Cookies\Cookie;
-use \Luminova\Functions\Functions;
 use \Luminova\Template\ViewResponse;
 use \App\Controllers\Config\Files;
+use \App\Controllers\Utils\Functions;
+use \App\Controllers\Application;
+use \Luminova\Exceptions\FileException;
+
+if (!function_exists('app')) {
+    /**
+     * Get application container class shared instance or new instance if not shared. 
+     * 
+     * @return Application Application class instance.
+    */
+    function app(): Application 
+    {
+        static $app = null;
+
+        if($app === null){
+            $app = Application::getInstance();
+        }
+
+        return $app;
+    }
+}
 
 if (!function_exists('func')) {
     /**
      * Return Functions instance or a specific context instance.
      *
-     * If context is specified, return an instance of the specified context,
-     * otherwise return a Functions instance or null.
-     * Supported contexts: 'files', 'ip', 'document', 'escape', 'tor'.
+     * If context is specified, return an instance of the specified context, otherwise return a Functions instance or null.
+     *      - Supported contexts: 'files', 'ip', 'document', 'escape', 'tor', 'math'.
      *
      * @param string|null $context The context to return instance for.
      * @param mixed ...$params Additional parameters based on context.
@@ -28,19 +47,21 @@ if (!function_exists('func')) {
      * @return Functions|object|null|string|bool Returns an instance of Functions, 
      *      object, string, or boolean value depending on the context.
      *
-     * @throws Exception
-     * @throws RuntimeException
+     * @throws Exception If an error occurs.
+     * @throws RuntimeException If unable to initialize method.
      */
     function func(?string $context = null, ...$params): mixed 
     {
+        $instance = Factory::functions();
+
         if ($context === null) {
-            return new Functions();
+            return $instance;
         }
 
         $context = strtolower($context);
 
-        if (in_array($context, ['files', 'ip', 'document', 'escape', 'tor'], true)) {
-            return Functions::{$context}(...$params);
+        if (in_array($context, ['files', 'ip', 'document', 'escape', 'tor', 'math'], true)) {
+            return $instance->{$context}(...$params);
         }
 
         return null;
@@ -57,7 +78,10 @@ if(!function_exists('kebab_case')){
 	 */
     function kebab_case(string $input): string 
     {
-       return Functions::toKebabCase($input);
+        $input = preg_replace('/[^\p{L}\p{N}]+/u', ' ', $input);
+		$kebabCase = str_replace(' ', '-', $input);
+
+		return strtolower($kebabCase);
     }
 }
 
@@ -103,20 +127,42 @@ if(!function_exists('escape')){
     * Escapes a string or array of strings based on the specified context.
     *
     * @param string|array $input The string or array of strings to be escaped.
+    *   - @example @var array<string, string> - Use the key as the context.
+    *   - @example @var array<int, string> Use the default context fall all values.
     * @param string $context The context in which the escaping should be performed. Defaults to 'html'.
     *                        Possible values: 'html', 'js', 'css', 'url', 'attr', 'raw'.
     * @param string|null $encoding The character encoding to use. Defaults to null.
     * 
-    * @return mixed The escaped string or array of strings.
+    * @return array|string The escaped string or array of strings.
     * @throws InvalidArgumentException When an invalid or blank encoding is provided.
     * @throws BadMethodCallException When an invalid context is called
     * @throws RuntimeException When the string is not valid UTF-8 or cannot be converted.
     */
-    function escape(string|array $input, string $context = 'html', ?string $encoding = null): mixed 
+    function escape(string|array $input, string $context = 'html', ?string $encoding = null): array|string 
     {
        return Functions::escape($input, $context, $encoding);
     }
 }
+
+if(!function_exists('strict')){
+    /**
+	 * Sanitize user input to protect against cross-site scripting attacks.
+     * It removes unwanted characters from a given string and return only allowed characters.
+	 *
+	 * @param string $string The input string to be sanitized.
+	 * @param string $type  The expected data type. 
+     *  -   Types: (int, digit, key, pass, username, email, url, money, double, float, az, tel, uuid, name, timezone, time, date, default).
+	 * @param string $symbol The symbol to replace disallowed characters with (optional).
+	 *
+	 * @return string The sanitized string.
+	 */
+    
+    function strict(string $input, string $type = 'default', string $replacer = ''): mixed 
+    {
+       return Functions::strictInput($input, $type, $replacer);
+    }
+}
+
 
 if(!function_exists('is_tor')){
     /**
@@ -124,15 +170,13 @@ if(!function_exists('is_tor')){
     *
     * @param string|null $ip Ip address to check else use current ip address
     * 
-    * @return bool 
+    * @return bool Return true if ip address is a Tor exit node.
     */
-    function is_tor(string|null $ip = null): bool 
+    function is_tor(string|null $ip = null): bool
     {
-       if($ip === null){
-            $ip = Functions::ip()->get();
-       }
+        $ip ??= Functions::ip()->get();
 
-       return Functions::tor()->isTorExitNode($ip);
+        return Functions::tor()->isTor($ip);
     }
 }
 
@@ -140,17 +184,17 @@ if(!function_exists('ip_address')){
     /**
     * Get user IP address or return ip address information
     *
-    * @param bool $ip_info If true return ip address information instead
+    * @param bool $ipInfo If true return ip address information instead
     * @param array $options Pass additional options to return with IP information
     * 
-    * @return string|object|null 
+    * @return string|object|null  Return ip info or ip address.
     */
-    function ip_address(bool $ip_info = false, array $options = []): string|object|null
+    function ip_address(bool $ipInfo = false, array $options = []): string|object|null
     {
         $ip = Functions::ip();
 
-        if($ip_info){
-            $info = $ip->getInfo(null, $options);
+        if($ipInfo){
+            $info = $ip->info(null, $options);
 
             return $info;
         }
@@ -186,7 +230,7 @@ if(!function_exists('session')) {
      *
      * @param string $key Key to retrieve the data
      *
-     * @return mixed|Session|Factory::session
+     * @return mixed|Session
      */
     function session(?string $key = null): mixed
     {
@@ -208,7 +252,7 @@ if (!function_exists('cookie')) {
      * @param string $value Value of the cookie
      * @param array  $options Options to be passed to the cookie
      * 
-     * @return Cookie
+     * @return Cookie Cookie instance 
      */
     function cookie(string $name, string $value = '', array $options = []): Cookie
     {
@@ -231,7 +275,7 @@ if(!function_exists('factory')) {
      * 
      * @return Factory|mixed
      */
-    function factory(string|null $context = null, ...$arguments): mixed
+    function factory(string|null $context = null, mixed ...$arguments): mixed
     {
         if($context === null || $context === ''){
             return new Factory();
@@ -256,7 +300,7 @@ if(!function_exists('service')) {
      * 
      * @return Services|mixed
      */
-    function service(string|null $service = null, ...$arguments): mixed
+    function service(string|null $service = null, mixed ...$arguments): mixed
     {
         $instance = Factory::services();
 
@@ -397,10 +441,7 @@ if(!function_exists('import')) {
      */
     function import(string $library): bool
     {
-        $instance = Factory::import();
-        $import = $instance::import($library);
- 
-        return $import;
+        return Factory::modules()->import($library);
     }
  }
 
@@ -418,8 +459,7 @@ if(!function_exists('import')) {
      */
     function logger(string $level, string $message, array $context = []): void
     {
-        $logger = Factory::logger();
-        $logger->log($level, $message, $context);
+        Factory::logger()->log($level, $message, $context);
     }
  }
 
@@ -446,18 +486,18 @@ if(!function_exists('import')) {
     ): string
     {
         $default ??= '';
-        $language = Factory::language();
+        $instance = Factory::language();
 
-        $defaultLocal = $language->getLocale();
+        $defaultLocal = $instance->getLocale();
 
         if ($locale && $locale !== $defaultLocal) {
-            $language->setLocale($locale);
+            $instance->setLocale($locale);
         }
 
-        $translation = $language->get($lookup, $default, $placeholders);
+        $translation = $instance->get($lookup, $default, $placeholders);
 
         if ($locale && $locale !== $defaultLocal) {
-            $language->setLocale($defaultLocal);
+            $instance->setLocale($defaultLocal);
         }
 
         return $translation;
@@ -471,16 +511,17 @@ if (!function_exists('path')) {
     * @param string|null $context Path context name to return [system, plugins, library, controllers, writeable, logs, caches,
     *          public, assets, views, routes, languages, services]
     * 
-    * @return string|Paths|Factory::paths 
+    * @return FileSystem|string Path string or file system instance.
    */
-   function path(null|string $context = null): string|object
+   function path(null|string $context = null): mixed
    {
-        $path = Factory::paths();
+        $instance = Factory::files();
+
         if ($context === null) {
-            return $path;
+            return $instance;
         }
         
-        return $path->{$context} ?? ''; 
+        return $instance->{$context} ?? ''; 
    }
 }
 
@@ -682,26 +723,31 @@ if (!function_exists('write_content')) {
      * @param resource $context [optional] A valid context resource created with stream_context_create.
      * 
      * @return bool true or false on failure.
+     * @throws FileException If unable to write file.
     */
     function write_content(string $filename, mixed $content, int $flag = 0, $context = null): bool 
     {
-        $handler = false;
-        $lock = $flag & (LOCK_EX | LOCK_NB | LOCK_SH | LOCK_UN);
-        if(!$lock){
-            $include = $flag & FILE_USE_INCLUDE_PATH;
-            $mode = $flag & FILE_APPEND ? 'a' : 'w';
-            $handler = fopen($filename, $mode, $include, $context);
-        }
-        
-        if ($handler === false) {
-            return file_put_contents($filename, $content, $flag, $context) !== false;
-        }
+        return Factory::files()->write($filename, $content, $flag, $context);
+    }
+}
 
-        $result = fwrite($handler, $content);
+if (!function_exists('make_dir')) {
+    /**
+     * Attempts to create the directory specified by pathname if not exist.
+     * 
+     * @param string $path Directory path to create.
+     * @param int $permissions Unix file permissions
+     * @param bool $recursive Allows the creation of nested directories (default: true)
+     * 
+     * @return bool true if files existed or was created else false
+     * @throws RuntimeException If path is not readable.
+     * @throws FileException If unable to create directory
+    */
+    function make_dir(string $path, ?int $permissions = null, bool $recursive = true): bool 
+    {
+        $permission = ($permissions ?? Files::$dirPermissions ?? 0777);
 
-        fclose($handler);
-
-        return $result !== false;
+        return Factory::files()->mkdir($path, $permission, $recursive);
     }
 }
 
@@ -723,28 +769,20 @@ if (!function_exists('validate')) {
      *          ]
      *        }
      * 
-     * @return bool|Validator|Factory::validate Return true or false else return validation instance
+     * @return ValidationInterface Return validation instance
     */
-    function validate(?array $inputs, ?array $rules, array $messages = []): bool|object 
+    function validate(?array $inputs, ?array $rules, array $messages = []): object 
     {
-        if ($inputs === []) {
-            return false;
-        }
-
-        if ($rules === []) {
-            return true;
-        }
-
         $validate = Factory::validate();
 
-        if ($inputs === null && $rules === null) {
+        if ($inputs === null || $rules === null) {
             return $validate;
         }
 
-        $validate->setMessages($messages);
-        $check = $validate->validate($inputs, $rules);
-
-        return $check->isPassed();
+        $validate->setRules($rules, $messages);
+        $validate->validate($inputs);
+        
+        return $validate;
     }
 }
 
@@ -844,18 +882,16 @@ if (!function_exists('response')) {
     * Response instance 
     *
     * @param int $status int $status HTTP status code (default: 200 OK)
+    * @param bool $encode Enable content encoding like gzip, deflate.
     *
     * @return ViewResponse instance 
     */
-    function response(int $status = 200): ViewResponse
+    function response(int $status = 200, bool $encode = true): ViewResponse
     {
-        static $response = null;
-
-        $response ??= new ViewResponse();
-
-        return $response->setStatus($status);
+        return Factory::response($status, true)->setStatus($status)->encode($encode);
     }
 }
+
 
 if (!function_exists('is_blob')) {
     /**
@@ -871,39 +907,141 @@ if (!function_exists('is_blob')) {
     }
 }
 
-if (!function_exists('make_dir')) {
+if (!function_exists('which_php')) {
     /**
-     * Attempts to create the directory specified by pathname if not exist.
-     * 
-     * @param string $path
-     * @param int $permissions 
-     * @param bool $recursive 
-     * 
-     * @return bool true if files existed or was created else false
-     * @throws RuntimeException If path is not readable
+     * Get the PHP script path.
+     *
+     * @return string
     */
-    function make_dir(string $path, ?int $permissions = null, bool $recursive = true): bool 
+    function which_php(): string 
     {
-        if (!file_exists($path)) {
-            if(mkdir($path, $permissions ?? Files::$filePermissions, $recursive)){
-                return true;
-            }
-            
-            // Check if mkdir failed due to lack of write permission
-            if (!is_writable($path)) {
-                if (!is_readable($path)) {
-                    throw new RuntimeException("Folder '{$path}' is not readable and not writable, please grant appropriate permissions.");
-                } else {
-                    throw new RuntimeException("Folder '{$path}' is not writable, please grant write permission.");
-                }
-            }  
-            
-            // Check if mkdir failed due to lack of read permission
-            if (!is_readable($path)) {
-                throw new RuntimeException("Folder '{$path}' is not readable, please grant read permission.");
+        return PHP_BINARY;
+    }
+}
+
+if (!function_exists('status_code')) {
+   /**
+     * Convert status to int, return run status based on result.
+     * In CLI, 0 is considered success while 1 is failure.
+     * In some occasions, void or null may be returned, treating it as success.
+     * 
+     * @param mixed $result Response from the callback function (void|bool|null|int)
+     * @param bool $return_int Return type (default: int)
+     * 
+     * @return int|bool
+     */
+    function status_code(mixed $result = null, bool $return_int = true): int|bool
+    {
+        if ($result === false || (is_int($result) && $result == 1)) {
+            return $return_int ? 1 : false;
+        }
+
+        return $return_int ? 0 : true;
+    }
+}
+
+if (!function_exists('is_utf8')) {
+    /**
+     * Checks if a given string is UTF-8 encoded.
+     *
+     * @param string $input The string to check for UTF-8 encoding.
+     * @return bool Returns true if the string is UTF-8 encoded, false otherwise.
+    */
+    function is_utf8(string $input): bool 
+    {
+        return preg_match('//u', $input) === 1;
+    }
+}
+
+if (!function_exists('has_uppercase')) {
+    /**
+     * Checks if a given string contains an uppercase letter.
+     *
+     * @param string $string The string to check uppercase.
+     * @return bool Returns true if the string has uppercase, false otherwise.
+    */
+   function has_uppercase(string $string): bool 
+    {
+        $has = false;
+        for ($i = 0; $i < strlen($string); $i++) {
+            if (ctype_upper($string[$i])) {
+                $has = true;
+                break; 
             }
         }
 
-        return true;
+        return $has;
     }
+}
+
+
+if (!function_exists('href')) {
+    /**
+     * Create a hyperlink to another view or file.
+     * 
+     * @param string|null $view To view or file.
+     * @param bool $absolute Should we use absolute url (default: false).
+     * 
+     * @return string Return hyperlink of view or base controller if blank string is passed.
+    */
+    function href(string|null $view = '', bool $absolute = false): string 
+    {
+        $view = (($view === null) ? '' : ltrim($view, '/'));
+
+        if($absolute){
+            return APP_URL . '/' . $view;
+        }
+
+        static $relative = null;
+
+        if($relative == null){
+            $relative = app()->link();
+        }
+
+        return $relative . $view;
+    }
+}
+
+if (!function_exists('asset')) {
+    /**
+     * Create a link to assets folder file.
+     * 
+     * @param string|null $filename Filename or path.
+     * @param bool $absolute Should we use absolute url (default: false).
+     * 
+     * @return string Return assets file or base asset folder if blank string is passed.
+    */
+    function asset(string|null $filename = '', bool $absolute = false): string 
+    {
+        $filename = 'assets/' . (($filename === null) ? '' : ltrim($filename, '/'));
+
+        if($absolute){
+            return APP_URL . '/' . $filename;
+        }
+
+        return href($filename);
+    }
+}
+
+if (!function_exists('camelcased')) {
+     /**
+     * Convert a string to camel case.
+     *
+     * @param string $input The string to convert
+     * @return string The string converted to camel case
+     */
+    function camelcased(string $input): string
+    {
+        $input = str_replace(['-', ' '], '_', $input);
+        $parts = explode('_', $input);
+
+        $camelCase = '';
+        $firstPart = true;
+        foreach ($parts as $part) {
+            $camelCase .= $firstPart ? $part : ucfirst($part);
+            $firstPart = false;
+        }
+        
+        return $camelCase;
+    }    
 }

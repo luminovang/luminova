@@ -21,6 +21,10 @@ class Builder extends BaseComposer
     */
     private static ?Terminal $terminal = null;
 
+    /**
+     * Project files 
+     * @var array
+    */
     private static $projectFiles = [
         "/app",
         "/bootstrap",
@@ -78,7 +82,7 @@ class Builder extends BaseComposer
 
     public static function export(string $destinationDir = "build"): void
     {
-        self::$systemIgnoreFiles[] = $destinationDir;
+        static::$systemIgnoreFiles[] = $destinationDir;
         $destinationDir = APP_ROOT . DIRECTORY_SEPARATOR . $destinationDir . DIRECTORY_SEPARATOR . 'v-' . APP_VERSION;
 
         if (!is_dir($destinationDir)) {
@@ -86,7 +90,7 @@ class Builder extends BaseComposer
         }
 
         parent::progress(10, function ($step) use ($destinationDir) {
-            [$added, $skipped, $failed] = self::makeCopy('.', $destinationDir);
+            [$added, $skipped, $failed] = static::makeCopy('.', $destinationDir);
 
             return $destinationDir;
         }, 
@@ -138,7 +142,7 @@ class Builder extends BaseComposer
 
     public static function archive(string $zipFileName, string $buildDir = "builds"): void
     {
-        self::$systemIgnoreFiles[] = $zipFileName;
+        static::$systemIgnoreFiles[] = $zipFileName;
         $zip = new ZipArchive();
         $buildDir = APP_ROOT . DIRECTORY_SEPARATOR . $buildDir . DIRECTORY_SEPARATOR . 'v-' . APP_VERSION;
         $buildFile = $buildDir . DIRECTORY_SEPARATOR . $zipFileName;
@@ -155,7 +159,7 @@ class Builder extends BaseComposer
             }
 
             static::terminal()->writeln("Creating a zip archive for the project...");
-            [$added, $skipped] = self::addToZip($zip, APP_ROOT . DIRECTORY_SEPARATOR . '.', '');
+            [$added, $skipped] = static::addToZip($zip, APP_ROOT . DIRECTORY_SEPARATOR . '.', '');
             static::terminal()->writeln("Archiving project...");
             $zip->close();
 
@@ -185,15 +189,15 @@ class Builder extends BaseComposer
             $relativePath = $zipFolder . DIRECTORY_SEPARATOR . $file;
 
             if (is_dir($filePath)) {
-                if (self::allow($relativePath) && !self::ignore($relativePath)) {
+                if (static::allow($relativePath) && !static::ignore($relativePath)) {
                     $zip->addEmptyDir($relativePath);
-                    self::addToZip($zip, $filePath, $relativePath);
+                    static::addToZip($zip, $filePath, $relativePath);
                     $added++;
                 } else {
                     $skipped++;
                 }
             } else {
-                if (!self::ignore($relativePath) && !self::skip(basename($relativePath))) {
+                if (!static::ignore($relativePath) && !static::skip(basename($relativePath))) {
                     $zip->addFile($filePath, $relativePath);
                     $added++;
                 } else {
@@ -221,7 +225,7 @@ class Builder extends BaseComposer
             $destinationPath = $destination . DIRECTORY_SEPARATOR . $file;
 
             if (is_dir($sourcePath)) {
-                if (self::allow($sourcePath) && !self::ignore($sourcePath)) {
+                if (static::allow($sourcePath) && !static::ignore($sourcePath)) {
                     if (!is_dir($destinationPath)) {
                         if(mkdir($destinationPath, 0755, true)){
                             $added++;
@@ -232,12 +236,12 @@ class Builder extends BaseComposer
                         $added++;
                     }
 
-                    [$added, $skipped, $failed] = self::makeCopy($sourcePath, $destinationPath);
+                    [$added, $skipped, $failed] = static::makeCopy($sourcePath, $destinationPath);
                 }else{
                     $skipped++;
                 }
             } else {
-                if (!self::ignore($sourcePath) && !self::skip(basename($sourcePath))) {
+                if (!static::ignore($sourcePath) && !static::skip(basename($sourcePath))) {
                     if(copy($sourcePath, $destinationPath)){
                         $added++;
                     }else{
@@ -255,7 +259,7 @@ class Builder extends BaseComposer
 
     private static function allow(string $path): bool
     {
-        foreach (self::$projectFiles as $projectFile) {
+        foreach (static::$projectFiles as $projectFile) {
             if (fnmatch($projectFile, parent::parseLocation($path)) || parent::isParentOrEqual($projectFile, parent::parseLocation($path)) ) {
                return true;
             }
@@ -266,7 +270,7 @@ class Builder extends BaseComposer
     private static function ignore(string $path): bool
     {
 
-        foreach (self::$systemIgnoreFiles as $ignoreFile) {
+        foreach (static::$systemIgnoreFiles as $ignoreFile) {
             if (fnmatch($ignoreFile, parent::parseLocation($path))) {
                 return true;
             }
@@ -276,7 +280,7 @@ class Builder extends BaseComposer
 
     private static function skip(string $path): bool
     {
-        foreach (self::$projectIgnoreFiles as $skipFile) {
+        foreach (static::$projectIgnoreFiles as $skipFile) {
             if (fnmatch(strtolower($skipFile), strtolower(parent::parseLocation($path)))) {
                 return true;
             }

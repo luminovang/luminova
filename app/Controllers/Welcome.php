@@ -10,27 +10,23 @@
 namespace App\Controllers;
 
 use \Luminova\Base\BaseViewController;
-use \App\Controllers\Config\Config;
 
 class Welcome extends BaseViewController 
 {
-    public function page(): void
+    public function home(): void
     {
         $this->view('index');
     }
 
     public function info(): void
     {
-        header("Content-type: application/json");
-        echo json_encode([
-            "error" => [
+        response(200)->json([
+            "welcome" => [
                 "status" => "OK",
                 "code" => 200,
-                "version" => Config::version(),
-                "framework" => Config::copyright(),
-                "timestamp" => date("Y-m-d H:i:s")
+                "message" => 'Hello world!'
             ]
-        ], JSON_PRETTY_PRINT);
+        ]);
     }
     
 }

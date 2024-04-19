@@ -10,6 +10,9 @@
 
 return [
     'aliases' => [
-        //'FooAlias' => 'SomeLiterary\Foo',
+        //'Foo' => 'SomeClass\ExampleFoo',
+    ],
+    'psr-4' => [
+       //'Example\MyNamespace'    => '/example/MyClass/',
     ]
 ];

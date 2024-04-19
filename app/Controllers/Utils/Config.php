@@ -7,7 +7,7 @@
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
  */
-namespace App\Controllers\Config;
+namespace App\Controllers\Utils;
 
 use \Luminova\Base\BaseConfig;
 
