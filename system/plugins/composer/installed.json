@@ -2,17 +2,17 @@
     "packages": [
         {
             "name": "luminovang/framework",
-            "version": "2.9.6",
-            "version_normalized": "2.9.6.0",
+            "version": "2.9.7",
+            "version_normalized": "2.9.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luminovang/framework.git",
-                "reference": "7b24ec5fea431f19df82dbc7e05114641f4402fb"
+                "reference": "7a733d9562e2d13362fc5133eb81abc3ec593595"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luminovang/framework/zipball/7b24ec5fea431f19df82dbc7e05114641f4402fb",
-                "reference": "7b24ec5fea431f19df82dbc7e05114641f4402fb",
+                "url": "https://api.github.com/repos/luminovang/framework/zipball/7a733d9562e2d13362fc5133eb81abc3ec593595",
+                "reference": "7a733d9562e2d13362fc5133eb81abc3ec593595",
                 "shasum": ""
             },
             "require": {
@@ -41,7 +41,7 @@
                 "psr/log": "Needed to use PSR logging",
                 "smarty/smarty": "Needed if you use Template engine"
             },
-            "time": "2024-03-27T15:53:04+00:00",
+            "time": "2024-04-20T20:46:27+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {

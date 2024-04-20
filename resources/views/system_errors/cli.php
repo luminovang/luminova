@@ -33,7 +33,7 @@ if (isset($exception)) {
         $cli::newLine();
     }
 } elseif (isset($stack)) {
-    $cli::error('Error: [' . $stack->getCode() . '] [' . $name . ']');
+    $cli::error('Error: [' . $stack->getCode() . '] [' . $stack->getName() . ']');
     $cli::writeln($stack->getMessage());
     $cli::newLine();
 }else{
