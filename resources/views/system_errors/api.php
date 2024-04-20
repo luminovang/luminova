@@ -7,18 +7,22 @@
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
  */
-use \Luminova\Time\Time;
+$error = [
+    'code' => $stack ? $stack->getCode() : 0,
+    'title' => $stack ? htmlspecialchars($stack->getName()) : null,
+];
+
+if (defined('PRODUCTION') && !PRODUCTION) {
+    $error['message'] = $stack ? htmlspecialchars($stack->getMessage()) : null;
+}else{
+    $error['message'] = 'Something went wrong, please check your server error logs for more details.';
+}
 
 response(500, true)->json([
-    'error' => [
-        'code' => $stack?->getCode(),
-        'title' => escape($name),
-        'message' => escape($stack?->getMessage()),
-        'timestamp' => Time::datetime(),
-    ],
+    'error' => $error,
     'framework' => [
         'php_version' => PHP_VERSION,
-        'version' => app()::VERSION,
-        'environment' => ENVIRONMENT,
+        'version' => defined('\Luminova\Application\Foundation::VERSION') ? \Luminova\Application\Foundation::VERSION : '1.0.0',
+        'environment' => defined('ENVIRONMENT') ? ENVIRONMENT : 'Unknown',
     ]
 ]);

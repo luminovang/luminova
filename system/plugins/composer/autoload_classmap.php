@@ -18,7 +18,7 @@ return array(
     'App\\Controllers\\Config\\Template' => $baseDir . '/app/Controllers/Config/Template.php',
     'App\\Controllers\\Config\\ViewErrors' => $baseDir . '/app/Controllers/Config/ViewErrors.php',
     'App\\Controllers\\Utils\\Config' => $baseDir . '/app/Controllers/Utils/Config.php',
-    'App\\Controllers\\Utils\\Func' => $baseDir . '/app/Controllers/Utils/Func.php',
+    'App\\Controllers\\Utils\\Functions' => $baseDir . '/app/Controllers/Utils/Functions.php',
     'App\\Controllers\\Welcome' => $baseDir . '/app/Controllers/Welcome.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'Luminova\\Application\\Factory' => $baseDir . '/system/Application/Factory.php',

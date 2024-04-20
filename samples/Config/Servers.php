@@ -30,6 +30,8 @@ class Servers extends BaseServers
      *          'username' => 'root',
      *          'password' => '',
      *          'database' => 'db_name',
+     *          'socket' => false,
+     *          'socket_path' => ',
      *      ],
      *      ...
      * ]

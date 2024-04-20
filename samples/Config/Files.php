@@ -13,8 +13,16 @@ namespace App\Controllers\Config;
 final class Files
 {
     /**
-     * Unix file permissions 0644
+     * Unix file permissions.
+     * 
      * @var int $filePermissions 
     */
-    public static int $filePermissions = 0755;
+    public static int $filePermissions = 0644;
+
+    /**
+     * Unix directory permissions 0755, 7604
+     * 
+     * @var int $dirPermissions
+    */
+    public static int $dirPermissions = 0740;
 }

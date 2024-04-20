@@ -7,9 +7,16 @@
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
 */
-require_once __DIR__ . '/../system/plugins/autoload.php';
+use \Luminova\Errors\Error;
+
+require_once __DIR__ . '/../system/Errors/Error.php';
 
 /**
- * Initialize error handling ini_set
+ * Initialize framework error handler
 */
-\Luminova\Errors\Error::initialize('http');
+Error::initialize('http');
+
+/**
+ * Autoload composer bootstrap
+*/
+require_once __DIR__ . '/../system/plugins/autoload.php';

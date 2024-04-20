@@ -807,35 +807,6 @@ if (!function_exists('get_class_name')) {
     }
 }
 
-if (!function_exists('filter_paths')) {
-    /**
-     * Filter the path to match to allowed in error directories preview.
-     *
-     * @param string $path The path to be filtered.
-     * 
-     * @return string
-    */
-    function filter_paths(string $path): string 
-    {
-        $matching = '';
-        $allowPreviews = ['system', 'app', 'resources', 'writable', 'libraries', 'routes', 'bootstrap', 'builds'];
-        foreach ($allowPreviews as $directory) {
-            $separator = $directory . DIRECTORY_SEPARATOR; 
-            if (strpos($path, $separator) !== false) {
-                $matching = $separator;
-                break;
-            }
-        }
-
-        if ($matching !== '') {
-            $filter = substr($path, strpos($path, $matching));
-
-            return $filter;
-        }
-
-        return basename($path);
-    }
-}
 
 if (!function_exists('is_command')) {
     /**

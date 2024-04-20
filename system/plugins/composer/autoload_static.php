@@ -9,7 +9,7 @@ class ComposerStaticInitce7d6b0379bc9a35d3afd6dd2b0e131e
     public static $files = array (
         'a2c9dda26e51c832b5344ac5c9ba205b' => __DIR__ . '/../../..' . '/libraries/sys/constants.php',
         '95fdf39a8122bf72f14ebe8df7aa8d5b' => __DIR__ . '/../../..' . '/libraries/sys/functions.php',
-        '4cd8dfe243dbbe1b839b58622aac1bb3' => __DIR__ . '/../../..' . '/libraries/sys/helpers.php',
+        '8048f6d5e0718bf65fe2ff18f6c25d93' => __DIR__ . '/../../..' . '/libraries/sys/features.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -66,7 +66,7 @@ class ComposerStaticInitce7d6b0379bc9a35d3afd6dd2b0e131e
         'App\\Controllers\\Config\\Template' => __DIR__ . '/../../..' . '/app/Controllers/Config/Template.php',
         'App\\Controllers\\Config\\ViewErrors' => __DIR__ . '/../../..' . '/app/Controllers/Config/ViewErrors.php',
         'App\\Controllers\\Utils\\Config' => __DIR__ . '/../../..' . '/app/Controllers/Utils/Config.php',
-        'App\\Controllers\\Utils\\Func' => __DIR__ . '/../../..' . '/app/Controllers/Utils/Func.php',
+        'App\\Controllers\\Utils\\Functions' => __DIR__ . '/../../..' . '/app/Controllers/Utils/Functions.php',
         'App\\Controllers\\Welcome' => __DIR__ . '/../../..' . '/app/Controllers/Welcome.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Luminova\\Application\\Factory' => __DIR__ . '/../../..' . '/system/Application/Factory.php',

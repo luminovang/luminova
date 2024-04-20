@@ -6,20 +6,7 @@
  * @author Ujah Chigozie Peter
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
- */
-if (version_compare(PHP_VERSION, 8.0, '<')) {
-    $err = 'Your PHP version must be 8.0 or higher to run PHP Luminova framework. Current version: %s' . PHP_VERSION;
-    if (!ini_get('display_errors')) {
-        if (PHP_SAPI === 'cli' || PHP_SAPI === 'phpdbg') {
-            fwrite(STDERR, $err);
-        } elseif (!headers_sent()) {
-            echo $err;
-        }
-    }
-    trigger_error($err, E_USER_ERROR);
-    exit(1);
-}
-
+*/
 /**
  * @var string APP_ROOT system root 2 levels back
 */
@@ -155,6 +142,36 @@ if(!function_exists('setenv')){
         }
 
         return $count > 0;
+    }
+}
+
+if (!function_exists('filter_paths')) {
+    /**
+     * Filter the path to match to allowed in error directories preview.
+     *
+     * @param string $path The path to be filtered.
+     * 
+     * @return string
+    */
+    function filter_paths(string $path): string 
+    {
+        $matching = '';
+        $allowPreviews = ['system', 'app', 'resources', 'writeable', 'libraries', 'routes', 'bootstrap', 'builds'];
+        foreach ($allowPreviews as $directory) {
+            $separator = $directory . DIRECTORY_SEPARATOR; 
+            if (strpos($path, $separator) !== false) {
+                $matching = $separator;
+                break;
+            }
+        }
+
+        if ($matching !== '') {
+            $filter = substr($path, strpos($path, $matching));
+
+            return $filter;
+        }
+
+        return basename($path);
     }
 }
 

@@ -7,11 +7,12 @@
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
  */
-namespace App\Controllers\Config;
 
-use \Luminova\Base\BasePaths;
-
-final class Paths extends BasePaths
-{ 
-    
-}
+return [
+    'aliases' => [
+        //'Foo' => 'SomeClass\ExampleFoo',
+    ],
+    'psr-4' => [
+       //'Example\MyNamespace'    => '/example/MyClass/',
+    ]
+];

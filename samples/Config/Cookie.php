@@ -16,7 +16,7 @@ final class Cookie
      * The path where session files are stored on the server.
      * @var string $savePath;
      */
-    public static string $savePath = ''; 
+    public static string $savePath = ""; 
 
     /**
      * The lifetime of the session in seconds.
@@ -28,20 +28,20 @@ final class Cookie
      * The path to use for the session cookie.
      * @var string $sessionPath;
      */
-    public static string $cookiePath = '/'; 
+    public static string $cookiePath = "/"; 
 
     /**
      * The domain to use for the session cookie.
      * @var string $sessionDomain;
      */
-    public static string $cookieDomain = '.localhost';
+    public static string $cookieDomain = ".localhost";
 
      /**
      * Set the session cookie security level.
      * None, Lax, Strict 
      * @var string $sameSite;
      */
-    public static string $sameSite = 'Lax';
+    public static string $sameSite = "Lax";
 
     /**
      *

@@ -8,5 +8,5 @@ $baseDir = dirname(dirname($vendorDir));
 return array(
     'a2c9dda26e51c832b5344ac5c9ba205b' => $baseDir . '/libraries/sys/constants.php',
     '95fdf39a8122bf72f14ebe8df7aa8d5b' => $baseDir . '/libraries/sys/functions.php',
-    '4cd8dfe243dbbe1b839b58622aac1bb3' => $baseDir . '/libraries/sys/helpers.php',
+    '8048f6d5e0718bf65fe2ff18f6c25d93' => $baseDir . '/libraries/sys/features.php',
 );
