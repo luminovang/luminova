@@ -20,11 +20,11 @@ class ViewErrors
      * 
      * @param Application $app Application instance available
      * 
-     * @return void 
+     * @return int 
     */
-    public static function onWebError(Application $app): void 
+    public static function onWebError(Application $app): int 
     {
-        $app->view('404')->render();
+       return $app->view('404')->render();
     }
 
     /**
@@ -32,15 +32,15 @@ class ViewErrors
      * 
      * @param Application $app Application instance available
      * 
-     * @return void 
+     * @return int 
     */
-    public static function onApiError(Application $app): void 
+    public static function onApiError(Application $app): int 
     {
-        response(404, false)->json([
+        return response(404, false)->json([
             'error' => [
                 'code' => 404,
                 'title' => $app->getView(),
-                'message' => 'The endpoint [' . $app->getView() . '] you are trying to access does not exist.',
+                'message' => "The endpoint [" . $app->getView() . "] you are trying to access does not exist.",
                 'timestamp' => Time::datetime(),
             ]
         ]);

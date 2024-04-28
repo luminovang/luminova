@@ -9,6 +9,7 @@
  */
 use \Luminova\Application\Factory;
 use \Luminova\Http\Request;
+use \Luminova\Http\UserAgent;
 use \Luminova\Cookies\Cookie;
 use \Luminova\Template\ViewResponse;
 use \App\Controllers\Config\Files;
@@ -31,6 +32,51 @@ if (!function_exists('app')) {
         }
 
         return $app;
+    }
+}
+
+if (!function_exists('request')) {
+    /**
+     * Get request object
+     * 
+     * @param bool $shared Return a shared instance (default: true).
+     * 
+     * @return Request Return Request
+    */
+    function request(bool $shared = true): Request 
+    {
+        return Factory::request($shared);
+    }
+}
+
+if (!function_exists('start_url')) {
+    /**
+     * Get start url with port hostname suffix if available.
+     * 
+     * @param string $suffix Optional pass a suffix to the start url.
+     * 
+     * @example http://localhost:8080, http://localhost/public/
+     * @example http://localhost/project-path/public/
+     * 
+     * @return string Return start url.
+    */
+    function start_url(?string $suffix = ''): string
+    {
+        $request = request();
+        $start = $request->getScheme() . '://' . $request->getHostname();
+
+        if(!PRODUCTION){
+            $start .= rtrim(dirname($_SERVER['SCRIPT_NAME']), '/');
+        }
+        
+        $start .= '/';
+
+        /*if(NOVAKIT_ENV === null && !PRODUCTION){
+            //$start .= basename(root(__DIR__)) . '/public/';
+            $start .= dirname($_SERVER['SCRIPT_NAME']);
+        }*/
+
+        return $start . ltrim($suffix, '/');
     }
 }
 
@@ -73,15 +119,21 @@ if(!function_exists('kebab_case')){
 	 * Convert a string to kebab case.
 	 *
 	 * @param string $string The input string to convert.
+     * @param bool $lower Should convert to lower case (default: true).
 	 * 
 	 * @return string The kebab-cased string.
 	 */
-    function kebab_case(string $input): string 
+    function kebab_case(string $input, bool $lower = true): string 
     {
         $input = preg_replace('/[^\p{L}\p{N}]+/u', ' ', $input);
 		$kebabCase = str_replace(' ', '-', $input);
+        $kebabCase = trim($kebabCase, '-');
 
-		return strtolower($kebabCase);
+        if($lower){
+		    return strtolower($kebabCase);
+        }
+
+        return $kebabCase;
     }
 }
 
@@ -151,12 +203,11 @@ if(!function_exists('strict')){
 	 *
 	 * @param string $string The input string to be sanitized.
 	 * @param string $type  The expected data type. 
-     *  -   Types: (int, digit, key, pass, username, email, url, money, double, float, az, tel, uuid, name, timezone, time, date, default).
+     *      -   Filter Types: [int, digit, key, password, username, email, url, money, double, alphabet, phone, name, timezone, time, date, uuid, default]
 	 * @param string $symbol The symbol to replace disallowed characters with (optional).
 	 *
 	 * @return string The sanitized string.
 	 */
-    
     function strict(string $input, string $type = 'default', string $replacer = ''): mixed 
     {
        return Functions::strictInput($input, $type, $replacer);
@@ -271,7 +322,8 @@ if(!function_exists('factory')) {
      * @example $config = new \Luminova\Config\Configuration();
      * 
      * @param string|null $context The class name to load
-     * @param mixed ...$arguments The last bool argument indicate wether to return a shared instance
+     * @param mixed ...$arguments The last bool argument indicate wether to return a shared instance.
+     * @param bool $shared Allow shared instance creation (default: true).
      * 
      * @return Factory|mixed
      */
@@ -296,7 +348,9 @@ if(!function_exists('service')) {
      * @example $config = new \Luminova\Config\Configuration();
      * 
      * @param string|null $service The service context name
-     * @param mixed ...$arguments The last bool argument indicate wether to return a shared instance
+     * @param mixed ...$arguments The last bool argument indicate wether to return a shared instance.
+     * @param bool $serialize Allow object serialization (default: false).
+     * @param bool $shared Allow shared instance creation (default: true).
      * 
      * @return Services|mixed
      */
@@ -334,39 +388,62 @@ if(!function_exists('remove_service')) {
     }
 }
 
+if (! function_exists('app_config')) {
+    /**
+     * Initialize and return application config, utils and other instances from Services.
+     * 
+     * @param string $name Class name.
+     * @param mixed ...$arguments Pass arguments to constructor.
+     * @param bool $serialize Allow object serialization (default: false).
+     * @param bool $shared Allow shared instance creation (default: true).
+     *
+     * @return object|null Return instance of application config.
+     */
+    function app_config(string $name, mixed ...$arguments): object|null
+    {
+        return Factory::services()->config($name, $arguments);
+    }
+}
+
 if(!function_exists('browser')) {
     /**
      * Tells what the user's browser is capable of
      * 
      * @param string|null $user_agent
-     * @param bool $return_array If set to true, this function will return an array instead of an object.
+     * @param bool $return Set the return type, if `instance` return userAgent class object otherwise return array or json object.
+     *      -   Return Types: [array, object, instance]
+     * @param bool $shared Allow shared instance creation (default: true).
      * 
-     * @return array|object
+     * @return array<string,mixed>|object<string,mixed>|UserAgent|false Return browser information.
      */
-    function browser(?string $user_agent = null, bool $return_array = false): array|object 
+    function browser(?string $user_agent = null, string $return = 'object', bool $shared = true): mixed
     { 
+        if($return === 'instance'){
+            return Factory::request($shared)->getUserAgent($user_agent);
+        }
+
+        $return = ($return === 'array');
+
         if (ini_get('browscap')) {
-            $browser = get_browser($user_agent, $return_array);
+            $browser = get_browser($user_agent, $return);
             
             if ($browser !== false) {
                 return $browser;
             }
         }
 
-        $browser =  Request::parseUserAgent($user_agent, $return_array);
-
-        return $browser;
+        return Factory::request($shared)->getUserAgent()->parse($user_agent, $return);
     }
 }
 
 if(!function_exists('is_platform')) {
     /**
-     * Tells which platform your application is running on
+     * Tells which operating system platform your application is running on
      * 
      * @param string $os Platform name 
      *      - [mac, windows, linux, freebsd, openbsd, solaris, aws, etc..]
      * 
-     * @return bool
+     * @return bool Return true if the platform is matching, false otherwise.
      */
     function is_platform(string $os): bool
     { 
@@ -504,24 +581,32 @@ if(!function_exists('import')) {
     }
 }
 
+if (!function_exists('file_system')) {
+    /**
+    * Get filesystem object
+    * 
+    * @param bool $shared Shared instance
+    * 
+    * @return FileSystem Return file system instance.
+   */
+   function file_system(bool $shared = true): object
+   {
+        return Factory::files($shared);
+   }
+}
+
 if (!function_exists('path')) {
     /**
-    * Get directory if context name is null Paths instance will be returned
+    * Get system or application paths in operating system based directory separators.
     * 
-    * @param string|null $context Path context name to return [system, plugins, library, controllers, writeable, logs, caches,
+    * @param string $name Path context name to return [system, plugins, library, controllers, writeable, logs, caches,
     *          public, assets, views, routes, languages, services]
     * 
-    * @return FileSystem|string Path string or file system instance.
+    * @return string Return os compatible path string.
    */
-   function path(null|string $context = null): mixed
+   function path(null|string $name): string
    {
-        $instance = Factory::files();
-
-        if ($context === null) {
-            return $instance;
-        }
-        
-        return $instance->{$context} ?? ''; 
+       return Factory::files()->getCompatible($name);
    }
 }
 
@@ -826,7 +911,7 @@ if (!function_exists('is_dev_server')) {
     /**
      * Check if the application is running locally on development server
      *
-     * @return bool
+     * @return bool Return true if is development server, false otherwise.
     */
     function is_dev_server(): bool
     {
@@ -850,12 +935,12 @@ if (!function_exists('is_dev_server')) {
 
 if (!function_exists('response')) {
     /** 
-    * Response instance 
+    * Initiate a view response object. 
     *
     * @param int $status int $status HTTP status code (default: 200 OK)
     * @param bool $encode Enable content encoding like gzip, deflate.
     *
-    * @return ViewResponse instance 
+    * @return ViewResponse Return vew response object. 
     */
     function response(int $status = 200, bool $encode = true): ViewResponse
     {
@@ -868,9 +953,9 @@ if (!function_exists('is_blob')) {
     /**
      * Find whether the type of a variable is blob
      *
-     * @param mixed $value
+     * @param mixed $value Value to check.
      * 
-     * @return bool 
+     * @return bool Return true if the value is a blob, false otherwise.
     */
     function is_blob(mixed $value): bool 
     {
@@ -880,13 +965,21 @@ if (!function_exists('is_blob')) {
 
 if (!function_exists('which_php')) {
     /**
-     * Get the PHP script path.
+     * Get the PHP script executable path.
      *
-     * @return string
+     * @return string|null Return PHP executable path or null.
     */
-    function which_php(): string 
+    function which_php(): string|null
     {
-        return PHP_BINARY;
+        if (defined('PHP_BINARY')) {
+            return PHP_BINARY;
+        }
+    
+        if (isset($_SERVER['_']) && strpos($_SERVER['_'], 'php') !== false) {
+            return $_SERVER['_'];
+        }
+    
+        return null;
     }
 }
 
@@ -916,6 +1009,7 @@ if (!function_exists('is_utf8')) {
      * Checks if a given string is UTF-8 encoded.
      *
      * @param string $input The string to check for UTF-8 encoding.
+     * 
      * @return bool Returns true if the string is UTF-8 encoded, false otherwise.
     */
     function is_utf8(string $input): bool 
@@ -929,6 +1023,7 @@ if (!function_exists('has_uppercase')) {
      * Checks if a given string contains an uppercase letter.
      *
      * @param string $string The string to check uppercase.
+     * 
      * @return bool Returns true if the string has uppercase, false otherwise.
     */
    function has_uppercase(string $string): bool 
@@ -994,14 +1089,14 @@ if (!function_exists('asset')) {
     }
 }
 
-if (!function_exists('camelcased')) {
+if (!function_exists('camel_case')) {
      /**
      * Convert a string to camel case.
      *
      * @param string $input The string to convert
      * @return string The string converted to camel case
      */
-    function camelcased(string $input): string
+    function camel_case(string $input): string
     {
         $input = str_replace(['-', ' '], '_', $input);
         $parts = explode('_', $input);

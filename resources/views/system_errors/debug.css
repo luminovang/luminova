@@ -55,7 +55,13 @@ p.lead {
     padding: 1rem;
 }
 .main-container{
-    min-height: calc(100vh - 150px);
+    min-height: calc(100vh - 210px);
+}
+.mt-4{
+    margin-top: 4rem;
+}
+.mt-2{
+    margin-top: 2rem !important;
 }
 .header {
     background: var(--main-bg-color);
@@ -70,8 +76,9 @@ p.lead {
 }
 .header p {
     font-size: 1.2rem;
-    margin: 0;
-    line-height: 2.5;
+    /*line-height: 2.5;*/
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 .header a {
     color: var(--brand-primary-color);
@@ -158,7 +165,23 @@ p.lead {
 .hide {
     display: none;
 }
-
+.button{
+    display: inline-block;
+    padding: .95rem 2rem;
+    font-weight: bold;
+    background-color: #370303;
+    color: #b0abab !important;
+    border: 0px;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+}
+.text-danger {
+    color:#b10606;
+}
+.text-warning{
+    color:#dab409;
+}
 .alert {
     margin-top: 2rem;
     display: block;

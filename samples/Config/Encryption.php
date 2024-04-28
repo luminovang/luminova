@@ -9,7 +9,7 @@
 */
 namespace App\Controllers\Config;
 
-class Encryption 
+final class Encryption 
 {
     /**
      * Specify encryption algorithm to use (openssl or sodium).

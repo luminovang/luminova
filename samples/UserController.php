@@ -10,7 +10,6 @@
 namespace App\Controllers;
 
 use \Luminova\Base\BaseController;
-use App\Controllers\Models\UserModel;
 
 class UserController extends BaseController
 {

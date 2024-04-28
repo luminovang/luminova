@@ -13,14 +13,25 @@ use \Luminova\Base\BaseViewController;
 
 class Welcome extends BaseViewController 
 {
-    public function home(): void
+    /**
+     * Index page controller method.
+     * @see /public/
+     * @return int Status code.
+    */
+    public function home(): int
     {
-        $this->view('index');
+        return $this->view('index');
     }
 
-    public function info(): void
+    /**
+     * Json info controller method.
+     * @see /public/api/info
+     * 
+     * @return int Status code.
+    */
+    public function info(): int
     {
-        response(200)->json([
+        return response(200)->json([
             "welcome" => [
                 "status" => "OK",
                 "code" => 200,
@@ -28,5 +39,4 @@ class Welcome extends BaseViewController
             ]
         ]);
     }
-    
 }

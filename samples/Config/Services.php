@@ -11,18 +11,18 @@
 namespace App\Controllers\Config;
 
 use \Luminova\Base\BaseServices;
-use \App\Controllers\Config\ServiceTest;
-
-/**
- * Services methods
- * 
- * @method static ServiceTest  ServiceTest(bool $shared = true, bool $serialize = false)   @return Test
- */
 
 class Services extends BaseServices
 {
+    /**
+     * Register services to autoload and discoverable in services.
+     * @example static::addService(FooClass::class, "Foo Argument", true, true);
+     * 
+     * @param void
+    */
     public static function bootstrap(): void
     {
-        static::addService(ServiceTest::class, "Test Argument", true, true);
+        //static::addService(FooClass::class, "Foo Argument", true, true);
+        //static::addService(BarClass::class, "Bar Argument", true, true);
     }
 }

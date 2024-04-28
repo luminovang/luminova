@@ -14,24 +14,31 @@ final class IPConfig
 {
     /**
      * Specify the IP address api provide 
-     *      -   Available are `ipapi` and `iphub`
+     * Available are ipapi and iphub
      * 
      * @var string $apiProvider ['ipapi', 'iphub']
     */
     public static string $apiProvider = 'iphub';
 
     /**
-     * Specify the IP hub api version.
-     *      > This is valid for `iphub` only.
+     * Specify the IP hub api version 
+     * This is valid for iphub only 
      * 
      * @var string $ipHubVersion
     */
     public static string $ipHubVersion = 'v2';
 
     /**
-     * Specify the IP address api key.
+     * Specify the IP address api key
      * 
      * @var string $apiKey
     */
-    public static string $apiKey = 'MjMyNDU6YWhJY045WGtqWHdhZVlybE5peEhpUGFpZ0ZEZkpuSWY=';
+    public static string $apiKey = '';
+
+    /**
+     * List of trusted proxy IP addresses or subnets.
+     * 
+     * @var array<int, string> $trustedProxies
+    */
+    public static array $trustedProxies = [];
  }

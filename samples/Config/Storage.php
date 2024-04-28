@@ -17,7 +17,7 @@ return [
         'base' => root(__DIR__, 'writeable/storages/'),
         'assets' => root(__DIR__, 'public/assets/'),
         'urls' => [
-            'public_url' => 'https://localhost/luminova.ng/public/assets/'
+            'public_url' => start_url('assets/')
         ],
         'lock_flags' => LOCK_EX,
         'disallow_links' => true,

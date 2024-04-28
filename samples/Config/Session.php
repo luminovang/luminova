@@ -45,7 +45,7 @@ final class Session
      * 
      * @var string $sessionDomain;
      */
-    public static string $sessionDomain = '.localhost';
+    public static string $sessionDomain = '.' . APP_HOSTNAME;
 
      /**
      * Set the session cookie security level.

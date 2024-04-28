@@ -12,17 +12,6 @@ namespace App\Controllers\Config;
 final class Sitemap 
 { 
     /**
-     * The base URL of your project's front controller.
-     *
-     * This variable defines the starting URL that leads to your project's front controller,
-     * where all incoming requests are initially routed. Ensure that this URL points to
-     * the front controller (e.g., public/) of your application depending on environment.
-     *
-     * @var string $startUrl
-     */
-    public static string $startUrl = 'https://localhost/project-dir/public/';
-
-    /**
      * The maximum limit of URLs to scan when generating the sitemap.
      *
      * Set this variable to limit the number of URLs scanned during the sitemap generation process.
@@ -46,7 +35,9 @@ final class Sitemap
      *
      * @var array<int,string> $ignoreUrls
     */
-    public static array $ignoreUrls = [];
+    public static array $ignoreUrls = [
+
+    ];
 
 
     /**
@@ -66,6 +57,6 @@ final class Sitemap
      * @var array<string,string> $viewUrlPatterns
      */
     public static array $viewUrlPatterns = [
-        //'index' => '/', 
+        
     ];
 }

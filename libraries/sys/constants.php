@@ -29,13 +29,17 @@ if (!function_exists('root')) {
      * Return to the root directory of your project.
      *
      * @param string $directory The directory of the file you are calling root from.
-     * @param string $suffix Prepend a path to root directory.
+     * @param string $suffix Prepend a path at the end root directory.
+     *      -   Not a filename
      * 
      * @return string $path + $suffix
      */
     function root(string $directory = __DIR__, string $suffix = ''): string
     {
-        $suffix = trim($suffix, DIRECTORY_SEPARATOR) . ($suffix ? DIRECTORY_SEPARATOR : '');
+        if($suffix !== ''){
+            $suffix = trim(str_replace('/', DIRECTORY_SEPARATOR, $suffix), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+        }
+        //$suffix = trim($suffix, DIRECTORY_SEPARATOR) . ($suffix ? DIRECTORY_SEPARATOR : '');
 
         if (file_exists(APP_ROOT . '.env')) {
             return APP_ROOT . $suffix;
@@ -156,8 +160,8 @@ if (!function_exists('filter_paths')) {
     function filter_paths(string $path): string 
     {
         $matching = '';
-        $allowPreviews = ['system', 'app', 'resources', 'writeable', 'libraries', 'routes', 'bootstrap', 'builds'];
-        foreach ($allowPreviews as $directory) {
+        $previews = ['system', 'app', 'resources', 'writeable', 'libraries', 'routes', 'bootstrap', 'builds'];
+        foreach ($previews as $directory) {
             $separator = $directory . DIRECTORY_SEPARATOR; 
             if (strpos($path, $separator) !== false) {
                 $matching = $separator;
@@ -225,7 +229,7 @@ defined('APP_FILE_VERSION') || define('APP_FILE_VERSION', env('app.file.version'
 /**
  * @var string APP_NAME application name
 */
-defined('APP_NAME') || define('APP_NAME', env('app.name', ''));
+defined('APP_NAME') || define('APP_NAME', env('app.name', 'Example'));
 
 /**
  * @var string ENVIRONMENT application development state
@@ -243,14 +247,9 @@ defined('PRODUCTION') || define('PRODUCTION', ENVIRONMENT === 'production');
 defined('MAINTENANCE') || define('MAINTENANCE', (bool) env('app.maintenance.mood', false));
 
 /**
- * @var string URL_PROTOCOL get request url protocol http or https 
+ * @var string URL_SCHEME get request url scheme http or https 
 */
-defined('URL_PROTOCOL') || define('URL_PROTOCOL', (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://'));
-
-/**
- * @var string SERVER_PROTOCOL get request server protocol HTTP/1.1
-*/
-defined('SERVER_PROTOCOL') || define('SERVER_PROTOCOL', (isset($_SERVER['SERVER_PROTOCOL']) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.1'));
+defined('URL_SCHEME') || define('URL_SCHEME', (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http'));
 
 /**
  * @var string APP_HOSTNAME get application hostname example.com
@@ -258,29 +257,19 @@ defined('SERVER_PROTOCOL') || define('SERVER_PROTOCOL', (isset($_SERVER['SERVER_
 defined('APP_HOSTNAME') || define('APP_HOSTNAME', env('app.hostname', 'example.com'));
 
 /**
- * @var string APP_URL get application www hostname http://example.com
-*/
-defined('APP_URL') || define('APP_URL', URL_PROTOCOL . APP_HOSTNAME);
-
-/**
  * @var string APP_WWW_HOSTNAME get application url www.example.com
 */
 defined('APP_WWW_HOSTNAME') || define('APP_WWW_HOSTNAME', 'www.' . APP_HOSTNAME);
 
 /**
+ * @var string APP_URL get application www hostname http://example.com
+*/
+defined('APP_URL') || define('APP_URL', URL_SCHEME . '://' . APP_HOSTNAME);
+
+/**
  * @var string APP_WWW_URL get application www url https://www.example.com
 */
-defined('APP_WWW_URL') || define('APP_WWW_URL', URL_PROTOCOL . APP_WWW_HOSTNAME);
-
-/**
- * @var string REQUEST_HOSTNAME get application current request hostname https://www.example.com
-*/
-defined('REQUEST_HOSTNAME') || define('REQUEST_HOSTNAME', URL_PROTOCOL . (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : APP_HOSTNAME));
-
-/**
- * @var string REQUEST_URL get application current request url https://www.example.com/path/?query=
-*/
-defined('REQUEST_URL') || define('REQUEST_URL', REQUEST_HOSTNAME . (isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : ''));
+defined('APP_WWW_URL') || define('APP_WWW_URL', URL_SCHEME . '://' . APP_WWW_HOSTNAME);
 
 /**
  * @var bool SHOW_DEBUG_BACKTRACE show debug tracer

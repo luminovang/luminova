@@ -1,7 +1,10 @@
 <?php 
 use \Luminova\Storage\Helper;
 use \Luminova\Debugger\Tracer;
+use \Luminova\Http\Request;
 $parts = explode(" File:", $exception->getMessage());
+//$searchable = urlencode(preg_replace('#\'.*\'|".*"#Us', '', $parts[0]??'') . ', PHP Luminova Framework');
+$searchable = urlencode(preg_replace('/"([^"]*\/[^"]*)"/', '', $parts[0] ?? '') . ' PHP Luminova Framework');
 ?>
 <!doctype html>
 <html lang="<?= str_replace('_', '-', locale());?>">
@@ -10,29 +13,18 @@ $parts = explode(" File:", $exception->getMessage());
     <meta name="robots" content="noindex">
     <link rel="shortcut icon" type="image/png" href="<?= href('favicon.png');?>">
     <title><?= escape($title ?? $exception::class) ?></title>
-    <style>
-        <?= preg_replace('#[\r\n\t ]+#', ' ', file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'debug.css')) ?> </style>
-    <script>
-        function toggle(id) {
-            event.preventDefault();
-            var element = document.getElementById(id);
-            if (element.style.display === "none") {
-                element.style.display = "block";
-            } else {
-                element.style.display = "none";
-            }
-        }
-    </script>
+    <style> <?= preg_replace('#[\r\n\t ]+#', ' ', file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'debug.css')) ?> </style>
+    <script>function toggle(id){ event.preventDefault(); var element=document.getElementById(id); if (element.style.display==="none"){ element.style.display="block";} else{ element.style.display="none";}} </script>
 </head>
 <body>
     <div class="header">
-        <div class="container">
+        <div class="container mt-4 <?= SHOW_DEBUG_BACKTRACE ?: 'main-container';?>">
             <h1><?= escape(($title ?? $exception::class) . ($exception->getCode() ? ' #' . $exception->getCode() : '')); ?></h1>
-            <p>
-                <?= nl2br(escape($parts[0]??'')) ?>
-                <a href="https://www.duckduckgo.com/?q=<?= urlencode(preg_replace('#\'.*\'|".*"#Us', '', $parts[0]??'')) ?>" rel="noreferrer" target="_blank">Search Online &rarr;</a>
+            <p><?= nl2br(escape($parts[0]??'')) ?> Thrown in file: <?= escape($parts[1]??'');?></p>
+            <p class="mt-2">
+                <a class="button" href="https://www.duckduckgo.com/?q=<?= $searchable; ?>" rel="noreferrer" target="_blank">Search Online &rarr;</a>
+                <a class="button" href="https://luminova.ng/forum/search?q=<?= $searchable;?>" rel="noreferrer" target="_blank">Report Bug &#128030;</a>
             </p>
-            <p>File: <?= escape($parts[1]??'');?></p>
         </div>
     </div>
 
@@ -172,7 +164,7 @@ $parts = explode(" File:", $exception->getMessage());
 
             <div class="content" id="request">
                 <h3>REQUEST</h3>
-                <?php $request = new \Luminova\Http\Request(); ?>
+                <?php $request = new Request(); ?>
                 <table>
                     <tbody>
                         <tr>
@@ -201,7 +193,7 @@ $parts = explode(" File:", $exception->getMessage());
                         </tr>
                         <tr>
                             <td>User Agent</td>
-                            <td><?= escape($request->getUserAgent()) ?></td>
+                            <td><?= escape($request->getUserAgent()->toString()) ?></td>
                         </tr>
 
                     </tbody>
@@ -234,7 +226,7 @@ $parts = explode(" File:", $exception->getMessage());
                                     <?php if (is_string($value)) : ?>
                                         <?= escape($value) ?>
                                     <?php else: ?>
-                                        <pre><?= escape(print_r($value, true)) ?></pre>
+                                        <pre><?= escape(print_r($value, true) ?? '') ?></pre>
                                     <?php endif; ?>
                                 </td>
                             </tr>
@@ -267,8 +259,8 @@ $parts = explode(" File:", $exception->getMessage());
                         <tbody>
                         <?php foreach ($headers as $name => $value) : ?>
                             <tr>
-                                <td><?= escape($name, 'html') ?></td>
-                                <td><?= escape($value, 'html') ?></td>
+                                <td><?= escape($name) ?></td>
+                                <td><?= escape($value) ?></td>
                             </tr>
                         <?php endforeach; ?>
                         </tbody>
@@ -284,7 +276,7 @@ $parts = explode(" File:", $exception->getMessage());
 
                 <ol>
                 <?php foreach ($files as $file) :?>
-                    <li><?= escape(trim($file)) ?></li>
+                    <li><?= escape(trim($file ?? '')) ?></li>
                 <?php endforeach ?>
                 </ol>
             </div>

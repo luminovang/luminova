@@ -11,6 +11,6 @@
 */
 
 /**
-  * Register router main page view
+ * Register router main page view
 */
 $router->get('/', 'Welcome::home');

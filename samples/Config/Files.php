@@ -20,9 +20,9 @@ final class Files
     public static int $filePermissions = 0644;
 
     /**
-     * Unix directory permissions 0755, 7604
+     * Unix directory permissions.
      * 
-     * @var int $dirPermissions
+     * @var int $dirPermissions 
     */
-    public static int $dirPermissions = 0740;
+    public static int $dirPermissions = 0755;
 }

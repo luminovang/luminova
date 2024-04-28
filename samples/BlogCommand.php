@@ -17,19 +17,20 @@ class BlogCommand extends BaseCommand
     /**
      * Command group.
      */
-    protected string $group = 'blogs';
+    protected string $group = 'blog';
 
     /**
      * Command name.
      */
-    protected string $name  = 'blogs-command';
+    protected string $name  = 'blog-command';
 
     /**
      * Command usages.
      */
     protected array $usages  = [
-        'php index.php blogs list',
-        'php index.php blogs read id "foo"'
+        'php index.php blog --help',
+        'php index.php blog list',
+        'php index.php blog read id "foo"'
     ];
 
     /**
@@ -41,8 +42,8 @@ class BlogCommand extends BaseCommand
      * Command options.
      */
     protected array $options = [
-        'php index.php blogs list' => 'Get a list of blog',
-        'php index.php blogs read id "foo"' => 'Read a blog by its ID'
+        'php index.php blog list' => 'Get a list of blog',
+        'php index.php blog read id "foo"' => 'Read a blog by its ID'
     ];
 
     /**
@@ -62,7 +63,7 @@ class BlogCommand extends BaseCommand
 
     /**
      * Display help information for the blog command.
-     * php index.php docs --help
+     * php index.php blog --help
      * 
      * @param array $helps Help information for the command.
      * @return int Status code.
@@ -74,7 +75,7 @@ class BlogCommand extends BaseCommand
 
     /**
      * List all available blogs.
-     * Command: php index.php docs list
+     * Command: php index.php blog list
      * 
      * @return int Status code.
      */
@@ -99,7 +100,7 @@ class BlogCommand extends BaseCommand
 
     /**
      * Display details of a specific blog.
-     * Command: php index.php docs read id "2"
+     * Command: php index.php blog read id "2"
      * 
      * @param string $id Blog ID.
      * @return int Status code.

@@ -1,0 +1,2 @@
+[notice] [2024-04-28T15:22:05+00:00]: [DEPRECATED (8192)] Function strftime() is deprecated File: system/plugins/smarty/smarty/src/Extension/DefaultExtension.php Line: 292
+[notice] [2024-04-28T15:42:52+00:00]: [DEPRECATED (8192)] Function strftime() is deprecated File: system/plugins/smarty/smarty/src/Extension/DefaultExtension.php Line: 290

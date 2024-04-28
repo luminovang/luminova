@@ -12,7 +12,8 @@
 *    });
 */
 
-$router->group("test", function() use($router): void
+$router->group("blog", function() use($router): void
 {
-    $router->command("foo", 'TestCommand::test');
+    $router->command('list', 'BlogCommand::list');
+    $router->command('/read/id/(:value)', 'BlogCommand::read');
 });

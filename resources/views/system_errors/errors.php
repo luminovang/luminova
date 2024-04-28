@@ -1,3 +1,10 @@
+<?php 
+$lines = explode("\n", $stack->getMessage());
+$messages = explode(' in ', $lines[0]);
+$tracers = array_slice($lines, 3);
+//$searchable = urlencode(preg_replace('#\'.*\'|"#Us', '', $messages[0]??'') . ', PHP Luminova Framework');
+$searchable = urlencode(preg_replace('/"([^"]*\/[^"]*)"/', '', $messages[0] ?? '') . ' PHP Luminova Framework');
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -6,22 +13,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/png" href="./favicon.png">
     <title>Error - <?= htmlspecialchars($stack->getName(), ENT_QUOTES); ?></title>
-    <style>
-        <?= preg_replace('#[\r\n\t ]+#', ' ', file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'debug.css')) ?>
-    </style>
+    <style><?= preg_replace('#[\r\n\t ]+#', ' ', file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'debug.css')) ?></style>
+    <script>function toggle(id){ event.preventDefault(); var element=document.getElementById(id); if (element.style.display==="none"){ element.style.display="block";} else{ element.style.display="none";}} </script>
 </head>
 <body id="e_all">
     <div class="container text-center main-container">
-        <h1 class="headline"><?= htmlspecialchars($stack->getName(), ENT_QUOTES); ?> (code: <?= $stack->getCode(); ?>)</h1>
-        <?php if (defined('PRODUCTION') && !PRODUCTION) : ?>
+        <h1 class="headline"><?= htmlspecialchars($stack->getName(), ENT_QUOTES); ?> #<?= $stack->getCode(); ?></h1>
+        <?php if (defined('PRODUCTION') && !PRODUCTION): ?>
             <div class="error-details">
                 <h2>Error Details:</h2>
-                <p class="lead"><?= nl2br(htmlspecialchars($stack->getMessage(), ENT_QUOTES)); ?></p>
-                <p class="lead">File: <?= htmlspecialchars($stack->getFile(), ENT_QUOTES); ?>, Line: <?= $stack->getLine(); ?></p>
+                <p class="lead"><?= htmlspecialchars($messages[0], ENT_QUOTES); ?>. Thrown in file: <?= htmlspecialchars(filter_paths($stack->getFile()), ENT_QUOTES); ?>, Line: <?= $stack->getLine(); ?></p>
+                <?php if(!empty($lines[2])): ?>
+                    <p class="lead text-warning">Caller: <?= htmlspecialchars($lines[2]??$messages[1], ENT_QUOTES); ?></p>
+                <?php endif;?>
+                <button class="button" type="button" onclick="return toggle('stack-tracer');">Stack tracer &#128269;</button>
+                <a class="button" href="https://luminova.ng/forum/search?q=<?= $searchable;?>" rel="noreferrer" target="_blank">Report Bug &#128030;</a>
+                <a class="button" href="https://www.duckduckgo.com/?q=<?= $searchable; ?>" rel="noreferrer" target="_blank">Search Online &rarr;</a>
+                <div id="stack-tracer" style="display:none;">
+                    <?php foreach($tracers as $trc): ?>
+                        <p class="lead text-danger"><?= htmlspecialchars($trc, ENT_QUOTES); ?></p>
+                    <?php endforeach; ?>
+                </div>
             </div>
         <?php else: ?>
             <h2>Origin is unreachable</h2>
-            <p class="lead" style="margin-bottom: 20px;">An error is preventing your website from loading properly.</p>
+            <p class="lead" style="margin-bottom: 20px;">An error is preventing website from loading properly.</p>
             <p class="lead" style="margin-bottom: 20px;">If you are the owner of this website, please check the error log for more information.</p>
         <?php endif; ?>
     </div>

@@ -20,4 +20,6 @@ cli.help
 !.gitkeep
 !/system/Composer/
 !/system/Debugger/
-!/system/plugins/
+!/system/plugins/composer/
+!/system/plugins/psr/
+!/system/plugins/autoload.php
