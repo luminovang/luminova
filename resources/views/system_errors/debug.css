@@ -166,7 +166,7 @@ p.lead {
     display: none;
 }
 .button{
-    display: inline-block;
+    display: inline-block !important;
     padding: .95rem 2rem;
     font-weight: bold;
     background-color: #370303;
@@ -175,6 +175,7 @@ p.lead {
     text-transform: uppercase;
     cursor: pointer;
     text-decoration: none;
+    margin: 5px;
 }
 .text-danger {
     color:#b10606;
