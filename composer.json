@@ -35,10 +35,11 @@
         "ext-mysqli": "Needed if you use MySQL",
         "ext-intl": "Needed if you use Local",
         "psr/log": "Needed to use PSR logging",
-        "phpmailer/phpmailer": "Needed if you use Mailer",
+        "phpmailer/phpmailer": "Needed if you want to use PHPMailer client",
+        "swiftmailer/swiftmailer": "Needed if you want use SwiftMailer client",
         "smarty/smarty": "Needed if you want to use Smarty template engine",
         "twig/twig": "Needed if you want to use Twig template engine",
-        "league/flysystem": "Needed if you use FileSystem storage",
+        "league/flysystem": "Needed if you use FileSystem cloud storages",
         "nanoblocktech/psr-cache": "If you need to use psr-cache",
         "peterujah/php-search-controller": "If you want to use model searching doSearch"
     },
