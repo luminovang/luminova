@@ -15,7 +15,8 @@ class Welcome extends BaseViewController
 {
     /**
      * Index page controller method.
-     * @see /public/
+     * @see /routes/web.php
+     * 
      * @return int Status code.
     */
     public function home(): int
@@ -25,7 +26,7 @@ class Welcome extends BaseViewController
 
     /**
      * Json info controller method.
-     * @see /public/api/info
+     * @see /routes/api.php
      * 
      * @return int Status code.
     */

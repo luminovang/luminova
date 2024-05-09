@@ -15,6 +15,7 @@ use \Luminova\Template\ViewResponse;
 use \App\Controllers\Config\Files;
 use \App\Controllers\Utils\Functions;
 use \App\Controllers\Application;
+use \Luminova\Template\Layout;
 use \Luminova\Exceptions\FileException;
 
 if (!function_exists('app')) {
@@ -225,9 +226,7 @@ if(!function_exists('is_tor')){
     */
     function is_tor(string|null $ip = null): bool
     {
-        $ip ??= Functions::ip()->get();
-
-        return Functions::tor()->isTor($ip);
+        return Functions::ip()->isTor($ip);
     }
 }
 
@@ -235,19 +234,17 @@ if(!function_exists('ip_address')){
     /**
     * Get user IP address or return ip address information
     *
-    * @param bool $ipInfo If true return ip address information instead
+    * @param bool $info If true return ip address information instead
     * @param array $options Pass additional options to return with IP information
     * 
     * @return string|object|null  Return ip info or ip address.
     */
-    function ip_address(bool $ipInfo = false, array $options = []): string|object|null
+    function ip_address(bool $info = false, array $options = []): string|object|null
     {
         $ip = Functions::ip();
 
-        if($ipInfo){
-            $info = $ip->info(null, $options);
-
-            return $info;
+        if($info){
+            return $ip->info(null, $options);
         }
 
        return $ip->get();
@@ -552,7 +549,7 @@ if(!function_exists('import')) {
      *    - @example array ['name' => 'Peter', 'email' => 'peter@foo.com] "Error name {name} and email {email}"
      * 
      * 
-     * @return string $translation
+     * @return string Return translated string.
      * @throws NotFoundException if translation is not found and default is not provided
      */
     function lang(
@@ -614,9 +611,9 @@ if (!function_exists('is_nested')) {
      /**
      * Check if array is a nested array
      * 
-     * @param array $array
+     * @param array $array Array to check.
      * 
-     * @return bool 
+     * @return bool Return true if array is a nested array
     */
     function is_nested(array $array): bool 
     {
@@ -625,10 +622,9 @@ if (!function_exists('is_nested')) {
         }
 
         foreach ($array as $value) {
-            if (is_array($value)) {
-                return true; 
-            }
+            if (is_array($value)) return true;
         }
+
         return false; 
     }
 
@@ -638,19 +634,47 @@ if (!function_exists('is_associative')) {
     /**
      * Check if array is associative
      * 
-     * @param array $array
+     * @param array $array Array to check
      * 
-     * @return bool 
+     * @return bool Return true if array is associative, false otherwise
     */
     function is_associative(array $array): bool 
     {
-        if ($array === []) {
+        if ($array === [] || isset($array[0])) {
             return false;
         }
 
-        return !is_int(key($array));
+        foreach ($array as $key => $value) {
+            if (is_int($key)) return false;
+        }
+    
+        return true;
+    }
+    
+}
+
+if (!function_exists('array_is_list')) {
+    /**
+     * Check if array is list
+     * 
+     * @param array $array Array to check
+     * 
+     * @return bool Return true if array is sequential, false otherwise.
+    */
+    function array_is_list(array $array): bool
+    {
+        if ($array === []) {
+            return true;
+        }
+
+        if (!isset($array[0])) {
+            return false;
+        }
+
+        return array_keys($array) === range(0, count($array) - 1);
     }
 }
+
 
 if (!function_exists('to_array')) {
     /**
@@ -673,7 +697,6 @@ if (!function_exists('to_array')) {
 
         return $array;
     }
-    
 }
 
 if (!function_exists('to_object')) {
@@ -783,7 +806,6 @@ if (!function_exists('is_list')) {
 
         if ($trim) {
             $input = preg_replace('/\s*,\s*/', ',', $input);
-    
             $input = preg_replace_callback('/"([^"]+)"/', function($matches) {
                 return '"' . trim($matches[1]) . '"';
             }, $input);
@@ -802,12 +824,13 @@ if (!function_exists('is_list')) {
 if (!function_exists('write_content')) {
     /**
      * Write, append contents to file.
+     * 
      * @param string $filename — Path to the file where to write the data.
-     * @param mixed $content
+     * @param string|resource $content The contents to write to the file, either as a string or a stream resource.
      * @param int $flags [optional] The value of flags can be any combination of the following flags (with some restrictions), joined with the binary OR (|) operator.
      * @param resource $context [optional] A valid context resource created with stream_context_create.
      * 
-     * @return bool true or false on failure.
+     * @return bool Return true or false on failure.
      * @throws FileException If unable to write file.
     */
     function write_content(string $filename, mixed $content, int $flag = 0, $context = null): bool 
@@ -915,18 +938,18 @@ if (!function_exists('is_dev_server')) {
     */
     function is_dev_server(): bool
     {
-        if(NOVAKIT_ENV !== null){
+        if(isset($_SERVER['NOVAKIT_EXECUTION_ENV'])){
             return true;
         }
 
-        $serverName = ($_SERVER['SERVER_NAME'] ?? '');
-
-        if ($serverName === '127.0.0.1' || $serverName === '::1' || $serverName === 'localhost') {
-            return true;
-        }
-        
-        if (strpos($serverName, 'localhost') !== false || strpos($serverName, '127.0.0.1') !== false) {
-            return true;
+        if($server = ($_SERVER['SERVER_NAME'] ?? false)){
+            if ($server === '127.0.0.1' || $server === '::1' || $server === 'localhost') {
+                return true;
+            }
+            
+            if (strpos($server, 'localhost') !== false || strpos($server, '127.0.0.1') !== false) {
+                return true;
+            }
         }
         
         return false;
@@ -948,7 +971,6 @@ if (!function_exists('response')) {
     }
 }
 
-
 if (!function_exists('is_blob')) {
     /**
      * Find whether the type of a variable is blob
@@ -959,7 +981,7 @@ if (!function_exists('is_blob')) {
     */
     function is_blob(mixed $value): bool 
     {
-        return is_resource($value) && get_resource_type($value) === 'stream';
+        return Factory::files()->isResource($value, 'stream');
     }
 }
 
@@ -1026,7 +1048,7 @@ if (!function_exists('has_uppercase')) {
      * 
      * @return bool Returns true if the string has uppercase, false otherwise.
     */
-   function has_uppercase(string $string): bool 
+    function has_uppercase(string $string): bool 
     {
         $has = false;
         for ($i = 0; $i < strlen($string); $i++) {
@@ -1110,4 +1132,51 @@ if (!function_exists('camel_case')) {
         
         return $camelCase;
     }    
+}
+
+if (!function_exists('string_length')) {
+    /**
+     * Calculate string length based on different charsets.
+     *
+     * @param string $content The content to calculate length for.
+     * @param string|null $charset The character set of the content.
+     * 
+     * @return int The calculated Content-Length.
+     */
+    function string_length(string $content, ?string $charset = null): int 
+    {
+        $charset = $charset ?? env('app.charset', 'utf-8');
+        switch (strtolower($charset)) {
+            case 'utf-8':
+            case 'utf8':
+                return mb_strlen($content, '8bit');
+            case 'iso-8859-1':
+            case 'latin1':
+                return strlen($content);
+            case 'windows-1252':
+                $content = mb_convert_encoding($content, 'ISO-8859-1', 'UTF-8');
+                return strlen($content);
+            default:
+                return is_utf8($content) ? mb_strlen($content, '8bit') : strlen($content);
+        }
+    }
+}
+
+if (!function_exists('layout')) {
+    /**
+     * PHP Template layout helper class.
+     * Allow you to extend and inherit a section of another template view file.
+     * 
+     * @param string $file Layout filename without the extension path.
+     * @example layout('foo') or layout('foo/bar/baz').
+     * 
+     * @return Layout Returns the layout class instance.
+     * @throws RuntimeException Throws if layout file is not found.
+     * 
+     * > All layouts must be stored in `resources/views/layout/` directory.
+    */
+    function layout(string $file): Layout
+    {
+        return Layout::getInstance()->layout($file);
+    }
 }

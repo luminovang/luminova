@@ -1,5 +1,5 @@
 <?php 
-//use Luminova\Command\Terminal;
+use \Luminova\Routing\Router;
 /** @var \Luminova\Routing\Router $router */
 /** @var \App\Controllers\Application $app */
 
@@ -12,7 +12,7 @@
 *    });
 */
 
-$router->group("blog", function() use($router): void
+$router->group("blog", function(Router $router): void
 {
     $router->command('list', 'BlogCommand::list');
     $router->command('/read/id/(:value)', 'BlogCommand::read');

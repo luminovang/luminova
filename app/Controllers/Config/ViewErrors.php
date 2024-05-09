@@ -20,11 +20,11 @@ class ViewErrors
      * 
      * @param Application $app Application instance available
      * 
-     * @return int 
+     * @return void 
     */
-    public static function onWebError(Application $app): int 
+    public static function onWebError(Application $app): void 
     {
-       return $app->view('404')->render();
+        $app->view('404')->render();
     }
 
     /**
@@ -32,11 +32,11 @@ class ViewErrors
      * 
      * @param Application $app Application instance available
      * 
-     * @return int 
+     * @return void 
     */
-    public static function onApiError(Application $app): int 
+    public static function onApiError(Application $app): void 
     {
-        return response(404, false)->json([
+        response(404, false)->json([
             'error' => [
                 'code' => 404,
                 'title' => $app->getView(),

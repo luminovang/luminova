@@ -5,7 +5,7 @@ namespace App\Controllers;
 use \Luminova\Base\BaseCommand;
 use \Luminova\Command\TextUtils;
 use \App\Controllers\Utils\Tables;
-use \Luminova\Database\QueryBuilder;
+use \Luminova\Database\Builder;
 
 /**
  * Class BlogCommand
@@ -16,18 +16,23 @@ class BlogCommand extends BaseCommand
 {
     /**
      * Command group.
+     * 
+     * @var string $group
      */
     protected string $group = 'blog';
 
     /**
      * Command name.
+     * 
+     * @var string $name
      */
     protected string $name  = 'blog-command';
 
     /**
      * Command usages.
+     * @var string|array<string,string> $usages
      */
-    protected array $usages  = [
+    protected array|string $usages  = [
         'php index.php blog --help',
         'php index.php blog list',
         'php index.php blog read id "foo"'
@@ -35,11 +40,15 @@ class BlogCommand extends BaseCommand
 
     /**
      * Command description.
+     * 
+     * @var string $description
      */
     protected string $description = 'CLI tool for managing blogs on our website.';
 
     /**
      * Command options.
+     * 
+     * @var array<string,string> $options
      */
     protected array $options = [
         'php index.php blog list' => 'Get a list of blog',
@@ -47,9 +56,9 @@ class BlogCommand extends BaseCommand
     ];
 
     /**
-     * @var QueryBuilder $builder
+     * @var Builder $builder
     */
-    private ?QueryBuilder $builder = null;
+    private ?Builder $builder = null;
 
     /**
      * Initializes the query helper class
@@ -57,7 +66,7 @@ class BlogCommand extends BaseCommand
     public function __construct()
     {
        parent::__construct();
-       $this->builder ??= QueryBuilder::getInstance();
+       $this->builder ??= Builder::getInstance();
        $this->builder->caching(false);
     }
 
@@ -82,7 +91,7 @@ class BlogCommand extends BaseCommand
     public function list(): int
     {  
         // Retrieve blogs from the database
-        $docs = $this->builder->table(Tables::DOCS)
+        $docs = $this->builder->table(Tables::BLOGS)
         ->limit(10)
         ->select(['bid', 'blog_title']);
         
@@ -108,7 +117,7 @@ class BlogCommand extends BaseCommand
     public function read(string $id): int
     {  
         // Retrieve blog from the database
-        $tbl = $this->builder->table(Tables::DOCS);
+        $tbl = $this->builder->table(Tables::BLOGS);
         $tbl->where('bid', '=', $id);
         $blog = $tbl->find(['blog_description', 'blog_title']);
         //

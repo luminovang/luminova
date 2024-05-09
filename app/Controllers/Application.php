@@ -24,7 +24,6 @@ class Application extends BaseApplication
          *  @example $session->setStorage("my_storage");
          *  @example $session->start();
         */
-       
 
         /**
         * Register global classes to use across your application life cycle

@@ -20,7 +20,8 @@ final class Session
     public static string $cookieName = 'PHPSESSID'; 
 
     /**
-     * The path where session files are stored on the server.
+     * Set the directory where session files are stored on the server.
+     * It doesn't affect the cookie sent to the client.
      * 
      * @var string $savePath;
      */
@@ -34,7 +35,8 @@ final class Session
     public static int $expiration = 365 * 24 * 60 * 60; 
 
     /**
-     * The path to use for the session cookie.
+     * Set the path on the server where the cookie will be available. 
+     * It controls the URL path under which the cookie is available on the server.
      * 
      * @var string $sessionPath;
      */
@@ -45,7 +47,7 @@ final class Session
      * 
      * @var string $sessionDomain;
      */
-    public static string $sessionDomain = '.' . APP_HOSTNAME;
+    public static string $sessionDomain = '.localhost';
 
      /**
      * Set the session cookie security level.

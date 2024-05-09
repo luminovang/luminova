@@ -34,15 +34,16 @@ final class Template
     */
     public static bool $templateIsolation = false;
 
-    /** 
-     * This property controls the use of variable key prefixing with `_` for view options. 
+    /**
+     * This property controls the use of variable key prefixing with '_' for view options.
      * When set to false, accessing view options with underscore prefixing will be disabled.
      * 
-     * @var bool $variablePrefixing
-     *  > Note: You must specify your variable type before building, your application you can't change this option after building.
-     *  > Changing it later will cause view options not to be discovered.
+     * @var bool|null $variablePrefixing
+     *     - Note: You must specify your variable type before building your application. 
+     *     - You can't change this option after building. Changing it later will cause view options not to be discovered.
+     *     - If `NULL` is passed, the view options will be left as raw arrays and can be accessed by `$options`.
      */
-    public static bool $variablePrefixing = true;
+    public static bool|null $variablePrefixing = true;
 
     /** 
      * Set your application template cache file directory path.

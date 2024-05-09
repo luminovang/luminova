@@ -63,17 +63,11 @@
 <section>
 
     <h1>About this page</h1>
-
     <p>The page you are looking at is being generated dynamically by Luminova.</p>
-
     <p>If you would like to edit this page you will find it located at:</p>
-
     <pre><code>resources/views/index.php</code></pre>
-
     <p>The corresponding controller for this page can be found at:</p>
-
     <pre><code>app/Controllers/Welcome.php</code></pre>
-
     <p>Development Server Context</p>
     <pre><code><?= $_SERVER['SERVER_SOFTWARE']??'Unknown Development Server';?></code></pre>
 

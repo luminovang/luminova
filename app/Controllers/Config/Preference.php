@@ -10,7 +10,10 @@
 
 namespace App\Controllers\Config;
 
+use \Luminova\Interface\MailerInterface;
 use \Psr\Log\LoggerInterface;
+
+use \Luminova\Email\Clients\NovaMailer;
 
 final class Preference
 {
@@ -25,5 +28,19 @@ final class Preference
     public static function getLogger(): LoggerInterface|null 
     {
         return null;
+    }
+
+    /**
+     * Return instance of your preferred mail client.
+     * Your mail client class must implement psr MailerInterface.
+     * You can use \Luminova\Email\Clients\PHPMailer, \Luminova\Email\Clients\SwiftMailer
+     * 
+     * @example new MyLogger(config) 
+     * 
+     * @return MailerInterface|null Return preferred logger instance or null to use default logger.
+    */
+    public static function getMailer(): MailerInterface|string|null 
+    {
+        return NovaMailer::class;
     }
 }

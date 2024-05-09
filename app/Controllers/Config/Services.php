@@ -16,6 +16,7 @@ class Services extends BaseServices
 {
     /**
      * Register services to autoload and discoverable in services.
+     * 
      * @example static::addService(FooClass::class, "Foo Argument", true, true);
      * 
      * @param void

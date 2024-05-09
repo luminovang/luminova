@@ -3,9 +3,7 @@ use \Luminova\Storage\Helper;
 use \Luminova\Debugger\Tracer;
 use \Luminova\Http\Request;
 
-$parts = explode(" File:", $exception->getMessage());
-$searchable = urlencode(preg_replace('/"([^"]*\/[^"]*)"/', '', $parts[0] ?? '') . ' PHP Luminova Framework');
-$throwIn = ($parts[1] ?? filter_paths($exception->getFile()) . ' on line: ' . $exception->getLine());
+$searchable = urlencode(preg_replace('/"([^"]*\/[^"]*)"/', '', $exception->getMessage() ?? '') . ' PHP Luminova Framework');
 ?>
 <!doctype html>
 <html lang="<?= str_replace('_', '-', locale());?>">
@@ -21,7 +19,7 @@ $throwIn = ($parts[1] ?? filter_paths($exception->getFile()) . ' on line: ' . $e
     <div class="header">
         <div class="container mt-4 <?= SHOW_DEBUG_BACKTRACE ?: 'main-container';?>">
             <h1><?= escape(($title ?? $exception::class) . ($exception->getCode() ? ' #' . $exception->getCode() : '')); ?></h1>
-            <p><?= nl2br(escape($parts[0]??'')) ?> Thrown in file: <?= escape($throwIn);?></p>
+            <p><?= nl2br(escape($exception->getMessage()??'')) ?> Thrown in file: <?= filter_paths($exception->getFile());?> on line: <?= $exception->getLine();?></p>
             <p class="mt-2">
                 <a class="button" href="https://www.duckduckgo.com/?q=<?= $searchable; ?>" rel="noreferrer" target="_blank">Search Online &rarr;</a>
                 <a class="button" href="https://luminova.ng/forum/search?q=<?= $searchable;?>" rel="noreferrer" target="_blank">Report Bug &#128030;</a>
