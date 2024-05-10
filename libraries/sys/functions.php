@@ -123,7 +123,7 @@ if(!function_exists('kebab_case')){
      * @param bool $lower Should convert to lower case (default: true).
 	 * 
 	 * @return string The kebab-cased string.
-	 */
+	*/
     function kebab_case(string $input, bool $lower = true): string 
     {
         $input = preg_replace('/[^\p{L}\p{N}]+/u', ' ', $input);
@@ -259,7 +259,7 @@ if(!function_exists('is_empty')){
      * @param mixed ...$values Arguments.
      * 
      * @return bool True if any of the values are empty, false otherwise.
-     */
+    */
     function is_empty(mixed ...$values): bool 
     {
         foreach ($values as $value) {
@@ -279,7 +279,7 @@ if(!function_exists('session')) {
      * @param string $key Key to retrieve the data
      *
      * @return mixed|Session
-     */
+    */
     function session(?string $key = null): mixed
     {
         $session = Factory::session();
@@ -301,7 +301,7 @@ if (!function_exists('cookie')) {
      * @param array  $options Options to be passed to the cookie
      * 
      * @return Cookie Cookie instance 
-     */
+    */
     function cookie(string $name, string $value = '', array $options = []): Cookie
     {
         return new Cookie($name, $value, $options);
@@ -323,7 +323,7 @@ if(!function_exists('factory')) {
      * @param bool $shared Allow shared instance creation (default: true).
      * 
      * @return Factory|mixed
-     */
+    */
     function factory(string|null $context = null, mixed ...$arguments): mixed
     {
         if($context === null || $context === ''){
@@ -350,7 +350,7 @@ if(!function_exists('service')) {
      * @param bool $shared Allow shared instance creation (default: true).
      * 
      * @return Services|mixed
-     */
+    */
     function service(string|null $service = null, mixed ...$arguments): mixed
     {
         $instance = Factory::services();
@@ -372,7 +372,7 @@ if(!function_exists('remove_service')) {
      * @param string $service The class name to delete and clear it cached
      * 
      * @return bool 
-     */
+    */
     function remove_service(?string $service = null): bool
     {
         $instance = Factory::services();
@@ -385,7 +385,7 @@ if(!function_exists('remove_service')) {
     }
 }
 
-if (! function_exists('app_config')) {
+if (!function_exists('app_config')) {
     /**
      * Initialize and return application config, utils and other instances from Services.
      * 
@@ -395,7 +395,7 @@ if (! function_exists('app_config')) {
      * @param bool $shared Allow shared instance creation (default: true).
      *
      * @return object|null Return instance of application config.
-     */
+    */
     function app_config(string $name, mixed ...$arguments): object|null
     {
         return Factory::services()->config($name, $arguments);
@@ -412,7 +412,7 @@ if(!function_exists('browser')) {
      * @param bool $shared Allow shared instance creation (default: true).
      * 
      * @return array<string,mixed>|object<string,mixed>|UserAgent|false Return browser information.
-     */
+    */
     function browser(?string $user_agent = null, string $return = 'object', bool $shared = true): mixed
     { 
         if($return === 'instance'){
@@ -441,7 +441,7 @@ if(!function_exists('is_platform')) {
      *      - [mac, windows, linux, freebsd, openbsd, solaris, aws, etc..]
      * 
      * @return bool Return true if the platform is matching, false otherwise.
-     */
+    */
     function is_platform(string $os): bool
     { 
         $os = strtolower($os);
@@ -466,7 +466,7 @@ if (!function_exists('text2html')) {
      * @param string $text A string containing the text to be processed.
      * 
      * @return string $text The processed text with HTML entities.
-     */
+    */
     function text2html(?string $text): string
     { 
         if ($text === null ||  $text === '') {
@@ -487,7 +487,7 @@ if(!function_exists('nl2html')) {
      * @param string $text A string containing the text to be processed.
      * 
      * @return string $text
-     */
+    */
     function nl2html(?string $text): string
     { 
         if($text === null ||  $text === ''){
@@ -503,16 +503,16 @@ if(!function_exists('nl2html')) {
 
 if(!function_exists('import')) {
     /**
-      * Import a custom library into your project 
-      * You must place your external libraries in libraries/libs/ directory
-      * 
-      * @param string $library the name of the library
-      * @example Foo/Bar/Baz
-      * @example Foo/Bar/Baz.php
-      * 
-      * @return bool true if the library was successfully imported
-      * @throws RuntimeException if library could not be found
-     */
+     * Import a custom library into your project 
+     * You must place your external libraries in libraries/libs/ directory
+     * 
+     * @param string $library the name of the library
+     * @example Foo/Bar/Baz
+     * @example Foo/Bar/Baz.php
+     * 
+     * @return bool true if the library was successfully imported
+     * @throws RuntimeException if library could not be found
+    */
     function import(string $library): bool
     {
         return Factory::modules()->import($library);
@@ -530,7 +530,7 @@ if(!function_exists('import')) {
      *
      * @return void
      * @throws InvalidArgumentException
-     */
+    */
     function logger(string $level, string $message, array $context = []): void
     {
         Factory::logger()->log($level, $message, $context);
@@ -551,7 +551,7 @@ if(!function_exists('import')) {
      * 
      * @return string Return translated string.
      * @throws NotFoundException if translation is not found and default is not provided
-     */
+    */
     function lang(
         string $lookup, 
         ?string $default = null, 
@@ -580,35 +580,35 @@ if(!function_exists('import')) {
 
 if (!function_exists('file_system')) {
     /**
-    * Get filesystem object
-    * 
-    * @param bool $shared Shared instance
-    * 
-    * @return FileSystem Return file system instance.
-   */
-   function file_system(bool $shared = true): object
-   {
+     * Get filesystem object
+     * 
+     * @param bool $shared Shared instance
+     * 
+     * @return FileSystem Return file system instance.
+    */
+    function file_system(bool $shared = true): object
+    {
         return Factory::files($shared);
-   }
+    }
 }
 
 if (!function_exists('path')) {
     /**
-    * Get system or application paths in operating system based directory separators.
-    * 
-    * @param string $name Path context name to return [system, plugins, library, controllers, writeable, logs, caches,
-    *          public, assets, views, routes, languages, services]
-    * 
-    * @return string Return os compatible path string.
-   */
-   function path(null|string $name): string
-   {
-       return Factory::files()->getCompatible($name);
-   }
+     * Get system or application paths in operating system based directory separators.
+     * 
+     * @param string $name Path context name to return [system, plugins, library, controllers, writeable, logs, caches,
+     *          public, assets, views, routes, languages, services]
+     * 
+     * @return string Return os compatible path string.
+    */
+    function path(null|string $name): string
+    {
+        return Factory::files()->getCompatible($name);
+    }
 }
 
 if (!function_exists('is_nested')) {
-     /**
+    /**
      * Check if array is a nested array
      * 
      * @param array $array Array to check.
@@ -627,7 +627,6 @@ if (!function_exists('is_nested')) {
 
         return false; 
     }
-
 }
 
 if (!function_exists('is_associative')) {
@@ -683,7 +682,7 @@ if (!function_exists('to_array')) {
      * @param mixed $input The object to convert to an array.
      * 
      * @return array $array Finalized array representation of the object
-     */
+    */
     function to_array(mixed $input): array 
     {
         if (!is_object($input)) {
@@ -706,7 +705,7 @@ if (!function_exists('to_object')) {
      * @param array|string $input Array or String list to convert
      * 
      * @return object $object
-     */
+    */
     function to_object(array|string $input): object 
     {
         if ($input === [] || $input === '') {
@@ -902,7 +901,7 @@ if (!function_exists('get_class_name')) {
      * 
      * @return string
     */
-   function get_class_name(string|object $from): string 
+    function get_class_name(string|object $from): string 
     {
         if (is_string($from)) {
             $pos = strrpos($from, '\\');
@@ -1006,7 +1005,7 @@ if (!function_exists('which_php')) {
 }
 
 if (!function_exists('status_code')) {
-   /**
+    /**
      * Convert status to int, return run status based on result.
      * In CLI, 0 is considered success while 1 is failure.
      * In some occasions, void or null may be returned, treating it as success.
@@ -1112,12 +1111,12 @@ if (!function_exists('asset')) {
 }
 
 if (!function_exists('camel_case')) {
-     /**
+    /**
      * Convert a string to camel case.
      *
      * @param string $input The string to convert
      * @return string The string converted to camel case
-     */
+    */
     function camel_case(string $input): string
     {
         $input = str_replace(['-', ' '], '_', $input);

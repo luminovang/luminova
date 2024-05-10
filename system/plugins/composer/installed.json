@@ -2,17 +2,17 @@
     "packages": [
         {
             "name": "luminovang/framework",
-            "version": "2.9.7",
-            "version_normalized": "2.9.7.0",
+            "version": "3.0.0",
+            "version_normalized": "3.0.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luminovang/framework.git",
-                "reference": "7a733d9562e2d13362fc5133eb81abc3ec593595"
+                "reference": "fab39aebda74467bb8240ab1ec1477a0eb6705aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luminovang/framework/zipball/7a733d9562e2d13362fc5133eb81abc3ec593595",
-                "reference": "7a733d9562e2d13362fc5133eb81abc3ec593595",
+                "url": "https://api.github.com/repos/luminovang/framework/zipball/fab39aebda74467bb8240ab1ec1477a0eb6705aa",
+                "reference": "fab39aebda74467bb8240ab1ec1477a0eb6705aa",
                 "shasum": ""
             },
             "require": {
@@ -31,17 +31,10 @@
                 "ext-curl": "Needed if you use CURLRequest class",
                 "ext-exif": "Needed if you run Image class tests",
                 "ext-fileinfo": "Needed to improve mime type detection for files",
-                "ext-gd": "Needed if you use Image class GDHandler",
-                "ext-imagick": "Needed if you use Image class ImageMagickHandler",
                 "ext-intl": "Needed if you use Local",
-                "ext-memcache": "Needed if you use Cache class MemcachedHandler with Memcache",
-                "ext-memcached": "Needed if you use Cache class MemcachedHandler with Memcached",
-                "ext-mysqli": "Needed if you use MySQL",
-                "phpmailer/phpmailer": "Needed if you use Mailer",
-                "psr/log": "Needed to use PSR logging",
-                "smarty/smarty": "Needed if you use Template engine"
+                "ext-mysqli": "Needed if you use MySQL"
             },
-            "time": "2024-04-20T20:46:27+00:00",
+            "time": "2024-05-10T07:52:03+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {

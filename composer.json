@@ -12,7 +12,7 @@
         "php": "^8.0",
         "ext-json": "*",
         "ext-mbstring": "*",
-        "luminovang/framework": "^2.0",
+        "luminovang/framework": "^3.0",
         "psr/cache": "^3.0",
         "psr/log": "^1.1",
         "psr/simple-cache": "^3.0"
@@ -24,6 +24,7 @@
         "phpunit/phpunit": "^9.1",
         "rector/rector": "0.18.3"
     },
+    
     "suggest": {
         "ext-curl": "Needed if you use CURLRequest class",
         "ext-exif": "Needed if you run Image class tests",

@@ -3,7 +3,7 @@
         'name' => 'luminovang/luminova',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'fbbc8660bf97edc9752206677126735e2faa7a3d',
+        'reference' => '68d9d679a6083698d1672b5055cd8a576ccae48e',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'luminovang/framework' => array(
-            'pretty_version' => '2.9.7',
-            'version' => '2.9.7.0',
-            'reference' => '7a733d9562e2d13362fc5133eb81abc3ec593595',
+            'pretty_version' => '3.0.0',
+            'version' => '3.0.0.0',
+            'reference' => 'fab39aebda74467bb8240ab1ec1477a0eb6705aa',
             'type' => 'library',
             'install_path' => __DIR__ . '/../luminovang/framework',
             'aliases' => array(),
@@ -22,7 +22,7 @@
         'luminovang/luminova' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'fbbc8660bf97edc9752206677126735e2faa7a3d',
+            'reference' => '68d9d679a6083698d1672b5055cd8a576ccae48e',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../../',
             'aliases' => array(),

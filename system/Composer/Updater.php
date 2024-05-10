@@ -316,7 +316,7 @@ class Updater
                 }
 
                 if ($returnCode === 0) {
-                    static::cli()?->success('Update was completed version [' . (Foundation::VERSION??'1.5.0') . ']');
+                    static::cli()?->writeln('Update was completed version [' . (Foundation::VERSION??'1.5.0') . ']', 'white', 'green');
                     if($hasTodo){
                         static::cli()?->writeln('TODO ATTENTION!', 'yellow');
                         static::cli()?->writeln('Please see /TODO.md to few manual associated with the current version update');
