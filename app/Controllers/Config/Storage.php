@@ -11,7 +11,7 @@
 /**
  * Tips: 
  * 
- * The key `base` is like a document root for your files.
+ * The key `base` is like a document root for your remote or local files.
  * @see https://luminova.ng/docs/0.0.0/configs/storage
  * @see https://luminova.ng/docs/0.0.0/files/storages
  * 
@@ -30,8 +30,8 @@ return [
      * Local Filesystem storage configuration.
     */
     'local' => [
-        'base' => root(__DIR__, 'writeable/storages/'),
-        'assets' => root(__DIR__, 'public/assets/'),
+        'base' => root('writeable/storages/'),
+        'assets' => root('public/assets/'),
         'urls' => [
             'public_url' => start_url('assets/')
         ],
@@ -150,7 +150,9 @@ return [
         'host' => 'localhost', // required
         'username' => 'your-username', // required
         'password' => 'your-password', // required
-        'port' => 22
+        'root' => '/root/path/', // required
+        'port' => 22,
+        'visibility' => []
     ],
 
     /**

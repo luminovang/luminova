@@ -39,7 +39,7 @@ class ViewErrors
         response(404, false)->json([
             'error' => [
                 'code' => 404,
-                'title' => $app->getView(),
+                'title' => 'Error 404',
                 'message' => "The endpoint [" . $app->getView() . "] you are trying to access does not exist.",
                 'timestamp' => Time::datetime(),
             ]

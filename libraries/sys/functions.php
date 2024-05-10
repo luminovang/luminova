@@ -73,7 +73,7 @@ if (!function_exists('start_url')) {
         $start .= '/';
 
         /*if(NOVAKIT_ENV === null && !PRODUCTION){
-            //$start .= basename(root(__DIR__)) . '/public/';
+            //$start .= basename(root()) . '/public/';
             $start .= dirname($_SERVER['SCRIPT_NAME']);
         }*/
 
@@ -318,7 +318,20 @@ if(!function_exists('factory')) {
      * @example $config = \Luminova\Application\Factory::config();
      * @example $config = new \Luminova\Config\Configuration();
      * 
-     * @param string|null $context The class name to load
+     * @param string|null $context The class name to load.
+     * Factory Classes: 
+     * -   'task'      `Task`
+     * -   'session'   `Session`
+     * -   'functions' `Functions`
+     * -   'modules'   `Modules`
+     * -   'language'  `Translator`
+     * -   'logger'    `Logger`
+     * -   'files'     `FileSystem`
+     * -   'validate'  `InputValidator`
+     * -   'response'  `ViewResponse`
+     * -   'services'  `Services`
+     * -   'request'   `Request`
+     * 
      * @param mixed ...$arguments The last bool argument indicate wether to return a shared instance.
      * @param bool $shared Allow shared instance creation (default: true).
      * 
@@ -594,14 +607,14 @@ if (!function_exists('file_system')) {
 
 if (!function_exists('path')) {
     /**
-     * Get system or application paths in operating system based directory separators.
+     * Get system or application path, converted to `unix` or `windows` directory separator style.
      * 
-     * @param string $name Path context name to return [system, plugins, library, controllers, writeable, logs, caches,
-     *          public, assets, views, routes, languages, services]
+     * @param string $name Path context name to return.
+     * - Context: [system, plugins, library, controllers, writeable, logs, caches, public, assets, views, routes, languages, services]
      * 
-     * @return string Return os compatible path string.
+     * @return string Return directory path, windows, unix or windows style path. 
     */
-    function path(null|string $name): string
+    function path(string $name): string
     {
         return Factory::files()->getCompatible($name);
     }

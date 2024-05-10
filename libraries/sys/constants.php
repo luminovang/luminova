@@ -28,18 +28,13 @@ if (!function_exists('root')) {
     /**
      * Return to the root directory of your project.
      *
-     * @param string $directory The directory of the file you are calling root from.
      * @param string $suffix Prepend a path at the end root directory.
-     *      -   Not a filename
      * 
-     * @return string $path + $suffix
+     * @return string Return root directory + Suffix/.
      */
-    function root(string $directory = __DIR__, string $suffix = ''): string
+    function root(string $suffix = ''): string
     {
-        if($suffix !== ''){
-            $suffix = trim(str_replace('/', DIRECTORY_SEPARATOR, $suffix), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
-        }
-        //$suffix = trim($suffix, DIRECTORY_SEPARATOR) . ($suffix ? DIRECTORY_SEPARATOR : '');
+       $suffix = ($suffix === '' ? '' : trim(str_replace('/', DIRECTORY_SEPARATOR, $suffix), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR);
 
         if (file_exists(APP_ROOT . '.env')) {
             return APP_ROOT . $suffix;
@@ -49,21 +44,21 @@ if (!function_exists('root')) {
             return DOCUMENT_ROOT . $suffix;
         }
 
-        $path = realpath($directory);
+        $root = realpath(__DIR__);
 
-        if ($path === false) {
+        if ($root === false) {
             return $suffix; 
         }
 
-        if (file_exists($path . DIRECTORY_SEPARATOR . '.env')) {
-            return $path . DIRECTORY_SEPARATOR . $suffix;
+        if (file_exists($root . DIRECTORY_SEPARATOR . '.env')) {
+            return $root . DIRECTORY_SEPARATOR . $suffix;
         }
 
-        while ($path !== DIRECTORY_SEPARATOR && !file_exists($path . DIRECTORY_SEPARATOR . '.env')) {
-            $path = dirname($path);
+        while ($root !== DIRECTORY_SEPARATOR && !file_exists($root . DIRECTORY_SEPARATOR . '.env')) {
+            $root = dirname($root);
         }
 
-        return ($path !== DIRECTORY_SEPARATOR) ? $path . DIRECTORY_SEPARATOR . $suffix : $suffix;
+        return $root . ($root === DIRECTORY_SEPARATOR ? '' : DIRECTORY_SEPARATOR) . $suffix;
     }
 }
 
@@ -78,7 +73,7 @@ if(!function_exists('env')){
      */
     function env(string $key, mixed $default = null): mixed 
     {
-        $value = $_ENV[$key] ?? $_SERVER[$key] ?? getenv($key);
+        $value = $_ENV[$key] ?? ($_SERVER[$key] ?? getenv($key));
 
         if ($value === false) {
             return $default;
@@ -123,16 +118,13 @@ if(!function_exists('setenv')){
         }
     
         if ($append_to_env) {
-            $envFile = APP_ROOT . '.env';
-            $envContents = file_get_contents($envFile);
+            $envContents = file_get_contents(APP_ROOT . '.env');
             if($envContents === false){
                 return false;
             }
-            $keyExists = (strpos($envContents, "$key=") !== false || strpos($envContents, "$key =") !== false);
-            //$keyValueExists = preg_match('/^' . preg_quote($key, '/') . '\s*=\s*.*$/m', $envContents);
-           
-            if (!$keyExists) {
-                return file_put_contents($envFile, "\n$key=$value", FILE_APPEND) !== false;
+ 
+            if (!(strpos($envContents, "$key=") !== false || strpos($envContents, "$key =") !== false)) {
+                return file_put_contents(APP_ROOT . '.env', "\n$key=$value", FILE_APPEND) !== false;
             } else {
                 $newContents = preg_replace_callback('/(' . preg_quote($key, '/') . ')\s*=\s*(.*)/',
                     function($match) use ($value) {
@@ -141,7 +133,7 @@ if(!function_exists('setenv')){
                     $envContents
                 );
 
-                return file_put_contents($envFile, $newContents) !== false;
+                return file_put_contents(APP_ROOT . '.env', $newContents) !== false;
             }
         }
 
@@ -169,13 +161,11 @@ if (!function_exists('filter_paths')) {
             }
         }
 
-        if ($matching !== '') {
-            $filter = substr($path, strpos($path, $matching));
-
-            return $filter;
+        if ($matching === '') {
+            return basename($path);
         }
 
-        return basename($path);
+        return substr($path, strpos($path, $matching));
     }
 }
 
