@@ -15,15 +15,22 @@ use \Luminova\Base\BaseServices;
 class Services extends BaseServices
 {
     /**
-     * Register services to autoload and discoverable in services.
+     * Register bootstrap autoload all your application services.
+     * Add each service in a new line within the bootstrap method.
      * 
-     * @example static::addService(FooClass::class, "Foo Argument", true, true);
+     * Usage:
+     *     - static::newService(Configuration::class) as $config = service('Configuration')
+     *     - static::newService('\Luminova\Config\Configuration') as $config = service('Configuration')
+     *     - static::newService(Configuration:class, 'config') as $config = service('config')
+     *     - Services::Configuration()
+     *     - Services::config()
      * 
-     * @param void
+     * @return void
+     * @throws RuntimeException Throws If the service already exists causing duplicate service.
     */
-    public static function bootstrap(): void
+    public function bootstrap(): void
     {
-        //static::addService(FooClass::class, "Foo Argument", true, true);
-        //static::addService(BarClass::class, "Bar Argument", true, true);
+        //static::newService(FooClass::class, 'foo', true, true);
+        //static::newService(BarClass::class, null, true, true, ['Bar Argument']);
     }
 }

@@ -8,6 +8,7 @@
  * @license See LICENSE file
  */
 use \Luminova\Application\Factory;
+use \Luminova\Application\Services;
 use \Luminova\Http\Request;
 use \Luminova\Http\UserAgent;
 use \Luminova\Cookies\Cookie;
@@ -22,7 +23,7 @@ if (!function_exists('app')) {
     /**
      * Get application container class shared instance or new instance if not shared. 
      * 
-     * @return Application Application class instance.
+     * @return Application Application shared instance.
     */
     function app(): Application 
     {
@@ -42,9 +43,9 @@ if (!function_exists('request')) {
      * 
      * @param bool $shared Return a shared instance (default: true).
      * 
-     * @return Request Return Request
+     * @return class-object<Request>|null Return Request object
     */
-    function request(bool $shared = true): Request 
+    function request(bool $shared = true): ?Request 
     {
         return Factory::request($shared);
     }
@@ -69,46 +70,47 @@ if (!function_exists('start_url')) {
         if(!PRODUCTION){
             $start .= rtrim(dirname($_SERVER['SCRIPT_NAME']), '/');
         }
-        
-        $start .= '/';
 
         /*if(NOVAKIT_ENV === null && !PRODUCTION){
             //$start .= basename(root()) . '/public/';
             $start .= dirname($_SERVER['SCRIPT_NAME']);
         }*/
 
-        return $start . ltrim($suffix, '/');
+        return $start . '/' . ltrim($suffix, '/');
     }
 }
 
 if (!function_exists('func')) {
     /**
-     * Return Functions instance or a specific context instance.
+     * Return shared functions instance or a specific context instance.
      *
      * If context is specified, return an instance of the specified context, otherwise return a Functions instance or null.
-     *      - Supported contexts: 'files', 'ip', 'document', 'escape', 'tor', 'math'.
+     * Supported contexts: 
+     *  -   ip, 
+     *  -   document, 
+     *  -   escape, 
+     *  -   tor, 
+     *  -   math.
      *
      * @param string|null $context The context to return instance for.
      * @param mixed ...$params Additional parameters based on context.
      *
-     * @return Functions|object|null|string|bool Returns an instance of Functions, 
-     *      object, string, or boolean value depending on the context.
+     * @return class-object<Functions>|object|null|string|bool Returns an instance of Functions, 
+     *    -   object string, or boolean value depending on the context.
      *
      * @throws Exception If an error occurs.
      * @throws RuntimeException If unable to initialize method.
      */
-    function func(?string $context = null, ...$params): mixed 
+    function func(?string $context = null, mixed ...$params): mixed 
     {
-        $instance = Factory::functions();
-
         if ($context === null) {
-            return $instance;
+            return Factory::functions();
         }
 
         $context = strtolower($context);
 
-        if (in_array($context, ['files', 'ip', 'document', 'escape', 'tor', 'math'], true)) {
-            return $instance->{$context}(...$params);
+        if (in_array($context, ['ip', 'document', 'escape', 'tor', 'math'])) {
+            return Factory::functions()->{$context}(...$params);
         }
 
         return null;
@@ -127,51 +129,32 @@ if(!function_exists('kebab_case')){
     function kebab_case(string $input, bool $lower = true): string 
     {
         $input = preg_replace('/[^\p{L}\p{N}]+/u', ' ', $input);
-		$kebabCase = str_replace(' ', '-', $input);
-        $kebabCase = trim($kebabCase, '-');
+        $input = trim(str_replace(' ', '-', $input), '-');
 
         if($lower){
-		    return strtolower($kebabCase);
+		    return strtolower($input);
         }
 
-        return $kebabCase;
+        return $input;
     }
 }
 
 if(!function_exists('locale')){
     /**
-    * Set locale or return local 
+    * Set locale or return locale application string.
     *
-    * @param ?string $locale If locale is present it will set it else return default locale
+    * @param string|null $locale If locale is present it will set it else return default locale
     *
-    * @return string|bool;
+    * @return string|true Return application locale or true if locale was set;
     */
-    function locale(?string $locale = null): string|bool 
+    function locale(?string $locale = null): string|true 
     {
         if($locale === null){
-            $locale = env('app.locale', 'en');
-
-            return $locale;
-        }else{
-            setenv('app.locale', $locale, true);
+            return env('app.locale', 'en');
         }
 
+        setenv('app.locale', $locale, true);
         return true;
-    }
-}
-
-if(!function_exists('is_feature')){
-    /**
-    * Check if feature is enabled in env file 
-    *
-    * @param string $key Feature key name
-    * @param bool $default 
-    *
-    * @return bool
-    */
-    function is_feature(string $key, bool $default = false): bool 
-    {
-        return (bool) env($key, $default);
     }
 }
 
@@ -207,14 +190,13 @@ if(!function_exists('strict')){
      *      -   Filter Types: [int, digit, key, password, username, email, url, money, double, alphabet, phone, name, timezone, time, date, uuid, default]
 	 * @param string $symbol The symbol to replace disallowed characters with (optional).
 	 *
-	 * @return string The sanitized string.
+	 * @return string Return sanitized string.
 	 */
-    function strict(string $input, string $type = 'default', string $replacer = ''): mixed 
+    function strict(string $input, string $type = 'default', string $replacer = ''): string 
     {
        return Functions::strictInput($input, $type, $replacer);
     }
 }
-
 
 if(!function_exists('is_tor')){
     /**
@@ -241,13 +223,11 @@ if(!function_exists('ip_address')){
     */
     function ip_address(bool $info = false, array $options = []): string|object|null
     {
-        $ip = Functions::ip();
-
         if($info){
-            return $ip->info(null, $options);
+            return Functions::ip()->info(null, $options);
         }
 
-       return $ip->get();
+       return Functions::ip()->get();
     }
 }
 
@@ -269,26 +249,24 @@ if(!function_exists('is_empty')){
         }
         return false;
     }
-
 }
 
 if(!function_exists('session')) {
     /**
      * Return session data if key is present else return session instance
      *
-     * @param string $key Key to retrieve the data
+     * @param string $key Key to retrieve the data.
+     * @param bool $shared Use shared instance (default: true).
      *
-     * @return mixed|Session
+     * @return class-object<Session>|mixed Return session instance or value if key is present.
     */
-    function session(?string $key = null): mixed
+    function session(?string $key = null, bool $shared = true): mixed
     {
-        $session = Factory::session();
-
         if (is_string($key) && $key !== '') {
-            return $session->get($key);
+            return Factory::session($shared)->get($key);
         }
 
-        return $session;
+        return Factory::session($shared);
     }
 }
 
@@ -296,15 +274,16 @@ if (!function_exists('cookie')) {
     /**
      * Create and return cookie instance.
      *
-     * @param string $name Name of the cookie
-     * @param string $value Value of the cookie
-     * @param array  $options Options to be passed to the cookie
+     * @param string $name Name of the cookie.
+     * @param string $value Value of the cookie.
+     * @param array  $options Options to be passed to the cookie.
+     * @param bool $shared Use shared instance (default: false).
      * 
-     * @return Cookie Cookie instance 
+     * @return class-object<Cookie> Return cookie instance.
     */
-    function cookie(string $name, string $value = '', array $options = []): Cookie
+    function cookie(string $name, string $value = '', array $options = [], bool $shared = false): Cookie
     {
-        return new Cookie($name, $value, $options);
+        return Factory::cookie($name, $value, $options, $shared);
     }
 }
 
@@ -318,10 +297,11 @@ if(!function_exists('factory')) {
      * @example $config = \Luminova\Application\Factory::config();
      * @example $config = new \Luminova\Config\Configuration();
      * 
-     * @param string|null $context The class name to load.
-     * Factory Classes: 
+     * @param class-string|string|null $context The factory class name or alias (e.g: Task::class or task).
+     * Factory Classes Alias: 
      * -   'task'      `Task`
      * -   'session'   `Session`
+     * -   'cookie'    `Cookie`
      * -   'functions' `Functions`
      * -   'modules'   `Modules`
      * -   'language'  `Translator`
@@ -329,15 +309,15 @@ if(!function_exists('factory')) {
      * -   'files'     `FileManager`
      * -   'validate'  `InputValidator`
      * -   'response'  `ViewResponse`
-     * -   'services'  `Services`
      * -   'request'   `Request`
+     * -   'service'   `Services`
      * 
      * @param mixed ...$arguments The last bool argument indicate wether to return a shared instance.
      * @param bool $shared Allow shared instance creation (default: true).
      * 
-     * @return Factory|mixed
+     * @return class-object|Factory|null Return instance of factory or instance of factory class, otherwise null.
     */
-    function factory(string|null $context = null, mixed ...$arguments): mixed
+    function factory(string|null $context = null, mixed ...$arguments): ?object
     {
         if($context === null || $context === ''){
             return new Factory();
@@ -352,66 +332,46 @@ if(!function_exists('service')) {
      * Returns a shared instance of a class in services
      * Or service instance if context is null
      *
-     * Same as:
-     * @example $config = service('config')
-     * @example $config = \Luminova\Application\Services::config();
-     * @example $config = new \Luminova\Config\Configuration();
+     * @example $config = service('Config')
+     * @example $config = Services::Config();
      * 
-     * @param string|null $service The service context name
+     * Same as:
+     * @example $config = new \Luminova\Config\Config();
+     * 
+     * @param class-string|string|null $service The service class name or alias.
      * @param mixed ...$arguments The last bool argument indicate wether to return a shared instance.
      * @param bool $serialize Allow object serialization (default: false).
      * @param bool $shared Allow shared instance creation (default: true).
      * 
-     * @return Services|mixed
+     * @return class-object|Services|null Return service class instance or instance of service class.
     */
-    function service(string|null $service = null, mixed ...$arguments): mixed
+    function service(?string $service = null, mixed ...$arguments): ?object
     {
-        $instance = Factory::services();
-
         if($service === null || $service === ''){
-            return $instance;
+            return Factory::service();
         }
 
-        return $instance::$service(...$arguments);
+        return Factory::service()->{$service}(...$arguments);
     }
 }
 
 if(!function_exists('remove_service')) {
     /**
      * Delete a service or clear all services
-     * If no service name was passed clear all cached instances of services classes.
+     * If NULL is passed all cached services instances will be cleared.
      * Else delete a specific services instance and clear it's cached instances
      * 
-     * @param string $service The class name to delete and clear it cached
+     * @param class-string|string $service The class name or alias, to delete and clear it cached
      * 
-     * @return bool 
+     * @return bool Return true if the service was removed or cleared, false otherwise.
     */
     function remove_service(?string $service = null): bool
     {
-        $instance = Factory::services();
-
         if($service === null){
-            return $instance::clear();
+            return Factory::service()->clear();
         }
 
-        return $instance::delete($service);
-    }
-}
-
-if (!function_exists('app_config')) {
-    /**
-     * Initialize and return application config, utils and other instances from Services.
-     * 
-     * @param string $name Class name.
-     * @param mixed ...$arguments Pass arguments to constructor.
-     * @param bool $serialize Allow object serialization (default: false).
-     * @param bool $shared Allow shared instance creation (default: true).
-     *
-     * @return object|null Return instance of application config.
-    */
-    function app_config(string $name, mixed ...$arguments): object|null
-    {
-        return Factory::services()->config($name, $arguments);
+        return Factory::service()->delete($service);
     }
 }
 
@@ -591,20 +551,6 @@ if(!function_exists('import')) {
     }
 }
 
-if (!function_exists('file_manager')) {
-    /**
-     * Get File manager object
-     * 
-     * @param bool $shared Shared instance
-     * 
-     * @return FileManager Return file manager instance.
-    */
-    function file_manager(bool $shared = true): object
-    {
-        return Factory::files($shared);
-    }
-}
-
 if (!function_exists('path')) {
     /**
      * Get system or application path, converted to `unix` or `windows` directory separator style.
@@ -719,19 +665,26 @@ if (!function_exists('to_object')) {
      * 
      * @return object $object
     */
-    function to_object(array|string $input): object 
+    function to_object(array|string $input): object|bool
     {
         if ($input === [] || $input === '') {
-            return (object) [];
+            return (object)[];
         }
 
         if (is_string($input)) {
             $input = list_to_array($input);
+            if(!is_array($input)){
+                return false;
+            }
         }
     
-        $object = json_decode(json_encode($input));
+        try{
+            return json_decode(json_encode($input, JSON_THROW_ON_ERROR));
+        }catch(\JsonException $e){
+            return false;
+        }
 
-        return $object;
+        return false;
     }
 }
 
@@ -827,9 +780,7 @@ if (!function_exists('is_list')) {
             return false;
         }
 
-        $pattern = '/^(\s*"?[^\s"]+"?\s*,)*\s*"?[^\s"]+"?\s*$/';
-
-        return preg_match($pattern, $input);
+        return preg_match('/^(\s*"?[^\s"]+"?\s*,)*\s*"?[^\s"]+"?\s*$/', $input);
     }
 }
 
@@ -865,9 +816,7 @@ if (!function_exists('make_dir')) {
     */
     function make_dir(string $path, ?int $permissions = null, bool $recursive = true): bool 
     {
-        $permission = ($permissions ?? Files::$dirPermissions ?? 0777);
-
-        return Factory::files()->mkdir($path, $permission, $recursive);
+        return Factory::files()->mkdir($path, ($permissions ?? Files::$dirPermissions ?? 0777), $recursive);
     }
 }
 
@@ -889,41 +838,41 @@ if (!function_exists('validate')) {
      *          ]
      *        }
      * 
-     * @return ValidationInterface Return validation instance
+     * @return class-object<ValidationInterface> Return validation instance
     */
     function validate(?array $inputs, ?array $rules, array $messages = []): object 
     {
-        $validate = Factory::validate();
-
         if ($inputs === null || $rules === null) {
-            return $validate;
+            return Factory::validate();
         }
 
-        $validate->setRules($rules, $messages);
-        $validate->validate($inputs);
+        $instance = Factory::validate();
+        $instance->setRules($rules, $messages);
+        $instance->validate($inputs);
         
-        return $validate;
+        return $instance;
     }
 }
 
 if (!function_exists('get_class_name')) {
     /**
-     * Get class name from namespace or object
+     * Get class basename from namespace or object
      * 
-     * @param string|object $content 
+     * @param string|object $from Class name or object.
      * 
-     * @return string
+     * @return string Return the class basename.
     */
     function get_class_name(string|object $from): string 
     {
         if (is_string($from)) {
-            $pos = strrpos($from, '\\');
-            $className = ($pos !== false) ? substr($from, $pos + 1) : $from;
-        } else {
-            $className = get_class_name(get_class($from));
+            if(($pos = strrpos($from, '\\')) !== false){
+                return substr($from, $pos + 1);
+            }
+
+            return $from;
         }
 
-        return $className;
+        return get_class_name(get_class($from));
     }
 }
 
@@ -975,7 +924,7 @@ if (!function_exists('response')) {
     * @param int $status int $status HTTP status code (default: 200 OK)
     * @param bool $encode Enable content encoding like gzip, deflate.
     *
-    * @return ViewResponse Return vew response object. 
+    * @return class-object<ViewResponse> Return vew response object. 
     */
     function response(int $status = 200, bool $encode = true): ViewResponse
     {
@@ -1003,7 +952,7 @@ if (!function_exists('which_php')) {
      *
      * @return string|null Return PHP executable path or null.
     */
-    function which_php(): string|null
+    function which_php(): ?string
     {
         if (defined('PHP_BINARY')) {
             return PHP_BINARY;
@@ -1026,7 +975,7 @@ if (!function_exists('status_code')) {
      * @param mixed $result Response from the callback function (void|bool|null|int)
      * @param bool $return_int Return type (default: int)
      * 
-     * @return int|bool
+     * @return int|bool Return boolean value.
      */
     function status_code(mixed $result = null, bool $return_int = true): int|bool
     {
@@ -1062,18 +1011,15 @@ if (!function_exists('has_uppercase')) {
     */
     function has_uppercase(string $string): bool 
     {
-        $has = false;
         for ($i = 0; $i < strlen($string); $i++) {
             if (ctype_upper($string[$i])) {
-                $has = true;
-                break; 
+                return true;
             }
         }
 
-        return $has;
+        return false;
     }
 }
-
 
 if (!function_exists('href')) {
     /**

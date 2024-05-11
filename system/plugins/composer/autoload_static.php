@@ -84,6 +84,7 @@ class ComposerStaticInitce7d6b0379bc9a35d3afd6dd2b0e131e
         'App\\Controllers\\Utils\\Functions' => __DIR__ . '/../../..' . '/app/Controllers/Utils/Functions.php',
         'App\\Controllers\\Welcome' => __DIR__ . '/../../..' . '/app/Controllers/Welcome.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Luminova\\Application\\Caller' => __DIR__ . '/../../..' . '/system/Application/Caller.php',
         'Luminova\\Application\\Factory' => __DIR__ . '/../../..' . '/system/Application/Factory.php',
         'Luminova\\Application\\Foundation' => __DIR__ . '/../../..' . '/system/Application/Foundation.php',
         'Luminova\\Application\\Functions' => __DIR__ . '/../../..' . '/system/Application/Functions.php',

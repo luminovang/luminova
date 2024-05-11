@@ -36,6 +36,7 @@ return array(
     'App\\Controllers\\Utils\\Functions' => $baseDir . '/app/Controllers/Utils/Functions.php',
     'App\\Controllers\\Welcome' => $baseDir . '/app/Controllers/Welcome.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'Luminova\\Application\\Caller' => $baseDir . '/system/Application/Caller.php',
     'Luminova\\Application\\Factory' => $baseDir . '/system/Application/Factory.php',
     'Luminova\\Application\\Foundation' => $baseDir . '/system/Application/Foundation.php',
     'Luminova\\Application\\Functions' => $baseDir . '/system/Application/Functions.php',

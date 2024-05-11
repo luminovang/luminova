@@ -9,7 +9,7 @@
  */
 
 return [
-    'aliases' => [
+    'alias' => [
         //'Foo' => 'SomeClass\ExampleFoo',
     ],
     'psr-4' => [
