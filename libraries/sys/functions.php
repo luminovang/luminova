@@ -326,7 +326,7 @@ if(!function_exists('factory')) {
      * -   'modules'   `Modules`
      * -   'language'  `Translator`
      * -   'logger'    `Logger`
-     * -   'files'     `FileSystem`
+     * -   'files'     `FileManager`
      * -   'validate'  `InputValidator`
      * -   'response'  `ViewResponse`
      * -   'services'  `Services`
@@ -591,15 +591,15 @@ if(!function_exists('import')) {
     }
 }
 
-if (!function_exists('file_system')) {
+if (!function_exists('file_manager')) {
     /**
-     * Get filesystem object
+     * Get File manager object
      * 
      * @param bool $shared Shared instance
      * 
-     * @return FileSystem Return file system instance.
+     * @return FileManager Return file manager instance.
     */
-    function file_system(bool $shared = true): object
+    function file_manager(bool $shared = true): object
     {
         return Factory::files($shared);
     }

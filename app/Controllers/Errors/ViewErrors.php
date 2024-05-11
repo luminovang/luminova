@@ -8,23 +8,25 @@
  * @license See LICENSE file
  */
 
-namespace App\Controllers\Config;
+namespace App\Controllers\Errors;
 
+use \Luminova\Base\BaseViewController;
 use \App\Controllers\Application;
+use \Luminova\Interface\ErrorHandlerInterface;
 use \Luminova\Time\Time;
 
-class ViewErrors 
+class ViewErrors extends BaseViewController implements ErrorHandlerInterface
 {
     /**
      * Define a function for the web error handler
      * 
      * @param Application $app Application instance available
      * 
-     * @return void 
+     * @return int Return status code. 
     */
-    public static function onWebError(Application $app): void 
+    public static function onWebError(Application $app): int 
     {
-        $app->view('404')->render();
+        return $app->view('404')->render();
     }
 
     /**
@@ -32,14 +34,14 @@ class ViewErrors
      * 
      * @param Application $app Application instance available
      * 
-     * @return void 
+     * @return int Return status code. 
     */
-    public static function onApiError(Application $app): void 
+    public static function onApiError(Application $app): int 
     {
-        response(404, false)->json([
+        return response(404, false)->json([
             'error' => [
                 'code' => 404,
-                'title' => 'Error 404',
+                'title' => $app->getView(),
                 'message' => "The endpoint [" . $app->getView() . "] you are trying to access does not exist.",
                 'timestamp' => Time::datetime(),
             ]

@@ -11,7 +11,7 @@ require __DIR__ . '/../bootstrap/app.php';
 
 use \Luminova\Routing\Bootstrap;
 use \App\Controllers\Application;
-use \App\Controllers\Config\ViewErrors;
+use \App\Controllers\Errors\ViewErrors;
 
 /**
  * Ensure that we are in front controller while running script in cli mode
