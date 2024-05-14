@@ -9,8 +9,8 @@
 */
 require __DIR__ . '/../bootstrap/app.php';
 
-use \Luminova\Routing\Bootstrap;
-use \App\Controllers\Application;
+use \Luminova\Routing\Context;
+use \Luminova\Routing\Router;
 use \App\Controllers\Errors\ViewErrors;
 
 /**
@@ -21,33 +21,26 @@ if (getcwd() . DIRECTORY_SEPARATOR !== FRONT_CONTROLLER) {
 }
 
 /**
- * Grab our application singleton instance.
+ * Load application route context.
+ * We register all our application contexts `WEB, API, CONSOLE and CLI` depending on our requirements.
  * 
- * @var Application $app
-*/
-$app = app();
-
-/**
- * Bootstraps Load The Application Context
- * We register all our application contexts `WEB, API, CONSOLE and CLI` depending on our requirements 
- * Bootstraps the router and set the error handler based on context
+ * @param Context ...$callbacks Routes context instance to each routing
  * 
- * @param Application $app Application Instance
- * @param Bootstrap ...$callbacks The Bootstrap instance to each routing
- * 
- * @example Bootstrap params
+ * @example Context params
  *  - @param string $name Rout name any url that starts with $name will be routed to name.php in routes/name.php
  *  - @param Closure|string|<int,string> $onError Error Handler 
  *          - `Closure` Pass a callable object or string
  *          - `array` Pass an array with your ViewErrors class name and method name to handle error.
+ * 
+ * @return Router Return router instance.
 */
-$app->router->bootstraps($app,
-    new Bootstrap(Bootstrap::WEB, [ViewErrors::class, 'onWebError']),
-    new Bootstrap(Bootstrap::API, [ViewErrors::class, 'onApiError']),
-    new Bootstrap(Bootstrap::CLI)
+$router = app()->router->context(
+    new Context(Context::WEB, [ViewErrors::class, 'onWebError']),
+    new Context(Context::API, [ViewErrors::class, 'onApiError']),
+    new Context(Context::CLI)
 );
 
 /**
  * Finally run our application router instance to register our routes 
 */
-$app->router->run();
+$router->run();

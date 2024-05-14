@@ -7,6 +7,7 @@
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
 */
+
 /**
  * @var string APP_ROOT system root 2 levels back
 */
@@ -143,11 +144,11 @@ if(!function_exists('setenv')){
 
 if (!function_exists('filter_paths')) {
     /**
-     * Filter the path to match to allowed in error directories preview.
+     * Filter the display path, to remove private directory paths before previewing to users.
      *
      * @param string $path The path to be filtered.
      * 
-     * @return string
+     * @return string Return the filtered path.
     */
     function filter_paths(string $path): string 
     {

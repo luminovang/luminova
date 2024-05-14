@@ -13,6 +13,7 @@ use \Luminova\Http\Request;
 use \Luminova\Http\UserAgent;
 use \Luminova\Cookies\Cookie;
 use \Luminova\Template\ViewResponse;
+use \Luminova\Interface\ValidationInterface;
 use \App\Controllers\Config\Files;
 use \App\Controllers\Utils\Functions;
 use \App\Controllers\Application;
@@ -23,7 +24,7 @@ if (!function_exists('app')) {
     /**
      * Get application container class shared instance or new instance if not shared. 
      * 
-     * @return Application Application shared instance.
+     * @return class-Application<BaseApplication> Application shared instance.
     */
     function app(): Application 
     {
@@ -121,7 +122,7 @@ if(!function_exists('kebab_case')){
    /**
 	 * Convert a string to kebab case.
 	 *
-	 * @param string $string The input string to convert.
+	 * @param string $input The input string to convert.
      * @param bool $lower Should convert to lower case (default: true).
 	 * 
 	 * @return string The kebab-cased string.
@@ -164,7 +165,7 @@ if(!function_exists('escape')){
     *
     * @param string|array $input The string or array of strings to be escaped.
     *   - @example @var array<string, string> - Use the key as the context.
-    *   - @example @var array<int, string> Use the default context fall all values.
+    *   - @example @var array<int, string> Use the default context for all values.
     * @param string $context The context in which the escaping should be performed. Defaults to 'html'.
     *                        Possible values: 'html', 'js', 'css', 'url', 'attr', 'raw'.
     * @param string|null $encoding The character encoding to use. Defaults to null.
@@ -185,7 +186,7 @@ if(!function_exists('strict')){
 	 * Sanitize user input to protect against cross-site scripting attacks.
      * It removes unwanted characters from a given string and return only allowed characters.
 	 *
-	 * @param string $string The input string to be sanitized.
+	 * @param string $input The input string to be sanitized.
 	 * @param string $type  The expected data type. 
      *      -   Filter Types: [int, digit, key, password, username, email, url, money, double, alphabet, phone, name, timezone, time, date, uuid, default]
 	 * @param string $symbol The symbol to replace disallowed characters with (optional).
@@ -297,7 +298,7 @@ if(!function_exists('factory')) {
      * @example $config = \Luminova\Application\Factory::config();
      * @example $config = new \Luminova\Config\Configuration();
      * 
-     * @param class-string|string|null $context The factory class name or alias (e.g: Task::class or task).
+     * @param string|null $context The factory name.
      * Factory Classes Alias: 
      * -   'task'      `Task`
      * -   'session'   `Session`
@@ -315,7 +316,7 @@ if(!function_exists('factory')) {
      * @param mixed ...$arguments The last bool argument indicate wether to return a shared instance.
      * @param bool $shared Allow shared instance creation (default: true).
      * 
-     * @return class-object|Factory|null Return instance of factory or instance of factory class, otherwise null.
+     * @return class-object|class-object<Factory>|null Return instance of factory or instance of factory class, otherwise null.
     */
     function factory(string|null $context = null, mixed ...$arguments): ?object
     {
@@ -343,7 +344,7 @@ if(!function_exists('service')) {
      * @param bool $serialize Allow object serialization (default: false).
      * @param bool $shared Allow shared instance creation (default: true).
      * 
-     * @return class-object|Services|null Return service class instance or instance of service class.
+     * @return class-object|class-object<Services>|null Return service class instance or instance of service class.
     */
     function service(?string $service = null, mixed ...$arguments): ?object
     {
@@ -379,12 +380,12 @@ if(!function_exists('browser')) {
     /**
      * Tells what the user's browser is capable of
      * 
-     * @param string|null $user_agent
+     * @param string|null $user_agent  The user agent string to analyze.
      * @param bool $return Set the return type, if `instance` return userAgent class object otherwise return array or json object.
      *      -   Return Types: [array, object, instance]
      * @param bool $shared Allow shared instance creation (default: true).
      * 
-     * @return array<string,mixed>|object<string,mixed>|UserAgent|false Return browser information.
+     * @return array<string,mixed>|object<string,mixed>|class-object<UserAgent>|false Return browser information.
     */
     function browser(?string $user_agent = null, string $return = 'object', bool $shared = true): mixed
     { 
@@ -514,9 +515,9 @@ if(!function_exists('import')) {
     /**
      * Translate multiple languages it supports nested array
      *
-     * @param string $lookup line to lookup
-     * @param string|null $default Fallback translation if not found
-     * @param string|null $locale
+     * @param string $lookup line to lookup.
+     * @param string|null $default Fallback translation if not found.
+     * @param string|null $locale The locale to use for translation (optional).
      * @param array $placeholders Matching placeholders for translation
      *    - @example array ['Peter', 'peter@foo.com] "Error name {0} and email {1}"
      *    - @example array ['name' => 'Peter', 'email' => 'peter@foo.com] "Error name {name} and email {email}"
@@ -555,14 +556,14 @@ if (!function_exists('path')) {
     /**
      * Get system or application path, converted to `unix` or `windows` directory separator style.
      * 
-     * @param string $name Path context name to return.
+     * @param string $file Path file name to return.
      * - Context: [system, plugins, library, controllers, writeable, logs, caches, public, assets, views, routes, languages, services]
      * 
      * @return string Return directory path, windows, unix or windows style path. 
     */
-    function path(string $name): string
+    function path(string $file): string
     {
-        return Factory::files()->getCompatible($name);
+        return Factory::fileManager()->getCompatible($file);
     }
 }
 
@@ -663,9 +664,9 @@ if (!function_exists('to_object')) {
      *
      * @param array|string $input Array or String list to convert
      * 
-     * @return object $object
+     * @return object|false $object  Return JSON object, otherwise false.
     */
-    function to_object(array|string $input): object|bool
+    function to_object(array|string $input): object|false
     {
         if ($input === [] || $input === '') {
             return (object)[];
@@ -696,9 +697,9 @@ if (!function_exists('list_to_array')) {
      * @example list_to_array('"a","b","c"') => ['a', 'b', 'c']
      * 
      * @param string $list string list
-     * @return array|bool $matches
+     * @return array|false Return array, otherwise false.
     */
-    function list_to_array(string $list): array|bool 
+    function list_to_array(string $list): array|false 
     {
         if ($list === '') {
             return false;
@@ -729,7 +730,7 @@ if (!function_exists('list_in_array')) {
      * @param string $list string list
      * @param array $array Array to map list to
      * 
-     * @return bool exist or not
+     * @return bool Return true exist, otherwise false.
     */
     function list_in_array(string $list, array $array = []): bool 
     {
@@ -798,7 +799,7 @@ if (!function_exists('write_content')) {
     */
     function write_content(string $filename, mixed $content, int $flag = 0, $context = null): bool 
     {
-        return Factory::files()->write($filename, $content, $flag, $context);
+        return Factory::fileManager()->write($filename, $content, $flag, $context);
     }
 }
 
@@ -816,7 +817,7 @@ if (!function_exists('make_dir')) {
     */
     function make_dir(string $path, ?int $permissions = null, bool $recursive = true): bool 
     {
-        return Factory::files()->mkdir($path, ($permissions ?? Files::$dirPermissions ?? 0777), $recursive);
+        return Factory::fileManager()->mkdir($path, ($permissions ?? Files::$dirPermissions ?? 0777), $recursive);
     }
 }
 
@@ -858,7 +859,7 @@ if (!function_exists('get_class_name')) {
     /**
      * Get class basename from namespace or object
      * 
-     * @param string|object $from Class name or object.
+     * @param string|class-object $from Class name or class object.
      * 
      * @return string Return the class basename.
     */
@@ -942,7 +943,7 @@ if (!function_exists('is_blob')) {
     */
     function is_blob(mixed $value): bool 
     {
-        return Factory::files()->isResource($value, 'stream');
+        return Factory::fileManager()->isResource($value, 'stream');
     }
 }
 

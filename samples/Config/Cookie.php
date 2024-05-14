@@ -34,13 +34,13 @@ final class Cookie
      * The domain to use for the session cookie.
      * @var string $sessionDomain;
      */
-    public static string $cookieDomain = '.' . APP_HOSTNAME;
+    public static string $cookieDomain = '.localhost';
 
-     /**
+    /**
      * Set the session cookie security level.
      * None, Lax, Strict 
      * @var string $sameSite;
-     */
+    */
     public static string $sameSite = 'Lax';
 
     /**

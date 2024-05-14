@@ -1,9 +1,9 @@
 <?php 
 namespace App\Controllers\Config;
 
-class ServiceTest 
+class ServiceExample
 { 
-    private $name;
+    private string $name = '';
 
     public function __construct(string $name){
         $this->name = $name;

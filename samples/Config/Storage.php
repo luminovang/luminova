@@ -7,15 +7,31 @@
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
  */
+
+/**
+ * Tips: 
+ * 
+ * The key `base` is like a document root for your remote or local files.
+ * @see https://luminova.ng/docs/0.0.0/configs/storage
+ * @see https://luminova.ng/docs/0.0.0/files/storages
+ * 
+ * @return array<string,mixed> Storage adapter configurations. 
+*/
 return [
+    /**
+     * Default configuration
+    */
     'default' => [
         'visibility' => 'public',
         'directory_visibility' => 'public'
     ],
 
+    /**
+     * Local Filesystem storage configuration.
+    */
     'local' => [
-        'base' => root(__DIR__, 'writeable/storages/'),
-        'assets' => root(__DIR__, 'public/assets/'),
+        'base' => root('writeable/storages/'),
+        'assets' => root('public/assets/'),
         'urls' => [
             'public_url' => start_url('assets/')
         ],
@@ -33,23 +49,16 @@ return [
         ]
     ],
 
-    'ftp' => [
-        'host' => 'hostname', // required
-        'root' => '/root/path/', // required
-        'username' => 'username', // required
-        'password' => 'password', // required
-    ],
-
-    'sftp-v3' => [
-        'root' => 'http://your-webdav-server.org/',
-        'username' => 'your-bucket-name',
-        'password' => 'path/prefix',
-    ],
-
+    /**
+     * Memory storage configuration.
+    */
     'memory' => [
         'readonly' => false
     ],
 
+    /**
+     * AWS-S3 storage configuration.
+    */
     'aws-s3' => [
         'configuration' => [
             'credentials' => [
@@ -60,10 +69,16 @@ return [
             'version' => 'latest',
         ],
         'bucket' => 'bucket-name',
-        'base' => 'path/prefix',
+        'base' => 'path/to/base/storage',
         'visibility' => 'public',
+        'urls' => [
+            'public_url' => []
+        ],
     ],
 
+    /**
+     * AWS-ASYNC-S3 storage configuration.
+    */
     'aws-async-s3' => [
         'configuration' => [
             'credentials' => [
@@ -74,30 +89,76 @@ return [
             'version' => 'latest',
         ],
         'bucket' => 'bucket-name',
-        'base' => 'path/prefix',
+        'base' => 'path/to/base/storage',
         'visibility' => 'public',
+        'urls' => [
+            'public_url' => []
+        ],
     ],
 
+    /**
+     * AZURE-BLOB storage configuration.
+    */
     'azure-blob' => [
         'dns' => 'DSN-STRING-HERE',
         'container' => 'container-name',
-        'base' => 'path/prefix',
+        'base' => 'path/to/base/storage',
         'visibility' => 'public',
+        'urls' => [
+            'public_url' => []
+        ],
     ],
 
+    /**
+     * Google Cloud storage configuration.
+    */
     'google-cloud' => [
         'configuration' => [],
         'bucket' => 'your-bucket-name',
-        'base' => 'path/prefix',
+        'base' => 'path/to/base/storage',
+        'urls' => [
+            'public_url' => []
+        ],
     ],
 
+    /**
+     * Web Dev storage configuration.
+    */
     'web-dev' => [
         'baseurl' => 'http://your-webdav-server.org/',
         'username' => 'your-bucket-name',
-        'password' => 'path/prefix',
+        'password' => 'your-password', // required
+        'urls' => [
+            'public_url' => []
+        ]
     ],
 
+    /**
+     * FTB storage configuration.
+    */
+    'ftp' => [
+        'host' => 'hostname', // required
+        'root' => '/root/path/', // required
+        'username' => 'your-username', // required
+        'password' => 'your-password', // required
+    ],
+
+    /**
+     * SFTP storage configuration.
+    */
+    'sftp-v3' => [
+        'host' => 'localhost', // required
+        'username' => 'your-username', // required
+        'password' => 'your-password', // required
+        'root' => '/root/path/', // required
+        'port' => 22,
+        'visibility' => []
+    ],
+
+    /**
+     * ZIP Archive storage configuration.
+    */
     'zip-archive' => [
-        'path' => '/path/to/zip/',
+        'path' => '/path/to/zip/'
     ]
 ];

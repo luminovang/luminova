@@ -36,9 +36,8 @@ final class Sitemap
      * @var array<int,string> $ignoreUrls
     */
     public static array $ignoreUrls = [
-
+        '*/api/*'
     ];
-
 
     /**
      * URL patterns associated with views for determining last modified timestamps in a sitemap.
@@ -56,7 +55,5 @@ final class Sitemap
      *
      * @var array<string,string> $viewUrlPatterns
      */
-    public static array $viewUrlPatterns = [
-        
-    ];
+    public static array $viewUrlPatterns = [];
 }

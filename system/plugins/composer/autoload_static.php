@@ -45,7 +45,6 @@ class ComposerStaticInitce7d6b0379bc9a35d3afd6dd2b0e131e
         'Luminova\\' => 
         array (
             0 => __DIR__ . '/../../..' . '/system',
-            1 => __DIR__ . '/..' . '/luminovang/framework/src',
         ),
         'App\\Controllers\\' => 
         array (
@@ -214,7 +213,7 @@ class ComposerStaticInitce7d6b0379bc9a35d3afd6dd2b0e131e
         'Luminova\\Models\\PushMessage' => __DIR__ . '/../../..' . '/system/Models/PushMessage.php',
         'Luminova\\Notifications\\FirebasePusher' => __DIR__ . '/../../..' . '/system/Notifications/FirebasePusher.php',
         'Luminova\\Notifications\\FirebaseRealtime' => __DIR__ . '/../../..' . '/system/Notifications/FirebaseRealtime.php',
-        'Luminova\\Routing\\Bootstrap' => __DIR__ . '/../../..' . '/system/Routing/Bootstrap.php',
+        'Luminova\\Routing\\Context' => __DIR__ . '/../../..' . '/system/Routing/Context.php',
         'Luminova\\Routing\\Router' => __DIR__ . '/../../..' . '/system/Routing/Router.php',
         'Luminova\\Routing\\Segments' => __DIR__ . '/../../..' . '/system/Routing/Segments.php',
         'Luminova\\Security\\Crypter' => __DIR__ . '/../../..' . '/system/Security/Crypter.php',

@@ -8,9 +8,8 @@
  * @license See LICENSE file
  */
 namespace Luminova\Composer;
-use Luminova\Base\BaseConfig;
 
-class BaseComposer
+abstract class BaseComposer
 {
     /**
      * @param int $totalSteps
@@ -18,7 +17,7 @@ class BaseComposer
      * @param callable|null $onCompleteCallback
      * @param string $completionMessage
     */
-    public static function progress(int $totalSteps, callable $taskCallback, ?callable $onCompleteCallback = null, ?string $completionMessage = null): void
+    protected static function progress(int $totalSteps, callable $taskCallback, ?callable $onCompleteCallback = null, ?string $completionMessage = null): void
     {
         $results = [];
         //$total = 0;
@@ -45,7 +44,7 @@ class BaseComposer
     }
 
 
-    public static function parseLocation(string $path): string{
+    protected static function parseLocation(string $path): string{
         //&& is_dir($path)
         if ($path != null ) {
             $path = ltrim($path, ".");
@@ -53,7 +52,7 @@ class BaseComposer
         return $path;
     }
 
-    public static function isParentOrEqual(string $path1, string $path2): bool
+    protected static function isParentOrEqual(string $path1, string $path2): bool
     {
         $parts1 = explode('/', trim($path1, '/'));
         $parts2 = explode('/', trim($path2, '/'));

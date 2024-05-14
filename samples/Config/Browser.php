@@ -12,51 +12,77 @@ namespace App\Controllers\Config;
 final class Browser 
 {
     /**
-     * Known patterns or name for common robots.
-     * Associative array where keys are robot names and values are regular expression patterns or name.
+     * An associative array of strings representing common keywords or patterns found in robots user agent string.
+     * Where array key is the robot pattern or keyword and the value is the name.
      *
-     * @var array<string,string> $robotPatterns 
+     * @var array<string,string> $robotPatterns
      */
     public static array $robotPatterns = [
-        'Googlebot' => '/Googlebot/i',
-        'Bingbot' => '/bingbot/i',
-        'Yahoo! Slurp' => '/Slurp/i',
-        //add more as needed
+        'Googlebot'          => 'Googlebot',
+        'bingbot'            => 'Bingbot',
+        'Slurp'              => 'Yahoo! Slurp',
+        'msnbot'             => 'MSNBot',
+        'yahoo'              => 'Yahoo',
+        'yandex'             => 'YandexBot',
+        'adsbot-google'      => 'AdsBot Google',
+        'feedfetcher-google' => 'Feedfetcher Google',
+        // add more as needed
     ];
 
     /**
-     * Common keywords/patterns found in mobile user agents.
-     * An array of strings representing common keywords or patterns found in mobile user agents.
+     * An associative array of strings representing common keywords found in mobile device user agents.
+     * Where array key is the mobile keyword and the value is the name.
      *
-     * @var array<string> $mobileKeywords 
+     * @var array<string,string> $mobileKeywords 
+     * NOTE: The order is important
      */
     public static array $mobileKeywords = [
-        'Mobile', 
-        'Android', 
-        'BlackBerry', 
-        'iPhone', 
-        'iPad', 
-        'iPod', 
-        'Windows Phone', 
-        'Opera Mini',
-        'Mobile Safari',
+        'android'         => 'Android',
+        'blackberry'      => 'BlackBerry',
+        'iphone'          => 'iOS',
+        'ipad'            => 'iOS',
+        'ipod'            => 'iOS',
+        'windows phone'   => 'Windows Phone',
+        'operamini'       => 'Opera Mini',
+        'opera mini'      => 'Opera Mini',
+        'Safari'          => 'Safari',
+        'Mobile Safari'   => 'Safari',
+        'mobile'          => 'Generic Mobile',
+        'smartphone'      => 'Generic Mobile',
+        'cellphone'       => 'Generic Mobile',
         //add more as needed
     ];
 
     /**
-     * Common keywords/patterns found in browser user agents.
      * An array of strings representing common keywords or patterns found in browser user agents.
      *
-     * @var array<string> $browsers
-     */
+     * @var string[] $browsers
+     * 
+     * > This will be taken in consideration when you call method `$userAgent->isTrusted()`.
+     * > Its also a good authentication when you are developing a hybrid mobile app, 
+     * to ensure only your webview can access.
+    */
     public static array $browsers = [
-        'Chrome', 
-        'Firefox', 
-        'Safari', 
-        'Edge', 
-        'Opera', 
-        'MSIE', 
+        'Chrome',
+        'Safari',
+        'Firefox',
+        'Mozilla',
+        'Edge',
+        'Opera',
+        'MSIE',
         'Trident',
+        'Edg',
+        'OPR',
+        'Flock',
+        'Spartan',
+        'Chimera',
+        'Phoenix',
+        'Firebird',
+        'Lynx',
+        'Links',
+        'IBrowse',
+        'Ubuntu',
+        'Vivaldi',
         //add more as needed
     ];
 }

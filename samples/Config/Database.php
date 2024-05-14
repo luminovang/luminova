@@ -10,17 +10,17 @@
 
 namespace App\Controllers\Config;
 
-use \Luminova\Base\BaseServers;
+use \Luminova\Base\BaseDatabase;
 
 
-class Servers extends BaseServers
+class Database extends BaseDatabase
 {
     /**
      * Optional servers to connect to when main server fails
      * An associative array with each database configuration keys and values.
      * 
      * Supported array keys 
-     * @example $databaseServers = [
+     * @example $databaseBackups = [
      *      [
      *          'port' => 0,
      *          'host' => '',
@@ -36,7 +36,7 @@ class Servers extends BaseServers
      *      ...
      * ]
      * 
-     * @var array $databaseServers
+     * @var array $databaseBackups
     */
-    protected static array $databaseServers = [];
+    protected static array $databaseBackups = [];
 }

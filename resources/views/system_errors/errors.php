@@ -1,9 +1,10 @@
 <?php 
 $lines = explode("\n", $stack->getMessage());
-$messages = explode(' in ', $lines[0]);
+$messages = explode(' called in ', $stack->getMessage());
+$message = explode(' File: ', $messages[0]);
 $tracers = array_slice($lines, 3);
 //$searchable = urlencode(preg_replace('#\'.*\'|"#Us', '', $messages[0]??'') . ', PHP Luminova Framework');
-$searchable = urlencode(preg_replace('/"([^"]*\/[^"]*)"/', '', $messages[0] ?? '') . ' PHP Luminova Framework');
+$searchable = urlencode(preg_replace('/"([^"]*\/[^"]*)"/', '', $message[0] ?? '') . ' PHP Luminova Framework');
 ?>
 <!doctype html>
 <html lang="en">
@@ -22,8 +23,8 @@ $searchable = urlencode(preg_replace('/"([^"]*\/[^"]*)"/', '', $messages[0] ?? '
         <?php if (defined('PRODUCTION') && !PRODUCTION): ?>
             <div class="error-details">
                 <h2>Error Details:</h2>
-                <p class="lead"><?= htmlspecialchars($messages[0], ENT_QUOTES); ?>. Thrown in file: <?= htmlspecialchars(filter_paths($stack->getFile()), ENT_QUOTES); ?>, Line: <?= $stack->getLine(); ?></p>
-                <?php if(!empty($lines[2])): ?>
+                <p class="lead"><?= htmlspecialchars($message[0], ENT_QUOTES); ?>. Thrown in: <?= htmlspecialchars(filter_paths($stack->getFile()), ENT_QUOTES); ?>, Line: <?= $stack->getLine(); ?></p>
+                <?php if(isset($lines[2]) || isset($messages[1])): ?>
                     <p class="lead text-warning">Caller: <?= htmlspecialchars($lines[2]??$messages[1], ENT_QUOTES); ?></p>
                 <?php endif;?>
                 <button class="button" type="button" onclick="return toggle('stack-tracer');">Stack tracer &#128269;</button>

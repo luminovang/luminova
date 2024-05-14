@@ -166,7 +166,7 @@ return array(
     'Luminova\\Models\\PushMessage' => $baseDir . '/system/Models/PushMessage.php',
     'Luminova\\Notifications\\FirebasePusher' => $baseDir . '/system/Notifications/FirebasePusher.php',
     'Luminova\\Notifications\\FirebaseRealtime' => $baseDir . '/system/Notifications/FirebaseRealtime.php',
-    'Luminova\\Routing\\Bootstrap' => $baseDir . '/system/Routing/Bootstrap.php',
+    'Luminova\\Routing\\Context' => $baseDir . '/system/Routing/Context.php',
     'Luminova\\Routing\\Router' => $baseDir . '/system/Routing/Router.php',
     'Luminova\\Routing\\Segments' => $baseDir . '/system/Routing/Segments.php',
     'Luminova\\Security\\Crypter' => $baseDir . '/system/Security/Crypter.php',
