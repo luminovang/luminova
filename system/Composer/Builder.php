@@ -25,7 +25,7 @@ class Builder extends BaseComposer
      * Project files 
      * @var array
     */
-    private static $projectFiles = [
+    private static array $projectFiles = [
         "/app",
         "/bootstrap",
         "/system",
@@ -39,7 +39,7 @@ class Builder extends BaseComposer
         "composer.json"
     ];
     
-    private static $systemIgnoreFiles = [
+    private static array $systemIgnoreFiles = [
         "/system/log",
         "/writeable/caches",
         "/phpstan.includes.php",
@@ -54,7 +54,7 @@ class Builder extends BaseComposer
         "/.DS_Store"
     ];
 
-    private static $projectIgnoreFiles = [
+    private static array $projectIgnoreFiles = [
         "composer.lock",
         "LICENSE",
         "LICENSE.txt",
@@ -76,13 +76,12 @@ class Builder extends BaseComposer
     */
     private static function terminal(): Terminal
     {
-        return static::$terminal ??= new Terminal();
+        return self::$terminal ??= new Terminal();
     }
-
 
     public static function export(string $destinationDir = "build"): void
     {
-        static::$systemIgnoreFiles[] = $destinationDir;
+        self::$systemIgnoreFiles[] = $destinationDir;
         $destinationDir = APP_ROOT . DIRECTORY_SEPARATOR . $destinationDir . DIRECTORY_SEPARATOR . 'v-' . APP_VERSION;
 
         if (!is_dir($destinationDir)) {
@@ -90,7 +89,7 @@ class Builder extends BaseComposer
         }
 
         parent::progress(10, function ($step) use ($destinationDir) {
-            [$added, $skipped, $failed] = static::makeCopy('.', $destinationDir);
+            [$added, $skipped, $failed] = self::makeCopy('.', $destinationDir);
 
             return $destinationDir;
         }, 
@@ -101,27 +100,27 @@ class Builder extends BaseComposer
                 $project_link .= "/" . $dir . "/public";
 
                 exec('LM_DEBUG_MODE=1 composer install --no-dev', $output, $returnCode);
-                static::terminal()->writeln("Cleaning and updating project dependency...");
+                self::terminal()->writeln("Cleaning and updating project dependency...");
                 foreach ($output as $line) {
                     echo $line . "\n";
                 }
             
                 if ($returnCode === 0) {
                     exec('LM_DEBUG_MODE=1 composer dump-autoload --optimize --no-dev');
-                    static::terminal()->writeln("Dumping project development files...");
+                    self::terminal()->writeln("Dumping project development files...");
                     foreach ($output as $line) {
                         echo $line . "\n";
                     }
          
-                    static::terminal()->writeln("Updating environment variables...");
+                    self::terminal()->writeln("Updating environment variables...");
                     setenv('app.environment.mood', 'production', true);
 
-                    static::terminal()->writeln("Project build completed successfully.");
-                    static::terminal()->writeln("To view your project, click the below link:");
-                    static::terminal()->writeln("\033[34m" . $project_link . "\033[0m\n");
+                    self::terminal()->writeln("Project build completed successfully.");
+                    self::terminal()->writeln("To view your project, click the below link:");
+                    self::terminal()->writeln("\033[34m" . $project_link . "\033[0m\n");
 
                 } else {
-                    static::terminal()->error("Fail to build project failed"); 
+                    self::terminal()->error("Fail to build project failed"); 
                 }
             } else {
                 $error = "\033[31mFailed to change to the build production directory.\033[0m\n";
@@ -131,7 +130,7 @@ class Builder extends BaseComposer
                 $error .= "   - \033[32mLM_DEBUG_MODE=1 composer install --no-dev\033[0m\n";
                 $error .= "   - \033[32mLM_DEBUG_MODE=1 composer dump-autoload --optimize --no-dev\033[0m";
 
-                static::terminal()->writeln($error);
+                self::terminal()->writeln($error);
                 exit(1);
     
             } 
@@ -142,7 +141,7 @@ class Builder extends BaseComposer
 
     public static function archive(string $zipFileName, string $buildDir = "builds"): void
     {
-        static::$systemIgnoreFiles[] = $zipFileName;
+        self::$systemIgnoreFiles[] = $zipFileName;
         $zip = new ZipArchive();
         $buildDir = APP_ROOT . DIRECTORY_SEPARATOR . $buildDir . DIRECTORY_SEPARATOR . 'v-' . APP_VERSION;
         $buildFile = $buildDir . DIRECTORY_SEPARATOR . $zipFileName;
@@ -153,23 +152,23 @@ class Builder extends BaseComposer
             }
          
             if ($zip->open($buildFile, ZipArchive::CREATE | ZipArchive::OVERWRITE) !== true) {
-                static::terminal()->error('Error creating project archive file');
+                self::terminal()->error('Error creating project archive file');
 
                 exit(1);
             }
 
-            static::terminal()->writeln("Creating a zip archive for the project...");
-            [$added, $skipped] = static::addToZip($zip, APP_ROOT . DIRECTORY_SEPARATOR . '.', '');
-            static::terminal()->writeln("Archiving project...");
+            self::terminal()->writeln("Creating a zip archive for the project...");
+            [$added, $skipped] = self::addToZip($zip, APP_ROOT . DIRECTORY_SEPARATOR . '.', '');
+            self::terminal()->writeln("Archiving project...");
             $zip->close();
 
-            static::terminal()->writeln("Project archive exported successfully");
-            static::terminal()->writeln("Build path: \033[34m" . filter_paths($buildFile) . "\033[0m\n");
-            static::terminal()->writeln($added . ' Files was added', 'green');
-            static::terminal()->writeln($skipped . ' Files was skipped', 'yellow');
+            self::terminal()->writeln("Project archive exported successfully");
+            self::terminal()->writeln("Build path: \033[34m" . filter_paths($buildFile) . "\033[0m\n");
+            self::terminal()->writeln($added . ' Files was added', 'green');
+            self::terminal()->writeln($skipped . ' Files was skipped', 'yellow');
             exit(0);
         } catch (Exception $e) {
-            static::terminal()->error("Error: " . $e->getMessage());
+            self::terminal()->error("Error: " . $e->getMessage());
         }
 
         exit(1);
@@ -189,15 +188,15 @@ class Builder extends BaseComposer
             $relativePath = $zipFolder . DIRECTORY_SEPARATOR . $file;
 
             if (is_dir($filePath)) {
-                if (static::allow($relativePath) && !static::ignore($relativePath)) {
+                if (self::allow($relativePath) && !self::ignore($relativePath)) {
                     $zip->addEmptyDir($relativePath);
-                    static::addToZip($zip, $filePath, $relativePath);
+                    self::addToZip($zip, $filePath, $relativePath);
                     $added++;
                 } else {
                     $skipped++;
                 }
             } else {
-                if (!static::ignore($relativePath) && !static::skip(basename($relativePath))) {
+                if (!self::ignore($relativePath) && !self::skip(basename($relativePath))) {
                     $zip->addFile($filePath, $relativePath);
                     $added++;
                 } else {
@@ -225,7 +224,7 @@ class Builder extends BaseComposer
             $destinationPath = $destination . DIRECTORY_SEPARATOR . $file;
 
             if (is_dir($sourcePath)) {
-                if (static::allow($sourcePath) && !static::ignore($sourcePath)) {
+                if (self::allow($sourcePath) && !self::ignore($sourcePath)) {
                     if (!is_dir($destinationPath)) {
                         if(mkdir($destinationPath, 0755, true)){
                             $added++;
@@ -236,12 +235,12 @@ class Builder extends BaseComposer
                         $added++;
                     }
 
-                    [$added, $skipped, $failed] = static::makeCopy($sourcePath, $destinationPath);
+                    [$added, $skipped, $failed] = self::makeCopy($sourcePath, $destinationPath);
                 }else{
                     $skipped++;
                 }
             } else {
-                if (!static::ignore($sourcePath) && !static::skip(basename($sourcePath))) {
+                if (!self::ignore($sourcePath) && !self::skip(basename($sourcePath))) {
                     if(copy($sourcePath, $destinationPath)){
                         $added++;
                     }else{
@@ -259,7 +258,7 @@ class Builder extends BaseComposer
 
     private static function allow(string $path): bool
     {
-        foreach (static::$projectFiles as $projectFile) {
+        foreach (self::$projectFiles as $projectFile) {
             if (fnmatch($projectFile, parent::parseLocation($path)) || parent::isParentOrEqual($projectFile, parent::parseLocation($path)) ) {
                return true;
             }
@@ -270,7 +269,7 @@ class Builder extends BaseComposer
     private static function ignore(string $path): bool
     {
 
-        foreach (static::$systemIgnoreFiles as $ignoreFile) {
+        foreach (self::$systemIgnoreFiles as $ignoreFile) {
             if (fnmatch($ignoreFile, parent::parseLocation($path))) {
                 return true;
             }
@@ -280,7 +279,7 @@ class Builder extends BaseComposer
 
     private static function skip(string $path): bool
     {
-        foreach (static::$projectIgnoreFiles as $skipFile) {
+        foreach (self::$projectIgnoreFiles as $skipFile) {
             if (fnmatch(strtolower($skipFile), strtolower(parent::parseLocation($path)))) {
                 return true;
             }

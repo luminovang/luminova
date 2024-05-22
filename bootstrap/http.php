@@ -7,20 +7,7 @@
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
 */
-
-/**
- * And display errors to developers when using it from the CLI.
-*/
-ini_set('display_errors', '1');
-error_reporting(E_ALL);
-
-/**
- * Refuse to run when called from php-cgi
-*/
-if (strpos(PHP_SAPI, 'cgi') === 0) {
-    echo "The cli tool is not supported when running php-cgi. It needs php-cli to function!";
-    exit(1);
-}
+use \Luminova\Application\Foundation;
 
 /**
  * Load basic requirements.
@@ -46,24 +33,9 @@ set_time_limit((int) env("script.execution.limit", 30));
 ignore_user_abort((bool) env('script.ignore.abort', true));
 
 /**
- * @var string CLI_ENVIRONMENT application cli development state
+ * Initialize framework error handler.
 */
-defined('CLI_ENVIRONMENT') || define('CLI_ENVIRONMENT', env('cli.environment.mood', 'testing'));
-
-/**
- * @var string STDOUT if it's not already defined
-*/
-defined('STDOUT') || define('STDOUT', 'php://output');
-
-/**
- * @var string STDIN if it's not already defined
-*/
-defined('STDIN') || define('STDIN', 'php://stdin');
-
-/**
- * @var string STDERR if it's not already defined
-*/
-defined('STDERR') || define('STDERR', 'php://stderr');
+Foundation::initialize();
 
 /**
  * Now we can autoload composer bootstrap.

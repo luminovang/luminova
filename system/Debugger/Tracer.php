@@ -11,7 +11,7 @@ namespace Luminova\Debugger;
 
 final class Tracer
 {
- /**
+    /**
      * Creates a syntax-highlighted version of a PHP file.
      * 
      * @param string $file File to highlight

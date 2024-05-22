@@ -38,7 +38,7 @@
                 </a>
             </li>
             <li class="menu-toggle">
-                <button onclick="toggleMenu();">&#9776;</button>
+                <button onClick="toggleMenu();">&#9776;</button>
             </li>
             <li class="menu-item hidden"><a href="#">Home</a></li>
             <li class="menu-item hidden"><a href="https://github.com/luminovang/luminova" target="_blank">GitHub</a></li>
@@ -48,18 +48,11 @@
     </div>
 
     <div class="info">
-
-        {assign var="application" value=app()}
-        <h1>Welcome to {$application->copyright()}</h1>
-
+        <h1>Welcome to {call_static->foundation method='copyright'}</h1>
         <h2>Simple framework built for speed and keeping your existing coding skills going.</h2>
         <p>Environment: {$smarty.const.ENVIRONMENT}</p>
-
     </div>
-
 </header>
-
-<!-- CONTENT -->
 
 <section>
 

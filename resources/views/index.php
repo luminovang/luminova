@@ -48,20 +48,14 @@
     </div>
 
     <div class="info">
-
-        <h1>Welcome to <?= app()->copyright() ?></h1>
-
+        <h1>Welcome to <?= \Luminova\Application\Foundation::copyright() ?></h1>
         <h2>Simple framework built for speed and keeping your existing coding skills going.</h2>
         <p>Environment: <?= ENVIRONMENT ?></p>
-
     </div>
 
 </header>
 
-<!-- CONTENT -->
-
 <section>
-
     <h1>About this page</h1>
     <p>The page you are looking at is being generated dynamically by Luminova.</p>
     <p>If you would like to edit this page you will find it located at:</p>
@@ -70,17 +64,13 @@
     <pre><code>app/Controllers/Welcome.php</code></pre>
     <p>Development Server Context</p>
     <pre><code><?= $_SERVER['SERVER_SOFTWARE']??'Unknown Development Server';?></code></pre>
-
 </section>
 
 
 <footer>
     <div class="copyrights">
-
         <p>&copy; <?= date('Y') ?> <a href="https://nanoblocktech.com/" target="_blank">Nanoblock Technology Ltd</a>. PHP Luminova is open source project released under the MIT open source license.</p>
-
     </div>
-
 </footer>
 
 <script>

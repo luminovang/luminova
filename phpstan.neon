@@ -2,11 +2,11 @@ includes:
 	- phpstan.includes.php
 
 parameters:
-	phpVersion: 80100
+	phpVersion: 80000
 	tmpDir: builds/phpstan
 	level: 6
 	bootstrapFiles:
-		- system/plugins/autoload.php
+		- bootstrap/http.php
 	paths:
 		- app
 		- system

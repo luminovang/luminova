@@ -12,19 +12,17 @@
 /**
  * Location of the framework bootstrap file.
 */
-require __DIR__ . '/bootstrap/cli.php';
 use \Luminova\Command\Console;
-use \Luminova\Config\DotEnv;
+
+/**
+ * Autoload composers 
+*/
+require __DIR__ . '/bootstrap/cli.php';
 
 /**
  * Ensure the current directory is pointing to the front controller's directory
 */
 chdir(FRONT_CONTROLLER);
-
-/**
- * Load environment settings from .env files into $_SERVER and $_ENV
-*/
-DotEnv::register(__DIR__ . DIRECTORY_SEPARATOR . '.env');
 
 /**
  * Initialize Terminal Console and Run console instance

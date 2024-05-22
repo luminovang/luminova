@@ -7,11 +7,12 @@
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
 */
-require __DIR__ . '/../bootstrap/app.php';
+declare(strict_types=1);
 
 use \Luminova\Routing\Context;
-use \Luminova\Routing\Router;
 use \App\Controllers\Errors\ViewErrors;
+
+require_once __DIR__ . '/../bootstrap/http.php';
 
 /**
  * Ensure that we are in front controller while running script in cli mode
@@ -24,23 +25,19 @@ if (getcwd() . DIRECTORY_SEPARATOR !== FRONT_CONTROLLER) {
  * Load application route context.
  * We register all our application contexts `WEB, API, CONSOLE and CLI` depending on our requirements.
  * 
- * @param Context ...$callbacks Routes context instance to each routing
+ * @param Context ...$contexts Routes context instance to each routing.
  * 
  * @example Context params
- *  - @param string $name Rout name any url that starts with $name will be routed to name.php in routes/name.php
- *  - @param Closure|string|<int,string> $onError Error Handler 
+ *  - @param string $name Route name, any url that starts with $name will be routed to name.php in routes/name.php.
+ *  - @param Closure|array<int,string>|null $onError 404 error handler.
  *          - `Closure` Pass a callable object or string
- *          - `array` Pass an array with your ViewErrors class name and method name to handle error.
+ *              fn(Application $app): int => ViewErrors::onWebError($app))
+ *          - `array` Pass an array with only 2 elements, your ViewErrors class name and method name to handle error.
  * 
- * @return Router Return router instance.
+ * Finally run our application router instance to register our routes 
 */
-$router = app()->router->context(
+app()->router->context(
     new Context(Context::WEB, [ViewErrors::class, 'onWebError']),
     new Context(Context::API, [ViewErrors::class, 'onApiError']),
     new Context(Context::CLI)
-);
-
-/**
- * Finally run our application router instance to register our routes 
-*/
-$router->run();
+)->run();

@@ -15,4 +15,8 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/system/Debugger/PHPStanRules.php',
 ];
 
-return ['parameters' => ['ignoreErrors' => $ignoreErrors]];
+return [
+	'parameters' => [
+		'ignoreErrors' => $ignoreErrors
+	]
+];

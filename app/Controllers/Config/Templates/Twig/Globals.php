@@ -14,11 +14,13 @@ namespace App\Controllers\Config\Templates\Twig;
 */
 trait Globals
 {
+    /**
+     * To register global const variables.
+     * 
+     * @return array<string,string> Return array of global variables.
+    */
     public function getGlobals(): array
     {
-        return [
-            'APP_NAME' => APP_NAME,
-            'ENVIRONMENT' => ENVIRONMENT
-        ];
+        return [];
     }
 }

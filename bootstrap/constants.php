@@ -11,55 +11,57 @@
 /**
  * @var string APP_ROOT system root 2 levels back
 */
-defined('APP_ROOT') || define('APP_ROOT', dirname(__DIR__, 2) . DIRECTORY_SEPARATOR);
+defined('APP_ROOT') || define('APP_ROOT', dirname(__DIR__, 1) . DIRECTORY_SEPARATOR);
 
-/**
- * Define our public application front controller of not defined 
- * 
- * @var string FRONT_CONTROLLER
-*/
-defined('FRONT_CONTROLLER') || define('FRONT_CONTROLLER', realpath(rtrim(getcwd(), '\\/ ')) . DIRECTORY_SEPARATOR);
-
-/**
- * @var string DOCUMENT_ROOT document root directory path 
-*/
-defined('DOCUMENT_ROOT') || define('DOCUMENT_ROOT', realpath(FRONT_CONTROLLER . 'public') . DIRECTORY_SEPARATOR);
-
-if (!function_exists('root')) {
+if(!function_exists('setenv')){
     /**
-     * Return to the root directory of your project.
+     * Set an environment variable if it doesn't already exist.
      *
-     * @param string $suffix Prepend a path at the end root directory.
+     * @param string $key The key of the environment variable.
+     * @param string $value The value of the environment variable.
+     * @param bool $append_to_env Save or update to .env file 
      * 
-     * @return string Return root directory + Suffix/.
+     * @return bool true on success or false on failure.
      */
-    function root(string $suffix = ''): string
+    function setenv(string $key, string $value, bool $append_to_env = false): bool
     {
-       $suffix = ($suffix === '' ? '' : trim(str_replace('/', DIRECTORY_SEPARATOR, $suffix), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR);
+        $count = 0;
+        $key = trim($key);
+        $value = trim($value);
 
-        if (file_exists(APP_ROOT . '.env')) {
-            return APP_ROOT . $suffix;
+        if (!getenv($key, true)) {
+            putenv("{$key}={$value}");
+            $count++;
+        }
+    
+        if (empty($_ENV[$key])) {
+            $_ENV[$key] = $value;
+            $count++;
+        }
+    
+        if (empty($_SERVER[$key])) {
+            $_SERVER[$key] = $value;
+            $count++;
+        }
+    
+        if ($append_to_env) {
+            $envContents = file_get_contents(APP_ROOT . '.env');
+            if($envContents === false){
+                return false;
+            }
+
+            if (!str_contains($envContents, "$key=") && !str_contains($envContents, "$key =")) {
+                return file_put_contents(APP_ROOT . '.env', "\n$key=$value", FILE_APPEND) !== false;
+            } else {
+                $newContents = preg_replace_callback('/(' . preg_quote($key, '/') . ')\s*=\s*(.*)/',
+                    fn($match) => $match[1] . '=' . $value,
+                    $envContents
+                );
+                return file_put_contents(APP_ROOT . '.env', $newContents) !== false;
+             }
         }
 
-        if (file_exists(DOCUMENT_ROOT . '.env')) {
-            return DOCUMENT_ROOT . $suffix;
-        }
-
-        $root = realpath(__DIR__);
-
-        if ($root === false) {
-            return $suffix; 
-        }
-
-        if (file_exists($root . DIRECTORY_SEPARATOR . '.env')) {
-            return $root . DIRECTORY_SEPARATOR . $suffix;
-        }
-
-        while ($root !== DIRECTORY_SEPARATOR && !file_exists($root . DIRECTORY_SEPARATOR . '.env')) {
-            $root = dirname($root);
-        }
-
-        return $root . ($root === DIRECTORY_SEPARATOR ? '' : DIRECTORY_SEPARATOR) . $suffix;
+        return $count > 0;
     }
 }
 
@@ -90,105 +92,53 @@ if(!function_exists('env')){
     }
 }
 
-if(!function_exists('setenv')){
+if(!function_exists('register_env')){
     /**
-     * Set an environment variable if it doesn't already exist.
+     * Register environment variables from a .env file.
      *
-     * @param string $key The key of the environment variable.
-     * @param string $value The value of the environment variable.
-     * @param bool $append_to_env Save or update to .env file 
+     * @param string $path The path to the .env file.
      * 
-     * @return bool true on success or false on failure.
+     * @return void
      */
-    function setenv(string $key, string $value, bool $append_to_env = false): bool
+    function register_env(string $path): void
     {
-        $count = 0;
-        if (!getenv($key, true)) {
-            putenv("{$key}={$value}");
-            $count++;
+        if (!file_exists($path)) {
+            echo "Environment file not found on: $path, make sure you add .env file to your project root";
+            exit(1);
         }
-    
-        if (empty($_ENV[$key])) {
-            $_ENV[$key] = $value;
-            $count++;
-        }
-    
-        if (empty($_SERVER[$key])) {
-            $_SERVER[$key] = $value;
-            $count++;
-        }
-    
-        if ($append_to_env) {
-            $envContents = file_get_contents(APP_ROOT . '.env');
-            if($envContents === false){
-                return false;
-            }
- 
-            if (!(strpos($envContents, "$key=") !== false || strpos($envContents, "$key =") !== false)) {
-                return file_put_contents(APP_ROOT . '.env', "\n$key=$value", FILE_APPEND) !== false;
-            } else {
-                $newContents = preg_replace_callback('/(' . preg_quote($key, '/') . ')\s*=\s*(.*)/',
-                    function($match) use ($value) {
-                        return $match[1] . '=' . $value;
-                    },
-                    $envContents
-                );
 
-                return file_put_contents(APP_ROOT . '.env', $newContents) !== false;
+        $file = new SplFileObject($path, 'r');
+        while (!$file->eof()) {
+            $line = trim($file->fgets());
+            if (str_starts_with($line, '#') || str_starts_with($line, ';')) {
+                continue;
+            }
+
+            $parts = explode('=', $line, 2);
+            if (count($parts) >= 2) {
+                [$name, $value] = $parts;
+                setenv($name, $value);
             }
         }
-
-        return $count > 0;
-    }
-}
-
-if (!function_exists('filter_paths')) {
-    /**
-     * Filter the display path, to remove private directory paths before previewing to users.
-     *
-     * @param string $path The path to be filtered.
-     * 
-     * @return string Return the filtered path.
-    */
-    function filter_paths(string $path): string 
-    {
-        $matching = '';
-        $previews = ['system', 'app', 'resources', 'writeable', 'libraries', 'routes', 'bootstrap', 'builds'];
-        foreach ($previews as $directory) {
-            $separator = $directory . DIRECTORY_SEPARATOR; 
-            if (strpos($path, $separator) !== false) {
-                $matching = $separator;
-                break;
-            }
-        }
-
-        if ($matching === '') {
-            return basename($path);
-        }
-
-        return substr($path, strpos($path, $matching));
     }
 }
 
 /**
- * Initialize and load the environment variables
+ * Initialize and load the environment variables.
 */
-\Luminova\Config\DotEnv::register(APP_ROOT . '.env');
+register_env(APP_ROOT . '.env');
 
 /**
- * Set default timezone
+ * Define our public application front controller of not defined 
+ * 
+ * @var string FRONT_CONTROLLER
 */
-date_default_timezone_set(env("app.timezone", 'UTC'));
+defined('FRONT_CONTROLLER') || define('FRONT_CONTROLLER', APP_ROOT . 'public' . DIRECTORY_SEPARATOR);
 
 /**
- * Limits the maximum execution time
+ * @var string DOCUMENT_ROOT document root directory path 
 */
-set_time_limit((int) env("script.execution.limit", 30));
-
-/**
- * Set whether a client disconnect should abort script execution
-*/
-ignore_user_abort((bool) env('script.ignore.abort', true));
+defined('DOCUMENT_ROOT') || define('DOCUMENT_ROOT', realpath(FRONT_CONTROLLER . 'public') . DIRECTORY_SEPARATOR);
 
 /**
  * @var int STATUS_OK success status code

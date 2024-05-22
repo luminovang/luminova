@@ -48,11 +48,6 @@
     },
 
     "autoload": {
-        "files": [
-            "libraries/sys/constants.php",
-            "libraries/sys/functions.php",
-            "libraries/sys/features.php"
-        ],
         "psr-4": {
             "Luminova\\": "system/",
             "App\\Controllers\\": "app/Controllers/"

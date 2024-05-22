@@ -58,7 +58,7 @@ $searchable = urlencode(preg_replace('/"([^"]*\/[^"]*)"/', '', $exception->getMe
 
                                         <?php
                                         $params = null;
-                                        if (substr($row['function'], -1) !== '}') {
+                                        if (!str_ends_with($row['function'], '}')) {
                                             $mirror = isset($row['class']) ? new ReflectionMethod($row['class'], $row['function']) : new ReflectionFunction($row['function']);
                                             $params = $mirror->getParameters();
                                         }
@@ -147,7 +147,7 @@ $searchable = urlencode(preg_replace('/"([^"]*\/[^"]*)"/', '', $exception->getMe
                                     <?php if (is_string($value)) : ?>
                                         <?= escape($value) ?>
                                     <?php elseif(is_bool($value)): ?>
-                                        <?= $value === true ? 'true' : 'false';?>
+                                        <?= $value ? 'true' : 'false';?>
                                     <?php elseif(is_int($value)): ?>
                                         <?= $value;?>
                                     <?php else: ?>

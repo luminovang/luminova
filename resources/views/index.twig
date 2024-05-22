@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html lang="{{locale()}}">
+<html lang="{{call_func('locale')}}">
 <head>
     <meta charset="UTF-8">
     <title>Welcome to PHP Luminova</title>
     <meta name="description" content="Luminova a Simple framework built for speed and keeping your existing coding skills going.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/png" href="{{href('favicon.png')}}">
-    <link rel="stylesheet" href="{{asset('css/app.css')}}">
+    <link rel="shortcut icon" type="image/png" href="{{call_func('href', 'favicon.png')}}">
+    <link rel="stylesheet" href="{{call_func('asset', 'css/app.css')}}">
 </head>
 <body>
 <header>
-
     <div class="menu">
         <ul>
             <li class="logo">
@@ -38,7 +37,7 @@
                 </a>
             </li>
             <li class="menu-toggle">
-                <button onclick="toggleMenu();">&#9776;</button>
+                <button onClick="toggleMenu();">&#9776;</button>
             </li>
             <li class="menu-item hidden"><a href="#">Home</a></li>
             <li class="menu-item hidden"><a href="https://github.com/luminovang/luminova" target="_blank">GitHub</a></li>
@@ -48,20 +47,13 @@
     </div>
 
     <div class="info">
-
-        <h1>Welcome to {{app().copyright}}</h1>
-
+        <h1>Welcome to {{call_static('foundation', 'copyright')}}</h1>
         <h2>Simple framework built for speed and keeping your existing coding skills going.</h2>
-        <p>Environment: {{ENVIRONMENT}}</p>
-
+        <p>Environment: {{get_const('ENVIRONMENT')}}</p>
     </div>
-
 </header>
 
-<!-- CONTENT -->
-
 <section>
-
     <h1>About this page</h1>
     <p>The page you are looking at is being generated dynamically by Luminova, Using Twig template.</p>
     <p>If you would like to edit this page you will find it located at:</p>
@@ -69,8 +61,7 @@
     <p>The corresponding controller for this page can be found at:</p>
     <pre><code>app/Controllers/Welcome.php</code></pre>
     <p>Development Server Context</p>
-    <pre><code>{{ request().server.get('SERVER_SOFTWARE') ?? 'Unknown Development Server' }}</code></pre>
-    
+    <pre><code>{{ call_func('request').server.get('SERVER_SOFTWARE') ?? 'Unknown Development Server' }}</code></pre>
 </section>
 
 
@@ -80,7 +71,6 @@
         <p>&copy; {{ 'now'|date('Y') }} <a href="https://nanoblocktech.com/" target="_blank">Nanoblock Technology Ltd</a>. PHP Luminova is open source project released under the MIT open source license.</p>
 
     </div>
-
 </footer>
 
 <script>

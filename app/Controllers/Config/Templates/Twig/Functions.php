@@ -10,18 +10,27 @@
 namespace App\Controllers\Config\Templates\Twig;
 
 use \Twig\TwigFunction;
+use \Luminova\Application\Foundation;
 
 trait Functions
 {
-    public function getFunctions(): array
+    /**
+     * Register your static classes or class name string.
+     * Do not initialize class instance in the array.
+     * 
+     * @var array<string,class-string> $classes.
+    */
+    protected static array $classes = [
+        'foundation' => Foundation::class
+    ];
+
+    /**
+     * Register functions accessible in Twig templates.
+     *
+     * @return array<int,TwigFunction> Functions.
+    */
+    public function registerFunctions(): array
     {
-        return [
-            new TwigFunction('app', 'app'),
-            new TwigFunction('href', 'href'),
-            new TwigFunction('asset', 'asset'),
-            new TwigFunction('locale', 'locale'),
-            new TwigFunction('request', 'request'),
-            new TwigFunction('func', 'func')
-        ];
+        return [];
     }
 }

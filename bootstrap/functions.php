@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Luminova Framework
  *
@@ -7,6 +7,7 @@
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
  */
+use \Luminova\Application\Foundation;
 use \Luminova\Application\Factory;
 use \Luminova\Application\Services;
 use \Luminova\Http\Request;
@@ -19,6 +20,54 @@ use \App\Controllers\Utils\Functions;
 use \App\Controllers\Application;
 use \Luminova\Template\Layout;
 use \Luminova\Exceptions\FileException;
+
+if (!function_exists('root')) {
+    /**
+     * Return to the root directory of your project.
+     *
+     * @param string $suffix Prepend a path at the end root directory.
+     * 
+     * @return string Return root directory + Suffix/.
+     */
+    function root(?string $suffix = null): string
+    {
+       $suffix = ($suffix === null ? '' : trim(str_replace('/', DIRECTORY_SEPARATOR, $suffix), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR);
+
+        if (file_exists(APP_ROOT . '.env')) {
+            return APP_ROOT . $suffix;
+        }
+
+        $root = dirname(__DIR__, 1) . DIRECTORY_SEPARATOR;
+        if (file_exists($root . '.env')) {
+            return $root . $suffix;
+        }
+
+        $root = realpath(__DIR__);
+        if ($root === false) {
+            return $suffix; 
+        }
+
+        while ($root !== DIRECTORY_SEPARATOR && !file_exists($root . DIRECTORY_SEPARATOR . '.env')) {
+            $root = dirname($root);
+        }
+
+        return $root . ($root === DIRECTORY_SEPARATOR ? '' : DIRECTORY_SEPARATOR) . $suffix;
+    }
+}
+
+if (!function_exists('filter_paths')) {
+    /**
+     * Filter the display path, to remove private directory paths before previewing to users.
+     *
+     * @param string $path The path to be filtered.
+     * 
+     * @return string Return the filtered path.
+    */
+    function filter_paths(string $path): string 
+    {
+        return Foundation::filterPath($path);
+    }
+}
 
 if (!function_exists('app')) {
     /**
@@ -421,7 +470,7 @@ if(!function_exists('is_platform')) {
         $os = strtolower($os);
 
         return match($os) {
-            'mac' => strpos(PHP_OS, 'Darwin') !== false,
+            'mac' => str_contains(PHP_OS, 'Darwin'),
             'windows' => strtoupper(substr(PHP_OS, 0, 3)) === 'WIN',
             'freebsd' => strtoupper(PHP_OS) === 'FREEBSD',
             'openbsd' => strtoupper(PHP_OS) === 'OPENBSD',
@@ -603,7 +652,7 @@ if (!function_exists('is_associative')) {
             return false;
         }
 
-        foreach ($array as $key => $value) {
+        foreach (array_keys($array) as $key) {
             if (is_int($key)) return false;
         }
     
@@ -681,7 +730,7 @@ if (!function_exists('to_object')) {
     
         try{
             return json_decode(json_encode($input, JSON_THROW_ON_ERROR));
-        }catch(\JsonException $e){
+        }catch(\JsonException){
             return false;
         }
 
@@ -705,7 +754,7 @@ if (!function_exists('list_to_array')) {
             return false;
         }
     
-        if (strpos($list, "'") !== false) {
+        if (str_contains($list, "'")) {
             preg_match_all("/'([^']+)'/", $list, $matches);
             if (!empty($matches[1])) {
                 return $matches[1];
@@ -772,9 +821,7 @@ if (!function_exists('is_list')) {
 
         if ($trim) {
             $input = preg_replace('/\s*,\s*/', ',', $input);
-            $input = preg_replace_callback('/"([^"]+)"/', function($matches) {
-                return '"' . trim($matches[1]) . '"';
-            }, $input);
+            $input = preg_replace_callback('/"([^"]+)"/', fn($matches) => '"' . trim($matches[1]) . '"', $input);
         }
     
         if ($input === '') {
@@ -886,9 +933,7 @@ if (!function_exists('is_command')) {
     */
     function is_command(): bool
     {
-        return defined('STDIN') ||
-            (empty($_SERVER['REMOTE_ADDR']) && !isset($_SERVER['HTTP_USER_AGENT']) && count($_SERVER['argv']) > 0) ||
-            php_sapi_name() === 'cli' || array_key_exists('SHELL', $_ENV) || !array_key_exists('REQUEST_METHOD', $_SERVER);
+        return Foundation::isCommand();
     }
 }
 
@@ -909,7 +954,7 @@ if (!function_exists('is_dev_server')) {
                 return true;
             }
             
-            if (strpos($server, 'localhost') !== false || strpos($server, '127.0.0.1') !== false) {
+            if (str_contains($server, 'localhost') || str_contains($server, '127.0.0.1')) {
                 return true;
             }
         }
@@ -959,7 +1004,7 @@ if (!function_exists('which_php')) {
             return PHP_BINARY;
         }
     
-        if (isset($_SERVER['_']) && strpos($_SERVER['_'], 'php') !== false) {
+        if (isset($_SERVER['_']) && str_contains($_SERVER['_'], 'php')) {
             return $_SERVER['_'];
         }
     
@@ -1104,7 +1149,7 @@ if (!function_exists('string_length')) {
      */
     function string_length(string $content, ?string $charset = null): int 
     {
-        $charset = $charset ?? env('app.charset', 'utf-8');
+        $charset ??= env('app.charset', 'utf-8');
         switch (strtolower($charset)) {
             case 'utf-8':
             case 'utf8':
@@ -1137,5 +1182,27 @@ if (!function_exists('layout')) {
     function layout(string $file): Layout
     {
         return Layout::getInstance()->layout($file);
+    }
+}
+
+if (!function_exists('get_mime')) {
+    /**
+     * Detect MIME Content-type for a file.
+     * 
+     * @param string $filename Path to the file.
+     * 
+     * @return string|false Return the content type in MIME format, otherwise false.
+    */
+    function get_mime(string $filename): string|false
+    {
+        $mime = mime_content_type($filename);
+        
+        if ($mime === false && ($finfo = finfo_open(FILEINFO_MIME_TYPE)) !== false) {
+            $mime = finfo_file($finfo, $filename);
+            finfo_close($finfo);
+            return $mime;
+        }
+
+        return $mime;
     }
 }

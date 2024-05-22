@@ -48,9 +48,9 @@ return static function (RectorConfig $rectorConfig): void {
     ]);
 
     $rectorConfig->parallel();
-    /*$rectorConfig->bootstrapFiles([
-        __DIR__ . '/system/Test/bootstrap.php',
-    ]);*/
+    $rectorConfig->bootstrapFiles([
+        __DIR__ . '/bootstrap/http.php'
+    ]);
 
     //composer analyze-code
     $rectorConfig->paths([
