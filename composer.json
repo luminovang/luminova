@@ -20,11 +20,15 @@
     },
 
     "require-dev": {
+        "league/flysystem": "^3.27",
+        "nanoblocktech/psr-cache": "^1.2",
         "nikic/php-parser": "^4.17.1",
         "phpstan/extension-installer": "^1.3",
         "phpstan/phpstan": "^1.10.2",
         "phpunit/phpunit": "^9.1",
-        "rector/rector": "0.18.3"
+        "rector/rector": "0.18.3",
+        "smarty/smarty": "^5.1",
+        "twig/twig": "^3.9"
     },
     
     "suggest": {
