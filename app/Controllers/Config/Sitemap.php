@@ -9,7 +9,9 @@
  */
 namespace App\Controllers\Config;
 
-final class Sitemap 
+use \Luminova\Base\BaseConfig;
+
+final class Sitemap extends BaseConfig
 { 
     /**
      * The maximum limit of URLs to scan when generating the sitemap.
@@ -20,7 +22,7 @@ final class Sitemap
      *
      * @var int $maxScan
      */
-    public static int $maxScan = 0;
+    public int $maxScan = 0;
 
     /**
      * URLs, URL patterns, or full URLs to ignore when generating a sitemap.
@@ -35,9 +37,10 @@ final class Sitemap
      *
      * @var array<int,string> $ignoreUrls
     */
-    public static array $ignoreUrls = [
+    public array $ignoreUrls = [
         '*/api/*'
     ];
+
 
     /**
      * URL patterns associated with views for determining last modified timestamps in a sitemap.
@@ -55,5 +58,5 @@ final class Sitemap
      *
      * @var array<string,string> $viewUrlPatterns
      */
-    public static array $viewUrlPatterns = [];
+    public array $viewUrlPatterns = [];
 }

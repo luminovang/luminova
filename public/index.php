@@ -9,10 +9,11 @@
 */
 declare(strict_types=1);
 
+use \Luminova\Boot;
 use \Luminova\Routing\Context;
 use \App\Controllers\Errors\ViewErrors;
 
-require_once __DIR__ . '/../bootstrap/http.php';
+require_once __DIR__ . '/../system/Boot.php';
 
 /**
  * Ensure that we are in front controller while running script in cli mode
@@ -36,7 +37,7 @@ if (getcwd() . DIRECTORY_SEPARATOR !== FRONT_CONTROLLER) {
  * 
  * Finally run our application router instance to register our routes 
 */
-app()->router->context(
+Boot::http()->router->context(
     new Context(Context::WEB, [ViewErrors::class, 'onWebError']),
     new Context(Context::API, [ViewErrors::class, 'onApiError']),
     new Context(Context::CLI)

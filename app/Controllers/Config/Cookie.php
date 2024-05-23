@@ -10,50 +10,52 @@
 
 namespace App\Controllers\Config;
 
-final class Cookie 
+use \Luminova\Base\BaseConfig;
+
+final class Cookie extends BaseConfig
 {
     /**
      * The path where session files are stored on the server.
      * @var string $savePath;
      */
-    public static string $savePath = ''; 
+    public string $savePath = ''; 
 
     /**
      * The lifetime of the session in seconds.
      * @var int $expiration;
      */
-    public static int $expiration = 365 * 24 * 60 * 60; 
+    public int $expiration = 365 * 24 * 60 * 60; 
 
     /**
      * The path to use for the session cookie.
      * @var string $sessionPath;
      */
-    public static string $cookiePath = '/'; 
+    public string $cookiePath = '/'; 
 
     /**
      * The domain to use for the session cookie.
      * @var string $sessionDomain;
      */
-    public static string $cookieDomain = '.localhost';
+    public string $cookieDomain = '.localhost';
 
-    /**
+     /**
      * Set the session cookie security level.
      * None, Lax, Strict 
      * @var string $sameSite;
-    */
-    public static string $sameSite = 'Lax';
+     */
+    public string $sameSite = 'Lax';
 
     /**
      *
      * Cookie will only be set if a secure HTTPS connection exists.
      */
-    public static bool $secure = false;
+    public bool $secure = false;
 
     /**
      *
      * Cookie will only be accessible via HTTP(S) (no JavaScript).
      */
-    public static bool $httpOnly = true;
+    public bool $httpOnly = true;
 
     /**
      * This flag allows setting a 'raw' cookie, i.e., its name and value are
@@ -65,5 +67,5 @@ final class Cookie
      * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie#attributes
      * @see https://tools.ietf.org/html/rfc2616#section-2.2
      */
-    public static bool $cookieRaw = false;
+    public bool $cookieRaw = false;
 }

@@ -102,8 +102,8 @@ class Updater
         $files = scandir($source);
         foreach ($files as $file) {
             if ($file !== '.' && $file !== '..') {
-                $srcFile = rtrim($source, '/') . "/$file";
-                $dstFile = rtrim($destination, '/') . "/$file";
+                $srcFile = rtrim($source, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $file;
+                $dstFile = rtrim($destination, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $file;
 
                 if(self::isUpdater(self::displayPath($dstFile))){
                     continue;
@@ -132,7 +132,7 @@ class Updater
     {
         $files = array_diff(scandir($dir), ['.', '..']);
         foreach ($files as $file) {
-            $path = rtrim($dir, '/') . "/$file";
+            $path = rtrim($dir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $file;
             if (is_dir($path)) {
                 self::removeRecursive($path, $main);
             } else {

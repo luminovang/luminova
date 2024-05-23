@@ -6,7 +6,8 @@ parameters:
 	tmpDir: builds/phpstan
 	level: 6
 	bootstrapFiles:
-		- bootstrap/http.php
+		- bootstrap/constants.php
+		- bootstrap/functions.php
 	paths:
 		- app
 		- system

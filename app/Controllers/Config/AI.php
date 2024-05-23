@@ -9,7 +9,9 @@
 */
 namespace App\Controllers\Config;
 
-final class AI
+use \Luminova\Base\BaseConfig;
+
+final class AI extends BaseConfig
 {
     /**
      * The `AI` handler class (default: `OpenAI`).
@@ -17,7 +19,7 @@ final class AI
      * @var string $handler
      * > Currently only OpenAI is supported
     */
-    public static string $handler = 'OpenAI';
+    public string $handler = 'OpenAI';
 
     /**
      * Set your OpenAI api secret key.
@@ -25,7 +27,7 @@ final class AI
      * @var string $apiKey
      * @see https://platform.openai.com/
     */
-    public static string $apiKey = '';
+    public string $apiKey = '';
 
     /**
      * Set your OpenAI Organization ID.
@@ -34,19 +36,19 @@ final class AI
      * @see https://platform.openai.com/docs/api-reference/authentication
      * @see https://platform.openai.com/settings/organization/general
     */
-    public static ?string $organization = null;
+    public ?string $organization = null;
 
     /**
      * Set your OpenAI Project ID.
      * 
      * @param string $project
     */
-    public static ?string $project = null;
+    public ?string $project = null;
 
     /**
      * Set your OpenAI API version.
      * 
      * @param string $version
     */
-    public static string $version = 'v1';
+    public string $version = 'v1';
 }

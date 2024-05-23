@@ -8,16 +8,18 @@
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
  */
-
-/**
- * Location of the framework bootstrap file.
-*/
 use \Luminova\Command\Console;
+use \Luminova\Boot;
 
 /**
  * Autoload composers 
 */
-require __DIR__ . '/bootstrap/cli.php';
+require __DIR__ . '/system/Boot.php';
+
+/**
+ * Location of the framework bootstrap file.
+*/
+Boot::cli();
 
 /**
  * Ensure the current directory is pointing to the front controller's directory

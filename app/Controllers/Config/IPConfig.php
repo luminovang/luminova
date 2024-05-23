@@ -7,10 +7,11 @@
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
  */
-
 namespace App\Controllers\Config;
 
-final class IPConfig
+use \Luminova\Base\BaseConfig;
+
+final class IPConfig extends BaseConfig
 {
     /**
      * Specify the IP address api provide 
@@ -18,7 +19,7 @@ final class IPConfig
      * 
      * @var string $apiProvider ['ipapi', 'iphub']
     */
-    public static string $apiProvider = 'iphub';
+    public string $apiProvider = 'iphub';
 
     /**
      * Specify the IP hub api version 
@@ -26,19 +27,19 @@ final class IPConfig
      * 
      * @var string $ipHubVersion
     */
-    public static string $ipHubVersion = 'v2';
+    public string $ipHubVersion = 'v2';
 
     /**
      * Specify the IP address api key
      * 
      * @var string $apiKey
     */
-    public static string $apiKey = '';
+    public string $apiKey = '';
 
     /**
      * List of trusted proxy IP addresses or subnets.
      * 
      * @var array<int, string> $trustedProxies
     */
-    public static array $trustedProxies = [];
+    public array $trustedProxies = [];
  }

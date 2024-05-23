@@ -7,22 +7,23 @@
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
  */
-
 namespace App\Controllers\Config;
 
-final class Security
+use \Luminova\Base\BaseConfig;
+
+final class Security extends BaseConfig
 {
     /**
      * List of trusted origin domains or patterns.
      * 
      * @var array<int, string> $trustedOrigins
     */
-    public static array $trustedOrigins = [];
+    public array $trustedOrigins = [];
 
     /**
      * List of trusted hostname or patterns.
      * 
      * @var array<int, string> $trustedHostname
     */
-    public static array $trustedHostname = [];
+    public array $trustedHostname = [];
  }

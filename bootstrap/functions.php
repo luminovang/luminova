@@ -73,7 +73,7 @@ if (!function_exists('app')) {
     /**
      * Get application container class shared instance or new instance if not shared. 
      * 
-     * @return class-Application<BaseApplication> Application shared instance.
+     * @return BaseApplication Application shared instance.
     */
     function app(): Application 
     {
@@ -93,7 +93,7 @@ if (!function_exists('request')) {
      * 
      * @param bool $shared Return a shared instance (default: true).
      * 
-     * @return class-object<Request>|null Return Request object
+     * @return Request|null Return Request object
     */
     function request(bool $shared = true): ?Request 
     {
@@ -114,18 +114,14 @@ if (!function_exists('start_url')) {
     */
     function start_url(?string $suffix = ''): string
     {
-        $request = request();
-        $start = $request->getScheme() . '://' . $request->getHostname();
-
-        if(!PRODUCTION){
-            $start .= rtrim(dirname($_SERVER['SCRIPT_NAME']), '/');
+        if(PRODUCTION){
+            return APP_URL . '/' . ltrim($suffix, '/');
         }
 
-        /*if(NOVAKIT_ENV === null && !PRODUCTION){
-            //$start .= basename(root()) . '/public/';
-            $start .= dirname($_SERVER['SCRIPT_NAME']);
-        }*/
-
+        $request = request();
+        $start = $request->getScheme() . '://' . $request->getHostname();
+        $start .= rtrim(dirname($_SERVER['SCRIPT_NAME']), '/');
+        
         return $start . '/' . ltrim($suffix, '/');
     }
 }
@@ -143,9 +139,9 @@ if (!function_exists('func')) {
      *  -   math.
      *
      * @param string|null $context The context to return instance for.
-     * @param mixed ...$params Additional parameters based on context.
+     * @param mixed $params [, mixed $... ] Additional parameters based on context.
      *
-     * @return class-object<Functions>|object|null|string|bool Returns an instance of Functions, 
+     * @return Functions|object|null|string|bool Returns an instance of Functions, 
      *    -   object string, or boolean value depending on the context.
      *
      * @throws Exception If an error occurs.
@@ -284,9 +280,9 @@ if(!function_exists('ip_address')){
 if(!function_exists('is_empty')){
     /**
      * Check if values are empty.
-     * This will treat 0 as none empty if you want any other thing use php empty function instead
+     * This will treat 0 as none empty if you want any other thing use php empty function instead.
      * 
-     * @param mixed ...$values Arguments.
+     * @param mixed $values [, mixed $... ] Values to check if empty or not.
      * 
      * @return bool True if any of the values are empty, false otherwise.
     */
@@ -308,7 +304,7 @@ if(!function_exists('session')) {
      * @param string $key Key to retrieve the data.
      * @param bool $shared Use shared instance (default: true).
      *
-     * @return class-object<Session>|mixed Return session instance or value if key is present.
+     * @return Session|mixed Return session instance or value if key is present.
     */
     function session(?string $key = null, bool $shared = true): mixed
     {
@@ -329,7 +325,7 @@ if (!function_exists('cookie')) {
      * @param array  $options Options to be passed to the cookie.
      * @param bool $shared Use shared instance (default: false).
      * 
-     * @return class-object<Cookie> Return cookie instance.
+     * @return Cookie Return cookie instance.
     */
     function cookie(string $name, string $value = '', array $options = [], bool $shared = false): Cookie
     {
@@ -339,8 +335,7 @@ if (!function_exists('cookie')) {
 
 if(!function_exists('factory')) {
     /**
-     * Returns a shared instance of a class in factory
-     * Or factory instance if context is null
+     * Returns a shared instance of a class in factory or factory instance if context is null.
      *
      * Same as:
      * @example $config = factory('config')
@@ -362,10 +357,10 @@ if(!function_exists('factory')) {
      * -   'request'   `Request`
      * -   'service'   `Services`
      * 
-     * @param mixed ...$arguments The last bool argument indicate wether to return a shared instance.
+     * @param mixed $arguments [, mixed $... ] The last bool argument indicate wether to return a shared instance.
      * @param bool $shared Allow shared instance creation (default: true).
      * 
-     * @return class-object|class-object<Factory>|null Return instance of factory or instance of factory class, otherwise null.
+     * @return class-object<\T>|Factory|null Return instance of factory or instance of factory class, otherwise null.
     */
     function factory(string|null $context = null, mixed ...$arguments): ?object
     {
@@ -379,8 +374,7 @@ if(!function_exists('factory')) {
 
 if(!function_exists('service')) {
     /**
-     * Returns a shared instance of a class in services
-     * Or service instance if context is null
+     * Returns a shared instance of a class in services or service instance if context is null.
      *
      * @example $config = service('Config')
      * @example $config = Services::Config();
@@ -388,12 +382,12 @@ if(!function_exists('service')) {
      * Same as:
      * @example $config = new \Luminova\Config\Config();
      * 
-     * @param class-string|string|null $service The service class name or alias.
-     * @param mixed ...$arguments The last bool argument indicate wether to return a shared instance.
+     * @param class-string<\T>|string|null $service The service class name or alias.
+     * @param mixed $arguments [, mixed $... ] The last bool argument indicate wether to return a shared instance.
      * @param bool $serialize Allow object serialization (default: false).
      * @param bool $shared Allow shared instance creation (default: true).
      * 
-     * @return class-object|class-object<Services>|null Return service class instance or instance of service class.
+     * @return class-object<\T>|Services|null Return service class instance or instance of service class.
     */
     function service(?string $service = null, mixed ...$arguments): ?object
     {
@@ -411,7 +405,7 @@ if(!function_exists('remove_service')) {
      * If NULL is passed all cached services instances will be cleared.
      * Else delete a specific services instance and clear it's cached instances
      * 
-     * @param class-string|string $service The class name or alias, to delete and clear it cached
+     * @param class-string<\T>|string $service The class name or alias, to delete and clear it cached
      * 
      * @return bool Return true if the service was removed or cleared, false otherwise.
     */
@@ -434,7 +428,7 @@ if(!function_exists('browser')) {
      *      -   Return Types: [array, object, instance]
      * @param bool $shared Allow shared instance creation (default: true).
      * 
-     * @return array<string,mixed>|object<string,mixed>|class-object<UserAgent>|false Return browser information.
+     * @return array<string,mixed>|object<string,mixed>|UserAgent|false Return browser information.
     */
     function browser(?string $user_agent = null, string $return = 'object', bool $shared = true): mixed
     { 
@@ -496,9 +490,7 @@ if (!function_exists('text2html')) {
             return '';
         }
 
-        $text = htmlspecialchars($text, ENT_QUOTES | ENT_HTML5);
-
-        return $text;
+        return htmlspecialchars($text, ENT_QUOTES | ENT_HTML5);
     }
 }
 
@@ -507,20 +499,17 @@ if(!function_exists('nl2html')) {
      * Converts newline characters in a string to HTML entities. 
      * This is useful when you want to display text in an HTML textarea while preserving the original line breaks.
      * 
-     * @param string $text A string containing the text to be processed.
+     * @param string|null $text A string containing the text to be processed.
      * 
      * @return string $text
     */
-    function nl2html(?string $text): string
-    { 
+    function nl2html(string|null $text): string
+    {
         if($text === null ||  $text === ''){
             return '';
         }
 
-        $text = str_replace(["\n", "\r\n", '[br/]', '<br/>'], "&#13;&#10;", $text);
-        $text = str_replace(["\t"], "&#09;", $text);
-
-        return $text;
+        return str_replace(["\n", "\r\n", '[br/]', '<br/>', "\t"], ["&#13;&#10;", "&#13;&#10;", "&#13;&#10;", "&#13;&#10;", "&#09;"], $text);
     }
 }
 
@@ -538,7 +527,8 @@ if(!function_exists('import')) {
     */
     function import(string $library): bool
     {
-        return Factory::modules()->import($library);
+        require_once path('library') . rtrim(rtrim($library, '.php'), '/') . '.php';
+        return true;
     }
  }
 
@@ -872,7 +862,7 @@ if (!function_exists('validate')) {
     /**
      * Validate input fields or get validation instance 
      * Return true or false if input and rules are specified 
-     * else return validation instance if NULL is passed on $inputs and $rules
+     * else return validation instance if NULL is passed on $inputs and $rules.
      *
      * @param array $inputs Input fields to validate on 
      *      @example [$_POST, $_GET or $this->request->getBody()]
@@ -886,7 +876,7 @@ if (!function_exists('validate')) {
      *          ]
      *        }
      * 
-     * @return class-object<ValidationInterface> Return validation instance
+     * @return ValidationInterface Return validation instance.
     */
     function validate(?array $inputs, ?array $rules, array $messages = []): object 
     {
@@ -906,7 +896,7 @@ if (!function_exists('get_class_name')) {
     /**
      * Get class basename from namespace or object
      * 
-     * @param string|class-object $from Class name or class object.
+     * @param string|class-object<\T> $from Class name or class object.
      * 
      * @return string Return the class basename.
     */
@@ -970,7 +960,7 @@ if (!function_exists('response')) {
     * @param int $status int $status HTTP status code (default: 200 OK)
     * @param bool $encode Enable content encoding like gzip, deflate.
     *
-    * @return class-object<ViewResponse> Return vew response object. 
+    * @return ViewResponse Return vew response object. 
     */
     function response(int $status = 200, bool $encode = true): ViewResponse
     {

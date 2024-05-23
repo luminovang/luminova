@@ -18,7 +18,7 @@ trait Functions
      * Register your static classes or class name string.
      * Do not initialize class instance in the array.
      * 
-     * @var array<string,class-string> $classes.
+     * @var array<string,class-string<\T>> $classes.
     */
     protected static array $classes = [
         'foundation' => Foundation::class

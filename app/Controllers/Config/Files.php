@@ -7,22 +7,23 @@
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
  */
-
 namespace App\Controllers\Config;
 
-final class Files
+use \Luminova\Base\BaseConfig;
+
+final class Files extends BaseConfig
 {
     /**
      * Unix file permissions.
      * 
      * @var int $filePermissions 
     */
-    public static int $filePermissions = 0644;
+    public int $filePermissions = 0644;
 
     /**
      * Unix directory permissions.
      * 
      * @var int $dirPermissions 
     */
-    public static int $dirPermissions = 0755;
+    public int $dirPermissions = 0755;
 }

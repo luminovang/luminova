@@ -49,7 +49,8 @@ return static function (RectorConfig $rectorConfig): void {
 
     $rectorConfig->parallel();
     $rectorConfig->bootstrapFiles([
-        __DIR__ . '/bootstrap/http.php'
+        __DIR__ . '/bootstrap/constants.php',
+        __DIR__ . '/bootstrap/functions.php'
     ]);
 
     //composer analyze-code

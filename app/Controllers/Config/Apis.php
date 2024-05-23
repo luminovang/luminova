@@ -10,21 +10,23 @@
 
 namespace App\Controllers\Config;
 
-final class Apis
+use \Luminova\Base\BaseConfig;
+
+final class Apis extends BaseConfig
 {
     /**
      * Indicates whether to forbid requests with empty Origin headers.
      * 
      * @var bool $forbidEmptyOrigin If true, requests with empty Origin headers are forbidden.
-    */
-    public static bool $forbidEmptyOrigin = true;
+     */
+    public bool $forbidEmptyOrigin = false;
 
     /**
      * Set whether to allow credentials in API requests.
      * 
      * @var bool $allowCredentials If true, the Access-Control-Allow-Credentials header is included.
      */
-    public static bool $allowCredentials = true;
+    public bool $allowCredentials = true;
 
     /**
      * Set the allowed origins for the Access-Control-Allow-Origin header in API requests.
@@ -34,15 +36,15 @@ final class Apis
      * @var array<int,string>|string $allowOrigins An array of allowed origins or a wildcard `*`.
      * 
      * > Note passing string null will result in allow all origins.
-    */
-    public static array|string $allowOrigins = [];
+     */
+    public array|string $allowOrigins = '*';
 
     /**
      * Set the allowed headers for the Access-Control-Allow-Headers header in API requests.
      * 
      * @var array<int,string> $allowHeaders An array of allowed header names.
      */
-    public static array $allowHeaders = [
+    public array $allowHeaders = [
         'Content-Type',
         'Access-Control-Allow-Headers',
         'Authorization',

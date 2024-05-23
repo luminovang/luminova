@@ -10,14 +10,13 @@
 
 namespace App\Controllers\Config;
 
+use \Luminova\Base\BaseConfig;
 use \Luminova\Interface\MailerInterface;
 use \Psr\Log\LoggerInterface;
 
 use \Luminova\Email\Clients\NovaMailer;
-use \Luminova\Email\Clients\PHPMailer;
-use \Luminova\Email\Clients\SwiftMailer;
 
-final class Preference
+final class Preference extends BaseConfig
 {
     /**
      * Return instance of your preferred logger class.
@@ -25,9 +24,9 @@ final class Preference
      * 
      * @example new MyLogger(config) 
      * 
-     * @return LoggerInterface|null Return preferred logger instance or null to use default logger.
+     * @return class-string<LoggerInterface>|null Return preferred logger instance or null to use default logger.
     */
-    public static function getLogger(): LoggerInterface|null 
+    public function getLogger(): LoggerInterface|null 
     {
         return null;
     }
@@ -39,10 +38,10 @@ final class Preference
      * 
      * @example new MyLogger(config) 
      * 
-     * @return MailerInterface|class-string<MailerInterface>|null Return preferred logger instance or null to use default logger.
+     * @return class-object<MailerInterface>|class-string<MailerInterface>|null Return preferred logger instance or null to use default logger.
     */
-    public static function getMailer(): MailerInterface|string|null 
+    public function getMailer(): MailerInterface|string|null 
     {
-        return NovaMailer::class;
+        return '\\' . NovaMailer::class;
     }
 }

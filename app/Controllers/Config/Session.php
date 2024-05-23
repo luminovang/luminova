@@ -7,17 +7,18 @@
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
  */
-
 namespace App\Controllers\Config;
 
-final class Session 
+use \Luminova\Base\BaseConfig;
+
+final class Session extends BaseConfig
 {
     /**
      * The name of the session cookie.
      * 
      * @var string $cookieName;
      */
-    public static string $cookieName = 'PHPSESSID'; 
+    public string $cookieName = 'PHPSESSID'; 
 
     /**
      * Set the directory where session files are stored on the server.
@@ -25,14 +26,14 @@ final class Session
      * 
      * @var string $savePath;
      */
-    public static string $savePath = ''; 
+    public string $savePath = ''; 
 
     /**
      * The lifetime of the session in seconds.
      * 
      * @var int $expiration;
      */
-    public static int $expiration = 365 * 24 * 60 * 60; 
+    public int $expiration = 365 * 24 * 60 * 60; 
 
     /**
      * Set the path on the server where the cookie will be available. 
@@ -40,14 +41,14 @@ final class Session
      * 
      * @var string $sessionPath;
      */
-    public static string $sessionPath = '/'; 
+    public string $sessionPath = '/'; 
 
     /**
      * The domain to use for the session cookie.
      * 
      * @var string $sessionDomain;
      */
-    public static string $sessionDomain = '.localhost';
+    public string $sessionDomain = '.localhost';
 
      /**
      * Set the session cookie security level.
@@ -55,7 +56,7 @@ final class Session
      * 
      * @var string $sameSite;
      */
-    public static string $sameSite = 'Lax';
+    public string $sameSite = 'Lax';
 
      /**
      * Enable strict session IP authentication.
@@ -63,7 +64,7 @@ final class Session
      * 
      * @var bool $strictSessionIp
      */
-    public static bool $strictSessionIp = false;
+    public bool $strictSessionIp = false;
 
     /**
      * Set the csrf storage engine 
@@ -71,5 +72,5 @@ final class Session
      * 
      * @var string $csrfStorage;
      */
-    public static string $csrfStorage = 'session';
+    public string $csrfStorage = 'session';
 }

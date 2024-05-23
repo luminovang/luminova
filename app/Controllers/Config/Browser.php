@@ -9,7 +9,9 @@
 */
 namespace App\Controllers\Config;
 
-final class Browser 
+use \Luminova\Base\BaseConfig;
+
+final class Browser extends BaseConfig
 {
     /**
      * An associative array of strings representing common keywords or patterns found in robots user agent string.
@@ -17,7 +19,7 @@ final class Browser
      *
      * @var array<string,string> $robotPatterns
      */
-    public static array $robotPatterns = [
+    public array $robotPatterns = [
         'Googlebot'          => 'Googlebot',
         'bingbot'            => 'Bingbot',
         'Slurp'              => 'Yahoo! Slurp',
@@ -36,7 +38,7 @@ final class Browser
      * @var array<string,string> $mobileKeywords 
      * NOTE: The order is important
      */
-    public static array $mobileKeywords = [
+    public array $mobileKeywords = [
         'android'         => 'Android',
         'blackberry'      => 'BlackBerry',
         'iphone'          => 'iOS',
@@ -62,7 +64,7 @@ final class Browser
      * > Its also a good authentication when you are developing a hybrid mobile app, 
      * to ensure only your webview can access.
     */
-    public static array $browsers = [
+    public array $browsers = [
         'Chrome',
         'Safari',
         'Firefox',
@@ -83,6 +85,5 @@ final class Browser
         'IBrowse',
         'Ubuntu',
         'Vivaldi',
-        //add more as needed
     ];
 }
