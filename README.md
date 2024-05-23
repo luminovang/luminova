@@ -13,9 +13,9 @@
 
 # About Luminova!
 
-Luminova is a PHP framework built for speed and efficiency, designed to enhance your existing coding skills. At Luminova, we prioritize performance and offer feature customization through the `env` file, ensuring that you only include what you need for your specific project. This approach allows you to enable only the necessary features and choose how you want your template rendering and implementation to look.
+Luminova is a PHP framework built for speed and efficiency, designed to enhance your existing coding skills. At Luminova, we prioritize performance by offering feature customization through the env file. This ensures the framework includes only what's needed for your project, based on the features you enable. This approach allows you to enable or disable necessary features and choose your preferred template rendering and coding style.
 
-By default, we provide access to the `Template` object within your views, enabling the use of the `$this` keyword within template files. This can be disabled if you prefer your views to be rendered in isolation, using the custom keyword `$self` to access application objects.
+Luminova, provide access to the `Template` object within the view files, allowing you to call template methods and properties using `$this` keyword within template files. This can be disabled if you prefer your views to be rendered in isolation, disabling it will allow you to access exported application classes using custom keyword `$self`.
 
 To get started with Luminova, please visit our [official documentation](https://luminova.ng/docs).
 
@@ -41,5 +41,3 @@ To get started with Luminova, please visit our [official documentation](https://
 - **Translation:** Create translations for your application using our translation class.
 - **Encryption:** Support for different encryption handlers and methods.
 - **Services:** Define classes that can be shared and discovered anywhere in your codebase, with support for serialization and class object caching.
-
-Many more useful classes and utilities are available to help you develop faster and better.
