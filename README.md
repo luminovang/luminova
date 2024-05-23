@@ -13,7 +13,7 @@
 
 # About Luminova!
 
-Luminova is a PHP framework built for speed and efficiency, designed to enhance your existing coding skills. At Luminova, we prioritize performance by offering feature customization through the env file. This ensures the framework includes only what's needed for your project, based on the features you enable. This approach allows you to enable or disable necessary features and choose your preferred template rendering and coding style.
+Luminova is a PHP framework built for speed and efficiency, designed to enhance your existing coding skills. At Luminova, we prioritize performance by offering feature customization through the env file. This ensures the framework includes only what's needed for your project, based on the features you enable. This approach allows you to enable or disable features as well as customizing your preferred template rendering mode and coding style.
 
 Luminova, provide access to the `Template` object within the view files, allowing you to call template methods and properties using `$this` keyword within template files. This can be disabled if you prefer your views to be rendered in isolation, disabling it will allow you to access exported application classes using custom keyword `$self`.
 
