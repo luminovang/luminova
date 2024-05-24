@@ -222,9 +222,8 @@ defined('SHOW_DEBUG_BACKTRACE') || define('SHOW_DEBUG_BACKTRACE', (bool) env('de
 */
 defined('NOVAKIT_ENV') || define('NOVAKIT_ENV', (isset($_SERVER['NOVAKIT_EXECUTION_ENV']) ? $_SERVER['NOVAKIT_EXECUTION_ENV'] : null));
 
-
 /**
- * @var bool PROJECT_ID Get the project basename/public as product id.
+ * @var bool PROJECT_ID Get the project basename/public as product id or empty on php server.
 */
 defined('PROJECT_ID') || define('PROJECT_ID', rtrim(dirname($_SERVER['SCRIPT_NAME']??''), '/'));
 
