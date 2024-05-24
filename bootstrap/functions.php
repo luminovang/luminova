@@ -117,12 +117,31 @@ if (!function_exists('start_url')) {
         if(PRODUCTION){
             return APP_URL . '/' . ltrim($suffix, '/');
         }
-        static $request = null;
-        $request ??= Factory::request();
-        $start = $request->getScheme() . '://' . $request->getHostname();
-        $start .= rtrim(dirname($_SERVER['SCRIPT_NAME']), '/');
-        
-        return $start . '/' . ltrim($suffix, '/');
+
+        $hostname = $_SERVER['HTTP_HOST'] 
+            ?? $_SERVER['HOST'] 
+            ?? $_SERVER['SERVER_NAME'] 
+            ?? $_SERVER['SERVER_ADDR'] 
+            ?? '';
+
+        return URL_SCHEME . '://' . $hostname  . PROJECT_ID . '/' . ltrim($suffix, '/');
+    }
+}
+
+if (!function_exists('absolute_url')) {
+    /**
+     * Convert application relative paths to absolute url.
+     * 
+     * @param string $path The path to convert to absolute url.
+     * 
+     * @example Path: /Applications/XAMPP/htdocs/project-path/public/asset/files/foo.text.
+     *      -   Returns: http://localhost/project-path/public/asset/files/foo.text.
+     * 
+     * @return string Return absolute url of the specified path.
+    */
+    function absolute_url(string $path): string
+    {
+        return Foundation::toAbsoluteUrl($path);
     }
 }
 
