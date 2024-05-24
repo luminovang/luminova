@@ -19,15 +19,14 @@ final class Boot
      * Initializes the HTTP environment for web application.
      * Sets up the error handler, finishes bootstrapping.
      *
-     * @return BaseApplication The application instance.
+     * @return class-object<BaseApplication> The application instance.
      */
     public static function http(): BaseApplication
     {
         Foundation::initialize();
         self::finish();
 
-        return app();
-        //return Application::getInstance();
+        return Application::getInstance();
     }
 
     /**

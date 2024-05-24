@@ -10,7 +10,7 @@
 namespace App\Controllers\Config;
 
 /**
- * @see https://luminova.ng/public/docs/0.0.0/templates/config
+ * @see https://luminova.ng/docs/0.0.0/templates/config
 */
 final class Template 
 { 
