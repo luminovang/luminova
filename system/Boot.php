@@ -26,8 +26,8 @@ final class Boot
         Foundation::initialize();
         self::finish();
 
-        //return app();
-        return Application::getInstance();
+        return app();
+        //return Application::getInstance();
     }
 
     /**

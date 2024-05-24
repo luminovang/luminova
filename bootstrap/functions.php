@@ -117,8 +117,8 @@ if (!function_exists('start_url')) {
         if(PRODUCTION){
             return APP_URL . '/' . ltrim($suffix, '/');
         }
-
-        $request = request();
+        static $request = null;
+        $request ??= Factory::request();
         $start = $request->getScheme() . '://' . $request->getHostname();
         $start .= rtrim(dirname($_SERVER['SCRIPT_NAME']), '/');
         
@@ -357,16 +357,18 @@ if(!function_exists('factory')) {
      * -   'request'   `Request`
      * -   'service'   `Services`
      * 
-     * @param mixed $arguments [, mixed $... ] The last bool argument indicate wether to return a shared instance.
      * @param bool $shared Allow shared instance creation (default: true).
+     * @param mixed $arguments [, mixed $... ] The initialization arguments.
      * 
      * @return class-object<\T>|Factory|null Return instance of factory or instance of factory class, otherwise null.
     */
-    function factory(string|null $context = null, mixed ...$arguments): ?object
+    function factory(string|null $context = null, bool $shared = true, mixed ...$arguments): ?object
     {
         if($context === null || $context === ''){
             return new Factory();
         }
+
+        $arguments[] = $shared;
 
         return Factory::$context(...$arguments);
     }
@@ -383,17 +385,20 @@ if(!function_exists('service')) {
      * @example $config = new \Luminova\Config\Config();
      * 
      * @param class-string<\T>|string|null $service The service class name or alias.
-     * @param mixed $arguments [, mixed $... ] The last bool argument indicate wether to return a shared instance.
-     * @param bool $serialize Allow object serialization (default: false).
      * @param bool $shared Allow shared instance creation (default: true).
+     * @param bool $serialize Allow object serialization (default: false).
+     * @param mixed $arguments [, mixed $... ] Service initialization arguments.
      * 
      * @return class-object<\T>|Services|null Return service class instance or instance of service class.
     */
-    function service(?string $service = null, mixed ...$arguments): ?object
+    function service(?string $service = null, bool $shared = true, bool $serialize = false, mixed ...$arguments): ?object
     {
         if($service === null || $service === ''){
             return Factory::service();
         }
+
+        $arguments[] = $serialize;
+        $arguments[] = $shared;
 
         return Factory::service()->{$service}(...$arguments);
     }
@@ -596,13 +601,27 @@ if (!function_exists('path')) {
      * Get system or application path, converted to `unix` or `windows` directory separator style.
      * 
      * @param string $file Path file name to return.
-     * - Context: [system, plugins, library, controllers, writeable, logs, caches, public, assets, views, routes, languages, services]
+     * 
+     * Storage Context Names.
+     *      - system.
+     *      - plugins.
+     *      - library.
+     *      - controllers.
+     *      - writeable. 
+     *      - logs.
+     *      - caches.
+     *      - public.
+     *      - assets.
+     *      - views.
+     *      - routes.
+     *      - languages.
+     *      - services
      * 
      * @return string Return directory path, windows, unix or windows style path. 
     */
-    function path(string $file): string
+    function path(string $name): string
     {
-        return Factory::fileManager()->getCompatible($file);
+        return Factory::fileManager()->getCompatible($name);
     }
 }
 
@@ -672,7 +691,6 @@ if (!function_exists('array_is_list')) {
         return array_keys($array) === range(0, count($array) - 1);
     }
 }
-
 
 if (!function_exists('to_array')) {
     /**
