@@ -24,7 +24,7 @@ if (getcwd() . DIRECTORY_SEPARATOR !== FRONT_CONTROLLER) {
 
 /**
  * Load application route context.
- * Register all our application contexts such as `WEB, API, CONSOLE and CLI` depending on our requirements.
+ * Register all your application contexts such as `WEB, API, CONSOLE and CLI` depending on our requirements.
  * 
  * @param Context|array<string,mixed> $contexts [, Context|array<string,mixed> ...$] Routes context method accept arguments array or new Context class instance.
  * 
@@ -45,7 +45,7 @@ if (getcwd() . DIRECTORY_SEPARATOR !== FRONT_CONTROLLER) {
  *                   'error' => [ViewErrors::class, 'onFooError'] 
  *               ]
  * 
- * Finally run our application router instance to register our routes.
+ * Finally run your application router to register and boot only request context for optimal performance.
 */
 Boot::http()->router->context(
     new Context(Context::WEB, [ViewErrors::class, 'onWebError']),
