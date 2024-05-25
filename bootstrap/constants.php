@@ -52,13 +52,14 @@ if(!function_exists('setenv')){
 
             if (!str_contains($envContents, "$key=") && !str_contains($envContents, "$key =")) {
                 return file_put_contents(APP_ROOT . '.env', "\n$key=$value", FILE_APPEND) !== false;
-            } else {
-                $newContents = preg_replace_callback('/(' . preg_quote($key, '/') . ')\s*=\s*(.*)/',
-                    fn($match) => $match[1] . '=' . $value,
-                    $envContents
-                );
-                return file_put_contents(APP_ROOT . '.env', $newContents) !== false;
-             }
+            }
+
+            $newContents = preg_replace_callback('/(' . preg_quote($key, '/') . ')\s*=\s*(.*)/',
+                fn($match) => $match[1] . '=' . $value,
+                $envContents
+            );
+            
+            return file_put_contents(APP_ROOT . '.env', $newContents) !== false;
         }
 
         return $count > 0;
@@ -221,6 +222,7 @@ defined('SHOW_DEBUG_BACKTRACE') || define('SHOW_DEBUG_BACKTRACE', (bool) env('de
  * @var bool NOVAKIT_ENV NovaKit executable command
 */
 defined('NOVAKIT_ENV') || define('NOVAKIT_ENV', (isset($_SERVER['NOVAKIT_EXECUTION_ENV']) ? $_SERVER['NOVAKIT_EXECUTION_ENV'] : null));
+
 
 /**
  * @var bool PROJECT_ID Get the project basename/public as product id or empty on php server.

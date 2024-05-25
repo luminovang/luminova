@@ -327,7 +327,7 @@ if(!function_exists('session')) {
     */
     function session(?string $key = null, bool $shared = true): mixed
     {
-        if (is_string($key) && $key !== '') {
+        if ($key !== null && $key !== '') {
             return Factory::session($shared)->get($key);
         }
 
@@ -533,7 +533,11 @@ if(!function_exists('nl2html')) {
             return '';
         }
 
-        return str_replace(["\n", "\r\n", '[br/]', '<br/>', "\t"], ["&#13;&#10;", "&#13;&#10;", "&#13;&#10;", "&#13;&#10;", "&#09;"], $text);
+        return str_replace(
+            ["\n", "\r\n", '[br/]', '<br/>', "\t"], 
+            ["&#13;&#10;", "&#13;&#10;", "&#13;&#10;", "&#13;&#10;", "&#09;"], 
+            $text
+        );
     }
 }
 
@@ -845,7 +849,6 @@ if (!function_exists('is_list')) {
     */
     function is_list(string $input, bool $trim = false):bool 
     {
-
         if ($trim) {
             $input = preg_replace('/\s*,\s*/', ',', $input);
             $input = preg_replace_callback('/"([^"]+)"/', fn($matches) => '"' . trim($matches[1]) . '"', $input);
@@ -976,7 +979,7 @@ if (!function_exists('is_dev_server')) {
             return true;
         }
 
-        if($server = ($_SERVER['SERVER_NAME'] ?? false)){
+        if(($server = ($_SERVER['SERVER_NAME'] ?? false)) !== false){
             if ($server === '127.0.0.1' || $server === '::1' || $server === 'localhost') {
                 return true;
             }
