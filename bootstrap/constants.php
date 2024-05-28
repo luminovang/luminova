@@ -51,7 +51,7 @@ if(!function_exists('setenv')){
             }
 
             if (!str_contains($envContents, "$key=") && !str_contains($envContents, "$key =")) {
-                return file_put_contents(APP_ROOT . '.env', "\n$key=$value", FILE_APPEND) !== false;
+                return file_put_contents(APP_ROOT . '.env', "\n$key=$value", FILE_APPEND | LOCK_EX) !== false;
             }
 
             $newContents = preg_replace_callback('/(' . preg_quote($key, '/') . ')\s*=\s*(.*)/',
@@ -59,7 +59,7 @@ if(!function_exists('setenv')){
                 $envContents
             );
             
-            return file_put_contents(APP_ROOT . '.env', $newContents) !== false;
+            return file_put_contents(APP_ROOT . '.env', $newContents, LOCK_EX) !== false;
         }
 
         return $count > 0;

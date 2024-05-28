@@ -21,6 +21,16 @@ final class Session extends BaseConfig
     public string $cookieName = 'PHPSESSID'; 
 
     /**
+     * The session storage index name, this will be used as 
+     * the default storage index for user's information in session or cookie.
+     * 
+     * @var string $tableIndex
+     * > Use a unique identifier possible md5 has string.
+     * > Do not dynamically generate the index always, you must specify a default id that will be used always.
+    */
+    public string $tableIndex = '__server_side_session_table';
+
+    /**
      * Set the directory where session files are stored on the server.
      * It doesn't affect the cookie sent to the client.
      * 

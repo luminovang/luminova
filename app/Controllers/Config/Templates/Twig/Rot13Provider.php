@@ -12,7 +12,7 @@ namespace App\Controllers\Config\Templates\Twig;
 
 class Rot13Provider
 {
-    public static function getProvider(): object|null
+    public static function getProvider(): ?object
     {
         return null;
     }

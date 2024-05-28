@@ -212,7 +212,7 @@ if(!function_exists('locale')){
     *
     * @return string|true Return application locale or true if locale was set;
     */
-    function locale(?string $locale = null): string|true 
+    function locale(?string $locale = null): string|bool 
     {
         if($locale === null){
             return env('app.locale', 'en');
@@ -746,7 +746,7 @@ if (!function_exists('to_object')) {
      * 
      * @return object|false $object  Return JSON object, otherwise false.
     */
-    function to_object(array|string $input): object|false
+    function to_object(array|string $input): object|bool
     {
         if ($input === [] || $input === '') {
             return (object)[];
@@ -779,7 +779,7 @@ if (!function_exists('list_to_array')) {
      * @param string $list string list
      * @return array|false Return array, otherwise false.
     */
-    function list_to_array(string $list): array|false 
+    function list_to_array(string $list): array|bool 
     {
         if ($list === '') {
             return false;
@@ -847,7 +847,7 @@ if (!function_exists('is_list')) {
      * 
      * @return bool true or false on failure.
     */
-    function is_list(string $input, bool $trim = false):bool 
+    function is_list(string $input, bool $trim = false): bool 
     {
         if ($trim) {
             $input = preg_replace('/\s*,\s*/', ',', $input);
@@ -1223,7 +1223,7 @@ if (!function_exists('get_mime')) {
      * 
      * @return string|false Return the content type in MIME format, otherwise false.
     */
-    function get_mime(string $filename): string|false
+    function get_mime(string $filename): string|bool
     {
         $mime = mime_content_type($filename);
         

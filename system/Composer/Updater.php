@@ -40,12 +40,10 @@ class Updater
     */
     public static function update(): void 
     {
-        if (getenv('LM_DEBUG_MODE') === false) { 
-            if(self::onInstallAndUpdate('bootstrap/', self::$frameworkPath, 'install/Boot/')){
-                self::updateConfigurations(self::$frameworkPath . 'install/Config/', 'app/Controllers/Config/');
-                self::updateConfigurations(self::$frameworkPath . 'install/Main/', 'samples/Main/', true);
-                self::onInstallAndUpdate('system/', self::$frameworkPath, 'src/', true);
-            }
+        if(self::onInstallAndUpdate('bootstrap/', self::$frameworkPath, 'install/Boot/')){
+            self::updateConfigurations(self::$frameworkPath . 'install/Config/', 'app/Controllers/Config/');
+            self::updateConfigurations(self::$frameworkPath . 'install/Main/', 'samples/Main/', true);
+            self::onInstallAndUpdate('system/', self::$frameworkPath, 'src/', true);
         }
     }
 
@@ -56,9 +54,7 @@ class Updater
     */
     public static function install(): void 
     {
-        if (getenv('LM_DEBUG_MODE') === false) {
-            self::onInstallAndUpdate('system/', self::$frameworkPath, 'src/', true);
-        }
+        self::onInstallAndUpdate('system/', self::$frameworkPath, 'src/', true);
     }
 
     /**
@@ -335,7 +331,7 @@ class Updater
                 }
 
                 self::removeRecursive($base . $source, 'framework');
-                exec('LM_DEBUG_MODE=1 composer dumpautoload', $output, $returnCode);
+                exec('composer dumpautoload', $output, $returnCode);
                 foreach ($output as $line) {
                     self::cli()->writeln('Dumping:   ' . $line);
                 }

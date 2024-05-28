@@ -14,7 +14,7 @@ class Modifiers extends Base
      * 
      * @return string|null Return function name if is callable, null otherwise.
     */
-    public function getModifierCallback(string $function): string|null 
+    public function getModifierCallback(string $function): ?string 
     {
         if (is_callable($function)) {
             return $function;
