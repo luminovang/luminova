@@ -46,6 +46,8 @@ To generate your website sitemap use the below `NovaKit` command.
 php novakit generate:sitemap
 ```
 
+To learn more about NovaKit commands [read the novakit documentation](https://luminova.ng/docs/0.0.0/commands/novakit).
+
 ---
 
 ### What's There For Me?
