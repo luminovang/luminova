@@ -53,7 +53,7 @@ To learn more about NovaKit commands [read the novakit documentation](https://lu
 ### What's There For Me?
 
 - **Database Builder:** A powerful Object Relational Mapping (ORM) tool that organizes CRUD operations and simplifies database interactions.
-- **MVC Architecture:** Adheres to the Model-View-Controller implementation.
+- **MVC & HMVC Architecture:** Adheres to the Model-View-Controller and  Hierarchical Model-View-Controller implementation.
 - **Flexible HTTP Routing:** Dynamic and fast routing implementation with a clear separation of concerns.
 - **Templating:** Optimized native PHP templating with additional inheritance and caching features. You can also use `Twig` or `Smarty` template engines.
 - **Error Handling:** Comprehensive error handling ensures that no errors go unnoticed, including non-fatal inline errors.
