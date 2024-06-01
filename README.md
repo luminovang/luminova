@@ -11,15 +11,25 @@
 
 ![Local Image](docs/logo.svg)
 
+
 # About Luminova!
 
 Luminova is a PHP framework built for speed and efficiency, designed to enhance your existing coding skills. At Luminova, we prioritize performance by offering feature customization through the `env` file. This ensures the framework includes only what's needed for your project, based on the features you enable. This approach allows you to enable or disable features as well as customizing your preferred template rendering mode and coding style.
 
 Luminova, provide access to the `Template` object within the view files, allowing you to call template methods and properties using `$this` keyword within template files. This can be disabled if you prefer your views to be rendered in isolation, disabling it will allow you to access exported application classes using custom keyword `$self`.
 
-To get started with Luminova, please visit our [official documentation](https://luminova.ng/docs).
+Get started with Luminova by visiting our [official documentation](https://luminova.ng/docs). For more information and sample code, check out our [YouTube channel](https://www.youtube.com/@luminovang).
 
-## What's There For Me?
+
+## Composer Installation
+
+Install luminova via Composer.
+
+```bash
+composer create-project luminovang/luminova my-project
+```
+
+### What's There For Me?
 
 - **Database Builder:** A powerful Object Relational Mapping (ORM) tool that organizes CRUD operations and simplifies database interactions.
 - **MVC Architecture:** Adheres to the Model-View-Controller implementation.
@@ -41,3 +51,21 @@ To get started with Luminova, please visit our [official documentation](https://
 - **Translation:** Create translations for your application using our translation class.
 - **Encryption:** Support for different encryption handlers and methods.
 - **Services:** Define classes that can be shared and discovered anywhere in your codebase, with support for serialization and class object caching.
+
+---
+
+## Quick Tips
+
+**Q: My session works on the development server but not on the production server.**
+- **A:** In production, change the `$sessionDomain` in `/app/Controllers/Config/Session.php` to your actual production domain. You can use `'.' . APP_HOST` for this. Also, update the `Cookie.php` configuration accordingly.
+
+**Q: My CSS and images are broken on the production server.**
+- **A:** Ensure you set the `app.environment.mood` key to `production` in your environment file when in production.
+
+---
+
+## Something Missing?
+
+Your feedback is highly appreciated. Let us know what more to add to enhance your experience with Luminova. You can also recommend tutorials for our YouTube channel to help you understand and use Luminova better.
+
+Most important, don't forget to rate Luminova on GitHub. Your rating is like fuel to illuminate our motivation to add more features and make Luminova widely recognized and better.
