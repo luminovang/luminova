@@ -20,6 +20,7 @@ Luminova, provide access to the `Template` object within the view files, allowin
 
 Get started with Luminova by visiting our [official documentation](https://luminova.ng/docs). For more information and sample code, check out our [YouTube channel](https://www.youtube.com/@luminovang).
 
+---
 
 ## Composer Installation
 
@@ -28,6 +29,24 @@ Install luminova via Composer.
 ```bash
 composer create-project luminovang/luminova my-project
 ```
+
+## Start Development Server
+
+To start the `PHP` development server, run the following `NovaKit` command.
+
+```bash
+php novakit server
+```
+
+## Sitemap Generator
+
+To generate your website sitemap use the below `NovaKit` command.
+
+```bash
+php novakit generate:sitemap
+```
+
+---
 
 ### What's There For Me?
 
