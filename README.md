@@ -52,6 +52,8 @@ To learn more about NovaKit commands [read the novakit documentation](https://lu
 
 ### What's There For Me?
 
+Here we can brief you on the basic features you can expect in Luminova. There's a lot more than what is written here. As Linus Torvalds said, "Talk is cheap. Show me the code."
+
 - **Database Builder:** A powerful Object Relational Mapping (ORM) tool that organizes CRUD operations and simplifies database interactions.
 - **MVC & HMVC Architecture:** Adheres to the Model-View-Controller and  Hierarchical Model-View-Controller implementation.
 - **Flexible HTTP Routing:** Dynamic and fast routing implementation with a clear separation of concerns.
