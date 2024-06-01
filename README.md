@@ -89,6 +89,6 @@ Here we can brief you on the basic features you can expect in Luminova. There's 
 
 ## Something Missing?
 
-Your feedback is highly appreciated. Let us know what more to add to enhance your experience with Luminova. You can also recommend tutorials for our YouTube channel to help you understand and use Luminova better.
+Your feedback is highly appreciated [peter@luminova.ng](mailto:peter@luminova.ng). Let us know what more to add to enhance your experience with Luminova. You can also recommend tutorials for our YouTube channel to help you understand and use Luminova better.
 
 Most important, don't forget to rate Luminova on GitHub. Your rating is like fuel to illuminate our motivation to add more features and make Luminova widely recognized and better.
