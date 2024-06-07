@@ -20,6 +20,7 @@ use \App\Controllers\Utils\Functions;
 use \App\Controllers\Application;
 use \Luminova\Template\Layout;
 use \Luminova\Exceptions\FileException;
+use JsonException;
 
 if (!function_exists('root')) {
     /**
@@ -370,7 +371,7 @@ if(!function_exists('factory')) {
      * -   'modules'   `Modules`
      * -   'language'  `Translator`
      * -   'logger'    `Logger`
-     * -   'files'     `FileManager`
+     * -   'fileManager'     `FileManager`
      * -   'validate'  `InputValidator`
      * -   'response'  `ViewResponse`
      * -   'request'   `Request`
@@ -648,6 +649,45 @@ if (!function_exists('path')) {
     }
 }
 
+if (!function_exists('get_column')) {
+    /**
+     * Return the values from a single column in the input array or an object.
+     * 
+     * @param array|object $from Array or an object to extract column values from.
+     * @param null|string|int $property The column property key to extract.
+     * @param string|int|null $index An optional column to use as the index/keys for the returned array.
+     * 
+     * @return array Returns an array of values representing a single column from the input array or object.
+    */
+    function get_column(array|object $from, null|string|int $property, null|string|int $index = null): array 
+    {
+        if (is_array($from)) {
+            return array_column($from, $property, $index);
+        }
+
+        $from = (array) $from;
+
+        if ($index !== null) {
+            $columns = [];
+            foreach ($from as $item) {
+                if (is_object($item)) {
+                    $key = $item->{$index};
+                    $value = ($property === null) ? $item : $item->{$property};
+                } else {
+                    $key = $item[$index];
+                    $value = ($property === null) ? $item : $item[$property];
+                }
+                $columns[$key] = $value;
+            }
+            return $columns;
+        }
+
+        return array_map(function($item) use ($property) {
+            return is_object($item) ? $item->{$property} : $item[$property];
+        }, $from);
+    }
+}
+
 if (!function_exists('is_nested')) {
     /**
      * Check if array is a nested array
@@ -690,7 +730,6 @@ if (!function_exists('is_associative')) {
     
         return true;
     }
-    
 }
 
 if (!function_exists('array_is_list')) {
@@ -761,7 +800,7 @@ if (!function_exists('to_object')) {
     
         try{
             return json_decode(json_encode($input, JSON_THROW_ON_ERROR));
-        }catch(\JsonException){
+        }catch(JsonException){
             return false;
         }
 
