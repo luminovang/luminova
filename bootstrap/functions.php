@@ -20,7 +20,6 @@ use \App\Controllers\Utils\Functions;
 use \App\Controllers\Application;
 use \Luminova\Template\Layout;
 use \Luminova\Exceptions\FileException;
-use JsonException;
 
 if (!function_exists('root')) {
     /**
@@ -800,7 +799,7 @@ if (!function_exists('to_object')) {
     
         try{
             return json_decode(json_encode($input, JSON_THROW_ON_ERROR));
-        }catch(JsonException){
+        }catch(\JsonException){
             return false;
         }
 

@@ -303,3 +303,9 @@ defined('RETURN_COLUMN') || define('RETURN_COLUMN', 5);
  * @var int RETURN_ALL Fetch all as results
 */
 defined('RETURN_ALL') || define('RETURN_ALL', 6);
+
+/**
+ * @var int RETURN_STMT Return prepared statement.
+*/
+defined('RETURN_STMT') || define('RETURN_STMT', 7);
+
