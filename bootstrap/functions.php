@@ -90,11 +90,11 @@ if (!function_exists('app')) {
 
 if (!function_exists('request')) {
     /**
-     * Get request object
+     * Get request object.
      * 
      * @param bool $shared Return a shared instance (default: true).
      * 
-     * @return Request|null Return Request object
+     * @return Request|null Return Request object.
     */
     function request(bool $shared = true): ?Request 
     {
@@ -209,9 +209,9 @@ if(!function_exists('locale')){
     /**
     * Set locale or return locale application string.
     *
-    * @param string|null $locale If locale is present it will set it else return default locale
+    * @param string|null $locale If locale is present it will set it else return default locale.
     *
-    * @return string|true Return application locale or true if locale was set;
+    * @return string|true Return application locale or true if locale was set.
     */
     function locale(?string $locale = null): string|bool 
     {
@@ -266,9 +266,9 @@ if(!function_exists('strict')){
 
 if(!function_exists('is_tor')){
     /**
-    * Checks if the given IP address is a Tor exit node
+    * Checks if the given IP address is a Tor exit node.
     *
-    * @param string|null $ip Ip address to check else use current ip address
+    * @param string|null $ip Ip address to check else use current ip address.
     * 
     * @return bool Return true if ip address is a Tor exit node.
     */
@@ -280,10 +280,10 @@ if(!function_exists('is_tor')){
 
 if(!function_exists('ip_address')){
     /**
-    * Get user IP address or return ip address information
+    * Get user IP address or return ip address information.
     *
-    * @param bool $info If true return ip address information instead
-    * @param array $options Pass additional options to return with IP information
+    * @param bool $info If true return ip address information instead.
+    * @param array $options Pass additional options to return with IP information.
     * 
     * @return string|object|null  Return ip info or ip address.
     */
@@ -428,9 +428,9 @@ if(!function_exists('remove_service')) {
     /**
      * Delete a service or clear all services
      * If NULL is passed all cached services instances will be cleared.
-     * Else delete a specific services instance and clear it's cached instances
+     * Else delete a specific services instance and clear it's cached instances.
      * 
-     * @param class-string<\T>|string $service The class name or alias, to delete and clear it cached
+     * @param class-string<\T>|string $service The class name or alias, to delete and clear it cached.
      * 
      * @return bool Return true if the service was removed or cleared, false otherwise.
     */
@@ -446,7 +446,7 @@ if(!function_exists('remove_service')) {
 
 if(!function_exists('browser')) {
     /**
-     * Tells what the user's browser is capable of
+     * Tells what the user's browser is capable of.
      * 
      * @param string|null $user_agent  The user agent string to analyze.
      * @param bool $return Set the return type, if `instance` return userAgent class object otherwise return array or json object.
@@ -477,9 +477,9 @@ if(!function_exists('browser')) {
 
 if(!function_exists('is_platform')) {
     /**
-     * Tells which operating system platform your application is running on
+     * Tells which operating system platform your application is running on.
      * 
-     * @param string $os Platform name 
+     * @param string $os Platform name.
      *      - [mac, windows, linux, freebsd, openbsd, solaris, aws, etc..]
      * 
      * @return bool Return true if the platform is matching, false otherwise.
@@ -507,7 +507,7 @@ if (!function_exists('text2html')) {
      * 
      * @param string $text A string containing the text to be processed.
      * 
-     * @return string $text The processed text with HTML entities.
+     * @return string Return processed text with HTML entities.
     */
     function text2html(?string $text): string
     { 
@@ -526,7 +526,7 @@ if(!function_exists('nl2html')) {
      * 
      * @param string|null $text A string containing the text to be processed.
      * 
-     * @return string $text
+     * @return string Return formatted string with line breaks.
     */
     function nl2html(string|null $text): string
     {
@@ -545,14 +545,14 @@ if(!function_exists('nl2html')) {
 if(!function_exists('import')) {
     /**
      * Import a custom library into your project 
-     * You must place your external libraries in libraries/libs/ directory
+     * You must place your external libraries in libraries/libs/ directory.
      * 
-     * @param string $library the name of the library
+     * @param string $library the name of the library.
      * @example Foo/Bar/Baz
      * @example Foo/Bar/Baz.php
      * 
-     * @return bool Return true if the library was successfully imported
-     * @throws RuntimeException if library could not be found
+     * @return bool true if the library was successfully imported.
+     * @throws RuntimeException if library could not be found.
     */
     function import(string $library): bool
     {
@@ -581,18 +581,18 @@ if(!function_exists('import')) {
 
  if (!function_exists('lang')) {
     /**
-     * Translate multiple languages it supports nested array
+     * Translate multiple languages it supports nested array.
      *
      * @param string $lookup line to lookup.
      * @param string|null $default Fallback translation if not found.
      * @param string|null $locale The locale to use for translation (optional).
-     * @param array $placeholders Matching placeholders for translation
+     * @param array $placeholders Matching placeholders for translation.
      *    - @example array ['Peter', 'peter@foo.com] "Error name {0} and email {1}"
      *    - @example array ['name' => 'Peter', 'email' => 'peter@foo.com] "Error name {name} and email {email}"
      * 
      * 
      * @return string Return translated string.
-     * @throws NotFoundException if translation is not found and default is not provided
+     * @throws NotFoundException if translation is not found and default is not provided.
     */
     function lang(
         string $lookup, 
@@ -690,11 +690,11 @@ if (!function_exists('get_column')) {
 
 if (!function_exists('is_nested')) {
     /**
-     * Check if array is a nested array
+     * Check if array is a nested array.
      * 
      * @param array $array Array to check.
      * 
-     * @return bool Return true if array is a nested array
+     * @return bool Return true if array is a nested array.
     */
     function is_nested(array $array): bool 
     {
@@ -712,11 +712,11 @@ if (!function_exists('is_nested')) {
 
 if (!function_exists('is_associative')) {
     /**
-     * Check if array is associative
+     * Check if array is associative.
      * 
-     * @param array $array Array to check
+     * @param array $array Array to check.
      * 
-     * @return bool Return true if array is associative, false otherwise
+     * @return bool Return true if array is associative, false otherwise.
     */
     function is_associative(array $array): bool 
     {
@@ -734,9 +734,9 @@ if (!function_exists('is_associative')) {
 
 if (!function_exists('array_is_list')) {
     /**
-     * Check if array is list
+     * Check if array is list.
      * 
-     * @param array $array Array to check
+     * @param array $array Array to check.
      * 
      * @return bool Return true if array is sequential, false otherwise.
     */
@@ -760,7 +760,7 @@ if (!function_exists('to_array')) {
      *
      * @param mixed $input The object to convert to an array.
      * 
-     * @return array $array Finalized array representation of the object
+     * @return array $array Finalized array representation of the object.
     */
     function to_array(mixed $input): array 
     {
@@ -779,9 +779,9 @@ if (!function_exists('to_array')) {
 
 if (!function_exists('to_object')) {
     /**
-     * Convert an array or string list to json object
+     * Convert an array or string list to json object.
      *
-     * @param array|string $input Array or String list to convert
+     * @param array|string $input Array or String list to convert.
      * 
      * @return object|false $object  Return JSON object, otherwise false.
     */
@@ -810,12 +810,13 @@ if (!function_exists('to_object')) {
 
 if (!function_exists('list_to_array')) {
     /**
-     * Convert string list to array 
+     * Convert string list to array.
      * 
      * @example list_to_array('a,b,c') => ['a', 'b', 'c']
      * @example list_to_array('"a","b","c"') => ['a', 'b', 'c']
      * 
-     * @param string $list string list
+     * @param string $list string list.
+     * 
      * @return array|false Return array, otherwise false.
     */
     function list_to_array(string $list): array|bool 
@@ -844,10 +845,10 @@ if (!function_exists('list_in_array')) {
    /**
      * Check if string list exist in array 
      * If any of the list doesn't exist in array it will return false
-     * First it will have to convert the list to array using list_to_array()
+     * First it will have to convert the list to array using list_to_array().
      * 
-     * @param string $list string list
-     * @param array $array Array to map list to
+     * @param string $list string list.
+     * @param array $array Array to map list to.
      * 
      * @return bool Return true exist, otherwise false.
     */
@@ -879,12 +880,12 @@ if (!function_exists('list_in_array')) {
 
 if (!function_exists('is_list')) {
     /**
-     * Check if string is a valid list format
+     * Check if string is a valid list format.
      * 
-     * @param string $input string to check
-     * @param bool $trim Trim whitespace around the values  
+     * @param string $input string to check.
+     * @param bool $trim Trim whitespace around the values.
      * 
-     * @return bool true or false on failure.
+     * @return bool Return true or false on failure.
     */
     function is_list(string $input, bool $trim = false): bool 
     {
@@ -924,12 +925,12 @@ if (!function_exists('make_dir')) {
      * Attempts to create the directory specified by pathname if not exist.
      * 
      * @param string $path Directory path to create.
-     * @param int $permissions Unix file permissions
-     * @param bool $recursive Allows the creation of nested directories (default: true)
+     * @param int $permissions Unix file permissions.
+     * @param bool $recursive Allows the creation of nested directories (default: true).
      * 
-     * @return bool true if files existed or was created else false
+     * @return bool Return true if files existed or was created else false.
      * @throws RuntimeException If path is not readable.
-     * @throws FileException If unable to create directory
+     * @throws FileException If unable to create directory.
     */
     function make_dir(string $path, ?int $permissions = null, bool $recursive = true): bool 
     {
@@ -939,15 +940,15 @@ if (!function_exists('make_dir')) {
 
 if (!function_exists('validate')) {
     /**
-     * Validate input fields or get validation instance 
+     * Validate input fields or get validation instance.
      * Return true or false if input and rules are specified 
      * else return validation instance if NULL is passed on $inputs and $rules.
      *
-     * @param array $inputs Input fields to validate on 
+     * @param array $inputs Input fields to validate on.
      *      @example [$_POST, $_GET or $this->request->getBody()]
-     * @param array $rules Validation filter rules to apply on each input field 
+     * @param array $rules Validation filter rules to apply on each input field.
      *      @example ['email' => 'required|email|max|min|length']
-     * @param array $messages Validation error messages to apply on each filter on input field
+     * @param array $messages Validation error messages to apply on each filter on input field.
      *      @example [
      *          'email' => [
      *              'required' => 'email is required',
@@ -973,7 +974,7 @@ if (!function_exists('validate')) {
 
 if (!function_exists('get_class_name')) {
     /**
-     * Get class basename from namespace or object
+     * Get class basename from namespace or object.
      * 
      * @param string|class-object<\T> $from Class name or class object.
      * 
@@ -998,7 +999,7 @@ if (!function_exists('is_command')) {
     /**
      * Find whether application is running in cli mode.
      *
-     * @return bool Return true if request is made in cli mode, false otherwise
+     * @return bool Return true if request is made in cli mode, false otherwise.
     */
     function is_command(): bool
     {
@@ -1008,7 +1009,7 @@ if (!function_exists('is_command')) {
 
 if (!function_exists('is_dev_server')) {
     /**
-     * Check if the application is running locally on development server
+     * Check if the application is running locally on development server.
      *
      * @return bool Return true if is development server, false otherwise.
     */
@@ -1036,7 +1037,7 @@ if (!function_exists('response')) {
     /** 
     * Initiate a view response object. 
     *
-    * @param int $status int $status HTTP status code (default: 200 OK)
+    * @param int $status int $status HTTP status code (default: 200 OK).
     * @param bool $encode Enable content encoding like gzip, deflate.
     *
     * @return ViewResponse Return vew response object. 
@@ -1049,7 +1050,7 @@ if (!function_exists('response')) {
 
 if (!function_exists('is_blob')) {
     /**
-     * Find whether the type of a variable is blob
+     * Find whether the type of a variable is blob.
      *
      * @param mixed $value Value to check.
      * 
@@ -1087,10 +1088,10 @@ if (!function_exists('status_code')) {
      * In CLI, 0 is considered success while 1 is failure.
      * In some occasions, void or null may be returned, treating it as success.
      * 
-     * @param mixed $result Response from the callback function (void|bool|null|int)
-     * @param bool $return_int Return type (default: int)
+     * @param mixed $result Response from the callback function (void|bool|null|int).
+     * @param bool $return_int Return type (default: int).
      * 
-     * @return int|bool Return boolean value.
+     * @return int|bool Return integer or boolean value.
      */
     function status_code(mixed $result = null, bool $return_int = true): int|bool
     {
@@ -1188,8 +1189,9 @@ if (!function_exists('camel_case')) {
     /**
      * Convert a string to camel case.
      *
-     * @param string $input The string to convert
-     * @return string The string converted to camel case
+     * @param string $input The string to convert.
+     * 
+     * @return string Return string converted to camel case.
     */
     function camel_case(string $input): string
     {
@@ -1214,7 +1216,7 @@ if (!function_exists('string_length')) {
      * @param string $content The content to calculate length for.
      * @param string|null $charset The character set of the content.
      * 
-     * @return int The calculated Content-Length.
+     * @return int Return calculated Content-Length.
      */
     function string_length(string $content, ?string $charset = null): int 
     {
