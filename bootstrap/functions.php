@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * Luminova Framework
  *
@@ -550,7 +551,7 @@ if(!function_exists('import')) {
      * @example Foo/Bar/Baz
      * @example Foo/Bar/Baz.php
      * 
-     * @return bool true if the library was successfully imported
+     * @return bool Return true if the library was successfully imported
      * @throws RuntimeException if library could not be found
     */
     function import(string $library): bool

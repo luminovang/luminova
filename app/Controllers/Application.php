@@ -14,7 +14,7 @@ use \Luminova\Base\BaseApplication;
 class Application extends BaseApplication 
 {
     /**
-     * @method #[\Override] onCreate
+     * {@inheritdoc}
     */
     protected function onCreate(): void
     {
@@ -52,4 +52,24 @@ class Application extends BaseApplication
         * @example $this->Meta->setCanonicalVersion(parent::baseUrl(), $this->getView());
         */
 	}
+
+    /**
+     * {@inheritdoc}
+    */
+    protected function onFinish(): void {}
+
+    /**
+     * {@inheritdoc}
+    */
+    protected function onContextInstalled(string $context): void {}
+
+    /**
+     * {@inheritdoc}
+    */
+    protected function onViewPresent(string $uri): void {}
+
+    /**
+     * {@inheritdoc}
+    */
+    protected function onCommandPresent(array $options): void {}
 }

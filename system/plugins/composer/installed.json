@@ -2,17 +2,17 @@
     "packages": [
         {
             "name": "luminovang/framework",
-            "version": "3.0.0",
-            "version_normalized": "3.0.0.0",
+            "version": "3.1.1",
+            "version_normalized": "3.1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/luminovang/framework.git",
-                "reference": "fab39aebda74467bb8240ab1ec1477a0eb6705aa"
+                "reference": "5a6769919f40eec3634119fb863b7c21d50cf44f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/luminovang/framework/zipball/fab39aebda74467bb8240ab1ec1477a0eb6705aa",
-                "reference": "fab39aebda74467bb8240ab1ec1477a0eb6705aa",
+                "url": "https://api.github.com/repos/luminovang/framework/zipball/5a6769919f40eec3634119fb863b7c21d50cf44f",
+                "reference": "5a6769919f40eec3634119fb863b7c21d50cf44f",
                 "shasum": ""
             },
             "require": {
@@ -34,7 +34,7 @@
                 "ext-intl": "Needed if you use Local",
                 "ext-mysqli": "Needed if you use MySQL"
             },
-            "time": "2024-05-10T07:52:03+00:00",
+            "time": "2024-06-29T09:09:23+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
