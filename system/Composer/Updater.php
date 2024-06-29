@@ -337,7 +337,7 @@ class Updater
                 }
 
                 if ($returnCode === 0) {
-                    self::cli()->success('Update was completed version [' . (Foundation::VERSION??'1.5.0') . ']');
+                    self::cli()->writeln('Update was completed version [' . (Foundation::VERSION??'1.5.0') . ']', 'white', 'green');
                     if($hasTodo || self::$toReplace !== []){
                         self::cli()->beeps(2);
                         self::cli()->writeln('TODO ATTENTION!', 'yellow');
