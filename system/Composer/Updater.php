@@ -41,7 +41,7 @@ class Updater
     public static function update(): void 
     {
         if(self::onInstallAndUpdate('bootstrap/', self::$frameworkPath, 'install/Boot/')){
-            self::updateConfigurations(self::$frameworkPath . 'install/Config/', 'app/Controllers/Config/');
+            self::updateConfigurations(self::$frameworkPath . 'install/App/', 'app/Controllers/');
             self::updateConfigurations(self::$frameworkPath . 'install/Main/', 'samples/Main/', true);
             self::onInstallAndUpdate('system/', self::$frameworkPath, 'src/', true);
         }
