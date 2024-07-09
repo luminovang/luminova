@@ -11,33 +11,19 @@ namespace App\Controllers;
 
 use \Luminova\Base\BaseViewController;
 
+/**
+ * This class demonstrates how web pages controller can be implemented using PHP Luminova.
+*/
 class Welcome extends BaseViewController 
 {
     /**
      * Index page controller method.
-     * @see /routes/web.php
+     * @see /routes/web.php - The web context.
      * 
-     * @return int Status code.
+     * @return int Return status code STATUS_SUCCESS or STATUS_ERROR.
     */
     public function home(): int
     {
         return $this->view('index');
-    }
-
-    /**
-     * Json info controller method.
-     * @see /routes/api.php
-     * 
-     * @return int Status code.
-    */
-    public function info(): int
-    {
-        return response(200)->json([
-            "welcome" => [
-                "status" => "OK",
-                "code" => 200,
-                "message" => 'Hello world!'
-            ]
-        ]);
     }
 }

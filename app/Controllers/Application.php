@@ -20,27 +20,22 @@ class Application extends BaseApplication
     {
         /**
          *  Initialize session manager if you want to make use of sessions
-         *  @example $session = new Session(new SessionManager());
-         *  @example $session->setStorage("my_storage");
-         *  @example $session->start();
+         *  @example $this->session = new Session(new SessionManager());
+         *  @example $this->session->setStorage("my_storage");
+         *  @example $this->session->start();
         */
 
         /**
         * Register global classes to use across your application life cycle
         * Once exported you can access the method in application class by $this->Foo
+        * The export method should be used if the property visibility is not protected or public,
+        * Or when view isolation is enabled.
         *
-        * @example $this->export($session); 
+        * @example $this->export($this->session); 
         * @example $this->export(MyClass::class); 
         * @example $this->export(new MyClass(arguments), 'MyClass');
         * @example $this->export(new MyClass(arguments));
         */
-
-
-        /**
-        * Set the template engine 
-        * @example $this->setTemplateEngin(parent::SMARTY_TEMPLATE );
-        */
-
 
         /**
         * Set default the canonical url version for your application
