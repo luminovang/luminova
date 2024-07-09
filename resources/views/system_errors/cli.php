@@ -9,7 +9,7 @@
  */
 use \Luminova\Command\Terminal;
 
-$cli = new Terminal();
+$cli ??= new Terminal();
 
 if (isset($exception)) {
     $parts = explode(" File:", $exception->getMessage());
