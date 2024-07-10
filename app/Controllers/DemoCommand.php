@@ -54,7 +54,7 @@ class DemoCommand extends BaseCommand
      * {@inheritdoc}
     */
     protected array $examples = [
-        'php index.php demo --help' => 'Show default message.',
+        'php index.php demo --help' => 'Show help message.',
         'php index.php demo hello' => 'Show default message.',
         'php index.php demo hello --password' => 'Show request for password.',
         'php index.php demo hello --select' => 'Show request to choose and option.',

@@ -14,7 +14,7 @@ use \Luminova\Base\BaseController;
 /**
  * This class demonstrates how web pages or API controller can be implemented using PHP Luminova.
 */
-class RequestController extends BaseController 
+class DemoRequest extends BaseController 
 {
     /**
      * This is an example of API controller.
