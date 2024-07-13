@@ -17,7 +17,7 @@ use \Luminova\Boot;
 require __DIR__ . '/system/Boot.php';
 
 /**
- * Location of the framework bootstrap file.
+ * Initialize booting framework bootstrap important files.
 */
 Boot::cli();
 
