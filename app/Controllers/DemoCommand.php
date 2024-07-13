@@ -30,7 +30,7 @@ class DemoCommand extends BaseCommand
      * {@inheritdoc}
     */
     protected array $usages  = [
-        'php index.php <command> <method> <arguments>',
+        'php index.php demo <command> <arguments>',
         'php index.php demo hello'
     ];
 
