@@ -20,7 +20,6 @@ class DemoRequest extends BaseController
      * This is an example of API controller.
      * 
      * @return int Return status code STATUS_SUCCESS or STATUS_ERROR.
-     * @Route("/api/info", methods={"POST"})
      * 
      * @see /routes/api.php - The api context.
     */

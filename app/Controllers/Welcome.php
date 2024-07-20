@@ -21,7 +21,6 @@ class Welcome extends BaseViewController
      * @see /routes/web.php - The web context.
      * 
      * @return int Return status code STATUS_SUCCESS or STATUS_ERROR.
-     * @Route("/", methods={"GET"})
     */
     public function home(): int
     {

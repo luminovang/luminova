@@ -146,8 +146,8 @@ class DemoCommand extends BaseCommand
         // Validate user password.
         if ($input == '12345') {
             return "You have entered the correct password '{$input}'.";
-        } else {
-            return "Incorrect password {$input}.";
         }
+
+        return "Incorrect password {$input}.";
     }
 }

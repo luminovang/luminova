@@ -26,25 +26,20 @@ if(!function_exists('setenv')){
      */
     function setenv(string $key, string $value, bool $append_to_env = false): bool
     {
-        $count = 0;
+        if($key === ''){
+            return false;
+        }
+
         $key = trim($key);
         $value = trim($value);
 
         if (!getenv($key, true)) {
             putenv("{$key}={$value}");
-            $count++;
         }
     
-        if (empty($_ENV[$key])) {
-            $_ENV[$key] = $value;
-            $count++;
-        }
-    
-        if (empty($_SERVER[$key])) {
-            $_SERVER[$key] = $value;
-            $count++;
-        }
-    
+        $_ENV[$key] = $value;
+        $_SERVER[$key] = $value;
+
         if ($append_to_env) {
             $envContents = file_get_contents(APP_ROOT . '.env');
             if($envContents === false){
@@ -63,7 +58,7 @@ if(!function_exists('setenv')){
             return file_put_contents(APP_ROOT . '.env', $newContents, LOCK_EX) !== false;
         }
 
-        return $count > 0;
+        return true;
     }
 }
 
@@ -78,6 +73,10 @@ if(!function_exists('env')){
      */
     function env(string $key, mixed $default = null): mixed 
     {
+        if($key === ''){
+            return '';
+        }
+
         $value = $_ENV[$key] ?? ($_SERVER[$key] ?? getenv($key));
 
         if ($value === false) {
@@ -105,7 +104,7 @@ if(!function_exists('register_env')){
     function register_env(string $path): void
     {
         if (!file_exists($path)) {
-            echo "Environment file not found on: $path, make sure you add .env file to your project root";
+            echo "Environment file not found on: {$path}, make sure you add .env file to your project root.";
             exit(1);
         }
 
@@ -118,8 +117,7 @@ if(!function_exists('register_env')){
 
             $parts = explode('=', $line, 2);
             if (count($parts) >= 2) {
-                [$name, $value] = $parts;
-                setenv($name, $value);
+                setenv($parts[0], $parts[1]);
             }
         }
     }
