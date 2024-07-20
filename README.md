@@ -50,6 +50,28 @@ To learn more about NovaKit commands [read the novakit documentation](https://lu
 
 ---
 
+## Routing
+
+Luminova support flexible routing implementation using `Attributes` or `Router` methods.
+
+**Define your route using `PHP8` attributes:***
+
+```php
+#[Route('/', methods: ['GET'])]
+public function index(): int 
+{
+    return $this->view('index');
+}
+```
+
+**Or define your route using code-based routing:**
+
+```php
+<?php 
+$router->get('/', 'YourController::index');
+```
+---
+
 ### What's There For Me?
 
 Here we can brief you on the basic features you can expect in Luminova. There's a lot more than what is written here. As Linus Torvalds said, "Talk is cheap. Show me the code."
