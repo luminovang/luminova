@@ -9,7 +9,7 @@
 ![PHP 8.0+](https://img.shields.io/badge/php-min%208.0.0-red.svg)
 
 
-![Local Image](https://github.com/luminovang/luminova/docs/logo.svg)
+![Local Image](docs/logo.svg)
 
 
 # About Luminova!
