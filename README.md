@@ -1,6 +1,7 @@
 # PHP Luminova Framework
 
 [![Author](https://img.shields.io/badge/author-@peterchig-blue.svg)](https://instagram.com/peterchig)
+![PHP 8.0+](https://img.shields.io/badge/php-min%208.0.0-red.svg)
 [![Source Code](https://img.shields.io/badge/source-luminovang/luminova-blue.svg)](https://github.com/luminovang/luminova)
 [![Latest Version](https://img.shields.io/github/tag/luminovang/luminova.svg)](https://github.com/luminovang/luminova/releases)
 [![Framework Source Code](https://img.shields.io/badge/source-luminovang/framework-blue.svg)](https://github.com/luminovang/framework)
@@ -8,7 +9,6 @@
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/luminovang/luminova/blob/master/LICENSE)
 [![Total Downloads](https://img.shields.io/packagist/dt/luminovang/framework.svg)](https://packagist.org/search/?tags=php%20luminova)
 ![Endpoint Badge](https://img.shields.io/endpoint?url=https%3A%2F%2Fluminova.ng%2Fdownloads)
-![PHP 8.0+](https://img.shields.io/badge/php-min%208.0.0-red.svg)
 
 
 ![Local Image](https://github.com/luminovang/luminova/raw/main/docs/logo.svg)
