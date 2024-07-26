@@ -20,13 +20,13 @@ if(!function_exists('setenv')){
      *
      * @param string $key The key of the environment variable.
      * @param string $value The value of the environment variable.
-     * @param bool $append_to_env Save or update to .env file 
+     * @param bool $append_to_env Weather to save or update the value in .env file (default: false).
      * 
-     * @return bool true on success or false on failure.
+     * @return bool Return true on success, otherwise false on failure.
      */
     function setenv(string $key, string $value, bool $append_to_env = false): bool
     {
-        if($key === ''){
+        if ($key === '') {
             return false;
         }
 
@@ -36,26 +36,40 @@ if(!function_exists('setenv')){
         if (!getenv($key, true)) {
             putenv("{$key}={$value}");
         }
-    
+
         $_ENV[$key] = $value;
         $_SERVER[$key] = $value;
 
         if ($append_to_env) {
-            $envContents = file_get_contents(APP_ROOT . '.env');
-            if($envContents === false){
+            $path = APP_ROOT . '.env';
+
+            try {
+                $file = new SplFileObject($path, 'a+');
+                $content = '';
+                $found = false;
+                $pattern = '/^' . preg_quote($key, '/') . '\s*=/m';
+
+                while (!$file->eof()) {
+                    $line = $file->fgets();
+                    if (preg_match($pattern, $line)) {
+                        $found = true;
+                        $content .= "$key=$value";
+                    }else{
+                        $content .= $line;
+                    }
+                }
+
+                if (!$found) {
+                    $content .= "\n$key=$value";
+                }
+
+                $file = new SplFileObject($path, 'w');
+                $file->fwrite($content);
+
+                return true;
+            } catch (RuntimeException|LogicException $e) {
                 return false;
             }
-
-            if (!str_contains($envContents, "$key=") && !str_contains($envContents, "$key =")) {
-                return file_put_contents(APP_ROOT . '.env', "\n$key=$value", FILE_APPEND | LOCK_EX) !== false;
-            }
-
-            $newContents = preg_replace_callback('/(' . preg_quote($key, '/') . ')\s*=\s*(.*)/',
-                fn($match) => $match[1] . '=' . $value,
-                $envContents
-            );
-            
-            return file_put_contents(APP_ROOT . '.env', $newContents, LOCK_EX) !== false;
         }
 
         return true;
@@ -64,12 +78,12 @@ if(!function_exists('setenv')){
 
 if(!function_exists('env')){
     /**
-     * Get environment variables.
+     * Get environment variable value from registered `ENV` variables.
      *
-     * @param string $key The key to retrieve.
-     * @param mixed $default The default value to return if the key is not found.
+     * @param string $key The environment variable key to retrieve.
+     * @param mixed $default Optional default value to return if the key is not found (default: null).
      * 
-     * @return mixed
+     * @return mixed Return the value of the specified environment key or default value if not found.
      */
     function env(string $key, mixed $default = null): mixed 
     {
@@ -86,47 +100,56 @@ if(!function_exists('env')){
         return match (strtolower($value)) {
             'true', 'enable' => true,
             'false', 'disable' => false,
-            'blank', => '',
+            'blank' => '',
             'null' => null,
-            default => $value
+            default => (str_starts_with($value, '[') && str_ends_with($value, ']')) 
+                ? (function($value) {
+                    if ($value === '[]') {
+                        return [];
+                    }
+    
+                    $value = trim($value, '[] ');
+                    $array = explode(',', $value);
+                    return array_map(function($item) {
+                        $entry = trim($item);
+                        if (is_numeric($entry)) {
+                            return $entry + 0;
+                        }
+                        return $entry;
+                    }, $array);
+                })($value)
+            : $value
         };
     }
 }
 
-if(!function_exists('register_env')){
-    /**
-     * Register environment variables from a .env file.
-     *
-     * @param string $path The path to the .env file.
-     * 
-     * @return void
-     */
-    function register_env(string $path): void
-    {
-        if (!file_exists($path)) {
-            echo "Environment file not found on: {$path}, make sure you add .env file to your project root.";
-            exit(1);
-        }
-
-        $file = new SplFileObject($path, 'r');
-        while (!$file->eof()) {
-            $line = trim($file->fgets());
-            if (str_starts_with($line, '#') || str_starts_with($line, ';')) {
-                continue;
-            }
-
-            $parts = explode('=', $line, 2);
-            if (count($parts) >= 2) {
-                setenv($parts[0], $parts[1]);
-            }
-        }
-    }
-}
-
 /**
- * Initialize and load the environment variables.
-*/
-register_env(APP_ROOT . '.env');
+ * Register environment variables from a .env file.
+ *
+ * @param string $path The path to the .env file.
+ * 
+ * @return void
+ */
+(function(string $path){
+    if (file_exists($path)) {
+        try{
+            $file = new SplFileObject($path, 'r');
+            while (!$file->eof()) {
+                $line = trim($file->fgets());
+                if (str_starts_with($line, '#') || str_starts_with($line, ';')) {
+                    continue;
+                }
+
+                $parts = explode('=', $line, 2);
+                if (isset($parts[1])) {
+                    setenv($parts[0], $parts[1]);
+                }
+            }
+            return;
+        }catch(RuntimeException|LogicException){}
+        exit("Environment file not found on: {$path}, make sure you add .env file to your project root.");
+    }
+})(APP_ROOT . '.env');
 
 /**
  * Define our public application front controller of not defined 
@@ -222,11 +245,10 @@ defined('SHOW_DEBUG_BACKTRACE') || define('SHOW_DEBUG_BACKTRACE', (bool) env('de
 */
 defined('NOVAKIT_ENV') || define('NOVAKIT_ENV', (isset($_SERVER['NOVAKIT_EXECUTION_ENV']) ? $_SERVER['NOVAKIT_EXECUTION_ENV'] : null));
 
-
 /**
- * @var bool PROJECT_ID Get the project basename/public as product id or empty on php server.
+ * @var bool PROJECT_ID Get the project ID, This is based on directory your project is located as product id or empty on php server.
 */
-defined('PROJECT_ID') || define('PROJECT_ID', rtrim(dirname($_SERVER['SCRIPT_NAME']??''), '/'));
+defined('PROJECT_ID') || define('PROJECT_ID', trim(dirname($_SERVER['SCRIPT_NAME']??''), '/'));
 
 /**
  * @var int FETCH_ASSOC Fetch as an associative array

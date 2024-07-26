@@ -50,8 +50,8 @@
 
     "autoload": {
         "psr-4": {
-            "Luminova\\": "system/",
-            "App\\Controllers\\": "app/Controllers/"
+            "App\\": "app/",
+            "Luminova\\": "system/"
         },
         "exclude-from-classmap": [
             "system/plugins/luminovang/framework/"

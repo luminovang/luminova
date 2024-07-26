@@ -11,9 +11,9 @@
 namespace App\Controllers\Errors;
 
 use \Luminova\Base\BaseViewController;
-use \App\Controllers\Application;
-use \Luminova\Interface\ErrorHandlerInterface;
 use \Luminova\Time\Time;
+use \App\Application;
+use \Luminova\Interface\ErrorHandlerInterface;
 
 class ViewErrors extends BaseViewController implements ErrorHandlerInterface
 {

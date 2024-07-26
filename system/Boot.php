@@ -10,8 +10,7 @@
 namespace Luminova;
 
 use \Luminova\Application\Foundation;
-use \Luminova\Base\BaseApplication;
-use \App\Controllers\Application;
+use \App\Application;
 
 final class Boot 
 {
@@ -19,9 +18,9 @@ final class Boot
      * Initializes the HTTP environment for web application.
      * Sets up the error handler, finishes bootstrapping.
      *
-     * @return class-object<BaseApplication> The application instance.
+     * @return Application The application instance.
      */
-    public static function http(): BaseApplication
+    public static function http(): Application
     {
         Foundation::initialize();
         self::finish();
@@ -47,7 +46,7 @@ final class Boot
          * Refuse to run when called from php-cgi
         */
         if (str_starts_with(PHP_SAPI, 'cgi')) {
-            echo "The cli tool is not supported when running php-cgi. It needs php-cli to function!";
+            echo "Novakit cli tool is not supported when running php-cgi. It needs php-cli to function!";
             exit(1);
         }
 

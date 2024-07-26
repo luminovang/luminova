@@ -1,5 +1,5 @@
 <?php
 /** @var \Luminova\Routing\Router $router */
-/** @var \App\Controllers\Application $app */
+/** @var \App\Application $app */
 
 $router->get('/', 'Welcome::home');

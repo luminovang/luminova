@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * Luminova Framework
  *
@@ -6,18 +7,20 @@
  * @author Ujah Chigozie Peter
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
+ * @see https://luminova.ng/docs/0.0.0/global/functions
  */
+use \App\Application;
+use \App\Config\Files;
+use \App\Utils\Functions;
 use \Luminova\Application\Foundation;
 use \Luminova\Application\Factory;
 use \Luminova\Application\Services;
 use \Luminova\Http\Request;
 use \Luminova\Http\UserAgent;
 use \Luminova\Cookies\Cookie;
-use \Luminova\Template\ViewResponse;
+use \Luminova\Sessions\Session;
 use \Luminova\Interface\ValidationInterface;
-use \App\Controllers\Config\Files;
-use \App\Controllers\Utils\Functions;
-use \App\Controllers\Application;
+use \Luminova\Template\Response;
 use \Luminova\Template\Layout;
 use \Luminova\Exceptions\FileException;
 
@@ -25,9 +28,9 @@ if (!function_exists('root')) {
     /**
      * Return to the root directory of your project.
      *
-     * @param string $suffix Prepend a path at the end root directory.
+     * @param string $suffix Optional suffix to prepend to the root directory.
      * 
-     * @return string Return root directory + Suffix/.
+     * @return string Return application document root, and optional appended suffix.
      */
     function root(?string $suffix = null): string
     {
@@ -73,7 +76,7 @@ if (!function_exists('app')) {
     /**
      * Get application container class shared instance or new instance if not shared. 
      * 
-     * @return BaseApplication Application shared instance.
+     * @return Application Return application shared instance.
     */
     function app(): Application 
     {
@@ -89,11 +92,11 @@ if (!function_exists('app')) {
 
 if (!function_exists('request')) {
     /**
-     * Get request object
+     * Get HTTP request object.
      * 
      * @param bool $shared Return a shared instance (default: true).
      * 
-     * @return Request|null Return Request object
+     * @return Request|null Return Request object.
     */
     function request(bool $shared = true): ?Request 
     {
@@ -103,19 +106,26 @@ if (!function_exists('request')) {
 
 if (!function_exists('start_url')) {
     /**
-     * Get start url with port hostname suffix if available.
+     * Get the start URL with an optional suffix and port hostname if available.
      * 
-     * @param string $suffix Optional pass a suffix to the start url.
+     * @param string $suffix Optional suffix to append to the start URL (default: null).
      * 
-     * @example http://localhost:8080, http://localhost/public/
-     * @example http://localhost/project-path/public/
+     * @return string Return the generated start URL of your project.
      * 
-     * @return string Return start url.
+     * @example - If your application path is like: `/Some/Path/To/htdocs/my-project-path/public/` 
+     * It returns depending on your development environment:
+     * - http://localhost:8080
+     * - http://localhost/my-project-path/public/
+     * - http://localhost/public
+     * - http://example.com:8080
+     * - http://example.com/
     */
-    function start_url(?string $suffix = ''): string
+    function start_url(?string $suffix = null): string
     {
+        $suffix = ($suffix=== null) ? '/' : '/' . ltrim($suffix, '/');
+
         if(PRODUCTION){
-            return APP_URL . '/' . ltrim($suffix, '/');
+            return APP_URL . $suffix;
         }
 
         $hostname = $_SERVER['HTTP_HOST'] 
@@ -124,20 +134,20 @@ if (!function_exists('start_url')) {
             ?? $_SERVER['SERVER_ADDR'] 
             ?? '';
 
-        return URL_SCHEME . '://' . $hostname  . PROJECT_ID . '/' . ltrim($suffix, '/');
+        return URL_SCHEME . '://' . $hostname . '/' . PROJECT_ID . $suffix;
     }
 }
 
 if (!function_exists('absolute_url')) {
     /**
-     * Convert application relative paths to absolute url.
+     * Convert an application-relative path to an absolute URL.
      * 
-     * @param string $path The path to convert to absolute url.
+     * @param string $path The relative path to convert to an absolute URL.
      * 
-     * @example Path: /Applications/XAMPP/htdocs/project-path/public/asset/files/foo.text.
-     *      -   Returns: http://localhost/project-path/public/asset/files/foo.text.
+     * @return string Return the absolute URL of the specified path.
      * 
-     * @return string Return absolute url of the specified path.
+     * @example - If path is: /Applications/XAMPP/htdocs/project-path/public/asset/files/foo.text.
+     * It returns: http://localhost/project-path/public/asset/files/foo.text.
     */
     function absolute_url(string $path): string
     {
@@ -148,20 +158,20 @@ if (!function_exists('absolute_url')) {
 if (!function_exists('func')) {
     /**
      * Return shared functions instance or a specific context instance.
-     *
      * If context is specified, return an instance of the specified context, otherwise return a Functions instance or null.
-     * Supported contexts: 
-     *  -   ip, 
-     *  -   document, 
-     *  -   escape, 
-     *  -   tor, 
-     *  -   math.
      *
      * @param string|null $context The context to return instance for.
      * @param mixed $params [, mixed $... ] Additional parameters based on context.
      *
      * @return Functions|object|null|string|bool Returns an instance of Functions, 
      *    -   object string, or boolean value depending on the context.
+     * 
+     *  Supported contexts: 
+     *  -   ip.
+     *  -   document.
+     *  -   escape.
+     *  -   tor.
+     *  -   math.
      *
      * @throws Exception If an error occurs.
      * @throws RuntimeException If unable to initialize method.
@@ -187,16 +197,16 @@ if(!function_exists('kebab_case')){
 	 * Convert a string to kebab case.
 	 *
 	 * @param string $input The input string to convert.
-     * @param bool $lower Should convert to lower case (default: true).
+     * @param bool $lower Weather to convert to lower case (default: true).
 	 * 
-	 * @return string The kebab-cased string.
+	 * @return string Return the kebab-cased string.
 	*/
-    function kebab_case(string $input, bool $lower = true): string 
+    function kebab_case(string $input, bool $toLower = true): string 
     {
         $input = preg_replace('/[^\p{L}\p{N}]+/u', ' ', $input);
         $input = trim(str_replace(' ', '-', $input), '-');
 
-        if($lower){
+        if($toLower){
 		    return strtolower($input);
         }
 
@@ -220,6 +230,25 @@ if(!function_exists('locale')){
 
         setenv('app.locale', $locale, true);
         return true;
+    }
+}
+
+if(!function_exists('uuid')){
+    /**
+     * Generates a UUID string of the specified version such as `1, 2, 3, 4, or 5`.
+     *
+     * @param int $version The version of the UUID to generate (default: 4).
+     * @param string|null $namespace The namespace for versions 3 and 5.
+     * @param string|null $name The name for versions 3 and 5.
+	 * 
+     * @return string Return the generated UUID string.
+     * @throws InvalidArgumentException If the namespace or name is not provided for versions 3 or 5.
+     * 
+     * To check if UUID is valid use `func()->isUuid(string, version)`
+     */
+    function uuid(int $version = 4, ?string $namespace = null, ?string $name = null): string 
+    {
+       return Functions::uuid($version, $namespace, $name);
     }
 }
 
@@ -247,8 +276,7 @@ if(!function_exists('escape')){
 
 if(!function_exists('strict')){
     /**
-	 * Sanitize user input to protect against cross-site scripting attacks.
-     * It removes unwanted characters from a given string and return only allowed characters.
+	 * String input type, this function removes unwanted characters from a given string and return only allowed characters.
 	 *
 	 * @param string $input The input string to be sanitized.
 	 * @param string $type  The expected data type. 
@@ -259,7 +287,7 @@ if(!function_exists('strict')){
 	 */
     function strict(string $input, string $type = 'default', string $replacer = ''): string 
     {
-       return Functions::strictInput($input, $type, $replacer);
+       return Functions::strictType($input, $type, $replacer);
     }
 }
 
@@ -308,7 +336,12 @@ if(!function_exists('is_empty')){
     function is_empty(mixed ...$values): bool 
     {
         foreach ($values as $value) {
-            if (is_null($value) || (is_string($value) && trim($value) === '') || (is_numeric($value) && (int) $value !== 0 && empty($value)) || (is_object($value) && $value instanceof Countable && count($value) === 0)) {
+            if (
+                is_null($value) || 
+                (is_string($value) && trim($value) === '') ||
+                (is_numeric($value) && (int) $value !== 0 && empty($value)) || 
+                (is_object($value) && $value instanceof Countable && count($value) === 0)
+            ) {
                 return true;
             }
         }
@@ -318,7 +351,7 @@ if(!function_exists('is_empty')){
 
 if(!function_exists('session')) {
     /**
-     * Return session data if key is present else return session instance
+     * Return session data if key is present else return session instance.
      *
      * @param string $key Key to retrieve the data.
      * @param bool $shared Use shared instance (default: true).
@@ -356,32 +389,38 @@ if(!function_exists('factory')) {
     /**
      * Returns a shared instance of a class in factory or factory instance if context is null.
      *
-     * Same as:
-     * @example $config = factory('config')
-     * @example $config = \Luminova\Application\Factory::config();
-     * @example $config = new \Luminova\Config\Configuration();
      * 
-     * @param string|null $context The factory name.
-     * Factory Classes Alias: 
-     * -   'task'      `Task`
-     * -   'session'   `Session`
-     * -   'cookie'    `Cookie`
-     * -   'functions' `Functions`
-     * -   'modules'   `Modules`
-     * -   'language'  `Translator`
-     * -   'logger'    `Logger`
-     * -   'fileManager'     `FileManager`
-     * -   'validate'  `InputValidator`
-     * -   'response'  `ViewResponse`
-     * -   'request'   `Request`
-     * -   'service'   `Services`
-     * 
+     * @param string|null $context The factory context name. (default: null).
      * @param bool $shared Allow shared instance creation (default: true).
-     * @param mixed $arguments [, mixed $... ] The initialization arguments.
+     * @param mixed $arguments [, mixed $... ] Optional class constructor initialization arguments.
+     * 
+     * * Factory Context Names: 
+     * 
+     * -   'task'           `\Luminova\Time\Task`
+     * -   'session'        `\Luminova\Sessions\Session`
+     * -   'cookie'         `\Luminova\Cookies\Cookie`
+     * -   'functions'      `\Luminova\Application\Functions`
+     * -   'modules'        `\Luminova\Library\Modules`
+     * -   'language'       `\Luminova\Languages\Translator`
+     * -   'logger'         `\Luminova\Logger\Logger`
+     * -   'fileManager'    `\Luminova\Storages\FileManager`
+     * -   'validate'       `\Luminova\Security\Validation`
+     * -   'response'       `\Luminova\Template\Response`
+     * -   'request'        `\Luminova\Http\Request`
+     * -   'service'        `\Luminova\Application\Services`
+     * -   'notification'   `\Luminova\Notifications\Firebase\Notification`,
+     * -   'caller'         `\Luminova\Application\Caller`
      * 
      * @return class-object<\T>|Factory|null Return instance of factory or instance of factory class, otherwise null.
+     * 
+     * @example - using factory to load class like: `$config = factory('config');`.
+     * 
+     * Is same as:
+     * 
+     * `$config = \Luminova\Application\Factory::config();`
+     * `$config = new \Luminova\Config\Configuration();`
     */
-    function factory(string|null $context = null, bool $shared = true, mixed ...$arguments): ?object
+    function factory(?string $context = null, bool $shared = true, mixed ...$arguments): ?object
     {
         if($context === null || $context === ''){
             return new Factory();
@@ -427,9 +466,9 @@ if(!function_exists('remove_service')) {
     /**
      * Delete a service or clear all services
      * If NULL is passed all cached services instances will be cleared.
-     * Else delete a specific services instance and clear it's cached instances
+     * Else delete a specific services instance and clear it's cached instances.
      * 
-     * @param class-string<\T>|string $service The class name or alias, to delete and clear it cached
+     * @param class-string<\T>|string $service The class name or alias, to delete and clear it cached.
      * 
      * @return bool Return true if the service was removed or cleared, false otherwise.
     */
@@ -445,7 +484,7 @@ if(!function_exists('remove_service')) {
 
 if(!function_exists('browser')) {
     /**
-     * Tells what the user's browser is capable of
+     * Tells what the user's browser is capable of.
      * 
      * @param string|null $user_agent  The user agent string to analyze.
      * @param bool $return Set the return type, if `instance` return userAgent class object otherwise return array or json object.
@@ -476,10 +515,19 @@ if(!function_exists('browser')) {
 
 if(!function_exists('is_platform')) {
     /**
-     * Tells which operating system platform your application is running on
+     * Tells which operating system platform your application is running on.
      * 
-     * @param string $os Platform name 
-     *      - [mac, windows, linux, freebsd, openbsd, solaris, aws, etc..]
+     * @param string $os The platform name to check.
+     * 
+     * Possible Values:
+     * - mac.
+     * - windows.
+     * - linux.
+     * - freebsd.
+     * - openbsd.
+     * - solaris.
+     * - aws.
+     * - etc.
      * 
      * @return bool Return true if the platform is matching, false otherwise.
     */
@@ -506,7 +554,7 @@ if (!function_exists('text2html')) {
      * 
      * @param string $text A string containing the text to be processed.
      * 
-     * @return string $text The processed text with HTML entities.
+     * @return string Return the processed text with HTML entities.
     */
     function text2html(?string $text): string
     { 
@@ -525,7 +573,7 @@ if(!function_exists('nl2html')) {
      * 
      * @param string|null $text A string containing the text to be processed.
      * 
-     * @return string $text
+     * @return string Return formatted string.
     */
     function nl2html(string|null $text): string
     {
@@ -544,18 +592,18 @@ if(!function_exists('nl2html')) {
 if(!function_exists('import')) {
     /**
      * Import a custom library into your project 
-     * You must place your external libraries in libraries/libs/ directory
+     * You must place your external libraries in libraries/libs/ directory.
      * 
-     * @param string $library the name of the library
+     * @param string $library the name of the library.
      * @example Foo/Bar/Baz
      * @example Foo/Bar/Baz.php
      * 
-     * @return bool true if the library was successfully imported
-     * @throws RuntimeException if library could not be found
+     * @return bool true if the library was successfully imported.
+     * @throws RuntimeException if library could not be found.
     */
     function import(string $library): bool
     {
-        require_once path('library') . rtrim(rtrim($library, '.php'), '/') . '.php';
+        require_once root('/libraries/libs/') . trim(rtrim($library, '.php'), DIRECTORY_SEPARATOR) . '.php';
         return true;
     }
  }
@@ -565,9 +613,21 @@ if(!function_exists('import')) {
      * Log a message at the given level.
      *
      * @param string $level The log level.
-     * - Log levels ['emergency, alert, critical, error, warning, notice, info, debug, exception, php_errors']
      * @param string $message The log message.
      * @param array $context Additional context data (optional).
+     * 
+     * Log Levels:
+     * 
+     * - emergency.
+     * - alert. 
+     * - critical. 
+     * - error.
+     * - warning.
+     * - notice.
+     * - info.
+     * - debug.
+     * - exception.
+     * - php_errors.
      *
      * @return void
      * @throws InvalidArgumentException
@@ -580,18 +640,18 @@ if(!function_exists('import')) {
 
  if (!function_exists('lang')) {
     /**
-     * Translate multiple languages it supports nested array
+     * Translate multiple languages it supports nested array.
      *
      * @param string $lookup line to lookup.
      * @param string|null $default Fallback translation if not found.
      * @param string|null $locale The locale to use for translation (optional).
-     * @param array $placeholders Matching placeholders for translation
+     * @param array $placeholders Matching placeholders for translation.
      *    - @example array ['Peter', 'peter@foo.com] "Error name {0} and email {1}"
      *    - @example array ['name' => 'Peter', 'email' => 'peter@foo.com] "Error name {name} and email {email}"
      * 
      * 
      * @return string Return translated string.
-     * @throws NotFoundException if translation is not found and default is not provided
+     * @throws NotFoundException if translation is not found and default is not provided.
     */
     function lang(
         string $lookup, 
@@ -626,6 +686,7 @@ if (!function_exists('path')) {
      * @param string $file Path file name to return.
      * 
      * Storage Context Names.
+     *      - app.
      *      - system.
      *      - plugins.
      *      - library.
@@ -689,11 +750,11 @@ if (!function_exists('get_column')) {
 
 if (!function_exists('is_nested')) {
     /**
-     * Check if array is a nested array
+     * Check if array is a nested array.
      * 
      * @param array $array Array to check.
      * 
-     * @return bool Return true if array is a nested array
+     * @return bool Return true if array is a nested array.
     */
     function is_nested(array $array): bool 
     {
@@ -711,11 +772,11 @@ if (!function_exists('is_nested')) {
 
 if (!function_exists('is_associative')) {
     /**
-     * Check if array is associative
+     * Check if array is associative.
      * 
-     * @param array $array Array to check
+     * @param array $array Array to check.
      * 
-     * @return bool Return true if array is associative, false otherwise
+     * @return bool Return true if array is associative, false otherwise.
     */
     function is_associative(array $array): bool 
     {
@@ -733,9 +794,9 @@ if (!function_exists('is_associative')) {
 
 if (!function_exists('array_is_list')) {
     /**
-     * Check if array is list
+     * Check if array is list.
      * 
-     * @param array $array Array to check
+     * @param array $array Array to check.
      * 
      * @return bool Return true if array is sequential, false otherwise.
     */
@@ -759,7 +820,7 @@ if (!function_exists('to_array')) {
      *
      * @param mixed $input The object to convert to an array.
      * 
-     * @return array $array Finalized array representation of the object
+     * @return array $array Finalized array representation of the object.
     */
     function to_array(mixed $input): array 
     {
@@ -809,13 +870,14 @@ if (!function_exists('to_object')) {
 
 if (!function_exists('list_to_array')) {
     /**
-     * Convert string list to array 
+     * Convert string list to array.
      * 
-     * @example list_to_array('a,b,c') => ['a', 'b', 'c']
-     * @example list_to_array('"a","b","c"') => ['a', 'b', 'c']
+     * @param string $list The string list.
      * 
-     * @param string $list string list
      * @return array|false Return array, otherwise false.
+     * 
+     * @example list_to_array('a,b,c') => ['a', 'b', 'c'].
+     * @example list_to_array('"a","b","c"') => ['a', 'b', 'c'].
     */
     function list_to_array(string $list): array|bool 
     {
@@ -841,12 +903,12 @@ if (!function_exists('list_to_array')) {
 
 if (!function_exists('list_in_array')) {
    /**
-     * Check if string list exist in array 
+     * Check if string list exist in array.
      * If any of the list doesn't exist in array it will return false
-     * First it will have to convert the list to array using list_to_array()
+     * First it will have to convert the list to array using `list_to_array`.
      * 
-     * @param string $list string list
-     * @param array $array Array to map list to
+     * @param string $list The string list to check.
+     * @param array $array The array to check list in.
      * 
      * @return bool Return true exist, otherwise false.
     */
@@ -878,12 +940,12 @@ if (!function_exists('list_in_array')) {
 
 if (!function_exists('is_list')) {
     /**
-     * Check if string is a valid list format
+     * Check if string is a valid list format.
      * 
-     * @param string $input string to check
-     * @param bool $trim Trim whitespace around the values  
+     * @param string $input string to check.
+     * @param bool $trim Trim whitespace around the values.
      * 
-     * @return bool true or false on failure.
+     * @return bool Return true or false on failure.
     */
     function is_list(string $input, bool $trim = false): bool 
     {
@@ -902,14 +964,15 @@ if (!function_exists('is_list')) {
 
 if (!function_exists('write_content')) {
     /**
-     * Write, append contents to file.
+     * Write or append string contents or stream to file.
+     * This function is an alternative for `file_put_contents`, it uses `SplFileObject` to write contents to file. 
      * 
-     * @param string $filename — Path to the file where to write the data.
+     * @param string $filename Path to the file to write contents.
      * @param string|resource $content The contents to write to the file, either as a string or a stream resource.
      * @param int $flags [optional] The value of flags can be any combination of the following flags (with some restrictions), joined with the binary OR (|) operator.
      * @param resource $context [optional] A valid context resource created with stream_context_create.
      * 
-     * @return bool Return true or false on failure.
+     * @return bool Return true if successful, otherwise false on failure.
      * @throws FileException If unable to write file.
     */
     function write_content(string $filename, mixed $content, int $flag = 0, $context = null): bool 
@@ -918,15 +981,43 @@ if (!function_exists('write_content')) {
     }
 }
 
+if (!function_exists('get_content')) {
+    /**
+     * Reads the content of a file with options for specifying the length of data to read and the starting offset.
+     * This function is an alternative for `file_get_contents`, it uses `SplFileObject` to open the file and read its contents. 
+     * It can handle reading a specific number of bytes from a given offset in the file.
+     * 
+     * @param string $filename The path to the file to be read.
+     * @param int $length The maximum number of bytes to read, if set to `0`, it read 8192 bytes at a time (default: 0).
+     * @param int $offset The starting position in the file to begin reading from (default: 0).
+     * @param bool $useInclude If `true`, the file will be searched in the include path (default: false). 
+     * @param resource|null $context A context resource created with `stream_context_create()` (default: null).
+     * 
+     * @return string|false Returns the contents of the file as a string, or `false` on failure.
+     * 
+     * @throws FileException If an error occurs while opening or reading the file.
+     */
+    function get_content(
+        string $filename, 
+        int $length = 0, 
+        int $offset = 0, 
+        bool $useInclude = false, 
+        $context = null
+    ): string|bool 
+    {
+        return Factory::fileManager()->getContent($filename, $length, $offset, $useInclude, $context);
+    }
+}
+
 if (!function_exists('make_dir')) {
     /**
      * Attempts to create the directory specified by pathname if not exist.
      * 
      * @param string $path Directory path to create.
-     * @param int $permissions Unix file permissions
+     * @param int $permissions Unix file permissions.
      * @param bool $recursive Allows the creation of nested directories (default: true)
      * 
-     * @return bool true if files existed or was created else false
+     * @return bool Return true if files already existed or was created successfully, otherwise false.
      * @throws RuntimeException If path is not readable.
      * @throws FileException If unable to create directory
     */
@@ -938,33 +1029,39 @@ if (!function_exists('make_dir')) {
 
 if (!function_exists('validate')) {
     /**
-     * Validate input fields or get validation instance 
-     * Return true or false if input and rules are specified 
-     * else return validation instance if NULL is passed on $inputs and $rules.
+     * Validate input fields or return validation instance.
+     * If input and rules are specified, it will do the validation and return instance which you can then called method `$validation->isPassed()`
+     * To check if passed or failed, or get the error information.
      *
-     * @param array $inputs Input fields to validate on 
-     *      @example [$_POST, $_GET or $this->request->getBody()]
-     * @param array $rules Validation filter rules to apply on each input field 
-     *      @example ['email' => 'required|email|max|min|length']
-     * @param array $messages Validation error messages to apply on each filter on input field
-     *      @example [
-     *          'email' => [
-     *              'required' => 'email is required',
-     *              'email' => 'Invalid [value] while validating [rule] on [field]'
-     *          ]
-     *        }
+     * @param array $inputs Input fields to validate on (e.g, `$_POST`, `$_GET` or `$this->request->getBody()`).
+     * @param array $rules Validation filter rules to apply on each input field.
+     * @param array $messages Validation error messages to apply on each filter on input field.
+     *     
+     * @example - Rules arguments example:
+     * ```php
+     * ['email' => 'required|email|max|min|length']
+     * ```
+     * 
+     * @example - Message arguments example:
+     * ```php
+     * [
+     *   'email' => [
+     *        'required' => 'email is required',
+     *        'email' => 'Invalid [value] while validating [rule] on [field]'
+     *    ]
+     *  ]
+     * ```
      * 
      * @return ValidationInterface Return validation instance.
     */
-    function validate(?array $inputs, ?array $rules, array $messages = []): object 
+    function validate(?array $inputs = null, ?array $rules = null, array $messages = []): ValidationInterface 
     {
-        if ($inputs === null || $rules === null) {
-            return Factory::validate();
-        }
-
         $instance = Factory::validate();
-        $instance->setRules($rules, $messages);
-        $instance->validate($inputs);
+
+        if ($inputs !== null && $rules !== null) {
+            $instance->setRules($rules, $messages);
+            $instance->validate($inputs);
+        }
         
         return $instance;
     }
@@ -972,7 +1069,7 @@ if (!function_exists('validate')) {
 
 if (!function_exists('get_class_name')) {
     /**
-     * Get class basename from namespace or object
+     * Get class basename from namespace or object.
      * 
      * @param string|class-object<\T> $from Class name or class object.
      * 
@@ -997,7 +1094,7 @@ if (!function_exists('is_command')) {
     /**
      * Find whether application is running in cli mode.
      *
-     * @return bool Return true if request is made in cli mode, false otherwise
+     * @return bool Return true if request is made in cli mode, false otherwise.
     */
     function is_command(): bool
     {
@@ -1007,7 +1104,7 @@ if (!function_exists('is_command')) {
 
 if (!function_exists('is_dev_server')) {
     /**
-     * Check if the application is running locally on development server
+     * Check if the application is running locally on development server.
      *
      * @return bool Return true if is development server, false otherwise.
     */
@@ -1035,12 +1132,12 @@ if (!function_exists('response')) {
     /** 
     * Initiate a view response object. 
     *
-    * @param int $status int $status HTTP status code (default: 200 OK)
+    * @param int $status int $status HTTP status code (default: 200 OK).
     * @param bool $encode Enable content encoding like gzip, deflate.
     *
-    * @return ViewResponse Return vew response object. 
+    * @return Response Return vew response object. 
     */
-    function response(int $status = 200, bool $encode = true): ViewResponse
+    function response(int $status = 200, bool $encode = true): Response
     {
         return Factory::response($status, true)->setStatus($status)->encode($encode);
     }
@@ -1048,7 +1145,7 @@ if (!function_exists('response')) {
 
 if (!function_exists('is_blob')) {
     /**
-     * Find whether the type of a variable is blob
+     * Find whether the type of a variable is blob.
      *
      * @param mixed $value Value to check.
      * 
@@ -1086,10 +1183,10 @@ if (!function_exists('status_code')) {
      * In CLI, 0 is considered success while 1 is failure.
      * In some occasions, void or null may be returned, treating it as success.
      * 
-     * @param mixed $result Response from the callback function (void|bool|null|int)
-     * @param bool $return_int Return type (default: int)
+     * @param mixed $result The response from the callback function or method to check (e.g, `void`, `bool`, `null`, `int`).
+     * @param bool $return_int Weather to return int or bool (default: int).
      * 
-     * @return int|bool Return boolean value.
+     * @return int|bool Return status response as boolean or integer value.
      */
     function status_code(mixed $result = null, bool $return_int = true): int|bool
     {
@@ -1139,12 +1236,12 @@ if (!function_exists('href')) {
     /**
      * Create a hyperlink to another view or file.
      * 
-     * @param string|null $view To view or file.
-     * @param bool $absolute Should we use absolute url (default: false).
+     * @param string|null $view The view path or file to create the link for (default: null).
+     * @param bool $absolute Whether to use an absolute URL (default: false).
      * 
-     * @return string Return hyperlink of view or base controller if blank string is passed.
-    */
-    function href(string|null $view = '', bool $absolute = false): string 
+     * @return string Return the generated hyperlink.
+     */
+    function href(?string $view = null, bool $absolute = false): string 
     {
         $view = (($view === null) ? '' : ltrim($view, '/'));
 
@@ -1164,14 +1261,14 @@ if (!function_exists('href')) {
 
 if (!function_exists('asset')) {
     /**
-     * Create a link to assets folder file.
+     * Create a link to a file in the assets folder.
      * 
-     * @param string|null $filename Filename or path.
-     * @param bool $absolute Should we use absolute url (default: false).
+     * @param string|null $filename The filename or path within the assets folder (default: null).
+     * @param bool $absolute Whether to use an absolute URL (default: false).
      * 
-     * @return string Return assets file or base asset folder if blank string is passed.
+     * @return string Return the generated URL to the assets file or base assets folder if no filename is provided.
     */
-    function asset(string|null $filename = '', bool $absolute = false): string 
+    function asset(?string $filename = null, bool $absolute = false): string 
     {
         $filename = 'assets/' . (($filename === null) ? '' : ltrim($filename, '/'));
 
@@ -1187,8 +1284,9 @@ if (!function_exists('camel_case')) {
     /**
      * Convert a string to camel case.
      *
-     * @param string $input The string to convert
-     * @return string The string converted to camel case
+     * @param string $input The string to convert.
+     * 
+     * @return string The string converted to camel case.
     */
     function camel_case(string $input): string
     {
@@ -1240,10 +1338,18 @@ if (!function_exists('layout')) {
      * Allow you to extend and inherit a section of another template view file.
      * 
      * @param string $file Layout filename without the extension path.
-     * @example layout('foo') or layout('foo/bar/baz').
      * 
      * @return Layout Returns the layout class instance.
      * @throws RuntimeException Throws if layout file is not found.
+     * 
+     * @example  - Usage examples:
+     * ```
+     * layout('foo')
+     * ```
+     *  or
+     * ```
+     * layout('foo/bar/baz')
+     * ```
      * 
      * > All layouts must be stored in `resources/views/layout/` directory.
     */

@@ -65,6 +65,14 @@ class DemoCommand extends BaseCommand
     /**
      * {@inheritdoc}
     */
+    protected function onCreate(): void 
+    {
+        // Your initialization code here
+    }
+
+    /**
+     * {@inheritdoc}
+    */
     public function help(array $helps): int
     {
         return STATUS_ERROR;
@@ -81,28 +89,28 @@ class DemoCommand extends BaseCommand
     */
     public function hello(): int
     {
-        $color = $this->getAnyOption('color', 'c', null);
-        $select = $this->getAnyOption('select', 's');
-        $password = $this->getAnyOption('password', 'p');
-        $message = $this->getAnyOption('message', 'm', 'Hello! this is a test default message.');
+        $color = static::getAnyOption('color', 'c', null);
+        $select = static::getAnyOption('select', 's');
+        $password = static::getAnyOption('password', 'p');
+        $message = static::getAnyOption('message', 'm', 'Hello! this is a test default message.');
 
         if($color !== null && $color === ''){
-            $this->error('You need to provide a color for argument --color.');
+            static::error('You need to provide a color for argument --color.');
             return STATUS_SUCCESS;
         }
 
         if($select === true){
-            $message = $this->askForLanguages();
+            $message = static::askForLanguages();
         }elseif($password === true){
-            $message = $this->askForPassword();
+            $message = static::askForPassword();
         }
 
         if($message === true){
-            $this->error('You need to provide a message for argument --message.');
+            static::error('You need to provide a message for argument --message.');
             return STATUS_SUCCESS;
         }
 
-        $this->writeln($message, $color);
+        static::writeln($message, $color);
 
         return STATUS_SUCCESS;
     }
@@ -124,7 +132,7 @@ class DemoCommand extends BaseCommand
             "red" => 'HTML'
         ];
 
-        $input = $this->prompt(
+        $input = static::prompt(
             'Enter your preferred programming language', // Message to display
             $options, // Array of options to prompt.
             'required|in_array(' . implode(',', $options) . ')' // Input validation rules.
@@ -141,7 +149,7 @@ class DemoCommand extends BaseCommand
     private function askForPassword(): string 
     {
         // Password prompt.
-        $input = $this->password('Enter your password `12345`');
+        $input = static::password('Enter your password `12345`');
 
         // Validate user password.
         if ($input == '12345') {
