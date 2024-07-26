@@ -53,7 +53,7 @@ if(!function_exists('setenv')){
                     $line = $file->fgets();
                     if (preg_match($pattern, $line)) {
                         $found = true;
-                        $content .= "$key=$value";
+                        $content .= "$key=$value\n";
                     }else{
                         $content .= $line;
                     }
