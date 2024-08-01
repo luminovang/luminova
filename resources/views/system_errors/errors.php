@@ -3,7 +3,6 @@ $lines = explode("\n", $stack->getMessage());
 $messages = explode(' called in ', $stack->getMessage());
 $message = explode(' File: ', $messages[0]);
 $tracers = array_slice($lines, 3);
-//$searchable = urlencode(preg_replace('#\'.*\'|"#Us', '', $messages[0]??'') . ', PHP Luminova Framework');
 $searchable = urlencode(preg_replace('/"([^"]*\/[^"]*)"/', '', $message[0] ?? '') . ' PHP Luminova Framework');
 ?>
 <!doctype html>

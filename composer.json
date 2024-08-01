@@ -14,12 +14,12 @@
         "ext-json": "*",
         "ext-mbstring": "*",
         "luminovang/framework": "^3.0",
-        "psr/cache": "^3.0",
-        "psr/log": "^1.1",
-        "psr/simple-cache": "^3.0"
+        "psr/log": "^1.1"
     },
 
     "require-dev": {
+        "psr/cache": "^3.0",
+        "psr/simple-cache": "^3.0",
         "nikic/php-parser": "^4.17.1",
         "phpstan/extension-installer": "^1.3",
         "phpstan/phpstan": "^1.10.2",
@@ -43,7 +43,7 @@
         "smarty/smarty": "Needed if you want to use Smarty template engine",
         "twig/twig": "Needed if you want to use Twig template engine",
         "league/flysystem": "Needed if you use FileSystem cloud storages",
-        "nanoblocktech/psr-cache": "If you need to use psr-cache",
+        "nanoblocktech/psr-cache": "If you need to use psr-cache or psr-simple-cache",
         "peterujah/php-search-controller": "If you want to use model searching doSearch",
         "peterujah/nano-image": "If you want to use outputImage fom file delivery class, for image resizing."
     },

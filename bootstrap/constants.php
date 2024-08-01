@@ -329,4 +329,3 @@ defined('RETURN_ALL') || define('RETURN_ALL', 6);
  * @var int RETURN_STMT Return prepared statement.
 */
 defined('RETURN_STMT') || define('RETURN_STMT', 7);
-

@@ -89,13 +89,13 @@ class DemoCommand extends BaseCommand
     */
     public function hello(): int
     {
-        $color = static::getAnyOption('color', 'c', null);
-        $select = static::getAnyOption('select', 's');
-        $password = static::getAnyOption('password', 'p');
-        $message = static::getAnyOption('message', 'm', 'Hello! this is a test default message.');
+        $color = $this->getAnyOption('color', 'c', null);
+        $select = $this->getAnyOption('select', 's');
+        $password = $this->getAnyOption('password', 'p');
+        $message = $this->getAnyOption('message', 'm', 'Hello! this is a test default message.');
 
         if($color !== null && $color === ''){
-            static::error('You need to provide a color for argument --color.');
+            $this->error('You need to provide a color for argument --color.');
             return STATUS_SUCCESS;
         }
 
@@ -106,11 +106,11 @@ class DemoCommand extends BaseCommand
         }
 
         if($message === true){
-            static::error('You need to provide a message for argument --message.');
+            $this->error('You need to provide a message for argument --message.');
             return STATUS_SUCCESS;
         }
 
-        static::writeln($message, $color);
+        $this->write($message, $color);
 
         return STATUS_SUCCESS;
     }
@@ -132,7 +132,7 @@ class DemoCommand extends BaseCommand
             "red" => 'HTML'
         ];
 
-        $input = static::prompt(
+        $input = $this->prompt(
             'Enter your preferred programming language', // Message to display
             $options, // Array of options to prompt.
             'required|in_array(' . implode(',', $options) . ')' // Input validation rules.
@@ -149,10 +149,12 @@ class DemoCommand extends BaseCommand
     private function askForPassword(): string 
     {
         // Password prompt.
-        $input = static::password('Enter your password `12345`');
+        $input = $this->password('Enter your password `12345`');
 
         // Validate user password.
         if ($input == '12345') {
+            $input = $this->color($input, 'green');
+            
             return "You have entered the correct password '{$input}'.";
         }
 

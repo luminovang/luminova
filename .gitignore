@@ -2,6 +2,7 @@
 /test
 /log
 /dump
+/upload
 /.git
 composer.lock
 command.phar

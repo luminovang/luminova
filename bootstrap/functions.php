@@ -9,12 +9,14 @@ declare(strict_types=1);
  * @license See LICENSE file
  * @see https://luminova.ng/docs/0.0.0/global/functions
  */
+
 use \App\Application;
 use \App\Config\Files;
-use \App\Utils\Functions;
+use \Luminova\Base\BaseFunction;
 use \Luminova\Application\Foundation;
 use \Luminova\Application\Factory;
 use \Luminova\Application\Services;
+use \Luminova\Functions\Escape;
 use \Luminova\Http\Request;
 use \Luminova\Http\UserAgent;
 use \Luminova\Cookies\Cookie;
@@ -23,14 +25,17 @@ use \Luminova\Interface\ValidationInterface;
 use \Luminova\Template\Response;
 use \Luminova\Template\Layout;
 use \Luminova\Exceptions\FileException;
+use \Luminova\Exceptions\AppException;
 
 if (!function_exists('root')) {
     /**
-     * Return to the root directory of your project.
+     * Find application root directory of your project.
+     * This ensures that the return path is from root directory.
      *
-     * @param string $suffix Optional suffix to prepend to the root directory.
+     * @param string $suffix Optional path to prepend to the root directory.
      * 
      * @return string Return application document root, and optional appended suffix.
+     * > The suffix must be a path not a filename if file name is passed, it return `/root/filename.foo/`.
      */
     function root(?string $suffix = null): string
     {
@@ -81,10 +86,7 @@ if (!function_exists('app')) {
     function app(): Application 
     {
         static $app = null;
-
-        if($app === null){
-            $app = Application::getInstance();
-        }
+        $app ??= Application::getInstance();
 
         return $app;
     }
@@ -96,7 +98,7 @@ if (!function_exists('request')) {
      * 
      * @param bool $shared Return a shared instance (default: true).
      * 
-     * @return Request|null Return Request object.
+     * @return Request|null Return http request object.
     */
     function request(bool $shared = true): ?Request 
     {
@@ -158,34 +160,33 @@ if (!function_exists('absolute_url')) {
 if (!function_exists('func')) {
     /**
      * Return shared functions instance or a specific context instance.
-     * If context is specified, return an instance of the specified context, otherwise return a Functions instance or null.
+     * If context is specified, return an instance of the specified context, 
+     * otherwise return anonymous class which extends BaseFunction.
      *
-     * @param string|null $context The context to return instance for.
-     * @param mixed $params [, mixed $... ] Additional parameters based on context.
+     * @param string|null $context The context to return it's instance (default: null).
+     * @param mixed $arguments [, mixed $... ] Optional initialization arguments based on context.
      *
-     * @return Functions|object|null|string|bool Returns an instance of Functions, 
-     *    -   object string, or boolean value depending on the context.
+     * @return anonymous-class-object<BaseFunction>|class-object<\T>|mixed Returns an instance of functions, 
+     * object string, or boolean value depending on the context, otherwise null.
      * 
-     *  Supported contexts: 
-     *  -   ip.
-     *  -   document.
-     *  -   escape.
-     *  -   tor.
-     *  -   math.
+     *  Supported contexts:
+     * 
+     *  -   ip: - Return instance of 'Luminova\Functions\IP'.
+     *  -   document:  Return instance of 'Luminova\Functions\IP'.
+     *  -   tor:  Return instance of 'Luminova\Functions\Tor'.
+     *  -   math:  Return instance of 'Luminova\Functions\Maths'.
      *
-     * @throws Exception If an error occurs.
-     * @throws RuntimeException If unable to initialize method.
+     * @throws AppException If an error occurs.
+     * @throws RuntimeException If unable to call method.
      */
-    function func(?string $context = null, mixed ...$params): mixed 
+    function func(?string $context = null, mixed ...$arguments): mixed 
     {
         if ($context === null) {
             return Factory::functions();
         }
 
-        $context = strtolower($context);
-
-        if (in_array($context, ['ip', 'document', 'escape', 'tor', 'math'])) {
-            return Factory::functions()->{$context}(...$params);
+        if (in_array($context, ['ip', 'document', 'tor', 'math'], true)) {
+            return Factory::functions()->{$context}(...$arguments);
         }
 
         return null;
@@ -248,29 +249,49 @@ if(!function_exists('uuid')){
      */
     function uuid(int $version = 4, ?string $namespace = null, ?string $name = null): string 
     {
-       return Functions::uuid($version, $namespace, $name);
+       return Factory::functions()->uuid($version, $namespace, $name);
     }
 }
 
 if(!function_exists('escape')){
     /**
     * Escapes a string or array of strings based on the specified context.
+    * If input is null instance of escape class will be returned.
     *
-    * @param string|array $input The string or array of strings to be escaped.
-    *   - @example @var array<string, string> - Use the key as the context.
-    *   - @example @var array<int, string> Use the default context for all values.
-    * @param string $context The context in which the escaping should be performed. Defaults to 'html'.
-    *                        Possible values: 'html', 'js', 'css', 'url', 'attr', 'raw'.
-    * @param string|null $encoding The character encoding to use. Defaults to null.
+    * @param string|array|null $input The string or array of strings to be escaped (default: null).
+    *                           For array, you can optionally use the keys of the array to specify the escape context for each value.
+    * @param string $context The escaper context in which the escaping should be performed (default:'html').
+    * @param string|null $encoding The escape character encoding to use (default: 'utf-8').
     * 
-    * @return array|string The escaped string or array of strings.
+    * @return array|string|Escape Return the escaped string or array of strings, otherwise return instance of escape if input is null.
     * @throws InvalidArgumentException When an invalid or blank encoding is provided.
-    * @throws BadMethodCallException When an invalid context is called
+    * @throws BadMethodCallException When an invalid context is called.
     * @throws RuntimeException When the string is not valid UTF-8 or cannot be converted.
+    *
+    * Supported Context Values: 
+    *
+    * - html - Escape general HTML content. 
+    * - js -   Escape JavaScript code. 
+    * - css -  Escape CSS styles. 
+    * - url -  Escape URL, 
+    * - attr - Escape HTML attributes.
+    * - raw -  Raw output no escaping apply.
     */
-    function escape(string|array $input, string $context = 'html', ?string $encoding = null): array|string 
+    function escape(
+        string|array|null $input = null, 
+        string $context = 'html', 
+        string|null $encoding = 'utf-8'
+    ): array|string|Escape
     {
-       return Functions::escape($input, $context, $encoding);
+        if($input === null){
+            return Factory::escaper(true, $encoding);
+        }
+
+        if ($context === 'raw') {
+            return $input;
+        }
+
+        return Factory::functions()->escape($input, $context, $encoding);
     }
 }
 
@@ -279,48 +300,50 @@ if(!function_exists('strict')){
 	 * String input type, this function removes unwanted characters from a given string and return only allowed characters.
 	 *
 	 * @param string $input The input string to be sanitized.
-	 * @param string $type  The expected data type. 
+	 * @param string $type  The expected input filter type.
      *      -   Filter Types: [int, digit, key, password, username, email, url, money, double, alphabet, phone, name, timezone, time, date, uuid, default]
-	 * @param string $symbol The symbol to replace disallowed characters with (optional).
+	 * @param string $symbol The symbol to replace disallowed characters with (default: blank string).
 	 *
 	 * @return string Return sanitized string.
 	 */
     function strict(string $input, string $type = 'default', string $replacer = ''): string 
     {
-       return Functions::strictType($input, $type, $replacer);
+       return Factory::functions()->strictType($input, $type, $replacer);
     }
 }
 
 if(!function_exists('is_tor')){
     /**
-    * Checks if the given IP address is a Tor exit node
+    * Checks if the given IP address is a Tor exit node.
     *
-    * @param string|null $ip Ip address to check else use current ip address
+    * @param string|null $ip The ip address to check, if NULL get current ip address.
+    * @param int $expiration The expiration time to request for new exit nodes from tor api (default: 2592000 30 days).
     * 
-    * @return bool Return true if ip address is a Tor exit node.
+    * @return bool Return true if ip address is a Tor exit node, otherwise false.
+    * @throws FileException Throws if error occurs or unable to read or write to directory.
     */
-    function is_tor(string|null $ip = null): bool
+    function is_tor(?string $ip = null, int $expiration = 2592000): bool
     {
-        return Functions::ip()->isTor($ip);
+        return Factory::functions()->ip()->isTor($ip, $expiration);
     }
 }
 
 if(!function_exists('ip_address')){
     /**
-    * Get user IP address or return ip address information
+    * Get user IP address or return ip address information.
     *
-    * @param bool $info If true return ip address information instead
-    * @param array $options Pass additional options to return with IP information
+    * @param bool $get_info Weather to true return ip address information instead (default: false).
+    * @param array $options Optional data to return with IP information (default: none).
     * 
-    * @return string|object|null  Return ip info or ip address.
+    * @return string|object|null Return client ip address or ip info, otherwise null if ip info not found.
     */
-    function ip_address(bool $info = false, array $options = []): string|object|null
+    function ip_address(bool $get_info = false, array $options = []): string|object|null
     {
-        if($info){
-            return Functions::ip()->info(null, $options);
+        if($get_info){
+            return Factory::functions()->ip()->info(null, $options);
         }
 
-       return Functions::ip()->get();
+        return Factory::functions()->ip()->get();
     }
 }
 
@@ -379,7 +402,12 @@ if (!function_exists('cookie')) {
      * 
      * @return Cookie Return cookie instance.
     */
-    function cookie(string $name, string $value = '', array $options = [], bool $shared = false): Cookie
+    function cookie(
+        string $name, 
+        string $value = '', 
+        array $options = [], 
+        bool $shared = false
+    ): Cookie
     {
         return Factory::cookie($name, $value, $options, $shared);
     }
@@ -388,7 +416,6 @@ if (!function_exists('cookie')) {
 if(!function_exists('factory')) {
     /**
      * Returns a shared instance of a class in factory or factory instance if context is null.
-     *
      * 
      * @param string|null $context The factory context name. (default: null).
      * @param bool $shared Allow shared instance creation (default: true).
@@ -399,7 +426,7 @@ if(!function_exists('factory')) {
      * -   'task'           `\Luminova\Time\Task`
      * -   'session'        `\Luminova\Sessions\Session`
      * -   'cookie'         `\Luminova\Cookies\Cookie`
-     * -   'functions'      `\Luminova\Application\Functions`
+     * -   'functions'      `\Luminova\Base\BaseFunction`
      * -   'modules'        `\Luminova\Library\Modules`
      * -   'language'       `\Luminova\Languages\Translator`
      * -   'logger'         `\Luminova\Logger\Logger`
@@ -412,7 +439,7 @@ if(!function_exists('factory')) {
      * -   'caller'         `\Luminova\Application\Caller`
      * 
      * @return class-object<\T>|Factory|null Return instance of factory or instance of factory class, otherwise null.
-     * 
+     * @throws AppException Throws an exception if factory context does not exist or error occurs.
      * @example - using factory to load class like: `$config = factory('config');`.
      * 
      * Is same as:
@@ -435,12 +462,6 @@ if(!function_exists('factory')) {
 if(!function_exists('service')) {
     /**
      * Returns a shared instance of a class in services or service instance if context is null.
-     *
-     * @example $config = service('Config')
-     * @example $config = Services::Config();
-     * 
-     * Same as:
-     * @example $config = new \Luminova\Config\Config();
      * 
      * @param class-string<\T>|string|null $service The service class name or alias.
      * @param bool $shared Allow shared instance creation (default: true).
@@ -448,8 +469,22 @@ if(!function_exists('service')) {
      * @param mixed $arguments [, mixed $... ] Service initialization arguments.
      * 
      * @return class-object<\T>|Services|null Return service class instance or instance of service class.
+     * @throws AppException Throws an exception if service does not exist or error occurs.
+     * 
+     * @example - Get config `$config = service('Config');`.
+     * @example - Also get config `$config = Services::Config();`
+     * 
+     * Both are Same as:
+     * ```
+     * $config = new \Foo\Bar\Config();
+     * ```
     */
-    function service(?string $service = null, bool $shared = true, bool $serialize = false, mixed ...$arguments): ?object
+    function service(
+        ?string $service = null, 
+        bool $shared = true, 
+        bool $serialize = false, 
+        mixed ...$arguments
+    ): ?object
     {
         if($service === null || $service === ''){
             return Factory::service();
@@ -488,10 +523,15 @@ if(!function_exists('browser')) {
      * 
      * @param string|null $user_agent  The user agent string to analyze.
      * @param bool $return Set the return type, if `instance` return userAgent class object otherwise return array or json object.
-     *      -   Return Types: [array, object, instance]
      * @param bool $shared Allow shared instance creation (default: true).
      * 
      * @return array<string,mixed>|object<string,mixed>|UserAgent|false Return browser information.
+     * 
+     * Return Types: 
+     * 
+     * - array: - Return browser information as array.
+     * - object: - Return browser information as object.
+     * - instance: - Return browser information instance.
     */
     function browser(?string $user_agent = null, string $return = 'object', bool $shared = true): mixed
     { 
@@ -519,17 +559,18 @@ if(!function_exists('is_platform')) {
      * 
      * @param string $os The platform name to check.
      * 
-     * Possible Values:
-     * - mac.
-     * - windows.
-     * - linux.
-     * - freebsd.
-     * - openbsd.
-     * - solaris.
-     * - aws.
-     * - etc.
-     * 
      * @return bool Return true if the platform is matching, false otherwise.
+     * 
+     * Predefine OS Values:
+     * 
+     * - mac - For macOS.
+     * - windows - For Windows os.
+     * - linux - For linux os.
+     * - freebsd - For FreeBSD os.
+     * - openbsd - For openbsd os.
+     * - solaris - For solaris os.
+     * - aws - For AWS OpsWorks.
+     * - etc.
     */
     function is_platform(string $os): bool
     { 
@@ -611,26 +652,27 @@ if(!function_exists('import')) {
  if(!function_exists('logger')) {
     /**
      * Log a message at the given level.
+     * This function will make use of your preferred psr logger class if available.
      *
-     * @param string $level The log level.
-     * @param string $message The log message.
+     * @param string $level The log level to use.
+     * @param string $message The message to log.
      * @param array $context Additional context data (optional).
      * 
      * Log Levels:
      * 
-     * - emergency.
-     * - alert. 
-     * - critical. 
-     * - error.
-     * - warning.
-     * - notice.
-     * - info.
-     * - debug.
-     * - exception.
-     * - php_errors.
+     * - emergency - Log emergency error that need attention.
+     * - alert - Log alert message. 
+     * - critical - Log critical issue that may cause app not to work properly. 
+     * - error - Log minor error.
+     * - warning - Log a warning message.
+     * - notice - Log a notice to attend later.
+     * - info - Log an information.
+     * - debug - Log for debugging purpose.
+     * - exception - Log an exception message.
+     * - php_errors - Log any php related error.
      *
      * @return void
-     * @throws InvalidArgumentException
+     * @throws \Luminova\Exceptions\InvalidArgumentException Throws if error occurs while login.
     */
     function logger(string $level, string $message, array $context = []): void
     {
@@ -642,12 +684,12 @@ if(!function_exists('import')) {
     /**
      * Translate multiple languages it supports nested array.
      *
-     * @param string $lookup line to lookup.
-     * @param string|null $default Fallback translation if not found.
+     * @param string $lookup The language context annotation line to lookup.
+     * @param string|null $default Optional fallback translation if not found.
      * @param string|null $locale The locale to use for translation (optional).
-     * @param array $placeholders Matching placeholders for translation.
-     *    - @example array ['Peter', 'peter@foo.com] "Error name {0} and email {1}"
-     *    - @example array ['name' => 'Peter', 'email' => 'peter@foo.com] "Error name {name} and email {email}"
+     * @param array $placeholders Optional matching placeholders for translation.
+     *    - @example - Using index `['Peter', 'peter@foo.com] // "Error name {0} and email {1}"`.
+     *    - @example Using keys `['name' => 'Peter', 'email' => 'peter@foo.com]` // "Error name {name} and email {email}"`.
      * 
      * 
      * @return string Return translated string.
@@ -792,6 +834,28 @@ if (!function_exists('is_associative')) {
     }
 }
 
+if (!function_exists('is_json')) {
+    /**
+     * Check if the input is a valid JSON object.
+     *
+     * @param mixed $input The input to check.
+     *
+     * @return bool Returns true if the input is valid JSON; false otherwise.
+     */
+    function is_json(mixed $input): bool
+    {
+        if (!is_string($input)) {
+            return false;
+        }
+
+        try{
+            return is_array(json_decode($input, true, 512, JSON_THROW_ON_ERROR));
+        }catch(JsonException){
+            return false;
+        }
+    }
+}
+
 if (!function_exists('array_is_list')) {
     /**
      * Check if array is list.
@@ -839,11 +903,11 @@ if (!function_exists('to_array')) {
 
 if (!function_exists('to_object')) {
     /**
-     * Convert an array or string list to json object
+     * Convert an array or string list to json object.
      *
-     * @param array|string $input Array or String list to convert
+     * @param array|string $input Array or String list to convert.
      * 
-     * @return object|false $object  Return JSON object, otherwise false.
+     * @return object|false $object Return JSON object, otherwise false.
     */
     function to_object(array|string $input): object|bool
     {
@@ -860,7 +924,7 @@ if (!function_exists('to_object')) {
     
         try{
             return json_decode(json_encode($input, JSON_THROW_ON_ERROR));
-        }catch(\JsonException){
+        }catch(JsonException){
             return false;
         }
 

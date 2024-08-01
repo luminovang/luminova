@@ -9,9 +9,7 @@ class ComposerStaticInitce7d6b0379bc9a35d3afd6dd2b0e131e
     public static $prefixLengthsPsr4 = array (
         'P' => 
         array (
-            'Psr\\SimpleCache\\' => 16,
             'Psr\\Log\\' => 8,
-            'Psr\\Cache\\' => 10,
         ),
         'L' => 
         array (
@@ -24,17 +22,9 @@ class ComposerStaticInitce7d6b0379bc9a35d3afd6dd2b0e131e
     );
 
     public static $prefixDirsPsr4 = array (
-        'Psr\\SimpleCache\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/simple-cache/src',
-        ),
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
-        ),
-        'Psr\\Cache\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/cache/src',
         ),
         'Luminova\\' => 
         array (
@@ -85,7 +75,6 @@ class ComposerStaticInitce7d6b0379bc9a35d3afd6dd2b0e131e
         'Luminova\\Application\\Caller' => __DIR__ . '/../../..' . '/system/Application/Caller.php',
         'Luminova\\Application\\Factory' => __DIR__ . '/../../..' . '/system/Application/Factory.php',
         'Luminova\\Application\\Foundation' => __DIR__ . '/../../..' . '/system/Application/Foundation.php',
-        'Luminova\\Application\\Functions' => __DIR__ . '/../../..' . '/system/Application/Functions.php',
         'Luminova\\Application\\Services' => __DIR__ . '/../../..' . '/system/Application/Services.php',
         'Luminova\\Arrays\\ArrayCountable' => __DIR__ . '/../../..' . '/system/Arrays/ArrayCountable.php',
         'Luminova\\Arrays\\ArrayInput' => __DIR__ . '/../../..' . '/system/Arrays/ArrayInput.php',
@@ -185,10 +174,10 @@ class ComposerStaticInitce7d6b0379bc9a35d3afd6dd2b0e131e
         'Luminova\\Exceptions\\ValidationException' => __DIR__ . '/../../..' . '/system/Exceptions/ValidationException.php',
         'Luminova\\Exceptions\\ViewNotFoundException' => __DIR__ . '/../../..' . '/system/Exceptions/ViewNotFoundException.php',
         'Luminova\\Functions\\Escape' => __DIR__ . '/../../..' . '/system/Functions/Escape.php',
-        'Luminova\\Functions\\IPAddress' => __DIR__ . '/../../..' . '/system/Functions/IPAddress.php',
+        'Luminova\\Functions\\IP' => __DIR__ . '/../../..' . '/system/Functions/IP.php',
         'Luminova\\Functions\\Maths' => __DIR__ . '/../../..' . '/system/Functions/Maths.php',
         'Luminova\\Functions\\Normalizer' => __DIR__ . '/../../..' . '/system/Functions/Normalizer.php',
-        'Luminova\\Functions\\TorDetector' => __DIR__ . '/../../..' . '/system/Functions/TorDetector.php',
+        'Luminova\\Functions\\Tor' => __DIR__ . '/../../..' . '/system/Functions/Tor.php',
         'Luminova\\Http\\Client\\Curl' => __DIR__ . '/../../..' . '/system/Http/Client/Curl.php',
         'Luminova\\Http\\Client\\Guzzle' => __DIR__ . '/../../..' . '/system/Http/Client/Guzzle.php',
         'Luminova\\Http\\Encoder' => __DIR__ . '/../../..' . '/system/Http/Encoder.php',
@@ -201,6 +190,7 @@ class ComposerStaticInitce7d6b0379bc9a35d3afd6dd2b0e131e
         'Luminova\\Http\\Server' => __DIR__ . '/../../..' . '/system/Http/Server.php',
         'Luminova\\Http\\UserAgent' => __DIR__ . '/../../..' . '/system/Http/UserAgent.php',
         'Luminova\\Interface\\AiInterface' => __DIR__ . '/../../..' . '/system/Interface/AiInterface.php',
+        'Luminova\\Interface\\CacheInterface' => __DIR__ . '/../../..' . '/system/Interface/CacheInterface.php',
         'Luminova\\Interface\\CallableInterface' => __DIR__ . '/../../..' . '/system/Interface/CallableInterface.php',
         'Luminova\\Interface\\ConnInterface' => __DIR__ . '/../../..' . '/system/Interface/ConnInterface.php',
         'Luminova\\Interface\\CookieInterface' => __DIR__ . '/../../..' . '/system/Interface/CookieInterface.php',
@@ -254,10 +244,6 @@ class ComposerStaticInitce7d6b0379bc9a35d3afd6dd2b0e131e
         'Luminova\\Time\\Time' => __DIR__ . '/../../..' . '/system/Time/Time.php',
         'Luminova\\Time\\Timestamp' => __DIR__ . '/../../..' . '/system/Time/Timestamp.php',
         'Luminova\\Utils\\Queue' => __DIR__ . '/../../..' . '/system/Utils/Queue.php',
-        'Psr\\Cache\\CacheException' => __DIR__ . '/..' . '/psr/cache/src/CacheException.php',
-        'Psr\\Cache\\CacheItemInterface' => __DIR__ . '/..' . '/psr/cache/src/CacheItemInterface.php',
-        'Psr\\Cache\\CacheItemPoolInterface' => __DIR__ . '/..' . '/psr/cache/src/CacheItemPoolInterface.php',
-        'Psr\\Cache\\InvalidArgumentException' => __DIR__ . '/..' . '/psr/cache/src/InvalidArgumentException.php',
         'Psr\\Log\\AbstractLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/AbstractLogger.php',
         'Psr\\Log\\InvalidArgumentException' => __DIR__ . '/..' . '/psr/log/Psr/Log/InvalidArgumentException.php',
         'Psr\\Log\\LogLevel' => __DIR__ . '/..' . '/psr/log/Psr/Log/LogLevel.php',
@@ -269,9 +255,6 @@ class ComposerStaticInitce7d6b0379bc9a35d3afd6dd2b0e131e
         'Psr\\Log\\Test\\DummyTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/DummyTest.php',
         'Psr\\Log\\Test\\LoggerInterfaceTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
         'Psr\\Log\\Test\\TestLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/TestLogger.php',
-        'Psr\\SimpleCache\\CacheException' => __DIR__ . '/..' . '/psr/simple-cache/src/CacheException.php',
-        'Psr\\SimpleCache\\CacheInterface' => __DIR__ . '/..' . '/psr/simple-cache/src/CacheInterface.php',
-        'Psr\\SimpleCache\\InvalidArgumentException' => __DIR__ . '/..' . '/psr/simple-cache/src/InvalidArgumentException.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

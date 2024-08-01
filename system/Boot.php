@@ -46,7 +46,7 @@ final class Boot
          * Refuse to run when called from php-cgi
         */
         if (str_starts_with(PHP_SAPI, 'cgi')) {
-            echo "Novakit cli tool is not supported when running php-cgi. It needs php-cli to function!";
+            echo 'Novakit cli tool is not supported when running php-cgi. It needs php-cli to function!';
             exit(1);
         }
 
