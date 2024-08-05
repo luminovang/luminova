@@ -243,10 +243,11 @@ defined('SHOW_DEBUG_BACKTRACE') || define('SHOW_DEBUG_BACKTRACE', (bool) env('de
 /**
  * @var bool NOVAKIT_ENV NovaKit executable command
 */
-defined('NOVAKIT_ENV') || define('NOVAKIT_ENV', (isset($_SERVER['NOVAKIT_EXECUTION_ENV']) ? $_SERVER['NOVAKIT_EXECUTION_ENV'] : null));
+defined('NOVAKIT_ENV') || define('NOVAKIT_ENV', ($_SERVER['NOVAKIT_EXECUTION_ENV'] ?? null));
 
 /**
- * @var bool PROJECT_ID Get the project ID, This is based on directory your project is located as product id or empty on php server.
+ * @var bool PROJECT_ID Get the project ID, 
+ * This is based on directory your project is located as product id or empty on php server.
 */
 defined('PROJECT_ID') || define('PROJECT_ID', trim(dirname($_SERVER['SCRIPT_NAME']??''), '/'));
 

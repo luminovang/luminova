@@ -215,7 +215,7 @@ class ComposerStaticInitce7d6b0379bc9a35d3afd6dd2b0e131e
         'Luminova\\Notifications\\Firebase\\Notification' => __DIR__ . '/../../..' . '/system/Notifications/Firebase/Notification.php',
         'Luminova\\Notifications\\Models\\Message' => __DIR__ . '/../../..' . '/system/Notifications/Models/Message.php',
         'Luminova\\Optimization\\Minification' => __DIR__ . '/../../..' . '/system/Optimization/Minification.php',
-        'Luminova\\Routing\\Context' => __DIR__ . '/../../..' . '/system/Routing/Context.php',
+        'Luminova\\Routing\\Prefix' => __DIR__ . '/../../..' . '/system/Routing/Prefix.php',
         'Luminova\\Routing\\Router' => __DIR__ . '/../../..' . '/system/Routing/Router.php',
         'Luminova\\Routing\\Segments' => __DIR__ . '/../../..' . '/system/Routing/Segments.php',
         'Luminova\\Security\\Crypter' => __DIR__ . '/../../..' . '/system/Security/Crypter.php',

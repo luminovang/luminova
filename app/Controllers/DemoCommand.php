@@ -100,9 +100,9 @@ class DemoCommand extends BaseCommand
         }
 
         if($select === true){
-            $message = static::askForLanguages();
+            $message = self::askForLanguages();
         }elseif($password === true){
-            $message = static::askForPassword();
+            $message = self::askForPassword();
         }
 
         if($message === true){

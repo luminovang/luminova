@@ -11,6 +11,7 @@
 namespace App\Config;
 
 use \Luminova\Base\BaseServices;
+use \Luminova\Exceptions\RuntimeException;
 
 class Services extends BaseServices
 {

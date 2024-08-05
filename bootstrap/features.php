@@ -26,16 +26,18 @@ if((bool) env('feature.app.services', false)){
 /**
  * Initialize and register class modules and alias
 */
-if((bool) env('feature.app.class.alias', false) && !defined('INIT_DEV_MODULES')){
-    if (file_exists($modules = root('/app/Config/') . 'Modules.php')) {
-        define('INIT_DEV_MODULES', true);
-        $config = require_once $modules;
+if(
+    (bool) env('feature.app.class.alias', false) && 
+    !defined('INIT_DEV_MODULES') && 
+    file_exists($modules = root('/app/Config/') . 'Modules.php')
+) {
+    define('INIT_DEV_MODULES', true);
+    $config = require_once $modules;
 
-        if(isset($config['alias'])){
-            foreach ($config['alias'] as $alias => $namespace) {
-                if (!class_alias($namespace, $alias)) {
-                    logger('warning', "Failed to create an alias [$alias] for class [$namespace]");
-                }
+    if(isset($config['alias'])){
+        foreach ($config['alias'] as $alias => $namespace) {
+            if (!class_alias($namespace, $alias)) {
+                logger('warning', "Failed to create an alias [$alias] for class [$namespace]");
             }
         }
     }
@@ -44,9 +46,11 @@ if((bool) env('feature.app.class.alias', false) && !defined('INIT_DEV_MODULES'))
 /**
  * Initialize dev global functions
 */
-if((bool) env('feature.app.dev.functions', false) && !defined('INIT_DEV_FUNCTIONS')){
-    if(file_exists($global = root('/app/Utils/') . 'Global.php')){
-        define('INIT_DEV_FUNCTIONS', true);
-        require_once $global;
-    }
+if(
+    env('feature.app.dev.functions', false) && 
+    !defined('INIT_DEV_FUNCTIONS') && 
+    file_exists($global = root('/app/Utils/') . 'Global.php')
+){
+    define('INIT_DEV_FUNCTIONS', true);
+    require_once $global;
 }

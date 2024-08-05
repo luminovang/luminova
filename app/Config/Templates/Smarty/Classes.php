@@ -36,7 +36,7 @@ final class Classes
     /**
      * To register your classes which will be accessible in smarty template.
      * 
-     * @return array<string,class-string> Return array of classes.
+     * @return array<string,class-string<\T>> Return array of classes.
      *      -   Use the array key as the class alias name.
     */
     public function registerClasses(): array
@@ -48,7 +48,7 @@ final class Classes
      * You can register your classes which will be accessible in smarty template.
      * NOTE: You can also register your class in application controller using export() method.
      * 
-     * @return array<string,class-object> Return array of classes.
+     * @return array<string,class-object<\T>> Return array of classes.
      *      -   Use the array key as the class alias name.
     */
     public function registerObjects(): array
@@ -77,7 +77,7 @@ final class Classes
      *          - Access {$foundation->version()}
      * 
      * @param string $context The caller context.
-     * @param array<string,class-string> $classes The registered classes.
+     * @param array<string,class-string<\T>> $classes The registered classes.
      * 
      * @return class-object<anonymous> Return anonymous class object.
     */

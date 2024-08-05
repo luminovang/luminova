@@ -60,7 +60,7 @@ final class PHPStanRules implements Rule
             //$variableName = ($node instanceof Variable) ? $node->name : $node->getOriginalNode()->name;
             $variableName = $node->name;
             
-            if (strpos($variableName, '_') !== false) {
+            if (str_contains($variableName, '_')) {
                 $errors[] = sprintf(
                     'Variable name "%s" contains underscores. Use camelCase instead.',
                     $variableName

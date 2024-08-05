@@ -13,6 +13,7 @@ declare(strict_types=1);
 use \App\Application;
 use \App\Config\Files;
 use \Luminova\Base\BaseFunction;
+use \Luminova\Base\BaseApplication;
 use \Luminova\Application\Foundation;
 use \Luminova\Application\Factory;
 use \Luminova\Application\Services;
@@ -21,6 +22,7 @@ use \Luminova\Http\Request;
 use \Luminova\Http\UserAgent;
 use \Luminova\Cookies\Cookie;
 use \Luminova\Sessions\Session;
+use \Luminova\Interface\SessionManagerInterface;
 use \Luminova\Interface\ValidationInterface;
 use \Luminova\Template\Response;
 use \Luminova\Template\Layout;
@@ -81,7 +83,7 @@ if (!function_exists('app')) {
     /**
      * Get application container class shared instance or new instance if not shared. 
      * 
-     * @return Application Return application shared instance.
+     * @return Application|BaseApplication Return application shared instance.
     */
     function app(): Application 
     {
@@ -376,18 +378,19 @@ if(!function_exists('session')) {
     /**
      * Return session data if key is present else return session instance.
      *
-     * @param string $key Key to retrieve the data.
-     * @param bool $shared Use shared instance (default: true).
+     * @param string $key Optional key to retrieve the data (default: null).
+     * @param bool $shared Weather to use shared instance (default: true).
+     * @param class-object<SessionManagerInterface> $manager The session manager interface to use (default: SessionManager).
      *
      * @return Session|mixed Return session instance or value if key is present.
     */
-    function session(?string $key = null, bool $shared = true): mixed
+    function session(?string $key = null, bool $shared = true, ?SessionManagerInterface $manager = null): mixed
     {
         if ($key !== null && $key !== '') {
-            return Factory::session($shared)->get($key);
+            return Factory::session($manager, $shared)->get($key);
         }
 
-        return Factory::session($shared);
+        return Factory::session($manager, $shared);
     }
 }
 
@@ -784,31 +787,37 @@ if (!function_exists('get_column')) {
             return $columns;
         }
 
-        return array_map(function($item) use ($property) {
-            return is_object($item) ? $item->{$property} : $item[$property];
-        }, $from);
+        return array_map(fn($item) => (is_object($item) ? $item->{$property} : $item[$property]), $from);
     }
 }
 
 if (!function_exists('is_nested')) {
     /**
      * Check if array is a nested array.
+     * If recursive is false it only checks one level of depth.
      * 
-     * @param array $array Array to check.
+     * @param array $array The array to check.
+     * @param bool $recursive Determines whether to check nested array values (default: false).
      * 
      * @return bool Return true if array is a nested array.
     */
-    function is_nested(array $array): bool 
+    function is_nested(array $array, bool $recursive = false): bool 
     {
         if ($array === []) {
             return false;
         }
 
         foreach ($array as $value) {
-            if (is_array($value)) return true;
+            if(!is_array($value)){
+                return false;
+            }
+
+            if ($recursive && !is_nested($value, true)){
+                return false;
+            }
         }
 
-        return false; 
+        return true; 
     }
 }
 
@@ -834,25 +843,24 @@ if (!function_exists('is_associative')) {
     }
 }
 
-if (!function_exists('is_json')) {
+if (!function_exists('json_validate')) {
     /**
      * Check if the input is a valid JSON object.
      *
      * @param mixed $input The input to check.
+     * @param int $depth Maximum nesting depth of the structure being decoded (default: 512).
+     * @param int $flags Optional flags (default: 0).
      *
      * @return bool Returns true if the input is valid JSON; false otherwise.
      */
-    function is_json(mixed $input): bool
+    function json_validate(mixed $input, int $depth = 512, int $flags = 0): bool
     {
         if (!is_string($input)) {
             return false;
         }
-
-        try{
-            return is_array(json_decode($input, true, 512, JSON_THROW_ON_ERROR));
-        }catch(JsonException){
-            return false;
-        }
+     
+        json_decode($input, null, $depth, $flags);
+        return json_last_error() === JSON_ERROR_NONE;
     }
 }
 
@@ -860,7 +868,7 @@ if (!function_exists('array_is_list')) {
     /**
      * Check if array is list.
      * 
-     * @param array $array Array to check.
+     * @param array $array The array to check.
      * 
      * @return bool Return true if array is sequential, false otherwise.
     */
@@ -905,7 +913,7 @@ if (!function_exists('to_object')) {
     /**
      * Convert an array or string list to json object.
      *
-     * @param array|string $input Array or String list to convert.
+     * @param array|string $input The array or string list to convert.
      * 
      * @return object|false $object Return JSON object, otherwise false.
     */
@@ -917,7 +925,8 @@ if (!function_exists('to_object')) {
 
         if (is_string($input)) {
             $input = list_to_array($input);
-            if(!is_array($input)){
+
+            if($input === false){
                 return false;
             }
         }
@@ -936,7 +945,7 @@ if (!function_exists('list_to_array')) {
     /**
      * Convert string list to array.
      * 
-     * @param string $list The string list.
+     * @param string $list The string list to convert.
      * 
      * @return array|false Return array, otherwise false.
      * 
@@ -1006,7 +1015,7 @@ if (!function_exists('is_list')) {
     /**
      * Check if string is a valid list format.
      * 
-     * @param string $input string to check.
+     * @param string $input The string to check.
      * @param bool $trim Trim whitespace around the values.
      * 
      * @return bool Return true or false on failure.
@@ -1153,7 +1162,6 @@ if (!function_exists('get_class_name')) {
     }
 }
 
-
 if (!function_exists('is_command')) {
     /**
      * Find whether application is running in cli mode.
@@ -1194,16 +1202,26 @@ if (!function_exists('is_dev_server')) {
 
 if (!function_exists('response')) {
     /** 
-    * Initiate a view response object. 
+    * Initiate a new view response object.
     *
     * @param int $status int $status HTTP status code (default: 200 OK).
-    * @param bool $encode Enable content encoding like gzip, deflate.
+    * @param array<string,mixed>|null $headers Additional response headers (default: null).
+    * @param bool $encode Enable content encoding like gzip, deflate (default: true).
+    * @param bool $shared Weather to return shared instance (default: true).
     *
-    * @return Response Return vew response object. 
+    * @return Response Return view response object. 
     */
-    function response(int $status = 200, bool $encode = true): Response
+    function response(
+        int $status = 200, 
+        ?array $headers = null, 
+        bool $encode = true,
+        bool $shared = true
+    ): Response
     {
-        return Factory::response($status, true)->setStatus($status)->encode($encode);
+        return Factory::response($status, [], $shared)
+            ->setStatus($status)
+            ->encode($encode)
+            ->headers($headers ?? []);
     }
 }
 
@@ -1359,6 +1377,7 @@ if (!function_exists('camel_case')) {
 
         $camelCase = '';
         $firstPart = true;
+
         foreach ($parts as $part) {
             $camelCase .= $firstPart ? $part : ucfirst($part);
             $firstPart = false;
@@ -1427,17 +1446,19 @@ if (!function_exists('get_mime')) {
     /**
      * Detect MIME Content-type for a file.
      * 
-     * @param string $filename Path to the file.
+     * @param string $filename The file to extract its mime.
+     * @param string|null $magic_database Optional magic database for custom mime (e.g, \path\custom.magic).
      * 
      * @return string|false Return the content type in MIME format, otherwise false.
     */
-    function get_mime(string $filename): string|bool
+    function get_mime(string $filename, ?string $magic_database = null): string|bool
     {
         $mime = mime_content_type($filename);
         
-        if ($mime === false && ($finfo = finfo_open(FILEINFO_MIME_TYPE)) !== false) {
+        if (!$mime && ($finfo = finfo_open(FILEINFO_MIME_TYPE, $magic_database)) !== false) {
             $mime = finfo_file($finfo, $filename);
             finfo_close($finfo);
+
             return $mime;
         }
 
@@ -1470,4 +1491,4 @@ if (!function_exists('shared')) {
 
         return $default;
     }
- }
+}

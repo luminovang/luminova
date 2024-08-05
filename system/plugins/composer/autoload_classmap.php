@@ -184,7 +184,7 @@ return array(
     'Luminova\\Notifications\\Firebase\\Notification' => $baseDir . '/system/Notifications/Firebase/Notification.php',
     'Luminova\\Notifications\\Models\\Message' => $baseDir . '/system/Notifications/Models/Message.php',
     'Luminova\\Optimization\\Minification' => $baseDir . '/system/Optimization/Minification.php',
-    'Luminova\\Routing\\Context' => $baseDir . '/system/Routing/Context.php',
+    'Luminova\\Routing\\Prefix' => $baseDir . '/system/Routing/Prefix.php',
     'Luminova\\Routing\\Router' => $baseDir . '/system/Routing/Router.php',
     'Luminova\\Routing\\Segments' => $baseDir . '/system/Routing/Segments.php',
     'Luminova\\Security\\Crypter' => $baseDir . '/system/Security/Crypter.php',

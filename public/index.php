@@ -10,7 +10,7 @@
 declare(strict_types=1);
 
 use \Luminova\Boot;
-use \Luminova\Routing\Context;
+use \Luminova\Routing\Prefix;
 use \App\Controllers\Errors\ViewErrors;
 
 require_once __DIR__ . '/../system/Boot.php';
@@ -26,7 +26,7 @@ if (getcwd() . DIRECTORY_SEPARATOR !== FRONT_CONTROLLER) {
  * Load application route context.
  * Register all your application contexts such as `WEB, API, CONSOLE and CLI` depending on our requirements.
  * 
- * @param Context|array<string,mixed> $contexts [, Context|array<string,mixed> ...$] Routes context method accept arguments array or new Context class instance.
+ * @param Prefix|array<string,mixed> $contexts [, Prefix|array<string,mixed> ...$] Routes context method accept arguments array or new Prefix class instance.
  * 
  * @example For context class instance, pass new instance of Context as shown below.
  *  - @param string $name Route URI prefix name, any url that starts with $name will be routed to name.php in routes/name.php.
@@ -37,7 +37,7 @@ if (getcwd() . DIRECTORY_SEPARATOR !== FRONT_CONTROLLER) {
  *              [ErrorHandlerController::class, 'handlerMethod']
  * 
  * 
- * @example For array context, pass an array of Context configuration expecting only associative array with 2 keys `prefix` and `error`.
+ * @example For array context, pass an array of prefix configuration expecting only associative array with 2 keys `prefix` and `error`.
  *      -   The key `prefix` Should indicate your context name.
  *      -   The key `error` Should indicate your error handler, which can be `NULL`, `Closure` or `Array` indicating controller class and method.
  *              [
@@ -48,7 +48,7 @@ if (getcwd() . DIRECTORY_SEPARATOR !== FRONT_CONTROLLER) {
  * Finally run your application router to register and boot only request context for optimal performance.
 */
 Boot::http()->router->context(
-    new Context(Context::WEB, [ViewErrors::class, 'onWebError']),
-    new Context(Context::API, [ViewErrors::class, 'onApiError']),
-    new Context(Context::CLI)
+    new Prefix(Prefix::WEB, [ViewErrors::class, 'onWebError']),
+    new Prefix(Prefix::API, [ViewErrors::class, 'onApiError']),
+    new Prefix(Prefix::CLI)
 )->run();

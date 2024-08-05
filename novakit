@@ -12,7 +12,7 @@ use \Luminova\Command\Console;
 use \Luminova\Boot;
 
 /**
- * Autoload composers 
+ * Autoload framework files. 
 */
 require __DIR__ . '/system/Boot.php';
 
