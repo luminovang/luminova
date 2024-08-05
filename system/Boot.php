@@ -1,6 +1,6 @@
 <?php 
 /**
- * Luminova Framework
+ * Luminova Framework Bootstrapping.
  *
  * @package Luminova
  * @author Ujah Chigozie Peter
@@ -91,7 +91,7 @@ final class Boot
         /**
          * Set whether a client disconnect should abort script execution
         */
-        ignore_user_abort((bool) env('script.ignore.abort', true));
+        ignore_user_abort((bool) env('script.ignore.abort', false));
     }
 
     /**
