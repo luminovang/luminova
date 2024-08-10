@@ -17,7 +17,6 @@ use \Luminova\Base\BaseApplication;
 use \Luminova\Application\Foundation;
 use \Luminova\Application\Factory;
 use \Luminova\Application\Services;
-use \Luminova\Functions\Escape;
 use \Luminova\Http\Request;
 use \Luminova\Http\UserAgent;
 use \Luminova\Cookies\Cookie;
@@ -257,18 +256,16 @@ if(!function_exists('uuid')){
 
 if(!function_exists('escape')){
     /**
-    * Escapes a string or array of strings based on the specified context.
-    * If input is null instance of escape class will be returned.
+    * Escapes a user input string or array of strings based on the specified context.
     *
-    * @param string|array|null $input The string or array of strings to be escaped (default: null).
-    *                           For array, you can optionally use the keys of the array to specify the escape context for each value.
+    * @param string|array $input The string or array of strings to be escaped.
+    *           For array, you can optionally use the keys of the array to specify the escape context for each value.
     * @param string $context The escaper context in which the escaping should be performed (default:'html').
-    * @param string|null $encoding The escape character encoding to use (default: 'utf-8').
+    * @param string $encoding The escape character encoding to use (default: 'utf-8').
     * 
-    * @return array|string|Escape Return the escaped string or array of strings, otherwise return instance of escape if input is null.
-    * @throws InvalidArgumentException When an invalid or blank encoding is provided.
+    * @return array|string Return the escaped string or array of strings.
+    * @throws InvalidArgumentException When an invalid, blank encoding is provided or unsupported encoding or empty string is provided.
     * @throws BadMethodCallException When an invalid context is called.
-    * @throws RuntimeException When the string is not valid UTF-8 or cannot be converted.
     *
     * Supported Context Values: 
     *
@@ -280,20 +277,41 @@ if(!function_exists('escape')){
     * - raw -  Raw output no escaping apply.
     */
     function escape(
-        string|array|null $input = null, 
+        string|array $input, 
         string $context = 'html', 
-        string|null $encoding = 'utf-8'
-    ): array|string|Escape
+        string $encoding = 'utf-8'
+    ): array|string
     {
-        if($input === null){
-            return Factory::escaper(true, $encoding);
+        static $escaper = null;
+        $escaper ??= Factory::escaper($encoding);
+
+        if (is_array($input)) {
+            array_walk_recursive($input, function (&$value, $key) use ($context, $encoding) {
+                $value = escape($value, is_string($key) ? $key : $context, $encoding);
+            });
+
+            return $input;
         }
+
+        $context = strtolower($context);
 
         if ($context === 'raw') {
             return $input;
         }
 
-        return Factory::functions()->escape($input, $context, $encoding);
+        if (!in_array($context, ['html', 'js', 'css', 'url', 'attr'], true)) {
+            throw new InvalidArgumentException(sprintf('Invalid escape context provided %s.', $context));
+        }
+
+        $method = ($context === 'attr') ? 'escapeHtmlAttr' : 'escape' . ucfirst($context);
+    
+        if ($encoding !== null && $escaper->getEncoding() !== $encoding) {
+            $escaper = $escaper->setEncoding($encoding);
+        }
+
+        $input = $escaper->{$method}($input);
+        
+        return $input;
     }
 }
 
@@ -433,6 +451,8 @@ if(!function_exists('factory')) {
      * -   'modules'        `\Luminova\Library\Modules`
      * -   'language'       `\Luminova\Languages\Translator`
      * -   'logger'         `\Luminova\Logger\Logger`
+     * -   'escaper'        `\Luminova\Functions\Escape`
+     * -   'network'        `\Luminova\Http\Network`
      * -   'fileManager'    `\Luminova\Storages\FileManager`
      * -   'validate'       `\Luminova\Security\Validation`
      * -   'response'       `\Luminova\Template\Response`
@@ -728,9 +748,9 @@ if (!function_exists('path')) {
     /**
      * Get system or application path, converted to `unix` or `windows` directory separator style.
      * 
-     * @param string $file Path file name to return.
+     * @param string $name The path name to return.
      * 
-     * Storage Context Names.
+     * Path Names.
      *      - app.
      *      - system.
      *      - plugins.
