@@ -17,6 +17,10 @@ use \Luminova\Base\BaseApplication;
 use \Luminova\Application\Foundation;
 use \Luminova\Application\Factory;
 use \Luminova\Application\Services;
+use \Luminova\Arrays\Lists;
+use \Luminova\Storages\FileManager;
+use \Luminova\Cache\FileCache;
+use \Luminova\Cache\MemoryCache;
 use \Luminova\Http\Request;
 use \Luminova\Http\UserAgent;
 use \Luminova\Cookies\Cookie;
@@ -25,7 +29,9 @@ use \Luminova\Interface\SessionManagerInterface;
 use \Luminova\Interface\ValidationInterface;
 use \Luminova\Template\Response;
 use \Luminova\Template\Layout;
+use \Luminova\Exceptions\InvalidArgumentException;
 use \Luminova\Exceptions\FileException;
+use \Luminova\Exceptions\ClassException;
 use \Luminova\Exceptions\AppException;
 
 if (!function_exists('root')) {
@@ -40,7 +46,7 @@ if (!function_exists('root')) {
      */
     function root(?string $suffix = null): string
     {
-       $suffix = ($suffix === null ? '' : trim(str_replace('/', DIRECTORY_SEPARATOR, $suffix), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR);
+       $suffix = ($suffix === null ? '' : trim(str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $suffix), TRIM_DS) . DIRECTORY_SEPARATOR);
 
         if (file_exists(APP_ROOT . '.env')) {
             return APP_ROOT . $suffix;
@@ -286,9 +292,10 @@ if(!function_exists('escape')){
         $escaper ??= Factory::escaper($encoding);
 
         if (is_array($input)) {
-            array_walk_recursive($input, function (&$value, $key) use ($context, $encoding) {
-                $value = escape($value, is_string($key) ? $key : $context, $encoding);
-            });
+            array_walk_recursive(
+                $input, 
+                fn(&$value, $key) => $value = escape($value, is_string($key) ? $key : $context, $encoding)
+            );
 
             return $input;
         }
@@ -667,7 +674,7 @@ if(!function_exists('import')) {
     */
     function import(string $library): bool
     {
-        require_once root('/libraries/libs/') . trim(rtrim($library, '.php'), DIRECTORY_SEPARATOR) . '.php';
+        require_once root('/libraries/libs/') . trim(rtrim($library, '.php'), TRIM_DS) . '.php';
         return true;
     }
  }
@@ -695,7 +702,7 @@ if(!function_exists('import')) {
      * - php_errors - Log any php related error.
      *
      * @return void
-     * @throws \Luminova\Exceptions\InvalidArgumentException Throws if error occurs while login.
+     * @throws InvalidArgumentException Throws if error occurs while login.
     */
     function logger(string $level, string $message, array $context = []): void
     {
@@ -748,9 +755,9 @@ if (!function_exists('path')) {
     /**
      * Get system or application path, converted to `unix` or `windows` directory separator style.
      * 
-     * @param string $name The path name to return.
+     * @param string $file Path file name to return.
      * 
-     * Path Names.
+     * Storage Context Names.
      *      - app.
      *      - system.
      *      - plugins.
@@ -977,20 +984,12 @@ if (!function_exists('list_to_array')) {
         if ($list === '') {
             return false;
         }
-    
-        if (str_contains($list, "'")) {
-            preg_match_all("/'([^']+)'/", $list, $matches);
-            if (!empty($matches[1])) {
-                return $matches[1];
-            }
+        
+        try{
+            return Lists::toArray($list);
+        }catch(Exception|AppException){
+            return false;
         }
-    
-        preg_match_all('/(\w+)/', $list, $matches);
-        if (!empty($matches[1])) {
-            return $matches[1];
-        }
-    
-        return false;
     }
 }
 
@@ -1036,22 +1035,16 @@ if (!function_exists('is_list')) {
      * Check if string is a valid list format.
      * 
      * @param string $input The string to check.
-     * @param bool $trim Trim whitespace around the values.
      * 
      * @return bool Return true or false on failure.
     */
-    function is_list(string $input, bool $trim = false): bool 
+    function is_list(string $input): bool 
     {
-        if ($trim) {
-            $input = preg_replace('/\s*,\s*/', ',', $input);
-            $input = preg_replace_callback('/"([^"]+)"/', fn($matches) => '"' . trim($matches[1]) . '"', $input);
-        }
-    
         if ($input === '') {
             return false;
         }
 
-        return preg_match('/^(\s*"?[^\s"]+"?\s*,)*\s*"?[^\s"]+"?\s*$/', $input);
+        return Lists::isList($input);
     }
 }
 
@@ -1070,7 +1063,7 @@ if (!function_exists('write_content')) {
     */
     function write_content(string $filename, mixed $content, int $flag = 0, $context = null): bool 
     {
-        return Factory::fileManager()->write($filename, $content, $flag, $context);
+        return FileManager::write($filename, $content, $flag, $context);
     }
 }
 
@@ -1098,7 +1091,7 @@ if (!function_exists('get_content')) {
         $context = null
     ): string|bool 
     {
-        return Factory::fileManager()->getContent($filename, $length, $offset, $useInclude, $context);
+        return FileManager::getContent($filename, $length, $offset, $useInclude, $context);
     }
 }
 
@@ -1116,7 +1109,7 @@ if (!function_exists('make_dir')) {
     */
     function make_dir(string $path, ?int $permissions = null, bool $recursive = true): bool 
     {
-        return Factory::fileManager()->mkdir($path, ($permissions ?? Files::$dirPermissions ?? 0777), $recursive);
+        return FileManager::mkdir($path, ($permissions ?? Files::$dirPermissions ?? 0777), $recursive);
     }
 }
 
@@ -1207,13 +1200,11 @@ if (!function_exists('is_dev_server')) {
         }
 
         if(($server = ($_SERVER['SERVER_NAME'] ?? false)) !== false){
-            if ($server === '127.0.0.1' || $server === '::1' || $server === 'localhost') {
-                return true;
-            }
-            
-            if (str_contains($server, 'localhost') || str_contains($server, '127.0.0.1')) {
-                return true;
-            }
+            return (
+                $server === '::1' || 
+                str_contains($server, 'localhost') || 
+                str_contains($server, '127.0.0.1')
+            );
         }
         
         return false;
@@ -1255,7 +1246,7 @@ if (!function_exists('is_blob')) {
     */
     function is_blob(mixed $value): bool 
     {
-        return Factory::fileManager()->isResource($value, 'stream');
+        return FileManager::isResource($value, 'stream');
     }
 }
 
@@ -1511,4 +1502,91 @@ if (!function_exists('shared')) {
 
         return $default;
     }
+}
+
+if (!function_exists('configs')) {
+    /**
+     * Retrieves the configurations for the specified context.
+     * This function can only be use to return configuration array stored in `app/Configs/` directory.
+     * 
+     * @param string $filename The configuration filename (without extension).
+     * @param array|null $default The default configuration if file could not be load (default: null).
+     * 
+     * @return array<mixed>|null Return array of the configurations for the filename, or false if not found.
+     */
+    function configs(string $filename, ?array $default = null): ?array 
+    {
+        static $configs = [];
+        static $path = null;
+
+        if (isset($configs[$filename])) {
+            return $configs[$filename];
+        }
+
+        if ($path === null) {
+            $path = root('/app/Config/');
+        }
+
+        if (is_readable($file = $path . $filename . '.php')) {
+            $configs[$filename] = require $file;
+            return $configs[$filename];
+        }
+
+        return $default;
+    }
+}
+
+if (!function_exists('cache')) {
+    /**
+     * Initialize or retrieve a new instance of the cache class.
+     * 
+     * @param string $driver The cache driver to return instance of [filesystem or memcached](default: `filesystem`).
+     * @param string|null $storage The name of the cache storage. If null, you must call the `setStorage` method later (default: null).
+     * @param string|null $persistentIdOrSubfolder Optional persistent id or subfolder for storage (default: null):
+     *  - For Memcached: A unique persistent connection ID. If null, the default ID from environment variables is used, or "default" if not set.
+     *  - For Filesystem Cache: A subdirectory within the cache directory. If null, defaults to the base cache directory.
+     * 
+     * @return FileCache|MemoryCache Return new instance of instance of cache class based on specified driver.
+     * @throws ClassException If unsupported driver is specified.
+     * @throws CacheException If there is an issue initializing the cache.
+     * @throws InvalidArgumentException If an invalid subdirectory is provided for the filesystem cache.
+     */
+    function cache(
+        string $driver = 'filesystem',
+        ?string $storage = null, 
+        ?string $persistentIdOrSubfolder = null
+    ): FileCache|MemoryCache {
+        /**
+         * @var array<string,FileCache|MemoryCache> $instances
+        */
+        static $instances = [];
+        $instances[$driver] ??= match ($driver) {
+            'memcached' => new MemoryCache($storage, $persistentIdOrSubfolder),
+            'filesystem' => new FileCache($storage, $persistentIdOrSubfolder),
+            default => throw new ClassException(
+                'Invalid cache driver type specified. Supported drivers: memcached, filesystem.'
+            ),
+        };
+    
+        $cache = $instances[$driver];
+    
+        if ($storage !== null && $cache->getStorage() !== $storage) {
+            $cache->setStorage($storage);
+        }
+    
+        if ($persistentIdOrSubfolder !== null) {
+            if ($driver === 'memcached' && $cache->getId() !== $persistentIdOrSubfolder) {
+                $cache->setId($persistentIdOrSubfolder);
+            }
+    
+            if ($driver === 'filesystem') {
+                $subfolder = trim($persistentIdOrSubfolder, TRIM_DS) . DIRECTORY_SEPARATOR;
+                if ($cache->getFolder() !== $subfolder) {
+                    $cache->setFolder($subfolder);
+                }
+            }
+        }
+    
+        return $cache;
+    }    
 }

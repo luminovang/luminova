@@ -10,7 +10,12 @@ declare(strict_types=1);
 */
 
 /**
- * @var string APP_ROOT system root 2 levels back
+ * @var string TRIM_DS pattern to trim directory separator.
+*/
+defined('TRIM_DS') || define('TRIM_DS', '/\\');
+
+/**
+ * @var string APP_ROOT system root 2 levels back.
 */
 defined('APP_ROOT') || define('APP_ROOT', dirname(__DIR__, 1) . DIRECTORY_SEPARATOR);
 
@@ -249,7 +254,7 @@ defined('NOVAKIT_ENV') || define('NOVAKIT_ENV', ($_SERVER['NOVAKIT_EXECUTION_ENV
  * @var bool PROJECT_ID Get the project ID, 
  * This is based on directory your project is located as product id or empty on php server.
 */
-defined('PROJECT_ID') || define('PROJECT_ID', trim(dirname($_SERVER['SCRIPT_NAME']??''), '/'));
+defined('PROJECT_ID') || define('PROJECT_ID', trim(dirname($_SERVER['SCRIPT_NAME']??''), TRIM_DS));
 
 /**
  * @var int FETCH_ASSOC Fetch as an associative array

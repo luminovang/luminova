@@ -5,6 +5,7 @@
     <title>Maintenance Mode</title>
     <meta charset="utf-8">
     <meta name="robots" content="noindex">
+    <meta http-equiv="Cache-Control" content="no-store, max-age=0, no-cache"/>
     <link rel="shortcut icon" type="image/png" href="./favicon.png">
     <style>
         <?= preg_replace('#[\r\n\t ]+#', ' ', file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'maintenance.css')) ?>

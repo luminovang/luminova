@@ -98,8 +98,8 @@ class Updater
         $files = scandir($source);
         foreach ($files as $file) {
             if ($file !== '.' && $file !== '..') {
-                $srcFile = rtrim($source, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $file;
-                $dstFile = rtrim($destination, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $file;
+                $srcFile = rtrim($source, '/\\') . DIRECTORY_SEPARATOR . $file;
+                $dstFile = rtrim($destination, '/\\') . DIRECTORY_SEPARATOR . $file;
 
                 if(self::isUpdater(self::displayPath($dstFile))){
                     continue;
@@ -128,7 +128,7 @@ class Updater
     {
         $files = array_diff(scandir($dir), ['.', '..']);
         foreach ($files as $file) {
-            $path = rtrim($dir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $file;
+            $path = rtrim($dir, '/\\') . DIRECTORY_SEPARATOR . $file;
             if (is_dir($path)) {
                 self::removeRecursive($path, $main);
             } else {
@@ -203,9 +203,9 @@ class Updater
 
         foreach ($files as $file) {
             if ($file !== '.' && $file !== '..') {
-                $srcFile = rtrim($source, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $file;
-                $dstFile = rtrim($destination, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $file;
-                $sampleFile = rtrim($sampleFolder, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $file;
+                $srcFile = rtrim($source, '/\\') . DIRECTORY_SEPARATOR . $file;
+                $dstFile = rtrim($destination, '/\\') . DIRECTORY_SEPARATOR . $file;
+                $sampleFile = rtrim($sampleFolder, '/\\') . DIRECTORY_SEPARATOR . $file;
 
                 if (!is_dir($srcFile)) {
                     self::doConfigCopy($srcFile, $dstFile, $sampleFile, $main);
@@ -238,9 +238,9 @@ class Updater
         $files = scandir($source);
         foreach ($files as $file) {
             if ($file !== '.' && $file !== '..') {
-                $srcFile = rtrim($source, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $file;
-                $dstFile = rtrim($destination, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $file;
-                $sampleFile = rtrim($sampleFolder, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $file;
+                $srcFile = rtrim($source, '/\\') . DIRECTORY_SEPARATOR . $file;
+                $dstFile = rtrim($destination, '/\\') . DIRECTORY_SEPARATOR . $file;
+                $sampleFile = rtrim($sampleFolder, '/\\') . DIRECTORY_SEPARATOR . $file;
 
                 if (!is_dir($srcFile)) {
                     self::doConfigCopy($srcFile, $dstFile, $sampleFile, $main);
@@ -296,8 +296,8 @@ class Updater
 
             foreach ($files as $file) {
                 if ($file !== '.' && $file !== '..') {
-                    $srcFile = rtrim($fullSource, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $file;
-                    $dstFile = rtrim($destination, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $file;
+                    $srcFile = rtrim($fullSource, '/\\') . DIRECTORY_SEPARATOR . $file;
+                    $dstFile = rtrim($destination, '/\\') . DIRECTORY_SEPARATOR . $file;
   
                     if(self::isUpdater(self::displayPath($dstFile))){
                         continue;
