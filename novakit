@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 /**
- * Luminova Framework
+ * Luminova Framework NovaKit Command Line Tool.
  *
  * @package Luminova
  * @author Ujah Chigozie Peter
@@ -12,12 +12,12 @@ use \Luminova\Command\Console;
 use \Luminova\Boot;
 
 /**
- * Autoload framework files. 
+ * Autoload composers 
 */
 require __DIR__ . '/system/Boot.php';
 
 /**
- * Initialize booting framework bootstrap important files.
+ * Location of the framework bootstrap file.
 */
 Boot::cli();
 

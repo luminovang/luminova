@@ -1,6 +1,6 @@
 <?php
 /**
- * Luminova Framework
+ * Luminova Framework Index front controller.
  *
  * @package Luminova
  * @author Ujah Chigozie Peter

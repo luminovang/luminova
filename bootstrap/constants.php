@@ -335,3 +335,27 @@ defined('RETURN_ALL') || define('RETURN_ALL', 6);
  * @var int RETURN_STMT Return prepared statement.
 */
 defined('RETURN_STMT') || define('RETURN_STMT', 7);
+
+/**
+ * Set error reporting.
+*/
+error_reporting(PRODUCTION ? 
+    E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT & ~E_USER_NOTICE & ~E_USER_DEPRECATED :
+    E_ALL
+);
+ini_set('display_errors', (!PRODUCTION && env('debug.display.errors', false)) ? '1' : '0');
+
+/**
+* Set default timezone
+*/
+date_default_timezone_set(env("app.timezone", 'UTC'));
+
+/**
+* Limits the maximum execution time
+*/
+set_time_limit((int) env("script.execution.limit", 30));
+
+/**
+* Set whether a client disconnect should abort script execution
+*/
+ignore_user_abort((bool) env('script.ignore.abort', false));

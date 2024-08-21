@@ -23,6 +23,7 @@ use \Luminova\Cache\FileCache;
 use \Luminova\Cache\MemoryCache;
 use \Luminova\Http\Request;
 use \Luminova\Http\UserAgent;
+use \Luminova\Http\HttpCode;
 use \Luminova\Cookies\Cookie;
 use \Luminova\Sessions\Session;
 use \Luminova\Interface\SessionManagerInterface;
@@ -700,6 +701,7 @@ if(!function_exists('import')) {
      * - debug - Log for debugging purpose.
      * - exception - Log an exception message.
      * - php_errors - Log any php related error.
+     * - metrics - Log performance metrics, specifically for api in production level.
      *
      * @return void
      * @throws InvalidArgumentException Throws if error occurs while login.
@@ -1589,4 +1591,127 @@ if (!function_exists('cache')) {
     
         return $cache;
     }    
+}
+
+if (!function_exists('array_merge_recursive_distinct')) {
+    /**
+     * Recursively merges two arrays, ensuring unique values in nested arrays.
+     * The first array will be updated with values from the second array.
+     *
+     * @param array<string|int,mixed> &$array1 The array to merge into, passed by reference.
+     * @param array<string|int,mixed> &$array2 The array to merge from, passed by reference.
+     * 
+     * @return array Return the merged array with unique values.
+     */
+    function array_merge_recursive_distinct(array &$array1, array &$array2): array
+    {
+        foreach ($array2 as $key => $value) {
+            if (is_array($value) && isset($array1[$key]) && is_array($array1[$key])) {
+                // Recursively merge nested arrays
+                $array1[$key] = array_merge_recursive_distinct($array1[$key], $value);
+            } else {
+                // Directly set value or replace existing value
+                $array1[$key] = $value;
+            }
+        }
+
+        return $array1;
+    }
+}
+
+if (!function_exists('http_status_header')) {
+    /**
+     * Sets the HTTP response status code and sends appropriate headers.
+     * 
+     * This function sets the HTTP status code and sends the corresponding status message header.
+     * If the status code is not predefined, it returns `false`. For predefined status codes, it sends headers including the status
+     * message. The function determines the HTTP protocol version based on the server's protocol.
+     *
+     * @param int $status The HTTP status code to set (e.g., 200, 404).
+     * 
+     * @return bool Returns true if the status code is found in the predefined list and headers are set, otherwise false.
+     */
+    function http_status_header(int $status): bool
+    {
+        static $codes = null;
+
+        // Cache the status codes if not already cached.
+        if ($codes === null) {
+            $codes = HttpCode::$codes;
+        }
+
+        $message = ($codes[$status] ?? null);
+
+        // Check if the status code is in the predefined list
+        if ($message === null) {
+            return false;
+        }
+
+        // Determine the protocol version (1.0 or 1.1) based on the server's protocol
+        $protocol = ($_SERVER['SERVER_PROTOCOL'] ?? '1.0');
+        $protocol = ($protocol !== '1.0' ? (strcasecmp($protocol, 'HTTP/1.0') ? '1.1' : '1.0') : $protocol);
+
+        // Send the HTTP header with the specified status and message
+        @header("HTTP/$protocol $status {$message}");
+
+        // Send the 'Status' header, which is often used for compatibility with older clients
+        @header("Status: $status {$message}", true, $status);
+
+        return true;
+    }
+}
+
+if (!function_exists('function_exists_cached')) {
+    /**
+     * Checks if a function exists and caches the result to avoid repeated checks.
+     * 
+     * This function uses a static cache to store whether a function exists or not.
+     * If the function's existence has been checked before, the cached result is returned.
+     * Otherwise, it checks the function's existence using `function_exists()` and caches the result,
+     * improving performance by avoiding repeated function existence checks.
+     *
+     * @param string $function The name of the function to check for existence.
+     * 
+     * @return bool Returns true if the function exists, false otherwise.
+     */
+    function function_exists_cached(string $function): bool
+    {
+        static $functions = [];
+        $func = $functions[$function] ?? null;
+
+        if($func === null){
+            $functions[$function] = (function_exists($function) ? 't' : 'f');
+            return $functions[$function] === 't';
+        }
+
+        return $func === 't';
+    }
+}
+
+if (!function_exists('class_exists_cached')) {
+    /**
+     * Checks if a class exists and caches the result for improved performance.
+     * 
+     * This function maintains a static cache to remember whether a class has been previously checked.
+     * It first checks the cache to see if the class's existence was determined before. If not, it uses
+     * `class_exists()` to perform the check and then stores the result in the cache. This avoids redundant
+     * checks and speeds up subsequent requests.
+     *
+     * @param string $class The name of the class to check for existence.
+     * @param bool $autoload Optional. Whether to check for class existence with autoloading (default: true).
+     * 
+     * @return bool Returns true if the class exists, false otherwise.
+     */
+    function class_exists_cached(string $class, bool $autoload = true): bool
+    {
+        static $classes = [];
+        $cached = $classes[$class] ?? null;
+
+        if($cached === null){
+            $classes[$class] = (class_exists($class, $autoload) ? 't' : 'f');
+            return $classes[$class] === 't';
+        }
+
+        return $cached === 't';
+    }
 }

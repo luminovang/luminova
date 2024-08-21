@@ -10,7 +10,6 @@
 namespace App\Controllers;
 
 use \Luminova\Base\BaseViewController;
-
 /**
  * This class demonstrates how web pages controller can be implemented using PHP Luminova.
 */
