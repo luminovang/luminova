@@ -10,10 +10,10 @@
 
 namespace App\Config;
 
-use \Luminova\Base\BaseServices;
+use \Luminova\Core\CoreServices;
 use \Luminova\Exceptions\RuntimeException;
 
-class Services extends BaseServices
+class Services extends CoreServices
 {
     /**
      * Register bootstrap autoload all your application services.

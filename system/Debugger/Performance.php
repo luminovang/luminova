@@ -98,7 +98,9 @@ final class Performance
             'Request Method' => self::esc(self::$request->getMethod()),
             'Request URL' => self::esc(self::$request->getUri()),
             'Request Origin' => self::esc(self::$request->getOrigin()),
-            'Request Referrer' => self::esc(self::$request->getUserAgent()->getReferrer())
+            'Request Referrer' => self::esc(self::$request->getUserAgent()->getReferrer()),
+            'Is Secure Request' => (self::$request->isSecure() ? 'YES' : 'NO'),
+            'Is AJAX' => (self::$request->isAJAX() ? 'YES' : 'NO')
         ];
 
         if(Foundation::isApiContext()){
@@ -308,17 +310,22 @@ final class Performance
     public static function metrics(bool $html = true): string
     {
         $execution = self::$endTime - self::$startTime;
-        $format = ($execution < 1) ? '%.2f milliseconds' : '%.4f seconds';
-        $time = ($execution < 1) ? $execution * 1000 : $execution;
+        $executionFormatted = ($execution < 1) ? sprintf('%.2f ms', $execution * 1000) : sprintf('%.4f s', $execution);
+        $filesLoaded = count(get_included_files());
+        $dbTime = shared('__DB_QUERY_EXECUTION_TIME__', null, 0);
+        $dbTimeFormatted = ($dbTime < 1) ? sprintf('%.2f ms', $dbTime * 1000) : sprintf('%.4f s', $dbTime);
+        $memoryUsage = (self::$endMemory - self::$startMemory) / 1024;
+        $separator = $html ? '<span style="color:#eecfcf;margin: 0 1rem;">|</span>' : ' | ';
 
-        $files = get_included_files();
-        $span = $html ? '<span style="color:#eecfcf;margin: 0 1rem;">|</span>' : ' | ';
-        
         return sprintf(
-            "Execution Time: {$format} {$span} Memory Usage: %.2f KB {$span} Files Loaded: %d",
-            $time,
-            (self::$endMemory - self::$startMemory) / 1024,
-            count($files)
+            "Execution Time: %s%sDatabase Query Time: %s%sMemory Usage: %.2f KB%sFiles Loaded: %d",
+            $executionFormatted,
+            $separator,
+            $dbTimeFormatted,
+            $separator,
+            $memoryUsage,
+            $separator,
+            $filesLoaded
         );
     }
 

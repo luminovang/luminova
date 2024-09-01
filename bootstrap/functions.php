@@ -12,8 +12,8 @@ declare(strict_types=1);
 
 use \App\Application;
 use \App\Config\Files;
-use \Luminova\Base\BaseFunction;
-use \Luminova\Base\BaseApplication;
+use \Luminova\Core\CoreFunction;
+use \Luminova\Core\CoreApplication;
 use \Luminova\Application\Foundation;
 use \Luminova\Application\Factory;
 use \Luminova\Application\Services;
@@ -89,7 +89,7 @@ if (!function_exists('app')) {
     /**
      * Get application container class shared instance or new instance if not shared. 
      * 
-     * @return Application|BaseApplication Return application shared instance.
+     * @return Application|CoreApplication<\T> Return application shared instance.
     */
     function app(): Application 
     {
@@ -169,12 +169,12 @@ if (!function_exists('func')) {
     /**
      * Return shared functions instance or a specific context instance.
      * If context is specified, return an instance of the specified context, 
-     * otherwise return anonymous class which extends BaseFunction.
+     * otherwise return anonymous class which extends CoreFunction.
      *
      * @param string|null $context The context to return it's instance (default: null).
      * @param mixed $arguments [, mixed $... ] Optional initialization arguments based on context.
      *
-     * @return anonymous-class-object<BaseFunction>|class-object<\T>|mixed Returns an instance of functions, 
+     * @return CoreFunction<\T>|class-object<\T>|mixed Returns an instance of functions, 
      * object string, or boolean value depending on the context, otherwise null.
      * 
      *  Supported contexts:
@@ -455,7 +455,7 @@ if(!function_exists('factory')) {
      * -   'task'           `\Luminova\Time\Task`
      * -   'session'        `\Luminova\Sessions\Session`
      * -   'cookie'         `\Luminova\Cookies\Cookie`
-     * -   'functions'      `\Luminova\Base\BaseFunction`
+     * -   'functions'      `\Luminova\Core\CoreFunction`
      * -   'modules'        `\Luminova\Library\Modules`
      * -   'language'       `\Luminova\Languages\Translator`
      * -   'logger'         `\Luminova\Logger\Logger`
@@ -1616,6 +1616,40 @@ if (!function_exists('array_merge_recursive_distinct')) {
         }
 
         return $array1;
+    }
+}
+
+if (!function_exists('array_extend_default')) {
+    /**
+     * Merges a new options array with a default options array without overwriting
+     * existing values. If both arrays contain nested arrays, they are merged
+     * recursively, ensuring that default values are preserved and new values 
+     * are added where applicable.
+     *
+     * This function provides a way to extend the default options while 
+     * maintaining their integrity, making it ideal for configurations 
+     * where certain settings should not be changed.
+     *
+     * @param array $default The default options array.
+     * @param array $new The new options array to merge.
+     * 
+     * @return array The merged options array with defaults preserved.
+     */
+    function array_extend_default(array $default, array $new): array 
+    {
+        $result = $default; 
+
+        foreach ($new as $key => $value) {
+            // If the key does not exist in the default, add it
+            if (!array_key_exists($key, $result)) {
+                $result[$key] = $value;
+            } elseif (is_array($result[$key]) && is_array($value)) {
+                // If both values are arrays, merge them recursively
+                $result[$key] = array_extend_default($result[$key], $value);
+            }
+        }
+
+        return $result;
     }
 }
 

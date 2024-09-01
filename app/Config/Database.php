@@ -10,10 +10,10 @@
 
 namespace App\Config;
 
-use \Luminova\Base\BaseDatabase;
+use \Luminova\Core\CoreDatabase;
 
 
-class Database extends BaseDatabase
+class Database extends CoreDatabase
 {
     /**
      * Optional servers to connect to when main server fails

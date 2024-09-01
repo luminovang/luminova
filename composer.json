@@ -20,6 +20,7 @@
     "require-dev": {
         "psr/cache": "^3.0",
         "psr/simple-cache": "^3.0",
+        "psr/http-client": "^1.0",
         "nikic/php-parser": "^4.17.1",
         "phpstan/extension-installer": "^1.3",
         "phpstan/phpstan": "^1.10.2",
@@ -38,6 +39,8 @@
         "ext-mysqli": "Needed if you use MySQL",
         "ext-intl": "Needed if you use Local",
         "psr/log": "Needed to use PSR logging",
+        "psr/http-client": "Needed to use Guzzle http client",
+        "guzzlehttp/guzzle": "Needed to use Guzzle http client",
         "phpmailer/phpmailer": "Needed if you want to use PHPMailer client",
         "swiftmailer/swiftmailer": "Needed if you want use SwiftMailer client",
         "smarty/smarty": "Needed if you want to use Smarty template engine",

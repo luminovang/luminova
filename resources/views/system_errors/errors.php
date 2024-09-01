@@ -30,13 +30,10 @@ $searchable = urlencode($message . ' PHP Luminova Framework');
                 <a class="button" href="https://luminova.ng/forum/search?q=<?= $searchable;?>" rel="noreferrer" target="_blank">Search Forum &#128270;</a>
                 <a class="button" href="https://github.com/luminovang/luminova/issues/new?labels=bug&title=<?= $searchable;?>" rel="noreferrer" target="_blank">Open Issue &#128030;</a>
                 <div id="stack-tracer" style="display:none;">
-                    <?php foreach(array_slice($lines, 3) as $trc): ?>
-                        <p class="entry text-danger"><?= htmlspecialchars($trc, ENT_QUOTES); ?></p>
-                    <?php endforeach; ?>
                     <?php 
                         if (SHOW_DEBUG_BACKTRACE) : 
                             include_once __DIR__ . DIRECTORY_SEPARATOR . 'tracer.php';
-                            onErrorShowDebugTracer($stack->getDebugTrace());
+                            onErrorShowDebugTracer($stack->getBacktrace(), array_slice($lines, 3));
                         endif;
                     ?>
                 </div>

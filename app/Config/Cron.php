@@ -1,6 +1,6 @@
 <?php 
 /**
- * Luminova Framework
+ * Luminova Framework Cron job scheduler for managing scheduled tasks.
  *
  * @package Luminova
  * @author Ujah Chigozie Peter
@@ -9,14 +9,9 @@
  */
 namespace App\Config;
 
-use \Luminova\Base\BaseCron;
+use \Luminova\Core\CoreCronTasks;
 
-/**
- * Class Cron
- * 
- * Cron job scheduler for managing scheduled tasks.
- */
-final class Cron extends BaseCron
+final class Cron extends CoreCronTasks
 {
     /**
      * Schedule the task for execution.

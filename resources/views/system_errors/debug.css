@@ -6,6 +6,7 @@
     --brand-primary-color: #063ca9;
     --light-bg-color: #ededee;
     --dark-bg-color: #404040;
+    --timeline-color: #711c1c;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17,6 +18,7 @@
         --brand-primary-color: #063ca9;
         --light-bg-color: #ededee;
         --dark-bg-color: #404040;
+        --timeline-color: #d0abab;
     }
 }
 
@@ -49,6 +51,10 @@ h1.headline {
 
 .text-center {
     text-align: center;
+}
+
+.text-timeline{
+    color: var(--timeline-color);
 }
 
 p.entry {
@@ -127,6 +133,7 @@ p.entry {
     color: #666;
 }
 
+.source .line.highlight,
 .source .line .highlight {
     display: block;
     background: #9b7c7c;

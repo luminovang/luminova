@@ -9,9 +9,9 @@
  */
 namespace App\Utils;
 
-use \Luminova\Base\BaseFunction;
+use \Luminova\Core\CoreFunction;
 
-class Functions extends BaseFunction
+class Functions extends CoreFunction
 {
  // Add more custom methods
 }

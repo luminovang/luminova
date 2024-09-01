@@ -14,11 +14,11 @@ final class Tracer
     /**
      * Creates a syntax-highlighted version of a PHP file.
      * 
-     * @param string $file File to highlight
-     * @param int $line Line number 
-     * @param int $lines Maximum number of lines
+     * @param string $file File to highlight.
+     * @param int $line Line number.
+     * @param int $lines Maximum number of lines.
      * 
-     * @return bool|string
+     * @return bool|string Return html highlight of the passed file.
     */
     public static function highlight(string $file, int $line, int $lines = 15): bool|string
     {
@@ -47,21 +47,26 @@ final class Tracer
         $code = '';
         $spans = 0;
 
-        foreach ($source as $n => $row) {
+        foreach ($source as $index => $row) {
             $spans += substr_count($row, '<span') - substr_count($row, '</span');
             $row = str_replace(["\r", "\n"], ['', ''], $row);
+            $entry = ($index + $start + 1);
 
-            if (($n + $start + 1) === $line) {
+            if ($entry === $line) {
                 preg_match_all('#<[^>]+>#', $row, $tags);
 
                 $code .= sprintf(
-                    "<span class='line highlight'><span class='number'>{$format}</span> %s\n</span>%s",
-                    $n + $start + 1,
+                    "<span class=\"line highlight\"><span class=\"number\">{$format}</span> %s\n</span>%s",
+                    $entry,
                     strip_tags($row),
                     implode('', $tags[0])
                 );
             } else {
-                $code .= sprintf('<span class="line"><span class="number">' . $format . '</span> %s', $n + $start + 1, $row) . "\n";
+                $code .= sprintf(
+                    "<span class=\"line\"><span class=\"number\">{$format}</span> %s\n",
+                    $entry, 
+                    $row
+                );
                 $spans++;
             }
         }

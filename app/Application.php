@@ -9,9 +9,9 @@
  */
 namespace App;
 
-use \Luminova\Base\BaseApplication;
+use \Luminova\Core\CoreApplication;
 
-class Application extends BaseApplication 
+class Application extends CoreApplication 
 {
     /**
      * {@inheritdoc}

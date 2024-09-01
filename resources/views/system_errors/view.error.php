@@ -29,7 +29,7 @@ $searchable = urlencode($message . ' PHP Luminova Framework');
     <?php 
     if (SHOW_DEBUG_BACKTRACE) : 
         include_once __DIR__ . DIRECTORY_SEPARATOR . 'tracer.php';
-        onErrorShowDebugTracer($exception->getDebugTrace());
+        onErrorShowDebugTracer($exception->getBacktrace());
     endif;
     ?>
 

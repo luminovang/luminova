@@ -1,11 +1,12 @@
 <?php 
 /**
- * Luminova Framework
+ * Luminova Framework sitemap configuration.
  *
  * @package Luminova
  * @author Ujah Chigozie Peter
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
+ * @link https://luminova.ng/docs/0.0.0/configs/sitemap
  */
 namespace App\Config;
 
@@ -25,6 +26,20 @@ final class Sitemap extends BaseConfig
     public int $maxScan = 0;
 
     /**
+     * Sets the allowed scan start URI prefix for sitemap generation.
+     *
+     * This option allows you to restrict sitemap generation to URLs that match a specific prefix.
+     * The prefix is appended to your start URL.
+     * To scan all URLs starting from the start url set this variable to blank string.
+     *
+     * @var string $scanUrlPrefix
+     *
+     * @example If your start URL is `http://localhost/example.com/` and the prefix is `blog`,
+     *          the sitemap will only include URLs that match `http://localhost/example.com/blog/*`.
+     */
+    public string $scanUrlPrefix = '';
+
+    /**
      * URLs, URL patterns, or full URLs to ignore when generating a sitemap.
      *
      * This array defines specific URLs, URL patterns, or full URLs that should be ignored
@@ -40,7 +55,6 @@ final class Sitemap extends BaseConfig
     public array $ignoreUrls = [
         '*/api/*'
     ];
-
 
     /**
      * URL patterns associated with views for determining last modified timestamps in a sitemap.
