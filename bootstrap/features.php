@@ -12,14 +12,14 @@ declare(strict_types=1);
 /**
  * Autoload register psr-4 classes
 */
-if((bool) env('feature.app.autoload.psr4', false)){
+if(env('feature.app.autoload.psr4', false)){
     \Luminova\Library\Modules::register();
 }
 
 /**
  * Register services 
 */
-if((bool) env('feature.app.services', false)){
+if(env('feature.app.services', false)){
     factory('register');
 }
 
@@ -27,7 +27,7 @@ if((bool) env('feature.app.services', false)){
  * Initialize and register class modules and alias
 */
 if(
-    (bool) env('feature.app.class.alias', false) && 
+    env('feature.app.class.alias', false) && 
     !defined('INIT_DEV_MODULES') && 
     file_exists($modules = root('/app/Config/') . 'Modules.php')
 ) {

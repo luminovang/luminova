@@ -88,7 +88,7 @@ if(!function_exists('env')){
      * @param string $key The environment variable key to retrieve.
      * @param mixed $default Optional default value to return if the key is not found (default: null).
      * 
-     * @return mixed Return the value of the specified environment key or default value if not found.
+     * @return array|string|int|float|double|bool|null Return the value of the specified environment key or default value if not found.
      */
     function env(string $key, mixed $default = null): mixed 
     {
@@ -96,35 +96,55 @@ if(!function_exists('env')){
             return '';
         }
 
+        static $arrays = [];
+
+        if (($value = $arrays[$key] ?? null) !== null) {
+            return $value;
+        }
+
         $value = $_ENV[$key] ?? ($_SERVER[$key] ?? getenv($key));
 
+        // Value cannot be false it always stored as string or an array.
         if ($value === false) {
             return $default;
         }
 
-        return match (strtolower($value)) {
+        $result = match (strtolower($value)) {
             'true', 'enable' => true,
             'false', 'disable' => false,
             'blank' => '',
             'null' => null,
-            default => (str_starts_with($value, '[') && str_ends_with($value, ']')) 
-                ? (function($value) {
-                    if ($value === '[]') {
-                        return [];
-                    }
-    
-                    $value = trim($value, '[] ');
-                    $array = explode(',', $value);
-                    return array_map(function($item) {
-                        $entry = trim($item);
-                        if (is_numeric($entry)) {
-                            return $entry + 0;
-                        }
-                        return $entry;
-                    }, $array);
-                })($value)
-            : $value
+            default => ((str_starts_with($value, '[') && str_ends_with($value, ']')) 
+                ? '__ENV_ARRAY__' 
+                : (is_numeric($value) 
+                    ? $value + 0 
+                    : $value
+                )
+            )
         };
+
+        if($result === '__ENV_ARRAY__'){
+            if($value === '[]'){
+                $arrays[$key] = [];
+                return [];
+            }
+
+            $result = array_map(function($item) {
+                $item = trim($item);
+                return match ($item) {
+                    'true' => true,
+                    'false' => false,
+                    'null' => null,
+                    is_numeric($item) => $item + 0,
+                    default => $item
+                };
+            }, explode(',', trim($value, '[] ')));
+            
+            // To avoid processing the array value if same key is called again.
+            $arrays[$key] = $result;
+        }
+
+        return $result;
     }
 }
 
@@ -167,13 +187,6 @@ defined('FRONT_CONTROLLER') || define('FRONT_CONTROLLER', APP_ROOT . 'public' . 
  * @var string DOCUMENT_ROOT document root directory path 
 */
 defined('DOCUMENT_ROOT') || define('DOCUMENT_ROOT', realpath(FRONT_CONTROLLER . 'public') . DIRECTORY_SEPARATOR);
-
-/**
- * @var int STATUS_OK success status code
- * 
- * @deprecated use STATUS_SUCCESS instead
-*/
-defined('STATUS_OK') || define('STATUS_OK', 0);
 
 /**
  * @var int STATUS_OK success status code

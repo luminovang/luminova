@@ -93,6 +93,7 @@ final class Performance
             'IP Address' => self::esc(ip_address()),
             'Environment' => ENVIRONMENT,
             'Project Id' => PROJECT_ID,
+            'Cache File' => Foundation::getCacheId() . '.lmv.php',
             'Server Software' => self::esc($_SERVER['SERVER_SOFTWARE'] ?? 'Not Set'),
             'UserAgent' => self::esc(self::$request->getUserAgent()->toString()),
             'Request Method' => self::esc(self::$request->getMethod()),
@@ -267,7 +268,7 @@ final class Performance
      */
     private static function showWebPerformanceMetrics(string|null $style, array $info): void 
     {
-        $style ??= 'position: fixed; bottom: 0; z-index: 9000; width: 100%; max-height: 400px; background-color: #000; color: #0d930d; padding: .5rem 1rem; margin: 0; left: 0; right: 0; box-sizing: border-box; overflow: auto;';
+        $style ??= 'font-family: -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif; position: fixed; bottom: 0; z-index: 9000; width: 100%; max-height: 400px; background-color: #000; color: #0d930d; padding: .5rem 1rem; margin: 0; left: 0; right: 0; box-sizing: border-box; overflow: auto;';
         $metrics = self::metrics();
         $detailsHtml = '';
 
@@ -287,7 +288,7 @@ final class Performance
                 <button type="button" id="lmv-toggle-button" onclick="lmvToggleProfilingDetails()" style="line-height: 30px; font-size: 15px; border-radius: 8px; position: absolute; right: 1rem; background-color: #e9e9ed; color: #000; border: 1px solid #201f1f; cursor: pointer;">Show Details</button>
             </div>
             <div id="lmv-debug-details" style="display: none; padding-top: 10px; color: #fff; height: 300px; overflow:auto;">
-                <table style="width: 100%; margin-bottom: 1rem;">
+                <table style="width: 100%; margin-bottom: 1rem;color:#f2efef">
                     <tbody>
                         {$detailsHtml}
                     </tbody>
@@ -416,7 +417,7 @@ final class Performance
 
         // Output counters
         $content .= <<<HTML
-        <table style="width:100%; margin-bottom:1rem;">
+        <table style="width:100%; margin-bottom:1rem;color:#f2efef;">
             <tbody>
                 <tr><td><strong>Total Framework Modules:</strong></td><td style='text-align:center;'>[<span style='color:#04ac17'>{$categories['Module']}</span>]</td></tr>
                 <tr><td><strong>Total Third Party Modules:</strong></td><td style='text-align:center;'>[<span style='color:#d99a06'>{$categories['ThirdParty']}</span>]</td></tr>
