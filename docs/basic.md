@@ -282,9 +282,9 @@ Caching can be implemented either automatically or manually to learn more about 
 
 To enable page view caching, update your environment variables as follows:
 
-1. Set `page.caching` to `true` to enable caching.
-2. Define the cache expiration duration by setting `page.cache.expiry`.
-3. For content that should never expire, set `page.caching.immutable` to `true`. This will set the cache duration to 5 years and add the `immutable` directive to your cache control headers.
+1. Enable page caching by setting `page.caching` to `true`.
+2. Set the cache expiration duration using `page.cache.expiry`. To cache content indefinitely, set this value to `0`, which defaults to a 5-year duration. You can manually set a longer duration if you prefer a custom expiration period.
+3. Optionally, set `page.caching.immutable` to `true` to add the `immutable` directive to your cache control headers for content that should never expire.
 
 #### Automatic Caching
 
