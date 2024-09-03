@@ -280,7 +280,7 @@ This flexibility ensures that you can customize the headers sent with your views
 The template view in Luminova allows you to cache content, serving a cached version of the page upon revisits. 
 Caching can be implemented either automatically or manually to learn more about view caching [read documentation](https://luminova.ng/docs/0.0.0/cache/view-caching).
 
-To enable page view caching simply your environment variable `page.caching` to true and also set the expiration of your page contents `page.cache.expiry`. Additionally to cache never expired content also set `page.caching.immutable` to true, this will create a timestamp of 5 years and add `immutable` to your cache control header.
+To enable page view caching, in your environment variable configuration set the `page.caching` to true and also set the expiration of your page contents `page.cache.expiry`. Additionally to cache never expired content also set `page.caching.immutable` to true, this will create a timestamp of 5 years and add `immutable` to your cache control header.
 
 #### Automatic Caching
 
