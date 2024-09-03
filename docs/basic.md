@@ -280,7 +280,11 @@ This flexibility ensures that you can customize the headers sent with your views
 The template view in Luminova allows you to cache content, serving a cached version of the page upon revisits. 
 Caching can be implemented either automatically or manually to learn more about view caching [read documentation](https://luminova.ng/docs/0.0.0/cache/view-caching).
 
-To enable page view caching, in your environment variable configuration set the `page.caching` to true and also set the expiration of your page contents `page.cache.expiry`. Additionally to cache never expired content also set `page.caching.immutable` to true, this will create a timestamp of 5 years and add `immutable` to your cache control header.
+To enable page view caching, update your environment variables as follows:
+
+1. Set `page.caching` to `true` to enable caching.
+2. Define the cache expiration duration by setting `page.cache.expiry`.
+3. For content that should never expire, set `page.caching.immutable` to `true`. This will set the cache duration to 5 years and add the `immutable` directive to your cache control headers.
 
 #### Automatic Caching
 
@@ -290,7 +294,7 @@ Automatic caching requires no additional implementation after enabling the cachi
 
 #### Manual Caching with Auto Renewal
 
-This method allows you to render cached content if it has not expired, and it only execute the callback function if cache does not exist or expired.
+This method allows you to render cached content if it is still valid. The callback function will only be executed if the cache does not exist or has expired.
 
 ```php
 <?php 
@@ -326,7 +330,7 @@ class MyController extends BaseViewController
 
 #### Manual Caching and Renewal
 
-This approach uses traditional if-else checking, to first verify if cache has expired before rendering new content or calling the reuse method.
+This approach uses a traditional if-else check to first verify if the cache has expired. If the cache is still valid, the existing content is rendered when you call the `reuse` method. If the cache has expired, new content is generated to refresh the content.
 
 ```php
 <?php 
