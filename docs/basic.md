@@ -1,8 +1,10 @@
-This documentation covers the basic implementation of template handling within the Luminova framework.
+## Template and Controller View Handling
 
-## Controller Overview
+This documentation covers the basic implementation of template handling within the Luminova framework controllers.
 
-Controllers are classes that handle requests made to your application, whether they originate from HTTP requests or CLI commands. Upon initialization, a controller method processes the request, receiving all necessary parameters and dependencies. After processing the information, the controller renders the response or handles it accordingly. All controller classes should be placed in the `/app/Controller/` directory.
+### Controller Overview 
+
+Controllers are classes that handle requests made to your application, whether they originate from HTTP requests or CLI commands. Upon initialization, a controller method processes the request, receiving all necessary parameters and dependencies. After processing the information, the controller renders the response or handles it accordingly. All controller classes should be placed in the `/app/Controllers/` directory.
 
 ***
 
@@ -17,7 +19,7 @@ Luminova provides two base controller classes for handling HTTP requests, both o
 Extending [Luminova\Base\BaseController](https://luminova.ng/docs/0.0.0/base/controller) automatically initializes the HTTP request class `\Luminova\Http\Request` and the input validation class `Luminova\Security\Validation`.
 
 ```php
-// /app/Controller/MyController.php
+// /app/Controllers/MyController.php
 <?php 
 namespace App\Controllers;
 
@@ -36,7 +38,7 @@ class MyController extends BaseController
 Extending [Luminova\Base\BaseViewController](https://luminova.ng/docs/0.0.0/base/view-controller) does not automatically initialize any additional classes, allowing for manual initialization when necessary. This is particularly useful for web pages that do not require immediate user input validation.
 
 ```php
-// /app/Controller/MyController.php
+// /app/Controllers/MyController.php
 <?php 
 namespace App\Controllers;
 
@@ -55,7 +57,7 @@ class MyController extends BaseViewController
 Extending [Luminova\Base\BaseCommand](https://luminova.ng/docs/0.0.0/base/command) allows the controller to handle command line operations in a manner similar to HTTP controllers. For more details on command line implementation, [see examples](https://luminova.ng/docs/0.0.0/commands/examples).
 
 ```php
-// /app/Controller/MyCommand.php
+// /app/Controllers/MyCommand.php
 <?php 
 namespace App\Controllers;
 
@@ -110,7 +112,6 @@ In above example, when a POST request is sent to `https://example.com/api/books`
 
 ***
 
-
 ### Application View Example
 
 The **`View`** object is designed to load and render templates stored in the `/resources/views` directory. Supported template file extensions include:
@@ -127,7 +128,7 @@ When you pass the template file name without the extension, the `View` object au
 <!DOCTYPE html>
 <html lang="en"> 
 <head>
-    <title><?php $this->_title; ?></title>
+    <title><?php $this->_title;?></title>
 </head>
 <body>
     <h1>My Book Website</h1>
@@ -272,13 +273,14 @@ class MyController extends BaseViewController
 
 This flexibility ensures that you can customize the headers sent with your views to match your specific needs, whether it's content type, caching controls, or custom headers.
 
-
 ***
 
 ### Application View Caching Examples
 
 The template view in Luminova allows you to cache content, serving a cached version of the page upon revisits. 
 Caching can be implemented either automatically or manually to learn more about view caching [read documentation](https://luminova.ng/docs/0.0.0/cache/view-caching).
+
+To enable page view caching simply your environment variable `page.caching` to true and also set the expiration of your page contents `page.cache.expiry`. Additionally to cache never expired content also set `page.caching.immutable` to true, this will create a timestamp of 5 years and add `immutable` to your cache control header.
 
 #### Automatic Caching
 
@@ -287,6 +289,8 @@ Automatic caching requires no additional implementation after enabling the cachi
 ***
 
 #### Manual Caching with Auto Renewal
+
+This method allows you to render cached content if it has not expired, and it only execute the callback function if cache does not exist or expired.
 
 ```php
 <?php 
@@ -322,6 +326,8 @@ class MyController extends BaseViewController
 
 #### Manual Caching and Renewal
 
+This approach uses traditional if-else checking, to first verify if cache has expired before rendering new content or calling the reuse method.
+
 ```php
 <?php 
 namespace App\Controllers;
@@ -330,7 +336,7 @@ use Luminova\Base\BaseViewController;
 use Luminova\Attributes\Route;
 use Luminova\Attributes\Error;
 use App\Controllers\Errors\ViewErrors;
-                                    use Luminova\Core\CoreApplication;
+use Luminova\Core\CoreApplication;
 
 #[Error(onError: [ViewErrors::class, 'onWebError'])]
 class MyController extends BaseViewController 
@@ -440,6 +446,7 @@ Organizing content in a framework is crucial for easy access and management. Lum
 #### Scenario
 
 Imagine you have a website with the following URL patterns:
+
 - `https://example.com/api/*` (API endpoints)
 - `https://example.com/admin/*` (Admin interface)
 - `https://example.com/*` (Main website)
@@ -545,7 +552,6 @@ class AdminController extends BaseController
 
 By using this approach, you can maintain both the readability of your code samples and the overall performance benefits of minified content.
 
-
 ***
 
 ### Object Exportation in Luminova
@@ -596,7 +602,7 @@ class AdminController extends BaseController
 #### How It Works
 
 - **Exporting Instances:** When you initialize an object, such as the `Users` class, you can export it to make it accessible within the isolated template context. In this case, the object is assigned the name `users` for use within the template.
-- **Static Class Export:** For classes like `Foo`, which only contain static methods and don’t require initialization, you can export them without creating an instance. This allows the static methods to be accessed directly in the template.
+- **Static Class Export:** For classes like `Foo`, which only contain static methods and don't require initialization, you can export them without creating an instance. This allows the static methods to be accessed directly in the template.
 - **Exporting with Initialization:** For classes that need to be initialized (e.g., `Bar` and `Baz`), you can specify this during export. Additionally, you can assign a different name (alias) to the exported object for use within the template.
 
 ***
