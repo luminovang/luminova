@@ -223,6 +223,35 @@ if(!function_exists('kebab_case')){
     }
 }
 
+if(!function_exists('uppercase_words')){
+    /**
+     * Uppercase the first character of each word in a string, 
+     * it also handles underscores (`_`) and hyphens (`-`), converting them to spaces before applying capitalization.
+     *
+     * @param string $string The input string to convert.
+     *
+     * @return string Return the string with the first character of each word capitalized.
+     */
+    function uppercase_words(string $string): string
+    {
+        if($string === ''){
+            return '';
+        }
+
+        $string = strtolower($string);
+        
+        if (strpbrk($string[0], '_- ') === false) {
+            $string[0] = strtoupper($string[0]);
+        }
+
+        return preg_replace_callback(
+            '/([-_ ])+(\w)/',
+            fn($matches) => $matches[1] . strtoupper($matches[2]),
+            $string
+        );
+    }
+}
+
 if(!function_exists('locale')){
     /**
     * Set locale or return locale application string.
@@ -289,9 +318,6 @@ if(!function_exists('escape')){
         string $encoding = 'utf-8'
     ): array|string
     {
-        static $escaper = null;
-        $escaper ??= Factory::escaper($encoding);
-
         if (is_array($input)) {
             array_walk_recursive(
                 $input, 
@@ -307,19 +333,23 @@ if(!function_exists('escape')){
             return $input;
         }
 
-        if (!in_array($context, ['html', 'js', 'css', 'url', 'attr'], true)) {
+        if($context === 'html' || $context === 'attr'){
+            return htmlspecialchars($input, ENT_QUOTES | ENT_SUBSTITUTE, $encoding);
+        }
+
+        if (!in_array($context, ['html', 'js', 'css', 'url'], true)) {
             throw new InvalidArgumentException(sprintf('Invalid escape context provided %s.', $context));
         }
 
-        $method = ($context === 'attr') ? 'escapeHtmlAttr' : 'escape' . ucfirst($context);
-    
+        static $escaper = null;
+        $escaper ??= Factory::escaper($encoding);
+
         if ($encoding !== null && $escaper->getEncoding() !== $encoding) {
             $escaper = $escaper->setEncoding($encoding);
         }
 
-        $input = $escaper->{$method}($input);
-        
-        return $input;
+        $method = 'escape' . ucfirst($context);
+        return $escaper->{$method}($input);
     }
 }
 
@@ -1434,6 +1464,7 @@ if (!function_exists('layout')) {
      * Allow you to extend and inherit a section of another template view file.
      * 
      * @param string $file Layout filename without the extension path.
+     * @param string $module The HMVC custom module name (e.g, `Blog`, `User`).
      * 
      * @return Layout Returns the layout class instance.
      * @throws RuntimeException Throws if layout file is not found.
@@ -1447,11 +1478,11 @@ if (!function_exists('layout')) {
      * layout('foo/bar/baz')
      * ```
      * 
-     * > All layouts must be stored in `resources/views/layout/` directory.
+     * > All layouts must be stored in `resources/Views/layout/` directory.
     */
-    function layout(string $file): Layout
+    function layout(string $file, string $module = ''): Layout
     {
-        return Layout::getInstance()->layout($file);
+        return Layout::getInstance()->layout($file, $module);
     }
 }
 
@@ -1595,8 +1626,9 @@ if (!function_exists('cache')) {
 
 if (!function_exists('array_merge_recursive_distinct')) {
     /**
-     * Recursively merges two arrays, ensuring unique values in nested arrays.
-     * The first array will be updated with values from the second array.
+     * Merges arrays recursively ensuring unique values in nested arrays. 
+     * Unlike traditional recursive merging, it replaces duplicate values rather than appending them. 
+     * When two arrays contain the same key, the value in the second array replaces the one in the first array.
      *
      * @param array<string|int,mixed> &$array1 The array to merge into, passed by reference.
      * @param array<string|int,mixed> &$array2 The array to merge from, passed by reference.
@@ -1619,21 +1651,48 @@ if (!function_exists('array_merge_recursive_distinct')) {
     }
 }
 
+if (!function_exists('array_merge_recursive_replace')) {
+   /**
+     * Merges multiple arrays recursively. 
+     * When two arrays share the same key, values from the second array overwrite those from the first. 
+     * Numeric keys are appended only if the value doesn't already exist in the array.
+     *
+     * @param array ...$array The arrays to be merged.
+     * 
+     * @return array Return the merged result array.
+     */
+    function array_merge_recursive_replace(array ...$array): array {
+        $merged = array_shift($array);
+        
+        foreach ($array as $params) {
+            foreach ($params as $key => $value) {
+                if (is_numeric($key) && !in_array($value, $merged, true)) {
+                    $merged[] = is_array($value) 
+                        ? array_merge_recursive_replace($merged[$key] ?? [], $value) 
+                        : $value;
+                } else {
+                    $merged[$key] = (isset($merged[$key]) && is_array($value) && is_array($merged[$key])) 
+                        ? array_merge_recursive_replace($merged[$key], $value) 
+                        : $value;
+                }
+            }
+        }
+
+        return $merged;
+    }
+}
+
 if (!function_exists('array_extend_default')) {
     /**
-     * Merges a new options array with a default options array without overwriting
-     * existing values. If both arrays contain nested arrays, they are merged
-     * recursively, ensuring that default values are preserved and new values 
-     * are added where applicable.
-     *
-     * This function provides a way to extend the default options while 
-     * maintaining their integrity, making it ideal for configurations 
-     * where certain settings should not be changed.
+     * Merges two arrays, treating the first array as the default configuration and the second as new or override values.
+     * 
+     * If both arrays contain nested arrays, they are merged recursively, 
+     * ensuring that default values are preserved and new values are added where applicable.
      *
      * @param array $default The default options array.
      * @param array $new The new options array to merge.
      * 
-     * @return array The merged options array with defaults preserved.
+     * @return array Return the merged options array with defaults preserved.
      */
     function array_extend_default(array $default, array $new): array 
     {

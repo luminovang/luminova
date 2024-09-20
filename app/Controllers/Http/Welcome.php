@@ -7,7 +7,7 @@
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
  */
-namespace App\Controllers;
+namespace App\Controllers\Http;
 
 use \Luminova\Base\BaseViewController;
 /**

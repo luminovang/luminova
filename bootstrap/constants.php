@@ -130,7 +130,7 @@ if(!function_exists('env')){
             }
 
             $result = array_map(function($item) {
-                $item = trim($item);
+                $item = trim($item, " '\"\n\r\t\v\0");
                 return match ($item) {
                     'true' => true,
                     'false' => false,
@@ -140,7 +140,6 @@ if(!function_exists('env')){
                 };
             }, explode(',', trim($value, '[] ')));
             
-            // To avoid processing the array value if same key is called again.
             $arrays[$key] = $result;
         }
 
