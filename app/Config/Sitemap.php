@@ -7,6 +7,7 @@
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
  * @link https://luminova.ng/docs/0.0.0/configs/sitemap
+ * @link https://www.sitemaps.org/protocol.html
  */
 namespace App\Config;
 
@@ -21,7 +22,7 @@ final class Sitemap extends BaseConfig
      * A value of 0 (zero) indicates no limit, meaning all accessible URLs will be scanned.
      * If you encounter performance issues or memory constraints, consider setting a reasonable limit.
      *
-     * @var int $maxScan
+     * @var int $maxScan The maximum number of URLs to scan during the sitemap generation process.
      */
     public int $maxScan = 0;
 
@@ -32,12 +33,75 @@ final class Sitemap extends BaseConfig
      * The prefix is appended to your start URL.
      * To scan all URLs starting from the start url set this variable to blank string.
      *
-     * @var string $scanUrlPrefix
+     * @var string $scanUrlPrefix A string specifying the start URL scan.
      *
      * @example If your start URL is `http://localhost/example.com/` and the prefix is `blog`,
      *          the sitemap will only include URLs that match `http://localhost/example.com/blog/*`.
      */
     public string $scanUrlPrefix = '';
+
+    /**
+     * Indicates how frequently the page is likely to change in the sitemap.
+     *
+     * This property provides general information to search engines about the expected 
+     * frequency of changes to the associated URL. While this value does not guarantee 
+     * how often search engines will crawl the page, it helps them prioritize their crawling 
+     * strategy based on the indicated frequency. 
+     * 
+     * Valid values include:
+     * - `always`: The page is updated continuously.
+     * - `hourly`: The page is updated at least once an hour.
+     * - `daily`: The page is updated at least once a day.
+     * - `weekly`: The page is updated at least once a week.
+     * - `monthly`: The page is updated at least once a month.
+     * - `yearly`: The page is updated at least once a year.
+     * - `never`: The page is not expected to change.
+     * 
+     * If set to `null`, no frequency information will be provided for the page.
+     *
+     * @var ?string $changeFrequently Set to one of the valid frequency values to indicate how often the page is likely to change, or `null` to disable.
+     */
+    public ?string $changeFrequently = null;
+
+    /**
+     * Determines whether to include a static `.html` version of URLs in the sitemap XML.
+     *
+     * When set to `true`, this property ensures that each URL entry in the sitemap 
+     * is accompanied by a corresponding `.html` static version. This is useful for sites that 
+     * have static HTML alternatives for certain pages or sections, allowing search engines 
+     * to index both the dynamic and static versions. 
+     * 
+     * Example:
+     * - If the URL is `https://example.com/page`, the static `.html` version will be included 
+     *   as `https://example.com/page.html` in the sitemap if this setting is enabled.
+     *
+     * @var bool $includeStaticHtml Set to `true` to enable static URL inclusion, or `false` to disable it.
+     * 
+     * > **Note:** By default the start URL will not include the `.html` (e.g, `https://example.com/`).
+     */
+    public bool $includeStaticHtml = false;
+
+    /**
+     * List of URL patterns to skip when generating static `.html` versions in the sitemap.
+     *
+     * This array defines specific URL patterns that should not have static `.html` 
+     * versions included in the sitemap XML. When a URL matches any of these patterns, 
+     * the sitemap generator will exclude the static `.html` version for that URL. 
+     * This is useful for excluding certain sections of the site, such as dynamic content 
+     * that does not require a static HTML counterpart (e.g., documentation pages, forums, 
+     * or external links).
+     *
+     * Supported patterns:
+     * - Wildcard (`*`) is used to match any characters in the URL.
+     * 
+     * Examples:
+     * - `'✸/foo/bar/✸'`: Excludes all URLs under the `docs/edit` path.
+     *
+     * @var array $skipStaticHtml An array of URL patterns to exclude from static `.html` generation.
+     */
+    public array $skipStaticHtml = [
+        '*/api/*'
+    ];
 
     /**
      * URLs, URL patterns, or full URLs to ignore when generating a sitemap.
@@ -50,7 +114,7 @@ final class Sitemap extends BaseConfig
      * - A URL pattern using wildcard characters (`*`) to match and exclude multiple URLs.
      *   Example: `✸/admin/login/✸` will match any URL containing `✸/admin/login/✸` and exclude them.
      *
-     * @var array<int,string> $ignoreUrls
+     * @var array<int,string> $ignoreUrls An array of URL patterns to exclude from sitemap generation.
     */
     public array $ignoreUrls = [
         '*/api/*'
@@ -70,7 +134,7 @@ final class Sitemap extends BaseConfig
      *          `$router->get('/blog/([a-zA-Z0-9-]+)', 'BlogController::blog');`.
      *          You would register this pattern as: `['viewBlogs' => '/blog/([a-zA-Z0-9-]+)']`.
      *
-     * @var array<string,string> $viewUrlPatterns
+     * @var array<string,string> $viewUrlPatterns An array of URL route patterns to extract last modify timestamp.
      */
     public array $viewUrlPatterns = [];
 }
