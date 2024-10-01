@@ -10,8 +10,6 @@
 declare(strict_types=1);
 
 use \Luminova\Boot;
-use \Luminova\Routing\Prefix;
-use \App\Controllers\Errors\ViewErrors;
 
 require_once __DIR__ . '/../system/Boot.php';
 
@@ -26,7 +24,7 @@ if (getcwd() . DIRECTORY_SEPARATOR !== FRONT_CONTROLLER) {
  * Load application route context.
  * Register all your application contexts such as `WEB, API, CONSOLE and CLI` depending on our requirements.
  * 
- * @param Prefix|array<string,mixed> $contexts [, Prefix|array<string,mixed> ...$] Routes context method accept arguments array or new Prefix class instance.
+ * @param \Luminova\Routing\Prefix|array<string,mixed> $contexts [, Prefix|array<string,mixed> ...$] Routes context method accept arguments array or new Prefix class instance.
  * 
  * @example For context class instance, pass new instance of Context as shown below.
  *  - @param string $name Route URI prefix name, any url that starts with $name will be routed to name.php in routes/name.php.
@@ -46,9 +44,7 @@ if (getcwd() . DIRECTORY_SEPARATOR !== FRONT_CONTROLLER) {
  *               ]
  * 
  * Finally run your application router to register and boot only request context for optimal performance.
+ * @see /samples/index.php - For non-attribute based index.php
+ * @see https://luminova.ng/public/docs/0.0.0/boot/public - Documentation for configuring index.php
 */
-Boot::http()->router->context(
-    new Prefix(Prefix::WEB, [ViewErrors::class, 'onWebError']),
-    new Prefix(Prefix::API, [ViewErrors::class, 'onApiError']),
-    new Prefix(Prefix::CLI)
-)->run();
+Boot::http()->router->context()->run();

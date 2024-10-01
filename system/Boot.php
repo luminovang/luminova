@@ -15,21 +15,31 @@ use \App\Application;
 final class Boot 
 {
     /**
-     * Initializes the HTTP environment for web application.
-     * Sets up the error handler, finishes bootstrapping.
+     * Initializes the HTTP environment for web application, 
+     * sets up error handler, finish bootstrapping process and return application object.
      *
      * @return Application Return the application instance.
      */
     public static function http(): Application
     {
-        Foundation::initialize();
-        self::finish();
-
+        self::init();
         return Application::getInstance();
     }
 
     /**
-     * Sets up the CLI (Command Line Interface) environment.
+     * Initializes the HTTP environment for web application error handler 
+     * and finish bootstrapping process.
+     *
+     * @return void
+     */
+    public static function init(): void 
+    {
+        Foundation::initialize();
+        self::finish();
+    }
+
+    /**
+     * Initializes the CLI (Command Line Interface) environment.
      * Define CLI-related constants, finishes bootstrapping.
      * 
      * @return void
@@ -38,13 +48,13 @@ final class Boot
     {
         /**
          * And display errors to developers when using it from the CLI.
-        */
+         */
         ini_set('display_errors', '1');
         error_reporting(E_ALL);
 
         /**
          * Refuse to run when called from php-cgi
-        */
+         */
         if (str_starts_with(PHP_SAPI, 'cgi')) {
             echo 'Novakit cli tool is not supported when running php-cgi. It needs php-cli to function!';
             exit(1);
@@ -70,9 +80,11 @@ final class Boot
      * Load all necessary files, setting timezone and execution limits, and configuring script behavior.
      * 
      * @return void
+     * @ignore
      */
     public static function warmup(): void
     {
+        self::override();
         require_once __DIR__ . '/../bootstrap/constants.php';
         require_once __DIR__ . '/../bootstrap/functions.php';
         require_once __DIR__ . '/Errors/ErrorHandler.php';
@@ -90,6 +102,27 @@ final class Boot
         require_once __DIR__ . '/plugins/autoload.php';
         require_once __DIR__ . '/../bootstrap/features.php';
         defined('IS_UP') || define('IS_UP', true);
+    }
+
+    /**
+     * Spoofs the HTTP request method based on hidden input or query param `_METHOD_OVERRIDE_` from the client.
+     *
+     * This method checks for a custom request method specified in the 
+     * POST or GET data, allowing clients to simulate different HTTP 
+     * methods (e.g., PUT, DELETE) using a hidden form field or query parameter.
+     *
+     * @return void
+     */
+    private static function override(): void 
+    {
+        if (php_sapi_name() === 'cli') {
+            return;
+        }
+
+        $method = $_POST['_OVERRIDE_REQUEST_METHOD_'] ?? $_GET['_OVERRIDE_REQUEST_METHOD_'] ?? null;
+        if ($method !== null) {
+            $_SERVER['REQUEST_METHOD'] = strtoupper($method);
+        }
     }
 }
 Boot::warmup();

@@ -10,25 +10,26 @@
 namespace App\Controllers\Cli;
 
 use \Luminova\Base\BaseCommand;
+use \Luminova\Attributes\Route;
 
 /**
- * This class demonstrates how command line tools can be implemented using PHP Luminova.
+ * This class demonstrates how CLI command line tools can be implemented in Luminova.
 */
-class DemoCommand extends BaseCommand 
+class CliController extends BaseCommand 
 {
     /**
      * {@inheritdoc}
-    */
+     */
     protected string $group = 'demo';
 
     /**
      * {@inheritdoc}
-    */
+     */
     protected string $name  = 'demo-command';
 
     /**
      * {@inheritdoc}
-    */
+     */
     protected array $usages  = [
         'php index.php demo <command> <arguments>',
         'php index.php demo hello'
@@ -36,12 +37,12 @@ class DemoCommand extends BaseCommand
 
     /**
      * {@inheritdoc}
-    */
+     */
     protected string $description = 'Luminova demo command line tool implementation example.';
 
     /**
      * {@inheritdoc}
-    */
+     */
     protected array $options = [
         '--help' => 'Show command help information.',
         '-c, --color' => 'Show message with a specific color.',
@@ -52,7 +53,7 @@ class DemoCommand extends BaseCommand
 
     /**
      * {@inheritdoc}
-    */
+     */
     protected array $examples = [
         'php index.php demo --help' => 'Show help message.',
         'php index.php demo hello' => 'Show default message.',
@@ -64,7 +65,7 @@ class DemoCommand extends BaseCommand
 
     /**
      * {@inheritdoc}
-    */
+     */
     protected function onCreate(): void 
     {
         // Your initialization code here
@@ -72,7 +73,7 @@ class DemoCommand extends BaseCommand
 
     /**
      * {@inheritdoc}
-    */
+     */
     public function help(array $helps): int
     {
         return STATUS_ERROR;
@@ -82,11 +83,15 @@ class DemoCommand extends BaseCommand
      * The command controller method hello.
      * This method will handle any demo command for hello.
      * 
-     * @see /routes/cli.php - The command line context.
-     * 
      * @return int Return status code STATUS_SUCCESS or STATUS_ERROR.
-     * @example `php index.php demo hello arguments`
-    */
+     * 
+     * @example Execute demo command:
+     * ```bash 
+     * php index.php demo hello arguments
+     * ```
+     * @see /routes/cli.php - The command line context.
+     */
+    #[Route('hello', group: 'demo')]
     public function hello(): int
     {
         $color = $this->getAnyOption('color', 'c', null);
@@ -115,11 +120,11 @@ class DemoCommand extends BaseCommand
         return STATUS_SUCCESS;
     }
 
-   /**
+    /**
      * Prompt user to select a programming language.
      * 
      * @return string Return message and selected language.
-    */
+     */
     private function askForLanguages(): string 
     {
         $options = [
@@ -145,7 +150,7 @@ class DemoCommand extends BaseCommand
      * Prompt user to enter a password.
      * 
      * @return string Return password validation message.
-    */
+     */
     private function askForPassword(): string 
     {
         // Password prompt.

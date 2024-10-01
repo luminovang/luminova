@@ -13,5 +13,5 @@ use \Luminova\Core\CoreFunction;
 
 class Functions extends CoreFunction
 {
- // Add more custom methods
+    // Add more custom methods
 }

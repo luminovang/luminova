@@ -22,7 +22,7 @@ class ViewErrors extends BaseViewController implements ErrorHandlerInterface
      * @param Application $app Application instance available.
      * 
      * @return int Return status code. 
-    */
+     */
     public static function onWebError(Application $app): int 
     {
         return $app->view('404')->render();
@@ -34,13 +34,13 @@ class ViewErrors extends BaseViewController implements ErrorHandlerInterface
      * @param Application $app Application instance available.
      * 
      * @return int Return status code. 
-    */
+     */
     public static function onApiError(Application $app): int 
     {
-        return response(404, null, false)->json([
+        return response(404)->json([
             'error' => [
                 'code' => 404,
-                'title' => $app->getView(),
+                'view' => $app->getView(),
                 'message' => "The endpoint [" . $app->getView() . "] you are trying to access does not exist.",
                 'timestamp' => Time::datetime()
             ]

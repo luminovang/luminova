@@ -18,7 +18,7 @@ if (defined('PRODUCTION') && !PRODUCTION) {
     $error['message'] = 'Something went wrong, please check your server error logs for more details.';
 }
 
-response(500, null, true)->json([
+response(500)->json([
     'error' => $error,
     'framework' => [
         'php_version' => PHP_VERSION,

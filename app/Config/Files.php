@@ -17,13 +17,13 @@ final class Files extends BaseConfig
      * Unix file permissions.
      * 
      * @var int $filePermissions 
-    */
+     */
     public int $filePermissions = 0644;
 
     /**
      * Unix directory permissions.
      * 
      * @var int $dirPermissions 
-    */
+     */
     public int $dirPermissions = 0755;
 }

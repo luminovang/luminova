@@ -133,9 +133,10 @@ final class Performance
        
         // Log the summary of included files by category
         $logData['included_files_summary'] = [
-            'Total Framework Modules' => $categories['Module'],
-            'Total Third Party Modules' => $categories['ThirdParty'],
-            'Other Modules Including Controllers' => $categories['Others']
+            'Framework Modules' => $categories['Module'],
+            'Third Party Modules' => $categories['ThirdParty'],
+            'Controllers' => $categories['Controller'],
+            'Other Modules' => $categories['Others']
         ];
 
         $logData['included_files'] = $files;
@@ -150,7 +151,7 @@ final class Performance
      * @param array|null $context The additional command information passed by router.
      * 
      * @return void
-    */
+     */
     private static function showCommandPerformanceMetrics(?array $context = null): void 
     {
        
@@ -240,17 +241,21 @@ final class Performance
         // Display the summary of included files by category
         self::$terminal->table(['Origination', 'Total'], [
             [
-                'Origination' => 'Total Framework Modules', 
+                'Origination' => 'Framework Modules', 
                 'Total' => $categories['Module']
             ],
             [
-                'Origination' => 'Total Third Party Modules', 
+                'Origination' => 'Third Party Modules', 
                 'Total' => $categories['ThirdParty']
             ],
             [
-                'Origination' => 'Other Modules Including Controllers', 
-                'Total' => $categories['Others']
+                'Origination' => 'Controllers', 
+                'Total' => $categories['Controller']
             ],
+            [
+                'Origination' => 'Other Modules', 
+                'Total' => $categories['Others']
+            ]
         ]);
 
         self::$terminal->writeln('Included Files:');
@@ -336,12 +341,13 @@ final class Performance
      * @param string $context The context to load the files for.
      * 
      * @return array<int,array|string> Return all included files.
-    */
+     */
     private static function fileInfo(string $context = 'web'): array 
     {
         $files = get_included_files();
         $categories = [
             'Module' => 0, 
+            'Controller' => 0, 
             'ThirdParty' => 0, 
             'Others' => 0
         ];
@@ -371,6 +377,9 @@ final class Performance
                     $category = 'Module';
                     $color = '#04ac17';
                 }
+            }elseif(preg_match('/^app(\/Modules(\/[^\/]+)?)?\/Controllers/', $filtered)) {
+                $category = 'Controller';
+                $color = '#f41166';
             }
 
             $categories[$category]++;
@@ -419,9 +428,10 @@ final class Performance
         $content .= <<<HTML
         <table style="width:100%; margin-bottom:1rem;color:#f2efef;">
             <tbody>
-                <tr><td><strong>Total Framework Modules:</strong></td><td style='text-align:center;'>[<span style='color:#04ac17'>{$categories['Module']}</span>]</td></tr>
-                <tr><td><strong>Total Third Party Modules:</strong></td><td style='text-align:center;'>[<span style='color:#d99a06'>{$categories['ThirdParty']}</span>]</td></tr>
-                <tr><td><strong>Other Modules Including Controllers:</strong></td><td style='text-align:center;'>[<span style='color:#eee'>{$categories['Others']}</span>]</td></tr>
+                <tr><td><strong>Framework Modules:</strong></td><td style='text-align:center;'>[<span style='color:#04ac17'>{$categories['Module']}</span>]</td></tr>
+                <tr><td><strong>Third Party Modules:</strong></td><td style='text-align:center;'>[<span style='color:#d99a06'>{$categories['ThirdParty']}</span>]</td></tr>
+                <tr><td><strong>Controllers:</strong></td><td style='text-align:center;'>[<span style='color:#eee'>{$categories['Controller']}</span>]</td></tr>
+                <tr><td><strong>Other Modules:</strong></td><td style='text-align:center;'>[<span style='color:#eee'>{$categories['Others']}</span>]</td></tr>
             </tbody>
         </table>
         <h2>Included Files:</h2>
@@ -437,7 +447,7 @@ final class Performance
      * @param mixed $input The input string to be escaped.
      * 
      * @return string The escaped string.
-    */
+     */
     private static function esc(mixed $input): string 
     {
         if($input === null){
