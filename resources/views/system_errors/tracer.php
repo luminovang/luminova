@@ -1,6 +1,7 @@
 <?php 
 use \Luminova\Functions\Maths;
 use \Luminova\Debugger\Tracer;
+use \Luminova\Debugger\Performance;
 use \Luminova\Http\Request;
 
 function onErrorShowDebugTracer(array $trace, ?array $timelines = null): void{
@@ -36,7 +37,7 @@ function onErrorShowDebugTracer(array $trace, ?array $timelines = null): void{
             <div class="content active" id="backtrace">
                 <h3>BACKTRACE</h3>
                 <ol class="trace">
-                    <?php foreach ($trace as $index => $row) : ?>
+                    <?php foreach($trace as $index => $row): ?>
                         <?php if(isset($row['function']) && $row['function'] === 'display'): ?>
                             <?php if(isset($row['args']) && is_file($row['args'][0]->getFile())): ?>
                             <li>
@@ -46,37 +47,37 @@ function onErrorShowDebugTracer(array $trace, ?array $timelines = null): void{
                                 </div>
                             </li>
                             <?php endif; ?>
-                        <?php elseif (isset($row['file']) && is_file($row['file']) && isset($row['class'])) : ?>
+                        <?php elseif(isset($row['file']) && is_file($row['file']) && isset($row['class'])): ?>
                             <li>
                                 <p>
                                     <?php if (isset($row['file']) && is_file($row['file'])) : ?>
-                                        <?php
-                                        if (isset($row['function']) && in_array($row['function'], ['include', 'include_once', 'require', 'require_once'], true)) {
-                                            echo htmlspecialchars($row['function'] . ' ' . trim($row['file']), ENT_QUOTES);
-                                        } else {
-                                            echo htmlspecialchars(trim($row['file']) . ' : ' . $row['line'], ENT_QUOTES);
-                                        }
-                                        ?>
+                                        <?php if (isset($row['function']) && in_array($row['function'], ['include', 'include_once', 'require', 'require_once'], true)): ?>
+                                            <?= htmlspecialchars($row['function'] . ' ' . trim($row['file']), ENT_QUOTES);?>
+                                        <?php else: ?>
+                                            <?= htmlspecialchars(trim($row['file']) . ' : ' . $row['line'], ENT_QUOTES);?>
+                                        <?php endif;?>
                                     <?php else: ?>
                                         {PHP internal code}
                                     <?php endif; ?>
 
-                                    <?php if (isset($row['class'])) : ?>
+                                    <?php if(isset($row['class'])): ?>
                                         &nbsp;&nbsp;&mdash;&nbsp;&nbsp;<?= htmlspecialchars($row['class'] . $row['type'] . $row['function'], ENT_QUOTES) ?>
-                                        <?php if (! empty($row['args'])) : ?>
+                                        <?php if(!empty($row['args'])): ?>
                                             <?php $argsId = uniqid('error', true) . 'args' . $index ?>
                                             ( <a href="#" onclick="return toggle('<?= htmlspecialchars($argsId, ENT_QUOTES) ?>');">arguments</a> )
                                             <div style="display:none;" id="<?= htmlspecialchars($argsId, ENT_QUOTES) ?>">
                                                 <table cellspacing="0">
 
                                                 <?php
-                                                $params = null;
-                                                if (!str_ends_with($row['function'], '}')) {
-                                                    $func = isset($row['class']) ? new ReflectionMethod($row['class'], $row['function']) : new ReflectionFunction($row['function']);
-                                                    $params = $func->getParameters();
-                                                }
+                                                    $params = null;
+                                                    if (!str_ends_with($row['function'], '}')) {
+                                                        $params = (isset($row['class']) 
+                                                            ? new ReflectionMethod($row['class'], $row['function']) 
+                                                            : new ReflectionFunction($row['function']))->getParameters();
+                                                    }
+                                                ?>
 
-                                                foreach ($row['args'] as $key => $value) : ?>
+                                                <?php foreach($row['args'] as $key => $value): ?>
                                                     <tr>
                                                         <td><code><?= htmlspecialchars(isset($params[$key]) ? '$' . $params[$key]->name : "#{$key}", ENT_QUOTES) ?></code></td>
                                                         <td><pre><?= print_r($value, true) ?></pre></td>
@@ -85,13 +86,13 @@ function onErrorShowDebugTracer(array $trace, ?array $timelines = null): void{
 
                                                 </table>
                                             </div>
-                                        <?php else : ?>
+                                        <?php else: ?>
                                             ()
                                         <?php endif; ?>
                                     <?php endif; ?>
 
                                     <?php if(!isset($row['class']) && isset($row['function'])):?>
-                                        &nbsp;&nbsp;&mdash;&nbsp;&nbsp; <?= htmlspecialchars($row['function']??'NULL', ENT_QUOTES) ?>()
+                                        &nbsp;&nbsp;&mdash;&nbsp;&nbsp; <?= htmlspecialchars($row['function'] ?? 'NULL', ENT_QUOTES) ?>()
                                     <?php endif; ?>
                                 </p>
                                 <div class="source">
@@ -104,23 +105,16 @@ function onErrorShowDebugTracer(array $trace, ?array $timelines = null): void{
             </div>
 
             <div class="content" id="timeline">
-                <?php foreach($timelines as $tl):
-                    if(str_ends_with($tl, 'thrown')){
-                        continue;
-                    }
-                ?>
+                <?php foreach($timelines as $tl): ?>
+                    <?php if(str_ends_with($tl, 'thrown')){continue;}?>
                     <p class="entry text-timeline"><?= htmlspecialchars($tl, ENT_QUOTES); ?></p>
                 <?php endforeach; ?>
             </div>
 
             <div class="content" id="server">
                 <h3>SERVER</h3>
-                <?php foreach (['_SERVER', '_SESSION'] as $var) : ?>
-                    <?php
-                        if (empty($GLOBALS[$var]) || ! is_array($GLOBALS[$var])) {
-                            continue;
-                        } 
-                    ?>
+                <?php foreach(['_SERVER', '_SESSION'] as $var): ?>
+                    <?php if(empty($GLOBALS[$var]) || !is_array($GLOBALS[$var])) {continue;} ?>
 
                     <h3>$<?= htmlspecialchars($var ?? 'NULL', ENT_QUOTES) ?></h3>
 
@@ -132,11 +126,11 @@ function onErrorShowDebugTracer(array $trace, ?array $timelines = null): void{
                             </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($GLOBALS[$var] as $key => $value) : ?>
+                        <?php foreach($GLOBALS[$var] as $key => $value): ?>
                             <tr>
                                 <td><?= htmlspecialchars($key ?? 'NULL', ENT_QUOTES) ?></td>
                                 <td>
-                                    <?php if (is_string($value)) : ?>
+                                    <?php if(is_string($value)): ?>
                                         <?= htmlspecialchars($value, ENT_QUOTES) ?>
                                     <?php else: ?>
                                         <pre><?= print_r($value, true) ?></pre>
@@ -146,12 +140,9 @@ function onErrorShowDebugTracer(array $trace, ?array $timelines = null): void{
                         <?php endforeach; ?>
                         </tbody>
                     </table>
-
                 <?php endforeach ?>
 
-        
-                <?php $constants = get_defined_constants(true); ?>
-                <?php if (!empty($constants['user'])) : ?>
+                <?php if(($constants = get_defined_constants(true)) !== []): ?>
                     <h3>CONSTANTS</h3>
                     <table>
                         <thead>
@@ -161,11 +152,11 @@ function onErrorShowDebugTracer(array $trace, ?array $timelines = null): void{
                             </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($constants['user'] as $key => $value) : ?>
+                        <?php foreach($constants['user'] as $key => $value): ?>
                             <tr>
                                 <td><?= htmlspecialchars((string) $key, ENT_QUOTES) ?></td>
                                 <td>
-                                    <?php if (is_string($value)) : ?>
+                                    <?php if(is_string($value)): ?>
                                         <?= htmlspecialchars($value, ENT_QUOTES) ?>
                                     <?php elseif(is_bool($value)): ?>
                                         <?= $value ? 'true' : 'false';?>
@@ -204,7 +195,7 @@ function onErrorShowDebugTracer(array $trace, ?array $timelines = null): void{
                             <td><?= $request->isAJAX() ? 'yes' : 'no' ?></td>
                         </tr>
                         <tr>
-                            <td>Is CLI Request?</td>
+                            <td>Is CLI Command?</td>
                             <td><?= is_command() ? 'yes' : 'no' ?></td>
                         </tr>
                         <tr>
@@ -221,14 +212,10 @@ function onErrorShowDebugTracer(array $trace, ?array $timelines = null): void{
 
 
                 <?php $empty = true; ?>
-                <?php foreach (['_GET', '_POST', '_COOKIE'] as $var) : ?>
-                    <?php
-                    if (empty($GLOBALS[$var]) || ! is_array($GLOBALS[$var])) {
-                        continue;
-                    } ?>
+                <?php foreach(['_GET', '_POST', '_COOKIE'] as $var):?>
+                    <?php if(empty($GLOBALS[$var]) || !is_array($GLOBALS[$var])) { continue;} ?>
 
                     <?php $empty = false; ?>
-
                     <h3>$<?= htmlspecialchars($var ?? 'NULL', ENT_QUOTES) ?></h3>
 
                     <table style="width: 100%">
@@ -239,11 +226,11 @@ function onErrorShowDebugTracer(array $trace, ?array $timelines = null): void{
                             </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($GLOBALS[$var] as $key => $value) : ?>
+                        <?php foreach($GLOBALS[$var] as $key => $value) : ?>
                             <tr>
                                 <td><?= htmlspecialchars($key ?? 'NULL', ENT_QUOTES) ?></td>
                                 <td>
-                                    <?php if (is_string($value)) : ?>
+                                    <?php if(is_string($value)) : ?>
                                         <?= htmlspecialchars($value, ENT_QUOTES) ?>
                                     <?php else: ?>
                                         <pre><?= print_r($value, true) ?></pre>
@@ -253,20 +240,15 @@ function onErrorShowDebugTracer(array $trace, ?array $timelines = null): void{
                         <?php endforeach; ?>
                         </tbody>
                     </table>
-
                 <?php endforeach ?>
 
-                <?php if ($empty) : ?>
-
+                <?php if($empty): ?>
                     <div class="alert">
                         No $_GET, $_POST, or $_COOKIE Information to show.
                     </div>
-
                 <?php endif; ?>
 
-                <?php $headers = $request->getHeaders(); ?>
-                <?php if (! empty($headers)) : ?>
-
+                <?php if(($headers = $request->getHeaders()) !== []): ?>
                     <h3>Headers</h3>
 
                     <table>
@@ -277,7 +259,7 @@ function onErrorShowDebugTracer(array $trace, ?array $timelines = null): void{
                             </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($headers as $name => $value) : ?>
+                        <?php foreach($headers as $name => $value): ?>
                             <tr>
                                 <td><?= htmlspecialchars($name ?? 'NULL', ENT_QUOTES) ?></td>
                                 <td><?= htmlspecialchars($value ?? 'NULL', ENT_QUOTES) ?></td>
@@ -285,37 +267,13 @@ function onErrorShowDebugTracer(array $trace, ?array $timelines = null): void{
                         <?php endforeach; ?>
                         </tbody>
                     </table>
-
                 <?php endif; ?>
             </div>
         
             <div class="content" id="files">
                 <h3>FILES</h3>
                 <ul style="margin: 0;padding: 0;">
-                    <?php 
-                        foreach ( get_included_files() as $index => $file){
-                            $filtered = filter_paths($file);
-                            $category = 'Others';
-                            $color = '#eee';
-                
-                            if (str_starts_with($filtered, 'system')) {
-                                if (str_starts_with($filtered, 'system/plugins')) {
-                                    $category = 'ThirdParty';
-                                    $color = '#d99a06';
-                                } else {
-                                    $category = 'Module';
-                                    $color = '#04ac17';
-                                }
-                            }
-                
-                            $bgColor = ($index % 2 === 0) ? '#282727' : 'transparent';
-                            echo "<li style='list-style: none; background-color: {$bgColor}; padding: .5rem;'>"
-                                . "[<span style='color: {$color}'>{$category}</span>] "
-                                . "<a style='color:#44a1f2' href='vscode://file{$file}'>/{$file}</a>"
-                                . "</li>";
-                        
-                        }
-                    ?>
+                    <?= Performance::fileInfo()[1];?>
                 </ul>
             </div>
 
@@ -335,6 +293,12 @@ function onErrorShowDebugTracer(array $trace, ?array $timelines = null): void{
                             <td>Memory Limit:</td>
                             <td><?= htmlspecialchars((string) ini_get('memory_limit'), ENT_QUOTES) ?></td>
                         </tr>
+                        <?php if(defined('IS_UP') && ($dbTime = shared('__DB_QUERY_EXECUTION_TIME__', null, 0)) > 0): ?>
+                        <tr>
+                            <td>Last Database Executions:</td>
+                            <td><?= htmlspecialchars(($dbTime < 1) ? sprintf('%.2f ms', $dbTime * 1000) : sprintf('%.4f s', $dbTime), ENT_QUOTES) ?></td>
+                        </tr>
+                        <?php endif;?>
                     </tbody>
                 </table>
 

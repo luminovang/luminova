@@ -338,11 +338,11 @@ final class Performance
     /**
      * Load all included files.
      * 
-     * @param string $context The context to load the files for.
+     * @param string $context The context to load the files for (e.g, `web`, `api or `cli`).
      * 
      * @return array<int,array|string> Return all included files.
      */
-    private static function fileInfo(string $context = 'web'): array 
+    public static function fileInfo(string $context = 'web'): array 
     {
         $files = get_included_files();
         $categories = [
@@ -355,7 +355,7 @@ final class Performance
         $html = '';
 
         if($context === 'web'){
-            $ide = env('debug.coding.ide', 'vscode');
+            $ide = defined('IS_UP') ? env('debug.coding.ide', 'vscode') : 'vscode';
             $scheme = match ($ide) {
                 'phpstorm' => 'phpstorm://open?url=file:',
                 'sublime' => 'sublimetext://open?url=file:',
