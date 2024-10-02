@@ -272,7 +272,7 @@ function onErrorShowDebugTracer(array $trace, ?array $timelines = null): void{
         
             <div class="content" id="files">
                 <h3>FILES</h3>
-                <ul style="margin: 0;padding: 0;">
+                <ul style="list-style-type: none; padding: 0; margin: 0;">
                     <?= Performance::fileInfo()[1];?>
                 </ul>
             </div>
