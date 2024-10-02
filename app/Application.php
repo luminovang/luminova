@@ -15,7 +15,7 @@ class Application extends CoreApplication
 {
     /**
      * {@inheritdoc}
-    */
+     */
     protected function onCreate(): void
     {
         /**
@@ -50,21 +50,21 @@ class Application extends CoreApplication
 
     /**
      * {@inheritdoc}
-    */
+     */
     protected function onFinish(): void {}
 
     /**
      * {@inheritdoc}
-    */
+     */
     protected function onContextInstalled(string $context): void {}
 
     /**
      * {@inheritdoc}
-    */
+     */
     protected function onViewPresent(string $uri): void {}
 
     /**
      * {@inheritdoc}
-    */
+     */
     protected function onCommandPresent(array $options): void {}
 }

@@ -104,7 +104,7 @@ final class Performance
             'Is AJAX' => (self::$request->isAJAX() ? 'YES' : 'NO')
         ];
 
-        if(Foundation::isApiContext()){
+        if(Foundation::isApiPrefix()){
             self::logApiPerformanceMetrics($info);
             return;
         }

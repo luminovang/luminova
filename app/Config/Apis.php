@@ -15,39 +15,40 @@ use \Luminova\Base\BaseConfig;
 final class Apis extends BaseConfig
 {
     /**
-     * Indicates whether to forbid requests with empty Origin headers.
+     * Indicates whether to forbid requests with empty request origin headers.
      * 
-     * @var bool $forbidEmptyOrigin If true, requests with empty Origin headers are forbidden.
+     * @var bool $forbidEmptyOrigin If true, requests with empty Origin headers are rejected.
      */
     public bool $forbidEmptyOrigin = false;
 
     /**
-     * Set whether to allow credentials in API requests.
+     * Indicates whether to allow credentials in API requests.
      * 
-     * @var bool $allowCredentials If true, the Access-Control-Allow-Credentials header is included.
+     * @var bool $allowCredentials If true, the Access-Control-Allow-Credentials header is sent.
      */
     public bool $allowCredentials = true;
 
     /**
-     * Set the allowed origins for the Access-Control-Allow-Origin header in API requests.
+     * Specifies allowed origins for the Access-Control-Allow-Origin header in API requests.
      * 
-     * Wildcard `*` allows all origins.
+     * A wildcard `*` allows requests from any origin. 
+     * Passing the string `null` also permits all origins.
      * 
      * @var array<int,string>|string $allowOrigins An array of allowed origins or a wildcard `*`.
-     * 
-     * > Note passing string null will result in allow all origins.
      */
     public array|string $allowOrigins = '*';
 
     /**
-     * Set the allowed headers for the Access-Control-Allow-Headers header in API requests.
+     * Defines the allowed headers for the Access-Control-Allow-Headers header in API requests.
      * 
-     * @var array<int,string> $allowHeaders An array of allowed header names.
+     * @var array<int,string> $allowHeaders An array of allowed header names or an empty array to allow all headers.
      */
     public array $allowHeaders = [
         'Content-Type',
-        'Access-Control-Allow-Headers',
         'Authorization',
-        'X-Requested-With'
+        'X-Requested-With',
+        'Host',
+        'Accept', 
+        'User-Agent'
     ];
 }
