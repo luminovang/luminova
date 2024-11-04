@@ -19,7 +19,7 @@ final class Tracer
      * @param int $lines Maximum number of lines.
      * 
      * @return bool|string Return html highlight of the passed file.
-    */
+     */
     public static function highlight(string $file, int $line, int $lines = 15): bool|string
     {
         if ($file === '' || ! is_readable($file)) {
@@ -27,7 +27,7 @@ final class Tracer
         }
 
         // Set our highlight colors:
-        static::highlightColor();
+        self::highlightColor();
         $source = get_content($file);
 
         if($source === false){
@@ -79,8 +79,10 @@ final class Tracer
     }
 
     /**
-     * Initialize ini_set highlight
-    */
+     * Initialize ini_set highlight.
+     * 
+     * @return void
+     */
     private static function highlightColor(): void
     {
         if (function_exists('ini_set')) {

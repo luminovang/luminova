@@ -733,41 +733,48 @@ if(!function_exists('import')) {
         require_once root('/libraries/libs/') . trim(rtrim($library, '.php'), TRIM_DS) . '.php';
         return true;
     }
- }
+}
 
- if(!function_exists('logger')) {
+if(!function_exists('logger')) {
     /**
-     * Log a message at the given level.
-     * This function will make use of your preferred psr logger class if available.
+     * Logs a message to a specified destination using the configured PSR logger.
+     * The destination can be a log level, email address, or URL endpoint. This function 
+     * delegates the logging action to the dispatch method, which handles the 
+     * asynchronous or synchronous execution as needed.
      *
-     * @param string $level The log level to use.
+     * Log Levels:
+     * - emergency: Log urgent errors requiring immediate attention.
+     * - alert: Log important alert messages.
+     * - critical: Log critical issues that may disrupt application functionality.
+     * - error: Log minor errors.
+     * - warning: Log warning messages.
+     * - notice: Log messages that require attention but are not urgent.
+     * - info: Log general information.
+     * - debug: Log messages for debugging purposes.
+     * - exception: Log exception messages.
+     * - php_errors: Log PHP-related errors.
+     * - metrics: Log performance metrics for production APIs.
+     *
+     * @param string $to The destination for the log (e.g, log level, email address, or URL).
      * @param string $message The message to log.
      * @param array $context Additional context data (optional).
-     * 
-     * Log Levels:
-     * 
-     * - emergency - Log emergency error that need attention.
-     * - alert - Log alert message. 
-     * - critical - Log critical issue that may cause app not to work properly. 
-     * - error - Log minor error.
-     * - warning - Log a warning message.
-     * - notice - Log a notice to attend later.
-     * - info - Log an information.
-     * - debug - Log for debugging purpose.
-     * - exception - Log an exception message.
-     * - php_errors - Log any php related error.
-     * - metrics - Log performance metrics, specifically for api in production level.
+     * @param bool $asynchronous Whether to log asynchronously for non network or email (default: false).
      *
      * @return void
-     * @throws InvalidArgumentException Throws if error occurs while login.
-    */
-    function logger(string $level, string $message, array $context = []): void
+     * @throws InvalidArgumentException Throws if an error occurs while logging or an invalid destination is provided.
+     */
+    function logger(
+        string $to, 
+        string $message, 
+        array $context = [],
+        bool $asynchronous = false
+    ): void
     {
-        Factory::logger()->log($level, $message, $context);
+        Factory::logger()->dispatch($to, $message, $context, $asynchronous);
     }
- }
+}
 
- if (!function_exists('lang')) {
+if (!function_exists('lang')) {
     /**
      * Translate multiple languages it supports nested array.
      *
@@ -1073,7 +1080,7 @@ if (!function_exists('list_in_array')) {
 
         $map = list_to_array($list);
 
-        if( $map === false){
+        if($map === false){
             return false;
         }
 
@@ -1167,6 +1174,64 @@ if (!function_exists('make_dir')) {
     function make_dir(string $path, ?int $permissions = null, bool $recursive = true): bool 
     {
         return FileManager::mkdir($path, ($permissions ?? Files::$dirPermissions ?? 0777), $recursive);
+    }
+}
+
+if (!function_exists('get_temp_file')) {
+    /**
+     * Retrieves the path for temporary files or generates a unique temporary file name.
+     *
+     * @param string|null $prefix Optional prefix for the temporary filename or a new sub-directory.
+     * @param string|null $extension  Optional file extension for the temporary filename.
+     * @param bool $local Indicates whether to use a local writable path (default: false).
+     *
+     * @return string|false Returns the path of the temporary directory, a unique temporary filename 
+     *                      with the specified extension, or false on failure.
+     */
+    function get_temp_file(
+        ?string $prefix = null, 
+        ?string $extension = null,
+        bool $local = false
+    ): string|bool
+    {
+        $dir = ($local 
+            ? root('/writeable/temp/') 
+            : sys_get_temp_dir() . DIRECTORY_SEPARATOR
+        );
+
+        if($local && !make_dir($dir, 0755)){
+            return false;
+        }
+ 
+        if($extension){
+            $prefix ??= 'tmp_';
+            $extension = '.' . ltrim($extension, '.');
+            $file = tempnam($dir, $prefix);
+            static $ids = [];
+
+            if($file === false){
+                $id = $prefix . $extension;
+                $ids[$id] ??= uniqid($prefix, true);
+                $file = $dir . $ids[$id] . $extension;
+
+                return (!file_exists($file) && (!is_writable($dir) || !touch($file)))
+                    ? false
+                    : $file;
+            }
+
+            return rename($file, $file . $extension) 
+                ? $file . $extension
+                : $file;
+        }
+
+        if ($prefix) {
+            $newDir = $dir . $prefix . DIRECTORY_SEPARATOR;
+            return (is_dir($newDir) || make_dir($newDir, 0755))
+                ? $newDir
+                : $dir;
+        }
+
+        return $dir;
     }
 }
 
@@ -1441,20 +1506,14 @@ if (!function_exists('string_length')) {
      */
     function string_length(string $content, ?string $charset = null): int 
     {
-        $charset ??= env('app.charset', 'utf-8');
-        switch (strtolower($charset)) {
-            case 'utf-8':
-            case 'utf8':
-                return mb_strlen($content, '8bit');
-            case 'iso-8859-1':
-            case 'latin1':
-                return strlen($content);
-            case 'windows-1252':
-                $content = mb_convert_encoding($content, 'ISO-8859-1', 'UTF-8');
-                return strlen($content);
-            default:
-                return is_utf8($content) ? mb_strlen($content, '8bit') : strlen($content);
-        }
+        return match(strtolower($charset ?? env('app.charset', 'utf-8'))){
+            'utf-8', 'utf8' => mb_strlen($content, '8bit'),
+            'iso-8859-1', 'latin1' => strlen($content),
+            'windows-1252' => strlen(mb_convert_encoding($content, 'ISO-8859-1', 'UTF-8')),
+            default => is_utf8($content) 
+                ? mb_strlen($content, '8bit') 
+                : strlen($content),
+        };
     }
 }
 
@@ -1709,6 +1768,60 @@ if (!function_exists('array_extend_default')) {
         }
 
         return $result;
+    }
+}
+
+if (!function_exists('array_merge_result')) {
+    /**
+     * Merges a response into the provided results variable while optionally preserving the structure of nested arrays.
+     * 
+     * @param mixed &$results The results variable to which the response will be merged or appended.
+     *                       This variable is passed by reference and may be modified.
+     * @param mixed $response The response variable to merge with results. It can be an array, string, 
+     *                       or other types.
+     * @param bool $preserve_nested Optional. Determines whether to preserve the nested structure 
+     *                               of arrays when merging (default: true).
+     *
+     * @return void
+     * @since 3.3.4
+     * @see https://luminova.ng/docs/3.3.0/global/functions#lmv-docs-array-merge-result
+     */
+    function array_merge_result(mixed &$results, mixed $response, bool $preserve_nested = true): void
+    {
+        if ($results === null || $results === []) {
+            $results = $response;
+            return;
+        }
+        
+        if (is_array($results)) {
+            if (!$preserve_nested && is_array($response)) {
+                $results = array_merge($results, $response);
+                return;
+            }
+
+            $results[] = $response;
+            return;
+        } 
+        
+        if (is_string($results)) {
+            $results = is_array($response) 
+                ? ($preserve_nested 
+                    ? array_merge([$results], [$response]) 
+                    : array_merge([$results], $response)
+                )
+                : [$results, $response];
+
+            return;
+        }
+
+        $results = [$results];
+
+        if (!$preserve_nested && is_array($response)) {
+            $results = array_merge($results, $response);
+            return;
+        }
+
+        $results[] = $response;
     }
 }
 

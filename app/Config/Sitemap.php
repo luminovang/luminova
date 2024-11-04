@@ -27,6 +27,17 @@ final class Sitemap extends BaseConfig
     public int $maxScan = 0;
 
     /**
+     * The number of seconds to wait before moving to the next URL during sitemap generation.
+     * 
+     * This value determines the delay for downloading content from each URL, impacting the overall speed
+     * of the sitemap generation process. The minimum allowed value is 1 second.
+     *
+     * @var int $scanSpeed The delay time in seconds for each URL scan.
+     * @since 3.3.4
+     */
+    public int $scanSpeed = 5;
+
+    /**
      * Sets the allowed scan start URI prefix for sitemap generation.
      *
      * This option allows you to restrict sitemap generation to URLs that match a specific prefix.

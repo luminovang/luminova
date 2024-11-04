@@ -20,13 +20,19 @@ use \PhpParser\Node\Expr\Variable;
 
 final class PHPStanRules implements Rule
 {
+    /**
+     * @return string
+     */
     public function getNodeType(): string
     {
         return Stmt::class;
     }
 
     /**
-     * @param Stmt $node
+     * @param Node $node
+     * @param Scope $scope
+     * 
+     * @return array
      */
     public function processNode(Node $node, Scope $scope): array
     {

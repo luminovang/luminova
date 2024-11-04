@@ -97,7 +97,7 @@ final class Performance
             'Server Software' => self::esc($_SERVER['SERVER_SOFTWARE'] ?? 'Not Set'),
             'UserAgent' => self::esc(self::$request->getUserAgent()->toString()),
             'Request Method' => self::esc(self::$request->getMethod()),
-            'Request URL' => self::esc(self::$request->getUri()),
+            'Request URL' => self::esc(self::$request->getUrl()),
             'Request Origin' => self::esc(self::$request->getOrigin()),
             'Request Referrer' => self::esc(self::$request->getUserAgent()->getReferrer()),
             'Is Secure Request' => (self::$request->isSecure() ? 'YES' : 'NO'),
@@ -117,7 +117,7 @@ final class Performance
      * 
      * @param array<string,mixed> $info The performance basic information.
      * @return void
-    */
+     */
     private static function logApiPerformanceMetrics(array $info): void 
     {
         $metrics = self::metrics(false);
@@ -142,7 +142,7 @@ final class Performance
         $logData['included_files'] = $files;
 
         // Log the complete data
-        @logger('metrics', json_encode($logData, JSON_PRETTY_PRINT));
+        @logger('metrics', json_encode($logData, JSON_PRETTY_PRINT), [], true);
     }
 
     /**
@@ -154,10 +154,9 @@ final class Performance
      */
     private static function showCommandPerformanceMetrics(?array $context = null): void 
     {
-       
         self::$terminal ??= new Terminal();
         self::$terminal->newLine();
-        self::$terminal->writeln('Command Performance Profiling');
+        self::$terminal->writeln('Command Execution Profiling');
         self::$terminal->writeln(self::metrics(false), 'green');
 
         if (self::$terminal->prompt('Show More Details?', ['yes', 'no']) !== 'yes') {
@@ -178,7 +177,7 @@ final class Performance
             'Executed' => $context['commands']['exe_string'] ?? 'No command executed'
         ];
 
-        self::$terminal->table(
+        self::$terminal->print(self::$terminal->table(
             ['Variable', 'Values'], 
             array_map(function($key, $value) {
                 return [
@@ -186,13 +185,13 @@ final class Performance
                     'Values' => $value
                 ];
             }, array_keys($info), $info)
-        );
+        ));
 
         if (!empty($context['commands']['options'])) {
             self::$terminal->writeln('Command Arguments:');
         
             // Map the arguments to table
-            self::$terminal->table(
+            self::$terminal->print(self::$terminal->table(
                 ['Name', 'Value'], 
                 array_map(function($key, $value) {
                     return [
@@ -200,7 +199,7 @@ final class Performance
                         'Value' => (is_array($value) ? json_encode($value) : $value ?? 'NULL')
                     ];
                 }, array_keys($context['commands']['options']), $context['commands']['options'])
-            );
+            ));
         }
 
         if (!empty($context['commands']['arguments'])) {
@@ -228,10 +227,10 @@ final class Performance
                 ];
             }
 
-            self::$terminal->table(
+            self::$terminal->print(self::$terminal->table(
                 ['Param', 'Value'], 
                 $rows
-            );
+            ));
         }
 
         // Display included files and categorize them
@@ -239,7 +238,7 @@ final class Performance
         [$categories, $files] = self::fileInfo('cli');
    
         // Display the summary of included files by category
-        self::$terminal->table(['Origination', 'Total'], [
+        self::$terminal->print(self::$terminal->table(['Origination', 'Total'], [
             [
                 'Origination' => 'Framework Modules', 
                 'Total' => $categories['Module']
@@ -256,11 +255,11 @@ final class Performance
                 'Origination' => 'Other Modules', 
                 'Total' => $categories['Others']
             ]
-        ]);
+        ]));
 
         self::$terminal->writeln('Included Files:');
         // Display detailed list of included files
-        self::$terminal->table(['Category', 'File'], $files);
+        self::$terminal->print(self::$terminal->table(['Category', 'File'], $files));
     }
 
     /**
@@ -398,9 +397,7 @@ final class Performance
             }
         }
 
-        return [
-            $categories, ($context === 'web' ? $html : $list)
-        ];
+        return [$categories, ($context === 'web' ? $html : $list)];
     }
 
     /**
@@ -430,7 +427,7 @@ final class Performance
             <tbody>
                 <tr><td><strong>Framework Modules:</strong></td><td style='text-align:center;'>[<span style='color:#04ac17'>{$categories['Module']}</span>]</td></tr>
                 <tr><td><strong>Third Party Modules:</strong></td><td style='text-align:center;'>[<span style='color:#d99a06'>{$categories['ThirdParty']}</span>]</td></tr>
-                <tr><td><strong>Controllers:</strong></td><td style='text-align:center;'>[<span style='color:#eee'>{$categories['Controller']}</span>]</td></tr>
+                <tr><td><strong>Controllers:</strong></td><td style='text-align:center;'>[<span style='color:#f41166'>{$categories['Controller']}</span>]</td></tr>
                 <tr><td><strong>Other Modules:</strong></td><td style='text-align:center;'>[<span style='color:#eee'>{$categories['Others']}</span>]</td></tr>
             </tbody>
         </table>
@@ -450,10 +447,6 @@ final class Performance
      */
     private static function esc(mixed $input): string 
     {
-        if($input === null){
-            return '';
-        }
-
-        return htmlspecialchars($input);
+        return ($input === null) ? '' : htmlspecialchars($input);
     }
 }

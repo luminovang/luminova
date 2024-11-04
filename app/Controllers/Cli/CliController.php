@@ -10,6 +10,7 @@
 namespace App\Controllers\Cli;
 
 use \Luminova\Base\BaseCommand;
+use \Luminova\Command\Utils\Color;
 use \Luminova\Attributes\Route;
 
 /**
@@ -158,7 +159,7 @@ class CliController extends BaseCommand
 
         // Validate user password.
         if ($input == '12345') {
-            $input = $this->color($input, 'green');
+            $input = Color::style($input, 'green');
             
             return "You have entered the correct password '{$input}'.";
         }
