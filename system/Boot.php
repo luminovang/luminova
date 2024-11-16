@@ -62,14 +62,8 @@ final class Boot
 
         // Define CLI environment
         defined('CLI_ENVIRONMENT') || define('CLI_ENVIRONMENT', env('cli.environment.mood', 'testing'));
-
-        // Define STDOUT if not already defined
         defined('STDOUT') || define('STDOUT', 'php://output');
-
-        // Define STDIN if not already defined
         defined('STDIN') || define('STDIN', 'php://stdin');
-
-        // Define STDERR if not already defined
         defined('STDERR') || define('STDERR', 'php://stderr');
 
         self::finish();
@@ -84,8 +78,9 @@ final class Boot
      */
     public static function warmup(): void
     {
-        self::override();
         require_once __DIR__ . '/../bootstrap/constants.php';
+        self::override();
+
         require_once __DIR__ . '/../bootstrap/functions.php';
         require_once __DIR__ . '/Errors/ErrorHandler.php';
         require_once __DIR__ . '/Application/Foundation.php';
@@ -115,11 +110,16 @@ final class Boot
      */
     private static function override(): void 
     {
-        if (php_sapi_name() === 'cli') {
+        if (PRODUCTION || php_sapi_name() === 'cli') {
             return;
         }
 
-        $method = $_POST['_OVERRIDE_REQUEST_METHOD_'] ?? $_GET['_OVERRIDE_REQUEST_METHOD_'] ?? null;
+        $method = (
+            $_POST['_OVERRIDE_REQUEST_METHOD_'] ?? 
+            $_GET['_override_request_method_'] ??
+            $_GET['_OVERRIDE_REQUEST_METHOD_'] ?? 
+            null
+        );
         if ($method !== null) {
             $_SERVER['REQUEST_METHOD'] = strtoupper($method);
         }

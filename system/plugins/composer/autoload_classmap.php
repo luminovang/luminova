@@ -82,6 +82,7 @@ return array(
     'Luminova\\Command\\Novakit\\Server' => $baseDir . '/system/Command/Novakit/Server.php',
     'Luminova\\Command\\Novakit\\System' => $baseDir . '/system/Command/Novakit/System.php',
     'Luminova\\Command\\Novakit\\SystemHelp' => $baseDir . '/system/Command/Novakit/SystemHelp.php',
+    'Luminova\\Command\\Remote' => $baseDir . '/system/Command/Remote.php',
     'Luminova\\Command\\Terminal' => $baseDir . '/system/Command/Terminal.php',
     'Luminova\\Command\\Utils\\Color' => $baseDir . '/system/Command/Utils/Color.php',
     'Luminova\\Command\\Utils\\Image' => $baseDir . '/system/Command/Utils/Image.php',

@@ -88,16 +88,28 @@ if (!function_exists('filter_paths')) {
 
 if (!function_exists('app')) {
     /**
-     * Get application container class shared instance or new instance if not shared. 
+     * Get application container class shared instance or a new instance if not shared.
      * 
-     * @return Application Return application shared instance.
-    */
-    function app(): Application 
+     * @param bool $shared Return a shared instance (default: true).
+     * @param mixed ...$arguments Optional arguments to pass to the application constructor.
+     * 
+     * @return Application Returns the shared instance if $shared is true,
+     *                     or a new instance if $shared is false.
+     * 
+     * Usage example:
+     * ```php
+     * $app = app(false, 'foo', 'bar');
+     * ```
+     */
+    function app(bool $shared = true, mixed ...$arguments): Application 
     {
-        static $app = null;
-        $app ??= Application::getInstance();
+        if ($shared) {
+            return $arguments 
+                ? Application::setInstance(new Application(...$arguments))
+                : Application::getInstance();
+        }
 
-        return $app;
+        return new Application(...$arguments);
     }
 }
 
@@ -384,18 +396,45 @@ if(!function_exists('escape')){
 
 if(!function_exists('strict')){
     /**
-	 * String input type, this function removes unwanted characters from a given string and return only allowed characters.
+	 * Strictly sanitizes user input to protect against invalid characters and ensure it conforms to the expected type.
 	 *
-	 * @param string $input The input string to be sanitized.
-	 * @param string $type  The expected input filter type.
-     *      -   Filter Types: [int, digit, key, password, username, email, url, money, double, alphabet, phone, name, timezone, time, date, uuid, default]
-	 * @param string $symbol The symbol to replace disallowed characters with (default: blank string).
+	 * @param string $string The input string to be sanitized.
+	 * @param string $type The expected data type (e.g., 'int', 'email', 'username').
+	 * @param string|null $replacement The symbol to replace disallowed characters or null to throw and exception (default: '').
 	 *
-	 * @return string Return sanitized string.
+	 * @return string Return the sanitized string.
+	 * @throws InvalidArgumentException Throws if the input does not match the expected type and no replacement is provided.
+	 * 
+	 * Available types:
+	 * - 'int'       : Only numeric characters (0-9) are allowed.
+	 * - 'digit'     : Numeric characters, including negative numbers and decimals.
+	 * - 'key'       : Alphanumeric characters, underscores, and hyphens.
+	 * - 'password'  : Alphanumeric characters, and special characters (@, *, !, _, -).
+	 * - 'username'  : Alphanumeric characters, hyphen, underscore, and dot.
+	 * - 'email'     : Alphanumeric characters and characters allowed in email addresses.
+	 * - 'url'       : Valid URL characters (alphanumeric, ?, #, &, +, =, . , : , /, -).
+	 * - 'money'     : Numeric characters, including decimal and negative values.
+	 * - 'double'    : Floating point numbers (numeric and decimal points).
+	 * - 'alphabet'  : Only alphabetic characters (a-z, A-Z).
+	 * - 'phone'     : Numeric characters, plus sign, and hyphen (e.g., phone numbers).
+	 * - 'name'      : Unicode characters, spaces, and common name symbols (e.g., apostrophe).
+	 * - 'timezone'  : Alphanumeric characters, hyphen, slash, and colon (e.g., timezone names).
+	 * - 'time'      : Alphanumeric characters and colon (e.g., time format).
+	 * - 'date'      : Alphanumeric characters, hyphen, slash, comma, and space (e.g., date format).
+	 * - 'uuid'      : A valid UUID format (e.g., 8-4-4-4-12 hexadecimal characters).
+	 * - 'default'   : Removes any HTML tags.
 	 */
-    function strict(string $input, string $type = 'default', string $replacer = ''): string 
+    function strict(
+        string $input, 
+        string $type = 'default', 
+        string|null $replacer = ''
+    ): string 
     {
-       return Factory::functions()->strictType($input, $type, $replacer);
+       return Factory::functions()->strictType(
+            $input, 
+            $type, 
+            $replacer
+        );
     }
 }
 
@@ -875,6 +914,7 @@ if (!function_exists('get_column')) {
                 }
                 $columns[$key] = $value;
             }
+
             return $columns;
         }
 
@@ -899,11 +939,7 @@ if (!function_exists('is_nested')) {
         }
 
         foreach ($array as $value) {
-            if(!is_array($value)){
-                return false;
-            }
-
-            if ($recursive && !is_nested($value, true)){
+            if(!is_array($value) || ($recursive && !is_nested($value, true))){
                 return false;
             }
         }
@@ -1152,10 +1188,11 @@ if (!function_exists('get_content')) {
         int $length = 0, 
         int $offset = 0, 
         bool $useInclude = false, 
-        $context = null
+        mixed $context = null,
+        int $delay = 0
     ): string|bool 
     {
-        return FileManager::getContent($filename, $length, $offset, $useInclude, $context);
+        return FileManager::getContent($filename, $length, $offset, $useInclude, $context, $delay);
     }
 }
 
@@ -1164,7 +1201,7 @@ if (!function_exists('make_dir')) {
      * Attempts to create the directory specified by pathname if not exist.
      * 
      * @param string $path Directory path to create.
-     * @param int $permissions Unix file permissions.
+     * @param int $permissions Unix file permissions (default: `App\Config\Files::$dirPermissions`).
      * @param bool $recursive Allows the creation of nested directories (default: true)
      * 
      * @return bool Return true if files already existed or was created successfully, otherwise false.
@@ -1173,7 +1210,7 @@ if (!function_exists('make_dir')) {
     */
     function make_dir(string $path, ?int $permissions = null, bool $recursive = true): bool 
     {
-        return FileManager::mkdir($path, ($permissions ?? Files::$dirPermissions ?? 0777), $recursive);
+        return FileManager::mkdir($path, $permissions ?? Files::$dirPermissions, $recursive);
     }
 }
 
@@ -1650,7 +1687,7 @@ if (!function_exists('cache')) {
     ): FileCache|MemoryCache {
         /**
          * @var array<string,FileCache|MemoryCache> $instances
-        */
+         */
         static $instances = [];
         $instances[$driver] ??= match ($driver) {
             'memcached' => new MemoryCache($storage, $persistentIdOrSubfolder),
@@ -1697,13 +1734,9 @@ if (!function_exists('array_merge_recursive_distinct')) {
     function array_merge_recursive_distinct(array &$array1, array &$array2): array
     {
         foreach ($array2 as $key => $value) {
-            if (is_array($value) && isset($array1[$key]) && is_array($array1[$key])) {
-                // Recursively merge nested arrays
-                $array1[$key] = array_merge_recursive_distinct($array1[$key], $value);
-            } else {
-                // Directly set value or replace existing value
-                $array1[$key] = $value;
-            }
+            $array1[$key] = (is_array($value) && isset($array1[$key]) && is_array($array1[$key])) 
+                ? array_merge_recursive_distinct($array1[$key], $value)
+                : $value;
         }
 
         return $array1;

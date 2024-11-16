@@ -8,8 +8,8 @@
     DirectoryIndex index.php
 
     # Handle SSL redirection
-    RewriteCond %{SERVER_PORT} !^443$
-    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    # RewriteCond %{SERVER_PORT} !^443$
+    # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
     # Handle authorization header
     RewriteCond %{HTTP:Authorization} .

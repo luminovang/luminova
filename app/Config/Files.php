@@ -18,12 +18,19 @@ final class Files extends BaseConfig
      * 
      * @var int $filePermissions 
      */
-    public int $filePermissions = 0644;
+    public static int $filePermissions = 0644;
 
     /**
      * Unix directory permissions.
      * 
      * @var int $dirPermissions 
      */
-    public int $dirPermissions = 0755;
+    public static int $dirPermissions = 0755;
+
+    /**
+     * {@inheritdoc}
+     */
+    protected static array $extensions = [
+        //'image/jpeg' => 'jpg',
+    ];
 }

@@ -113,6 +113,7 @@ class ComposerStaticInitce7d6b0379bc9a35d3afd6dd2b0e131e
         'Luminova\\Command\\Novakit\\Server' => __DIR__ . '/../../..' . '/system/Command/Novakit/Server.php',
         'Luminova\\Command\\Novakit\\System' => __DIR__ . '/../../..' . '/system/Command/Novakit/System.php',
         'Luminova\\Command\\Novakit\\SystemHelp' => __DIR__ . '/../../..' . '/system/Command/Novakit/SystemHelp.php',
+        'Luminova\\Command\\Remote' => __DIR__ . '/../../..' . '/system/Command/Remote.php',
         'Luminova\\Command\\Terminal' => __DIR__ . '/../../..' . '/system/Command/Terminal.php',
         'Luminova\\Command\\Utils\\Color' => __DIR__ . '/../../..' . '/system/Command/Utils/Color.php',
         'Luminova\\Command\\Utils\\Image' => __DIR__ . '/../../..' . '/system/Command/Utils/Image.php',

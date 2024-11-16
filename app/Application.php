@@ -51,7 +51,7 @@ class Application extends CoreApplication
     /**
      * {@inheritdoc}
      */
-    protected function onFinish(): void {}
+    protected function onFinish(array $info): void {}
 
     /**
      * {@inheritdoc}
@@ -67,4 +67,12 @@ class Application extends CoreApplication
      * {@inheritdoc}
      */
     protected function onCommandPresent(array $options): void {}
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function onDestroy(): void 
+    {
+        gc_collect_cycles();
+    }
 }
