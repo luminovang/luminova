@@ -5,9 +5,21 @@
     "license": "MIT",
     "type": "project",
     "homepage": "https://luminova.ng",
+    
     "support": {
-        "source": "https://github.com/luminovang/luminova/"
+        "email": "dev@luminova.ng",
+        "source": "https://github.com/luminovang/luminova/",
+        "docs": "https://luminova.ng/docs"
     },
+
+    "authors": [
+        {
+            "name": "Ujah Chigozie Peter",
+            "email": "peter@luminova.ng",
+            "homepage": "https://github.com/peterujah/",
+            "role": "developer"
+        }
+    ],
 
     "require": {
         "php": "^8.0",

@@ -56,6 +56,7 @@ if(!function_exists('setenv')){
 
                 while (!$file->eof()) {
                     $line = $file->fgets();
+                    
                     if (preg_match($pattern, $line)) {
                         $found = true;
                         $content .= "$key=$value\n";
@@ -68,8 +69,7 @@ if(!function_exists('setenv')){
                     $content .= "\n$key=$value";
                 }
 
-                $file = new SplFileObject($path, 'w');
-                $file->fwrite($content);
+                (new SplFileObject($path, 'w'))->fwrite($content);
 
                 return true;
             } catch (RuntimeException|LogicException $e) {

@@ -1,7 +1,7 @@
 <?php
 /**
  * Sends fatal errors to a remote server in production environments.
- * To enable, specify the endpoint URL in `logger.remote.errors` within the environment configuration (.env).
+ * To enable, specify the endpoint URL in `logger.remote.logs` within the environment configuration (.env).
  *
  * @var \Luminova\Errors\ErrorHandler $stack
  */
@@ -12,7 +12,7 @@ use Luminova\Exceptions\AppException;
 
 include_once __DIR__ . '/tracing.php';
 
-$endpoint = env('logger.remote.errors');
+$endpoint = env('logger.remote.logs');
 
 if ($endpoint) {
     // Default error details

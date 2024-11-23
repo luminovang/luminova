@@ -1,7 +1,7 @@
 <?php
 /**
  * Sends fatal errors via email in production environments.
- * To enable, specify the recipient email in `logger.mail.errors` within the environment configuration (.env).
+ * To enable, specify the recipient email in `logger.mail.logs` within the environment configuration (.env).
  *
  * @var \Luminova\Errors\ErrorHandler|null $stack
  */
@@ -12,7 +12,7 @@ use Luminova\Exceptions\MailerException;
 
 include_once __DIR__ . '/tracing.php';
 
-$recipient = env('logger.mail.errors');
+$recipient = env('logger.mail.logs');
 
 if ($recipient) {
     // Default error details
