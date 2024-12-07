@@ -9,7 +9,7 @@
  */
 namespace App\Controllers\Http;
 
-use \Luminova\Base\BaseViewController;
+use \Luminova\Base\BaseController;
 use \Luminova\Attributes\Prefix;
 use \Luminova\Attributes\Route;
 use \App\Controllers\Errors\ViewErrors;
@@ -18,7 +18,7 @@ use \App\Controllers\Errors\ViewErrors;
  * This class demonstrates how HTTP web pages controller can be implemented in Luminova.
 */
 #[Prefix(pattern: '/(?!api).*', onError: [ViewErrors::class, 'onApiError'])]
-class Welcome extends BaseViewController 
+class Welcome extends BaseController 
 {
     /**
      * Index page controller method.

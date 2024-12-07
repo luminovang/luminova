@@ -9,12 +9,12 @@
  */
 namespace App\Controllers\Errors;
 
-use \Luminova\Base\BaseViewController;
+use \Luminova\Base\BaseController;
 use \App\Application;
 use \Luminova\Time\Time;
 use \Luminova\Interface\ErrorHandlerInterface;
 
-class ViewErrors extends BaseViewController implements ErrorHandlerInterface
+class ViewErrors extends BaseController implements ErrorHandlerInterface
 {
     /**
      * Define a function for the web error handler.

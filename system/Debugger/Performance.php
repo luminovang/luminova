@@ -98,7 +98,7 @@ final class Performance
 
         self::$request ??= new Request();
         $classInfo = Router::getClassInfo();
-
+ 
         $info = [
             'Framework' => Foundation::copyright(),
             'PHP Version' => PHP_VERSION,
@@ -109,11 +109,12 @@ final class Performance
             'Cache File Id' =>  env('page.caching', false) ? Foundation::getCacheId() . '.lmv' : 'N/A',
             'Server Software' => self::esc($_SERVER['SERVER_SOFTWARE'] ?? 'Not Set'),
             'UserAgent' => self::esc(self::$request->getUserAgent()->toString()),
-            'Request Method' => self::esc(self::$request->getMethod()?:'N/A'),
-            'Request URL' => self::esc(self::$request->getUrl()),
-            'Request Origin' => self::esc(self::$request->getOrigin()?:'N/A'),
-            'Request Referrer' => self::esc(self::$request->getUserAgent()->getReferrer()?:'N/A'),
-            'Is Secure Request' => (self::$request->isSecure() ? 'YES' : 'NO'),
+            'Method' => self::esc(self::$request->getMethod()?:'N/A'),
+            'URL' => self::esc(self::$request->getUrl()),
+            'Origin' => self::esc(self::$request->getOrigin()?:'N/A'),
+            'Referrer' => self::esc(self::$request->getUserAgent()->getReferrer()?:'N/A'),
+            'Cookies' => self::$request->getCookie()->isEmpty() ? null : self::$request->getCookie()->count(),
+            'Is Secure' => (self::$request->isSecure() ? 'YES' : 'NO'),
             'Is AJAX' => (self::$request->isAJAX() ? 'YES' : 'NO'),
             'Is Cache' =>  (!empty($classInfo['cache'])) ? 'YES' : 'NO',
             'Is Static Cache' =>  (!empty($classInfo['staticCache'])) ? 'YES' : 'NO',
@@ -136,6 +137,7 @@ final class Performance
     private static function logApiPerformanceMetrics(array $info): void 
     {
         $metrics = self::metrics(false);
+        $info['Cookies'] = self::getCookieFile($info['Cookies']);
         $logData = [
             'metrics' => $metrics,
             'info' => $info,
@@ -295,6 +297,7 @@ final class Performance
         $detailsHtml = '';
 
         foreach ($info as $label => $value) {
+            $value = ($label=== 'Cookies') ? self::getCookieFile($value, true) : ($value ?? 'N/A');
             $detailsHtml .= "<tr><td><strong>{$label}:</strong></td><td>{$value}</td></tr>";
         }
 
@@ -321,6 +324,36 @@ final class Performance
         HTML;
 
         echo $contents;
+    }
+
+    /**
+     * Create cookies length flags.
+     * 
+     * @return string Return cookie flag as HTML or text.
+     */
+    private static function getCookieFile(int|null $cookies, bool $is_html = false): string  
+    {
+        if ($cookies === null) {
+            return '';
+        }
+        
+        return $cookies . match (true) {
+            $cookies <= 20 => $is_html 
+                ? ' <span style="color: green;">[normal]</span>' 
+                : ' [normal]',
+            $cookies >= 21 && $cookies <= 39 => $is_html 
+                ? ' <span style="color: orange;">[medium]</span>' 
+                : ' [medium]',
+            $cookies >= 40 && $cookies <= 50 => $is_html 
+                ? ' <span style="color: red;">[large]</span>' 
+                : ' [large]',
+            $cookies > 50 => $is_html 
+                ? ' <span style="color: purple;">[extra-large]</span>' 
+                : ' [extra-large]',
+            default => $is_html 
+                ? ' <span style="color: gray;">[unknown]</span>' 
+                : ' [unknown]',
+        };
     }
 
     /**

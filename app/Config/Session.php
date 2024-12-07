@@ -68,7 +68,7 @@ final class Session extends BaseConfig
      */
     public string $sameSite = 'Lax';
 
-     /**
+    /**
      * Enable strict session IP authentication.
      * If set to true, the user will be logged out if their IP address changes.
      * 
