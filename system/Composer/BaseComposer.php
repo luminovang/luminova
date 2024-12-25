@@ -20,7 +20,6 @@ abstract class BaseComposer
     protected static function progress(int $totalSteps, callable $taskCallback, ?callable $onCompleteCallback = null, ?string $completionMessage = null): void
     {
         $results = [];
-        //$total = 0;
         
         for ($step = 1; $step <= $totalSteps; $step++) {
             $result = $taskCallback($step);
@@ -28,14 +27,12 @@ abstract class BaseComposer
             $progressMessage = "Processing... Step $step/$totalSteps";
             echo "\r" . str_pad($progressMessage, 80, " ") . "\r";
             flush();
-            //$total++;
         }
         
         sleep(1);
         
         if($completionMessage !== null){
             echo "\033[32m$completionMessage\033[0m\n";
-            //echo "Build operations: $total copied\n";
         }
         
         if ($onCompleteCallback !== null) {
@@ -45,7 +42,6 @@ abstract class BaseComposer
 
 
     protected static function parseLocation(string $path): string{
-        //&& is_dir($path)
         if ($path != null ) {
             $path = ltrim($path, ".");
         }

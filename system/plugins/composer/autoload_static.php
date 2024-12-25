@@ -10,6 +10,8 @@ class ComposerStaticInitce7d6b0379bc9a35d3afd6dd2b0e131e
         'P' => 
         array (
             'Psr\\Log\\' => 8,
+            'Psr\\Http\\Message\\' => 17,
+            'Psr\\Http\\Client\\' => 16,
         ),
         'L' => 
         array (
@@ -26,9 +28,18 @@ class ComposerStaticInitce7d6b0379bc9a35d3afd6dd2b0e131e
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
+        'Psr\\Http\\Message\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+        ),
+        'Psr\\Http\\Client\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/http-client/src',
+        ),
         'Luminova\\' => 
         array (
             0 => __DIR__ . '/../../..' . '/system',
+            1 => __DIR__ . '/..' . '/luminovang/framework/src',
         ),
         'App\\' => 
         array (
@@ -93,7 +104,6 @@ class ComposerStaticInitce7d6b0379bc9a35d3afd6dd2b0e131e
         'Luminova\\Base\\BaseController' => __DIR__ . '/../../..' . '/system/Base/BaseController.php',
         'Luminova\\Base\\BaseMailer' => __DIR__ . '/../../..' . '/system/Base/BaseMailer.php',
         'Luminova\\Base\\BaseModel' => __DIR__ . '/../../..' . '/system/Base/BaseModel.php',
-        'Luminova\\Base\\BaseViewController' => __DIR__ . '/../../..' . '/system/Base/BaseViewController.php',
         'Luminova\\Boot' => __DIR__ . '/../../..' . '/system/Boot.php',
         'Luminova\\Builder\\Document' => __DIR__ . '/../../..' . '/system/Builder/Document.php',
         'Luminova\\Builder\\Inputs' => __DIR__ . '/../../..' . '/system/Builder/Inputs.php',
@@ -196,9 +206,11 @@ class ComposerStaticInitce7d6b0379bc9a35d3afd6dd2b0e131e
         'Luminova\\Http\\Network' => __DIR__ . '/../../..' . '/system/Http/Network.php',
         'Luminova\\Http\\Request' => __DIR__ . '/../../..' . '/system/Http/Request.php',
         'Luminova\\Http\\Server' => __DIR__ . '/../../..' . '/system/Http/Server.php',
+        'Luminova\\Http\\Uri' => __DIR__ . '/../../..' . '/system/Http/Uri.php',
         'Luminova\\Http\\UserAgent' => __DIR__ . '/../../..' . '/system/Http/UserAgent.php',
         'Luminova\\Interface\\AiInterface' => __DIR__ . '/../../..' . '/system/Interface/AiInterface.php',
         'Luminova\\Interface\\CallableInterface' => __DIR__ . '/../../..' . '/system/Interface/CallableInterface.php',
+        'Luminova\\Interface\\ClientInterface' => __DIR__ . '/../../..' . '/system/Interface/ClientInterface.php',
         'Luminova\\Interface\\ConnInterface' => __DIR__ . '/../../..' . '/system/Interface/ConnInterface.php',
         'Luminova\\Interface\\CookieInterface' => __DIR__ . '/../../..' . '/system/Interface/CookieInterface.php',
         'Luminova\\Interface\\CookieJarInterface' => __DIR__ . '/../../..' . '/system/Interface/CookieJarInterface.php',
@@ -209,8 +221,9 @@ class ComposerStaticInitce7d6b0379bc9a35d3afd6dd2b0e131e
         'Luminova\\Interface\\HttpRequestInterface' => __DIR__ . '/../../..' . '/system/Interface/HttpRequestInterface.php',
         'Luminova\\Interface\\LazyInterface' => __DIR__ . '/../../..' . '/system/Interface/LazyInterface.php',
         'Luminova\\Interface\\MailerInterface' => __DIR__ . '/../../..' . '/system/Interface/MailerInterface.php',
-        'Luminova\\Interface\\NetworkClientInterface' => __DIR__ . '/../../..' . '/system/Interface/NetworkClientInterface.php',
         'Luminova\\Interface\\NetworkInterface' => __DIR__ . '/../../..' . '/system/Interface/NetworkInterface.php',
+        'Luminova\\Interface\\PromiseInterface' => __DIR__ . '/../../..' . '/system/Interface/PromiseInterface.php',
+        'Luminova\\Interface\\ResponseInterface' => __DIR__ . '/../../..' . '/system/Interface/ResponseInterface.php',
         'Luminova\\Interface\\RouterInterface' => __DIR__ . '/../../..' . '/system/Interface/RouterInterface.php',
         'Luminova\\Interface\\ServicesInterface' => __DIR__ . '/../../..' . '/system/Interface/ServicesInterface.php',
         'Luminova\\Interface\\SessionManagerInterface' => __DIR__ . '/../../..' . '/system/Interface/SessionManagerInterface.php',
@@ -260,10 +273,27 @@ class ComposerStaticInitce7d6b0379bc9a35d3afd6dd2b0e131e
         'Luminova\\Time\\Timestamp' => __DIR__ . '/../../..' . '/system/Time/Timestamp.php',
         'Luminova\\Utils\\Async' => __DIR__ . '/../../..' . '/system/Utils/Async.php',
         'Luminova\\Utils\\Event' => __DIR__ . '/../../..' . '/system/Utils/Event.php',
+        'Luminova\\Utils\\Interval' => __DIR__ . '/../../..' . '/system/Utils/Interval.php',
         'Luminova\\Utils\\LazyObject' => __DIR__ . '/../../..' . '/system/Utils/LazyObject.php',
         'Luminova\\Utils\\Process' => __DIR__ . '/../../..' . '/system/Utils/Process.php',
+        'Luminova\\Utils\\Promise\\FulfilledPromise' => __DIR__ . '/../../..' . '/system/Utils/Promise/FulfilledPromise.php',
+        'Luminova\\Utils\\Promise\\Helper' => __DIR__ . '/../../..' . '/system/Utils/Promise/Helper.php',
+        'Luminova\\Utils\\Promise\\Promise' => __DIR__ . '/../../..' . '/system/Utils/Promise/Promise.php',
+        'Luminova\\Utils\\Promise\\Queue' => __DIR__ . '/../../..' . '/system/Utils/Promise/Queue.php',
+        'Luminova\\Utils\\Promise\\RejectedPromise' => __DIR__ . '/../../..' . '/system/Utils/Promise/RejectedPromise.php',
         'Luminova\\Utils\\Queue' => __DIR__ . '/../../..' . '/system/Utils/Queue.php',
         'Luminova\\Utils\\WeakReference' => __DIR__ . '/../../..' . '/system/Utils/WeakReference.php',
+        'Psr\\Http\\Client\\ClientExceptionInterface' => __DIR__ . '/..' . '/psr/http-client/src/ClientExceptionInterface.php',
+        'Psr\\Http\\Client\\ClientInterface' => __DIR__ . '/..' . '/psr/http-client/src/ClientInterface.php',
+        'Psr\\Http\\Client\\NetworkExceptionInterface' => __DIR__ . '/..' . '/psr/http-client/src/NetworkExceptionInterface.php',
+        'Psr\\Http\\Client\\RequestExceptionInterface' => __DIR__ . '/..' . '/psr/http-client/src/RequestExceptionInterface.php',
+        'Psr\\Http\\Message\\MessageInterface' => __DIR__ . '/..' . '/psr/http-message/src/MessageInterface.php',
+        'Psr\\Http\\Message\\RequestInterface' => __DIR__ . '/..' . '/psr/http-message/src/RequestInterface.php',
+        'Psr\\Http\\Message\\ResponseInterface' => __DIR__ . '/..' . '/psr/http-message/src/ResponseInterface.php',
+        'Psr\\Http\\Message\\ServerRequestInterface' => __DIR__ . '/..' . '/psr/http-message/src/ServerRequestInterface.php',
+        'Psr\\Http\\Message\\StreamInterface' => __DIR__ . '/..' . '/psr/http-message/src/StreamInterface.php',
+        'Psr\\Http\\Message\\UploadedFileInterface' => __DIR__ . '/..' . '/psr/http-message/src/UploadedFileInterface.php',
+        'Psr\\Http\\Message\\UriInterface' => __DIR__ . '/..' . '/psr/http-message/src/UriInterface.php',
         'Psr\\Log\\AbstractLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/AbstractLogger.php',
         'Psr\\Log\\InvalidArgumentException' => __DIR__ . '/..' . '/psr/log/Psr/Log/InvalidArgumentException.php',
         'Psr\\Log\\LogLevel' => __DIR__ . '/..' . '/psr/log/Psr/Log/LogLevel.php',

@@ -7,6 +7,8 @@ $baseDir = dirname(dirname($vendorDir));
 
 return array(
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
-    'Luminova\\' => array($baseDir . '/system'),
+    'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
+    'Psr\\Http\\Client\\' => array($vendorDir . '/psr/http-client/src'),
+    'Luminova\\' => array($baseDir . '/system', $vendorDir . '/luminovang/framework/src'),
     'App\\' => array($baseDir . '/app'),
 );

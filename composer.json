@@ -26,7 +26,8 @@
         "ext-json": "*",
         "ext-mbstring": "*",
         "luminovang/framework": "^3.0",
-        "psr/log": "^1.1"
+        "psr/log": "^1.1",
+        "psr/http-client": "^1.0"
     },
 
     "require-dev": {
