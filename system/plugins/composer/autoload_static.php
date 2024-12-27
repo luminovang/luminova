@@ -39,7 +39,6 @@ class ComposerStaticInitce7d6b0379bc9a35d3afd6dd2b0e131e
         'Luminova\\' => 
         array (
             0 => __DIR__ . '/../../..' . '/system',
-            1 => __DIR__ . '/..' . '/luminovang/framework/src',
         ),
         'App\\' => 
         array (
@@ -226,7 +225,7 @@ class ComposerStaticInitce7d6b0379bc9a35d3afd6dd2b0e131e
         'Luminova\\Interface\\ResponseInterface' => __DIR__ . '/../../..' . '/system/Interface/ResponseInterface.php',
         'Luminova\\Interface\\RouterInterface' => __DIR__ . '/../../..' . '/system/Interface/RouterInterface.php',
         'Luminova\\Interface\\ServicesInterface' => __DIR__ . '/../../..' . '/system/Interface/ServicesInterface.php',
-        'Luminova\\Interface\\SessionManagerInterface' => __DIR__ . '/../../..' . '/system/Interface/SessionManagerInterface.php',
+        'Luminova\\Interface\\SessionInterface' => __DIR__ . '/../../..' . '/system/Interface/SessionInterface.php',
         'Luminova\\Interface\\ValidationInterface' => __DIR__ . '/../../..' . '/system/Interface/ValidationInterface.php',
         'Luminova\\Interface\\ViewResponseInterface' => __DIR__ . '/../../..' . '/system/Interface/ViewResponseInterface.php',
         'Luminova\\Languages\\Translator' => __DIR__ . '/../../..' . '/system/Languages/Translator.php',
@@ -252,6 +251,7 @@ class ComposerStaticInitce7d6b0379bc9a35d3afd6dd2b0e131e
         'Luminova\\Seo\\Schema' => __DIR__ . '/../../..' . '/system/Seo/Schema.php',
         'Luminova\\Seo\\Sitemap' => __DIR__ . '/../../..' . '/system/Seo/Sitemap.php',
         'Luminova\\Sessions\\CookieManager' => __DIR__ . '/../../..' . '/system/Sessions/CookieManager.php',
+        'Luminova\\Sessions\\DatabaseSessionHandler' => __DIR__ . '/../../..' . '/system/Sessions/DatabaseSessionHandler.php',
         'Luminova\\Sessions\\Session' => __DIR__ . '/../../..' . '/system/Sessions/Session.php',
         'Luminova\\Sessions\\SessionManager' => __DIR__ . '/../../..' . '/system/Sessions/SessionManager.php',
         'Luminova\\Storages\\Adapters\\Adapters' => __DIR__ . '/../../..' . '/system/Storages/Adapters/Adapters.php',

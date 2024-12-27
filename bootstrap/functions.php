@@ -28,7 +28,7 @@ use \Luminova\Cookies\Cookie;
 use \Luminova\Sessions\Session;
 use \Luminova\Interface\HttpRequestInterface;
 use \Luminova\Interface\ViewResponseInterface;
-use \Luminova\Interface\SessionManagerInterface;
+use \Luminova\Interface\SessionInterface;
 use \Luminova\Interface\ValidationInterface;
 use \Luminova\Template\Response;
 use \Luminova\Template\Layout;
@@ -510,11 +510,11 @@ if(!function_exists('session')) {
      *
      * @param string $key Optional key to retrieve the data (default: null).
      * @param bool $shared Weather to use shared instance (default: true).
-     * @param class-object<SessionManagerInterface> $manager The session manager interface to use (default: SessionManager).
+     * @param class-object<SessionInterface> $manager The session manager interface to use (default: SessionManager).
      *
      * @return Session|mixed Return session instance or value if key is present.
     */
-    function session(?string $key = null, bool $shared = true, ?SessionManagerInterface $manager = null): mixed
+    function session(?string $key = null, bool $shared = true, ?SessionInterface $manager = null): mixed
     {
         return ($key !== null && $key !== '') 
             ? Factory::session($manager, $shared)->get($key) 

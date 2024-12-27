@@ -34,7 +34,7 @@ if ($endpoint) {
 
     $payload = [
         'title'    => sprintf('%s (v%.1f) Error Occurred: %s', APP_NAME, APP_VERSION, $title),
-        'host'     => HOST_NAME,
+        'host'     => APP_HOSTNAME,
         'heading'  => $heading,
         'details'  => $details,
         'tracer'   => $tracer,

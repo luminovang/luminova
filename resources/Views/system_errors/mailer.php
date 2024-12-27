@@ -36,7 +36,7 @@ if ($recipient) {
     $body = sprintf(
         '<body><h1>%s</h1><h3>Host: %s</h3><p>%s</p><br/><div>%s</div></body>',
         $heading,
-        HOST_NAME,
+        APP_HOSTNAME,
         $details,
         $tracer
     );
