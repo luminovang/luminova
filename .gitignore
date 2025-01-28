@@ -12,6 +12,8 @@ cli.help
 .fleet
 .idea
 .vscode
+Dockerfile
+docker-compose.yml
 /builds/*/
 !/build/.gitkeep
 # Ignore all folders within /system/

@@ -44,11 +44,11 @@ final class Apis extends BaseConfig
      * @var array<int,string> $allowHeaders An array of allowed header names or an empty array to allow all headers.
      */
     public array $allowHeaders = [
-        'Content-Type',
-        'Authorization',
-        'X-Requested-With',
-        'Host',
-        'Accept', 
-        'User-Agent'
+        // 'Content-Type',
+        // 'Authorization',
+        // 'X-Requested-With',
+        // 'Host',
+        // 'Accept', 
+        // 'User-Agent'
     ];
 }

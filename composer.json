@@ -62,7 +62,9 @@
         "league/flysystem": "Needed if you use FileSystem cloud storages",
         "nanoblocktech/psr-cache": "If you need to use psr-cache or psr-simple-cache",
         "peterujah/php-search-controller": "If you want to use model searching doSearch",
-        "peterujah/nano-image": "If you want to use outputImage fom file delivery class, for image resizing."
+        "peterujah/nano-image": "If you want to use outputImage fom file delivery class, for image resizing.",
+        "endroid/qr-code": "For generating Base64 or inline SVG images for TOTP QR codes.",
+        "luminovang/array-functions": "For using PHP 8.4 array_find_*, array_all, or array_any in earlier PHP versions."
     },
 
     "autoload": {
@@ -121,13 +123,11 @@
     },
 
     "scripts-descriptions": {
-        "post-update-cmd": "Update framework",
-        "post-create-project-cmd": "Install and configure project",
-        "analyze-app": "Run static analysis",
-        "analyze-code": "Analyze coding style",
-        "build-app": "Build project for production",
-        "archive-app": "Export project files as zip",
-        "cs-fix": "Fix the coding style standard"
+        "post-update-cmd": "Automatically finalizes framework dependency updates after running 'composer update'.",
+        "post-create-project-cmd": "Automatically configures the project and generates an application key after initial installation.",
+        "analyze-app": "Performs static analysis on the application and its framework dependencies using phpstan.",
+        "analyze-code": "Analyzes the application's code for style and standards compliance using rector.",
+        "cs-fix": "Fixes coding style issues to comply with PHP standards using php-cs-fixer."
     },
 
     "minimum-stability": "stable",

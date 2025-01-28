@@ -17,7 +17,10 @@ $finder = Finder::create()
     ])
     ->notPath([
         'Config',
-    ]);
+    ])
+    ->name('*.php')
+    ->ignoreDotFiles(true)
+    ->ignoreVCS(true);
 
 $header = <<<HEADER
     My Application.
@@ -32,14 +35,20 @@ HEADER;
 
 return (new Config())->setRules([
     '@PSR12' => true,
+    'blank_line_after_opening_tag' => false,
+    'assign_null_coalescing_to_coalesce_equal' => false,
+    'not_operator_with_successor_space' => false,
+    'method_chaining_indentation' => false,
+    'phpdoc_indent' => true,
+    'phpdoc_trim' => true,
+    'single_quote' => true,
+    'no_blank_lines_after_phpdoc' => true,
+    'no_unused_imports' => true,
     'header_comment' => [
         'header' => $header,
         'location' => 'after_open',
         'comment_type' => 'PHPDoc'
     ],
-    'array_syntax' => ['syntax' => 'short'],
-    'blank_line_after_opening_tag' => false,
-    'assign_null_coalescing_to_coalesce_equal' => false,
     'braces' => [
         'allow_single_line_anonymous_class_with_empty_body' => true,
         'allow_single_line_closure' => true,
@@ -48,16 +57,17 @@ return (new Config())->setRules([
         'position_after_functions_and_oop_constructs' => 'next',
     ],
     'binary_operator_spaces' => [
-        'default' => 'single_space'
+        'default' => 'align_single_space_minimal'
     ],
     'whitespace_after_comma_in_array' => [
         'ensure_single_space' => true
     ],
-    'not_operator_with_successor_space' => true,
-    'method_chaining_indentation' => false,
-    'phpdoc_indent' => true,
-    'phpdoc_trim' => true,
-    'no_blank_lines_after_phpdoc' => true,
+    'concat_space' => [
+        'spacing' => 'one'
+    ],
+    'array_syntax' => [
+        'syntax' => 'short'
+    ],
     'no_superfluous_phpdoc_tags' => [
         'remove_inheritdoc' => false
     ],
@@ -65,7 +75,7 @@ return (new Config())->setRules([
         'only_untyped' => false
     ],
     'yoda_style' => [
-        'always_move_variable' => true
+        'always_move_variable' => false
     ]
 ])
 ->setFinder($finder)

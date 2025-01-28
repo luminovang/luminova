@@ -57,7 +57,7 @@ To learn more about NovaKit commands [read the novakit documentation](https://lu
 
 Luminova support flexible routing implementation using `Attributes` or `Router` methods.
 
-**Define your route using `PHP8` attributes:***
+**Define your route using `PHP8` attributes:**
 
 ```php
 #[Route('/', methods: ['GET'])]

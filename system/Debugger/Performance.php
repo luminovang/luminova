@@ -11,9 +11,11 @@ namespace Luminova\Debugger;
 
 use \Luminova\Application\Foundation;
 use \Luminova\Functions\Maths;
+use \Luminova\Functions\IP;
 use \Luminova\Command\Terminal;
 use \Luminova\Routing\Router;
 use \Luminova\Http\Request;
+use \Luminova\Logger\Logger;
 
 final class Performance
 {
@@ -102,7 +104,7 @@ final class Performance
         $info = [
             'Framework' => Foundation::copyright(),
             'PHP Version' => PHP_VERSION,
-            'IP Address' => self::esc(ip_address()),
+            'IP Address' => self::esc(IP::get()),
             'Environment' => ENVIRONMENT,
             'Project Id' => PROJECT_ID,
             'Class Controller' => (!empty($classInfo['namespace'])) ? $classInfo['namespace'] . '->' . $classInfo['method'] . '()' : 'N/A',
@@ -159,7 +161,7 @@ final class Performance
         $logData['included_files'] = $files;
 
         // Log the complete data
-        @logger('metrics', json_encode($logData, JSON_PRETTY_PRINT), [], true);
+        Logger::metrics(json_encode($logData, JSON_PRETTY_PRINT));
     }
 
     /**
