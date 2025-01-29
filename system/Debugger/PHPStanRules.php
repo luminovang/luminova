@@ -37,7 +37,6 @@ final class PHPStanRules implements Rule
     public function processNode(Node $node, Scope $scope): array
     {
         $errors = [];
-
         $comments = $node->getComments();
 
         if ($comments === []) {
