@@ -21,7 +21,7 @@ class ViewErrors extends BaseController implements ErrorHandlerInterface
      * 
      * @param Application $app Application instance available.
      * 
-     * @return int Return status code. 
+     * @return int Return response status code. 
      */
     public static function onWebError(Application $app): int 
     {
@@ -33,7 +33,7 @@ class ViewErrors extends BaseController implements ErrorHandlerInterface
      * 
      * @param Application $app Application instance available.
      * 
-     * @return int Return status code. 
+     * @return int Return response status code. 
      */
     public static function onApiError(Application $app): int 
     {

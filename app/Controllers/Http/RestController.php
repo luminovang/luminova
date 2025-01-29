@@ -23,7 +23,7 @@ class RestController extends BaseController
     /**
      * This is an example of API controller.
      * 
-     * @return int Return status code STATUS_SUCCESS or STATUS_ERROR.
+     * @return int Return response status code STATUS_SUCCESS or STATUS_ERROR.
      * 
      * @see /routes/api.php - The api context for method-based routing.
      */

@@ -23,7 +23,7 @@ class Welcome extends BaseController
     /**
      * Index page controller method.
      * 
-     * @return int Return status code STATUS_SUCCESS or STATUS_ERROR.
+     * @return int Return response status code STATUS_SUCCESS or STATUS_ERROR.
      * @see /routes/web.php - The web context for method-based routing.
      */
     #[Route('/', methods: ['GET'])]

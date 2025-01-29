@@ -117,7 +117,6 @@ class CliController extends BaseCommand
         }
 
         $this->write($message, $color);
-
         return STATUS_SUCCESS;
     }
 
