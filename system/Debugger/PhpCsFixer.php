@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 /**
- * Luminova Framework
+ * Luminova Framework coding standards fixer.
  *
  * @package Luminova
  * @author Ujah Chigozie Peter
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
-*/
+ */
 namespace Luminova\Debugger; 
 
 use \PhpCsFixer\Finder;
@@ -97,6 +97,13 @@ final class PhpCsFixer
     ];
 
     /**
+     * Additional custom configurations.
+     * 
+     * @var array<string,mixed> $options
+     */
+    private array $options = [];
+
+    /**
      * Perform fix for developer's project.
      * 
      * @var int FIX_PROJECT
@@ -114,35 +121,55 @@ final class PhpCsFixer
      * Initializes the php coding standard fixer. 
      * 
      * @param string $root Project root directory (e.g, `__DIR__`).
-     * @param int $fix Weather running fix for project or framework (default: `self::FIX_PROJECT`).
+     * @param int $fixFor Weather running fix for project or framework (default: `self::FIX_PROJECT`).
      */
-    public function __construct(string $root, int $fix = self::FIX_PROJECT)
+    public function __construct(string $root, int $fixFor = self::FIX_PROJECT)
     {
         self::$finder ??= Finder::create()
-            ->in(($fix === self::FIX_PROJECT)
+            ->in(($fixFor === self::FIX_PROJECT)
                 ? [$root . '/src', $root . '/install']
                 : [$root . '/app']
             )
             ->name('*.php')
             ->notPath([
-                ($fix === self::FIX_PROJECT)  ? 'plugins' : 'Config',
+                ($fixFor === self::FIX_PROJECT)  ? 'plugins' : 'Config',
             ])
             ->ignoreDotFiles(true)
             ->ignoreVCSIgnored(true)
             ->ignoreVCS(true);
     }
 
+    /**
+     * Sets a configuration value for a given key.
+     *
+     * This method allows setting custom configuration options. It will not
+     * override predefined configurations.
+     *
+     * @param string $key   The configuration key to set.
+     * @param mixed  $value The value to assign to the configuration key.
+     *
+     * @return self Returns the current instance for method chaining.
+     */
     public function setConfig(string $key, mixed $value): self 
     {
-        // Can't change predefined configs
-        if(isset($this->configs[$key])){
+        if(array_key_exists($key, $this->configs)){
             return $this;
         }
 
-        $this->configs[$key] = $value;
+        $this->options[$key] = $value;
         return $this;
     }
 
+    /**
+     * Sets the header comment for the PHP-CS-Fixer configuration.
+     *
+     * This method allows setting a custom header comment that will be added
+     * to the top of each PHP file during the fixing process.
+     *
+     * @param string $comment The header comment to be set.
+     *
+     * @return self Returns the current instance for method chaining.
+     */
     public function setHeaderComment(string $comment): self 
     {
         $this->configs['header_comment']['header'] = $comment;
@@ -155,11 +182,11 @@ final class PhpCsFixer
      * This method creates and returns a ConfigInterface object with the
      * predefined rules, finder, indentation, and line ending settings.
      *
-     * @return ConfigInterface The configured PHP-CS-Fixer Config object.
+     * @return ConfigInterface Return the configured PHP-CS-Fixer Config object.
      */
     public function getRules(): ConfigInterface 
     {
-        return (new Config())->setRules($this->configs)
+        return (new Config())->setRules(array_merge($this->configs, $this->options))
             ->setFinder(self::$finder)
             ->setIndent("    ")
             ->setLineEnding("\r\n");

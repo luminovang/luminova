@@ -7,25 +7,25 @@ declare(strict_types=1);
  * @author Ujah Chigozie Peter
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
-*/
+ */
 
 /**
  * Autoload register psr-4 classes
-*/
+ */
 if(env('feature.app.autoload.psr4', false)){
     \Luminova\Library\Modules::register();
 }
 
 /**
  * Register services 
-*/
+ */
 if(env('feature.app.services', false)){
     factory('register');
 }
 
 /**
  * Initialize and register class modules and alias
-*/
+ */
 if(
     env('feature.app.class.alias', false) && 
     !defined('INIT_DEV_MODULES') && 
@@ -45,7 +45,7 @@ if(
 
 /**
  * Initialize dev global functions
-*/
+ */
 if(
     env('feature.app.dev.functions', false) && 
     !defined('INIT_DEV_FUNCTIONS') && 
