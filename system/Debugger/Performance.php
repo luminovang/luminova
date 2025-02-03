@@ -89,6 +89,11 @@ final class Performance
      */
     public static function stop(?string $style = null, ?array $context = null): void
     {
+        $isApi = Foundation::isApiPrefix();
+        if($isApi && !env('debug.api.performance.profiling', false)){
+            return;
+        }
+
         self::$endTime = microtime(true);
         self::$endMemory = memory_get_usage();
         self::$filesLoaded = get_included_files();
@@ -122,7 +127,7 @@ final class Performance
             'Is Static Cache' =>  (!empty($classInfo['staticCache'])) ? 'YES' : 'NO',
         ];
 
-        if(Foundation::isApiPrefix()){
+        if($isApi){
             self::logApiPerformanceMetrics($info);
             return;
         }
@@ -152,16 +157,18 @@ final class Performance
        
         // Log the summary of included files by category
         $logData['included_files_summary'] = [
-            'Framework Modules' => $categories['Module'],
-            'Third Party Modules' => $categories['ThirdParty'],
+            'FrameworkModules' => $categories['Module'],
+            'ThirdPartyModules' => $categories['ThirdParty'],
             'Controllers' => $categories['Controller'],
-            'Other Modules' => $categories['Others']
+            'OtherModules' => $categories['Others']
         ];
 
         $logData['included_files'] = $files;
 
         // Log the complete data
-        Logger::metrics(json_encode($logData, JSON_PRETTY_PRINT));
+        Logger::metrics(json_encode($logData, JSON_PRETTY_PRINT)?: '', [
+            'key' => self::$request->getUrl()
+        ]);
     }
 
     /**
