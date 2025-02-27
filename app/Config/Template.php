@@ -15,54 +15,62 @@ namespace App\Config;
 final class Template 
 { 
     /** 
-     * Specify the template engine for rendering your application views.
-     * Available Template Engines: [default, twig, or smarty]
+     * Specifies the template engine used for rendering application views.
      * 
-     * @var string $templateEngine Engine name (default: default).
-     *    - `smarty`: Configuration files in /app/Config/Templates/Smarty/
-     *    - `twig`: Configuration files in /app/Config/Templates/Twig/
-     *    - `default`: No additional configuration is required.
+     * Supported template engines:  
+     * - `default`  → No additional configuration required.  
+     * - `smarty`   → Configuration in `/app/Config/Templates/Smarty/`.  
+     * - `twig`     → Configuration in `/app/Config/Templates/Twig/`.  
+     * 
+     * @var string $templateEngine Default: `default`
      */
     public string $templateEngine = 'default';
 
     /** 
-     * Enabling this property will render your view in isolation, allowing template view options to be accessed as variables (e.g., $verName or $_verName instead of $this->_verName or $this->verName).
-     * Additionally, access to protected properties registered in your App\Controller\Application class won't be possible using the $this keyword ($this->myClassName). 
-     * Instead, you can use the $self keyword ($self->myClassName) and `export()` method in application controller to export your classes.
+     * Enables template isolation, preventing direct access to properties 
+     * in `App\Application` via `$this->propertyName`.  
      * 
-     * @var bool $templateIsolation 
-    */
+     * When enabled:  
+     * - Use `$self->propertyName` instead of `$this->propertyName`.  
+     * - Use the `$this->export(...)` method in application class or `$this->app->export(...)` int the controller to expose properties.  
+     * - Template variables can be accessed directly as `$varName` instead of `$this->varName`.  
+     * 
+     * @var bool $templateIsolation Default: `false`
+     */
     public bool $templateIsolation = false;
 
     /**
-     * This property controls the use of variable key prefixing with '_' for view options.
-     * When set to false, accessing view options with underscore prefixing will be disabled.
+     * Controls the use of an underscore `_` prefix for view option variables.  
      * 
-     * @var bool|null $variablePrefixing
-     *     - Note: You must specify your variable type before building your application. 
-     *     - You can't change this option after building. Changing it later will cause view options not to be discovered.
-     *     - If `NULL` is passed, the view options will be left as raw arrays and can be accessed by `$options`.
+     * - `true`  → Variables will be prefixed with `_` (e.g., `$_varName`).  
+     * - `false` → Underscore prefixing is disabled.  
+     * - `null`  → Variables are stored as raw arrays (`$options`).  
+     * 
+     * **Important:** This setting must be defined **before** building your application.  
+     * Changing it afterward will prevent view options from being properly recognized.  
+     * 
+     * @var bool|null $variablePrefixing Default: `true`
      */
     public bool|null $variablePrefixing = true;
 
     /** 
-     * Set your application template cache file directory path.
+     * Directory path for cached template files.
      * 
-     * @var string $cacheFolder 
+     * @var string $cacheFolder Default: `writeable/caches/`
      */
     public string $cacheFolder = 'writeable/caches/';
 
     /** 
-     * Set your application template engine compile folder.
+     * Directory path for compiled template files.
      * 
-     * @var string $compileFolder 
+     * @var string $compileFolder Default: `writeable/compile/`
      */
     public string $compileFolder = 'writeable/compile/';
 
     /** 
-     * Set your application template engine config folder.
+     * Directory path for template engine configuration files.
      * 
-     * @var string $configFolder 
+     * @var string $configFolder Default: `writeable/config/`
      */
     public string $configFolder = 'writeable/config/';
 }

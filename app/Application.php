@@ -1,6 +1,6 @@
 <?php 
 /**
- * Luminova Framework
+ * Luminova Framework application class.
  *
  * @package Luminova
  * @author Ujah Chigozie Peter
@@ -11,42 +11,49 @@ namespace App;
 
 use \Luminova\Core\CoreApplication;
 
+/**
+ * @example - Initialize the session manager if your application uses sessions.
+ * 
+ * ```php
+ * use Luminova\Sessions\Session;
+ * protected ?Session $session = null;
+ * 
+ * $this->session = new Session(new SessionManager());
+ * $this->session->setStorage("my_storage");
+ * $this->session->start();
+ * ```
+ * 
+ * @example - Register global classes for use throughout the application lifecycle.
+ * 
+ * - Once exported, you can access the method in the application template view files using `$this->Foo`.
+ * - Use the `export` method when the property visibility is **not protected or public**,
+ *   or when **view isolation** is enabled.
+ *
+ * ```php 
+ * $this->export($this->session);
+ * $this->export(MyClass::class);
+ * $this->export(new MyClass(arguments), 'MyClass');
+ * $this->export(new MyClass(arguments));
+ * ```
+ * 
+ * @example - Set the canonical URL version for your application.
+ * 
+ * - Ensure the `Meta` class is registered before setting this.
+ * - Helps with SEO by defining the preferred URL version.
+ *
+ * ```php 
+ * $this->export(Meta::class); //or $this->Meta = new Meta();
+ * $this->Meta->setCanonicalVersion("https://example.com/", $this->getView());
+ * $this->Meta->setCanonicalVersion("https://www.example.com/", $this->getView());
+ * $this->Meta->setCanonicalVersion(parent::baseUrl(), $this->getView());
+ * ```
+ */
 class Application extends CoreApplication 
 {
     /**
      * {@inheritdoc}
      */
-    protected function onCreate(): void
-    {
-        /**
-         *  Initialize session manager if you want to make use of sessions
-         *  @example $this->session = new Session(new SessionManager());
-         *  @example $this->session->setStorage("my_storage");
-         *  @example $this->session->start();
-         */
-
-        /**
-         * Register global classes to use across your application life cycle
-         * Once exported you can access the method in application class by $this->Foo
-         * The export method should be used if the property visibility is not protected or public,
-         * Or when view isolation is enabled.
-         *
-         * @example $this->export($this->session); 
-         * @example $this->export(MyClass::class); 
-         * @example $this->export(new MyClass(arguments), 'MyClass');
-         * @example $this->export(new MyClass(arguments));
-         */
-
-        /**
-         * Set default the canonical url version for your application
-         * Before settings, make sure to register Meta Class 
-         * @example $this->export(Meta::class);
-         *
-         * @example $this->Meta->setCanonicalVersion("https://example.com/", $this->getView());
-         * @example $this->Meta->setCanonicalVersion("https://www.example.com/", $this->getView());
-         * @example $this->Meta->setCanonicalVersion(parent::baseUrl(), $this->getView());
-         */
-	}
+    protected function onCreate(): void {}
 
     /**
      * {@inheritdoc}
@@ -73,6 +80,7 @@ class Application extends CoreApplication
      */
     protected function onDestroy(): void 
     {
-        gc_collect_cycles();
+        // Optional garbage collection
+        // gc_collect_cycles();
     }
 }

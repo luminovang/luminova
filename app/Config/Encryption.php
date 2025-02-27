@@ -1,6 +1,6 @@
 <?php 
 /**
- * Luminova Framework
+ * Luminova Framework application encryption configuration.
  *
  * @package Luminova
  * @author Ujah Chigozie Peter
@@ -14,28 +14,31 @@ use \Luminova\Base\BaseConfig;
 final class Encryption extends BaseConfig
 {
     /**
-     * Specify encryption algorithm to use (openssl or sodium).
-     * 
+     * Encryption handler to use.
+     * Available options: 'openssl', 'sodium'.
+     *
      * @var string $handler
      */
     public string $handler = 'openssl';
 
     /**
-     * The encryption mode for openssl (e.g., 'AES-128-CBC', 'AES-192-CBC', 'AES-128-CFB', 'AES-128-ECB').
-     * 
-     * @var string $mode
+     * Encryption method for OpenSSL.
+     * Examples: 'AES-128-CBC', 'AES-192-CBC', 'AES-128-CFB', 'AES-128-ECB'.
+     *
+     * @var string $method
      */
     public string $method = 'AES-128-CBC';
   
     /**
-     * Specify hashing digest to use (e.g., SHA512, SHA256).
-     * 
+     * Hashing algorithm for data integrity.
+     * Examples: 'SHA512', 'SHA256'.
+     *
      * @var string $digest
      */
     public string $digest = 'SHA512';
 
     /**
-     * Openssl key Information,
+     * OpenSSL key information.
      *
      * @var string $keyInfo
      */

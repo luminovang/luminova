@@ -354,6 +354,11 @@ defined('RETURN_ALL') || define('RETURN_ALL', 6);
 defined('RETURN_STMT') || define('RETURN_STMT', 7);
 
 /**
+ * @var int RETURN_RESULT Return mysqli result.
+ */
+defined('RETURN_RESULT') || define('RETURN_RESULT', 8);
+
+/**
  * Set error reporting.
  */
 error_reporting(PRODUCTION ? 

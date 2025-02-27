@@ -29,7 +29,10 @@ class Services extends CoreServices
      * @return void
      * @throws RuntimeException Throws If the service already exists causing duplicate service.
     */
-    public function bootstrap(): void
+    public function bootstrap(): void 
     {
+        // Registration Example: static::newService(\Foo\Bar\Example::class);
+        // Now you can use it anywhere in application.
+        // Usage Example: $example = service('Example');
     }
 }

@@ -14,32 +14,31 @@ use \Luminova\Base\BaseConfig;
 final class IPConfig extends BaseConfig
 {
     /**
-     * Specify the IP address api provide 
-     * Available are ipapi and iphub
-     * 
+     * IP address API provider.
+     * Available options: 'ipapi', 'iphub'.
+     *
      * @var string $apiProvider ['ipapi', 'iphub']
-    */
+     */
     public string $apiProvider = 'iphub';
 
     /**
-     * Specify the IP hub api version 
-     * This is valid for iphub only 
-     * 
+     * IPHub API version (Applicable only when using 'iphub').
+     *
      * @var string $ipHubVersion
-    */
+     */
     public string $ipHubVersion = 'v2';
 
     /**
-     * Specify the IP address api key
-     * 
+     * API key for the selected IP address provider.
+     *
      * @var string $apiKey
-    */
+     */
     public string $apiKey = '';
 
     /**
      * List of trusted proxy IP addresses or subnets.
-     * 
+     *
      * @var array<int, string> $trustedProxies
-    */
+     */
     public array $trustedProxies = [];
- }
+}
