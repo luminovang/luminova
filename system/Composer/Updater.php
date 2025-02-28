@@ -19,25 +19,26 @@ class Updater
 {
     /**
      * @var string $frameworkPath framework directory
-    */
+     */
     private static string $frameworkPath = 'system/plugins/luminovang/framework/';
+
     /**
      * @var Terminal $terminal 
-    */
+     */
     private static ?Terminal $terminal = null;
 
     /**
      * New sample changes.
      * 
      * @param array $toReplace
-    */
+     */
     private static array $toReplace = [];
 
     /**
      * Update framework 
      * 
      * @return void 
-    */
+     */
     public static function update(): void 
     {
         if(self::onInstallAndUpdate('bootstrap/', self::$frameworkPath, 'install/Boot/')){
@@ -51,7 +52,7 @@ class Updater
      * Install, update framework and configure project
      * 
      * @return void 
-    */
+     */
     public static function install(): void 
     {
         self::onInstallAndUpdate('system/', self::$frameworkPath, 'src/', true);
@@ -64,7 +65,7 @@ class Updater
      * @param string $dest
      * 
      * @return bool 
-    */
+     */
     private static function isUpdater(string $dest): bool 
     {
         return str_contains($dest, 'system/Composer/Updater.php');
@@ -74,7 +75,7 @@ class Updater
      * Get prepared cli instance 
      * 
      * @return Terminal 
-    */
+     */
     private static function cli(): Terminal
     {
         return self::$terminal ??= new Terminal();
@@ -87,7 +88,7 @@ class Updater
      * @param string $source File source.
      * 
      * @return void  
-    */
+     */
     private static function checkAndMoveFolderRecursive(string $destination, string $source): void
     {
         if(!file_exists($source)){
@@ -98,8 +99,8 @@ class Updater
         $files = scandir($source);
         foreach ($files as $file) {
             if ($file !== '.' && $file !== '..') {
-                $srcFile = rtrim($source, '/\\') . DIRECTORY_SEPARATOR . $file;
-                $dstFile = rtrim($destination, '/\\') . DIRECTORY_SEPARATOR . $file;
+                $srcFile = rtrim($source, TRIM_DS) . DIRECTORY_SEPARATOR . $file;
+                $dstFile = rtrim($destination, TRIM_DS) . DIRECTORY_SEPARATOR . $file;
 
                 if(self::isUpdater(self::displayPath($dstFile))){
                     continue;
@@ -123,12 +124,12 @@ class Updater
      * @param string|null $main main directory to ignore deletion
      * 
      * @return void  
-    */
+     */
     private static function removeRecursive(string $dir, ?string $main = null): void
     {
         $files = array_diff(scandir($dir), ['.', '..']);
         foreach ($files as $file) {
-            $path = rtrim($dir, '/\\') . DIRECTORY_SEPARATOR . $file;
+            $path = rtrim($dir, TRIM_DS) . DIRECTORY_SEPARATOR . $file;
             if (is_dir($path)) {
                 self::removeRecursive($path, $main);
             } else {
@@ -147,7 +148,7 @@ class Updater
      * @param string $path File path.
      * 
      * @return string  
-    */
+     */
     private static function displayPath(string $path): string 
     {
         return dirname($path) . DIRECTORY_SEPARATOR . basename($path);
@@ -159,7 +160,7 @@ class Updater
      * @param string $path
      * 
      * @return void  
-    */
+     */
     private static function makeDirectoryIfNotExist(string $path): void 
     {
         if (!is_dir($path)) {
@@ -168,26 +169,39 @@ class Updater
     }
 
     /**
-     * Compare two files to see if any changes in the hash
-
+     * Compare two files to check if their hashes differ.
+     * 
      * @param string $source File source.
      * @param string $destination. File destination path.
      * 
-     * @return bool  
-    */
+     * @return bool Return true if the files are different or if the destination doesn't exist, otherwise false.
+     */
     private static function fileChanged(string $source, string $destination): bool
     {
-        return md5_file($source) !== md5_file($destination);
+        $isSource = file_exists($source);
+        $isDestination = file_exists($destination);
+
+        if(!$isSource && !$isDestination){
+            return false;
+        }
+
+        if (!$isDestination) {
+            return $isSource;
+        }
+
+        return ($isSource && $isDestination) 
+            ? md5_file($source) !== md5_file($destination) 
+            : false;
     }
 
     /**
      * Compare two files to see if any changes in the hash
-
+     * 
      * @param string $source File source.
      * @param string $destination. File destination path.
      * 
      * @return bool  
-    */
+     */
     private static function updateConfigurations(string $source, string $destination, bool $main = false): void
     {
         if(!file_exists($source)){
@@ -203,9 +217,9 @@ class Updater
 
         foreach ($files as $file) {
             if ($file !== '.' && $file !== '..') {
-                $srcFile = rtrim($source, '/\\') . DIRECTORY_SEPARATOR . $file;
-                $dstFile = rtrim($destination, '/\\') . DIRECTORY_SEPARATOR . $file;
-                $sampleFile = rtrim($sampleFolder, '/\\') . DIRECTORY_SEPARATOR . $file;
+                $srcFile = rtrim($source, TRIM_DS) . DIRECTORY_SEPARATOR . $file;
+                $dstFile = rtrim($destination, TRIM_DS) . DIRECTORY_SEPARATOR . $file;
+                $sampleFile = rtrim($sampleFolder, TRIM_DS) . DIRECTORY_SEPARATOR . $file;
 
                 if (!is_dir($srcFile)) {
                     self::doConfigCopy($srcFile, $dstFile, $sampleFile, $main);
@@ -224,8 +238,13 @@ class Updater
      * @param string $source File source.
      * 
      * @return void  
-    */
-    private static function updateDevConfigs(string $destination, string $sampleFolder, string $source, bool $main = false): void
+     */
+    private static function updateDevConfigs(
+        string $destination, 
+        string $sampleFolder, 
+        string $source, 
+        bool $main = false
+    ): void
     {
         if(!file_exists($source)){
             return;
@@ -238,9 +257,9 @@ class Updater
         $files = scandir($source);
         foreach ($files as $file) {
             if ($file !== '.' && $file !== '..') {
-                $srcFile = rtrim($source, '/\\') . DIRECTORY_SEPARATOR . $file;
-                $dstFile = rtrim($destination, '/\\') . DIRECTORY_SEPARATOR . $file;
-                $sampleFile = rtrim($sampleFolder, '/\\') . DIRECTORY_SEPARATOR . $file;
+                $srcFile = rtrim($source, TRIM_DS) . DIRECTORY_SEPARATOR . $file;
+                $dstFile = rtrim($destination, TRIM_DS) . DIRECTORY_SEPARATOR . $file;
+                $sampleFile = rtrim($sampleFolder, TRIM_DS) . DIRECTORY_SEPARATOR . $file;
 
                 if (!is_dir($srcFile)) {
                     self::doConfigCopy($srcFile, $dstFile, $sampleFile, $main);
@@ -253,7 +272,7 @@ class Updater
 
     /**
      * Do move file to it destination.
-    */
+     */
     private static function doConfigCopy(string $from, string $to, string $sample, bool $main = false): bool
     {
         if (file_exists($to)) {
@@ -286,7 +305,7 @@ class Updater
      * @param bool $complete complete.
      * 
      * @return bool  
-    */
+     */
     private static function onInstallAndUpdate(string $destination, string $source, string $codes, bool $complete = false): bool
     {
         $fullSource = $source . $codes;
@@ -296,8 +315,8 @@ class Updater
 
             foreach ($files as $file) {
                 if ($file !== '.' && $file !== '..') {
-                    $srcFile = rtrim($fullSource, '/\\') . DIRECTORY_SEPARATOR . $file;
-                    $dstFile = rtrim($destination, '/\\') . DIRECTORY_SEPARATOR . $file;
+                    $srcFile = rtrim($fullSource, TRIM_DS) . DIRECTORY_SEPARATOR . $file;
+                    $dstFile = rtrim($destination, TRIM_DS) . DIRECTORY_SEPARATOR . $file;
   
                     if(self::isUpdater(self::displayPath($dstFile))){
                         continue;
@@ -319,8 +338,8 @@ class Updater
 
             if($complete){
                 $base = APP_ROOT . DIRECTORY_SEPARATOR;
-                $toDos = $base . $source . 'TODO.md';
-                $currentTodo = $base . 'TODO.md';
+                $toDos = $base . rtrim($source, TRIM_DS) . 'TODO.md';
+                $currentTodo = rtrim($base, TRIM_DS) . 'TODO.md';
                 $hasTodo = false;
 
                 if(file_exists($toDos) && self::fileChanged($toDos, $currentTodo)){
