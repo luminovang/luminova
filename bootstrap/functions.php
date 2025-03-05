@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 /**
- * Luminova Framework
+ * Luminova Framework global helper functions.
  *
  * @package Luminova
  * @author Ujah Chigozie Peter
@@ -84,7 +84,7 @@ if (!function_exists('filter_paths')) {
      * @param string $path The path to be filtered.
      * 
      * @return string Return the filtered path.
-    */
+     */
     function filter_paths(string $path): string 
     {
         return Foundation::filterPath($path);
@@ -143,14 +143,14 @@ if (!function_exists('request')) {
 
 if (!function_exists('response')) {
     /** 
-    * Initiate a new view response object.
-    *
-    * @param int $status int $status HTTP status code (default: 200 OK).
-    * @param array<string,mixed>|null $headers Additional response headers (default: null).
-    * @param bool $shared Weather to return shared instance (default: true).
-    *
-    * @return ViewResponseInterface Return view controller response object. 
-    */
+     * Initiate a new view response object.
+     *
+     * @param int $status int $status HTTP status code (default: 200 OK).
+     * @param array<string,mixed>|null $headers Additional response headers (default: null).
+     * @param bool $shared Weather to return shared instance (default: true).
+     *
+     * @return ViewResponseInterface Return view controller response object. 
+     */
     function response(
         int $status = 200, 
         ?array $headers = null, 
@@ -185,7 +185,7 @@ if (!function_exists('start_url')) {
      * - http://localhost/public
      * - http://example.com:8080
      * - http://example.com/
-    */
+     */
     function start_url(?string $suffix = null): string
     {
         $suffix = ($suffix=== null) ? '/' : '/' . ltrim($suffix, '/');
@@ -214,7 +214,7 @@ if (!function_exists('absolute_url')) {
      * 
      * @example - If path is: /Applications/XAMPP/htdocs/project-path/public/asset/files/foo.text.
      * It returns: http://localhost/project-path/public/asset/files/foo.text.
-    */
+     */
     function absolute_url(string $path): string
     {
         return Foundation::toAbsoluteUrl($path);
@@ -265,7 +265,7 @@ if(!function_exists('kebab_case')){
      * @param bool $lower Weather to convert to lower case (default: true).
 	 * 
 	 * @return string Return the kebab-cased string.
-	*/
+	 */
     function kebab_case(string $input, bool $toLower = true): string 
     {
         $input = preg_replace('/[^\p{L}\p{N}]+/u', ' ', $input);
@@ -306,12 +306,12 @@ if(!function_exists('uppercase_words')){
 
 if(!function_exists('locale')){
     /**
-    * Set locale or return locale application string.
-    *
-    * @param string|null $locale If locale is present it will set it else return default locale
-    *
-    * @return string|true Return application locale or true if locale was set;
-    */
+     * Set locale or return locale application string.
+     *
+     * @param string|null $locale If locale is present it will set it else return default locale
+     *
+     * @return string|true Return application locale or true if locale was set;
+     */
     function locale(?string $locale = null): string|bool 
     {
         if(!$locale){
@@ -344,26 +344,26 @@ if(!function_exists('uuid')){
 
 if(!function_exists('escape')){
     /**
-    * Escapes a user input string or array of strings based on the specified context.
-    *
-    * @param string|array $input The string or array of strings to be escaped.
-    *           For array, you can optionally use the keys of the array to specify the escape context for each value.
-    * @param string $context The escaper context in which the escaping should be performed (default:'html').
-    * @param string $encoding The escape character encoding to use (default: 'utf-8').
-    * 
-    * @return array|string Return the escaped string or array of strings.
-    * @throws InvalidArgumentException When an invalid, blank encoding is provided or unsupported encoding or empty string is provided.
-    * @throws BadMethodCallException When an invalid context is called.
-    *
-    * Supported Context Values: 
-    *
-    * - html - Escape general HTML content. 
-    * - js -   Escape JavaScript code. 
-    * - css -  Escape CSS styles. 
-    * - url -  Escape URL, 
-    * - attr - Escape HTML attributes.
-    * - raw -  Raw output no escaping apply.
-    */
+     * Escapes a user input string or array of strings based on the specified context.
+     *
+     * @param string|array $input The string or array of strings to be escaped.
+     *           For array, you can optionally use the keys of the array to specify the escape context for each value.
+     * @param string $context The escaper context in which the escaping should be performed (default:'html').
+     * @param string $encoding The escape character encoding to use (default: 'utf-8').
+     * 
+     * @return array|string Return the escaped string or array of strings.
+     * @throws InvalidArgumentException When an invalid, blank encoding is provided or unsupported encoding or empty string is provided.
+     * @throws BadMethodCallException When an invalid context is called.
+     *
+     * Supported Context Values: 
+     *
+     * - html - Escape general HTML content. 
+     * - js -   Escape JavaScript code. 
+     * - css -  Escape CSS styles. 
+     * - url -  Escape URL, 
+     * - attr - Escape HTML attributes.
+     * - raw -  Raw output no escaping apply.
+     */
     function escape(
         string|array $input, 
         string $context = 'html', 
@@ -456,14 +456,14 @@ if(!function_exists('strict')){
 
 if(!function_exists('is_tor')){
     /**
-    * Checks if the given IP address is a Tor exit node.
-    *
-    * @param string|null $ip The ip address to check, if NULL get current ip address.
-    * @param int $expiration The expiration time to request for new exit nodes from tor api (default: 2592000 30 days).
-    * 
-    * @return bool Return true if ip address is a Tor exit node, otherwise false.
-    * @throws FileException Throws if error occurs or unable to read or write to directory.
-    */
+     * Checks if the given IP address is a Tor exit node.
+     *
+     * @param string|null $ip The ip address to check, if NULL get current ip address.
+     * @param int $expiration The expiration time to request for new exit nodes from tor api (default: 2592000 30 days).
+     * 
+     * @return bool Return true if ip address is a Tor exit node, otherwise false.
+     * @throws FileException Throws if error occurs or unable to read or write to directory.
+     */
     function is_tor(?string $ip = null, int $expiration = 2592000): bool
     {
         return IP::isTor($ip, $expiration);
@@ -472,13 +472,13 @@ if(!function_exists('is_tor')){
 
 if(!function_exists('ip_address')){
     /**
-    * Get user IP address or return ip address information.
-    *
-    * @param bool $get_info Weather to true return ip address information instead (default: false).
-    * @param array $options Optional data to return with IP information (default: none).
-    * 
-    * @return string|object|null Return client ip address or ip info, otherwise null if ip info not found.
-    */
+     * Get user IP address or return ip address information.
+     *
+     * @param bool $get_info Weather to true return ip address information instead (default: false).
+     * @param array $options Optional data to return with IP information (default: none).
+     * 
+     * @return string|object|null Return client ip address or ip info, otherwise null if ip info not found.
+     */
     function ip_address(bool $get_info = false, array $options = []): string|object|null
     {
         return $get_info ? IP::info(null, $options): IP::get();
@@ -493,7 +493,7 @@ if(!function_exists('is_empty')){
      * @param mixed $values [, mixed $... ] Values to check if empty or not.
      * 
      * @return bool True if any of the values are empty, false otherwise.
-    */
+     */
     function is_empty(mixed ...$values): bool 
     {
         foreach ($values as $value) {
@@ -519,7 +519,7 @@ if(!function_exists('session')) {
      * @param class-object<SessionManagerInterface> $manager The session manager interface to use (default: SessionManager).
      *
      * @return Session|mixed Return session instance or value if key is present.
-    */
+     */
     function session(?string $key = null, bool $shared = true, ?SessionManagerInterface $manager = null): mixed
     {
         return ($key !== null && $key !== '') 
@@ -538,7 +538,7 @@ if (!function_exists('cookie')) {
      * @param bool $shared Use shared instance (default: false).
      * 
      * @return Cookie Return cookie instance.
-    */
+     */
     function cookie(
         string $name, 
         string $value = '', 
@@ -585,7 +585,7 @@ if(!function_exists('factory')) {
      * 
      * `$config = \Luminova\Application\Factory::config();`
      * `$config = new \Luminova\Config\Configuration();`
-    */
+     */
     function factory(?string $context = null, bool $shared = true, mixed ...$arguments): ?object
     {
         if($context === null || $context === ''){
@@ -617,7 +617,7 @@ if(!function_exists('service')) {
      * ```
      * $config = new \Foo\Bar\Config();
      * ```
-    */
+     */
     function service(
         ?string $service = null, 
         bool $shared = true, 
@@ -645,7 +645,7 @@ if(!function_exists('remove_service')) {
      * @param class-string<\T>|string $service The class name or alias, to delete and clear it cached.
      * 
      * @return bool Return true if the service was removed or cleared, false otherwise.
-    */
+     */
     function remove_service(?string $service = null): bool
     {
         if($service === null){
@@ -671,7 +671,7 @@ if(!function_exists('browser')) {
      * - array: - Return browser information as array.
      * - object: - Return browser information as object.
      * - instance: - Return browser information instance.
-    */
+     */
     function browser(?string $user_agent = null, string $return = 'object', bool $shared = true): mixed
     { 
         if($return === 'instance'){
@@ -710,7 +710,7 @@ if(!function_exists('is_platform')) {
      * - solaris - For solaris os.
      * - aws - For AWS OpsWorks.
      * - etc.
-    */
+     */
     function is_platform(string $os): bool
     { 
         $os = strtolower($os);
@@ -735,7 +735,7 @@ if (!function_exists('text2html')) {
      * @param string $text A string containing the text to be processed.
      * 
      * @return string Return the processed text with HTML entities.
-    */
+     */
     function text2html(?string $text): string
     { 
         return !$text ? '' : htmlspecialchars($text, ENT_QUOTES|ENT_HTML5);
@@ -750,7 +750,7 @@ if(!function_exists('nl2html')) {
      * @param string|null $text A string containing the text to be processed.
      * 
      * @return string Return formatted string.
-    */
+     */
     function nl2html(string|null $text): string
     {
         return !$text ? '' : str_replace(
@@ -772,7 +772,7 @@ if(!function_exists('import')) {
      * 
      * @return bool true if the library was successfully imported.
      * @throws RuntimeException if library could not be found.
-    */
+     */
     function import(string $library): bool
     {
         require_once root('/libraries/libs/') . trim(rtrim($library, '.php'), TRIM_DS) . '.php';
@@ -845,7 +845,7 @@ if (!function_exists('lang')) {
      * ```php
      *  echo lang('User.error.all', null, 'en', ['name' => 'Peter', 'email' => 'peter@foo.com]);
      * ```
-    */
+     */
     function lang(
         string $lookup, 
         ?string $default = null, 
@@ -895,7 +895,7 @@ if (!function_exists('path')) {
      *      - services
      * 
      * @return string Return directory path, windows, unix or windows style path. 
-    */
+     */
     function path(string $name): string
     {
         return Factory::fileManager()->getCompatible($name);
@@ -911,7 +911,7 @@ if (!function_exists('get_column')) {
      * @param string|int|null $index An optional column to use as the index/keys for the returned array.
      * 
      * @return array Returns an array of values representing a single column from the input array or object.
-    */
+     */
     function get_column(array|object $from, null|string|int $property, null|string|int $index = null): array 
     {
         if (is_array($from)) {
@@ -949,7 +949,7 @@ if (!function_exists('is_nested')) {
      * @param bool $recursive Determines whether to check nested array values (default: false).
      * 
      * @return bool Return true if array is a nested array.
-    */
+     */
     function is_nested(array $array, bool $recursive = false): bool 
     {
         if ($array === []) {
@@ -973,7 +973,7 @@ if (!function_exists('is_associative')) {
      * @param array $array Array to check.
      * 
      * @return bool Return true if array is associative, false otherwise.
-    */
+     */
     function is_associative(array $array): bool 
     {
         if ($array === [] || isset($array[0])) {
@@ -1016,7 +1016,7 @@ if (!function_exists('array_is_list')) {
      * @param array $array The array to check.
      * 
      * @return bool Return true if array is sequential, false otherwise.
-    */
+     */
     function array_is_list(array $array): bool
     {
         if ($array === []) {
@@ -1038,7 +1038,7 @@ if (!function_exists('to_array')) {
      * @param mixed $input The object to convert to an array.
      * 
      * @return array $array Finalized array representation of the object.
-    */
+     */
     function to_array(mixed $input): array 
     {
         if (!is_object($input)) {
@@ -1061,7 +1061,7 @@ if (!function_exists('to_object')) {
      * @param array|string $input The array or string list to convert.
      * 
      * @return object|false $object Return JSON object, otherwise false.
-    */
+     */
     function to_object(array|string $input): object|bool
     {
         if ($input === [] || $input === '') {
@@ -1096,7 +1096,7 @@ if (!function_exists('list_to_array')) {
      * 
      * @example list_to_array('a,b,c') => ['a', 'b', 'c'].
      * @example list_to_array('"a","b","c"') => ['a', 'b', 'c'].
-    */
+     */
     function list_to_array(string $list): array|bool 
     {
         if (!$list) {
@@ -1121,18 +1121,20 @@ if (!function_exists('list_in_array')) {
      * @param array $array The array to check list in.
      * 
      * @return bool Return true exist, otherwise false.
-    */
+     */
     function list_in_array(string $list, array $array = []): bool 
     {
-        if(!$array && !$list){
+        if(!$array && $list === ''){
             return true;
         }
 
-        if(!$array || !$list){
+        if(!$array || $list === ''){
             return false;
         }
-
-        $map = list_to_array($list);
+        
+        $map = is_list($list) 
+            ? list_to_array($list) 
+            : [$list];
 
         if($map === false){
             return false;
@@ -1155,14 +1157,10 @@ if (!function_exists('is_list')) {
      * @param string $input The string to check.
      * 
      * @return bool Return true or false on failure.
-    */
+     */
     function is_list(string $input): bool 
     {
-        if (!$input) {
-            return false;
-        }
-
-        return Lists::isList($input);
+        return $input ? Lists::isList($input) : false;
     }
 }
 
@@ -1178,7 +1176,7 @@ if (!function_exists('write_content')) {
      * 
      * @return bool Return true if successful, otherwise false on failure.
      * @throws FileException If unable to write file.
-    */
+     */
     function write_content(string $filename, mixed $content, int $flag = 0, $context = null): bool 
     {
         return FileManager::write($filename, $content, $flag, $context);
@@ -1225,7 +1223,7 @@ if (!function_exists('make_dir')) {
      * @return bool Return true if files already existed or was created successfully, otherwise false.
      * @throws RuntimeException If path is not readable.
      * @throws FileException If unable to create directory
-    */
+     */
     function make_dir(string $path, ?int $permissions = null, bool $recursive = true): bool 
     {
         return FileManager::mkdir($path, $permissions ?? Files::$dirPermissions, $recursive);
@@ -1316,7 +1314,7 @@ if (!function_exists('validate')) {
      * ```
      * 
      * @return ValidationInterface Return validation instance.
-    */
+     */
     function validate(?array $inputs = null, ?array $rules = null, array $messages = []): ValidationInterface 
     {
         $instance = Factory::validate();
@@ -1337,7 +1335,7 @@ if (!function_exists('get_class_name')) {
      * @param string|class-object<\T> $from Class name or class object.
      * 
      * @return string Return the class basename.
-    */
+     */
     function get_class_name(string|object $from): string 
     {
         if (is_string($from)) {
@@ -1357,7 +1355,7 @@ if (!function_exists('is_command')) {
      * Find whether application is running in cli mode.
      *
      * @return bool Return true if request is made in cli mode, false otherwise.
-    */
+     */
     function is_command(): bool
     {
         return Foundation::isCommand();
@@ -1369,7 +1367,7 @@ if (!function_exists('is_dev_server')) {
      * Check if the application is running locally on development server.
      *
      * @return bool Return true if is development server, false otherwise.
-    */
+     */
     function is_dev_server(): bool
     {
         if(isset($_SERVER['NOVAKIT_EXECUTION_ENV'])){
@@ -1395,7 +1393,7 @@ if (!function_exists('is_blob')) {
      * @param mixed $value Value to check.
      * 
      * @return bool Return true if the value is a blob, false otherwise.
-    */
+     */
     function is_blob(mixed $value): bool 
     {
         return FileManager::isResource($value, 'stream');
@@ -1407,7 +1405,7 @@ if (!function_exists('which_php')) {
      * Get the PHP script executable path.
      *
      * @return string|null Return PHP executable path or null.
-    */
+     */
     function which_php(): ?string
     {
         if (defined('PHP_BINARY')) {
@@ -1450,7 +1448,7 @@ if (!function_exists('is_utf8')) {
      * @param string $input The string to check for UTF-8 encoding.
      * 
      * @return bool Returns true if the string is UTF-8 encoded, false otherwise.
-    */
+     */
     function is_utf8(string $input): bool 
     {
         return preg_match('//u', $input) === 1;
@@ -1464,7 +1462,7 @@ if (!function_exists('has_uppercase')) {
      * @param string $string The string to check uppercase.
      * 
      * @return bool Returns true if the string has uppercase, false otherwise.
-    */
+     */
     function has_uppercase(string $string): bool 
     {
         for ($i = 0; $i < strlen($string); $i++) {
@@ -1512,7 +1510,7 @@ if (!function_exists('asset')) {
      * @param bool $absolute Whether to use an absolute URL (default: false).
      * 
      * @return string Return the generated URL to the assets file or base assets folder if no filename is provided.
-    */
+     */
     function asset(?string $filename = null, bool $absolute = false): string 
     {
         $filename = 'assets/' . (($filename === null) ? '' : ltrim($filename, '/'));
@@ -1532,7 +1530,7 @@ if (!function_exists('camel_case')) {
      * @param string $input The string to convert.
      * 
      * @return string The string converted to camel case.
-    */
+     */
     function camel_case(string $input): string
     {
         $input = str_replace(['-', ' '], '_', $input);
@@ -1593,7 +1591,7 @@ if (!function_exists('layout')) {
      * ```
      * 
      * > All layouts must be stored in `resources/Views/layout/` directory.
-    */
+     */
     function layout(string $file, string $module = ''): Layout
     {
         return Layout::getInstance()->layout($file, $module);
@@ -1608,7 +1606,7 @@ if (!function_exists('get_mime')) {
      * @param string|null $magic_database Optional magic database for custom mime (e.g, \path\custom.magic).
      * 
      * @return string|false Return the content type in MIME format, otherwise false.
-    */
+     */
     function get_mime(string $filename, ?string $magic_database = null): string|bool
     {
         $mime = mime_content_type($filename);
