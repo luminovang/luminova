@@ -6,6 +6,7 @@
  * @author Ujah Chigozie Peter
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
+ * @link https://luminova.ng
  */
 namespace Luminova\Composer;
 
@@ -306,7 +307,12 @@ class Updater
      * 
      * @return bool  
      */
-    private static function onInstallAndUpdate(string $destination, string $source, string $codes, bool $complete = false): bool
+    private static function onInstallAndUpdate(
+        string $destination, 
+        string $source, 
+        string $codes, 
+        bool $complete = false
+    ): bool
     {
         $fullSource = $source . $codes;
         if(file_exists($fullSource)){

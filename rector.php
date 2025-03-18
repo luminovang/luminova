@@ -6,6 +6,7 @@
  * @author Ujah Chigozie Peter
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
+ * @link https://luminova.ng
  */
 use Rector\Config\RectorConfig;
 use Rector\Set\ValueObject\SetList;

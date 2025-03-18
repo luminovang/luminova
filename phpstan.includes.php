@@ -6,6 +6,7 @@
  * @author Ujah Chigozie Peter
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
+ * @link https://luminova.ng
  */
 declare(strict_types = 1);
 
@@ -16,8 +17,4 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/system/Debugger/PHPStanRules.php',
 ];
 
-return [
-	'parameters' => [
-		'ignoreErrors' => $ignoreErrors
-	]
-];
+return ['parameters' => ['ignoreErrors' => $ignoreErrors]];

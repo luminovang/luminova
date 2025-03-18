@@ -7,9 +7,9 @@ declare(strict_types=1);
  * @author Ujah Chigozie Peter
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
+ * @link https://luminova.ng
  * @see https://luminova.ng/docs/0.0.0/global/functions
  */
-
 use \App\Application;
 use \App\Config\Files;
 use \Luminova\Core\CoreFunction;

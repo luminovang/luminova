@@ -69,6 +69,7 @@ return array(
     'Luminova\\Builder\\Xhtml' => $baseDir . '/system/Builder/Xhtml.php',
     'Luminova\\Cache\\FileCache' => $baseDir . '/system/Cache/FileCache.php',
     'Luminova\\Cache\\MemoryCache' => $baseDir . '/system/Cache/MemoryCache.php',
+    'Luminova\\Cache\\RedisCache' => $baseDir . '/system/Cache/RedisCache.php',
     'Luminova\\Cache\\TemplateCache' => $baseDir . '/system/Cache/TemplateCache.php',
     'Luminova\\Command\\Auth\\Handler' => $baseDir . '/system/Command/Auth/Handler.php',
     'Luminova\\Command\\Auth\\Session' => $baseDir . '/system/Command/Auth/Session.php',

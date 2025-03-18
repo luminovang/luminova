@@ -39,7 +39,6 @@ class ComposerStaticInitce7d6b0379bc9a35d3afd6dd2b0e131e
         'Luminova\\' => 
         array (
             0 => __DIR__ . '/../../..' . '/system',
-            1 => __DIR__ . '/..' . '/luminovang/framework/src',
         ),
         'App\\' => 
         array (
@@ -111,6 +110,7 @@ class ComposerStaticInitce7d6b0379bc9a35d3afd6dd2b0e131e
         'Luminova\\Builder\\Xhtml' => __DIR__ . '/../../..' . '/system/Builder/Xhtml.php',
         'Luminova\\Cache\\FileCache' => __DIR__ . '/../../..' . '/system/Cache/FileCache.php',
         'Luminova\\Cache\\MemoryCache' => __DIR__ . '/../../..' . '/system/Cache/MemoryCache.php',
+        'Luminova\\Cache\\RedisCache' => __DIR__ . '/../../..' . '/system/Cache/RedisCache.php',
         'Luminova\\Cache\\TemplateCache' => __DIR__ . '/../../..' . '/system/Cache/TemplateCache.php',
         'Luminova\\Command\\Auth\\Handler' => __DIR__ . '/../../..' . '/system/Command/Auth/Handler.php',
         'Luminova\\Command\\Auth\\Session' => __DIR__ . '/../../..' . '/system/Command/Auth/Session.php',
