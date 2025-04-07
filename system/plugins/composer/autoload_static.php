@@ -39,6 +39,7 @@ class ComposerStaticInitce7d6b0379bc9a35d3afd6dd2b0e131e
         'Luminova\\' => 
         array (
             0 => __DIR__ . '/../../..' . '/system',
+            1 => __DIR__ . '/..' . '/luminovang/framework/src',
         ),
         'App\\' => 
         array (
@@ -151,6 +152,7 @@ class ComposerStaticInitce7d6b0379bc9a35d3afd6dd2b0e131e
         'Luminova\\Database\\Drivers\\PdoDriver' => __DIR__ . '/../../..' . '/system/Database/Drivers/PdoDriver.php',
         'Luminova\\Database\\Manager' => __DIR__ . '/../../..' . '/system/Database/Manager.php',
         'Luminova\\Database\\Migration' => __DIR__ . '/../../..' . '/system/Database/Migration.php',
+        'Luminova\\Database\\RawExpression' => __DIR__ . '/../../..' . '/system/Database/RawExpression.php',
         'Luminova\\Database\\Schema' => __DIR__ . '/../../..' . '/system/Database/Schema.php',
         'Luminova\\Database\\Seeder' => __DIR__ . '/../../..' . '/system/Database/Seeder.php',
         'Luminova\\Database\\Table' => __DIR__ . '/../../..' . '/system/Database/Table.php',

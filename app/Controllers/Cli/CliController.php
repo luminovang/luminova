@@ -31,7 +31,7 @@ class CliController extends BaseCommand
     /**
      * {@inheritdoc}
      */
-    protected array $usages  = [
+    protected array|string $usages  = [
         'php index.php demo <command> <arguments>',
         'php index.php demo hello'
     ];

@@ -110,6 +110,7 @@ return array(
     'Luminova\\Database\\Drivers\\PdoDriver' => $baseDir . '/system/Database/Drivers/PdoDriver.php',
     'Luminova\\Database\\Manager' => $baseDir . '/system/Database/Manager.php',
     'Luminova\\Database\\Migration' => $baseDir . '/system/Database/Migration.php',
+    'Luminova\\Database\\RawExpression' => $baseDir . '/system/Database/RawExpression.php',
     'Luminova\\Database\\Schema' => $baseDir . '/system/Database/Schema.php',
     'Luminova\\Database\\Seeder' => $baseDir . '/system/Database/Seeder.php',
     'Luminova\\Database\\Table' => $baseDir . '/system/Database/Table.php',

@@ -9,6 +9,6 @@ return array(
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
     'Psr\\Http\\Client\\' => array($vendorDir . '/psr/http-client/src'),
-    'Luminova\\' => array($baseDir . '/system'),
+    'Luminova\\' => array($baseDir . '/system', $vendorDir . '/luminovang/framework/src'),
     'App\\' => array($baseDir . '/app'),
 );
