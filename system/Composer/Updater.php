@@ -89,7 +89,7 @@ class Updater
     /**
      * Returns a prepared CLI instance, initializing it if necessary.
      * 
-     * @return Terminal CLI instance.
+     * @return Terminal Return the CLI instance.
      */
     private static function cli(): Terminal
     {
@@ -205,7 +205,7 @@ class Updater
      * @param string $source Source file.
      * @param string $destination Destination file.
      * 
-     * @return bool True if the files differ or if the destination does not exist.
+     * @return bool Return true if the files differ or if the destination does not exist.
      */
     private static function fileChanged(string $source, string $destination): bool
     {

@@ -39,7 +39,6 @@ class ComposerStaticInitce7d6b0379bc9a35d3afd6dd2b0e131e
         'Luminova\\' => 
         array (
             0 => __DIR__ . '/../../..' . '/system',
-            1 => __DIR__ . '/..' . '/luminovang/framework/src',
         ),
         'App\\' => 
         array (
@@ -194,6 +193,7 @@ class ComposerStaticInitce7d6b0379bc9a35d3afd6dd2b0e131e
         'Luminova\\Exceptions\\StorageException' => __DIR__ . '/../../..' . '/system/Exceptions/StorageException.php',
         'Luminova\\Exceptions\\ValidationException' => __DIR__ . '/../../..' . '/system/Exceptions/ValidationException.php',
         'Luminova\\Exceptions\\ViewNotFoundException' => __DIR__ . '/../../..' . '/system/Exceptions/ViewNotFoundException.php',
+        'Luminova\\Ftp\\FTP' => __DIR__ . '/../../..' . '/system/Ftp/FTP.php',
         'Luminova\\Functions\\Escape' => __DIR__ . '/../../..' . '/system/Functions/Escape.php',
         'Luminova\\Functions\\Func' => __DIR__ . '/../../..' . '/system/Functions/Func.php',
         'Luminova\\Functions\\IP' => __DIR__ . '/../../..' . '/system/Functions/IP.php',
@@ -255,6 +255,7 @@ class ComposerStaticInitce7d6b0379bc9a35d3afd6dd2b0e131e
         'Luminova\\Security\\Encryption\\OpenSSL' => __DIR__ . '/../../..' . '/system/Security/Encryption/OpenSSL.php',
         'Luminova\\Security\\Encryption\\Sodium' => __DIR__ . '/../../..' . '/system/Security/Encryption/Sodium.php',
         'Luminova\\Security\\JWTAuth' => __DIR__ . '/../../..' . '/system/Security/JWTAuth.php',
+        'Luminova\\Security\\RateLimiter' => __DIR__ . '/../../..' . '/system/Security/RateLimiter.php',
         'Luminova\\Security\\TOTP' => __DIR__ . '/../../..' . '/system/Security/TOTP.php',
         'Luminova\\Security\\Validation' => __DIR__ . '/../../..' . '/system/Security/Validation.php',
         'Luminova\\Seo\\Schema' => __DIR__ . '/../../..' . '/system/Seo/Schema.php',

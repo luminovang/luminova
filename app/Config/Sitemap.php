@@ -38,6 +38,16 @@ final class Sitemap extends BaseConfig
     public int $scanSpeed = 5;
 
     /**
+     * Sets the sitemap scrap script's maximum execution time.
+     * 
+     * If the provided timeout exceeds the current limit it adjust the time.
+     * 
+     * @var int $maxExecutionTime The maximum execution time in seconds (0 for no limit).
+     * @since 3.5.3
+     */
+    public int $maxExecutionTime = 300;
+
+    /**
      * Sets the allowed scan start URI prefix for sitemap generation.
      *
      * This option allows you to restrict sitemap generation to URLs that match a specific prefix.
@@ -119,14 +129,20 @@ final class Sitemap extends BaseConfig
      *
      * This array defines specific URLs, URL patterns, or full URLs that should be ignored
      * when generating a sitemap. Ignored URLs will not be included in the sitemap XML output.
+     * 
+     * If pattern starts with '@', treat as raw regex otherwise convert glob pattern to regex.
      *
      * Each element in the array can be:
      * - A full URL to completely exclude from the sitemap.
      * - A URL pattern using wildcard characters (`*`) to match and exclude multiple URLs.
-     *   Example: `✸/admin/login/✸` will match any URL containing `✸/admin/login/✸` and exclude them.
      *
      * @var array<int,string> $ignoreUrls An array of URL patterns to exclude from sitemap generation.
-    */
+     * 
+     * @example - Patterns:
+     * 
+     * - `✸/admin/login/✸` will match any URL containing `https://example.com/any/admin/login/✸` and exclude them.
+     * - `@(^|.*\/)?scheme:\/\/.*` will match any URL containing `scheme://✸` and exclude them.
+     */
     public array $ignoreUrls = [
         '*/api/*'
     ];

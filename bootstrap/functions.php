@@ -47,6 +47,7 @@ if (!function_exists('root')) {
      * @param string $suffix Optional path to prepend to the root directory.
      * 
      * @return string Return application document root, and optional appended suffix.
+     * 
      * > The suffix must be a path not a filename if file name is passed, it return `/root/filename.foo/`.
      */
     function root(?string $suffix = null): string
@@ -179,6 +180,7 @@ if (!function_exists('start_url')) {
      * @return string Return the generated start URL of your project.
      * 
      * @example - If your application path is like: `/Some/Path/To/htdocs/my-project-path/public/` 
+     * 
      * It returns depending on your development environment:
      * - http://localhost:8080
      * - http://localhost/my-project-path/public/
@@ -213,6 +215,7 @@ if (!function_exists('absolute_url')) {
      * @return string Return the absolute URL of the specified path.
      * 
      * @example - If path is: /Applications/XAMPP/htdocs/project-path/public/asset/files/foo.text.
+     * 
      * It returns: http://localhost/project-path/public/asset/files/foo.text.
      */
     function absolute_url(string $path): string
@@ -226,19 +229,19 @@ if (!function_exists('func')) {
      * Return shared functions instance or a specific context instance.
      * If context is specified, return an instance of the specified context, 
      * otherwise return anonymous class which extends CoreFunction.
-     *
-     * @param string|null $context The context to return it's instance (default: null).
-     * @param mixed $arguments [, mixed $... ] Optional initialization arguments based on context.
-     *
-     * @return CoreFunction<\T>|class-object<\T>|mixed Returns an instance of functions, 
-     * object string, or boolean value depending on the context, otherwise null.
      * 
-     *  Supported contexts:
+     * **Supported contexts:**
      * 
      *  -   ip: - Return instance of 'Luminova\Functions\IP'.
      *  -   document:  Return instance of 'Luminova\Functions\IP'.
      *  -   tor:  Return instance of 'Luminova\Functions\Tor'.
      *  -   math:  Return instance of 'Luminova\Functions\Maths'.
+     *
+     * @param string|null $context The context to return it's instance (default: null).
+     * @param mixed $arguments [, mixed $... ] Optional initialization arguments based on context.
+     *
+     * @return CoreFunction<\T>|class-object<\T>|mixed Returns an instance of functions, 
+     *              object string, or boolean value depending on the context, otherwise null.
      *
      * @throws AppException If an error occurs.
      * @throws RuntimeException If unable to call method.
@@ -258,7 +261,7 @@ if (!function_exists('func')) {
 }
 
 if(!function_exists('kebab_case')){
-   /**
+    /**
 	 * Convert a string to kebab case.
 	 *
 	 * @param string $input The input string to convert.
@@ -345,6 +348,15 @@ if(!function_exists('uuid')){
 if(!function_exists('escape')){
     /**
      * Escapes a user input string or array of strings based on the specified context.
+     * 
+     * **Supported Context Values:**
+     *
+     * - html - Escape general HTML content. 
+     * - js -   Escape JavaScript code. 
+     * - css -  Escape CSS styles. 
+     * - url -  Escape URL, 
+     * - attr - Escape HTML attributes.
+     * - raw -  Raw output no escaping apply.
      *
      * @param string|array $input The string or array of strings to be escaped.
      *           For array, you can optionally use the keys of the array to specify the escape context for each value.
@@ -354,15 +366,6 @@ if(!function_exists('escape')){
      * @return array|string Return the escaped string or array of strings.
      * @throws InvalidArgumentException When an invalid, blank encoding is provided or unsupported encoding or empty string is provided.
      * @throws BadMethodCallException When an invalid context is called.
-     *
-     * Supported Context Values: 
-     *
-     * - html - Escape general HTML content. 
-     * - js -   Escape JavaScript code. 
-     * - css -  Escape CSS styles. 
-     * - url -  Escape URL, 
-     * - attr - Escape HTML attributes.
-     * - raw -  Raw output no escaping apply.
      */
     function escape(
         string|array $input, 
@@ -408,16 +411,9 @@ if(!function_exists('escape')){
 if(!function_exists('strict')){
     /**
 	 * Strictly sanitizes user input to protect against invalid characters and ensure it conforms to the expected type.
-	 *
-	 * @param string $string The input string to be sanitized.
-	 * @param string $type The expected data type (e.g., 'int', 'email', 'username').
-	 * @param string|null $replacement The symbol to replace disallowed characters or null to throw and exception (default: '').
-	 *
-	 * @return string|null Return the sanitized string or null if input doesn't match 
-	 * 			nor support replacing like `email` `url` `username` or `password`.
-	 * @throws InvalidArgumentException If the input contains invalid characters, or HTML tags, and no replacement is provided.
-	 * 
-	 * Available types:
+     * 
+     * **Available types:**
+     * 
 	 * - 'int'       : Only numeric characters (0-9) are allowed.
 	 * - 'numeric'   : Numeric characters, including negative numbers and decimals.
 	 * - 'key'       : Alphanumeric characters, underscores, and hyphens.
@@ -435,6 +431,14 @@ if(!function_exists('strict')){
 	 * - 'date'      : Alphanumeric characters, hyphen, slash, comma, and space (e.g., date format).
 	 * - 'uuid'      : A valid UUID format (e.g., 8-4-4-4-12 hexadecimal characters).
 	 * - 'default'   : Removes HTML tags.
+	 *
+	 * @param string $string The input string to be sanitized.
+	 * @param string $type The expected data type (e.g., 'int', 'email', 'username').
+	 * @param string|null $replacement The symbol to replace disallowed characters or null to throw and exception (default: '').
+	 *
+	 * @return string|null Return the sanitized string or null if input doesn't match 
+	 * 			nor support replacing like `email` `url` `username` or `password`.
+	 * @throws InvalidArgumentException If the input contains invalid characters, or HTML tags, and no replacement is provided.
 	 * 
 	 * > **Note:** 
 	 * > - HTML tags (including their content) are completely removed for the 'default' type.
@@ -474,14 +478,14 @@ if(!function_exists('ip_address')){
     /**
      * Get user IP address or return ip address information.
      *
-     * @param bool $get_info Weather to true return ip address information instead (default: false).
+     * @param bool $ipInfo Weather to true return ip address information instead (default: false).
      * @param array $options Optional data to return with IP information (default: none).
      * 
      * @return string|object|null Return client ip address or ip info, otherwise null if ip info not found.
      */
-    function ip_address(bool $get_info = false, array $options = []): string|object|null
+    function ip_address(bool $ipInfo = false, array $options = []): string|object|null
     {
-        return $get_info ? IP::info(null, $options): IP::get();
+        return $ipInfo ? IP::info(null, $options): IP::get();
     }
 }
 
@@ -558,7 +562,7 @@ if(!function_exists('factory')) {
      * @param bool $shared Allow shared instance creation (default: true).
      * @param mixed $arguments [, mixed $... ] Optional class constructor initialization arguments.
      * 
-     * * Factory Context Names: 
+     * **Factory Context Names:**
      * 
      * -   'task'           `\Luminova\Time\Task`
      * -   'session'        `\Luminova\Sessions\Session`
@@ -660,35 +664,35 @@ if(!function_exists('browser')) {
     /**
      * Tells what the user's browser is capable of.
      * 
-     * @param string|null $user_agent  The user agent string to analyze.
-     * @param bool $return Set the return type, if `instance` return userAgent class object otherwise return array or json object.
-     * @param bool $shared Allow shared instance creation (default: true).
-     * 
-     * @return array<string,mixed>|object<string,mixed>|UserAgent|false Return browser information.
-     * 
      * Return Types: 
      * 
      * - array: - Return browser information as array.
      * - object: - Return browser information as object.
      * - instance: - Return browser information instance.
+     * 
+     * @param string|null $userAgent  The user agent string to analyze.
+     * @param bool $return Set the return type, if `instance` return userAgent class object otherwise return array or json object.
+     * @param bool $shared Allow shared instance creation (default: true).
+     * 
+     * @return array<string,mixed>|object<string,mixed>|UserAgent|false Return browser information.
      */
-    function browser(?string $user_agent = null, string $return = 'object', bool $shared = true): mixed
+    function browser(?string $userAgent = null, string $return = 'object', bool $shared = true): mixed
     { 
         if($return === 'instance'){
-            return request($shared)->getUserAgent($user_agent);
+            return request($shared)->getUserAgent($userAgent);
         }
 
         $return = ($return === 'array');
 
         if (ini_get('browscap')) {
-            $browser = get_browser($user_agent, $return);
+            $browser = get_browser($userAgent, $return);
             
             if ($browser !== false) {
                 return $browser;
             }
         }
 
-        return request($shared)->getUserAgent()->parse($user_agent, $return);
+        return request($shared)->getUserAgent()->parse($userAgent, $return);
     }
 }
 
@@ -700,30 +704,33 @@ if(!function_exists('is_platform')) {
      * 
      * @return bool Return true if the platform is matching, false otherwise.
      * 
-     * Predefine OS Values:
+     * **Predefine OS Values:**
      * 
      * - mac - For macOS.
-     * - windows - For Windows os.
-     * - linux - For linux os.
-     * - freebsd - For FreeBSD os.
-     * - openbsd - For openbsd os.
-     * - solaris - For solaris os.
+     * - windows - For Windows OS.
+     * - linux - For Linux OS.
+     * - freebsd - For FreeBSD OS.
+     * - openbsd - For OpenBSD OS.
+     * - bsd - For BSD OS.
+     * - solaris - For Solaris OS.
      * - aws - For AWS OpsWorks.
+     * - azure - For Azure environment.
      * - etc.
      */
     function is_platform(string $os): bool
     { 
         $os = strtolower($os);
-
-        return match($os) {
-            'mac' => str_contains(PHP_OS, 'Darwin'),
-            'windows' => strtoupper(substr(PHP_OS, 0, 3)) === 'WIN',
-            'freebsd' => strtoupper(PHP_OS) === 'FREEBSD',
-            'openbsd' => strtoupper(PHP_OS) === 'OPENBSD',
-            'solaris' => strtoupper(PHP_OS) === 'SOLARIS',
-            'linux' => strtoupper(PHP_OS) === 'LINUX',
+        return match ($os) {
+            'mac' => PHP_OS_FAMILY === 'Darwin',
+            'windows' => PHP_OS_FAMILY === 'Windows',
+            'freebsd' => PHP_OS === 'FreeBSD',
+            'openbsd' => PHP_OS === 'OpenBSD',
+            'bsd' => PHP_OS_FAMILY === 'BSD',
+            'solaris' => PHP_OS_FAMILY === 'Solaris',
+            'linux' => PHP_OS_FAMILY === 'Linux',
             'aws' => isset($_ENV['AWS_EXECUTION_ENV']),
-            default => stripos(php_uname('s'), $os) !== false
+            'azure' => isset($_ENV['WEBSITE_INSTANCE_ID']) || isset($_ENV['AZURE_FUNCTIONS_ENVIRONMENT']),
+            default => str_contains(php_uname('s'), $os),
         };
     }
 }
@@ -876,23 +883,24 @@ if (!function_exists('path')) {
     /**
      * Get system or application path, converted to `unix` or `windows` directory separator style.
      * 
-     * @param string $file Path file name to return.
+     * **Available Paths:**
      * 
-     * Storage Context Names.
-     *      - app.
-     *      - system.
-     *      - plugins.
-     *      - library.
-     *      - controllers.
-     *      - writeable. 
-     *      - logs.
-     *      - caches.
-     *      - public.
-     *      - assets.
-     *      - views.
-     *      - routes.
-     *      - languages.
-     *      - services
+     * - `app` - Application root directory.
+     * - `system` - Luminova Framework and third-party plugins root directory.
+     * - `plugins` - Third-party plugins root directory.
+     * - `library` - Custom libraries root directory.
+     * - `controllers` - Application controllers directory.
+     * - `writable` - Application writable directory.
+     * - `logs` - Application logs directory.
+     * - `caches` - Application cache directory.
+     * - `public` - Application public directory (front controller).
+     * - `assets` - Application public assets directory.
+     * - `views` - Application template views directory.
+     * - `routes` - Application method-based routes directory.
+     * - `languages` - Application language pack directory.
+     * - `services` - Application cached services directory.
+     * 
+     * @param string $file Path file name to return.
      * 
      * @return string Return directory path, windows, unix or windows style path. 
      */
@@ -907,12 +915,12 @@ if (!function_exists('get_column')) {
      * Return the values from a single column in the input array or an object.
      * 
      * @param array|object $from Array or an object to extract column values from.
-     * @param null|string|int $property The column property key to extract.
+     * @param string|int|null $property The column property key to extract.
      * @param string|int|null $index An optional column to use as the index/keys for the returned array.
      * 
      * @return array Returns an array of values representing a single column from the input array or object.
      */
-    function get_column(array|object $from, null|string|int $property, null|string|int $index = null): array 
+    function get_column(array|object $from, string|int|null $property, string|int|null $index = null): array 
     {
         if (is_array($from)) {
             return array_column($from, $property, $index);
@@ -1112,7 +1120,7 @@ if (!function_exists('list_to_array')) {
 }
 
 if (!function_exists('list_in_array')) {
-   /**
+    /**
      * Check if string list exist in array.
      * If any of the list doesn't exist in array it will return false
      * First it will have to convert the list to array using `list_to_array`.
@@ -1600,23 +1608,33 @@ if (!function_exists('layout')) {
 
 if (!function_exists('get_mime')) {
     /**
-     * Detect MIME Content-type for a file.
+     * Detect the MIME type of a file or raw data.
+     *
+     * If the input string is a path to an existing file, it uses finfo_file(),
+     * otherwise it treats the input as raw binary and uses finfo_buffer().
+     *
+     * @param string $input File path or raw binary string to extract mime from.
+     * @param string|null $magicDatabase  Optional path to a custom magic database (e.g, \path\custom.magic).
      * 
-     * @param string $filename The file to extract its mime.
-     * @param string|null $magic_database Optional magic database for custom mime (e.g, \path\custom.magic).
-     * 
-     * @return string|false Return the content type in MIME format, otherwise false.
+     * @return string Return the detected MIME type (e.g. "image/jpeg"), or false if detection fails.
      */
-    function get_mime(string $filename, ?string $magic_database = null): string|bool
+    function get_mime(string $input, ?string $magicDatabase = null): string|bool
     {
-        $mime = mime_content_type($filename);
-        
-        if (!$mime && ($finfo = finfo_open(FILEINFO_MIME_TYPE, $magic_database)) !== false) {
-            $mime = finfo_file($finfo, $filename);
-            finfo_close($finfo);
-
-            return $mime;
+        if($input === ''){
+            return 'text/plain';
         }
+
+        $finfo = new finfo(FILEINFO_MIME_TYPE, $magicDatabase);
+
+        if ($finfo === false) {
+            return false;
+        }
+
+        $mime = is_file($input)
+            ? ($finfo->file($input) ?: mime_content_type($input))
+            : $finfo->buffer($input);
+        
+        finfo_close($finfo);
 
         return $mime;
     }
@@ -1760,7 +1778,7 @@ if (!function_exists('array_merge_recursive_distinct')) {
 }
 
 if (!function_exists('array_merge_recursive_replace')) {
-   /**
+    /**
      * Merges multiple arrays recursively. 
      * When two arrays share the same key, values from the second array overwrite those from the first. 
      * Numeric keys are appended only if the value doesn't already exist in the array.
@@ -1828,14 +1846,14 @@ if (!function_exists('array_merge_result')) {
      *                       This variable is passed by reference and may be modified.
      * @param mixed $response The response variable to merge with results. It can be an array, string, 
      *                       or other types.
-     * @param bool $preserve_nested Optional. Determines whether to preserve the nested structure 
+     * @param bool $preserveNested Optional. Determines whether to preserve the nested structure 
      *                               of arrays when merging (default: true).
      *
      * @return void
      * @since 3.3.4
      * @see https://luminova.ng/docs/3.3.0/global/functions#lmv-docs-array-merge-result
      */
-    function array_merge_result(mixed &$results, mixed $response, bool $preserve_nested = true): void
+    function array_merge_result(mixed &$results, mixed $response, bool $preserveNested = true): void
     {
         if ($results === null || $results === []) {
             $results = $response;
@@ -1843,7 +1861,7 @@ if (!function_exists('array_merge_result')) {
         }
         
         if (is_array($results)) {
-            if (!$preserve_nested && is_array($response)) {
+            if (!$preserveNested && is_array($response)) {
                 $results = array_merge($results, $response);
                 return;
             }
@@ -1854,10 +1872,7 @@ if (!function_exists('array_merge_result')) {
         
         if (is_string($results)) {
             $results = is_array($response) 
-                ? ($preserve_nested 
-                    ? array_merge([$results], [$response]) 
-                    : array_merge([$results], $response)
-                )
+                ? array_merge([$results], $preserveNested ? [$response] : $response) 
                 : [$results, $response];
 
             return;
@@ -1865,7 +1880,7 @@ if (!function_exists('array_merge_result')) {
 
         $results = [$results];
 
-        if (!$preserve_nested && is_array($response)) {
+        if (!$preserveNested && is_array($response)) {
             $results = array_merge($results, $response);
             return;
         }

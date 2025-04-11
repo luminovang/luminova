@@ -24,6 +24,65 @@ defined('TRIM_DS') || define('TRIM_DS', '/\\');
  */
 defined('APP_ROOT') || define('APP_ROOT', dirname(__DIR__, 1) . DIRECTORY_SEPARATOR);
 
+/**
+ * Executes a PHP function dynamically, checking if it's disabled before execution.
+ *
+ * This function is useful when you need to call a PHP function dynamically, 
+ * but you want to ensure that the function is not disabled.
+ *
+ * @param string $function The name of the PHP function to execute.
+ * @param mixed ...$arguments Any optional arguments to pass to the PHP function.
+ *
+ * @return mixed Return the result of the executed PHP function, or false if the function is disabled.
+ *
+ * @example - Call the 'set_time_limit' function dynamically:
+ * 
+ * ```php
+ * $limit = set_function('set_time_limit', 300);
+ * 
+ * if($limit === false){
+ *      echo "Execution limit is disabled";
+ * }
+ * ```
+ */
+function set_function(string $function, mixed ...$arguments): mixed 
+{
+    static $disables = null;
+    $disables ??= ini_get('disable_functions');
+
+    if ($disables && str_contains($disables, $function) ) {
+       return false;
+    }
+
+    return $function(...$arguments);
+}
+
+/**
+ * Sets the script's maximum execution time if the provided timeout exceeds the current limit.
+ *
+ * This function checks the current `max_execution_time` and compares it with the provided timeout. 
+ * If the timeout is greater than the current limit and the `set_time_limit` function is not disabled, 
+ * it updates the execution time to the new value.
+ *
+ * @param int $timeout The maximum execution time in seconds.
+ *
+ * @return bool Returns true if the execution time is successfully set, false otherwise.
+ */
+function set_max_execution_time(int $timeout): bool 
+{
+    if (PHP_OS_FAMILY === 'Windows') {
+        return false;
+    }
+
+    $maxExecution = (int) ini_get('max_execution_time');
+
+    if (($maxExecution !== 0 && $timeout > $maxExecution) || ($maxExecution > 0 && $timeout === 0)) {
+        return set_function('set_time_limit', $timeout);
+    }
+
+    return false;
+}
+
 if(!function_exists('setenv')){
     /**
      * Sets an environment variable, optionally saving it to the `.env` file.
@@ -473,16 +532,16 @@ error_reporting(PRODUCTION ?
 ini_set('display_errors', (!PRODUCTION && env('debug.display.errors', false)) ? '1' : '0');
 
 /**
- * Set default timezone
- */
-date_default_timezone_set(env('app.timezone', 'UTC'));
-
-/**
  * Limits the maximum execution time
  */
-set_time_limit((int) env('script.execution.limit', 30));
+set_max_execution_time((int) env('script.execution.limit', 30));
+
+/**
+ * Set default timezone
+ */
+set_function('date_default_timezone_set', env('app.timezone', 'UTC'));
 
 /**
  * Set whether a client disconnect should abort script execution
  */
-ignore_user_abort((bool) env('script.ignore.abort', false));
+set_function('ignore_user_abort', (bool) env('script.ignore.abort', false));
