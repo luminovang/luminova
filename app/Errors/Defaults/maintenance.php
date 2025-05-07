@@ -8,7 +8,7 @@
     <meta http-equiv="Cache-Control" content="no-store, max-age=0, no-cache"/>
     <link rel="shortcut icon" type="image/png" href="./favicon.png">
     <style>
-        <?= preg_replace('#[\r\n\t ]+#', ' ', file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'maintenance.css')) ?>
+        <?= preg_replace('#[\r\n\t ]+#', ' ', file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'maintenance.css')) ?>
     </style>
 </head>
 <body>

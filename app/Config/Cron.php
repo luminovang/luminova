@@ -14,6 +14,8 @@ use \Luminova\Core\CoreCronTasks;
 final class Cron extends CoreCronTasks
 {
     /**
+     * {@inheritdoc}
+     * 
      * Schedule the task for execution.
      */
     protected function schedule(): void 

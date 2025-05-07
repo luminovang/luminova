@@ -90,9 +90,9 @@ namespace App\Controllers;
 use Luminova\Base\BaseController;
 use Luminova\Attributes\Route;
 use Luminova\Attributes\Error;
-use App\Controllers\Errors\ViewErrors;
+use App\Errors\Controllers\Views;
 
-#[Error('api', onError: [ViewErrors::class, 'onApiError'])]
+#[Error('api', onError: [Views::class, 'onApiError'])]
 class BookController extends BaseController 
 {
     #[Route('/api/books', methods: ['POST'])]
@@ -153,9 +153,9 @@ namespace App\Controllers;
 use Luminova\Base\BaseViewController;
 use Luminova\Attributes\Route;
 use Luminova\Attributes\Error;
-use App\Controllers\Errors\ViewErrors;
+use App\Errors\Controllers\Views;
 
-#[Error(onError: [ViewErrors::class, 'onWebError'])]
+#[Error(onError: [Views::class, 'onWebError'])]
 class BookController extends BaseViewController 
 {
     #[Route('/books', methods: ['GET'])]
@@ -193,9 +193,9 @@ use Luminova\Base\BaseController;
 use Luminova\Email\Mailer;
 use Luminova\Attributes\Route;
 use Luminova\Attributes\Error;
-use App\Controllers\Errors\ViewErrors;
+use App\Errors\Controllers\Views;
 
-#[Error(onError: [ViewErrors::class, 'onWebError'])]
+#[Error(onError: [Views::class, 'onWebError'])]
 class BookController extends BaseController
 {
     #[Route('/books/send', methods: ['GET'])]
@@ -244,9 +244,9 @@ namespace App\Controllers;
 use Luminova\Base\BaseViewController;
 use Luminova\Attributes\Route;
 use Luminova\Attributes\Error;
-use App\Controllers\Errors\ViewErrors;
+use App\Errors\Controllers\Views;
 
-#[Error(onError: [ViewErrors::class, 'onWebError'])]
+#[Error(onError: [Views::class, 'onWebError'])]
 class MyController extends BaseViewController 
 {
     #[Route('/books', methods: ['GET'])]
@@ -303,9 +303,9 @@ namespace App\Controllers;
 use Luminova\Base\BaseViewController;
 use Luminova\Attributes\Route;
 use Luminova\Attributes\Error;
-use App\Controllers\Errors\ViewErrors;
+use App\Errors\Controllers\Views;
 
-#[Error(onError: [ViewErrors::class, 'onWebError'])]
+#[Error(onError: [Views::class, 'onWebError'])]
 class MyController extends BaseViewController 
 {
     #[Route('/books', methods: ['GET'])]
@@ -339,10 +339,10 @@ namespace App\Controllers;
 use Luminova\Base\BaseViewController;
 use Luminova\Attributes\Route;
 use Luminova\Attributes\Error;
-use App\Controllers\Errors\ViewErrors;
+use App\Errors\Controllers\Views;
 use Luminova\Core\CoreApplication;
 
-#[Error(onError: [ViewErrors::class, 'onWebError'])]
+#[Error(onError: [Views::class, 'onWebError'])]
 class MyController extends BaseViewController 
 {
     #[Route('/books', methods: ['GET'])]

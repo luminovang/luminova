@@ -48,7 +48,7 @@
     </div>
 
     <div class="info">
-        <h1>Welcome to {call_static->foundation method='copyright'}</h1>
+        <h1>Welcome to {call_static->luminova method='copyright'}</h1>
         <h2>Simple framework built for speed and keeping your existing coding skills going.</h2>
         <p>Environment: {$smarty.const.ENVIRONMENT}</p>
     </div>

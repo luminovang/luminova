@@ -10,7 +10,7 @@
 namespace App\Config\Templates\Smarty;
 
 use \Luminova\Exceptions\BadMethodCallException;
-use \Luminova\Application\Foundation;
+use \Luminova\Luminova;
 
 final class Classes
 {
@@ -30,7 +30,7 @@ final class Classes
      * @var array<string,class-string> $classes.
     */
     private static array $classes = [
-        'foundation' => Foundation::class
+        'luminova' => Luminova::class
     ];
 
     /**
@@ -66,20 +66,20 @@ final class Classes
      * This implementation allows you to call any class, function or access constant variables 
      * Without having to manfully register it.
      * 
-     * @example - {call_static->foundation method='copyright'}
+     * @example - {call_static->luminova method='copyright'}
      * @example - {call_static->instance class='\App\File\Caller' method='copyright'}
      * @example - {call_func->request param='copyright'}
      * @example - {get_const->CONSTANT}
      * @example - {call_new->request param='copyright'}
      * @example - {call_new->instance class='\App\File\Caller'}
-     * @example - {call_new->instance class='\Luminova\Application\Foundation' assign='foundation'}
-     * @example - {new->foundation assign='foundation'} 
-     *          - Access {$foundation->version()}
+     * @example - {call_new->instance class='\Luminova\Luminova' assign='luminova'}
+     * @example - {new->luminova assign='luminova'} 
+     *          - Access {$luminova->version()}
      * 
      * @param string $context The caller context.
-     * @param array<string,class-string<\T>> $classes The registered classes.
+     * @param array<string,string<\T>> $classes The registered classes.
      * 
-     * @return class-object<anonymous> Return anonymous class object.
+     * @return object<anonymous> Return anonymous class object.
     */
     private static function newInstance(string $context): object 
     {

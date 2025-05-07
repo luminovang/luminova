@@ -10,7 +10,7 @@
  */
 namespace Luminova\Debugger; 
 
-use \Luminova\Application\Foundation;
+use \Luminova\Luminova;
 use \Luminova\Functions\Maths;
 use \Luminova\Functions\IP;
 use \Luminova\Command\Terminal;
@@ -90,7 +90,7 @@ final class Performance
      */
     public static function stop(?string $style = null, ?array $context = null): void
     {
-        $isApi = Foundation::isApiPrefix();
+        $isApi = Luminova::isApiPrefix();
         if($isApi && !env('debug.api.performance.profiling', false)){
             return;
         }
@@ -99,7 +99,7 @@ final class Performance
         self::$endMemory = memory_get_usage();
         self::$filesLoaded = get_included_files();
 
-        if(Foundation::isCommand()){
+        if(Luminova::isCommand()){
             self::showCommandPerformanceMetrics($context);
             return;
         }
@@ -108,13 +108,15 @@ final class Performance
         $classInfo = Router::getClassInfo();
  
         $info = [
-            'Framework' => Foundation::copyright(),
+            'Framework' => Luminova::copyright(),
             'PHP Version' => PHP_VERSION,
             'IP Address' => self::esc(IP::get()),
             'Environment' => ENVIRONMENT,
-            'Project Id' => PROJECT_ID,
-            'Class Controller' => (!empty($classInfo['namespace'])) ? $classInfo['namespace'] . '->' . $classInfo['method'] . '()' : 'N/A',
-            'Cache File Id' =>  env('page.caching', false) ? Foundation::getCacheId() . '.lmv' : 'N/A',
+            'Script Path' => CONTROLLER_SCRIPT_PATH,
+            'Class Controller' => (!empty($classInfo['namespace'])) 
+                ? $classInfo['namespace'] . '->' . $classInfo['method'] . '()' 
+                : 'N/A',
+            'Cache File Id' =>  env('page.caching', false) ? Luminova::getCacheId() . '.lmv' : 'N/A',
             'Server Software' => self::esc($_SERVER['SERVER_SOFTWARE'] ?? 'Not Set'),
             'UserAgent' => self::esc(self::$request->getUserAgent()->toString()),
             'Method' => self::esc(self::$request->getMethod()?:'N/A'),
@@ -159,6 +161,7 @@ final class Performance
         // Log the summary of included files by category
         $logData['included_files_summary'] = [
             'FrameworkModules' => $categories['Module'],
+            'ComposerModules' => $categories['Composer'],
             'ThirdPartyModules' => $categories['ThirdParty'],
             'Controllers' => $categories['Controller'],
             'OtherModules' => $categories['Others']
@@ -194,11 +197,11 @@ final class Performance
 
         // Display basic system information
         $info = [
-            'Framework' => Foundation::copyright(),
-            'NovaKit Version' => Foundation::NOVAKIT_VERSION,
+            'Framework' => Luminova::copyright(),
+            'NovaKit Version' => Luminova::NOVAKIT_VERSION,
             'PHP Version' => PHP_VERSION,
             'Environment' => ENVIRONMENT,
-            'Project Id' => PROJECT_ID,
+            'Script Path' => CONTROLLER_SCRIPT_PATH,
             'Class Controller' => (!empty($classInfo['namespace'])) ? $classInfo['namespace'] . '->' . $classInfo['method'] . '()' : 'N/A',
             'Server Software' => self::esc($_SERVER['SERVER_SOFTWARE'] ?? 'Not Set'),
             'Method' => 'CLI',
@@ -272,6 +275,10 @@ final class Performance
             [
                 'Origination' => 'Framework Modules', 
                 'Total' => $categories['Module']
+            ],
+            [
+                'Origination' => 'Composer Autoload Modules', 
+                'Total' => $categories['Composer']
             ],
             [
                 'Origination' => 'Third Party Modules', 
@@ -410,6 +417,7 @@ final class Performance
             'Module' => 0, 
             'Controller' => 0, 
             'ThirdParty' => 0, 
+            'Composer' => 0,
             'Others' => 0
         ];
         $list = [];
@@ -442,7 +450,13 @@ final class Performance
                 str_starts_with($filtered, 'public/index.php') || 
                 str_starts_with($filtered, 'bootstrap/')
             ) {
-                if (str_starts_with($filtered, 'system/plugins')) {
+                if (
+                    str_starts_with($filtered, 'system/plugins/composer') || 
+                    str_ends_with($filtered, 'system/plugins/autoload.php')
+                ) {
+                    $category = 'Composer';
+                    $color = '#e66c13';
+                }elseif (str_starts_with($filtered, 'system/plugins')) {
                     $category = 'ThirdParty';
                     $color = '#af1b2e';
                 } else {
@@ -515,7 +529,11 @@ final class Performance
                         <td style='text-align:center;'><span style='background-color:#057d14; padding: 0 1rem; border-radius: 8px; color: #ccc; font-weight: bold;'>{$categories['Module']}</span></td>
                     </tr>
                     <tr>
-                        <td style="padding: .5rem 5px;"><strong>Composer and Third Party Modules:</strong></td>
+                        <td style="padding: .5rem 5px;"><strong>Composer Autoload Modules:</strong></td>
+                        <td style='text-align:center;'><span style='background-color:#af1b2e; padding: 0 1rem; border-radius: 8px; color: #ccc; font-weight: bold;'>{$categories['Composer']}</span></td>
+                    </tr>
+                    <tr>
+                        <td style="padding: .5rem 5px;"><strong>Third Party Modules:</strong></td>
                         <td style='text-align:center;'><span style='background-color:#af1b2e; padding: 0 1rem; border-radius: 8px; color: #ccc; font-weight: bold;'>{$categories['ThirdParty']}</span></td>
                     </tr>
                     <tr>

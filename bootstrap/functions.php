@@ -10,13 +10,14 @@ declare(strict_types=1);
  * @link https://luminova.ng
  * @see https://luminova.ng/docs/0.0.0/global/functions
  */
+use \Luminova\Luminova;
 use \App\Application;
 use \App\Config\Files;
 use \Luminova\Core\CoreFunction;
-use \Luminova\Application\Foundation;
+use \Luminova\Core\CoreApplication;
 use \Luminova\Application\Factory;
 use \Luminova\Application\Services;
-use \Luminova\Arrays\Lists;
+use \Luminova\Arrays\Listify;
 use \Luminova\Storages\FileManager;
 use \Luminova\Cache\FileCache;
 use \Luminova\Cache\MemoryCache;
@@ -32,6 +33,7 @@ use \Luminova\Interface\HttpRequestInterface;
 use \Luminova\Interface\ViewResponseInterface;
 use \Luminova\Interface\SessionManagerInterface;
 use \Luminova\Interface\ValidationInterface;
+use \Luminova\Interface\LazyInterface;
 use \Luminova\Template\Response;
 use \Luminova\Template\Layout;
 use \Luminova\Exceptions\InvalidArgumentException;
@@ -88,7 +90,7 @@ if (!function_exists('filter_paths')) {
      */
     function filter_paths(string $path): string 
     {
-        return Foundation::filterPath($path);
+        return Luminova::filterPath($path);
     }
 }
 
@@ -99,7 +101,7 @@ if (!function_exists('app')) {
      * @param bool $shared Return a shared instance (default: true).
      * @param mixed ...$arguments Optional arguments to pass to the application constructor.
      * 
-     * @return Application Returns the shared instance if $shared is true,
+     * @return CoreApplication<Application,LazyInterface> Returns the shared instance if $shared is true,
      *                     or a new instance if $shared is false.
      * 
      * @example Usage example:
@@ -125,7 +127,7 @@ if (!function_exists('request')) {
      *
      * @param bool $shared Return a shared instance (default: true).
      * 
-     * @return HttpRequestInterface Returns an incoming HTTP request object.
+     * @return Request<HttpRequestInterface,LazyInterface> Returns an incoming HTTP request object.
      */
     function request(bool $shared = true): HttpRequestInterface 
     {
@@ -150,7 +152,7 @@ if (!function_exists('response')) {
      * @param array<string,mixed>|null $headers Additional response headers (default: null).
      * @param bool $shared Weather to return shared instance (default: true).
      *
-     * @return ViewResponseInterface Return view controller response object. 
+     * @return Response<ViewResponseInterface> Return view controller response object. 
      */
     function response(
         int $status = 200, 
@@ -202,7 +204,7 @@ if (!function_exists('start_url')) {
             ?? $_SERVER['SERVER_ADDR'] 
             ?? '';
 
-        return URL_SCHEME . '://' . $hostname . '/' . PROJECT_ID . $suffix;
+        return URL_SCHEME . '://' . $hostname . '/' . CONTROLLER_SCRIPT_PATH . $suffix;
     }
 }
 
@@ -220,7 +222,7 @@ if (!function_exists('absolute_url')) {
      */
     function absolute_url(string $path): string
     {
-        return Foundation::toAbsoluteUrl($path);
+        return Luminova::toAbsoluteUrl($path);
     }
 }
 
@@ -240,7 +242,7 @@ if (!function_exists('func')) {
      * @param string|null $context The context to return it's instance (default: null).
      * @param mixed $arguments [, mixed $... ] Optional initialization arguments based on context.
      *
-     * @return CoreFunction<\T>|class-object<\T>|mixed Returns an instance of functions, 
+     * @return CoreFunction<\T>|object<\T>|mixed Returns an instance of functions, 
      *              object string, or boolean value depending on the context, otherwise null.
      *
      * @throws AppException If an error occurs.
@@ -262,15 +264,22 @@ if (!function_exists('func')) {
 
 if(!function_exists('kebab_case')){
     /**
-	 * Convert a string to kebab case.
-	 *
-	 * @param string $input The input string to convert.
-     * @param bool $lower Weather to convert to lower case (default: true).
-	 * 
-	 * @return string Return the kebab-cased string.
-	 */
+     * Convert a string to kebab-case format.
+     *
+     * Replaces all non-letter and non-digit characters with hyphens.
+     * Optionally converts the entire string to lowercase.
+     *
+     * @param string $input The input string to convert.
+     * @param bool $toLower Whether to convert the result to lowercase (default: true).
+     *
+     * @return string The kebab-cased version of the input string.
+     */
     function kebab_case(string $input, bool $toLower = true): string 
     {
+        if($input === ''){
+            return '';
+        }
+
         $input = preg_replace('/[^\p{L}\p{N}]+/u', ' ', $input);
         $input = trim(str_replace(' ', '-', $input), '-');
 
@@ -278,31 +287,80 @@ if(!function_exists('kebab_case')){
     }
 }
 
-if(!function_exists('uppercase_words')){
+if (!function_exists('camel_case')) {
     /**
-     * Uppercase the first character of each word in a string, 
-     * it also handles underscores (`_`) and hyphens (`-`), converting them to spaces before applying capitalization.
+     * Convert a string to camel case.
      *
-     * @param string $string The input string to convert.
-     *
-     * @return string Return the string with the first character of each word capitalized.
+     * @param string $input The string to convert.
+     * 
+     * @return string Return the string converted to camel case.
      */
-    function uppercase_words(string $string): string
+    function camel_case(string $input): string
     {
-        if($string === ''){
+        $input = str_replace(['-', ' '], '_', $input);
+        $parts = explode('_', $input);
+
+        $camelCase = '';
+        $firstPart = true;
+
+        foreach ($parts as $part) {
+            $camelCase .= $firstPart ? $part : ucfirst($part);
+            $firstPart = false;
+        }
+        
+        return $camelCase;
+    }    
+}
+
+if(!function_exists('pascal_case')){
+    /**
+     * Convert a string to PascalCase format.
+     *
+     * Replaces spaces, underscores, and hyphens with word boundaries,
+     * capitalizes each word, and removes all delimiters.
+     *
+     * @param string $input The input string to convert.
+     *
+     * @return string The PascalCase version of the input string.
+     */
+    function pascal_case(string $input): string
+    {
+        if($input === ''){
             return '';
         }
 
-        $string = strtolower($string);
+        $input = preg_replace('/[_\-\s]+/', ' ', strtolower($input));
+        return str_replace(' ', '', ucwords($input));
+    }
+}
+
+if(!function_exists('uppercase_words')){
+    /**
+     * Capitalize the first letter of each word in a string.
+     *
+     * Preserves underscores, hyphens, and spaces as delimiters,
+     * and capitalizes the letter that follows each one.
+     *
+     * @param string $input The input string to convert.
+     *
+     * @return string Return the input string with the first character of each word capitalized.
+     */
+    function uppercase_words(string $input): string
+    {
+        if($input === ''){
+            return '';
+        }
+
+        $input = strtolower($input);
         
-        if (strpbrk($string[0], '_- ') === false) {
-            $string[0] = strtoupper($string[0]);
+        if (strpbrk($input[0], '_- ') === false) {
+            $input[0] = strtoupper($input[0]);
         }
 
         return preg_replace_callback(
             '/([-_ ])+(\w)/',
             fn($matches) => $matches[1] . strtoupper($matches[2]),
-            $string
+            $input
         );
     }
 }
@@ -520,9 +578,9 @@ if(!function_exists('session')) {
      *
      * @param string $key Optional key to retrieve the data (default: null).
      * @param bool $shared Weather to use shared instance (default: true).
-     * @param class-object<SessionManagerInterface> $manager The session manager interface to use (default: SessionManager).
+     * @param object<SessionManagerInterface> $manager The session manager interface to use (default: SessionManager).
      *
-     * @return Session|mixed Return session instance or value if key is present.
+     * @return Session<LazyInterface>|mixed Return session instance or value if key is present.
      */
     function session(?string $key = null, bool $shared = true, ?SessionManagerInterface $manager = null): mixed
     {
@@ -541,7 +599,7 @@ if (!function_exists('cookie')) {
      * @param array  $options Options to be passed to the cookie.
      * @param bool $shared Use shared instance (default: false).
      * 
-     * @return Cookie Return cookie instance.
+     * @return Cookie<Luminova\Interface\CookieInterface,LazyInterface> Return cookie instance.
      */
     function cookie(
         string $name, 
@@ -581,7 +639,7 @@ if(!function_exists('factory')) {
      * -   'notification'   `\Luminova\Notifications\Firebase\Notification`,
      * -   'caller'         `\Luminova\Application\Caller`
      * 
-     * @return class-object<\T>|Factory|null Return instance of factory or instance of factory class, otherwise null.
+     * @return object<\T>|Factory|null Return instance of factory or instance of factory class, otherwise null.
      * @throws AppException Throws an exception if factory context does not exist or error occurs.
      * @example - using factory to load class like: `$config = factory('config');`.
      * 
@@ -611,7 +669,7 @@ if(!function_exists('service')) {
      * @param bool $serialize Allow object serialization (default: false).
      * @param mixed $arguments [, mixed $... ] Service initialization arguments.
      * 
-     * @return class-object<\T>|Services|null Return service class instance or instance of service class.
+     * @return object<\T>|Services|null Return service class instance or instance of service class.
      * @throws AppException Throws an exception if service does not exist or error occurs.
      * 
      * @example - Get config `$config = service('Config');`.
@@ -1112,7 +1170,7 @@ if (!function_exists('list_to_array')) {
         }
         
         try{
-            return Lists::toArray($list);
+            return Listify::toArray($list);
         }catch(Throwable){
             return false;
         }
@@ -1168,7 +1226,7 @@ if (!function_exists('is_list')) {
      */
     function is_list(string $input): bool 
     {
-        return $input ? Lists::isList($input) : false;
+        return $input ? Listify::isList($input) : false;
     }
 }
 
@@ -1340,21 +1398,13 @@ if (!function_exists('get_class_name')) {
     /**
      * Get class basename from namespace or object.
      * 
-     * @param string|class-object<\T> $from Class name or class object.
+     * @param string|object<\T> $from Class namespace or class object.
      * 
      * @return string Return the class basename.
      */
     function get_class_name(string|object $from): string 
     {
-        if (is_string($from)) {
-            if(($pos = strrpos($from, '\\')) !== false){
-                return substr($from, $pos + 1);
-            }
-
-            return $from;
-        }
-
-        return get_class_name(get_class($from));
+        return Luminova::getClassBaseNames(is_string($from) ? $from : get_class($from));
     }
 }
 
@@ -1366,7 +1416,7 @@ if (!function_exists('is_command')) {
      */
     function is_command(): bool
     {
-        return Foundation::isCommand();
+        return Luminova::isCommand();
     }
 }
 
@@ -1451,14 +1501,25 @@ if (!function_exists('status_code')) {
 
 if (!function_exists('is_utf8')) {
     /**
-     * Checks if a given string is UTF-8 encoded.
+     * Checks if a given string is valid UTF-8.
      *
      * @param string $input The string to check for UTF-8 encoding.
      * 
-     * @return bool Returns true if the string is UTF-8 encoded, false otherwise.
+     * @return bool Returns true if the string is UTF-8, false otherwise.
      */
     function is_utf8(string $input): bool 
     {
+        if($input === ''){
+            return true;
+        }
+
+        static $mbstring = null;
+        $mbstring ??= function_exists('mb_check_encoding');
+
+        if($mbstring){
+            return mb_check_encoding($input, 'UTF-8');
+        }
+
         return preg_match('//u', $input) === 1;
     }
 }
@@ -1531,31 +1592,6 @@ if (!function_exists('asset')) {
     }
 }
 
-if (!function_exists('camel_case')) {
-    /**
-     * Convert a string to camel case.
-     *
-     * @param string $input The string to convert.
-     * 
-     * @return string The string converted to camel case.
-     */
-    function camel_case(string $input): string
-    {
-        $input = str_replace(['-', ' '], '_', $input);
-        $parts = explode('_', $input);
-
-        $camelCase = '';
-        $firstPart = true;
-
-        foreach ($parts as $part) {
-            $camelCase .= $firstPart ? $part : ucfirst($part);
-            $firstPart = false;
-        }
-        
-        return $camelCase;
-    }    
-}
-
 if (!function_exists('string_length')) {
     /**
      * Calculate string length based on different charsets.
@@ -1563,17 +1599,22 @@ if (!function_exists('string_length')) {
      * @param string $content The content to calculate length for.
      * @param string|null $charset The character set of the content.
      * 
-     * @return int The calculated Content-Length.
+     * @return int Return the calculated Content-Length.
      */
     function string_length(string $content, ?string $charset = null): int 
     {
-        return match(strtolower($charset ?? env('app.charset', 'utf-8'))){
+        if ($content === '') {
+            return 0;
+        }
+
+        $charset = strtolower(trim($charset ?? env('app.charset', 'utf-8')));
+
+        return match ($charset) {
             'utf-8', 'utf8' => mb_strlen($content, '8bit'),
-            'iso-8859-1', 'latin1' => strlen($content),
-            'windows-1252' => strlen(mb_convert_encoding($content, 'ISO-8859-1', 'UTF-8')),
+            'iso-8859-1', 'latin1', 'windows-1252' => strlen($content),
             default => is_utf8($content) 
                 ? mb_strlen($content, '8bit') 
-                : strlen($content),
+                : strlen(mb_convert_encoding($content, 'iso-8859-1', 'utf-8') ?: $content),
         };
     }
 }
@@ -1966,7 +2007,7 @@ if (!function_exists('class_exists_cached')) {
      * checks and speeds up subsequent requests.
      *
      * @param string $class The name of the class to check for existence.
-     * @param bool $autoload Optional. Whether to check for class existence with autoloading (default: true).
+     * @param bool $autoload Optional. Whether to check for class existence with autoload (default: true).
      * 
      * @return bool Returns true if the class exists, false otherwise.
      */

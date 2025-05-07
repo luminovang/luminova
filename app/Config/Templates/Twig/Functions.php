@@ -10,7 +10,7 @@
 namespace App\Config\Templates\Twig;
 
 use \Twig\TwigFunction;
-use \Luminova\Application\Foundation;
+use \Luminova\Luminova;
 
 trait Functions
 {
@@ -18,10 +18,10 @@ trait Functions
      * Register your static classes or class name string.
      * Do not initialize class instance in the array.
      * 
-     * @var array<string,class-string<\T>> $classes.
+     * @var array<string,string<\T>> $classes.
     */
     protected static array $classes = [
-        'foundation' => Foundation::class
+        'luminova' => Luminova::class
     ];
 
     /**

@@ -12,7 +12,7 @@ $searchable = urlencode($message . ' PHP Luminova Framework');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/png" href="./favicon.png">
     <title>Error Occurred - <?= htmlspecialchars($stack->getName(), ENT_QUOTES); ?></title>
-    <style><?= preg_replace('#[\r\n\t ]+#', ' ', file_get_contents(__DIR__  . DIRECTORY_SEPARATOR . 'debug.css')) ?></style>
+    <style><?= preg_replace('#[\r\n\t ]+#', ' ', file_get_contents(__DIR__  . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'debug.css')) ?></style>
     <script>function toggle(id){ event.preventDefault(); var element=document.getElementById(id); if (element.style.display==="none"){ element.style.display="block";} else{ element.style.display="none";}} </script>
 </head>
 <body id="e_all">
@@ -49,7 +49,7 @@ $searchable = urlencode($message . ' PHP Luminova Framework');
             <p>
                 Displayed at <?= date('H:i:sA'); ?> &mdash;
                 PHP: <?= PHP_VERSION; ?> &mdash;
-                Luminova: <?= defined('\Luminova\Application\Foundation::VERSION') ? \Luminova\Application\Foundation::VERSION : '1.0.0'; ?> &mdash;
+                Luminova: <?= defined('\Luminova\Luminova::VERSION') ? \Luminova\Luminova::VERSION : '1.0.0'; ?> &mdash;
                 Environment: <?= defined('ENVIRONMENT') ? ENVIRONMENT : 'Unknown'; ?>
             </p>
         </div>

@@ -10,8 +10,10 @@
  */
 namespace Luminova;
 
-use \Luminova\Application\Foundation;
+use \Luminova\Luminova;
+use \Luminova\Exceptions\RuntimeException;
 use \App\Application;
+use \Throwable;
 
 final class Boot 
 {
@@ -35,12 +37,48 @@ final class Boot
      */
     public static function init(): void 
     {
-        Foundation::initialize();
+        Luminova::initialize();
         self::finish();
     }
 
     /**
+     * Attempts to open a file using `fopen()` and throws a RuntimeException on failure.
+     *
+     * This method provides a safe wrapper around `fopen()` with enhanced error reporting.
+     * If an exception occurs or the returned value is not a valid resource, a RuntimeException is thrown.
+     *
+     * @param string $filename The path to the file to open.
+     * @param string $mode The mode in which to open the file (e.g., 'r', 'w', 'a').
+     * 
+     * @return resource Return a valid stream resource on success.
+     * @throws RuntimeException If the file cannot be opened or an error occurs.
+     */
+    public static function tryFopen(string $filename, string $mode): mixed
+    {
+        $error = null;
+        $handle = null;
+
+        try {
+            $handle = fopen($filename, $mode);
+        } catch (Throwable $e) {
+            $error = $e;
+        }
+
+        if (!is_resource($handle)) {
+            throw new RuntimeException(sprintf(
+                'Failed to open file "%s" with mode "%s"%s',
+                $filename,
+                $mode,
+                $error ? ': ' . $error->getMessage() : ''
+            ), RuntimeException::ERROR, $error);
+        }
+
+        return $handle;
+    }
+
+    /**
      * Initializes the CLI (Command Line Interface) environment.
+     * 
      * Define CLI-related constants, finishes bootstrapping.
      * 
      * @return void
@@ -63,11 +101,24 @@ final class Boot
 
         // Define CLI environment
         defined('CLI_ENVIRONMENT') || define('CLI_ENVIRONMENT', env('cli.environment.mood', 'testing'));
-        defined('STDOUT') || define('STDOUT', 'php://output');
-        defined('STDIN') || define('STDIN', 'php://stdin');
-        defined('STDERR') || define('STDERR', 'php://stderr');
-
+        self::shouldDefineCommandStreams();
         self::finish();
+    }
+
+    /**
+     * Ensures that standard CLI streams (STDIN, STDOUT, STDERR) are defined.
+     *
+     * This method checks if the standard input/output/error stream constants are defined,
+     * and if not, it defines them using the appropriate mode.
+     *
+     * @return void
+     * @throws RuntimeException If the file cannot be opened or an error occurs.
+     */
+    public static function shouldDefineCommandStreams(): void 
+    {
+        defined('STDIN') || define('STDIN', self::tryFopen('php://stdin', 'r'));
+        defined('STDOUT') || define('STDOUT', self::tryFopen('php://stdout', 'w'));
+        defined('STDERR') || define('STDERR', self::tryFopen('php://stderr', 'w'));
     }
 
     /**
@@ -84,7 +135,7 @@ final class Boot
 
         require_once __DIR__ . '/../bootstrap/functions.php';
         require_once __DIR__ . '/Errors/ErrorHandler.php';
-        require_once __DIR__ . '/Application/Foundation.php';
+        require_once __DIR__ . '/Luminova.php';
     }
 
     /**
@@ -101,11 +152,12 @@ final class Boot
     }
 
     /**
-     * Spoofs the HTTP request method based on hidden input or query param `_METHOD_OVERRIDE_` from the client.
+     * Spoofs the HTTP POST request method 
+     * using `_method` or `_METHOD` as a hiding field or query param .
      *
      * This method checks for a custom request method specified in the 
-     * POST or GET data, allowing clients to simulate different HTTP 
-     * methods (e.g., PUT, DELETE) using a hidden form field or query parameter.
+     * POST data, allowing clients to simulate different HTTP methods 
+     * (e.g., PUT, DELETE, PATCH, OPTIONS).
      *
      * @return void
      */
@@ -115,14 +167,18 @@ final class Boot
             return;
         }
 
-        $method = (
-            $_POST['_OVERRIDE_REQUEST_METHOD_'] ?? 
-            $_GET['_override_request_method_'] ??
-            $_GET['_OVERRIDE_REQUEST_METHOD_'] ?? 
-            null
-        );
-        if ($method !== null) {
-            $_SERVER['REQUEST_METHOD'] = strtoupper($method);
+        if(strtoupper($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST'){
+            $override = $_POST['_METHOD'] 
+                ?? $_POST['_method'] 
+                ?? $_GET['_method'] 
+                ?? null;
+
+            if ($override) {
+                $override = strtoupper(trim($override));
+                if(in_array($override, ['PUT', 'DELETE', 'PATCH', 'OPTIONS'], true)){
+                    $_SERVER['HTTP_X_HTTP_METHOD_OVERRIDE'] = $override;
+                }
+            }
         }
     }
 }

@@ -12,12 +12,12 @@ namespace App\Controllers\Http;
 use \Luminova\Base\BaseController;
 use \Luminova\Attributes\Prefix;
 use \Luminova\Attributes\Route;
-use \App\Controllers\Errors\ViewErrors;
+use \App\Errors\Controllers\ErrorController;
 
 /**
  * This class demonstrates how HTTP web pages or REST API controller can be implemented in Luminova.
-*/
-#[Prefix(pattern: '/api/(:root)', onError: [ViewErrors::class, 'onApiError'])]
+ */
+#[Prefix(pattern: '/api/(:root)', onError: [ErrorController::class, 'onApiError'])]
 class RestController extends BaseController 
 {
     /**

@@ -20,6 +20,34 @@ use \Psr\Log\AbstractLogger;
 final class Logger extends BaseConfig
 {
     /**
+     * Header key to extract and include in the log context, if present.
+     * 
+     * This is useful for identifying API users or request originators via a specific HTTP header.
+     *
+     * @var string|null $contextHeaderName
+     *
+     * @example
+     * ```php
+     * $contextHeaderName = 'X-API-User-Id';
+     * ```
+     */
+    public static ?string $contextHeaderName = null;
+
+    /**
+     * Request body field to extract and include in the log context, if present.
+     * 
+     * This allows tracking a user or identifier passed in the payload (e.g., `POST`, `GET` etc...).
+     *
+     * @var string|null $contextFieldName
+     *
+     * @example
+     * ```php
+     * $contextFieldName = 'username';
+     * ```
+     */
+    public static ?string $contextFieldName = null;
+    
+    /**
      * Enables asynchronous logging using Fibers to log messages 
      * in a background thread without blocking the UI.
      * 

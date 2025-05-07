@@ -10,11 +10,5 @@
 namespace App\Config;
 
 use \Luminova\Base\BaseConfig;
-use \Luminova\Interface\MailerInterface;
-use \Psr\Log\LoggerInterface;
 
-use \Luminova\Email\Clients\NovaMailer;
-
-final class Preference extends BaseConfig
-{
-}
+final class Preference extends BaseConfig {}

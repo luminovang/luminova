@@ -9,25 +9,17 @@
  * @license See LICENSE file
  * @link https://luminova.ng
  */
-use \Luminova\Command\Console;
+use \Luminova\Command\Novakit;
 use \Luminova\Boot;
 
-/**
- * Autoload composers 
-*/
+// Autoload framework models 
 require __DIR__ . '/system/Boot.php';
 
-/**
- * Location of the framework bootstrap file.
-*/
+// Bool novakit framework CLI configurations.
 Boot::cli();
 
-/**
- * Ensure the current directory is pointing to the front controller's directory
-*/
-chdir(FRONT_CONTROLLER);
+// Ensure the current directory is pointing to the front controller's directory.
+chdir(DOCUMENT_ROOT);
 
-/**
- * Initialize Terminal Console and Run console instance
-*/
-(new Console())->run($_SERVER['argv'] ?? []);
+// Initialize Novakit CLI Console and run command.
+(new Novakit())->run($_SERVER['argv'] ?? $argv ?? []);

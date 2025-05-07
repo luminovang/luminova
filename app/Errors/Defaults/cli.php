@@ -11,7 +11,7 @@ use \Luminova\Command\Terminal;
 use \Luminova\Command\Utils\Color;
 
 // Initialize terminal
-new Terminal();
+Terminal::init();
 
 if (isset($exception)) {
     $parts = explode(" File:", $exception->getMessage());

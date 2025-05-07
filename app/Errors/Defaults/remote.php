@@ -5,9 +5,8 @@
  *
  * @var \Luminova\Errors\ErrorHandler $stack
  */
-
-use Luminova\Errors\ErrorHandler;
 use Luminova\Http\Network;
+use Luminova\Errors\ErrorHandler;
 use Luminova\Exceptions\AppException;
 
 include_once __DIR__ . '/tracing.php';

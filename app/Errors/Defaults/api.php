@@ -22,7 +22,7 @@ response(500)->json([
     'error' => $error,
     'framework' => [
         'php_version' => PHP_VERSION,
-        'version' => defined('\Luminova\Application\Foundation::VERSION') ? \Luminova\Application\Foundation::VERSION : '1.0.0',
+        'version' => defined('\Luminova\Luminova::VERSION') ? \Luminova\Luminova::VERSION : '1.0.0',
         'environment' => defined('ENVIRONMENT') ? ENVIRONMENT : 'Unknown',
     ]
 ]);

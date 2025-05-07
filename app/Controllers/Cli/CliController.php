@@ -12,10 +12,12 @@ namespace App\Controllers\Cli;
 use \Luminova\Base\BaseCommand;
 use \Luminova\Command\Utils\Color;
 use \Luminova\Attributes\Route;
+use \Luminova\Attributes\Group;
 
 /**
  * This class demonstrates how CLI command line tools can be implemented in Luminova.
-*/
+ */
+#[Group(name: 'demo')]
 class CliController extends BaseCommand 
 {
     /**
@@ -47,9 +49,9 @@ class CliController extends BaseCommand
     protected array $options = [
         '--help' => 'Show command help information.',
         '-c, --color' => 'Show message with a specific color.',
-        '-s -select' => 'Indicate to prompt user enter select an option.',
-        '-p -password' => 'Indicate to prompt user to enter password.',
-        '-m -message' => 'Specify message to display.'
+        '-s --select' => 'Indicate to prompt user enter select an option.',
+        '-p --password' => 'Indicate to prompt user to enter password.',
+        '-m --message' => 'Specify message to display.'
     ];
 
     /**

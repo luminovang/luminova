@@ -10,7 +10,7 @@ $searchable = urlencode($message . ' PHP Luminova Framework');
     <meta http-equiv="Cache-Control" content="no-store, max-age=0, no-cache"/>
     <link rel="shortcut icon" type="image/png" href="<?= href('favicon.png');?>">
     <title>View Error Occurred - <?= htmlspecialchars($title ?? $exception::class, ENT_QUOTES) ?></title>
-    <style> <?= preg_replace('#[\r\n\t ]+#', ' ', file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'debug.css')) ?> </style>
+    <style> <?= preg_replace('#[\r\n\t ]+#', ' ', file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'debug.css')) ?> </style>
     <script>function toggle(id){ event.preventDefault(); var element=document.getElementById(id); if (element.style.display==="none"){ element.style.display="block";} else{ element.style.display="none";}} </script>
 </head>
 <body>
@@ -38,7 +38,7 @@ $searchable = urlencode($message . ' PHP Luminova Framework');
             <p>
                 Displayed at <?= date('H:i:sA') ?> &mdash;
                 PHP: <?= PHP_VERSION ?>  &mdash;
-                Luminova: <?= \Luminova\Application\Foundation::VERSION ?> &mdash;
+                Luminova: <?= \Luminova\Luminova::VERSION ?> &mdash;
                 Environment: <?= ENVIRONMENT ?>
             </p>
         </div>

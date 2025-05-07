@@ -53,7 +53,11 @@ class Application extends CoreApplication
     /**
      * {@inheritdoc}
      */
-    protected function onCreate(): void {}
+    protected function onCreate(): void 
+    {
+        // Register namespace for HMVC Info controllers
+        $this->router->addNamespace('\\App\\Modules\\Info\\Controllers\\');
+    }
 
     /**
      * {@inheritdoc}

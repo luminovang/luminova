@@ -16,8 +16,8 @@ require_once __DIR__ . '/../system/Boot.php';
 /**
  * Ensure that we are in front controller while running script in cli mode
 */
-if (getcwd() . DIRECTORY_SEPARATOR !== FRONT_CONTROLLER) {
-    chdir(FRONT_CONTROLLER);
+if (getcwd() . DIRECTORY_SEPARATOR !== DOCUMENT_ROOT) {
+    chdir(DOCUMENT_ROOT);
 }
 
 /**
@@ -30,9 +30,9 @@ if (getcwd() . DIRECTORY_SEPARATOR !== FRONT_CONTROLLER) {
  *  - @param string $name Route URI prefix name, any url that starts with $name will be routed to name.php in routes/name.php.
  *  - @param Closure|array<int,string>|null $onError For error argument, which handles 404 errors.
  *          - `Closure` Using closures, pass a callable object or string as shown below.
- *              fn(Application $app): int => ViewErrors::onWebError($app))
+ *              fn(Application $app): int => App\Errors\Controllers\ErrorController::onWebError($app))
  *          - `Array` For array, pass a list array with only 2 elements, your error controller string-class name and the method name to handle error.
- *              [ErrorHandlerController::class, 'handlerMethod']
+ *              [App\Errors\Controllers\ErrorController::class, 'handlerMethod']
  * 
  * 
  * @example For array context, pass an array of prefix configuration expecting only associative array with 2 keys `prefix` and `error`.
@@ -40,11 +40,11 @@ if (getcwd() . DIRECTORY_SEPARATOR !== FRONT_CONTROLLER) {
  *      -   The key `error` Should indicate your error handler, which can be `NULL`, `Closure` or `Array` indicating controller class and method.
  *              [
  *                   'prefix' => 'foo', 
- *                   'error' => [ViewErrors::class, 'onFooError'] 
+ *                   'error' => [App\Errors\Controllers\ErrorController::class, 'onFooError'] 
  *               ]
  * 
  * Finally run your application router to register and boot only request context for optimal performance.
  * @see /samples/index.php - For non-attribute based index.php
  * @see https://luminova.ng/public/docs/0.0.0/boot/public - Documentation for configuring index.php
-*/
+ */
 Boot::http()->router->context()->run();

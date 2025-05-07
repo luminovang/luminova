@@ -7,14 +7,14 @@
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
  */
-namespace App\Controllers\Errors;
+namespace App\Errors\Controllers;
 
-use \Luminova\Base\BaseController;
 use \App\Application;
 use \Luminova\Time\Time;
+use \Luminova\Interface\RoutableInterface;
 use \Luminova\Interface\ErrorHandlerInterface;
 
-class ViewErrors extends BaseController implements ErrorHandlerInterface
+class ErrorController implements RoutableInterface, ErrorHandlerInterface
 {
     /**
      * Define a function for the web error handler.

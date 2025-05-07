@@ -48,8 +48,9 @@
     </div>
 
     <div class="info">
-        <h1>Welcome to <?= \Luminova\Application\Foundation::copyright() ?></h1>
+        <h1>Welcome to <?= \Luminova\Luminova::copyright() ?></h1>
         <h2>Simple framework built for speed and keeping your existing coding skills going.</h2>
+        <p>Architecture: Model-View-Controller (MVC)</p>
         <p>Environment: <?= ENVIRONMENT ?></p>
     </div>
 
@@ -64,6 +65,8 @@
     <pre><code>app/Controllers/Welcome.php</code></pre>
     <p>Development Server Context</p>
     <pre><code><?= $_SERVER['SERVER_SOFTWARE']??'Unknown Development Server';?></code></pre>
+    <p>Enable HMVC Design Pattern in envirment configuration file (.env)</p>
+    <pre><code>feature.app.hmvc = enable</code></pre>
 </section>
 
 

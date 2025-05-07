@@ -13,8 +13,8 @@ namespace Luminova\Composer;
 include_once __DIR__ . '/../../bootstrap/constants.php';
 include_once __DIR__ . '/../../bootstrap/functions.php';
 
+use \Luminova\Luminova;
 use \Luminova\Command\Terminal;
-use \Luminova\Application\Foundation;
 
 class Updater
 {
@@ -40,6 +40,20 @@ class Updater
     private static array $toReplace = [];
 
     /**
+     * Check if slef has new update.
+     * 
+     * @var bool selfHasUpdate
+     */
+    private static bool $selfHasUpdate = false;
+
+    /**
+     * Slef update into.
+     * 
+     * @var array selfInfo
+     */
+    private static array $selfInfo = [];
+
+    /**
      * Updates the framework by copying necessary files and configurations.
      * 
      * This method checks if the framework requires an update and then:
@@ -56,6 +70,7 @@ class Updater
         if(self::onInstallAndUpdate('bootstrap/', self::$frameworkPath, 'install/Boot/')){
             self::doCopy(self::$frameworkPath . 'novakit', 'novakit');
             self::updateConfigurations(self::$frameworkPath . 'install/App/', 'app/');
+            self::updateConfigurations(self::$frameworkPath . 'install/Bin/', 'bin/');
             self::updateConfigurations(self::$frameworkPath . 'install/Main/', 'samples/Main/', true);
             self::onInstallAndUpdate('system/', self::$frameworkPath, 'src/', true);
         }
@@ -83,7 +98,19 @@ class Updater
      */
     private static function isUpdater(string $dest): bool 
     {
-        return str_contains($dest, 'system/Composer/Updater.php');
+        return str_ends_with(self::normalizePath($dest), 'system/Composer/Updater.php');
+    }
+
+    /**
+     * Normalize path.
+     * 
+     * @param string $path Path to normalize.
+     * 
+     * @return string Return string.
+     */
+    private static function normalizePath(string $path): string 
+    {
+        return str_replace(['\\', '//'], '/', rtrim($path, '/'));
     }
 
     /**
@@ -118,6 +145,8 @@ class Updater
                 $dstFile = rtrim($destination, TRIM_DS) . DIRECTORY_SEPARATOR . $file;
 
                 if(self::isUpdater(self::displayPath($dstFile))){
+                    self::$selfHasUpdate = self::fileChanged($srcFile, $dstFile);
+                    self::$selfInfo = [$srcFile, $dstFile];
                     continue;
                 }
                 
@@ -287,6 +316,7 @@ class Updater
         if(!$main){
             self::makeDirectoryIfNotExist($sampleFolder);
         }
+        
         $files = scandir($source);
         foreach ($files as $file) {
             if ($file !== '.' && $file !== '..') {
@@ -389,6 +419,8 @@ class Updater
                     $dstFile = rtrim($destination, TRIM_DS) . DIRECTORY_SEPARATOR . $file;
   
                     if(self::isUpdater(self::displayPath($dstFile))){
+                        self::$selfHasUpdate = self::fileChanged($srcFile, $dstFile);
+                        self::$selfInfo = [$srcFile, $dstFile];
                         continue;
                     }
 
@@ -426,7 +458,7 @@ class Updater
                 }
 
                 if ($returnCode === 0) {
-                    self::cli()->writeln('Update was completed version [' . (Foundation::VERSION??'1.5.0') . ']', 'white', 'green');
+                    self::cli()->writeln('Update was completed version [' . (Luminova::VERSION??'1.5.0') . ']', 'white', 'green');
                     self::cli()->newLine();
 
                     if($hasTodo || self::$toReplace !== []){
@@ -441,6 +473,10 @@ class Updater
                             self::cli()->writeln('See "/TODO.md" to follow a few manual steps associated with the current version update.');
                         }
                     }
+                }
+
+                if(self::$selfHasUpdate){
+                    rename(...self::$selfInfo);
                 }
             }
         }
