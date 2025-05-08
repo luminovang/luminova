@@ -40,14 +40,14 @@ class Updater
     private static array $toReplace = [];
 
     /**
-     * Check if slef has new update.
+     * Check if self has new update.
      * 
      * @var bool selfHasUpdate
      */
     private static bool $selfHasUpdate = false;
 
     /**
-     * Slef update into.
+     * Self update into.
      * 
      * @var array selfInfo
      */
@@ -451,6 +451,11 @@ class Updater
                     }
                 }
 
+                if(self::$selfHasUpdate){
+                    [$srcFile, $dstFile] = self::$selfInfo;
+                    rename($srcFile, $dstFile);
+                }
+                
                 self::removeRecursive($base . $source, 'framework');
                 exec('composer dumpautoload', $output, $returnCode);
                 foreach ($output as $line) {
@@ -473,10 +478,6 @@ class Updater
                             self::cli()->writeln('See "/TODO.md" to follow a few manual steps associated with the current version update.');
                         }
                     }
-                }
-
-                if(self::$selfHasUpdate){
-                    rename(...self::$selfInfo);
                 }
             }
         }
