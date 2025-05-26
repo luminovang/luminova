@@ -101,7 +101,7 @@ if (!function_exists('app')) {
      * @param bool $shared Return a shared instance (default: true).
      * @param mixed ...$arguments Optional arguments to pass to the application constructor.
      * 
-     * @return CoreApplication<Application,LazyInterface> Returns the shared instance if $shared is true,
+     * @return Application<CoreApplication,LazyInterface> Returns the shared instance if $shared is true,
      *                     or a new instance if $shared is false.
      * 
      * @example Usage example:

@@ -14,7 +14,6 @@ use \Luminova\Luminova;
 use \Luminova\Functions\Maths;
 use \Luminova\Functions\IP;
 use \Luminova\Command\Terminal;
-use \Luminova\Routing\Router;
 use \Luminova\Http\Request;
 use \Luminova\Logger\Logger;
 
@@ -105,7 +104,7 @@ final class Performance
         }
 
         self::$request ??= new Request();
-        $classInfo = Router::getClassInfo();
+        $classInfo = Luminova::getClassInfo();
  
         $info = [
             'Framework' => Luminova::copyright(),
@@ -113,10 +112,10 @@ final class Performance
             'IP Address' => self::esc(IP::get()),
             'Environment' => ENVIRONMENT,
             'Script Path' => CONTROLLER_SCRIPT_PATH,
-            'Class Controller' => (!empty($classInfo['namespace'])) 
-                ? $classInfo['namespace'] . '->' . $classInfo['method'] . '()' 
+            'Controller' => (!empty($classInfo['namespace'])) 
+                ? $classInfo['namespace'] . '::' . $classInfo['method'] . '()' 
                 : 'N/A',
-            'Cache File Id' =>  env('page.caching', false) ? Luminova::getCacheId() . '.lmv' : 'N/A',
+            'Cache File' =>  env('page.caching', false) ? Luminova::getCacheId() . '.lmv' : 'N/A',
             'Server Software' => self::esc($_SERVER['SERVER_SOFTWARE'] ?? 'Not Set'),
             'UserAgent' => self::esc(self::$request->getUserAgent()->toString()),
             'Method' => self::esc(self::$request->getMethod()?:'N/A'),
@@ -193,7 +192,7 @@ final class Performance
             return;
         }
 
-        $classInfo = Router::getClassInfo();
+        $classInfo = Luminova::getClassInfo();
 
         // Display basic system information
         $info = [
@@ -202,7 +201,7 @@ final class Performance
             'PHP Version' => PHP_VERSION,
             'Environment' => ENVIRONMENT,
             'Script Path' => CONTROLLER_SCRIPT_PATH,
-            'Class Controller' => (!empty($classInfo['namespace'])) ? $classInfo['namespace'] . '->' . $classInfo['method'] . '()' : 'N/A',
+            'Controller' => (!empty($classInfo['namespace'])) ? $classInfo['namespace'] . '::' . $classInfo['method'] . '()' : 'N/A',
             'Server Software' => self::esc($_SERVER['SERVER_SOFTWARE'] ?? 'Not Set'),
             'Method' => 'CLI',
             'Group' => $context['commands']['group'] ?? 'N/A',
@@ -433,7 +432,7 @@ final class Performance
             };
         }
 
-        $filename = Router::getClassInfo()['filename'] ?? null;
+        $filename = Luminova::getClassInfo()['filename'] ?? null;
         $index = 0;
 
         foreach (self::$filesLoaded ?? get_included_files() as $file) {
@@ -581,7 +580,7 @@ final class Performance
      */
     private static function fileCount(): array 
     {
-        $unused = ((Router::getClassInfo()['attrFiles'] ?? 1) - 1);
-        return [ count(self::$filesLoaded) - 1 - $unused, $unused];
+        $unused = ((Luminova::getClassInfo()['attrFiles'] ?? 1) - 1);
+        return [count(self::$filesLoaded) - 1 - $unused, $unused];
     }
 }

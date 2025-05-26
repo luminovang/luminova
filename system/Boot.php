@@ -21,7 +21,7 @@ final class Boot
      * Initializes the HTTP environment for web application, 
      * sets up error handler, finish bootstrapping process and return application object.
      *
-     * @return Application Return the application instance.
+     * @return Application<CoreApplication,LazyInterface> Return the application instance.
      */
     public static function http(): Application
     {

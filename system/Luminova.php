@@ -22,7 +22,7 @@ final class Luminova
      * 
      * @var string VERSION
      */
-    public const VERSION = '3.5.6';
+    public const VERSION = '3.5.9';
 
     /**
      * Framework version name.
@@ -53,7 +53,7 @@ final class Luminova
     private static ?string $base = null;
 
     /**
-     * Request url segments.
+     * Request URL segments.
      * 
      * @var ?string $segments
      */
@@ -76,6 +76,13 @@ final class Luminova
         'builds',
         'app'
     ];
+
+    /**
+     * Controller class information.
+     * 
+     * @var array<string,string> $classInfo
+     */
+    private static array $classInfo = [];
 
     /**
      * Get the framework copyright information.
@@ -520,6 +527,44 @@ final class Luminova
     public static function isFatal(string|int $errno): bool 
     {
         return in_array($errno, [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR], true);
+    }
+
+    /**
+     * Returns information about the routed controller class.
+     *
+     * @return array<string,string> Return an associative array of routed class information.
+     * @internal Used internally by the routing system when class info is needed.
+     */
+    public static function getClassInfo(): array
+    {
+        return self::$classInfo;
+    }
+
+    /**
+     * Sets information about the routed controller class.
+     *
+     * @param string $key The key under which to store the information.
+     * @param mixed $value The value to store.
+     *
+     * @return void
+     * @internal
+     */
+    public static function addClassInfo(string $key, mixed $value): void
+    {
+        self::$classInfo[$key] = $value;
+    }
+
+    /**
+     * Sets or replaces information about the routed controller class.
+     *
+     * @param array<string, mixed> $info An associative array of class infos.
+     *
+     * @return void
+     * @internal
+     */
+    public static function setClassInfo(array $info): void
+    {
+        self::$classInfo = array_replace(self::$classInfo, $info);
     }
 
     /**

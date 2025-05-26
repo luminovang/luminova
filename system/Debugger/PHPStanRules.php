@@ -45,7 +45,7 @@ final class PHPStanRules implements Rule
         }
 
         foreach ($comments as $comment) {
-            if (! $comment instanceof Doc) {
+            if (!$comment instanceof Doc) {
                 continue;
             }
 

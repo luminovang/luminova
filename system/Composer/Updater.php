@@ -453,7 +453,7 @@ class Updater
 
                 if(self::$selfHasUpdate){
                     [$srcFile, $dstFile] = self::$selfInfo;
-                    rename($srcFile, $dstFile);
+                    @rename($srcFile, $dstFile);
                 }
                 
                 self::removeRecursive($base . $source, 'framework');
