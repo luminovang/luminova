@@ -74,6 +74,16 @@ final class Logger extends BaseConfig
     public static bool $autoBackup = false;
 
     /**
+     * Determines whether log context information should be included 
+     * when sending logs to the Telegram bot.
+     * 
+     * This can also be configured via the environment variable: `logger.telegram.send.context`.
+     *
+     * @var bool
+     */
+    public static bool $telegramSendContext = false;
+
+    /**
      * Returns an instance of the preferred logger class, which must 
      * implement the PSR `LoggerInterface`.
      * 

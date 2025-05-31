@@ -14,6 +14,8 @@ use \Luminova\Errors\ErrorHandler;
 use \Luminova\Debugger\Performance;
 use \Luminova\Http\Header;
 use \Luminova\Logger\Logger;
+use \ReflectionClass;
+use \Throwable;
 
 final class Luminova 
 {
@@ -22,7 +24,7 @@ final class Luminova
      * 
      * @var string VERSION
      */
-    public const VERSION = '3.5.9';
+    public const VERSION = '3.6.1';
 
     /**
      * Framework version name.
@@ -43,7 +45,7 @@ final class Luminova
      * 
      * @var string NOVAKIT_VERSION
      */
-    public const NOVAKIT_VERSION = '2.9.8';
+    public const NOVAKIT_VERSION = '2.9.9';
 
     /**
      * Server base path for router.
@@ -404,6 +406,47 @@ final class Luminova
         return ($matching === '') 
             ? $path 
             : substr($path, strpos($path, $matching));
+    }
+
+    /**
+     * Checks if a property exists in a class, with optional static-only filtering.
+     *
+     * This method performs a property existence check on a given class. When `$staticOnly` is true,
+     * it ensures the property is explicitly declared as `static` using reflection. Otherwise, it
+     * falls back to the native `property_exists()` for faster general-purpose checks.
+     *
+     * @param class-string|object $objectOrClass Fully-qualified class name or object.
+     * @param string $property The name of the property to check.
+     * @param bool $staticOnly If true, only checks for static properties (default: false).
+     *
+     * @return bool Returns true if the property exists (and is static if `$staticOnly` is true), false otherwise.
+     *
+     * @example - Usages:
+     * ```php
+     * Luminova::isPropertyExists(MyClass::class, 'config', true); // true, if public static $config exists
+     * Luminova::isPropertyExists(MyClass::class, 'data');         // true, for any $data (static or non-static)
+     * Luminova::isPropertyExists(MyClass::class, 'missing', true); // false, property does not exist
+     * ```
+     */
+    public static function isPropertyExists(
+        string|object $objectOrClass, 
+        string $property, 
+        bool $staticOnly = false
+    ): bool
+    {
+        if(!$staticOnly){
+            return property_exists($objectOrClass, $property);
+        }
+        try{
+            $ref = new ReflectionClass($objectOrClass);
+
+            if (!$ref->hasProperty($property)) {
+                return false;
+            }
+
+            return $ref->getProperty($property)->isStatic();
+        }catch(Throwable){}
+        return false;
     }
 
     /**

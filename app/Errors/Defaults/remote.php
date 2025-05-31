@@ -5,7 +5,7 @@
  *
  * @var \Luminova\Errors\ErrorHandler $stack
  */
-use Luminova\Http\Network;
+use Luminova\Http\Client\Curl;
 use Luminova\Errors\ErrorHandler;
 use Luminova\Exceptions\AppException;
 
@@ -42,9 +42,8 @@ if ($endpoint) {
 
     // Fiber for asynchronous background execution
     $fiber = new Fiber(function () use ($endpoint, $payload) {
-        $network = new Network();
         try {
-            $response = $network->post($endpoint, [
+            $response = (new Curl())->request('POST', $endpoint, [
                 'body' => $payload
             ]);
 

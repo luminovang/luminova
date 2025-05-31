@@ -39,6 +39,7 @@ class ComposerStaticInitce7d6b0379bc9a35d3afd6dd2b0e131e
         'Luminova\\' => 
         array (
             0 => __DIR__ . '/../../..' . '/system',
+            1 => __DIR__ . '/..' . '/luminovang/framework/src',
         ),
         'App\\' => 
         array (
@@ -97,6 +98,7 @@ class ComposerStaticInitce7d6b0379bc9a35d3afd6dd2b0e131e
         'Luminova\\Attributes\\Error' => __DIR__ . '/../../..' . '/system/Attributes/Error.php',
         'Luminova\\Attributes\\Group' => __DIR__ . '/../../..' . '/system/Attributes/Group.php',
         'Luminova\\Attributes\\Prefix' => __DIR__ . '/../../..' . '/system/Attributes/Prefix.php',
+        'Luminova\\Attributes\\Reflector' => __DIR__ . '/../../..' . '/system/Attributes/Reflector.php',
         'Luminova\\Attributes\\Route' => __DIR__ . '/../../..' . '/system/Attributes/Route.php',
         'Luminova\\Attributes\\Tokenizer' => __DIR__ . '/../../..' . '/system/Attributes/Tokenizer.php',
         'Luminova\\Base\\BaseCache' => __DIR__ . '/../../..' . '/system/Base/BaseCache.php',
@@ -116,6 +118,8 @@ class ComposerStaticInitce7d6b0379bc9a35d3afd6dd2b0e131e
         'Luminova\\Cache\\MemoryCache' => __DIR__ . '/../../..' . '/system/Cache/MemoryCache.php',
         'Luminova\\Cache\\RedisCache' => __DIR__ . '/../../..' . '/system/Cache/RedisCache.php',
         'Luminova\\Cache\\TemplateCache' => __DIR__ . '/../../..' . '/system/Cache/TemplateCache.php',
+        'Luminova\\Command\\Auth\\Handler' => __DIR__ . '/../../..' . '/system/Command/Auth/Handler.php',
+        'Luminova\\Command\\Auth\\Session' => __DIR__ . '/../../..' . '/system/Command/Auth/Session.php',
         'Luminova\\Command\\Consoles\\Authenticate' => __DIR__ . '/../../..' . '/system/Command/Consoles/Authenticate.php',
         'Luminova\\Command\\Consoles\\Builder' => __DIR__ . '/../../..' . '/system/Command/Consoles/Builder.php',
         'Luminova\\Command\\Consoles\\ClearWritable' => __DIR__ . '/../../..' . '/system/Command/Consoles/ClearWritable.php',
@@ -197,6 +201,7 @@ class ComposerStaticInitce7d6b0379bc9a35d3afd6dd2b0e131e
         'Luminova\\Exceptions\\StorageException' => __DIR__ . '/../../..' . '/system/Exceptions/StorageException.php',
         'Luminova\\Exceptions\\ValidationException' => __DIR__ . '/../../..' . '/system/Exceptions/ValidationException.php',
         'Luminova\\Exceptions\\ViewNotFoundException' => __DIR__ . '/../../..' . '/system/Exceptions/ViewNotFoundException.php',
+        'Luminova\\Ftp\\FTP' => __DIR__ . '/../../..' . '/system/Ftp/FTP.php',
         'Luminova\\Functions\\Escape' => __DIR__ . '/../../..' . '/system/Functions/Escape.php',
         'Luminova\\Functions\\Func' => __DIR__ . '/../../..' . '/system/Functions/Func.php',
         'Luminova\\Functions\\IP' => __DIR__ . '/../../..' . '/system/Functions/IP.php',
@@ -266,6 +271,7 @@ class ComposerStaticInitce7d6b0379bc9a35d3afd6dd2b0e131e
         'Luminova\\Security\\JWTAuth' => __DIR__ . '/../../..' . '/system/Security/JWTAuth.php',
         'Luminova\\Security\\RateLimiter' => __DIR__ . '/../../..' . '/system/Security/RateLimiter.php',
         'Luminova\\Security\\TOTP' => __DIR__ . '/../../..' . '/system/Security/TOTP.php',
+        'Luminova\\Security\\Throttler' => __DIR__ . '/../../..' . '/system/Security/Throttler.php',
         'Luminova\\Security\\Validation' => __DIR__ . '/../../..' . '/system/Security/Validation.php',
         'Luminova\\Seo\\Schema' => __DIR__ . '/../../..' . '/system/Seo/Schema.php',
         'Luminova\\Seo\\Sitemap' => __DIR__ . '/../../..' . '/system/Seo/Sitemap.php',
