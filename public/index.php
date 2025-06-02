@@ -15,7 +15,7 @@ require_once __DIR__ . '/../system/Boot.php';
 
 /**
  * Ensure that we are in front controller while running script in cli mode
-*/
+ */
 if (getcwd() . DIRECTORY_SEPARATOR !== DOCUMENT_ROOT) {
     chdir(DOCUMENT_ROOT);
 }
