@@ -21,7 +21,7 @@ final class Cron extends CoreCronTasks
     protected function schedule(): void 
     {
        /**
-         * $this->service('\App\Controllers\ExampleCommand::fooMethod')
+         * $this->service('\App\Controllers\Cli\ExampleCommand::fooMethod')
          *   ->seconds(5)
          *   ->log(root('/writeable/log/') . 'cron.log');
          */
