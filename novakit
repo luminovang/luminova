@@ -15,7 +15,7 @@ use \Luminova\Boot;
 // Autoload framework models
 require __DIR__ . '/system/Boot.php';
 
-// Bool novakit framework CLI configurations.
+// Bool novakit framework CLI configurations. 
 Boot::cli();
 
 // Ensure the current directory is pointing to the front controller's directory.
