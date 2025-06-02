@@ -1,7 +1,7 @@
 <?php
 /**
  * Handles all URI prefixes except for `api` (e.g., https://example.com/).
- * This file defines the routes that are not under the `/api` prefix.
+ * This file defines the routes that are not under the `/api` prefix. 
  *
  * The following global variables are available in the current file:
  * 
