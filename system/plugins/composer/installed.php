@@ -3,7 +3,7 @@
         'name' => 'luminovang/luminova',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '0634b766ed8f989d04779d60a840fc298fc5ef85',
+        'reference' => '508a2cc1b8e07d3c3599cb4a13525e317485e15b',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../../',
         'aliases' => array(),
@@ -22,7 +22,7 @@
         'luminovang/luminova' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '0634b766ed8f989d04779d60a840fc298fc5ef85',
+            'reference' => '508a2cc1b8e07d3c3599cb4a13525e317485e15b',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../../',
             'aliases' => array(),
