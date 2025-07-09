@@ -315,7 +315,7 @@ final class Luminova
     /**
      * Generate cache id for storing and serving static pages.
      * 
-     * @return string Return cache id.
+     * @return string Return cache id string.
      */
     public static function getCacheId(): string 
     {
