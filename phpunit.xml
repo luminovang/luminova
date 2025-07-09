@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
-         bootstrap="system/plugins/autoload.php"
-         backupGlobals="false"
-         beStrictAboutOutputDuringTests="true"
-         beStrictAboutTodoAnnotatedTests="true"
-         cacheResultFile="builds/.phpunit.cache/test-results"
-         colors="true"
-         columns="max"
-         failOnRisky="true"
-         failOnWarning="true"
-         verbose="true">
+        xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+        bootstrap="system/plugins/autoload.php"
+        backupGlobals="false"
+        beStrictAboutOutputDuringTests="true"
+        beStrictAboutTodoAnnotatedTests="true"
+        cacheResultFile="builds/.phpunit.cache/test-results"
+        colors="true"
+        columns="max"
+        failOnRisky="true"
+        failOnWarning="true"
+        verbose="true">
 
     <coverage cacheDirectory="builds/.phpunit.cache/code-coverage"
               processUncoveredFiles="true"
@@ -18,11 +18,9 @@
         <include>
             <directory suffix=".php">system</directory>
         </include>
-
         <exclude>
             <directory>system/plugins</directory>
         </exclude>
-
         <report>
             <clover outputFile="builds/logs/clover.xml"/>
         </report>

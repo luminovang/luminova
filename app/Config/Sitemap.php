@@ -11,9 +11,9 @@
  */
 namespace App\Config;
 
-use \Luminova\Base\BaseConfig;
+use \Luminova\Base\Configuration;
 
-final class Sitemap extends BaseConfig
+final class Sitemap extends Configuration
 { 
     /**
      * The maximum limit of URLs to scan when generating the sitemap.
@@ -118,7 +118,7 @@ final class Sitemap extends BaseConfig
      * Examples:
      * - `'✸/foo/bar/✸'`: Excludes all URLs under the `docs/edit` path.
      *
-     * @var array<string,string> $skipStaticHtml An array of URL patterns to exclude from static `.html` generation.
+     * @var array<int,string> $skipStaticHtml An array of URL patterns to exclude from static `.html` generation.
      */
     public array $skipStaticHtml = [
         '*/api/*'

@@ -9,23 +9,26 @@
  */
 namespace App\Controllers\Http;
 
-use \Luminova\Base\BaseController;
-use \Luminova\Attributes\Prefix;
+use \Luminova\Base\Controller;
 use \Luminova\Attributes\Route;
+use \Luminova\Attributes\Prefix;
 use \App\Errors\Controllers\ErrorController;
+use function \Luminova\Funcs\response;
 
 /**
- * This class demonstrates how HTTP web pages or REST API controller can be implemented in Luminova.
+ * Example: Default Luminova MVC API controller.
+ *
+ * Demonstrates how to implement a REST API endpoint 
+ * using Luminova's standard MVC (non-HMVC) structure.
  */
 #[Prefix(pattern: '/api/(:root)', onError: [ErrorController::class, 'onApiError'])]
-class RestController extends BaseController 
+class RestController extends Controller 
 {
     /**
-     * This is an example of API controller.
+     * Handles the "/api/info" endpoint.
      * 
-     * @return int Return response status code STATUS_SUCCESS or STATUS_ERROR.
-     * 
-     * @see /routes/api.php - The api context for method-based routing.
+     * @return int Return one of STATUS_SUCCESS, STATUS_ERROR, or STATUS_SILENCE.
+     * @see /routes/api.php For method-based routing configuration.
      */
     #[Route('/api/info', methods: ['POST'])]
     public function info(): int

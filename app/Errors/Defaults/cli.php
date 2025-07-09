@@ -8,31 +8,37 @@
  * @license See LICENSE file
  */
 use \Luminova\Command\Terminal;
-use \Luminova\Command\Utils\Color;
+use \Luminova\Command\Utils\{Color, Text};
+use \Luminova\Foundation\Error\Message;
+use function \Luminova\Funcs\filter_paths;
+
+/**
+ * @var Message|\Throwable<\T>|null $error
+ */
 
 // Initialize terminal
 Terminal::init();
 
-if (isset($exception)) {
-    $parts = explode(" File:", $exception->getMessage());
-    Terminal::error('Exception: [' . $exception::class . ']');
+if ($error instanceof Throwable) {
+    $parts = explode(" File:", $error->getMessage());
+    Terminal::writeln(Color::apply('Exception: [' . $error::class . ']', Text::FONT_BOLD, 'red'));
     Terminal::newLine();
-    Terminal::writeln($parts[0]);
+    Terminal::error(Message::prettify($parts[0]));
+    Terminal::newLine();
     $fileLine = Color::style(isset($parts[1]) 
         ? filter_paths($parts[1])
-        : filter_paths($exception->getFile() . ' Line: ' . $exception->getLine())
+        : filter_paths($error->getFile() . ' Line: ' . $error->getLine())
     , 'green');
     Terminal::writeln('File: ' . $fileLine);
-    Terminal::newLine();
 
-    $last = $exception;
+    $last = $error;
 
     while ($previous = $last->getPrevious()) {
         $last = $previous;
         $part = explode(" File:", $previous->getMessage());
-        Terminal::error('Caused by: [' . $previous::class . ']');
+        Terminal::writeln('Caused by: [' . $previous::class . ']', 'red');
         Terminal::newLine();
-        Terminal::writeln($part[0]);
+        Terminal::error(Message::prettify($part[0]));
         $fileLine = Color::style(isset($part[1]) 
             ? filter_paths($part[1])
             : filter_paths($previous->getFile() . ' Line: ' . $previous->getLine())
@@ -43,9 +49,13 @@ if (isset($exception)) {
     return;
 }
 
-if (isset($stack)) {
-    Terminal::error('Error: [' . $stack->getCode() . '] [' . $stack->getName() . ']');
-    Terminal::writeln($stack->getMessage());
+if ($error instanceof Message) {
+    Terminal::writeln(Color::apply(
+        'Error: [' . $error->getCode() . '] [' . $error->getName() . ']',
+        Text::FONT_BOLD, 'red'
+    ));
+    Terminal::newLine();
+    Terminal::error(Message::prettify($error->getMessage()));
     Terminal::newLine();
     return;
 }

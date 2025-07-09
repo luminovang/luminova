@@ -1,7 +1,10 @@
 {
     "name": "luminovang/luminova",
-    "description": "PHP Luminova framework, simple yet powerful framework design for speed",
-    "keywords": ["Framework", "PHP", "MVC", "PHP Framework", "Luminova", "PHP Luminova Framework", "Luminova Ng", "PHP Luminova"],
+    "description": "Luminova is a fast, modular PHP framework designed for simplicity, performance, and modern web application development.",
+    "keywords": [
+        "php", "framework", "mvc", "hmvc", "luminova", "php luminova", "luminova ng", "novakit cli",
+        "php framework", "web development", "modern php", "modular framework", "novakit"
+    ],
     "license": "MIT",
     "type": "project",
     "homepage": "https://luminova.ng",
@@ -26,14 +29,11 @@
         "ext-json": "*",
         "ext-mbstring": "*",
         "luminovang/framework": "^3.0",
-        "psr/log": "^1.1",
-        "psr/http-client": "^1.0"
+        "psr/http-client": "^1.0",
+        "psr/log": "^1.1"
     },
 
     "require-dev": {
-        "psr/cache": "^3.0",
-        "psr/simple-cache": "^3.0",
-        "psr/http-client": "^1.0",
         "nikic/php-parser": "^4.17.1",
         "phpstan/extension-installer": "^1.3",
         "phpstan/phpstan": "^1.10.2",
@@ -43,28 +43,28 @@
     },
     
     "suggest": {
-        "ext-curl": "Needed if you will use CURLRequest class",
-        "ext-exif": "Needed if you will use Image class",
-        "ext-fileinfo": "Needed to improves mime type detection for files",
-        "ext-gd": "Needed if you will use Image class GDHandler",
-        "ext-imagick": "Needed if you will use Image class ImageMagickHandler", 
-        "ext-memcache": "Needed if you will use Cache MemcachedHandler with Memcache class",
-        "ext-memcached": "Needed if you will use Cache MemcachedHandler with Memcached class",
-        "ext-mysqli": "Needed if you will use MySQL",
-        "ext-intl": "Needed if you use use Local",
-        "psr/log": "Needed for PSR logging",
-        "psr/http-client": "Needed for Guzzle or cURL http client",
-        "guzzlehttp/guzzle": "Needed if you will use Guzzle http client",
-        "phpmailer/phpmailer": "Needed if you will use PHPMailer client",
-        "swiftmailer/swiftmailer": "Needed if you will use SwiftMailer client",
-        "smarty/smarty": "Needed if you want to use Smarty template engine",
-        "twig/twig": "Needed if you want to use Twig template engine",
-        "league/flysystem": "Needed if you use FileSystem versatile cloud storages",
-        "nanoblocktech/psr-cache": "Needed if you want to use PSR cache or PSR simple cache",
-        "peterujah/php-search-controller": "Needed if you want searching using doSearch in database models",
-        "peterujah/nano-image": "Needed if you want to invoke outputImage of file delivery class, for image resizing.",
-        "endroid/qr-code": "Needed for generating Base64 or inline SVG images for TOTP QR codes.",
-        "luminovang/array-functions": "Needed for using PHP 8.4 array_find_*, array_all, or array_any in earlier PHP versions."
+        "ext-curl": "Required if using the CURLRequest class.",
+        "ext-exif": "Required for image handling with the Image class.",
+        "ext-fileinfo": "Improves MIME type detection for file uploads.",
+        "ext-gd": "Required for image manipulation using GDHandler.",
+        "ext-imagick": "Required for image manipulation using ImageMagickHandler.",
+        "ext-memcached": "Required if using Memcached with the MemcachedHandler.",
+        "ext-mysqli": "Required for MySQL database support.",
+        "ext-intl": "Required for locale and internationalization features.",
+        "psr/log": "Needed for applications using PSR-compatible logging.",
+        "psr/http-client": "Required when using HTTP clients like Guzzle or cURL.",
+        "guzzlehttp/guzzle": "Required for using Guzzle as an HTTP client.",
+        "phpmailer/phpmailer": "Required for sending emails using PHPMailer.",
+        "swiftmailer/swiftmailer": "Required for sending emails using SwiftMailer.",
+        "smarty/smarty": "Required to enable Smarty as a template engine.",
+        "twig/twig": "Required to enable Twig as a template engine.",
+        "league/flysystem": "Required for using cloud storage drivers via Flysystem.",
+        "nanoblocktech/psr-cache": "Enables support for PSR-6 and PSR-16 caching.",
+        "peterujah/php-search-controller": "Provides support for model search with BaseModel::doSearch().",
+        "peterujah/nano-image": "Required for image resizing when using the FileDelivery::outputImage() method.",
+        "endroid/qr-code": "Generates inline Base64 or SVG QRcodes when using TOTP class.",
+        "luminovang/array-functions": "Backports PHP 8.4 array_* functions for older versions.",
+        "opis/closure": "Required for storing closures in the BackgroundTaskQueue system."
     },
 
     "autoload": {
@@ -123,11 +123,11 @@
     },
 
     "scripts-descriptions": {
-        "post-update-cmd": "Automatically finalizes framework dependency updates after running 'composer update'.",
-        "post-create-project-cmd": "Automatically configures the project and generates an application key after initial installation.",
-        "analyze-app": "Performs static analysis on the application and its framework dependencies using phpstan.",
-        "analyze-code": "Analyzes the application's code for style and standards compliance using rector.",
-        "cs-fix": "Fixes coding style issues to comply with PHP standards using php-cs-fixer."
+        "post-update-cmd": "Runs after 'composer update' to apply Luminova-specific updates and configurations.",
+        "post-create-project-cmd": "Initializes project setup after installation, including application key generation.",
+        "analyze-app": "Runs PHPStan to statically analyze the application and framework codebase.",
+        "analyze-code": "Performs code quality checks and detects structural issues using Rector in dry-run mode.",
+        "cs-fix": "Automatically fixes PHP coding style issues using PHP-CS-Fixer."
     },
 
     "minimum-stability": "stable",

@@ -10,7 +10,7 @@
 
 namespace App\Config;
 
-use \Luminova\Core\CoreServices;
+use \Luminova\Foundation\Core\Services as CoreServices;
 use \Luminova\Exceptions\RuntimeException;
 
 class Services extends CoreServices

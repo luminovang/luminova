@@ -10,18 +10,14 @@
  */
 namespace Luminova\Composer;
 
-use \Luminova\Composer\BaseComposer;
-use \Luminova\Command\Terminal;
-use \ZipArchive;
 use \Exception;
+use \ZipArchive;
+use \Luminova\Command\Terminal;
+use \Luminova\Composer\BaseComposer;
+use function \Luminova\Funcs\{make_dir, filter_paths};
 
 class Builder extends BaseComposer
 {  
-    /**
-     * @var Terminal $terminal 
-    */
-    private static ?Terminal $terminal = null;
-
     /**
      * Project files 
      * @var array
@@ -70,18 +66,9 @@ class Builder extends BaseComposer
         ".git"
     ];
 
-    /**
-     * Get prepared cli instance 
-     * 
-     * @return Terminal 
-    */
-    private static function terminal(): Terminal
-    {
-        return self::$terminal ??= new Terminal();
-    }
-
     public static function export(string $destinationDir = "build"): void
     {
+        Terminal::init();
         self::$systemIgnoreFiles[] = $destinationDir;
         $destinationDir = APP_ROOT . DIRECTORY_SEPARATOR . $destinationDir . DIRECTORY_SEPARATOR . 'v-' . APP_VERSION;
 
@@ -101,27 +88,26 @@ class Builder extends BaseComposer
                 $project_link .= "/" . $dir . "/public";
 
                 exec('LM_DEBUG_MODE=1 composer install --no-dev', $output, $returnCode);
-                self::terminal()->writeln("Cleaning and updating project dependency...");
+                Terminal::writeln("Cleaning and updating project dependency...");
                 foreach ($output as $line) {
                     echo $line . "\n";
                 }
             
                 if ($returnCode === 0) {
                     exec('LM_DEBUG_MODE=1 composer dump-autoload --optimize --no-dev');
-                    self::terminal()->writeln("Dumping project development files...");
+                    Terminal::writeln("Dumping project development files...");
                     foreach ($output as $line) {
                         echo $line . "\n";
                     }
          
-                    self::terminal()->writeln("Updating environment variables...");
+                    Terminal::writeln("Updating environment variables...");
                     setenv('app.environment.mood', 'production', true);
 
-                    self::terminal()->writeln("Project build completed successfully.");
-                    self::terminal()->writeln("To view your project, click the below link:");
-                    self::terminal()->writeln("\033[34m" . $project_link . "\033[0m\n");
-
+                    Terminal::writeln("Project build completed successfully.");
+                    Terminal::writeln("To view your project, click the below link:");
+                    Terminal::writeln("\033[34m" . $project_link . "\033[0m\n");
                 } else {
-                    self::terminal()->error("Fail to build project failed"); 
+                    Terminal::error("Fail to build project failed"); 
                 }
             } else {
                 $error = "\033[31mFailed to change to the build production directory.\033[0m\n";
@@ -131,7 +117,7 @@ class Builder extends BaseComposer
                 $error .= "   - \033[32mLM_DEBUG_MODE=1 composer install --no-dev\033[0m\n";
                 $error .= "   - \033[32mLM_DEBUG_MODE=1 composer dump-autoload --optimize --no-dev\033[0m";
 
-                self::terminal()->writeln($error);
+                Terminal::writeln($error);
                 exit(1);
     
             } 
@@ -142,6 +128,7 @@ class Builder extends BaseComposer
 
     public static function archive(string $zipFileName, string $buildDir = "builds"): void
     {
+        Terminal::init();
         self::$systemIgnoreFiles[] = $zipFileName;
         $zip = new ZipArchive();
         $buildDir = APP_ROOT . DIRECTORY_SEPARATOR . $buildDir . DIRECTORY_SEPARATOR . 'v-' . APP_VERSION;
@@ -153,23 +140,23 @@ class Builder extends BaseComposer
             }
          
             if ($zip->open($buildFile, ZipArchive::CREATE | ZipArchive::OVERWRITE) !== true) {
-                self::terminal()->error('Error creating project archive file');
+                Terminal::error('Error creating project archive file');
 
                 exit(1);
             }
 
-            self::terminal()->writeln("Creating a zip archive for the project...");
+            Terminal::writeln("Creating a zip archive for the project...");
             [$added, $skipped] = self::addToZip($zip, APP_ROOT . DIRECTORY_SEPARATOR . '.', '');
-            self::terminal()->writeln("Archiving project...");
+            Terminal::writeln("Archiving project...");
             $zip->close();
 
-            self::terminal()->writeln("Project archive exported successfully");
-            self::terminal()->writeln("Build path: \033[34m" . filter_paths($buildFile) . "\033[0m\n");
-            self::terminal()->writeln($added . ' Files was added', 'green');
-            self::terminal()->writeln($skipped . ' Files was skipped', 'yellow');
+            Terminal::writeln("Project archive exported successfully");
+            Terminal::writeln("Build path: \033[34m" . filter_paths($buildFile) . "\033[0m\n");
+            Terminal::writeln($added . ' Files was added', 'green');
+            Terminal::writeln($skipped . ' Files was skipped', 'yellow');
             exit(0);
         } catch (Exception $e) {
-            self::terminal()->error("Error: " . $e->getMessage());
+            Terminal::error("Error: " . $e->getMessage());
         }
 
         exit(1);

@@ -26,13 +26,6 @@ class Updater
     private static string $frameworkPath = 'system/plugins/luminovang/framework/';
 
     /**
-     * CLI terminal instance.
-     * 
-     * @var Terminal $terminal 
-     */
-    private static ?Terminal $terminal = null;
-
-    /**
      * List of files to be replaced during updates.
      * 
      * @param array $toReplace
@@ -111,16 +104,6 @@ class Updater
     private static function normalizePath(string $path): string 
     {
         return str_replace(['\\', '//'], '/', rtrim($path, '/'));
-    }
-
-    /**
-     * Returns a prepared CLI instance, initializing it if necessary.
-     * 
-     * @return Terminal Return the CLI instance.
-     */
-    private static function cli(): Terminal
-    {
-        return self::$terminal ??= new Terminal();
     }
 
     /**
@@ -439,6 +422,7 @@ class Updater
             }
 
             if($complete){
+                Terminal::init();
                 $base = APP_ROOT . DIRECTORY_SEPARATOR;
                 $toDos = $base . rtrim($source, TRIM_DS) . 'TODO.md';
                 $currentTodo = rtrim($base, TRIM_DS) . 'TODO.md';
@@ -459,23 +443,23 @@ class Updater
                 self::removeRecursive($base . $source, 'framework');
                 exec('composer dumpautoload', $output, $returnCode);
                 foreach ($output as $line) {
-                    self::cli()->writeln('Dumping:   ' . $line);
+                    Terminal::writeln('Dumping:   ' . $line);
                 }
 
                 if ($returnCode === 0) {
-                    self::cli()->writeln('Update was completed version [' . (Luminova::VERSION??'1.5.0') . ']', 'white', 'green');
-                    self::cli()->newLine();
+                    Terminal::writeln('Update was completed version [' . (Luminova::VERSION??'1.5.0') . ']', 'white', 'green');
+                    Terminal::newLine();
 
                     if($hasTodo || self::$toReplace !== []){
-                        self::cli()->beeps(2);
-                        self::cli()->writeln('TODO ATTENTION!', 'yellow');
+                        Terminal::beeps(2);
+                        Terminal::writeln('TODO ATTENTION!', 'yellow');
 
                         if(self::$toReplace !== []){
-                            self::cli()->writeln('See "/samples/*" to manually replace your configuration files accordingly.');
+                            Terminal::writeln('See "/samples/*" to manually replace your configuration files accordingly.');
                         }
 
                         if($hasTodo){
-                            self::cli()->writeln('See "/TODO.md" to follow a few manual steps associated with the current version update.');
+                            Terminal::writeln('See "/TODO.md" to follow a few manual steps associated with the current version update.');
                         }
                     }
                 }

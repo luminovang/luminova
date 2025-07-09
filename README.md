@@ -14,107 +14,281 @@
 ![Local Image](https://github.com/luminovang/luminova/raw/main/docs/logo.svg)
 
 
-# About Luminova!
+Luminova is a high-performance PHP framework designed for speed, efficiency, and developer productivity. It allows you to customize the framework to your project via the `.env` file, enabling only the features you need. This modular approach ensures optimal performance while giving you full control over template rendering modes and coding styles.
 
-Luminova is a PHP framework built for speed and efficiency, designed to enhance your existing coding skills. At Luminova, we prioritize performance by offering feature customization through the `env` file. This ensures the framework includes only what's needed for your project, based on the features you enable. This approach allows you to enable or disable features as well as customizing your preferred template rendering mode and coding style.
+Within Luminova templates, `View` objects are accessible directly in your view files. You can call application methods and properties using `$this` or `$self` for stricter isolation mode.
 
-Luminova, provide access to the template `View` object within the view files, allowing you to call template methods and properties using `$this` keyword within template files. This can be disabled if you prefer your views to be rendered in isolation, disabling it will allow you to access exported application classes using custom keyword `$self`.
+Ready to try Luminova with your next projects? Explore the [official documentation](https://luminova.ng/docs) or join the community for tips, tutorials, and coding insights on our [YouTube channel](https://www.youtube.com/@luminovang).
 
-Ready to light up your projects? Dive into our [official documentation](https://luminova.ng/docs). For more tips, tricks, and some coding fun, check out our [YouTube channel](https://www.youtube.com/@luminovang).
+
+> **Luminova Skeleton**
+> This repository gives you everything you need to start a new Luminova project: a clean directory structure, essential configuration files, and the core bootstrapping setup.
+
+---
+
+## Key Features
+
+Luminova comes packed with tools to speed up development while keeping your application organized and performant.
+
+* **Database Builder:** ORM for easier CRUD operations and database management.
+* **MVC & HMVC Architecture:** Supports both MVC and Hierarchical MVC for modular applications.
+* **Flexible Routing and Controllers:** Fast, dynamic routing with attribute or method-based configuration.
+* **HTTP and CLI Routing:** Handing dynamic routing for HTTP or CLI, similar to HTTP routing.
+* **Templating:** Native PHP templating with inheritance, caching, and optional engines like Twig or Smarty.
+* **Error Handling:** Comprehensive error tracking, including non-fatal inline errors.
+* **Session Management:** Simplified session handling for authentication and user state.
+* **Cloud Storage:** Integrations with AWS, Azure, Google Cloud, and more.
+* **File Management:** Secure file delivery with temporary or permanent URLs.
+* **Sitemap Generator:** Generate sitemaps easily using NovaKit.
+* **Schema Objects:** Generate structured schema objects for pages.
+* **Command Line Tools:** Build full CLI applications with built-in routing support.
+* **CLI Tooling:** Command Line Helper for application development/production (`php novakit`).
+* **AI Models:** Extend your application with AI-powered features.
+* **Flexible Database Failover:** Instant failover support for backup databases.
+* **Security:** Implements multiple security layers to protect user data.
+* **Request Handling:** Securely process incoming and outgoing HTTP requests.
+* **Email:** Send emails with support for rendering full template content.
+* **Translation & Localization:** Build multilingual applications.
+* **Encryption:** Supports multiple encryption handlers and methods.
+* **Services:** Share classes and objects across your codebase with caching support.
+
+---
+
+## Requirements
+
+* PHP **8.0+**
+* Composer
+* `ext-mbstring` enabled
+* `ext-json` enabled
+* `psr/http-client` installed
+* `psr/log` installed
+* `ext-json` enabled
+* Web server (Apache, Nginx, or PHP built-in)
 
 
 ---
 
-## Composer Installation
+## Installation
 
-Install luminova via Composer.
+Create a new luminova project using Composer:
 
 ```bash
 composer create-project luminovang/luminova my-project
 ```
 
+## Encryption Key
+
+Generate your application encryption key:
+
+```bash
+php novakit generate:key
+```
+
 ## Start Development Server
 
-To start the `PHP` development server, run the following `NovaKit` command.
+To start PHP development server.
+
+Run the following `novakit` command:
 
 ```bash
 php novakit server
 ```
 
+> Visit: http://localhost:8000
+
+
 ## Sitemap Generator
 
-To generate your website sitemap use the below `NovaKit` command.
+To generate your website XML sitemap:
+
+Use the below `novakit` command:
 
 ```bash
-php novakit generate:sitemap
+php novakit sitemap
 ```
-
-To learn more about NovaKit commands [read the novakit documentation](https://luminova.ng/docs/0.0.0/commands/novakit).
 
 ---
 
-## Routing
+## Directory Structure
 
-Luminova support flexible routing implementation using `Attributes` or `Router` methods.
+```
+app/
+    │── Controllers/     # Route handlers
+    │── Config/          # Application settings
+    │── Models/          # Application data models
+    │── Views/           # UI templates
+    │── Modules/         # HMVC modules (optional)
+bootstrap/      # Core Helper Functions
+bin/            # Novakit Console Commands
+public/         # Front Controller (Framework entry point)
+resources/
+        │── Views/     # MVC Template files
+routes/         # Routes for Method-Based Routing
+writeable/      # Private Storage, Logs, cache, Sessions, and Temp Files
+system/         # Core Modules
+    │── plugins/       # ThirdParty Vendor Files
+```
 
-**Define your route using `PHP8` attributes:**
+---
+
+
+## Basic Usage
+
+### Defining Routes
+
+Luminova supports flexible routing using **PHP Attributes** or **Method-Based Routing**.
+
+#### Attribute Routing
+
+Enable attribute routing by setting the environment variable:
+
+```ini
+feature.route.attributes = true
+```
+
+Example:
 
 ```php
-#[Route('/', methods: ['GET'])]
-public function index(): int 
+namespace App\Controllers\Http;
+
+use Luminova\Base\Controller;
+use Luminova\Attributes\Route;
+use Luminova\Attributes\Prefix;
+
+#[Prefix('/(:base)', exclude: ['api'])]
+class MainController extends Controller
 {
-    return $this->view('index');
+    #[Route('/', methods: ['GET'])]
+    public function index(): int 
+    {
+        return $this->view('index');
+    }
 }
 ```
 
-**Or define your route using code-based routing:**
+#### Method-Based Routing
+
+Disable attribute routing by setting:
+
+```ini
+feature.route.attributes = false
+```
+
+Example:
 
 ```php
-<?php 
-$router->get('/', 'YourController::index');
+namespace App\Controllers\Http;
+
+use Luminova\Base\Controller;
+
+class MainController extends Controller
+{
+    public function index(): int
+    {
+        return $this->view('index');
+    }
+}
 ```
+
+Then register your route:
+
+```php
+// /routes/web.php
+$route->get('/', 'MainController::index');
+```
+
+**Using a Callback Handler:**
+
+```php
+// /routes/web.php
+use Luminova\Routing\Router;
+use function Luminova\Funcs\view;
+
+$router->get('/', function (): int {
+    return view('index');
+});
+```
+
 ---
 
-### What's There For Me?
+### Rendering Templates
 
-Here we can brief you on the basic features you can expect in Luminova. There's a lot more than what is written here. As Linus Torvalds said, "Talk is cheap. Show me the code."
+#### Inside a Controller
 
-- **Database Builder:** A powerful Object Relational Mapping (ORM) tool that organizes CRUD operations and simplifies database interactions.
-- **MVC & HMVC Architecture:** Adheres to the Model-View-Controller and  Hierarchical Model-View-Controller implementation.
-- **Flexible HTTP Routing:** Dynamic and fast routing implementation with a clear separation of concerns.
-- **Templating:** Optimized native PHP templating with additional inheritance and caching features. You can also use `Twig` or `Smarty` template engines.
-- **Error Handling:** Comprehensive error handling ensures that no errors go unnoticed, including non-fatal inline errors.
-- **Session Management:** Easily manage user login sessions without additional implementation.
-- **CLI Routing:** Dynamic routing for CLI implementations similar to HTTP routing methods.
-- **Cloud Storage:** Supports various cloud storage solutions like AWS, Azure, Google Cloud, and more.
-- **File Management:** Deliver files to the browser from any location with temporary or permanent URLs to access private files.
-- **Sitemap Generator:** Generate website sitemaps using the `NovaKit` command.
-- **Schema Object:** Support for generating schema objects for website pages.
-- **Command Line Tool:** Full support for implementing CLI tools, with everything you need available.
-- **AI Models:** Integrate or extend AI features into your application.
-- **Database:** A flexible database system that supports instant failover to a backup database without user interruption.
-- **Security:** Various security implementations to secure your application and user information.
-- **Request Handling:** Secure handling of incoming and outgoing HTTP requests.
-- **Email:** Send emails anywhere, with support for sending entire view content as the email body.
-- **Translation:** Create translations for your application using our translation class.
-- **Encryption:** Support for different encryption handlers and methods.
-- **Services:** Define classes that can be shared and discovered anywhere in your codebase, with support for serialization and class object caching.
+```php
+return $this->view(
+    string $template,           // Template name
+    array $options = [],        // View options
+    string $type = View::HTML,  // Template content type
+    int $status = 200           // HTTP status code
+);
+```
+
+**Alternative Using Template Property (`$tpl`):**
+
+```php
+return $this->tpl->view(
+    string $template,           // Template name
+    string $type = View::HTML   // Template content type
+)->render(
+    array $options = [],        // View options
+    int $status = 200           // HTTP status code
+);
+```
+
+**Global Helper Function:**
+
+You can render views outside of a controller using the `view()` helper:
+
+```php
+use function Luminova\Funcs\view;
+
+return view(
+    string $template,           // Template name
+    array $options = [],        // View options
+    string $type = View::HTML,  // Template content type
+    int $status = 200           // HTTP status code
+);
+```
+
+> To learn more about Luminova, see the **[official documentation](https://luminova.ng/docs/)**.
+
 
 ---
 
 ### Quick Tips
 
-**Q: My session works on the development server but not on the production server.**
-- **A:** In production, update the `$sessionDomain` in `/app/Config/Session.php` to your actual production domain. A quick fix is to use `'.' . APP_HOST`. Also, don't forget to update the `Cookie.php` configuration accordingly.
+**Q:** My session works locally but not on production.
+**A:** Update `$sessionDomain` in `/app/Config/Session.php` to match your production domain (e.g., `'.' . APP_HOST`). Also check `Cookie.php` configuration.
 
-**Q: My CSS and images are broken on the production server.**
-- **A:** Make sure you set the `app.environment.mood` key to `production` in your environment file when deploying to production. This small step ensures your assets are served correctly.
+**Q:** CSS or images are broken on production.
+**A:** Ensure `app.environment.mood` is set to `production` in your environment file to serve assets correctly.
 
 ---
 
+## Contributing
 
-### Something Missing?
+If your contribution targets the core framework or its docs, use these repositories instead:
 
-Your feedback is highly appreciated! Drop us a line at [peter@luminova.ng](mailto:peter@luminova.ng). Let us know what we can add to enhance your experience with Luminova. You can also recommend tutorials for our YouTube channel to help you understand and use Luminova better.
+* **[Framework Source Code](https://github.com/luminovang/framework)**
+* **[Documentation](https://github.com/luminovang/documentation)**
 
-Most importantly, don't forget to rate Luminova on GitHub. Your rating is like fuel, helping to illuminate our motivation to add more features and make Luminova even better known and more powerful.
+For this skeleton repository, pull requests should focus on:
+
+* Improving the project structure
+* Fixing default configuration files
+* Enhancing developers experience
+
+---
+
+### Feedback
+
+We welcome your feedback! Contact us at [peter@luminova.ng](mailto:peter@luminova.ng) with suggestions, feature requests, or tutorial ideas.
+
+Don’t forget to ⭐ Luminova on GitHub. Your support helps us continue improving the framework and adding new features.
+
+---
+
+## License
+
+Luminova is open-source and released under the MIT License.

@@ -1,6 +1,11 @@
 <?php 
 /**
  * Luminova Framework
+ * 
+ * Twig template extension configuration.
+ * Allows registration of functions, classes, filters, globals, and other Twig components.
+ *
+ * @mixin \Twig\Extension\AbstractExtension<\Twig\Extension\GlobalsInterface>
  *
  * @package Luminova
  * @author Ujah Chigozie Peter
@@ -9,119 +14,155 @@
  */
 namespace App\Config\Templates\Twig;
 
-use \Twig\Extension\AbstractExtension;
-use \Twig\Extension\GlobalsInterface;
 use \Twig\TwigFunction;
-use \App\Config\Templates\Twig\{
-   Functions, Globals, Operators, Filters, NodeVisitors, TokenParsers, Tests
-};
-use \Luminova\Exceptions\BadMethodCallException;
-use \Throwable;
 
-class Extensions extends AbstractExtension implements GlobalsInterface
+/**
+ * Twig helper template functions.
+ *
+ * Provides access to global functions, constants, static methods, class instantiation,
+ * environment variables, request information, and common template helpers directly from Twig templates.
+ *
+ * @method static mixed fn(string $function, mixed ...$args) Call any global function.
+ * @method static mixed const(string $name) Get the value of a defined constant.
+ * @method static mixed static(string $class, string $member, mixed ...$args) Call a static member of a class.
+ * @method static object<\T> new(string $class, mixed ...$args) Instantiate a class.
+ * @method static DateTimeImmutable now() Get the current timestamp as DateTimeImmutable.
+ * 
+ * @see https://luminova.ng/docs/0.0.0/templates/twig
+ * @example - Examples:
+ * ```twig
+ * {{ new('Example').getValue() }}
+ * ```
+ */
+trait Extensions
 {
-   use Functions, Globals, Operators, Filters, NodeVisitors, TokenParsers, Tests;
+    /**
+     * Register custom functions for Twig templates.
+     *
+     * These functions are accessible directly in Twig templates.
+     *
+     * @return TwigFunction[] Array of TwigFunction instances.
+     *
+     * @example - Example:
+     * ```php
+     * return [
+     *      new TwigFunction('flash', static fn(string $key) => \App\Utils\Messages\flash($key)),
+     * ]
+     * ```
+     */
+    public function registerFunctions(): array
+    {
+        return [];
+    }
 
     /**
-     * Register functions accessible in Twig templates.
+     * Register classes accessible in Twig templates.
      *
-     * @return array<int,TwigFunction> Functions.
-    */
-    public function getFunctions(): array
+     * Each key becomes the alias used in the template, and the value
+     * is the fully qualified class name.
+     *
+     * @return array<string,class-string> Associative array of class aliases.
+     *
+     * @example - Example:
+     * ```php
+     * return [
+     *     'Example' => \App\Utils\Example::class,
+     * ]
+     * ```
+     * > **Note:**
+     * > Do not initialize class instance in the array.
+     */
+    public function registerClasses(): array
     {
-        return array_merge([
-            /** 
-             * `call_func` Call global functions,
-             * 
-             * @example To call any global functions.
-             *     {{call_func('functionName', ..,arguments)}}
-             * 
-             * @param string $function The function name to call.
-             * @param mixed ...$arguments Function arguments,
-             * 
-             * @return mixed The response from called function.
-             * @throws BadMethodCallException
-            */
-            new TwigFunction('call_func', function (string $function, mixed ...$arguments): mixed {
-                if (is_callable($function)) {
-                    return $function(...$arguments);
-                }
+        return [];
+    }
 
-                throw new BadMethodCallException(sprintf('Function "%s" is not callable.', $function));
-            }),
+    /**
+     * Register custom Twig tests.
+     *
+     * @return array<int,\Twig\TwigTest> Array of TwigTest instances.
+     */
+    public function getTests(): array
+    {
+        return [];
+    }
 
-            /** 
-             * `const` Access a global constant variables.
-             * 
-             * @example To get a const variable.
-             *     {{get_const('APP_NAME')}}
-             * 
-             * @param string $constant The constant name
-             * 
-             * @return mixed The value of called constant.
-             * @throws BadMethodCallException
-            */
-            new TwigFunction('get_const', function (string $constant): mixed {
-                if (defined($constant)) {
-                    return constant($constant);
-                }
+    /**
+     * Register custom Twig filters.
+     *
+     * Filters transform template values (e.g., `{{ name|upper }}`).
+     *
+     * @return array<int,\Twig\TwigFilter> Array of TwigFilter instances.
+     *
+     * @example - Example:
+     * ```php
+     * return [
+     *     // new TwigFilter('rot13', 'str_rot13'),
+     *     // new TwigFilter('upper', 'strtoupper'),
+     * ]
+     * ```
+     */
+    public function getFilters(): array
+    {
+        return [];
+    }
 
-                throw new BadMethodCallException(sprintf('Constant variable "%s" is not defined.', $constant));
-            }),
+    /**
+     * Register global constants or variables accessible in all Twig templates.
+     *
+     * @return array<string,mixed> Associative array of global variables.
+     */
+    public function getGlobals(): array
+    {
+        return [
+            'APP_NAME'        => APP_NAME,
+            'APP_VERSION'     => APP_VERSION,
+            'PRODUCTION'      => PRODUCTION,
+            'ENVIRONMENT'     => ENVIRONMENT,
+            'STATUS_SUCCESS'  => STATUS_SUCCESS,
+            'STATUS_ERROR'    => STATUS_ERROR,
+            'STATUS_SILENCE'  => STATUS_SILENCE,
+            // Add any additional global constants here
+        ];
+    }
 
-            /** 
-             * `call_static` Class class static method,
-             * 
-             * @example To call any static method.
-             *     Namespace: {{call_static('\Foo\Bar\Baz', 'myMethod', ..,arguments)}}
-             *     Alias: {{call_static('foo', 'myMethod', ..,arguments)}}
-             * 
-             * @param string|class-string $class The class name to class it method.
-             * @param string $method The class class method name to call.
-             * @param mixed ...$arguments Method arguments,
-             * 
-             * @return mixed The response of called method.
-             * @throws BadMethodCallException
-            */
-            new TwigFunction('call_static', function (string $class, string $method, mixed ...$arguments): mixed {
-                $class = static::$classes[$class] ?? $class;
+    /**
+     * Return custom node visitors for Twig compilation.
+     *
+     * @return array<int,\Twig\NodeVisitor\NodeVisitorInterface>
+     */
+    public function getNodeVisitors(): array
+    {
+        return [];
+    }
 
-                if (method_exists($class, $method)) {
-                    return $class::{$method}(...$arguments);
-                }
+    /**
+     * Register custom Twig operators.
+     *
+     * @return array{0:string,1:callable} Array containing operator name and handler.
+     */
+    public function getOperators(): array
+    {
+        return ['noop', fn($a, $b) => $a];
+    }
 
-                throw new BadMethodCallException(sprintf('Method "%s" or class "%s" does not exist', $method, $class));
-            }),
+    /**
+     * Return optional provider object for dependency injection or service resolution.
+     *
+     * @return object|null Return provider object.
+     */
+    public static function getProvider(): ?object
+    {
+        return null;
+    }
 
-            /** 
-             * `new` Initializes class instance,
-             * 
-             * @example To initialize new class instance.
-             *     Namespace: {{call_new('\Foo\Bar\Baz', ...arguments)}}
-             *     Alias: {{call_new('foo', ...arguments)}}
-             * 
-             * @param string|class-string $class The class name to initialize.
-             * @param mixed ...$arguments Class initialization arguments,
-             * 
-             * @return class-object The class object.
-             * @throws BadMethodCallException
-            */
-            new TwigFunction('call_new', function (string $class, mixed ...$arguments): object {
-                $class = static::$classes[$class] ?? $class;
-                try{
-                    if (class_exists($class)) {
-                        return new $class(...$arguments);
-                    }
-                }catch(Throwable $e){
-                    throw new BadMethodCallException(sprintf(
-                        'Unable to initialize class "%s", %s', 
-                        $class, 
-                        $e->getMessage()
-                    ), $e->getCode(), $e);
-                }
-
-                throw new BadMethodCallException(sprintf('Class "%s" does not exist', $class));
-            })
-        ], $this->registerFunctions());
+    /**
+     * Register custom token parsers for Twig templates.
+     *
+     * @return array<int,\Twig\TokenParser\TokenParserInterface>
+     */
+    public function getTokenParsers(): array
+    {
+        return [];
     }
 }

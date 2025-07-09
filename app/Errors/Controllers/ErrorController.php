@@ -9,39 +9,75 @@
  */
 namespace App\Errors\Controllers;
 
-use \App\Application;
 use \Luminova\Time\Time;
+use function \Luminova\Funcs\response;
+use \Luminova\Foundation\Core\Application;
 use \Luminova\Interface\RoutableInterface;
 use \Luminova\Interface\ErrorHandlerInterface;
 
 class ErrorController implements RoutableInterface, ErrorHandlerInterface
 {
     /**
-     * Define a function for the web error handler.
+     * {@inheritDoc} 
      * 
-     * @param Application $app Application instance available.
+     * @example - Usage:
      * 
-     * @return int Return response status code. 
+     * ```php
+     * // app/Controllers/Http/FooController.php
+     * // app/Modules/<?module>/Controllers/Http/FooController.php
+     * 
+     * $this->app->router->trigger(500);
+     * ```
+     * 
+     * > This is the global fallback handler for manually triggered errors.
+     * > Renders an error view with the provided status code and request data.
+     */
+    public static function onTrigger(Application $app, int $status = 404, array $arguments = []): int
+    {
+        // Manually handle error based on status code here
+        $template = match($status) {
+            500 => '5xx',
+            default => '4xx'
+        };
+
+        return $app->view->view($template)->render(
+            ['data' => $arguments], 
+            $status
+        );
+    }
+  
+    /**
+     * Handle web-based routing errors.
+     * 
+     * Renders a default 404 HTML page for browser clients.
+     * 
+     * @param Application $app Application instance.
+     * 
+     * @return int Return response status code.
      */
     public static function onWebError(Application $app): int 
     {
-        return $app->view('404')->render();
+        return $app->view->view('4xx')->render(status: 404);
     }
 
     /**
-     * Define a function for the API error handler.
+     * Handle API routing errors.
      * 
-     * @param Application $app Application instance available.
+     * Returns a structured JSON error response for API clients.
      * 
-     * @return int Return response status code. 
+     * @param Application $app Application instance.
+     * 
+     * @return int Return response status code.
      */
     public static function onApiError(Application $app): int 
     {
+        $view = $app->getUri();
+
         return response(404)->json([
             'error' => [
-                'code' => 404,
-                'view' => $app->getView(),
-                'message' => "The endpoint [" . $app->getView() . "] you are trying to access does not exist.",
+                'code'      => 404,
+                'view'      => $view,
+                'message'   => "The endpoint [{$view}] you are trying to access does not exist.",
                 'timestamp' => Time::datetime()
             ]
         ]);

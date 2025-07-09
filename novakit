@@ -2,6 +2,13 @@
 <?php
 /**
  * Luminova Framework NovaKit Command Line Tool.
+ * 
+ * ██╗     ██╗   ██╗███╗   ███╗██╗███╗   ██╗ ██████╗ ██╗   ██╗ █████╗ 
+ * ██║     ██║   ██║████╗ ████║██║████╗  ██║██╔═══██╗██║   ██║██╔══██╗
+ * ██║     ██║   ██║██╔████╔██║██║██╔██╗ ██║██║   ██║██║   ██║███████║
+ * ██║     ██║   ██║██║╚██╔╝██║██║██║╚██╗██║██║   ██║██║   ██║██╔══██║
+ * ███████╗╚██████╔╝██║ ╚═╝ ██║██║██║ ╚████║╚██████╔╝╚██████╔╝██║  ██║
+ * ╚══════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝
  *
  * @package Luminova
  * @author Ujah Chigozie Peter
@@ -12,10 +19,10 @@
 use \Luminova\Command\Novakit;
 use \Luminova\Boot;
 
-// Autoload framework models
+// Autoload framework models.
 require __DIR__ . '/system/Boot.php';
 
-// Bool novakit framework CLI configurations. 
+// Bool novakit framework CLI configurations.
 Boot::cli();
 
 // Ensure the current directory is pointing to the front controller's directory.

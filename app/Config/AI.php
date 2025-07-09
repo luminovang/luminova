@@ -1,55 +1,56 @@
 <?php 
 /**
- * Luminova Framework
+ * Luminova Framework AI configuration.
  *
- * @package Luminova
- * @author Ujah Chigozie Peter
+ * @package   Luminova
+ * @author    Ujah Chigozie Peter
  * @copyright (c) Nanoblock Technology Ltd
- * @license See LICENSE file
-*/
+ * @license   See LICENSE file
+ */
 namespace App\Config;
 
-use \Luminova\Base\BaseConfig;
+use \Luminova\Base\Configuration;
 
-final class AI extends BaseConfig
+final class AI extends Configuration
 {
     /**
-     * The AI handler class.
-     * Currently, only `OpenAI` is supported.
+     * AI provider handler class.
      * 
+     * Currently, only `OpenAI` is supported.
+     *
      * @var string $handler
      */
     public string $handler = 'OpenAI';
 
     /**
-     * The API secret key for authenticating OpenAI requests.
-     * 
+     * API key for authenticating OpenAI requests.
+     *
      * @var string $apiKey
      * @see https://platform.openai.com/
      */
     public string $apiKey = '';
 
     /**
-     * The OpenAI Organization ID.
-     * This is required if your OpenAI account belongs to an organization.
+     * OpenAI organization ID (if your account belongs to one).
      * 
-     * @var string|null $organization (e.g., `org-xxxx`)
+     * Example: `org-xxxx`
+     *
+     * @var string|null $organization
      * @see https://platform.openai.com/docs/api-reference/authentication
      * @see https://platform.openai.com/settings/organization/general
      */
     public ?string $organization = null;
 
     /**
-     * The OpenAI Project ID.
-     * This helps organize API usage under a specific project.
-     * 
+     * OpenAI project ID to group API usage.
+     *
      * @var string|null $project
      */
     public ?string $project = null;
 
     /**
-     * The OpenAI API version to use.
-     * 
+     * OpenAI API version to use.
+     *
      * @var string $version
      */
     public string $version = 'v1';

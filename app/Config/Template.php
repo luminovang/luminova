@@ -1,76 +1,105 @@
 <?php 
 /**
- * Luminova Framework
+ * Luminova Framework Template and View  rendering Configuration.
  *
- * @package Luminova
- * @author Ujah Chigozie Peter
+ * @package   Luminova
+ * @author    Ujah Chigozie Peter
  * @copyright (c) Nanoblock Technology Ltd
- * @license See LICENSE file
+ * @license   See LICENSE file
  */
 namespace App\Config;
 
 /**
+ * Template configuration for Luminova views.
+ *
  * @see https://luminova.ng/docs/0.0.0/templates/config
-*/
+ */
 final class Template 
 { 
     /** 
-     * Specifies the template engine used for rendering application views.
+     * The template engine used to render application views.
      * 
-     * Supported template engines:  
-     * - `default`  → No additional configuration required.  
-     * - `smarty`   → Configuration in `/app/Config/Templates/Smarty/`.  
-     * - `twig`     → Configuration in `/app/Config/Templates/Twig/`.  
+     * Supported options:  
+     * - `default` → No extra configuration required {@see enableDefaultTemplateLayout}
+     * - `smarty`  → Configure under `/app/Config/Templates/Smarty/`  
+     * - `twig`    → Configure under `/app/Config/Templates/Twig/`  
      * 
-     * @var string $templateEngine Default: `default`
+     * @var string $templateEngine (default: `default`)
      */
     public string $templateEngine = 'default';
 
     /** 
-     * Enables template isolation, preventing direct access to properties 
-     * in `App\Application` via `$this->propertyName`.  
+     * Enables template isolation to prevent direct access to properties 
+     * of `App\Application` via `$this->propertyName`.  
      * 
      * When enabled:  
      * - Use `$self->propertyName` instead of `$this->propertyName`.  
-     * - Use the `$this->export(...)` method in application class or `$this->app->export(...)` int the controller to expose properties.  
-     * - Template variables can be accessed directly as `$varName` instead of `$this->varName`.  
+     * - Expose properties via `$this->view->export(...)` in the application 
+     *   class or `$this->app->view->export(...)` in controllers.  
+     * - Template variables are accessible directly as `$varName` instead 
+     *   of `$this->varName`.  
      * 
-     * @var bool $templateIsolation Default: `false`
+     * @var bool $templateIsolation (default: `false`)
      */
     public bool $templateIsolation = false;
 
     /**
-     * Controls the use of an underscore `_` prefix for view option variables.  
-     * 
-     * - `true`  → Variables will be prefixed with `_` (e.g., `$_varName`).  
-     * - `false` → Underscore prefixing is disabled.  
-     * - `null`  → Variables are stored as raw arrays (`$options`).  
-     * 
-     * **Important:** This setting must be defined **before** building your application.  
-     * Changing it afterward will prevent view options from being properly recognized.  
-     * 
-     * @var bool|null $variablePrefixing Default: `true`
+     * Enable or disable the default template layout.
+     *
+     * When enabled (`true`) and `$templateEngine` is set to `default`, 
+     * you can use the built-in layout system for template inheritance. 
+     * This allows you to extend parts of the layout easily, for example:
+     *
+     * @example - Example:
+     * ```php
+     * <?= $this->layout->template('/layouts/scaffolding')->extend('head'); ?>
+     * <?= $this->layout->template('/layouts/scaffolding')->extend('section'); ?>
+     * <?= $this->layout->template('/layouts/scaffolding')->extend('footer'); ?>
+     * ```
+     *
+     * > When disabled (`false`), the `$this->layout` object in templates will be `NULL`.
+     * To use layouts in that case, you must set them up manually.
+     *
+     * @var bool $enableDefaultTemplateLayout (default: `false`)
+     * @see https://luminova.ng/docs/0.0.0/templates/php-layout-engine
      */
-    public bool|null $variablePrefixing = true;
+    public bool $enableDefaultTemplateLayout = false;
+
+    /**
+     * Controls whether view option variables are prefixed with an underscore `_`.  
+     * 
+     * - `true`  → Variables use the `_` prefix (e.g., `$_varName`)  
+     * - `false` → No prefix added  
+     * - `null`  → Variables are stored as raw arrays (`$options`)  
+     * 
+     * **Note:** This must be set **before** building your application.  
+     * Changing it later will break template option recognition.  
+     * 
+     * @var bool|null $variablePrefixing (default: `true`)
+     */
+    public ?bool $variablePrefixing = true;
 
     /** 
-     * Directory path for cached template files.
+     * Directory for cached template files.
      * 
-     * @var string $cacheFolder Default: `writeable/caches/`
+     * @var string $cacheFolder (default: `writeable/caches/`)
+     * @deprecated Template cache is strictly store in `'/writeable/caches/templates/`
      */
     public string $cacheFolder = 'writeable/caches/';
 
     /** 
-     * Directory path for compiled template files.
+     * Directory for compiled template files.
      * 
-     * @var string $compileFolder Default: `writeable/compile/`
+     * Directory by template engines for when compiling templates.
+     * 
+     * @var string $compileFolder (default: `writeable/compile/`)
      */
     public string $compileFolder = 'writeable/compile/';
 
     /** 
-     * Directory path for template engine configuration files.
+     * Directory for template engine configuration files.
      * 
-     * @var string $configFolder Default: `writeable/config/`
+     * @var string $configFolder (default: `writeable/config/`)
      */
     public string $configFolder = 'writeable/config/';
 }
