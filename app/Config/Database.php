@@ -66,7 +66,8 @@ class Database extends CoreDatabase
      *         'pdo_version' => 'mysql',
      *         'production' => false,
      *         'persistent' => true,
-     *         'emulate_preparse' => true,
+     *         'emulate_prepares' => true,
+     *         'timeout' => 0,
      *         'socket' => false,
      *         'socket_path' => null,
      *         'sqlite_path' => null, // Only used if PDO version is sqlite

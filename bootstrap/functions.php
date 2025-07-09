@@ -150,7 +150,7 @@ if (!function_exists('response')) {
      *
      * @param int $status int $status HTTP status code (default: 200 OK).
      * @param array<string,mixed>|null $headers Additional response headers (default: null).
-     * @param bool $shared Weather to return shared instance (default: true).
+     * @param bool $shared Whether to return shared instance (default: true).
      *
      * @return Response<ViewResponseInterface> Return view controller response object. 
      */
@@ -536,7 +536,7 @@ if(!function_exists('ip_address')){
     /**
      * Get user IP address or return ip address information.
      *
-     * @param bool $ipInfo Weather to true return ip address information instead (default: false).
+     * @param bool $ipInfo Whether to true return ip address information instead (default: false).
      * @param array $options Optional data to return with IP information (default: none).
      * 
      * @return string|object|null Return client ip address or ip info, otherwise null if ip info not found.
@@ -577,7 +577,7 @@ if(!function_exists('session')) {
      * Return session data if key is present else return session instance.
      *
      * @param string $key Optional key to retrieve the data (default: null).
-     * @param bool $shared Weather to use shared instance (default: true).
+     * @param bool $shared Whether to use shared instance (default: true).
      * @param object<SessionManagerInterface> $manager The session manager interface to use (default: SessionManager).
      *
      * @return Session<LazyInterface>|mixed Return session instance or value if key is present.
@@ -1485,17 +1485,17 @@ if (!function_exists('status_code')) {
      * In some occasions, void or null may be returned, treating it as success.
      * 
      * @param mixed $result The response from the callback function or method to check (e.g, `void`, `bool`, `null`, `int`).
-     * @param bool $return_int Weather to return int or bool (default: int).
+     * @param bool $returnInt Whether to return int or bool (default: int).
      * 
      * @return int|bool Return status response as boolean or integer value.
      */
-    function status_code(mixed $result = null, bool $return_int = true): int|bool
+    function status_code(mixed $result = null, bool $returnInt = true): int|bool
     {
         if ($result === false || (is_int($result) && $result == 1)) {
-            return $return_int ? 1 : false;
+            return $returnInt ? 1 : false;
         }
 
-        return $return_int ? (int) $result : true;
+        return $returnInt ? (int) $result : true;
     }
 }
 
@@ -1594,7 +1594,7 @@ if (!function_exists('asset')) {
 
 if (!function_exists('string_length')) {
     /**
-     * Calculate string length based on different charsets.
+     * Calculate string length based on different charset.
      *
      * @param string $content The content to calculate length for.
      * @param string|null $charset The character set of the content.

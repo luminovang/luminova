@@ -375,7 +375,7 @@ final class Performance
     /**
      * Calculate and return the performance metrics.
      *
-     * @param bool $html Weather reporting should include html output (default: true).
+     * @param bool $html Whether reporting should include html output (default: true).
      * 
      * @return string Return formatted performance metrics including execution time, memory usage, and number of files loaded.
      */

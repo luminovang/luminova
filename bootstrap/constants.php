@@ -514,18 +514,18 @@ defined('FETCH_COLUMN') || define('FETCH_COLUMN', 4);
 defined('FETCH_NUM_OBJ') || define('FETCH_NUM_OBJ', 5);
 
 /**
- * Database fetch mode to return all result as an associative array.
+ * Fetch a two-column result into an array where the first column is a key and the second column is the value.
  * 
- * @var int FETCH_ALL
+ * @var int FETCH_KEY_PAIR
  */
-defined('FETCH_ALL') || define('FETCH_ALL', 6);
+defined('FETCH_KEY_PAIR') || define('FETCH_KEY_PAIR', 6);
 
 /**
- * Database fetch mode to return all columns as an associative array.
+ * Fetch instance of the requested class, by mapping the columns to named properties in the class.
  * 
- * @var int FETCH_COLUMN_ASSOC
+ * @var int FETCH_CLASS
  */
-defined('FETCH_COLUMN_ASSOC') || define('FETCH_COLUMN_ASSOC', 7);
+defined('FETCH_CLASS') || define('FETCH_CLASS', 7);
 
 /**
  * Database statement return mode to return next result (single record).
@@ -589,6 +589,56 @@ defined('RETURN_STMT') || define('RETURN_STMT', 7);
  * @var int RETURN_RESULT
  */
 defined('RETURN_RESULT') || define('RETURN_RESULT', 8);
+
+/**
+ * Return mode to fetch rows one at a time (use in while loop).
+ * 
+ * @var int RETURN_STREAM
+ */
+defined('RETURN_STREAM') || define('RETURN_STREAM', 9);
+
+/**
+ * Null value type (e.g., for SQL NULL values)
+ * 
+ * @var int PARAM_NULL
+ */
+defined('PARAM_NULL') || define('PARAM_NULL', 0);
+
+/**
+ * Integer value type (e.g., for IDs, counters)
+ * 
+ * @var int PARAM_INT
+ */
+defined('PARAM_INT') || define('PARAM_INT', 1);
+
+/**
+ * String value type (e.g., for text, UUIDs, dates)
+ * 
+ * @var int PARAM_STR
+ */
+defined('PARAM_STR') || define('PARAM_STR', 2);
+
+/**
+ * Large Object type (e.g., BLOBs or large binary/text data)
+ * 
+ * @var int PARAM_LOB
+ */
+defined('PARAM_LOB') || define('PARAM_LOB', 3);
+
+/**
+ * Boolean value type (true/false)
+ * 
+ * @var int PARAM_BOOL
+ */
+defined('PARAM_BOOL') || define('PARAM_BOOL', 5);
+
+/**
+ * Floating-point number type (e.g., decimals)
+ * Not standard in PDO; used for internal handling
+ * 
+ * @var int PARAM_FLOAT
+ */
+defined('PARAM_FLOAT') || define('PARAM_FLOAT', 192);
 
 /**
  * Set error reporting.

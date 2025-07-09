@@ -69,7 +69,7 @@ final class Logger extends BaseConfig
      * Indicate whether a backup of log file should be created when the `logger.max.size` or `$maxSize` limit is reached. 
      * Set to 'true' to automatically create a backup and empty the current log file, 'false' to empty the log file only.
      * 
-     * @var bool $autoBackup Weather to automatically create backup.
+     * @var bool $autoBackup Whether to automatically create backup.
      */
     public static bool $autoBackup = false;
 

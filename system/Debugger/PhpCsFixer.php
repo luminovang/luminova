@@ -122,7 +122,7 @@ final class PhpCsFixer
      * Initializes the php coding standard fixer. 
      * 
      * @param string $root Project root directory (e.g, `__DIR__`).
-     * @param int $fixFor Weather running fix for project or framework (default: `self::FIX_PROJECT`).
+     * @param int $fixFor Whether running fix for project or framework (default: `self::FIX_PROJECT`).
      */
     public function __construct(string $root, int $fixFor = self::FIX_PROJECT)
     {

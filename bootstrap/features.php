@@ -1,7 +1,7 @@
 <?php 
 declare(strict_types=1);
 /**
- * Luminova Framework Features.
+ * Luminova Framework
  *
  * @package Luminova
  * @author Ujah Chigozie Peter
