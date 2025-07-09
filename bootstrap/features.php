@@ -9,49 +9,43 @@ declare(strict_types=1);
  * @license See LICENSE file
  * @link https://luminova.ng
  */
+use function \Luminova\Funcs\{root, import};
 
 /**
- * Autoload register psr-4 classes
+ * Autoload register PSR-4 classes.
  */
-if(env('feature.app.autoload.psr4', false)){
+if (env('feature.app.autoload.psr4', false)) {
     \Luminova\Library\Modules::register();
 }
 
 /**
- * Register services 
+ * Register application services.
  */
-if(env('feature.app.services', false)){
-    factory('register');
+if (env('feature.app.services', false)) {
+    \Luminova\Funcs\factory('register');
 }
 
 /**
- * Initialize and register class modules and alias
+ * Initialize and register class modules and aliases.
  */
-if(
-    env('feature.app.class.alias', false) && 
-    !defined('INIT_DEV_MODULES') && 
-    file_exists($modules = root('/app/Config/') . 'Modules.php')
-) {
-    define('INIT_DEV_MODULES', true);
-    $config = require_once $modules;
+if (!defined('__INIT_DEV_MODULES__') && env('feature.app.class.alias', false)) {
+    $config = import(root('/app/Config/', 'Modules.php'), true, true);
 
-    if(isset($config['alias'])){
+    if (is_array($config['alias'] ?? null)) {
         foreach ($config['alias'] as $alias => $namespace) {
             if (!class_alias($namespace, $alias)) {
-                logger('warning', "Failed to create an alias [$alias] for class [$namespace]");
+                \Luminova\Funcs\logger('warning', "Failed to create alias [$alias] for class [$namespace]");
             }
         }
     }
+
+    define('__INIT_DEV_MODULES__', true);
 }
 
 /**
- * Initialize dev global functions
+ * Load and initialize dev global functions.
  */
-if(
-    env('feature.app.dev.functions', false) && 
-    !defined('INIT_DEV_FUNCTIONS') && 
-    file_exists($global = root('/app/Utils/') . 'Global.php')
-){
-    define('INIT_DEV_FUNCTIONS', true);
-    require_once $global;
+if (!defined('__INIT_DEV_FUNCTIONS__') && env('feature.app.dev.functions', false)) {
+    import(root('/app/Utils/', 'Global.php'), true, true);
+    define('__INIT_DEV_FUNCTIONS__', true);
 }

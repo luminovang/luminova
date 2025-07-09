@@ -14,6 +14,10 @@ use \Luminova\Composer\BaseComposer;
 use \Luminova\Command\Terminal;
 use \ZipArchive;
 use \Exception;
+use function \Luminova\Funcs\{
+    filter_paths,
+    make_dir
+};
 
 class Builder extends BaseComposer
 {  

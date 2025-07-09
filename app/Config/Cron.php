@@ -23,7 +23,7 @@ final class Cron extends CoreCronTasks
        /**
          * $this->service('\App\Controllers\Cli\ExampleCommand::fooMethod')
          *   ->seconds(5)
-         *   ->log(root('/writeable/log/') . 'cron.log');
+         *   ->log(Luminova\Funcs\root('/writeable/log/') . 'cron.log');
          */
     }
 }

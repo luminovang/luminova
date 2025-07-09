@@ -20,9 +20,12 @@ parameters:
 		- dump/*
 	scanDirectories:
 		- samples/
-		- resources/views/
-	checkMissingIterableValueType: false
-	checkGenericClassInNonGenericObjectType: false
+		- resources/Views/
+	ignoreErrors:
+		-
+			identifier: missingType.generics
+		-
+			identifier: missingType.iterableValue
 	checkMissingCallableSignature: true
 	treatPhpDocTypesAsCertain: false
 

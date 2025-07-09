@@ -16,6 +16,10 @@ use \Luminova\Functions\IP;
 use \Luminova\Command\Terminal;
 use \Luminova\Http\Request;
 use \Luminova\Logger\Logger;
+use function \Luminova\Funcs\{
+    filter_paths,
+    shared
+};
 
 final class Performance
 {

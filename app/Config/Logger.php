@@ -61,7 +61,7 @@ final class Logger extends BaseConfig
      * When this limit is reached, a backup of the log file is created 
      * if `logger.create.backup` or `$autoBackup` is set to true; otherwise, the logs are cleared.
      * 
-     * @var string $maxSize The maximum size of each log file.
+     * @var int $maxSize The maximum size of each log file.
      */
     public static int $maxSize = 0;
 

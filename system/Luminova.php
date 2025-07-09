@@ -1,6 +1,13 @@
 <?php
 /**
  * Luminova Framework foundation.
+ * 
+ * ██╗     ██╗   ██╗███╗   ███╗██╗███╗   ██╗ ██████╗ ██╗   ██╗ █████╗ 
+ * ██║     ██║   ██║████╗ ████║██║████╗  ██║██╔═══██╗██║   ██║██╔══██╗
+ * ██║     ██║   ██║██╔████╔██║██║██╔██╗ ██║██║   ██║██║   ██║███████║
+ * ██║     ██║   ██║██║╚██╔╝██║██║██║╚██╗██║██║   ██║██║   ██║██╔══██║
+ * ███████╗╚██████╔╝██║ ╚═╝ ██║██║██║ ╚████║╚██████╔╝╚██████╔╝██║  ██║
+ * ╚══════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝
  *
  * @package Luminova
  * @author Ujah Chigozie Peter
@@ -24,14 +31,14 @@ final class Luminova
      * 
      * @var string VERSION
      */
-    public const VERSION = '3.6.5';
+    public const VERSION = '3.6.6';
 
     /**
      * Framework version name.
      * 
      * @var string VERSION_NAME
      */
-    public const VERSION_NAME = 'Osiris';
+    public const VERSION_NAME = 'Hermes';
 
     /**
      * Minimum required php version.
@@ -45,7 +52,7 @@ final class Luminova
      * 
      * @var string NOVAKIT_VERSION
      */
-    public const NOVAKIT_VERSION = '2.9.9';
+    public const NOVAKIT_VERSION = '3.0.0';
 
     /**
      * Server base path for router.
@@ -96,16 +103,17 @@ final class Luminova
      */
     public static final function copyright(bool $userAgent = false): string
     {
-        if($userAgent){
+        if ($userAgent) {
             return sprintf(
-                'LuminovaFramework/%s (PHP; %s; %s) - https://luminova.ng',
-                self::VERSION, 
+                'LuminovaFramework-%s/%s (PHP; %s; %s) - https://luminova.ng',
+                self::VERSION_NAME, 
+                self::VERSION,
                 PHP_VERSION,
                 PHP_OS_FAMILY
             );
         }
 
-        return 'PHP Luminova (' . self::VERSION . ')';
+        return sprintf('PHP Luminova (%s)', self::VERSION);
     }
 
     /**
@@ -117,7 +125,7 @@ final class Luminova
      */
     public static final function version(bool $integer = false): string|int
     {
-        return $integer ? (int) strict(self::VERSION, 'int') : self::VERSION;
+        return $integer ? (int) \Luminova\Funcs\strict(self::VERSION, 'int') : self::VERSION;
     }
 
     /**
@@ -315,7 +323,7 @@ final class Luminova
     /**
      * Generate cache id for storing and serving static pages.
      * 
-     * @return string Return cache id string.
+     * @return string Return cache id.
      */
     public static function getCacheId(): string 
     {
@@ -378,11 +386,18 @@ final class Luminova
             return $cli;
         }
 
-        if (!empty($_SERVER['REMOTE_ADDR']) || !empty($_SERVER['HTTP_USER_AGENT'])) {
+        $isHttp = $_SERVER['REMOTE_ADDR'] 
+            ?? $_SERVER['HTTP_USER_AGENT'] 
+            ?? null;
+
+        if ($isHttp !== null) {
             return $cli = false;
         }
 
-        return $cli = (PHP_SAPI === 'cli' || isset($_SERVER['argv']) || defined('STDIN') || !empty($_ENV['SHELL']));
+        return $cli = (PHP_SAPI === 'cli' 
+            || isset($_SERVER['argv']) 
+            || defined('STDIN') 
+            || !empty($_ENV['SHELL']));
     }
 
     /**
@@ -397,6 +412,7 @@ final class Luminova
         $matching = '';
         foreach (self::$systemPaths as $directory) {
             $separator = $directory . DIRECTORY_SEPARATOR; 
+
             if (str_contains($path, $separator)) {
                 $matching = $separator;
                 break;

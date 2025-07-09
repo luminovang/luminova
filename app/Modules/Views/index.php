@@ -1,3 +1,4 @@
+<?php use function \Luminova\Funcs\{locale, href, asset};?>
 <!DOCTYPE html>
 <html lang="<?= locale();?>">
 <head>

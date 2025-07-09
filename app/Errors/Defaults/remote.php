@@ -5,9 +5,10 @@
  *
  * @var \Luminova\Errors\ErrorHandler $stack
  */
-use Luminova\Http\Client\Curl;
-use Luminova\Errors\ErrorHandler;
-use Luminova\Exceptions\AppException;
+use \Luminova\Http\Client\Curl;
+use \Luminova\Errors\ErrorHandler;
+use \Luminova\Exceptions\AppException;
+use function \Luminova\Funcs\logger;
 
 include_once __DIR__ . '/tracing.php';
 
