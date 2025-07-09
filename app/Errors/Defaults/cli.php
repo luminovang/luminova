@@ -9,6 +9,7 @@
  */
 use \Luminova\Command\Terminal;
 use \Luminova\Command\Utils\Color;
+use function \Luminova\Funcs\filter_paths;
 
 // Initialize terminal
 Terminal::init();
@@ -18,10 +19,12 @@ if (isset($exception)) {
     Terminal::error('Exception: [' . $exception::class . ']');
     Terminal::newLine();
     Terminal::writeln($parts[0]);
+
     $fileLine = Color::style(isset($parts[1]) 
         ? filter_paths($parts[1])
         : filter_paths($exception->getFile() . ' Line: ' . $exception->getLine())
     , 'green');
+
     Terminal::writeln('File: ' . $fileLine);
     Terminal::newLine();
 
@@ -30,9 +33,11 @@ if (isset($exception)) {
     while ($previous = $last->getPrevious()) {
         $last = $previous;
         $part = explode(" File:", $previous->getMessage());
+
         Terminal::error('Caused by: [' . $previous::class . ']');
         Terminal::newLine();
         Terminal::writeln($part[0]);
+        
         $fileLine = Color::style(isset($part[1]) 
             ? filter_paths($part[1])
             : filter_paths($previous->getFile() . ' Line: ' . $previous->getLine())

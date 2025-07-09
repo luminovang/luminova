@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="<?= locale();?>">
+<html lang="<?= \Luminova\Funcs\locale();?>">
 <head>
     <meta charset="UTF-8">
     <title>Welcome to PHP Luminova</title>
     <meta name="description" content="Simple framework built for speed and keeping your existing coding skills going.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/png" href="<?= href('favicon.png');?>">
-    <link rel="stylesheet" href="<?= asset('css/app.css');?>">
+    <link rel="shortcut icon" type="image/png" href="<?= \Luminova\Funcs\href('favicon.png');?>">
+    <link rel="stylesheet" href="<?= Luminova\Funcs\asset('css/app.css');?>">
 </head>
 <body>
 <header>
@@ -64,7 +64,7 @@
     <pre><code>app/Controllers/Welcome.php</code></pre>
     <p>Development Server Context</p>
     <pre><code><?= $_SERVER['SERVER_SOFTWARE']??'Unknown Development Server';?></code></pre>
-    <p>Enable HMVC Design Pattern in envirment configuration file (.env)</p>
+    <p>Enable HMVC Design Pattern in environment configuration file (.env)</p>
     <pre><code>feature.app.hmvc = enable</code></pre>
 </section>
 

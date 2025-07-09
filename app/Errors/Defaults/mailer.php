@@ -5,10 +5,10 @@
  *
  * @var \Luminova\Errors\ErrorHandler|null $stack
  */
-
-use Luminova\Errors\ErrorHandler;
-use Luminova\Email\Mailer;
-use Luminova\Exceptions\MailerException;
+use \Luminova\Errors\ErrorHandler;
+use \Luminova\Email\Mailer;
+use \Luminova\Exceptions\MailerException;
+use function \Luminova\Funcs\logger;
 
 include_once __DIR__ . '/tracing.php';
 

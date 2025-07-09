@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="<?= locale();?>">
+<html lang="<?= \Luminova\Funcs\locale();?>">
 <head>
     <meta charset="UTF-8">
     <title>404 Error Page</title>
     <meta name="description" content="Simple framework built for speed and keeping your existing coding skills going.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/png" href="<?= href('favicon.png');?>">
-    <link rel="stylesheet" href="<?= asset('css/app.css');?>">
+    <link rel="shortcut icon" type="image/png" href="<?= \Luminova\Funcs\href('favicon.png');?>">
+    <link rel="stylesheet" href="<?= \Luminova\Funcs\asset('css/app.css');?>">
 </head>
 <body>
 <header>

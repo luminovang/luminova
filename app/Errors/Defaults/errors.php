@@ -1,4 +1,4 @@
-<?php 
+<?php
 $lines = explode(PHP_EOL, $stack->getMessage());
 $messages = explode(' called in ', $stack->getMessage());
 $message = $stack->getFilteredMessage();
@@ -21,7 +21,7 @@ $searchable = urlencode($message . ' PHP Luminova Framework');
         <?php if (defined('PRODUCTION') && !PRODUCTION): ?>
             <div class="error-details">
                 <h2>Error Details:</h2>
-                <p class="entry"><?= htmlspecialchars($message, ENT_QUOTES); ?>. Thrown in: <?= htmlspecialchars(filter_paths($stack->getFile()), ENT_QUOTES); ?>, Line: <?= $stack->getLine(); ?></p>
+                <p class="entry"><?= htmlspecialchars($message, ENT_QUOTES); ?>. Thrown in: <?= htmlspecialchars(\Luminova\Funcs\filter_paths($stack->getFile()), ENT_QUOTES); ?>, Line: <?= $stack->getLine(); ?></p>
                 <?php if(isset($lines[2]) || isset($messages[1])): ?>
                     <p class="entry text-warning">Caller: <?= htmlspecialchars($lines[2] ?? $messages[1] ?? '', ENT_QUOTES); ?></p>
                 <?php endif;?>

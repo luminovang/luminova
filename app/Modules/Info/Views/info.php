@@ -1,4 +1,12 @@
-<?php use \Luminova\Functions\Maths;?>
+<?php 
+use \Luminova\Functions\Maths;
+use function \Luminova\Funcs\{
+    locale,
+    href,
+    asset,
+    shared
+};
+?>
 <!DOCTYPE html>
 <html lang="<?= locale();?>">
 <head>

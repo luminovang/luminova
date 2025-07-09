@@ -7,6 +7,7 @@
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
  */
+use function \Luminova\Funcs\{root, start_url};
 
 /**
  * Tips: 

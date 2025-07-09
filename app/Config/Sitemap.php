@@ -118,7 +118,7 @@ final class Sitemap extends BaseConfig
      * Examples:
      * - `'✸/foo/bar/✸'`: Excludes all URLs under the `docs/edit` path.
      *
-     * @var array<string,string> $skipStaticHtml An array of URL patterns to exclude from static `.html` generation.
+     * @var array<int,string> $skipStaticHtml An array of URL patterns to exclude from static `.html` generation.
      */
     public array $skipStaticHtml = [
         '*/api/*'

@@ -45,7 +45,7 @@ use \Luminova\Core\CoreApplication;
  * $this->export(Meta::class); //or $this->Meta = new Meta();
  * $this->Meta->setCanonicalVersion("https://example.com/", $this->getView());
  * $this->Meta->setCanonicalVersion("https://www.example.com/", $this->getView());
- * $this->Meta->setCanonicalVersion(parent::baseUrl(), $this->getView());
+ * $this->Meta->setCanonicalVersion(APP_URL, $this->getView());
  * ```
  */
 class Application extends CoreApplication 
@@ -56,6 +56,7 @@ class Application extends CoreApplication
     protected function onCreate(): void 
     {
         // Register namespace for HMVC Info controllers
+        // You can delete the below line, if you are not using HMVC pattern
         $this->router->addNamespace('\\App\\Modules\\Info\\Controllers\\');
     }
 

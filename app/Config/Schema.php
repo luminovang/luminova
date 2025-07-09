@@ -8,6 +8,7 @@
  * @license See LICENSE file
  * @link https://luminova.ng/docs/3.2.6/seo/schema
  */
+use function \Luminova\Funcs\{locale, href, asset};
 
 return [
     'name'                  => APP_NAME,

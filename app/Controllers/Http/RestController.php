@@ -13,6 +13,7 @@ use \Luminova\Base\BaseController;
 use \Luminova\Attributes\Prefix;
 use \Luminova\Attributes\Route;
 use \App\Errors\Controllers\ErrorController;
+use function \Luminova\Funcs\response;
 
 /**
  * This class demonstrates how HTTP web pages or REST API controller can be implemented in Luminova.
