@@ -1,7 +1,8 @@
 <?php 
-use \Luminova\Functions\Maths;
+use \Luminova\Common\Maths;
 use \Luminova\Debugger\Performance;
 use \Luminova\Http\Request;
+use function \Luminova\Funcs\{ip_address, is_command, shared};
 include_once __DIR__ . '/tracing.php';
 
 function onErrorShowDebugTracer(array $trace, ?array $timelines = null): void{
@@ -38,12 +39,14 @@ function onErrorShowDebugTracer(array $trace, ?array $timelines = null): void{
                 <?= getDebugTracing($trace); ?>
             </div>
 
-            <div class="content" id="timeline">
-                <?php foreach($timelines as $tl): ?>
-                    <?php if(str_ends_with($tl, 'thrown')){continue;}?>
-                    <p class="entry text-timeline"><?= htmlspecialchars($tl, ENT_QUOTES); ?></p>
-                <?php endforeach; ?>
-            </div>
+            <?php if($timelines): ?>
+                <div class="content" id="timeline">
+                    <?php foreach($timelines as $tl): ?>
+                        <?php if(str_ends_with($tl, 'thrown')){continue;}?>
+                        <p class="entry text-timeline"><?= htmlspecialchars($tl, ENT_QUOTES); ?></p>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif;?>
 
             <div class="content" id="server">
                 <h3>SERVER</h3>
@@ -109,7 +112,7 @@ function onErrorShowDebugTracer(array $trace, ?array $timelines = null): void{
 
             <div class="content" id="request">
                 <h3>REQUEST</h3>
-                <?php $request = new Request(); ?>
+                <?php $request = Request::getInstance(); ?>
                 <table>
                     <tbody>
                         <tr>
@@ -227,7 +230,7 @@ function onErrorShowDebugTracer(array $trace, ?array $timelines = null): void{
                             <td>Memory Limit:</td>
                             <td><?= htmlspecialchars((string) ini_get('memory_limit'), ENT_QUOTES) ?></td>
                         </tr>
-                        <?php if(defined('IS_UP') && ($dbTime = shared('__DB_QUERY_EXECUTION_TIME__', null, 0)) > 0): ?>
+                        <?php if(defined('IS_UP') && ($dbTime = shared('__DB_QUERY_EXECUTION_TIME__', default: 0)) > 0): ?>
                         <tr>
                             <td>Last Database Executions:</td>
                             <td><?= htmlspecialchars(($dbTime < 1) ? sprintf('%.2f ms', $dbTime * 1000) : sprintf('%.4f s', $dbTime), ENT_QUOTES) ?></td>

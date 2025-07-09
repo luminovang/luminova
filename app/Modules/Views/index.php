@@ -1,8 +1,9 @@
+<?php use function \Luminova\Funcs\{locale, href, asset};?>
 <!DOCTYPE html>
 <html lang="<?= locale();?>">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome to PHP Luminova</title>
+    <title><?= $this->_title; ?></title>
     <meta name="description" content="Simple framework built for speed and keeping your existing coding skills going.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/png" href="<?= href('favicon.png');?>">
@@ -62,10 +63,10 @@
     <p>If you would like to edit this page you will find it located at:</p>
     <pre><code>resources/Modules/Views/index.php</code></pre>
     <p>The corresponding controller for this page can be found at:</p>
-    <pre><code>app/Modules/Controllers/Welcome.php</code></pre>
+    <pre><code>app/Modules/Controllers/Http/MainController.php</code></pre>
     <p>Development Server Context</p>
     <pre><code><?= $_SERVER['SERVER_SOFTWARE']??'Unknown Development Server';?></code></pre>
-    <a href="<?= $this->_href;?>info">See Custom HMVC Info Page Example</a>
+    <a href="<?= $this->_href;?>info">See Custom HMVC Info Module Page Example</a>
 </section>
 
 

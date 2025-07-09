@@ -9,7 +9,7 @@
  */
 namespace App\Config;
 
-use \Luminova\Core\CoreDatabase;
+use \Luminova\Foundation\Core\Database as CoreDatabase;
 
 class Database extends CoreDatabase
 {
@@ -92,7 +92,7 @@ class Database extends CoreDatabase
      * - Load-balanced regional databases
      * - Multi-tenant database separation
      *
-     * @return string|null The shard identifier key (e.g., 'NG', 'EU').
+     * @return string Return the shard identifier key (e.g., 'NG', 'EU').
      *
      * @example Static shard mapping:
      * ```php

@@ -9,20 +9,30 @@
  */
 namespace App\Config;
 
-use \Luminova\Base\BaseConfig;
+use \Luminova\Base\Configuration;
 use \Luminova\Interface\MailerInterface;
-use \Luminova\Email\Clients\NovaMailer;
+use \Luminova\Utility\Email\Clients\NovaMailer;
 
-final class Mailer extends BaseConfig
+final class Mailer extends Configuration
 {
     /**
-     * Return instance of your preferred mail client.
-     * Your mail client class must implement psr MailerInterface.
-     * You can use \Luminova\Email\Clients\PHPMailer, \Luminova\Email\Clients\SwiftMailer
+     * Returns an instance (or class name) of the mail client to use.
      * 
-     * @example new MyLogger(config) 
+     * The mail client here will be used in your entire application for email services.
      * 
-     * @return class-object<MailerInterface>|class-string<MailerInterface>|null Return preferred logger instance or null to use default logger.
+     * - Your mail client must implement `Psr\Mail\MailerInterface`.  
+     * - You can use built-in clients like:  
+     *   - `\Luminova\Email\Clients\PHPMailer`  
+     *   - `\Luminova\Email\Clients\SwiftMailer`  
+     * - Return `null` to let the framework use its default mailer.
+     * 
+     * @example 
+     * ```php
+     * return new MyMailer($config);
+     * ```
+     * 
+     * @return MailerInterface|class-string<MailerInterface>|null 
+     *         Returns a mailer instance, a mailer class name, or `null` for the default mailer.
      */
     public function getMailer(): MailerInterface|string|null 
     {

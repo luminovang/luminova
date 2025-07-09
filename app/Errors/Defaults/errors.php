@@ -1,7 +1,16 @@
 <?php 
-$lines = explode(PHP_EOL, $stack->getMessage());
-$messages = explode(' called in ', $stack->getMessage());
-$message = $stack->getFilteredMessage();
+/**
+ * For more extended error information in development.
+ * This allows you to view full error details and the line error was triggered.
+ * 
+ * @var \Luminova\Exceptions\AppException<\T>|Luminova\Foundation\Error\Message|Throwable|null $error
+ */
+use \Luminova\Foundation\Error\Message;
+use function \Luminova\Funcs\filter_paths;
+
+$lines = explode(PHP_EOL, $error->getMessage());
+$messages = explode(' called in ', $error->getMessage());
+$message = $error->getDescription();
 $searchable = urlencode($message . ' PHP Luminova Framework');
 ?>
 <!doctype html>
@@ -11,17 +20,17 @@ $searchable = urlencode($message . ' PHP Luminova Framework');
     <meta name="robots" content="noindex">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/png" href="./favicon.png">
-    <title>Error Occurred - <?= htmlspecialchars($stack->getName(), ENT_QUOTES); ?></title>
+    <title>Error Occurred - <?= htmlspecialchars($error->getName(), ENT_QUOTES); ?></title>
     <style><?= preg_replace('#[\r\n\t ]+#', ' ', file_get_contents(__DIR__  . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'debug.css')) ?></style>
     <script>function toggle(id){ event.preventDefault(); var element=document.getElementById(id); if (element.style.display==="none"){ element.style.display="block";} else{ element.style.display="none";}} </script>
 </head>
 <body id="e_all">
     <div class="container text-center main-container">
-        <h1 class="headline"><?= htmlspecialchars($stack->getName(), ENT_QUOTES); ?> #<?= $stack->getCode(); ?></h1>
+        <h1 class="headline"><?= htmlspecialchars($error->getName(), ENT_QUOTES); ?> #<?= $error->getCode(); ?></h1>
         <?php if (defined('PRODUCTION') && !PRODUCTION): ?>
             <div class="error-details">
                 <h2>Error Details:</h2>
-                <p class="entry"><?= htmlspecialchars($message, ENT_QUOTES); ?>. Thrown in: <?= htmlspecialchars(filter_paths($stack->getFile()), ENT_QUOTES); ?>, Line: <?= $stack->getLine(); ?></p>
+                <p class="entry"><?= Message::prettify($message); ?>. Thrown in: <?= htmlspecialchars(filter_paths($error->getFile()), ENT_QUOTES); ?>, Line: <?= $error->getLine(); ?></p>
                 <?php if(isset($lines[2]) || isset($messages[1])): ?>
                     <p class="entry text-warning">Caller: <?= htmlspecialchars($lines[2] ?? $messages[1] ?? '', ENT_QUOTES); ?></p>
                 <?php endif;?>
@@ -33,7 +42,7 @@ $searchable = urlencode($message . ' PHP Luminova Framework');
                     <?php 
                         if (SHOW_DEBUG_BACKTRACE) : 
                             include_once __DIR__ . DIRECTORY_SEPARATOR . 'tracer.php';
-                            onErrorShowDebugTracer($stack->getBacktrace(), array_slice($lines, 3));
+                            onErrorShowDebugTracer($error->getBacktrace(), array_slice($lines, 3));
                         endif;
                     ?>
                 </div>

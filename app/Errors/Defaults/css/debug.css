@@ -7,6 +7,7 @@
     --light-bg-color: #ededee;
     --dark-bg-color: #404040;
     --timeline-color: #711c1c;
+    --link-color: #048aff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,6 +20,7 @@
         --light-bg-color: #ededee;
         --dark-bg-color: #404040;
         --timeline-color: #d0abab;
+        --link-color: #0087ff;
     }
 }
 
@@ -30,6 +32,10 @@ body {
     font-weight: 300;
     margin: 0;
     padding: 0;
+}
+
+a {
+    color: var(--link-color);
 }
 
 h1 {
@@ -66,8 +72,13 @@ p.entry {
     margin: 0 auto;
     padding: 1rem;
 }
+
 .main-container{
     min-height: calc(100vh - 210px);
+}
+
+.subtitle{
+    font-weight: lighter;
 }
 
 .mt-4{

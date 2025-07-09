@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="<?= locale();?>">
+<html lang="<?= \Luminova\Funcs\locale();?>">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome to PHP Luminova</title>
+    <title><?= $this->_title; ?></title>
     <meta name="description" content="Simple framework built for speed and keeping your existing coding skills going.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/png" href="<?= href('favicon.png');?>">
-    <link rel="stylesheet" href="<?= asset('css/app.css');?>">
+    <link rel="shortcut icon" type="image/png" href="<?= \Luminova\Funcs\href('favicon.png');?>">
+    <link rel="stylesheet" href="<?= Luminova\Funcs\asset('css/app.css');?>">
 </head>
 <body>
 <header>
@@ -59,12 +59,12 @@
     <h1>About this page</h1>
     <p>The page you are looking at is being generated dynamically by Luminova.</p>
     <p>If you would like to edit this page you will find it located at:</p>
-    <pre><code>resources/views/index.php</code></pre>
+    <pre><code>resources/Views/index.php</code></pre>
     <p>The corresponding controller for this page can be found at:</p>
-    <pre><code>app/Controllers/Welcome.php</code></pre>
+    <pre><code>app/Controllers/Http/MainController.php</code></pre>
     <p>Development Server Context</p>
     <pre><code><?= $_SERVER['SERVER_SOFTWARE']??'Unknown Development Server';?></code></pre>
-    <p>Enable HMVC Design Pattern in envirment configuration file (.env)</p>
+    <p>Enable HMVC Design Pattern in environment configuration file (.env)</p>
     <pre><code>feature.app.hmvc = enable</code></pre>
 </section>
 

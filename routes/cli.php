@@ -10,6 +10,6 @@ use \Luminova\Routing\Router;
  * @var string $context The name of the current routing context (this file's context).
  */
 
-$router->group('demo', static function(Router $router){
-   $router->command('hello', 'CliController::hello');
+Router::group('demo', static function(): void {
+   Router::command('hello', 'CommandController::hello');
 });

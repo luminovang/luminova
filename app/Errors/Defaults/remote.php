@@ -3,11 +3,12 @@
  * Sends fatal errors to a remote server in production environments.
  * To enable, specify the endpoint URL in `logger.remote.logs` within the environment configuration (.env).
  *
- * @var \Luminova\Errors\ErrorHandler $stack
+ * @var \Luminova\Foundation\Error\Message $error
  */
-use Luminova\Http\Client\Curl;
-use Luminova\Errors\ErrorHandler;
+use Luminova\Http\Client\Novio;
+use function \Luminova\Funcs\logger;
 use Luminova\Exceptions\AppException;
+use Luminova\Foundation\Error\Message;
 
 include_once __DIR__ . '/tracing.php';
 
@@ -20,15 +21,15 @@ if ($endpoint) {
     $details = 'No additional details available.';
     $tracer = 'No debug tracing available';
 
-    if ($stack instanceof ErrorHandler) {
+    if ($error instanceof Message) {
         ob_start();
-        getDebugTracing($stack->getBacktrace());
+        getDebugTracing($error->getBacktrace());
         $tracer = ob_get_clean();
 
         // Error details from stack
-        $title = htmlspecialchars($stack->getName(), ENT_QUOTES);
-        $heading = sprintf('%s #%d', $title, $stack->getCode());
-        $details = htmlspecialchars($stack->getMessage(), ENT_QUOTES);
+        $title = htmlspecialchars($error->getName(), ENT_QUOTES);
+        $heading = sprintf('%s #%d', $title, $error->getCode());
+        $details = htmlspecialchars($error->getMessage(), ENT_QUOTES);
     }
 
     $payload = [
@@ -43,7 +44,7 @@ if ($endpoint) {
     // Fiber for asynchronous background execution
     $fiber = new Fiber(function () use ($endpoint, $payload) {
         try {
-            $response = (new Curl())->request('POST', $endpoint, [
+            $response = (new Novio())->request('POST', $endpoint, [
                 'body' => $payload
             ]);
 

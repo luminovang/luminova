@@ -1,4 +1,6 @@
 <?php
+use \Luminova\Routing\Router;
+
 /**
  * This file handles all URI that start with `api` (e.g, https://example.com/api)
  * 
@@ -9,4 +11,4 @@
  * @var string $context The name of the current routing context (this file's context).
  */
 
-$router->post('/info', 'RestController::info');
+Router::post('/info', 'RestController::info');

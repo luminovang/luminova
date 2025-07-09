@@ -1,6 +1,13 @@
 <?php 
-$message = $exception->getFilteredMessage();
+/**
+ * @var \Luminova\Exceptions\AppException<\T>|null $error
+ */
+use \Luminova\Foundation\Error\Message;
+use function \Luminova\Funcs\{href, filter_paths, get_class_name};
+
+$message = $error->getDescription();
 $searchable = urlencode($message . ' PHP Luminova Framework');
+$eTitle = $error?->getName() ?? get_class_name($error::class);
 ?>
 <!doctype html>
 <html lang="en">
@@ -9,15 +16,18 @@ $searchable = urlencode($message . ' PHP Luminova Framework');
     <meta name="robots" content="noindex">
     <meta http-equiv="Cache-Control" content="no-store, max-age=0, no-cache"/>
     <link rel="shortcut icon" type="image/png" href="<?= href('favicon.png');?>">
-    <title>View Error Occurred - <?= htmlspecialchars($title ?? $exception::class, ENT_QUOTES) ?></title>
+    <title>Template Error - <?= htmlspecialchars($eTitle, ENT_QUOTES) ?></title>
     <style> <?= preg_replace('#[\r\n\t ]+#', ' ', file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'debug.css')) ?> </style>
     <script>function toggle(id){ event.preventDefault(); var element=document.getElementById(id); if (element.style.display==="none"){ element.style.display="block";} else{ element.style.display="none";}} </script>
 </head>
 <body>
     <div class="header">
         <div class="container mt-4 <?= SHOW_DEBUG_BACKTRACE ?: 'main-container';?>">
-            <h1><?= htmlspecialchars(($title ?? $exception::class) . ($exception->getCode() ? ' #' . $exception->getCode() : ''), ENT_QUOTES); ?></h1>
-            <p><?= nl2br(htmlspecialchars($message, ENT_QUOTES)) ?> Thrown in file: <?= filter_paths($exception->getFile());?> on line: <?= $exception->getLine();?></p>
+            <h1>
+                <?= htmlspecialchars($eTitle, ENT_QUOTES); ?> #<?= $error->getCode(); ?>
+                <span class="subtitle"><?= $title ? htmlspecialchars("($title)", ENT_QUOTES) : ''; ?></span>
+            </h1>
+            <p><?= nl2br(Message::prettify(rtrim($message, '.'))) ?>. Thrown in file: <?= filter_paths($error->getFile());?> on line: <?= $error->getLine();?></p>
             <p class="mt-2">
                 <a class="button" href="https://www.duckduckgo.com/?q=<?= $searchable; ?>" rel="noreferrer" target="_blank">Search Online &rarr;</a>
                 <a class="button" href="https://luminova.ng/forum/search?q=<?= $searchable;?>" rel="noreferrer" target="_blank">Search Forum &#128270;</a>
@@ -29,7 +39,7 @@ $searchable = urlencode($message . ' PHP Luminova Framework');
     <?php 
     if (SHOW_DEBUG_BACKTRACE) : 
         include_once __DIR__ . DIRECTORY_SEPARATOR . 'tracer.php';
-        onErrorShowDebugTracer($exception->getBacktrace());
+        onErrorShowDebugTracer($error->getBacktrace());
     endif;
     ?>
 
