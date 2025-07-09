@@ -634,6 +634,7 @@ defined('PARAM_BOOL') || define('PARAM_BOOL', 5);
 
 /**
  * Floating-point number type (e.g., decimals)
+ * 
  * Not standard in PDO; used for internal handling
  * 
  * @var int PARAM_FLOAT
