@@ -1,9 +1,19 @@
-<?php use function \Luminova\Funcs\{locale, href, asset};?>
+<?php
+/**
+ * Replace this template with your custom 5xx error page design
+ * to better match your application's layout and branding.
+ */
+use \Luminova\Http\HttpCode;
+use function \Luminova\Funcs\{locale, href, asset};
+
+$status = ($this->getOption('error')['code'] ?? 500);
+$title = "{$status} " . HttpCode::get($status);
+?>
 <!DOCTYPE html>
 <html lang="<?= locale();?>">
 <head>
     <meta charset="UTF-8">
-    <title><?= $this->_title; ?></title>
+    <title><?= $title;?></title>
     <meta name="description" content="Simple framework built for speed and keeping your existing coding skills going.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/png" href="<?= href('favicon.png');?>">
@@ -49,30 +59,21 @@
     </div>
 
     <div class="info">
-        <h1>Welcome to <?= \Luminova\Luminova::copyright() ?></h1>
-        <h2>Simple framework built for speed and keeping your existing coding skills going.</h2>
-        <p>Architecture: Hierarchical Model-View-Controller (HMVC)</p>
-        <p>Environment: <?= ENVIRONMENT ?></p>
+        <h1><?= $title;?></h1>
+        <h2>The server encountered an error preventing the application from loading.</h2>
     </div>
-
 </header>
 
-<section>
-    <h1>About this page</h1>
-    <p>The page you are looking at is being generated dynamically by Luminova as part of HMVC example.</p>
-    <p>If you would like to edit this page you will find it located at:</p>
-    <pre><code>resources/Modules/Views/index.php</code></pre>
-    <p>The corresponding controller for this page can be found at:</p>
-    <pre><code>app/Modules/Controllers/Http/MainController.php</code></pre>
-    <p>Development Server Context</p>
-    <pre><code><?= $_SERVER['SERVER_SOFTWARE']??'Unknown Development Server';?></code></pre>
-    <a href="<?= $this->_href;?>info">See Custom HMVC Info Module Page Example</a>
-</section>
 
+<section class="main-container">
+   <a href="<?= $this->_href;?>" class="button">Home</a>
+</section>
 
 <footer>
     <div class="copyrights">
+
         <p>&copy; <?= date('Y') ?> <a href="https://nanoblocktech.com/" target="_blank">Nanoblock Technology Ltd</a>. PHP Luminova is open source project released under the MIT open source license.</p>
+
     </div>
 </footer>
 

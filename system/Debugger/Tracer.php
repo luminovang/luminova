@@ -10,6 +10,8 @@
  */
 namespace Luminova\Debugger; 
 
+use function \Luminova\Funcs\get_content;
+
 final class Tracer
 {
     /**

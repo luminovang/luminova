@@ -9,36 +9,51 @@
 */
 namespace App\Config;
 
-use \Luminova\Base\BaseConfig;
+use \Luminova\Base\Configuration;
 
-final class Encryption extends BaseConfig
+final class Encryption extends Configuration
 {
     /**
-     * Encryption handler to use.
-     * Available options: 'openssl', 'sodium'.
+     * Which encryption engine to use.
+     * 
+     * - 'openssl' (default) — widely available and reliable.
+     * - 'sodium' — newer, built-in in PHP 7.2+, often faster and safer by default.
+     * 
+     * This controls which library handles all encryption and decryption.
      *
      * @var string $handler
      */
     public string $handler = 'openssl';
 
     /**
-     * Encryption method for OpenSSL.
+     * The specific encryption algorithm when using OpenSSL.
+     * 
      * Examples: 'AES-128-CBC', 'AES-192-CBC', 'AES-128-CFB', 'AES-128-ECB'.
+     * 
+     * If you don't know which to pick, stick with 'AES-128-CBC' — it’s secure 
+     * and widely supported. This setting is ignored if you use 'sodium'.
      *
      * @var string $method
      */
     public string $method = 'AES-128-CBC';
   
     /**
-     * Hashing algorithm for data integrity.
+     * Hashing algorithm used to verify encrypted data hasn’t been changed.
+     * 
      * Examples: 'SHA512', 'SHA256'.
+     * 
+     * SHA512 gives a longer hash (more collision-resistant), while SHA256 is 
+     * slightly faster. Either is secure for most uses.
      *
      * @var string $digest
      */
-    public string $digest = 'SHA512';
+    public string $digest = 'SHA256';
 
     /**
-     * OpenSSL key information.
+     * Extra key information or salt for OpenSSL.
+     * 
+     * This value is mixed into the encryption key to make it harder to guess.
+     * Leave it empty unless you know you need to customize it.
      *
      * @var string $keyInfo
      */

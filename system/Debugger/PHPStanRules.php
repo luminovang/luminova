@@ -11,13 +11,16 @@ declare(strict_types=1);
  */
 namespace Luminova\Debugger; 
 
-use \PhpParser\Comment\Doc;
 use \PhpParser\Node;
-use \PhpParser\Node\Stmt;
-use \PhpParser\Node\Stmt\Use_;
-use \PHPStan\Analyser\Scope;
 use \PHPStan\Rules\Rule;
+use \PhpParser\Node\Stmt;
+use \PhpParser\Comment\Doc;
+use \PHPStan\Analyser\Scope;
+use \PhpParser\Node\Stmt\Use_;
+use \PhpParser\Node\Stmt\Echo_;
+use \PhpParser\Node\Expr\Eval_;
 use \PhpParser\Node\Expr\Variable;
+use \PhpParser\Node\Expr\Include_;
 
 final class PHPStanRules implements Rule
 {
@@ -26,7 +29,7 @@ final class PHPStanRules implements Rule
      */
     public function getNodeType(): string
     {
-        return Stmt::class;
+        return Node::class;
     }
 
     /**
@@ -38,42 +41,67 @@ final class PHPStanRules implements Rule
     public function processNode(Node $node, Scope $scope): array
     {
         $errors = [];
-        $comments = $node->getComments();
 
-        if ($comments === []) {
-            return $errors;
+        // Rule Use import instead of include/required
+        if ($node instanceof Include_) {
+            [$type, $func] = $this->getIncludeChecks($node);
+            $errors[] = sprintf(
+                'Avoid using `%s`; use the `\Luminova\Funcs\%s` helper function instead.',
+                $type,
+                $func
+            );
         }
 
-        foreach ($comments as $comment) {
-            if (!$comment instanceof Doc) {
-                continue;
-            }
-
-            $previous = $node->getAttribute('previous');
-
-            while ($previous) {
-                if ($previous instanceof Use_) {
-                    $errors[] = 'Use statement must be located after license docblock';
-                    break;
+        // Rule Use statement should not appear before docblock license
+         if ($node instanceof Stmt && ($comments = $node->getComments()) !== []) {
+            foreach ($comments as $comment) {
+                if (!$comment instanceof Doc) {
+                    continue;
                 }
 
-                $previous = $previous->getAttribute('previous');
+                $previous = $node->getAttribute('previous');
+                while ($previous) {
+                    if ($previous instanceof Use_) {
+                        $errors[] = 'Use statement must be located after license docblock.';
+                        break;
+                    }
+
+                    $previous = $previous->getAttribute('previous');
+                }
             }
         }
 
-        // Check for variable naming convention
-        if ($node instanceof Variable) {
-            //$variableName = ($node instanceof Variable) ? $node->name : $node->getOriginalNode()->name;
-            $variableName = $node->name;
-            
-            if (str_contains($variableName, '_')) {
+        // Rule Variable naming should be camelCase
+        if ($node instanceof Variable && is_string($node->name)) {
+            if (str_contains($node->name, '_')) {
                 $errors[] = sprintf(
                     'Variable name "%s" contains underscores. Use camelCase instead.',
-                    $variableName
+                    $node->name
                 );
             }
         }
 
+         // Rule Disallow echo usage inside class methods
+        if ($node instanceof Echo_ && $scope->isInClass()) {
+            $errors[] = 'Avoid using echo inside class methods. Return value or use Logger instead.';
+        }
+
+        // Rule Disallow eval()
+        if ($node instanceof Eval_) {
+            $errors[] = 'Avoid using eval(). It is insecure.';
+        }
+
         return $errors;
+    }
+
+    private function getIncludeChecks(Node $node): array
+    {
+        return match ($node->type) {
+            Include_::TYPE_INCLUDE => ['include', 'import(path: \'...\', require: false, once: false)'],
+            Include_::TYPE_INCLUDE_ONCE => ['include_once', 'import(path: \'...\', require: false, once: true)'],
+            Include_::TYPE_REQUIRE => ['require', 'import(path: \'...\', once: false)'],
+            Include_::TYPE_REQUIRE_ONCE => ['require_once', 'import(path: \'...\', once: true)'],
+            default => ['include/require', 'import(...)']
+        };
     }
 }

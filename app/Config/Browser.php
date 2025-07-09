@@ -1,6 +1,6 @@
 <?php 
 /**
- * Luminova Framework
+ * Luminova Framework Browser detection configuration.
  *
  * @package Luminova
  * @author Ujah Chigozie Peter
@@ -9,9 +9,9 @@
 */
 namespace App\Config;
 
-use \Luminova\Base\BaseConfig;
+use \Luminova\Base\Configuration;
 
-final class Browser extends BaseConfig
+final class Browser extends Configuration
 {
     /**
      * An associative array of strings representing common keywords or patterns found in robots user agent string.
@@ -36,7 +36,7 @@ final class Browser extends BaseConfig
      * Where array key is the mobile keyword and the value is the name.
      *
      * @var array<string,string> $mobileKeywords 
-     * NOTE: The order is important
+     * > **Note:** The order is important.
      */
     public array $mobileKeywords = [
         'android'         => 'Android',
@@ -63,7 +63,7 @@ final class Browser extends BaseConfig
      * > This will be taken in consideration when you call method `$userAgent->isTrusted()`.
      * > Its also a good authentication when you are developing a hybrid mobile app, 
      * to ensure only your webview can access.
-    */
+     */
     public array $browsers = [
         'Chrome',
         'Safari',

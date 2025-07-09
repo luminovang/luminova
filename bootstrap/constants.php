@@ -35,6 +35,49 @@ defined('IS_LOCALHOST') || define('IS_LOCALHOST', (
     ($_SERVER['SERVER_NAME'] ?? '') === 'localhost'
 ));
 
+if (!function_exists('json_validate')) {
+    /**
+     * Check if the input is a valid JSON object.
+     *
+     * @param mixed $input The input to check.
+     * @param int $depth Maximum nesting depth of the structure being decoded (default: 512).
+     * @param int $flags Optional flags (default: 0).
+     *
+     * @return bool Returns true if the input is valid JSON; false otherwise.
+     */
+    function json_validate(mixed $input, int $depth = 512, int $flags = 0): bool
+    {
+       if (!is_string($input)) {
+            return false;
+        }
+        
+        json_decode($input, null, $depth, $flags);
+        return json_last_error() === JSON_ERROR_NONE;
+    }
+}
+
+if (!function_exists('array_is_list')) {
+    /**
+     * Check if array is list.
+     * 
+     * @param array $array The array to check.
+     * 
+     * @return bool Return true if array is sequential, false otherwise.
+     */
+    function array_is_list(array $array): bool
+    {
+        if ($array === []) {
+            return true;
+        }
+
+        if (!isset($array[0])) {
+            return false;
+        }
+
+        return array_keys($array) === range(0, count($array) - 1);
+    }
+}
+
 /**
  * Executes a PHP function dynamically, checking if it's disabled before execution.
  *
@@ -116,170 +159,205 @@ function __cache_env(array $entries, string $path): bool
     return file_put_contents($path, $code) !== false;
 }
 
-if(!function_exists('setenv')){
-    /**
-     * Sets an environment variable, optionally saving it to the `.env` file.
-     *
-     * @param string $key The environment variable key.
-     * @param string $value The value to set for the environment variable.
-     * @param bool $updateToEnv Whether to store/update the variable in the `.env` file (default: false).
-     * 
-     * @return bool Returns true on success, false on failure.
-     *
-     * @example Temporarily set an environment variable for the current runtime:
-     * ```php
-     * setenv('FOO_KEY', 'foo value');
-     * ```
-     *
-     * @example Set an environment variable and persist it in the `.env` file:
-     * ```php
-     * setenv('FOO_KEY', 'foo value', true);
-     * ```
-     *
-     * @example Add or update an environment variable as a disabled entry:
-     * ```php
-     * setenv(';FOO_KEY', 'foo value', true);
-     * ```
-     */
-    function setenv(string $key, string $value, bool $updateToEnv = false): bool
-    {
-        $key = trim($key);
+/**
+ * Convert a numeric string into its appropriate numeric type.
+ * 
+ * This method detects whether the given string represents
+ * a floating-point number or an integer. If the string
+ * contains a decimal point (.) or scientific notation (e),
+ * it is converted to a float; otherwise, it is converted to an int.
+ * 
+ * @param string $value The numeric string to convert.
+ * @param bool $toLowercase Whether to convert the string to lowercase before processing.
+ *                    Useful when checking for scientific notation (e.g., "1E3").
+ * 
+ * @return float|int Returns the numeric value as int or float depending on the input.
+ */
+function to_numeric(string $value, bool $toLowercase = false): float|int
+{
+    $value = trim($value);
 
-        if ($key === '') {
-            return false;
+    if ($value === '') {
+        return 0;
+    }
+
+    if ($toLowercase) {
+        $value = strtolower($value);
+    }
+
+    if (ctype_digit($value)) {
+        return (int) $value;
+    }
+
+    if (!is_numeric($value)) {
+        return 0;
+    }
+
+    return (str_contains($value, '.') || str_contains($value, 'e'))
+        ? (float) $value
+        : (int) $value;
+}
+
+/**
+ * Sets an environment variable, optionally saving it to the `.env` file.
+ *
+ * @param string $key The environment variable key.
+ * @param string $value The value to set for the environment variable.
+ * @param bool $updateToEnv Whether to store/update the variable in the `.env` file (default: false).
+ * 
+ * @return bool Returns true on success, false on failure.
+ *
+ * @example Temporarily set an environment variable for the current runtime:
+ * ```php
+ * setenv('FOO_KEY', 'foo value');
+ * ```
+ *
+ * @example Set an environment variable and persist it in the `.env` file:
+ * ```php
+ * setenv('FOO_KEY', 'foo value', true);
+ * ```
+ *
+ * @example Add or update an environment variable as a disabled entry:
+ * ```php
+ * setenv(';FOO_KEY', 'foo value', true);
+ * ```
+ */
+function setenv(string $key, string $value, bool $updateToEnv = false): bool
+{
+    $key = trim($key);
+
+    if ($key === '') {
+        return false;
+    }
+
+    $value = trim($value);
+    $isComment = str_starts_with($key, ';');
+
+    if($isComment){
+        unset($_ENV[$key], $_SERVER[$key]);
+    }else{
+        if (!getenv($key, true)) {
+            putenv("{$key}={$value}");
         }
 
-        $value = trim($value);
-        $isComment = str_starts_with($key, ';');
+        $_ENV[$key] = $_SERVER[$key] = $value;
+    }
 
-        if($isComment){
-            unset($_ENV[$key], $_SERVER[$key]);
-        }else{
-            if (!getenv($key, true)) {
-                putenv("{$key}={$value}");
+    if (!$updateToEnv) {
+        return true;
+    }
+
+    $path = APP_ROOT . '.env';
+    $envCache = APP_ROOT . 'writeable/.env-cache.php';
+
+    try {
+        $file = new SplFileObject($path, 'a+');
+        $file->seek(0);
+
+        $lines = '';
+        $found = false;
+        $pattern = '/^[;]*\s*' . preg_quote($isComment ? trim($key, "; \t") : $key, '/') . '\s*=\s*(.*)$/mi';
+
+        while (!$file->eof()) {
+            $line = $file->fgets();
+            
+            if (preg_match($pattern, $line)) {
+                $found = true;
+                $lines .= "{$key}={$value}\n";
+            }else{
+                $lines .= $line;
             }
-
-            $_ENV[$key] = $_SERVER[$key] = $value;
         }
 
-        if (!$updateToEnv) {
-            return true;
+        if (!$found) {
+            $lines .= "\n{$key}={$value}";
         }
 
-        $path = APP_ROOT . '.env';
-        $envCache = APP_ROOT . 'writeable/.env-cache.php';
+        $saved = (new SplFileObject($path, 'w'))->fwrite($lines) !== false;
 
-        try {
-            $file = new SplFileObject($path, 'a+');
-            $file->seek(0);
-
-            $lines = '';
-            $found = false;
-            $pattern = '/^[;]*\s*' . preg_quote($isComment ? trim($key, "; \t") : $key, '/') . '\s*=\s*(.*)$/mi';
-
-            while (!$file->eof()) {
-                $line = $file->fgets();
-                
-                if (preg_match($pattern, $line)) {
-                    $found = true;
-                    $lines .= "{$key}={$value}\n";
-                }else{
-                    $lines .= $line;
-                }
-            }
-
-            if (!$found) {
-                $lines .= "\n{$key}={$value}";
-            }
-
-            $saved = (new SplFileObject($path, 'w'))->fwrite($lines) !== false;
-
-            if($saved && !IS_LOCALHOST && file_exists($envCache)){
-                $entry = include $envCache;
-                $entry[$key] = $value;
-        
-                __cache_env($entry, $envCache);
-                $entry = [];
-            }
-
-            return $saved;
-        } catch (Throwable) {
-            return false;
+        if($saved && !IS_LOCALHOST && file_exists($envCache)){
+            $entry = include $envCache;
+            $entry[$key] = $value;
+    
+            __cache_env($entry, $envCache);
+            $entry = [];
         }
+
+        return $saved;
+    } catch (Throwable) {
+        return false;
     }
 }
 
-if(!function_exists('env')){
-    /**
-     * Retrieve an environment variable's value.
-     *
-     * @param string $key The name of the environment variable.
-     * @param mixed $default Optional fallback value if the key is not found (default: null).
-     * 
-     * @return array|string|int|float|bool|null The environment variable's value, or the default if not found.
-     *         Supports automatic type conversion for booleans, numbers, null, and arrays.
-     */
-    function env(string $key, mixed $default = null): mixed 
-    {
-        $key = trim($key);
+/**
+ * Retrieve an environment variable's value.
+ *
+ * @param string $key The name of the environment variable.
+ * @param mixed $default Optional fallback value if the key is not found (default: null).
+ * 
+ * @return array|string|int|float|bool|null The environment variable's value, or the default if not found.
+ *         Supports automatic type conversion for booleans, numbers, null, and arrays.
+ */
+function env(string $key, mixed $default = null): mixed 
+{
+    $key = trim($key);
 
-        if ($key === '') {
-            return '';
-        }
+    if ($key === '') {
+        return '';
+    }
 
-        $value = $_ENV[$key] ?? $_SERVER[$key] ?? getenv($key) ?: '__ENV_KEY_EMPTY__';
+    $value = $_ENV[$key] ?? $_SERVER[$key] ?? getenv($key) ?: '__ENV_KEY_EMPTY__';
 
-        if ($value === '__ENV_KEY_EMPTY__') {
-            return $default;
-        }
+    if ($value === '__ENV_KEY_EMPTY__') {
+        return $default;
+    }
 
-        if (!$value || $value === true || !is_string($value)) {
-            return $value;
-        }
-
-        $value = trim($value);
-
-        if (is_numeric($value)) {
-            return $_ENV[$key] = $_SERVER[$key] = $value + 0;
-        }
-
-        if($value === '[]'){
-            return $_ENV[$key] = $_SERVER[$key] = [];
-        }
-
-        $normalized = match (strtolower($value)) {
-            'true', 'enable'   => true,
-            'false', 'disable' => false,
-            'null'             => null,
-            'blank'            => '',
-            default            => '__ENV_CONTINUE_SEARCH__'
-        };
-
-        if($normalized === null){
-            return $normalized;
-        }
-
-        if ($normalized !== '__ENV_CONTINUE_SEARCH__') {
-            return $_ENV[$key] = $_SERVER[$key] = $normalized;
-        }
-
-        if (str_starts_with($value, '[') && str_ends_with($value, ']')) {
-            $items = array_map(function($item) {
-                $item = trim($item, " '\"\n\r\t\v\0");
-                return match ($item) {
-                    'true'  => true,
-                    'false' => false,
-                    'null'  => null,
-                    is_numeric($item) => $item + 0,
-                    default => $item
-                };
-            }, explode(',', trim($value, '[] ')));
-
-            return $_ENV[$key] = $_SERVER[$key] = $items ?: [];
-        }
-
+    if (!$value || $value === true || !is_string($value)) {
         return $value;
     }
+
+    $value = trim($value);
+
+    if (is_numeric($value)) {
+        return $_ENV[$key] = $_SERVER[$key] = to_numeric($value, true);
+    }
+
+    if($value === '[]'){
+        return $_ENV[$key] = $_SERVER[$key] = [];
+    }
+
+    $normalized = match (strtolower($value)) {
+        'true', 'enable'   => true,
+        'false', 'disable' => false,
+        'null'             => null,
+        'blank'            => '',
+        default            => '__ENV_CONTINUE_SEARCH__'
+    };
+
+    if($normalized === null){
+        return $normalized;
+    }
+
+    if ($normalized !== '__ENV_CONTINUE_SEARCH__') {
+        return $_ENV[$key] = $_SERVER[$key] = $normalized;
+    }
+
+    if (str_starts_with($value, '[') && str_ends_with($value, ']')) {
+        $items = array_map(function($item) {
+            $item = trim($item, " '\"\n\r\t\v\0");
+            return match ($item) {
+                'true'  => true,
+                'false' => false,
+                'null'  => null,
+                is_numeric($item) => to_numeric($item, true),
+                default => $item
+            };
+        }, explode(',', trim($value, '[] ')));
+
+        return $_ENV[$key] = $_SERVER[$key] = $items ?: [];
+    }
+
+    return $value;
 }
 
 /**
@@ -289,7 +367,7 @@ if(!function_exists('env')){
  * 
  * @return void
  */
-(function (string $path) {
+(static function (string $path) {
     $envCache = APP_ROOT . 'writeable/.env-cache.php';
 
     if(!IS_LOCALHOST && file_exists($envCache)){
@@ -321,11 +399,11 @@ if(!function_exists('env')){
                 }
             }
 
-            if(IS_LOCALHOST){
-                return;
+            if(!IS_LOCALHOST){
+                __cache_env($entry, $envCache);
+                $entry = [];
             }
-            __cache_env($entry, $envCache);
-            $entry = [];
+           
             return;
         } catch (Throwable) {}
     }
@@ -634,7 +712,6 @@ defined('PARAM_BOOL') || define('PARAM_BOOL', 5);
 
 /**
  * Floating-point number type (e.g., decimals)
- * 
  * Not standard in PDO; used for internal handling
  * 
  * @var int PARAM_FLOAT

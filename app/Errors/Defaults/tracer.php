@@ -1,7 +1,8 @@
 <?php 
-use \Luminova\Functions\Maths;
-use \Luminova\Debugger\Performance;
+use \Luminova\Common\Maths;
 use \Luminova\Http\Request;
+use \Luminova\Debugger\Performance;
+use function \Luminova\Funcs\{ip_address, is_command, shared};
 include_once __DIR__ . '/tracing.php';
 
 function onErrorShowDebugTracer(array $trace, ?array $timelines = null): void{

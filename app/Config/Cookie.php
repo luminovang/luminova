@@ -9,9 +9,9 @@
  */
 namespace App\Config;
 
-use \Luminova\Base\BaseConfig;
+use \Luminova\Base\Configuration;
 
-final class Cookie extends BaseConfig
+final class Cookie extends Configuration
 {
     /**
      * The directory where cookie-related data may be stored on the server.
@@ -22,6 +22,7 @@ final class Cookie extends BaseConfig
 
     /**
      * The cookie's expiration time in seconds.
+     * 
      * This determines how long the cookie remains valid.
      *
      * @var int $expiration
@@ -30,6 +31,7 @@ final class Cookie extends BaseConfig
 
     /**
      * The path where the cookie is accessible.
+     * 
      * This restricts the availability of the cookie to a specific directory.
      * 
      * @var string $cookiePath (e.g., `'/my-project/'`)
@@ -38,6 +40,7 @@ final class Cookie extends BaseConfig
 
     /**
      * The domain for which the cookie is valid.
+     * 
      * This determines which domains can access the cookie.
      * 
      * @var string $cookieDomain (e.g., `'.' . APP_HOSTNAME`)
@@ -46,6 +49,7 @@ final class Cookie extends BaseConfig
 
     /**
      * The SameSite policy for cookies.
+     * 
      * Defines how cookies are sent with cross-site requests.
      * Available options: 'None', 'Lax', 'Strict'.
      *
@@ -55,6 +59,7 @@ final class Cookie extends BaseConfig
 
     /**
      * Enforce secure cookies by requiring an HTTPS connection.
+     * 
      * If enabled, cookies will not be sent over an insecure HTTP connection.
      *
      * @var bool $secure
@@ -63,6 +68,7 @@ final class Cookie extends BaseConfig
 
     /**
      * Restrict cookie access to HTTP(S) requests only.
+     * 
      * If enabled, JavaScript cannot access the cookie via `document.cookie`.
      *
      * @var bool $httpOnly
@@ -71,6 +77,7 @@ final class Cookie extends BaseConfig
 
     /**
      * Enable setting raw (non-URL-encoded) cookies.
+     * 
      * If enabled, cookie names and values must comply with RFC 2616.
      *
      * @var bool $cookieRaw

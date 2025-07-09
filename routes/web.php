@@ -10,4 +10,8 @@
  * @var string $context The name of the current routing context (this file's context).
  */
 
+// MVC and HMVC index view
 $router->get('/', 'Welcome::home');
+
+// HMVC info view
+$router->get('/info', 'InfoController::info');

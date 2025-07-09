@@ -17,8 +17,13 @@ abstract class BaseComposer
      * @param callable $taskCallback
      * @param callable|null $onCompleteCallback
      * @param string $completionMessage
-    */
-    protected static function progress(int $totalSteps, callable $taskCallback, ?callable $onCompleteCallback = null, ?string $completionMessage = null): void
+     */
+    protected static function progress(
+        int $totalSteps, 
+        callable $taskCallback, 
+        ?callable $onCompleteCallback = null, 
+        ?string $completionMessage = null
+    ): void
     {
         $results = [];
         

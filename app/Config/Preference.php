@@ -9,6 +9,6 @@
  */
 namespace App\Config;
 
-use \Luminova\Base\BaseConfig;
+use \Luminova\Base\Configuration;
 
-final class Preference extends BaseConfig {}
+final class Preference extends Configuration {}

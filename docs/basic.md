@@ -16,16 +16,16 @@ Luminova provides two base controller classes for handling HTTP requests, both o
 
 #### Base Controller
 
-Extending [Luminova\Base\BaseController](https://luminova.ng/docs/0.0.0/base/controller) automatically initializes the HTTP request class `\Luminova\Http\Request` and the input validation class `Luminova\Security\Validation`.
+Extending [Luminova\Base\Controller](https://luminova.ng/docs/0.0.0/base/controller) automatically initializes the HTTP request class `\Luminova\Http\Request` and the input validation class `Luminova\Security\Validation`.
 
 ```php
 // /app/Controllers/MyController.php
 <?php 
 namespace App\Controllers;
 
-use Luminova\Base\BaseController;
+use Luminova\Base\Controller;
 
-class MyController extends BaseController 
+class MyController extends Controller 
 {
     //...
 }
@@ -35,16 +35,16 @@ class MyController extends BaseController
 
 #### Base View Controller
 
-Extending [Luminova\Base\BaseViewController](https://luminova.ng/docs/0.0.0/base/view-controller) does not automatically initialize any additional classes, allowing for manual initialization when necessary. This is particularly useful for web pages that do not require immediate user input validation.
+Extending [Luminova\Base\Controller](https://luminova.ng/docs/0.0.0/base/view-controller) does not automatically initialize any additional classes, allowing for manual initialization when necessary. This is particularly useful for web pages that do not require immediate user input validation.
 
 ```php
 // /app/Controllers/MyController.php
 <?php 
 namespace App\Controllers;
 
-use Luminova\Base\BaseViewController;
+use Luminova\Base\Controller;
 
-class MyController extends BaseViewController 
+class MyController extends Controller 
 {
     //...
 }
@@ -87,13 +87,13 @@ The `Response` class allows you to handle any type of response rendering without
 <?php 
 namespace App\Controllers;
 
-use Luminova\Base\BaseController;
+use Luminova\Base\Controller;
 use Luminova\Attributes\Route;
 use Luminova\Attributes\Error;
 use App\Errors\Controllers\Views;
 
 #[Error('api', onError: [Views::class, 'onApiError'])]
-class BookController extends BaseController 
+class BookController extends Controller 
 {
     #[Route('/api/books', methods: ['POST'])]
     public function apiListBooks(): int 
@@ -150,13 +150,13 @@ When you pass the template file name without the extension, the `View` object au
 <?php 
 namespace App\Controllers;
 
-use Luminova\Base\BaseViewController;
+use Luminova\Base\Controller;
 use Luminova\Attributes\Route;
 use Luminova\Attributes\Error;
 use App\Errors\Controllers\Views;
 
 #[Error(onError: [Views::class, 'onWebError'])]
-class BookController extends BaseViewController 
+class BookController extends Controller 
 {
     #[Route('/books', methods: ['GET'])]
     public function webShowBooks(): int 
@@ -189,14 +189,14 @@ Here's how you can achieve this:
 <?php
 namespace App\Controllers;
 
-use Luminova\Base\BaseController;
+use Luminova\Base\Controller;
 use Luminova\Email\Mailer;
 use Luminova\Attributes\Route;
 use Luminova\Attributes\Error;
 use App\Errors\Controllers\Views;
 
 #[Error(onError: [Views::class, 'onWebError'])]
-class BookController extends BaseController
+class BookController extends Controller
 {
     #[Route('/books/send', methods: ['GET'])]
     public function sendShowBooks(string $email): int
@@ -241,13 +241,13 @@ Here's how you can do it:
 <?php 
 namespace App\Controllers;
 
-use Luminova\Base\BaseViewController;
+use Luminova\Base\Controller;
 use Luminova\Attributes\Route;
 use Luminova\Attributes\Error;
 use App\Errors\Controllers\Views;
 
 #[Error(onError: [Views::class, 'onWebError'])]
-class MyController extends BaseViewController 
+class MyController extends Controller 
 {
     #[Route('/books', methods: ['GET'])]
     public function webShowBooks(): int 
@@ -300,13 +300,13 @@ This method allows you to render cached content if it is still valid. The callba
 <?php 
 namespace App\Controllers;
 
-use Luminova\Base\BaseViewController;
+use Luminova\Base\Controller;
 use Luminova\Attributes\Route;
 use Luminova\Attributes\Error;
 use App\Errors\Controllers\Views;
 
 #[Error(onError: [Views::class, 'onWebError'])]
-class MyController extends BaseViewController 
+class MyController extends Controller 
 {
     #[Route('/books', methods: ['GET'])]
     public function webShowBooks(): int 
@@ -336,14 +336,14 @@ This approach uses a traditional if-else check to first verify if the cache has 
 <?php 
 namespace App\Controllers;
 
-use Luminova\Base\BaseViewController;
+use Luminova\Base\Controller;
 use Luminova\Attributes\Route;
 use Luminova\Attributes\Error;
 use App\Errors\Controllers\Views;
 use Luminova\Core\CoreApplication;
 
 #[Error(onError: [Views::class, 'onWebError'])]
-class MyController extends BaseViewController 
+class MyController extends Controller 
 {
     #[Route('/books', methods: ['GET'])]
     public function webShowBooks(): int 
@@ -470,9 +470,9 @@ Here's how you can set it up:
 <?php 
 namespace App\Controllers;
 
-use Luminova\Base\BaseController;
+use Luminova\Base\Controller;
 
-class WebController extends BaseController
+class WebController extends Controller
 {
 	protected function onCreate(): void 
 	{
@@ -486,9 +486,9 @@ class WebController extends BaseController
 <?php 
 namespace App\Controllers;
 
-use Luminova\Base\BaseController;
+use Luminova\Base\Controller;
 
-class ApiController extends BaseController
+class ApiController extends Controller
 {
 	protected function onCreate(): void 
 	{
@@ -503,9 +503,9 @@ class ApiController extends BaseController
 <?php 
 namespace App\Controllers;
 
-use Luminova\Base\BaseController;
+use Luminova\Base\Controller;
 
-class AdminController extends BaseController
+class AdminController extends Controller
 {
 	protected function onCreate(): void 
 	{
@@ -540,9 +540,9 @@ In your application controller's `onCreate` or `__construct` method, you can cal
 <?php 
 namespace App\Controllers;
 
-use Luminova\Base\BaseController;
+use Luminova\Base\Controller;
 
-class AdminController extends BaseController
+class AdminController extends Controller
 {
 	protected function onCreate(): void 
 	{
@@ -573,13 +573,13 @@ However, to still access protected or public properties defined in the applicati
 <?php 
 namespace App\Controllers;
 
-use Luminova\Base\BaseController;
+use Luminova\Base\Controller;
 use App\Models\Users;
 use App\Utils\Foo;
 use App\Utils\Bar;
 use App\Utils\Baz;
 
-class AdminController extends BaseController
+class AdminController extends Controller
 {
 	protected Users $users;
 

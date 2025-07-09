@@ -11,11 +11,12 @@
 namespace Luminova\Debugger; 
 
 use \Luminova\Luminova;
-use \Luminova\Functions\Maths;
-use \Luminova\Functions\IP;
-use \Luminova\Command\Terminal;
+use \Luminova\Utility\IP;
 use \Luminova\Http\Request;
+use \Luminova\Common\Maths;
 use \Luminova\Logger\Logger;
+use \Luminova\Command\Terminal;
+use function \Luminova\Funcs\{shared, filter_paths};
 
 final class Performance
 {
@@ -104,18 +105,18 @@ final class Performance
         }
 
         self::$request ??= new Request();
-        $classInfo = Luminova::getClassInfo();
+        $classMetadata = Luminova::getClassMetadata();
  
         $info = [
             'Framework' => Luminova::copyright(),
             'PHP Version' => PHP_VERSION,
-            'IP Address' => self::esc(IP::get()),
+            'IP Address' => IP::get(),
             'Environment' => ENVIRONMENT,
             'Script Path' => CONTROLLER_SCRIPT_PATH,
-            'Controller' => (!empty($classInfo['namespace'])) 
-                ? $classInfo['namespace'] . '::' . $classInfo['method'] . '()' 
+            'Controller' => (!empty($classMetadata['namespace'])) 
+                ? $classMetadata['namespace'] . '::' . $classMetadata['method'] . '()' 
                 : 'N/A',
-            'Cache File' =>  env('page.caching', false) ? Luminova::getCacheId() . '.lmv' : 'N/A',
+            'Cache Name' =>  env('page.caching', false) ? Luminova::getCacheId() . '.lmv' : 'N/A',
             'Server Software' => self::esc($_SERVER['SERVER_SOFTWARE'] ?? 'Not Set'),
             'UserAgent' => self::esc(self::$request->getUserAgent()->toString()),
             'Method' => self::esc(self::$request->getMethod()?:'N/A'),
@@ -125,8 +126,8 @@ final class Performance
             'Cookies' => self::$request->getCookie()->isEmpty() ? null : self::$request->getCookie()->count(),
             'Is Secure' => (self::$request->isSecure() ? 'YES' : 'NO'),
             'Is AJAX' => (self::$request->isAJAX() ? 'YES' : 'NO'),
-            'Is Cache' =>  (!empty($classInfo['cache'])) ? 'YES' : 'NO',
-            'Is Static Cache' =>  (!empty($classInfo['staticCache'])) ? 'YES' : 'NO',
+            'Is Cache' =>  (!empty($classMetadata['cache'])) ? 'YES' : 'NO',
+            'Is Static Cache' =>  (!empty($classMetadata['staticCache'])) ? 'YES' : 'NO',
         ];
 
         if($isApi){
@@ -162,8 +163,8 @@ final class Performance
             'FrameworkModules' => $categories['Module'],
             'ComposerModules' => $categories['Composer'],
             'ThirdPartyModules' => $categories['ThirdParty'],
-            'Controllers' => $categories['Controller'],
-            'OtherModules' => $categories['Others']
+            'AppModules' => $categories['Others'],
+            'Controllers' => $categories['Controller']
         ];
 
         $logData['included_files'] = $files;
@@ -192,7 +193,7 @@ final class Performance
             return;
         }
 
-        $classInfo = Luminova::getClassInfo();
+        $classMetadata = Luminova::getClassMetadata();
 
         // Display basic system information
         $info = [
@@ -201,7 +202,7 @@ final class Performance
             'PHP Version' => PHP_VERSION,
             'Environment' => ENVIRONMENT,
             'Script Path' => CONTROLLER_SCRIPT_PATH,
-            'Controller' => (!empty($classInfo['namespace'])) ? $classInfo['namespace'] . '::' . $classInfo['method'] . '()' : 'N/A',
+            'Controller' => (!empty($classMetadata['namespace'])) ? $classMetadata['namespace'] . '::' . $classMetadata['method'] . '()' : 'N/A',
             'Server Software' => self::esc($_SERVER['SERVER_SOFTWARE'] ?? 'Not Set'),
             'Method' => 'CLI',
             'Group' => $context['commands']['group'] ?? 'N/A',
@@ -266,34 +267,38 @@ final class Performance
         }
 
         // Display included files and categorize them
-        self::$terminal->writeln('Included Files Summary:');
+        self::$terminal->writeln('Loaded File Summary:');
         [$categories, $files] = self::fileInfo('cli');
    
         // Display the summary of included files by category
-        self::$terminal->print(self::$terminal->table(['Origination', 'Total'], [
+        self::$terminal->print(self::$terminal->table(['Source', 'Summary'], [
             [
-                'Origination' => 'Framework Modules', 
-                'Total' => $categories['Module']
+                'Source' => 'Composer Autoload Modules', 
+                'Summary' => $categories['Composer']
             ],
             [
-                'Origination' => 'Composer Autoload Modules', 
-                'Total' => $categories['Composer']
+                'Source' => 'Framework Core Modules', 
+                'Summary' => $categories['Module']
             ],
             [
-                'Origination' => 'Third Party Modules', 
-                'Total' => $categories['ThirdParty']
+                'Source' => 'Third Party Modules', 
+                'Summary' => $categories['ThirdParty']
             ],
             [
-                'Origination' => 'Controllers', 
-                'Total' => $categories['Controller']
+                'Source' => 'Application Modules', 
+                'Summary' => $categories['Others']
             ],
             [
-                'Origination' => 'Other Modules', 
-                'Total' => $categories['Others']
+                'Source' => 'Controllers Scanned', 
+                'Summary' => $classMetadata['controllers']
+            ],
+            [
+                'Source' => 'Controllers Loaded', 
+                'Summary' => $categories['Controller']
             ]
         ]));
 
-        self::$terminal->writeln('Included Files:');
+        self::$terminal->writeln('Loaded Files:');
         // Display detailed list of included files
         self::$terminal->print(self::$terminal->table(['Category', 'File'], $files));
     }
@@ -314,7 +319,7 @@ final class Performance
 
         foreach ($info as $label => $value) {
             $value = ($label=== 'Cookies') ? self::getCookieFile($value, true) : ($value ?? 'N/A');
-            $detailsHtml .= "<tr><td><strong>{$label}:</strong></td><td>{$value}</td></tr>";
+            $detailsHtml .= "<tr style='padding: .5rem;'><td><strong>{$label}:</strong></td><td>{$value}</td></tr>";
         }
 
         $whatIncluded = self::whatIncluded();
@@ -326,10 +331,15 @@ final class Performance
         <div id="lmv-debug-container" style="{$style}">
             <div id="lmv-header-details" style="height: 35px; display: flex; line-height: 30px; font-weight: bold;">
                 <p style="margin: 0;">{$metrics}</p>
-                <button type="button" id="lmv-toggle-button" onclick="lmvToggleProfilingDetails()" style="line-height: 30px; font-size: 15px; border-radius: 8px; position: absolute; right: 1rem; background-color: #e9e9ed; color: #000; border: 1px solid #201f1f; cursor: pointer;">More Details</button>
+                <button type="button" id="lmv-toggle-button" onclick="lmvToggleProfilingDetails()" style="line-height: 30px; font-size: 15px; border-radius: 8px; position: absolute; right: 1rem; background-color: #073084; color: #e9e9ed; border: 1px solid #073084; cursor: pointer;padding:3px 8px;">More Details</button>
             </div>
             <div id="lmv-debug-details" style="display: none; padding-top: 10px; color: #fff; height: 300px; overflow:auto;">
                 <table style="width: 100%; margin-bottom: 1rem;color:#f2efef" cellpadding="4">
+                    <thead style="background-color: #113535; color:#dadada; font-family: -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif; font-weight: bold; font-size: 1.3rem;">
+                        <tr>
+                            <td style="padding: .5rem;" colspan="2">On This Page</td>
+                        </tr>
+                    </thead>
                     <tbody>
                         {$detailsHtml}
                     </tbody>
@@ -381,17 +391,17 @@ final class Performance
      */
     public static function metrics(bool $html = true): string
     {
-        [$total, $unused] = self::fileCount();
+        [$total, $controllers] = self::fileCount();
         $separator = $html ? '<span style="color:#eecfcf;margin: 0 1rem;">|</span>' : ' | ';
-        $unused = ($unused > 0)
+        $unused = ($controllers >= 10)
             ? $separator . ($html 
-                    ? '<span style="color:#af1b2e;" title="Total number of skipped controllers files while searching for matched controller for view.">Skipped Controllers: ' . $unused . '</span>' 
-                    : 'Skipped Controllers: ' . $unused
+                    ? '<span style="color:#af1b2e;" title="Total number of scanned controllers files while searching for matched controller for view.">Scanned Controllers: ' . $controllers . '</span>' 
+                    : 'Scanned Controllers: ' . $controllers
                 )
             : '';
 
         return sprintf(
-            "Execution Time: %s%sDatabase Query Time: %s%sMemory Usage: %s%sLoaded Files: %d%s",
+            "Execution: %s%sDatabase: %s%sMemory: %s%sFiles: %d%s",
             Maths::toTimeUnit(abs(self::$endTime - self::$startTime) * 1_000, true),
             $separator,
             Maths::toTimeUnit(shared('__DB_QUERY_EXECUTION_TIME__', null, 0) * 1_000, true),
@@ -432,7 +442,7 @@ final class Performance
             };
         }
 
-        $filename = Luminova::getClassInfo()['filename'] ?? null;
+        $filename = Luminova::getClassMetadata()['filename'] ?? null;
         $index = 0;
 
         foreach (self::$filesLoaded ?? get_included_files() as $file) {
@@ -442,7 +452,7 @@ final class Performance
 
             $filtered = filter_paths($file);
             $category = 'Others';
-            $color = '#d99a06';
+            $color = '#6f4f06';
 
             if (
                 str_starts_with($filtered, 'system') ||
@@ -454,7 +464,7 @@ final class Performance
                     str_ends_with($filtered, 'system/plugins/autoload.php')
                 ) {
                     $category = 'Composer';
-                    $color = '#e66c13';
+                    $color = '#15728e';
                 }elseif (str_starts_with($filtered, 'system/plugins')) {
                     $category = 'ThirdParty';
                     $color = '#af1b2e';
@@ -501,10 +511,10 @@ final class Performance
     {
         // Get file information and usage statistics
         [$categories, $html] = self::fileInfo('web');
-        $unused = self::fileCount()[1]??0;
+        $controllers = self::fileCount()[1];
         
         // Generate optimization tip if unused files are present
-        $unusedOptimization = ($unused > 0)
+        $unusedOptimization = ($controllers >= 10)
             ? <<<HTML
                 <p style="background-color: #932727; color: #fff; padding: .5rem; border-radius: 6px; margin-bottom: 1rem;">
                     <strong>Unused Optimization Tip:</strong> To improve application performance and reduce the number of unused files, enable 
@@ -515,37 +525,37 @@ final class Performance
 
         // Build the content table to display included file types and counts
         $content = <<<HTML
-            <table style="width:100%; color:#f2efef; margin-bottom:1rem;" cellpadding="4">
+            <table style="width:100%; color:#f2efef; margin-bottom:1rem;border: 1px solid #113535" cellpadding="4" cellspacing="3">
                 <thead style="background-color: #113535; color:#dadada; font-family: -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif; font-weight: bold; font-size: 1.3rem;">
-                    <tr>
-                        <td style="padding: .5rem;">Included Files Description</td>
+                    <tr style="border-bottom: 1px solid #113535">
+                        <td style="padding: .5rem;">Loaded File Source</td>
                         <td style="padding: .5rem; text-align:center;">Summary</td>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td style="padding: .5rem 5px;"><strong>Framework Components and Modules:</strong></td>
+                    <tr style="border-bottom: 1px solid #113535">
+                        <td style="padding: .5rem 5px;"><strong>Composer Autoload Modules:</strong></td>
+                        <td style='text-align:center;'><span style='background-color:#15728e; padding: 0 1rem; border-radius: 8px; color: #ccc; font-weight: bold;'>{$categories['Composer']}</span></td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #113535">
+                        <td style="padding: .5rem 5px;"><strong>Framework Core Modules:</strong></td>
                         <td style='text-align:center;'><span style='background-color:#057d14; padding: 0 1rem; border-radius: 8px; color: #ccc; font-weight: bold;'>{$categories['Module']}</span></td>
                     </tr>
-                    <tr>
-                        <td style="padding: .5rem 5px;"><strong>Composer Autoload Modules:</strong></td>
-                        <td style='text-align:center;'><span style='background-color:#af1b2e; padding: 0 1rem; border-radius: 8px; color: #ccc; font-weight: bold;'>{$categories['Composer']}</span></td>
-                    </tr>
-                    <tr>
+                    <tr style="border-bottom: 1px solid #113535">
                         <td style="padding: .5rem 5px;"><strong>Third Party Modules:</strong></td>
-                        <td style='text-align:center;'><span style='background-color:#af1b2e; padding: 0 1rem; border-radius: 8px; color: #ccc; font-weight: bold;'>{$categories['ThirdParty']}</span></td>
+                        <td style='text-align:center;'><span style='background-color:#ac3507; padding: 0 1rem; border-radius: 8px; color: #ccc; font-weight: bold;'>{$categories['ThirdParty']}</span></td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #113535">
+                        <td style="padding: .5rem 5px;"><strong>Application Modules:</strong></td>
+                        <td style='text-align:center;'><span style='background-color:#6f4f06; padding: 0 1rem; border-radius: 8px; color: #fff; font-weight: bold;'>{$categories['Others']}</span></td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #113535">
+                        <td style="padding: .5rem 5px;"><strong>Controllers Scanned:</strong></td>
+                        <td style='text-align:center;'><span style='background-color:#2a669b; padding: 0 1rem; border-radius: 8px; color: #fff; font-weight: bold;'>{$controllers}</span></td>
                     </tr>
                     <tr>
-                        <td style="padding: .5rem 5px;"><strong>Application Controller Classes:</strong></td>
+                        <td style="padding: .5rem 5px;"><strong>Controllers Loaded:</strong></td>
                         <td style='text-align:center;'><span style='background-color:#eee; padding: 0 1rem; border-radius: 8px; color: #000; font-weight: bold;'>{$categories['Controller']}</span></td>
-                    </tr>
-                    <tr>
-                        <td style="padding: .5rem 5px;"><strong>Unused Application Controller Classes:</strong></td>
-                        <td style='text-align:center;'><span style='background-color:#2a669b; padding: 0 1rem; border-radius: 8px; color: #fff; font-weight: bold;'>{$unused}</span></td>
-                    </tr>
-                    <tr>
-                        <td style="padding: .5rem 5px;"><strong>Other Application Modules:</strong></td>
-                        <td style='text-align:center;'><span style='background-color:#d99a06; padding: 0 1rem; border-radius: 8px; color: #fff; font-weight: bold;'>{$categories['Others']}</span></td>
                     </tr>
                 </tbody>
             </table>
@@ -553,7 +563,7 @@ final class Performance
             {$unusedOptimization}
 
             <h2 style="background-color: #113535; padding: .5rem; color:#dadada; font-family: -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif; font-weight: bold; font-size: 1.3rem; margin-bottom:0;">
-                Included File History
+                Loaded Files
             </h2>
             <ol id='lmv-included-files' style='list-style-type: none; padding: 0; margin: 0;'>{$html}</ol>
         HTML;
@@ -576,11 +586,15 @@ final class Performance
     /**
      * Calculate the total number of files loaded, excluding this class and unused controllers.
      *
-     * @return array{0:unt,1:int} Return the total number of files loaded and unused files count.
+     * @return array{0:int,1:int} Return the total number of files loaded and unused files count.
      */
     private static function fileCount(): array 
     {
-        $unused = ((Luminova::getClassInfo()['attrFiles'] ?? 1) - 1);
-        return [count(self::$filesLoaded) - 1 - $unused, $unused];
+        $controllers = max( Luminova::getClassMetadata()['controllers'] ?? 0, 0);
+
+        return [
+            count(self::$filesLoaded) - $controllers, 
+            $controllers
+        ];
     }
 }

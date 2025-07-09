@@ -1,8 +1,19 @@
+<?php
+/**
+ * Replace this template with your custom 4xx error page design
+ * to better match your application's layout and branding.
+ */
+use \Luminova\Http\HttpCode;
+use function \Luminova\Funcs\{locale, href, asset};
+
+$status = ($this->getOption('error')['code'] ?? 404);
+$title = "{$status} " . HttpCode::get($status);
+?>
 <!DOCTYPE html>
 <html lang="<?= locale();?>">
 <head>
     <meta charset="UTF-8">
-    <title>404 Error Page</title>
+    <title><?= $title;?></title>
     <meta name="description" content="Simple framework built for speed and keeping your existing coding skills going.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/png" href="<?= href('favicon.png');?>">
@@ -48,30 +59,19 @@
     </div>
 
     <div class="info">
-
-        <h1>Error 404 Page Not Found</h1>
-
+        <h1><?= $title;?></h1>
         <h2>Sorry, we couldn't find the page you are looking for.</h2>
-
     </div>
-
 </header>
 
-
 <section class="main-container">
-
    <a href="<?= $this->_href;?>" class="button">Home</a>
-
 </section>
-
 
 <footer>
     <div class="copyrights">
-
         <p>&copy; <?= date('Y') ?> <a href="https://nanoblocktech.com/" target="_blank">Nanoblock Technology Ltd</a>. PHP Luminova is open source project released under the MIT open source license.</p>
-
     </div>
-
 </footer>
 
 <script>
