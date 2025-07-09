@@ -9,7 +9,7 @@
  */
 namespace App\Console;
 
-use \Luminova\Base\BaseConsole;
+use \Luminova\Base\Console;
 
 /**
  * This class demonstrates how to create a CLI console command 
@@ -17,7 +17,7 @@ use \Luminova\Base\BaseConsole;
  * 
  * @see /bin/.novakit-console.php
  */
-class ConsoleHelloCommand extends BaseConsole 
+class ConsoleHelloCommand extends Console 
 {
     /**
      * {@inheritdoc}

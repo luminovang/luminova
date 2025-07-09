@@ -9,18 +9,25 @@
  */
 namespace App;
 
-use \Luminova\Core\CoreApplication;
+use \Luminova\Foundation\Core\Application as CoreApplication;
 
 /**
+ * @see https://luminova.ng/docs/0.0.0/foundation/application
+ * 
  * @example - Initialize the session manager if your application uses sessions.
  * 
  * ```php
  * use Luminova\Sessions\Session;
+ * use Luminova\Sessions\Managers\Session as SessionManager;
+ * 
  * protected ?Session $session = null;
  * 
- * $this->session = new Session(new SessionManager());
- * $this->session->setStorage("my_storage");
- * $this->session->start();
+ * protected function onCreate(): void 
+ * {
+ *      $this->session = new Session(new SessionManager());
+ *      $this->session->setStorage("my_storage");
+ *      $this->session->start();
+ * }
  * ```
  * 
  * @example - Register global classes for use throughout the application lifecycle.
@@ -30,10 +37,13 @@ use \Luminova\Core\CoreApplication;
  *   or when **view isolation** is enabled.
  *
  * ```php 
- * $this->export($this->session);
- * $this->export(MyClass::class);
- * $this->export(new MyClass(arguments), 'MyClass');
- * $this->export(new MyClass(arguments));
+ * protected function onCreate(): void 
+ * {
+ *      $this->view->export($object, 'foo');
+ *      $this->view->export(MyClass::class);
+ *      $this->view->export(new MyClass(arguments));
+ *      $this->view->export(new MyClass(arguments), 'MyClass');
+ * }
  * ```
  * 
  * @example - Set the canonical URL version for your application.
@@ -42,10 +52,20 @@ use \Luminova\Core\CoreApplication;
  * - Helps with SEO by defining the preferred URL version.
  *
  * ```php 
- * $this->export(Meta::class); //or $this->Meta = new Meta();
- * $this->Meta->setCanonicalVersion("https://example.com/", $this->getView());
- * $this->Meta->setCanonicalVersion("https://www.example.com/", $this->getView());
- * $this->Meta->setCanonicalVersion(parent::baseUrl(), $this->getView());
+ * use Luminova\Component\Seo\Schema;
+ * 
+ * protected ?Schema $schema = null;
+ * 
+ * protected function onCreate(): void 
+ * {
+ *      $this->schema = new Schema();
+ * 
+ *      $uri = $this->getUri();
+ * 
+ *      $this->schema->setUrl(APP_URL, $uri);
+ *      $this->schema->setCanonical("https://example.com/{$uri}");
+ *      $this->schema->setCanonical("https://www.example.com/{$uri}");
+ * }
  * ```
  */
 class Application extends CoreApplication 
@@ -55,8 +75,16 @@ class Application extends CoreApplication
      */
     protected function onCreate(): void 
     {
-        // Register namespace for HMVC Info controllers
-        $this->router->addNamespace('\\App\\Modules\\Info\\Controllers\\');
+        /**
+         * Register namespace for HMVC custom Info module controllers
+         * You can remove the below line, if you are not using HMVC
+         * 
+         * @see https://luminova.ng/docs/0.0.0/introduction/hmvc-design
+         * @see https://luminova.ng/docs/0.0.0/routing/system#lmv-docs-addnamespace
+         */
+        if(self::$isHmvcModule){
+            $this->router->addNamespace('\\App\\Modules\\Info\\Controllers\\');
+        }
     }
 
     /**
@@ -85,6 +113,6 @@ class Application extends CoreApplication
     protected function onDestroy(): void 
     {
         // Optional garbage collection
-        // gc_collect_cycles();
+        // E.g, gc_collect_cycles();
     }
 }

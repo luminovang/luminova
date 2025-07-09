@@ -9,38 +9,41 @@
  */
 namespace App\Modules\Info\Controllers\Http;
 
-use \Luminova\Base\BaseController;
+use \Luminova\Base\Controller;
 use \Luminova\Attributes\Prefix;
 use \Luminova\Attributes\Route;
 use \App\Errors\Controllers\ErrorController;
 
 /**
- * Demonstrates a custom module controller for serving HTTP web pages using Luminova's HMVC architecture.
+ * Example: Luminova HMVC module controller.
+ *
+ * Demonstrates how to serve HTTP pages using Luminova's HMVC architecture.
  * 
- * @see /app/Application.php - For module controller namespace registration.
+ * @see /app/Application.php - For module namespace registration.
  */
-#[Prefix(pattern: '/info/(:root)', onError: [ErrorController::class, 'onApiError'])]
-class InfoController extends BaseController
+#[Prefix(pattern: '/info/(:root)', onError: [ErrorController::class, 'onWebError'])]
+class InfoController extends Controller
 {
     /**
-     * Register the controller model name
-     * for non-root model.
+     * {@inheritDoc}
      * 
-     * @return void 
+     * Called when the controller is created.
+     * 
+     * Registers the module name for resolving non-root view paths.
      */
     protected function onCreate(): void 
     {
-        // Same as the directory name (app/Modules/Info) use `Infos`
-        $this->app->setModule('Info');
+        // Matches directory name (app/Modules/Info), use 'Info' not 'Infos'
+        $this->app->view->setModule('Info');
     }
 
     /**
-     * Handles the info homepage route.
+     * Handles the /info route.
      *
      * @return int Return one of STATUS_SUCCESS, STATUS_ERROR, or STATUS_SILENCE.
      */
     #[Route('/info', methods: ['GET'])]
-    public function infoHome(): int
+    public function info(): int
     {
         return $this->view('info');
     }

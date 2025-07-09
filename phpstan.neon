@@ -10,17 +10,25 @@ parameters:
 		- bootstrap/functions.php
 	paths:
 		- app
+		- bin
 		- system
+		- routes
+		- public
 		- libraries
+		- resources
 	excludePaths:
 		- writeable/*
 		- samples/*
+		- docs/*
+		- tests/*
 		- system/plugins/*
+		- app/Errors/Defaults/css/*
+		- public/assets/*
 		- builds/*
 		- dump/*
 	scanDirectories:
 		- samples/
-		- resources/views/
+		- resources/Views/
 	checkMissingIterableValueType: false
 	checkGenericClassInNonGenericObjectType: false
 	checkMissingCallableSignature: true

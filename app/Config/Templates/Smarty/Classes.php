@@ -79,7 +79,7 @@ final class Classes
      * @param string $context The caller context.
      * @param array<string,string<\T>> $classes The registered classes.
      * 
-     * @return object<anonymous> Return anonymous class object.
+     * @return object<\T> Return anonymous class object.
     */
     private static function newInstance(string $context): object 
     {
@@ -96,7 +96,7 @@ final class Classes
 
             /**
              * @param string $context
-             * @param array<string,class-string> $classes
+             * @param array<string,string<\T>> $classes
             */
             public function __construct(string $context = 'call_func', array $classes = [])
             {

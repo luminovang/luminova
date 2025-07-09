@@ -3,12 +3,12 @@
  * Sends fatal errors via email in production environments.
  * To enable, specify the recipient email in `logger.mail.logs` within the environment configuration (.env).
  *
- * @var \Luminova\Errors\ErrorHandler|null $stack
+ * @var \Luminova\Foundation\Error\Message|null $error
  */
-
-use Luminova\Errors\ErrorHandler;
-use Luminova\Email\Mailer;
+use Luminova\Utility\Email\Mailer;
+use Luminova\Foundation\Error\Message;
 use Luminova\Exceptions\MailerException;
+use function \Luminova\Funcs\logger;
 
 include_once __DIR__ . '/tracing.php';
 
@@ -21,15 +21,15 @@ if ($recipient) {
     $details = 'No additional details available.';
     $tracer = '<p>No debug tracing available</p>';
 
-    if ($stack instanceof ErrorHandler) {
+    if ($error instanceof Message) {
         ob_start();
-        getDebugTracing($stack->getBacktrace());
+        getDebugTracing($error->getBacktrace());
         $tracer = ob_get_clean();
 
         // Error details from stack
-        $title = htmlspecialchars($stack->getName(), ENT_QUOTES);
-        $heading = sprintf('%s #%d', $title, $stack->getCode());
-        $details = htmlspecialchars($stack->getMessage(), ENT_QUOTES);
+        $title = htmlspecialchars($error->getName(), ENT_QUOTES);
+        $heading = sprintf('%s #%d', $title, $error->getCode());
+        $details = htmlspecialchars($error->getMessage(), ENT_QUOTES);
     }
 
     $subject = sprintf('%s (v%.1f) Error Occurred: %s', APP_NAME, APP_VERSION, $title);

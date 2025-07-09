@@ -9,21 +9,21 @@
  */
 namespace App\Config;
 
-use \Luminova\Core\CoreCronTasks;
+use \Luminova\Foundation\Core\CronTasks;
 
-final class Cron extends CoreCronTasks
+final class Cron extends CronTasks
 {
+  /**
+   * {@inheritdoc}
+   * 
+   * Schedule the task for execution.
+   */
+  protected function schedule(): void 
+  {
     /**
-     * {@inheritdoc}
-     * 
-     * Schedule the task for execution.
+     * $this->service('\App\Controllers\Cli\ExampleCommand::fooMethod')
+     *   ->seconds(5)
+     *   ->log(Luminova\Funcs\root('/writeable/log/') . 'cron.log');
      */
-    protected function schedule(): void 
-    {
-       /**
-         * $this->service('\App\Controllers\Cli\ExampleCommand::fooMethod')
-         *   ->seconds(5)
-         *   ->log(root('/writeable/log/') . 'cron.log');
-         */
-    }
+  }
 }

@@ -1,34 +1,40 @@
 <?php 
 /**
- * Luminova Framework
+ * Luminova Framework HTTP request security configuration.
  *
- * @package Luminova
- * @author Ujah Chigozie Peter
+ * @package   Luminova
+ * @autor     Ujah Chigozie Peter
  * @copyright (c) Nanoblock Technology Ltd
- * @license See LICENSE file
+ * @license   See LICENSE file
  */
 namespace App\Config;
 
-use \Luminova\Base\BaseConfig;
+use \Luminova\Base\Configuration;
 
-final class Security extends BaseConfig
+final class Security extends Configuration
 {
     /**
      * List of trusted origin domains or wildcard patterns.
-     * These origins are allowed for cross-origin requests.
      * 
-     * Examples: `['https://example.com', '*.trusted.com']`
+     * These origins are allowed to make cross-origin (CORS) requests to your app.  
+     * Use full URLs or wildcards if needed.  
      * 
+     * Examples: 
+     * - ['https://example.com', '*.trusted.com']
+     *
      * @var array<int,string> $trustedOrigins
      */
     public array $trustedOrigins = [];
 
     /**
-     * List of trusted hostname's or wildcard patterns.
-     * These hostname's are considered valid for application requests.
+     * List of trusted hostnames or wildcard patterns.
      * 
-     * Example:`['example.com', '*.trusted.net']`
+     * These hostnames are considered valid when the application handles requests.  
+     * Use plain domain names or wildcards as needed.  
      * 
+     * Example:
+     * - ['example.com', '*.trusted.net']
+     *
      * @var array<int,string> $trustedHostnames
      */
     public array $trustedHostnames = [];

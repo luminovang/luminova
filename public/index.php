@@ -45,6 +45,21 @@ if (getcwd() . DIRECTORY_SEPARATOR !== DOCUMENT_ROOT) {
  * 
  * Finally run your application router to register and boot only request context for optimal performance.
  * @see /samples/index.php - For non-attribute based index.php
- * @see https://luminova.ng/public/docs/0.0.0/boot/public - Documentation for configuring index.php
+ * @see https://luminova.ng/docs/0.0.0/boot/public - Documentation for configuring index.php
  */
 Boot::http()->router->context()->run();
+
+/**
+ * Uncomment below if you don't want to use attribute routing.
+ * And import these two namespace:
+ * ```php
+ * use \Luminova\Routing\Prefix;
+ * use \App\Errors\Controllers\ErrorController;
+ * ```
+ * And remove the above line
+ */
+// Boot::http()->router->context(
+//    new Prefix(Prefix::WEB, [ErrorController::class, 'onWebError']),
+//    new Prefix(Prefix::API, [ErrorController::class, 'onApiError']),
+//    new Prefix(Prefix::CLI)
+// )->run();

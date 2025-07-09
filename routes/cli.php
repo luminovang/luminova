@@ -11,5 +11,5 @@ use \Luminova\Routing\Router;
  */
 
 $router->group('demo', static function(Router $router){
-   $router->command('hello', 'CliController::hello');
+   $router->command('hello', 'CommandController::hello');
 });

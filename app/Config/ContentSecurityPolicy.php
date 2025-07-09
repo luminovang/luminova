@@ -2,7 +2,7 @@
 /**
  * Luminova Framework ContentSecurityPolicy Configuration Class
  *
- * This class extends the BaseConfig and provides a simple, customizable way to generate and manage 
+ * This class extends the Configuration and provides a simple, customizable way to generate and manage 
  * Content-Security-Policy (CSP) directives. It helps in enhancing the security of web applications by 
  * controlling what resources are allowed to load.
  * 
@@ -17,9 +17,9 @@
  */
 namespace App\Config;
 
-use \Luminova\Base\BaseConfig;
+use \Luminova\Base\Configuration;
 
-final class ContentSecurityPolicy extends BaseConfig
+final class ContentSecurityPolicy extends Configuration
 {
     /**
      * {@inheritdoc}
