@@ -18,7 +18,7 @@ declare(strict_types=1);
 use \Luminova\Command\Novakit;
 use \App\Console\ConsoleHelloCommand;
 
-// Format 1 – Register command directly, line by line.
+// Format 1 – Register command directly, line by line. 
 // This method optionally supports defining command properties.
 Novakit::command('hello', ConsoleHelloCommand::class);
 
