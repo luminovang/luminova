@@ -2192,7 +2192,7 @@ function get_mime(string $input, ?string $magicDatabase = null): string|bool
 }
 
 /**
- * Temporarily stores and retrieves values within the same scope.
+ * Temporarily stores and retrieves values within the same scope. 
  *
  * @param string $key The key to identify the value.
  * @param mixed $value The value to store (optional).
