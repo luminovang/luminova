@@ -24,6 +24,9 @@ docker-compose.yml
 /node/src/*
 /node/app.js
 
+/system/Luminova.php
+/system/Runtime.php
+
 # Except for 
 !.gitkeep
 !/system/Composer/

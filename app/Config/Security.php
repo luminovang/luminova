@@ -1,4 +1,5 @@
-<?php 
+<?php
+declare(strict_types=1);
 /**
  * HTTP Request Security Configuration for Luminova Framework.
  *
@@ -12,7 +13,7 @@
  */
 namespace App\Config;
 
-use \Luminova\Config\Configuration;
+use Luminova\Config\Configuration;
 
 final class Security extends Configuration
 {
@@ -54,7 +55,7 @@ final class Security extends Configuration
      * - `all`  - Enforce CORS security on all HTTP requests.
      * - `web`  - Enforce CORS security only on non-API requests.
      * - `api`  - Enforce CORS security only on API requests determined by
-     *            {@see env('app.api.prefix')} or {@see Luminova::isApiPrefix()}.
+     *            {@see env('app.api.prefix')} or {@see Router::isApiPrefix()}.
      * - `none` - Disable CORS security validation.
      * Or a custom URI prefix to enforce CORS security only (e.g, `users`)
      *
@@ -158,10 +159,10 @@ final class Security extends Configuration
      *
      * Requests from these origins are considered safe.
      *
+     * @var string[] $trustedOrigins
+     *
      * @see Luminova\Http\Request::isTrusted()
      * @see Luminova\Http\Request::isTrustedOrigin()
-     *
-     * @var array<int,string> $trustedOrigins
      * 
      * @example - Example:
      * ```php
@@ -178,9 +179,9 @@ final class Security extends Configuration
      *
      * Requests from these hostnames are considered safe.
      *
-     * @see Luminova\Http\Request::isTrusted()
+     * @var string[] $trustedHostnames
      *
-     * @var array<int,string> $trustedHostnames
+     * @see Luminova\Http\Request::isTrustedHost()
      * 
      * @example - Example:
      * ```php
@@ -191,6 +192,16 @@ final class Security extends Configuration
      * ```
      */
     public static array $trustedHostnames = [];
+
+    /**
+     * Trusted proxy IP addresses and CIDR subnets.
+     *
+     * @var string[] $trustedProxies
+     * 
+     * @see Luminova\Http\Request::isTrustedProxy()
+     * @see Luminova\Http\Network\IP::isTrustedProxy()
+     */
+    public static array $trustedProxies = [];
 
     /**
      * Apply API-style security to all HTTP requests.

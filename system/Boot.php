@@ -11,8 +11,8 @@ declare(strict_types=1);
  */
 namespace Luminova;
 
-use \App\Kernel;
 use \Throwable;
+use \App\Kernel;
 use Luminova\Runtime;
 use Luminova\Luminova;
 use Luminova\Config\Env;
@@ -26,6 +26,8 @@ use Luminova\Foundation\Error\Error;
 use Luminova\Foundation\Module\Factory;
 use Luminova\Foundation\Core\Application;
 use Luminova\Foundation\Module\Autoloader;
+use function strlen;
+use function substr;
 
 /**
  * Luminova framework bootstrapping and autoloading helper.
@@ -95,7 +97,11 @@ final class Boot
     {
         self::init();
 
-        if (!PRODUCTION && !STAGING && !Runtime::isLocalhost()) {
+        if (
+            !Runtime::isProduction()
+            && !Runtime::isStaging()
+            && !Runtime::isLocalhost()
+        ) {
             exit(
                 'Invalid environment mode for production. '
                 . 'Set "app.environment.mode=production" or "staging".'
@@ -195,7 +201,7 @@ final class Boot
      */
     public static function cli(): void
     {
-        if (!in_array(PHP_SAPI, ['cli', 'phpdbg'], true)) {
+        if (!self::isCli()) {
             self::onError(sprintf(
                 'Method "Boot::cli()" can only be called in CLI context. '
                 . 'Use "Boot::http()" instead. Current SAPI: %s.',
@@ -207,11 +213,14 @@ final class Boot
 
         error_reporting(E_ALL);
 
-        ini_set('display_errors', '1');
-        ini_set('display_startup_errors', '1');
-        ini_set('html_errors', '0');
-        ini_set('log_errors', '1');
-        ini_set('error_log', 'php://stderr');
+        putenv('TMP=' . TMPDIR);
+        putenv('TEMP=' . TMPDIR);
+
+        self::trySetIniValue('display_errors', '1');
+        self::trySetIniValue('display_startup_errors', '1');
+        self::trySetIniValue('html_errors', '0');
+        self::trySetIniValue('log_errors', '1');
+        self::trySetIniValue('error_log', 'php://stderr');
 
         defined('CLI_ENVIRONMENT')
             || define('CLI_ENVIRONMENT', Env::get('cli.environment.mode', 'testing'));
@@ -220,18 +229,6 @@ final class Boot
 
         Error::register();
         self::finish();
-    }
-
-    /**
-     * Get the shared application instance.
-     *
-     * @return Application|\App\Application<Application> Returns the application instance.
-     * 
-     * @deprecated
-     */
-    public static function application(): Application
-    {
-        return Kernel::resolve(Kernel::SERVICE_APPLICATION, true);
     }
 
     /**
@@ -247,13 +244,30 @@ final class Boot
      */
     public static function warmup(): void
     {
+        defined('TRIM_DS') || define('TRIM_DS', '/\\');
+
+        /**
+         * Luminova application base directory.
+         * 
+         * @var string APP_BASE_PATH
+         * @see ../
+         */
         defined('APP_BASE_PATH') || define(
             'APP_BASE_PATH',
-            rtrim(
-                getenv('APP_BASE_PATH') ?: ($_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)),
-                '/\\'
+            self::toPath(
+                path: getenv('APP_BASE_PATH') ?: ($_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)),
+                suffix: ''
             )
         );
+
+        /**
+         * Luminova temporary directory environment variables.
+         * 
+         * @var string TMPDIR
+         * @see ../writeable/tmp
+         */
+        defined('TMPDIR') || define('TMPDIR', APP_BASE_PATH . '/writeable/tmp');
+        putenv('TMPDIR=' . TMPDIR);
 
         if (defined('BOOT_WARMUP_STARTED')) {
             self::override();
@@ -273,6 +287,7 @@ final class Boot
          */
         try{
             Env::register();
+            defined('IS_ENV_REGISTERED') || define('IS_ENV_REGISTERED', true);
         } catch (Throwable $e) {
             self::onError(
                 $e->getMessage(), 
@@ -292,8 +307,33 @@ final class Boot
 
         define('BOOT_WARMUP_STARTED', true);
 
+        if(MAINTENANCE){
+            return;
+        }
+
         // start recording
         Runtime::profiling('start');
+    }
+
+    /**
+     * Attempts to set a PHP configuration directive at runtime.
+     *
+     * Returns the previous directive value on success, or false if the
+     * directive cannot be updated or ini_set() is unavailable.
+     *
+     * @param string $name The PHP configuration directive name.
+     * @param mixed $value The value to assign.
+     *
+     * @return void
+     */
+    private static function trySetIniValue(string $name, mixed $value): void
+    {
+        static $available = null;
+
+        if ($available ??= function_exists('ini_set')) {
+            @ini_set($name, (string) $value);
+            return;
+        }
     }
 
     /**
@@ -306,20 +346,26 @@ final class Boot
      *
      * @see ../.phpvci.php
      */
-   public static function isPhpVciAutoload(): bool
+    public static function isPhpVciAutoload(): bool
     {
-        self::$phpvci ??= self::readPhpVciConfig();
+        static $on = null;
 
-        if (self::$phpvci === []) {
+        self::$phpvci ??= self::readPhpVciConfig();
+        $status = self::$phpvci['status'] ?? 0;
+
+        if ($status === 1 || self::$phpvci === []) {
             return false;
         }
 
-        if ((self::$phpvci['status'] ?? 0) === 2) {
+        if ($status === 2 || $on === true) {
             return true;
         }
 
-        return !empty(self::$phpvci['version'])
-            && !empty(self::$phpvci['paths']['target']);
+        return $on = (
+            !empty(self::$phpvci['version'])
+            && !empty(self::$phpvci['paths']['target'])
+            && is_dir(self::$phpvci['paths']['target'])
+        );
     }
 
     /**
@@ -348,7 +394,7 @@ final class Boot
             && self::isPhpVciAutoload();
 
         $base = $usePhpVci
-            ? self::toPath(self::$phpvci['paths']['target'])
+            ? self::$phpvci['paths']['target']
             : '/';
 
         $root = match ($from) {
@@ -362,6 +408,53 @@ final class Boot
             : Luminova::root($root, $file);
 
         return @is_file($filepath) ? $filepath : null;
+    }
+
+    /**
+     * Resolves an error template file path.
+     *
+     * Searches the framework's default error templates directory first,
+     * followed by the application's error defaults directory.
+     *
+     * When PHPVCI shared autoloading is enabled, framework templates are
+     * resolved from the shared framework installation.
+     *
+     * @param 'xxx.php'|'errors.php'|'view.error.php'|'maintenance.php' $filename The error template filename.
+     * @param bool $appOnly Whether to restrict lookup to application error templates.
+     *
+     * @return string|null Returns the absolute template file path, or null if not found.
+     * 
+     * @see /app/Errors/Defaults/ Resolve from application error template.
+     * @see /system/Foundation/Error/Templates/ Resolve from framework error template.
+     * @see /{phpvci:paths.target}/Foundation/Error/Templates/ Resolve from framework phpvci error template.
+     */
+    public static function resolveErrorTemplate(
+        string $filename = 'xxx.php',
+        bool $appOnly = false
+    ): ?string
+    {
+        $filename = ltrim($filename, '/\\');
+        $files = [];
+
+        if(!$appOnly){
+            $base = self::isPhpVciAutoload() 
+                ? self::$phpvci['paths']['target']
+                : __DIR__ . '/';
+ 
+            $files[] = "{$base}Foundation/Error/Templates/{$filename}";
+        }
+
+        if(defined('APP_BASE_PATH')){
+            $files[] = APP_BASE_PATH . "/app/Errors/Defaults/{$filename}";
+        }
+
+        foreach($files as $file){
+            if (is_file($file)) {
+                return $file;
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -388,7 +481,28 @@ final class Boot
      */
     private static function toPath(string $path, string $suffix = '/'): string
     {
-        return rtrim(str_replace('\\', '/', $path), '/') . $suffix;
+        if($path === ''){
+            return '';
+        }
+
+        $path = preg_replace(
+            '~[/\\\\]+~', 
+            '/', 
+            $path
+        );
+
+        return rtrim($path, '/') 
+            . $suffix;
+    }
+
+    /**
+     * Check if PHP_SAPI is cli.
+     *
+     * @return bool
+     */
+    private static function isCli(): bool 
+    {
+        return in_array(PHP_SAPI, ['cli', 'phpdbg'], true);
     }
 
     /**
@@ -410,15 +524,17 @@ final class Boot
         ?string $description = null
     ): never
     {
-        if (in_array(PHP_SAPI, ['cli', 'phpdbg'], true)) {
-            fwrite(STDERR, preg_replace(
-                '/<br\s*\/?>/i',
-                PHP_EOL,
-                strip_tags($message)
-            ) ?? $message);
-
+        if (self::isCli()) {
+            fwrite(
+                STDERR, 
+                preg_replace('/<br\s*\/?>/i', PHP_EOL, strip_tags($message)) 
+                    ?? $message
+            );
             exit(1);
         }
+
+        self::trySetIniValue('display_errors', '0');
+        self::trySetIniValue('display_startup_errors', '0');
 
         while (ob_get_level() > 0 && @ob_end_clean()) {}
         http_response_code(500);
@@ -434,26 +550,20 @@ final class Boot
         $title ??= 'Application Autoload Error';
         $description ??= 'Boot Error #500';
         $escaped = htmlspecialchars($message, ENT_QUOTES, 'UTF-8');
-        $file = APP_BASE_PATH . '/app/Errors/Defaults/xxx.php';
 
-        if (is_file($file)) {
+        $file = self::resolveErrorTemplate('xxx.php');
+
+        if($file !== null){
             $description = $title;
-            $message = preg_replace(
-                '/&lt;br\s*\/?&gt;/i',
-                ' ',
-                $escaped
-            ) ?? $escaped;
-
+            $message = preg_replace('/&lt;br\s*\/?&gt;/i', ' ', $escaped) 
+                ?? $escaped;
 
             include $file;
             exit(1);
         }
 
-        $message = preg_replace(
-            '/&lt;br\s*\/?&gt;/i',
-            '<br>',
-            $escaped
-        ) ?? $escaped;
+        $message = preg_replace('/&lt;br\s*\/?&gt;/i', '<br>', $escaped) 
+            ?? $escaped;
 
         echo '<!DOCTYPE html><html lang="en"><head>'
             . '<meta charset="UTF-8">'
@@ -523,7 +633,7 @@ final class Boot
 
         if (!$entry->isEmpty()) {
             try{
-                $entry->log();
+                $entry->tryLog();
             } catch(Throwable) {}
         }
 
@@ -534,7 +644,7 @@ final class Boot
      * Finalizes the bootstrapping process.
      *
      * Loads composer module and custom framework feature. 
-     * Sets `APP_BOOTED` constant if not defined.
+     * Sets `APP_BOOT_COMPLETED` constant if not defined.
      *
      * @return void
      */
@@ -543,7 +653,7 @@ final class Boot
         self::phpVciVersionCompare();
         self::features();
 
-        defined('APP_BOOTED') || define('APP_BOOTED', true);
+        defined('APP_BOOT_COMPLETED') || define('APP_BOOT_COMPLETED', true);
 
         // If application is undergoing maintenance.
         if(MAINTENANCE){
@@ -558,34 +668,41 @@ final class Boot
     /**
      * Loads PHPVCI boot configuration.
      *
+     * Resolves dynamic target paths and adds the configuration status.
+     *
      * @return array{
-     *      status: 0,
-     *      enabled: bool,
-     *      version: string,
-     *      paths: array{
-     *          target: string
-     *      }
-     * } Return configurations.
+     *     status: 0,
+     *     enabled: bool,
+     *     version: string,
+     *     paths: array{
+     *         target: string
+     *     }
+     * } Returns the PHPVCI configuration, or an empty array if unavailable or disabled.
      */
-    private static function readPhpVciConfig(): array
+    public static function readPhpVciConfig(): array
     {
         $path = APP_BASE_PATH . '/.phpvci.php';
 
-        if (!@is_file($path)) {
+        if (!is_file($path)) {
             return [];
         }
 
         $config = include $path;
 
-        if (
-            !is_array($config) 
-            || empty($config['enabled'])
-        ) {
+        if (!is_array($config) || empty($config['enabled'])) {
             return [];
         }
-        
-        $config['status'] = 0;
-        $config['version'] = trim($config['version'] ?? '');
+
+        $version = $config['version'] ?? '';
+        $target = $config['paths']['target'] ?? '';
+
+        if (is_callable($target)) {
+            $target = $target();
+        }
+
+        $config['status'] = 'ideal';
+        $config['version'] = is_string($version) ? trim($version) : '';
+        $config['paths']['target'] = is_string($target) ? self::toPath(trim($target)) : '';
 
         return $config;
     }
@@ -599,33 +716,43 @@ final class Boot
     {
         self::$phpvci ??= self::readPhpVciConfig();
 
-        if (self::$phpvci === []) {
-            return;
-        }
-
-        if((self::$phpvci['status'] ?? 0) >= 0){
+        if (
+            self::$phpvci === [] 
+            || (self::$phpvci['status'] ?? 0) >= 0
+        ) {
             return;
         }
 
         self::$phpvci['status'] = 1;
 
-        foreach (['version', 'paths', 'target'] as $key) {
-            $isTarget = $key === 'target';
-            $isMissing = $isTarget 
-                ? empty(self::$phpvci['paths'][$key]) 
-                : empty(self::$phpvci[$key]);
+        $required = [
+            'version'      => 'Version',
+            'paths.target' => 'Target',
+        ];
 
-            if (!$isMissing) {
+        foreach ($required as $key => $label) {
+            $isTarget = $key === 'paths.target';
+            $value = $isTarget
+                ? (self::$phpvci['paths']['target'] ?? null)
+                : (self::$phpvci[$key] ?? null);
+
+            if (!is_string($value) || $value === '') {
+                self::onError(
+                    sprintf('Invalid PHPVCI configuration: missing "%s".', $key),
+                    sprintf('Missing %s', $label)
+                );
                 continue;
             }
 
-            self::onError(
-                sprintf(
-                    'Invalid PHPVCI configuration: missing "%s".', 
-                    $isTarget ? "paths.{$key}" : $key
-                ),
-                sprintf('Missing %s', ucfirst($key))
-            );
+            if($isTarget && !is_dir($value)){
+                self::onError(
+                    sprintf(
+                        'PHPVCI package: target "%s" not found or is not a valid directory.',
+                        $value
+                    ),
+                    'Invalid Target'
+                );
+            }
         }
 
         self::$phpvci['status'] = 2;
@@ -646,31 +773,32 @@ final class Boot
      */
     private static function setAppDefaults(): void
     {
-        $isLive = (PRODUCTION && !STAGING);
+        $isLive = (Runtime::isProduction() && !Runtime::isStaging());
 
         /**
          * Set error reporting.
          */
-        if(PHP_SAPI !== 'cli'){
+        if(!self::isCli()){
             error_reporting($isLive
                 ? E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_USER_NOTICE & ~E_USER_DEPRECATED
                 : E_ALL
             );
-            ini_set(
+            self::trySetIniValue(
                 'display_errors', 
-                ((STAGING || !PRODUCTION) && Env::get('debug.display.errors', false)) ? '1' : '0'
+                ((Runtime::isStaging() || !Runtime::isProduction()) 
+                    && Env::get('debug.display.errors', false)) ? '1' : '0'
             );
 
-            ini_set('error_prepend_string', '<span class="php-core-error">');
-            ini_set('error_append_string', '</span>');
-            ini_set('log_errors', '1');
-            ini_set('error_log', APP_BASE_PATH . '/writeable/logs/php-errors.log');
+            self::trySetIniValue('error_prepend_string', '<span class="php-core-error">');
+            self::trySetIniValue('error_append_string', '</span>');
+            self::trySetIniValue('log_errors', '1');
+            self::trySetIniValue('error_log', APP_BASE_PATH . '/writeable/logs/php-errors.log');
         }
 
         /**
          * Set exception tracing arguments reporting.
          */
-        ini_set('zend.exception_ignore_args', $isLive ? '1' : '0');
+        self::trySetIniValue('zend.exception_ignore_args', $isLive ? '1' : '0');
 
         // Set max execution time (seconds)
         $limit = Env::get('script.execution.limit');
@@ -732,7 +860,7 @@ final class Boot
             && in_array($from, ['system', 'bootstrap'], true)
             && self::isPhpVciAutoload()
         ) {
-            $base = self::toPath(self::$phpvci['paths']['target']);
+            $base = self::$phpvci['paths']['target'];
             $root = $base . $from . '/';
         } else {
             $root = match ($from) {
@@ -762,7 +890,7 @@ final class Boot
             : sprintf(
                 'Module file "%s" not found.%s',
                 $file,
-                self::isProduction()
+                Runtime::isProduction()
                     ? ''
                     : sprintf(' Checked path: %s', $filepath)
             );
@@ -781,57 +909,53 @@ final class Boot
     }
 
     /**
-     * Determine if the application is running in production mode.
-     *
-     * This method checks defined constants to determine if the application is in production.
-     * It first checks for a `Runtime::isLocalhost()` constant, then falls back to `PRODUCTION`.
-     * If neither constant is defined, it defaults to true (production mode).
-     *
-     * @return bool True if in production mode, false otherwise.
-     */
-    private static function isProduction(): bool 
-    {
-        if(defined('PRODUCTION')){
-            return PRODUCTION === true;
-        }
-
-        return !Runtime::isLocalhost();
-    }
-
-    /**
      * Load application is undergoing maintenance.
      * 
      * @return never
      */
     private static function maintenance(): never 
     {
-        $message = 'Error: (503) System undergoing maintenance!';
-
-        if(Runtime::isCommand()){
-            Terminal::error($message);
-            exit(STATUS_ERROR);
-        }
-
-        error_reporting(0);
-        ini_set('display_errors', 0);
-
-        $retry = Env::get('app.maintenance.retry', 3600);
+        error_reporting(E_ALL);
+        self::trySetIniValue('display_errors', '0');
+        self::trySetIniValue('display_startup_errors', '0');
+        self::trySetIniValue('log_errors', '1');
 
         try{
-            Header::sendNoCacheHeaders(503, retry: $retry);
-            self::import(
-                file:       'Errors/Defaults/maintenance.php',
-                from:       'app',
-                resolvable: false,
-                throw:      true
+            $msg = 'Error: (503) System undergoing maintenance!';
+
+            if(Runtime::isCommand()){
+                Terminal::error($msg);
+                exit(STATUS_ERROR);
+            }
+
+            $retry = Env::get('app.maintenance.retry', 3600);
+
+            $file = self::resolveErrorTemplate(
+                'maintenance.php', 
+                appOnly: true
             );
-        }catch(Throwable){
-            Luminova::terminate(
-                503, 
-                $message, 
-                'Service Unavailable', 
-                $retry,
-                hookOnTerminated: false
+
+            if($file === null){
+                Luminova::terminate(
+                    503, 
+                    $msg, 
+                    'Service Unavailable', 
+                    $retry,
+                    hookOnTerminated: false
+                );
+            }
+
+            Header::sendNoCacheHeaders(503, retry: $retry);
+            include $file;
+        }catch(Throwable $e){
+            Error::tryLog(
+                'error',
+                sprintf(
+                    "[Maintenance] %s in %s:%d\n",
+                    $e->getMessage(),
+                    $e->getFile(),
+                    $e->getLine()
+                )
             );
         } finally{
             exit(STATUS_ERROR);
@@ -845,7 +969,7 @@ final class Boot
      */
     private static function phpVciVersionCompare(): void
     {
-        if(!self::isPhpVciAutoload()){
+        if(MAINTENANCE || !self::isPhpVciAutoload()){
             return;
         }
 
@@ -973,7 +1097,7 @@ final class Boot
      */
     private static function override(): void 
     {
-        if (PRODUCTION || PHP_SAPI === 'cli') {
+        if (PRODUCTION || Runtime::isCommand()) {
             return;
         }
 
@@ -1013,7 +1137,7 @@ final class Boot
      */
     private static function features(): void 
     {
-        if(defined('APP_BOOTED')){
+        if(defined('APP_BOOT_COMPLETED')){
             return;
         }
 
@@ -1026,6 +1150,10 @@ final class Boot
         ) {
             self::import('Utils/Global.php', from: 'app', resolvable: false);
             define('USER_DEFINED_GLOBAL_HELPER', true);
+        }
+
+        if(MAINTENANCE){
+            return;
         }
 
         /**

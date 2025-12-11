@@ -1,4 +1,5 @@
-<?php 
+<?php
+declare(strict_types=1);
 /**
  * Luminova Framework
  *
@@ -7,7 +8,6 @@
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
  */
-
 namespace App\Config;
 
 use \Luminova\Foundation\Core\Services as CoreServices;

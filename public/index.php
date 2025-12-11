@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * Luminova Framework front controller.
  *
@@ -11,8 +12,6 @@
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
  */
-declare(strict_types=1);
-
 use Luminova\Boot;
 
 require_once dirname(__DIR__) . '/system/Boot.php';

@@ -1,4 +1,5 @@
-<?php 
+<?php
+declare(strict_types=1);
 /**
  * Luminova Framework client related cookie configuration.
  *
@@ -27,7 +28,7 @@ final class Cookie extends Configuration
      *
      * @var int $expiration
      */
-    public int $expiration = 365 * 24 * 60 * 60; 
+    public int $expiration = 30 * 24 * 60 * 60; 
 
     /**
      * The path where the cookie is accessible.

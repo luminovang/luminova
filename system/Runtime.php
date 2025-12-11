@@ -207,9 +207,9 @@ final class Runtime
     /**
      * Profiling start mode.
      *
-     * @var bool isProfiling
+     * @var bool isStartedProfiling
      */
-    private static bool $isProfiling = false;
+    private static bool $isStartedProfiling = false;
 
     /**
 	 * Output compression enable.
@@ -264,7 +264,32 @@ final class Runtime
     public static function isLocal(): bool
     {
         return self::isLocalhost()
+            || self::isPhpServer()
             || self::isLocalAddress();
+    }
+
+    /**
+     * Determine whether the application is running through 
+     * the Luminova PHP development server.
+     *
+     * Checks the PHP built-in server SAPI and verifies the server identifier
+     * against the current NOVAKIT version to distinguish Luminova-managed
+     * server instances from other PHP development servers.
+     *
+     * @return bool Returns true if running through the Luminova PHP development server, false otherwise.
+     */
+    public static function isPhpServer(): bool
+    {
+        if (PHP_SAPI !== 'cli-server') {
+            return false;
+        }
+
+        $phpServer = $_SERVER['LUMINOVA_PHP_CLI_SERVER'] 
+            ?? $_ENV['LUMINOVA_PHP_CLI_SERVER']
+            ?? getenv('LUMINOVA_PHP_CLI_SERVER');
+
+        return !empty($phpServer) 
+            && Luminova::NOVAKIT_VERSION === $phpServer;
     }
 
     /**
@@ -334,7 +359,6 @@ final class Runtime
      * @return bool `true` if the request is addressed to localhost, otherwise `false`.
      * 
      * @see self::isLocalAddress()
-     * @see \IS_LOCALHOST
      */
     public static function isLocalhost(): bool
     {
@@ -344,7 +368,7 @@ final class Runtime
             return $isLocalhost;
         }
 
-         if(PHP_SAPI === 'cli'){
+         if(self::isCommand()){
             $host = strtolower(gethostname() ?: '');
 
             return $isLocalhost = match (true) {
@@ -389,6 +413,38 @@ final class Runtime
         );
     }
 
+    /**
+     * Determines whether the application is running in production mode.
+     *
+     * Uses the PRODUCTION constant when defined; otherwise, determines the
+     * environment based on whether the application is running on localhost.
+     *
+     * @return bool Returns true if the application is in production mode, false otherwise.
+     */
+    public static function isProduction(): bool
+    {
+        static $isProd = null;
+
+        return $isProd ??= (
+            (defined('PRODUCTION') && PRODUCTION) 
+            || !self::isLocalhost()
+        );
+    }
+
+    /**
+     * Determines whether the application is running in staging mode.
+     *
+     * Checks the STAGING constant and caches the result for subsequent calls.
+     *
+     * @return bool Returns true if the application is in staging mode, false otherwise.
+     */
+    public static function isStaging(): bool
+    {
+        static $isStaging = null;
+
+        return $isStaging ??= (defined('STAGING') && STAGING);
+    }
+    
     /**
      * Determine whether the application is running in a Docker environment.
      *
@@ -533,7 +589,7 @@ final class Runtime
         }
 
         return $isCli = (
-            in_array(PHP_SAPI, ['cli', 'phpdbg'], true) // cli-server
+            in_array(PHP_SAPI, ['cli', 'phpdbg'], true)
             || isset($_SERVER['argv'])
             || defined('STDIN')
         );
@@ -551,7 +607,10 @@ final class Runtime
     {
         static $isHmvc;
 
-        return $isHmvc ??= (bool) Env::get('feature.app.hmvc', false);
+        return $isHmvc ??= (bool) Env::get(
+            'feature.app.hmvc', 
+            false
+        );
     }
 
     /**
@@ -617,9 +676,9 @@ final class Runtime
         }
 
         return $enabled = filter_var(
-            ini_get('session.upload_progress.enabled'),
+            self::tryGetIniValue('session.upload_progress.enabled', '0'),
             FILTER_VALIDATE_BOOLEAN
-        ) && ini_get('session.upload_progress.name') !== '';
+        ) && self::tryGetIniValue('session.upload_progress.name', '') !== '';
     }
 
     /**
@@ -710,7 +769,7 @@ final class Runtime
      */
     public static function cleanOutputBuffers(string $mode = 'auto', int $limit = 0): bool
     {
-        if (PHP_SAPI === 'cli' || PHP_SAPI === 'phpdbg') {
+        if (self::isCommand()) {
             return false;
         }
 
@@ -832,19 +891,19 @@ final class Runtime
      * It can return the list as a simple array of function names or as an associative array
      * with function names as keys and `true` as values.
      * 
-     * @param bool $flip Whether to return an associative lookup array.
+     * @param bool $flipValue Whether to return an associative lookup array.
      * 
-     * @return ($flip is true ? array<string, true> : array<int, string>) Returns an array of disabled function names or an associative array if `$flip` is true.
+     * @return ($flipValue is true ? array<string, true> : array<int, string>) Returns an array of disabled function names or an associative array if `$flipValue` is true.
      */
-    public static function disabledFunctions(bool $flip = false): array
+    public static function disabledFunctions(bool $flipValue = false): array
     {
         if (self::$disabledFunctions !== null) {
-            return ($flip && isset(self::$disabledFunctions[0])) 
+            return ($flipValue && isset(self::$disabledFunctions[0])) 
                 ? array_flip(self::$disabledFunctions) 
                 : self::$disabledFunctions;
         }
 
-        $list = ini_get('disable_functions') ?: '';
+        $list = self::tryGetIniValue('disable_functions') ?: '';
 
         if ($list === '') {
             return self::$disabledFunctions = [];
@@ -858,7 +917,7 @@ final class Runtime
                 continue;
             }
 
-            if ($flip) {
+            if ($flipValue) {
                 $disabled[$function] = true;
                 continue;
             }
@@ -1112,7 +1171,10 @@ final class Runtime
 
         [$error, $code] = self::getPermissionError($result, $file);
 
-        if (PRODUCTION && Logger::tryDispatch('critical', $error)) {
+        if (
+            self::isProduction()
+            && Logger::tryDispatch('critical', $error)
+        ) {
             return false;
         }
 
@@ -1194,7 +1256,7 @@ final class Runtime
         int $reserve = 0
     ): int 
     {
-        $limit = ini_get('memory_limit');
+        $limit = self::tryGetIniValue('memory_limit');
 
         if ($limit === false) {
             return 0;
@@ -1215,6 +1277,136 @@ final class Runtime
         }
 
         return $bytes;
+    }
+
+    /**
+     * Sets a PHP configuration directive at runtime.
+     *
+     * @param string $name The PHP configuration directive name.
+     * @param string|int|float|bool|null $value The value to assign.
+     * @param string|null $label Optional label used in error messages.
+     *
+     * @return string Returns the previous value of the directive.
+     * @throws RuntimeException If the configuration directive cannot be updated.
+     * 
+     * @see ini_set()
+     * @see self::trySetIniValue()
+     */
+    public static function setIniValue(
+        string $name,
+        string|int|float|bool|null $value,
+        ?string $label = null
+    ): string 
+    {
+        static $iniAvailable = null;
+        $iniAvailable ??= function_exists('ini_set');
+
+        if ($iniAvailable === false) {
+            throw new RuntimeException(
+                'PHP function "ini_set" is disabled or unavailable.'
+            );
+        }
+
+        $result = ini_set($name, $value);
+
+        if ($result === false) {
+            throw new RuntimeException(sprintf(
+                'Unable to configure %s with value: %s.',
+                $label ?? sprintf('PHP directive "%s"', $name),
+                var_export($value, true)
+            ));
+        }
+
+        return $result;
+    }
+
+    /**
+     * Attempts to set a PHP configuration directive at runtime.
+     *
+     * Returns the previous directive value on success, or false if the
+     * directive cannot be updated or ini_set() is unavailable.
+     *
+     * @param string $name The PHP configuration directive name.
+     * @param mixed $value The value to assign.
+     *
+     * @return string|false Returns the previous value on success, or false on failure.
+     */
+    public static function trySetIniValue(string $name, mixed $value): string|false
+    {
+        static $iniAvailable = null;
+
+        if ($iniAvailable ??= function_exists('ini_set')) {
+            return @ini_set($name, (string) $value);
+        }
+
+        return false;
+    }
+
+    /**
+     * Retrieves the value of a defined PHP constant.
+     *
+     * Returns the specified default value if the constant is not defined.
+     *
+     * @param string $name The constant name, including its class or namespace if applicable.
+     * @param mixed $default The fallback value when the constant is not defined.
+     *
+     * @return mixed Returns the constant value if defined, otherwise the default value.
+     */
+    public static function getConstantValue(string $name, mixed $default = null): mixed
+    {
+        return defined($name) 
+            ? constant($name) 
+            : $default;
+    }
+
+    /**
+     * Retrieves the value of a PHP configuration directive.
+     *
+     * @param string $name The PHP configuration directive name.
+     *
+     * @return string Returns the directive value.
+     * @throws RuntimeException If ini_get() is unavailable or the directive cannot be read.
+     * 
+     * @see self::tryGetIniValue()
+     */
+    public static function getIniValue(string $name): string
+    {
+        $result = self::tryGetIniValue($name);
+
+        if ($result === false) {
+            throw new RuntimeException(sprintf(
+                'Unable to retrieve PHP configuration directive "%s".', 
+                $name
+            ));
+        }
+
+        return $result;
+    }
+
+    /**
+     * Attempts to retrieve the value of a PHP configuration directive.
+     *
+     * @param string $name The PHP configuration directive name.
+     * @param string|false $default Default value returned when the directive cannot be read.
+     *
+     * @return string|false Returns the directive value, or the default value on failure.
+     * 
+     * @see self::getIniValue()
+     */
+    public static function tryGetIniValue(
+        string $name,
+        string|false $default = false
+    ): string|false
+    {
+        static $iniGetAvailable = null;
+
+        if (!($iniGetAvailable ??= function_exists('ini_get'))) {
+            return $default;
+        }
+
+        $result = @ini_get($name);
+
+        return ($result === false) ? $default : $result;
     }
 
     /**
@@ -1326,7 +1518,13 @@ final class Runtime
             return false;
         }
 
-        $current = (int) ini_get('max_execution_time');
+        $current = self::tryGetIniValue('max_execution_time');
+
+        if($current === false){
+            return false;
+        }
+
+        $current = (int) $current;
 
         if ($current > 0) {
             $seconds = min($seconds, $current);
@@ -1642,7 +1840,7 @@ final class Runtime
      *
      * @return void
      *
-     * @example - Example
+     * @example - Example:
      * ```php
      * use Luminova\Runtime;
      *
@@ -1684,7 +1882,7 @@ final class Runtime
      * Profiling is only active when debugging is enabled and the application
      * is not running in production.
      *
-     * @param string $mode The profiling mode (typically: `start` or `stop`).
+     * @param 'start|'stop' $mode The profiling mode (typically: `start` or `stop`).
      * @param null|array{
      *     command:string,
      *     name:string,
@@ -1719,8 +1917,8 @@ final class Runtime
     {
         if (
             !self::isProfilingEnabled()  
-            || (self::$isProfiling && $mode === 'start')
-            || (!self::$isProfiling && $mode === 'stop')
+            || (self::$isStartedProfiling && $mode === 'start')
+            || (!self::$isStartedProfiling && $mode === 'stop')
         ) {
             return;
         }
@@ -1734,7 +1932,7 @@ final class Runtime
             ))
         };
 
-        self::$isProfiling = $mode === 'start';
+        self::$isStartedProfiling = $mode === 'start';
     }
 
     /**
@@ -1750,10 +1948,16 @@ final class Runtime
      */
     public static function isProfilingEnabled(): bool
     {
-        static $isProfilingEnabled;
+        static $isProfilingEnabled = null;
 
-        return $isProfilingEnabled ??= Env::get('debug.show.performance.profiling', false)
-            && (!PRODUCTION || Env::get('production.show.performance.profiling', false));
+        return $isProfilingEnabled ??= Env::get(
+            'debug.show.performance.profiling', 
+            false
+        )
+            && (
+                !self::isProduction()
+                || Env::get('production.show.performance.profiling', false)
+            );
     }
 
     /**
@@ -1775,12 +1979,16 @@ final class Runtime
      * - Route attribute scanning is active but attribute caching is off.
      *
      * @return void
+     * 
      * @ignore
      * @codeCoverageIgnore
      */
     public static function tips(): void
     {
-        if (!PRODUCTION || !Env::get('debug.alert.performance.tips', false)) {
+        if (
+            !self::isProduction()
+            || !Env::get('debug.alert.performance.tips', false)
+        ) {
             return;
         }
 
@@ -1791,7 +1999,10 @@ final class Runtime
         $entry = new Entry('warning');
         $off = 'Disable this warning by setting "debug.alert.performance.tips=false" in your .env file.';
 
-        if (function_exists('opcache_get_status') && !ini_get('opcache.enable')) {
+        if (
+            function_exists('opcache_get_status') 
+            && !self::tryGetIniValue('opcache.enable')
+        ) {
             $entry->add(
                 "OPcache is installed but disabled. 
                 Enable it to improve performance. {$off}"
@@ -2022,7 +2233,7 @@ final class Runtime
         if (
             headers_sent()
             || !empty($_SERVER['HTTP_RANGE'])
-            || filter_var(ini_get('zlib.output_compression'), FILTER_VALIDATE_BOOL)
+            || filter_var(self::tryGetIniValue('zlib.output_compression'), FILTER_VALIDATE_BOOL)
         ) {
             return false;
         }
@@ -2127,7 +2338,7 @@ final class Runtime
      * @param string $mode File access mode (e.g., 'r', 'w').
      *
      * @return resource|null Return a valid stream resource.
-     * @throws RuntimeException If the file can't be opened.
+     * @throws \RuntimeException If the file can't be opened.
      */
     private static function tryFopen(string $filename, string $mode): mixed
     {
@@ -2141,7 +2352,11 @@ final class Runtime
         }
 
         if ($handle === false || !is_resource($handle)) {
-            throw new RuntimeException(sprintf(
+            if(str_starts_with($filename, 'php://std')){
+                return $filename;
+            }
+
+            throw new \RuntimeException(sprintf(
                 'Failed to open file "%s" with mode "%s"%s',
                 $filename,
                 $mode,

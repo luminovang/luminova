@@ -6,8 +6,11 @@
  *   - /resources/Views/
  *   - /app/Modules/<module>/resources/Views/
  *
- * > It is recommended to create your own template, as modifying this file 
- * > may be overwritten in future updates.
+ * @var string|null $title The error title.
+ * @var string|null $message The error message.
+ * @var string|null $description The error full description.
+ * 
+ * > It is recommended to use a minimal module to avoid errors on failure.
  */
 $title ??= 'Unknown Error';
 $message ??= '';
@@ -31,8 +34,7 @@ $description ??= $title;
     <div class="footer">
         <div class="container">
             <p>
-                Displayed at <?= date('H:i:sA'); ?> &mdash;
-                PHP: <?= PHP_VERSION ?>
+                Displayed at <?= date('H:i:sA'); ?>
                 <?= defined('ENVIRONMENT') ? '  &mdash; Environment: ' . ENVIRONMENT : ''; ?>
             </p>
         </div>

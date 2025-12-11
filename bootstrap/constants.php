@@ -41,7 +41,7 @@ defined('APP_ROOT') || define('APP_ROOT', Luminova::appRoot());
  * @example `/path/to/project/public/`
  * @example `/usr/www/example.com/public/`
  */
-defined('DOCUMENT_ROOT') || define('DOCUMENT_ROOT', APP_ROOT . 'public' . DIRECTORY_SEPARATOR);
+defined('DOCUMENT_ROOT') || define('DOCUMENT_ROOT', APP_ROOT . 'public/');
 
 /**
  * Status code indicating successful execution.
@@ -217,15 +217,6 @@ defined('FETCH_OBJ') || define('FETCH_OBJ', 3);
 defined('FETCH_COLUMN') || define('FETCH_COLUMN', 4);
 
 /**
- * Fetch mode that returns each row as an object with numeric property names.
- *
- * @var int
- *
- * @deprecated
- */
-defined('FETCH_NUM_OBJ') || define('FETCH_NUM_OBJ', 5);
-
-/**
  * Fetch mode that returns a two-column result as an associative array.
  *
  * The first column is used as the array key and the second column as its value.
@@ -357,61 +348,3 @@ defined('PARAM_BOOL') || define('PARAM_BOOL', 5);
  * @var int
  */
 defined('PARAM_FLOAT') || define('PARAM_FLOAT', 192);
-
-/**
- * Indicates whether the application is running in a local environment.
- *
- * @var bool
- *
- * @deprecated Use {@see Runtime::isLocal()} instead.
- */
-defined('IS_LOCAL') || define('IS_LOCAL', Runtime::isLocal());
-
-/**
- * Indicates whether the application is running on localhost.
- *
- * @var bool
- *
- * @deprecated Use {@see Runtime::isLocalhost()} instead.
- */
-defined('IS_LOCALHOST') || define('IS_LOCALHOST', Runtime::isLocalhost());
-
-/**
- * Relative path to the application index controller file.
- *
- * The value is based on the base directory of the application and is empty
- * when running through the PHP development server.
- *
- * @var string
- *
- * @example `www/example.com/public/index.php`
- *
- * @deprecated Use {@see \Luminova\Luminova::entryScript()} instead.
- */
-defined('APP_CONTROLLER_INDEX') || define(
-    'APP_CONTROLLER_INDEX',
-    trim(dirname($_SERVER['SCRIPT_NAME'] ?? DOCUMENT_ROOT . 'index.php'), TRIM_DS) . '/index.php'
-);
-
-/**
- * Alias for {@see APP_CONTROLLER_INDEX}.
- *
- * @var string
- *
- * @deprecated Use {@see APP_CONTROLLER_INDEX} instead.
- */
-defined('CONTROLLER_SCRIPT_PATH') || define('CONTROLLER_SCRIPT_PATH', APP_CONTROLLER_INDEX);
-
-/**
- * Absolute path to the Novakit development server executable.
- *
- * The value is `null` when the application is not running under Novakit.
- *
- * @var string|null
- *
- * @deprecated Use {@see Runtime::isContainer('novakit')} instead.
- */
-defined('NOVAKIT_ENV') || define(
-    'NOVAKIT_ENV',
-    (($_SERVER['RUNTIME_ENV'] ?? null) === 'novakit') ? APP_ROOT . 'novakit' : null
-);

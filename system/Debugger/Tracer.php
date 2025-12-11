@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * Luminova Framework
  *
@@ -130,77 +131,6 @@ final class Tracer
     public static function getBreakpoints(): array
     {
         return self::$breakpoints;
-    }
-
-    /**
-     * Retrieves the last debug backtrace from the shared error context.
-     * 
-     * This method accesses a shared memory `$trace` to retrieve
-     * the stored debug backtrace. If the backtrace is not set, it returns an empty array.
-     * 
-     * @return array Return the debug backtrace or an empty array if not available.
-     * @deprecated Use Runtime::lastErrorBacktrace() instead.
-     */
-    public static function getBacktrace(): array 
-    {
-        return Runtime::lastErrorBacktrace();
-    }
-
-    /**
-     * Stores the last debug backtrace in the shared error context.
-     * 
-     * 
-     * Can either replace the current backtrace or prepend to it.
-     * 
-     * @param array $backtrace Array of backtrace information.
-     * @param bool $push If true (default), prepends to the existing backtrace.
-     * 
-     * @return void
-     * @deprecated Use Runtime::setLastBacktrace() instead.
-     */
-    public static function setBacktrace(array $backtrace, bool $push = true): void 
-    {
-        Runtime::setLastBacktrace($backtrace, $push);
-    }
-
-    /**
-     * Stores the last error code in the shared error context.
-     * 
-     * @param string|int $code The last error code value.
-     * 
-     * @return void
-     * @deprecated Use Runtime::setLastErrorCode() instead.
-     */
-    public static function setLastErrorCode(string|int $code): void 
-    {
-        Runtime::setLastErrorCode($code);
-    }
-
-    /**
-     * Retrieves the last stored error code or a default value.
-     * 
-     * @param string|int $default Default error code if none was stored (default: `E_ERROR`).
-     * 
-     * @return string|int Return the last stored error code, or the provided default.
-     * 
-     * @deprecated Use Runtime::LastErrorCode() instead.
-     */
-    public static function getLastErrorCode(string|int $default = E_ERROR): string|int
-    {
-        return Runtime::LastErrorCode($default);
-    }
-
-    /**
-     * Clears the shared last error code and back tracer.
-     * 
-     * @return void
-     * @internal
-     * 
-     * @deprecated Use Runtime::clearLastError() instead.
-     */
-    public static function resetLastError(): void 
-    {
-        Runtime::clearLastError();
     }
 
     /**
@@ -391,7 +321,7 @@ final class Tracer
             withName: true
         );
 
-        if (PHP_SAPI === 'cli') {
+        if (Runtime::isCommand()) {
             $fileLine = "Dumped at: {$file}:{$line}";
 
             echo PHP_EOL;
@@ -561,7 +491,10 @@ final class Tracer
      */
     public static function getIdeEditorUri(?string $file = null, string|int $line = 1): string 
     {
-        $ide = defined('APP_BOOTED') ? strtolower(Env::get('debug.coding.ide', 'vscode')) : 'vscode';
+        $ide = defined('APP_BOOT_COMPLETED') 
+            ? strtolower(Env::get('debug.coding.ide', 'vscode')) 
+            : 'vscode';
+            
         $scheme = match ($ide) {
             'phpstorm'  => 'phpstorm://open?file=',
             'sublime'   => 'sublimetext://open?url=file:',
@@ -613,30 +546,35 @@ final class Tracer
     }
 
     /**
-     * Initialize ini_set highlight.
+     * Initialize code color highlight.
      * 
      * @param bool $forDarkTheme Wether for dark theme.
      * 
-     * @return void
+     * @return bool Return true if theme was applied, otherwise false.
      */
-    private static function highlightColor(bool $forDarkTheme = true): void
+    private static function highlightColor(bool $forDarkTheme = true): bool
     {
-        if (!function_exists('ini_set')) {
-            return;
+        $themes = match(true){
+            $forDarkTheme => [
+                'comment' => '#767a7e; font-style: italic',
+                'default' => '#c7c7c7',
+                'html'    => '#06B',
+                'keyword' => '#f1ce61;',
+                'string'  => '#869d6a',
+            ],
+            default => [
+                'comment' => '#6a737d; font-style: italic',
+                'default' => '#24292e',
+                'html'    => '#0550ae',
+                'keyword' => '#d73a49',
+                'string'  => '#032f62',
+            ],
+        };
+
+        foreach ($themes as $name => $value) {
+            Runtime::trySetIniValue("highlight.{$name}", $value);
         }
 
-        if ($forDarkTheme) {
-            ini_set('highlight.comment', '#767a7e; font-style: italic');
-            ini_set('highlight.default', '#c7c7c7');
-            ini_set('highlight.html', '#06B');
-            ini_set('highlight.keyword', '#f1ce61;');
-            ini_set('highlight.string', '#869d6a');
-        } else {
-            ini_set('highlight.comment', '#6a737d; font-style: italic');
-            ini_set('highlight.default', '#24292e');
-            ini_set('highlight.html',    '#0550ae');
-            ini_set('highlight.keyword', '#d73a49');
-            ini_set('highlight.string',  '#032f62');
-        }
+        return true;
     }
 }

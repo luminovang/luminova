@@ -812,7 +812,7 @@ function finish_response(bool $closeSession = true, bool $ignoreUserAbort = true
         \session_write_close();
     }
 
-    if($ignoreUserAbort && PHP_SAPI !== 'cli'){
+    if($ignoreUserAbort && !Runtime::isCommand()){
         \ignore_user_abort(true);
     }
 
@@ -1295,7 +1295,7 @@ function browser(?string $userAgent = null, string $return = 'object', bool $sha
     if ($return !== 'instance') {
         $asArray = ($return === 'array');
 
-        if(\ini_get('browscap')){
+        if(Runtime::tryGetIniValue('browscap')){
             $browser = \get_browser($userAgent, $asArray);
 
             if ($browser !== false) {
@@ -1566,21 +1566,6 @@ function system_path(string $name): string
 }
 
 /**
- * Resolve system and application path.
- *
- * @param string $name The path name to resolves.
- * 
- * @return string Return directory path, windows, unix or windows style path.
- * 
- * @deprecated Use `system_path()` instead.
- * > This function is retained for backward compatibility.
- */
-function path(string $name): string
-{
-    return Filesystem::path($name);
-}
-
-/**
  * Create a directory if it does not already exist.
  * 
  * If the directory exists, the function returns true without error.
@@ -1617,23 +1602,28 @@ function make_dir(string $path, ?int $permissions = null, bool $recursive = true
  * @param string|resource $content   String data or a readable stream resource.
  * @param int|null        $mode      File permissions. Null preserves existing permissions.
  * @param bool            $acquireLock Whether to acquire an exclusive file lock.
- *
- * @return bool True on success.
- *
- * @throws RuntimeException If the file cannot be written.
+ * @param bool $deleteLockFile Whether to delete lock file once done.
+ * 
+ * @return int Returns the total number of bytes written on success, otherwise false.
+ * 
+ * @throws InvalidArgumentException If the data or chunk size is invalid.
+ * @throws FileException If the target directory, temporary file, lock, write, rename, 
+ *                      or permission operation fails.
  */
 function atomic_write(
     string $filename,
     mixed $content,
     ?int $mode = null,
-    bool $acquireLock = false
-): bool 
+    bool $acquireLock = false,
+    bool $deleteLockFile = false
+): int 
 {
     return Filesystem::atomicWrite(
         $filename,
         $content,
         $mode,
-        $acquireLock
+        $acquireLock,
+        $deleteLockFile
     );
 }
 
@@ -2283,31 +2273,4 @@ function validate(
     $instance->validate();
     
     return $instance;
-}
-
-/**
- * Convert a file path to a display-friendly format.
- * 
- * @param string $path The file path to convert.
- * 
- * @return string Return the cleaned path safe for display.
- * @deprecated Use display_path() instead for clarity and consistency.
- */
-function filter_paths(string $path): string 
-{
-    return Luminova::toDisplayPath($path);
-}
-
-/**
- * Alias of `base_url()`. Use `base_url()` instead for clarity and consistency.
- *
- * @param string|null $route
- * @param boolean $relative
- * 
- * @return string
- * @deprecated Use base_url() instead for clarity and consistency.
- */
-function start_url(?string $route = null, bool $relative = false): string
-{
-    return Luminova::toBaseUrl($route, $relative);
 }

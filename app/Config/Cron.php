@@ -1,4 +1,5 @@
-<?php 
+<?php
+declare(strict_types=1);
 /**
  * Luminova Framework Cron job scheduler for managing scheduled tasks.
  *

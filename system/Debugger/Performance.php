@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * Performance class for measuring and displaying performance metrics.
  *

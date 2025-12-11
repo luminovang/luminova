@@ -1,4 +1,5 @@
-<?php 
+<?php
+declare(strict_types=1);
 /**
  * Luminova Framework
  *
@@ -20,7 +21,11 @@ use \App\Errors\Controllers\AppError;
  * Demonstrates how to implement a basic HTTP page controller 
  * using Luminova's standard MVC (non-HMVC) structure.
  */
-#[Prefix(pattern: '/(:base)', exclude: ['api', 'webhook'], onError: [AppError::class, 'onWebError'])]
+#[Prefix(
+    pattern: '/(:base)', 
+    exclude: ['api', 'webhook'], 
+    onError: [AppError::class, 'onWebError']
+)]
 class MainController extends Controller 
 {
     /**

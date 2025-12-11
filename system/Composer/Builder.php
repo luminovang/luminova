@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * Luminova Framework BBBB
  *
@@ -13,9 +14,10 @@ namespace Luminova\Composer;
 use \Closure;
 use \Exception;
 use \ZipArchive;
-use \DirectoryIterator;
 use Luminova\Luminova;
+use \DirectoryIterator;
 use Luminova\Command\Terminal;
+use Luminova\Storage\Filesystem;
 use function Luminova\Funcs\make_dir;
 
 final class Builder
@@ -90,8 +92,9 @@ final class Builder
         '/writeable/temp',
         '/writeable/tmp',
         '/writeable/caches',
-        '/writeable/session/',
-        '/writeable/.env-cache.php',
+        '/writeable/locks',
+        '/writeable/sessions',
+        '/writeable/.env.php',
         '/system/plugins/luminovang/framework',
         '/phpstan.includes.php',
         '/phpstan.neon',
@@ -252,7 +255,7 @@ final class Builder
      */
     public static function import(string $source, ?string $destination = null): int 
     {
-        $source = self::normalize(rtrim($source, TRIM_DS) . DIRECTORY_SEPARATOR);
+        $source = Filesystem::toSeparator(rtrim($source, TRIM_DS) . '/');
         $destination ??= APP_ROOT;
         Terminal::init();
 
@@ -506,9 +509,9 @@ final class Builder
             return;
         }
 
-        $base = self::normalize(
+        $base = Filesystem::toSeparator(
             APP_ROOT 
-            . DIRECTORY_SEPARATOR 
+            . '/' 
             . Updater::FRAMEWORK_PATH
         );
 
@@ -546,11 +549,13 @@ final class Builder
             $sourcePath = $item->getPathname();
 
             // RELATIVE PATH FROM ROOT (single source of truth)
-            $relativePath = self::normalize(str_replace(self::$root, '', $sourcePath));
+            $relativePath = Filesystem::toSeparator(
+                str_replace(self::$root, '', $sourcePath)
+            );
             $relativePath = '/' . ltrim($relativePath, TRIM_DS);
 
-            $destPath = self::normalize($destination
-                ? rtrim($destination, TRIM_DS) . DIRECTORY_SEPARATOR . $item->getFilename()
+            $destPath = Filesystem::toSeparator($destination
+                ? rtrim($destination, TRIM_DS) . '/' . $item->getFilename()
                 : ltrim($relativePath, TRIM_DS) // for zip
             ); 
 
@@ -651,11 +656,6 @@ final class Builder
     private static function ensureDir(string $dir): bool
     {
         return is_dir($dir) || mkdir($dir, 0755, true);
-    }
-
-    private static function normalize(string $path): string
-    {
-        return str_replace(['\\', '/'], '/', $path);
     }
 
     /**

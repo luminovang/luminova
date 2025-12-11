@@ -300,7 +300,7 @@ function uwait(float|int $seconds, float|int|null $max = null): void
  */
 function dump(mixed ...$vars): void
 {
-    $isCli = PHP_SAPI === 'cli';
+    $isCli = PHP_SAPI === 'cli' || PHP_SAPI === 'phpdbg';
     $separator = $isCli ? PHP_EOL : '<br/>';
 
     if (!$isCli) {

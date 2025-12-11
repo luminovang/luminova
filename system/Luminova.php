@@ -30,7 +30,6 @@ use Luminova\Http\HttpStatus;
 use Luminova\Command\Terminal;
 use Luminova\Promise\{Rejected, Fulfilled};
 use Luminova\Exceptions\{
-    ClassException, 
     RuntimeException, 
     InvalidArgumentException
 };
@@ -42,7 +41,7 @@ final class Luminova
      * 
      * @var string VERSION
      */
-    public const VERSION = '3.9.1';
+    public const VERSION = '3.9.3';
 
     /**
      * Framework version name.
@@ -193,37 +192,6 @@ final class Luminova
 	}
 
     /**
-     * Resolve an application kernel service or return the kernel instance.
-     *
-     * When `$service` is `null`, the kernel instance is returned. Otherwise,
-     * the requested service is resolved through the application kernel.
-     * 
-     * @deprecated Use Kernel::resolve(), global helper kernel() or Application::make() instead
-     *
-     * @param string|null $service The service identifier,
-     *        class/interface name, or `null` to return the kernel instance.
-     * @param bool $shared Whether to reuse a shared instance when supported.
-     * @param mixed ...$arguments Arguments passed to the service resolver.
-     *
-     * @return Kernel|mixed The resolved service or kernel result.
-     *
-     * @throws RuntimeException If the requested service cannot be resolved.
-     * @throws ClassException If the service/abstract is not available.
-     */
-    public static function kernel(
-        ?string $service = null,
-        bool $shared = true,
-        mixed ...$arguments
-    ): mixed 
-    {
-        return \Luminova\Funcs\kernel(
-            $service,
-            $shared,
-            ...$arguments
-        );
-    }
-
-    /**
      * Build an absolute path from the application root directory.
      * 
      * Generates a normalized path based on `APP_ROOT`, with optional
@@ -274,34 +242,33 @@ final class Luminova
         bool $normalize = false
     ): string
     {
-        $ds = '/';
-        $fullPath = self::appRoot();
+        $appPath = self::appRoot();
 
         if(
             $path !== null 
             && $path !== '' 
-            && str_starts_with(ltrim($path, '/\\'), ltrim($fullPath, '/\\'))
+            && str_starts_with(ltrim($path, '/\\'), ltrim($appPath, '/\\'))
         ){
-            $fullPath = '/';
+            $appPath = '/';
         }
 
-        if($path !== null && $path !== '' && $path !== $ds){
-            $fullPath .= \trim($path, '/\\') . '/';
+        if(
+            $path !== null 
+            && $path !== '' 
+            && $path !== '/'
+        ){
+            $appPath .= \trim($path, '/\\') . '/';
         }
 
         if ($filename !== null && $filename !== '') {
-            $fullPath .= \trim($filename, '/\\');
+            $appPath .= \trim($filename, '/\\');
         }
 
-        if (!$normalize) {
-            return \str_replace(
-                ['\\', '/'], 
-                '/', 
-                $fullPath
-            );
-        }
-
-        return \str_replace(['/', '\\'], \DIRECTORY_SEPARATOR, $fullPath);
+        return self::toPath(
+            $appPath, 
+            $normalize ? DIRECTORY_SEPARATOR : '/', 
+            false
+        );
     }
 
     /**
@@ -568,7 +535,10 @@ final class Luminova
             return self::$rootUri;
         }
 
-        $script = str_replace('\\', '/', $_SERVER['SCRIPT_NAME'] ?? '/');
+        $script = self::toPath(
+            $_SERVER['SCRIPT_NAME'] ?? '/', 
+            trimEnd: false
+        );
 
         if ($script === '/') {
             return self::$rootUri = '/';
@@ -603,22 +573,23 @@ final class Luminova
      */
     public static function appRoot(): string
     {
-        static $root;
+        static $root = null;
 
         if ($root !== null) {
             return $root;
         }
 
-        $ds = DIRECTORY_SEPARATOR;
+        if(self::isAppRoot(APP_BASE_PATH)){
+            return $root = APP_BASE_PATH . '/';
+        }
+
         $dir = APP_BASE_PATH;
 
         while ($dir !== DIRECTORY_SEPARATOR) {
-            if (
-                @is_file($dir . '/.env')
-                || @is_file($dir . '/.dev.env')
-                || @is_file($dir . '/system/Boot.php')
-            ) {
-                return $root = str_replace(['/', '\\'], $ds, $dir) . $ds;
+            $path = self::toPath($dir);
+
+            if(self::isAppRoot($path)){
+                return $root = "{$path}/";
             }
 
             $parent = dirname($dir);
@@ -630,11 +601,7 @@ final class Luminova
             $dir = $parent;
         }
 
-        return $root = str_replace(
-            ['/', '\\'], 
-            $ds, 
-            APP_BASE_PATH
-        ) . $ds;
+        return $root = APP_BASE_PATH . '/';
     }
 
     /**
@@ -681,7 +648,7 @@ final class Luminova
      */
     public static function toAbsoluteUrl(string $path): string
     {
-        if (!PRODUCTION && Runtime::isOutsideContainer()) {
+        if (!Runtime::isProduction() && Runtime::isOutsideContainer()) {
             $base = self::documentRootUri();
 
             if (str_starts_with($path, $base)) {
@@ -744,11 +711,14 @@ final class Luminova
      * // /about
      * ```
      */
-    public static function toBaseUrl(?string $route = null, bool $relative = false): string
+    public static function toBaseUrl(
+        ?string $route = null, 
+        bool $relative = false
+    ): string
     {
         $route = '/' . ltrim((string) $route, '/');
 
-        if(PRODUCTION){
+        if(Runtime::isProduction()){
             return $relative ? $route : APP_URL . $route;
         }
 
@@ -765,7 +735,9 @@ final class Luminova
             ?? $_SERVER['SERVER_NAME'] 
             ?? 'localhost';
 
-        $base = URL_SCHEME . '://' . $hostname;
+        $base = Runtime::getConstantValue('URL_SCHEME', 'http') 
+            . '://' 
+            . $hostname;
 
         if ($uri !== '') {
             $base .= '/' . $uri;
@@ -821,7 +793,7 @@ final class Luminova
      */
     public static function toDisplayPath(string $path): string
     {
-        $path = str_replace('\\', '/', $path);
+        $path = self::toPath($path);
 
         foreach (self::SYSTEM_PATHS as $directory) {
             $needle = '/' . trim($directory, '/') . '/';
@@ -954,6 +926,44 @@ final class Luminova
     }
 
     /**
+     * Undocumented function
+     *
+     * @param string $path
+     * 
+     * @return bool
+     */
+    private static function isAppRoot(string $path): bool 
+    {
+        return (
+            @is_file($path . '/.env')
+            || @is_file($path . '/.dev.env')
+            || @is_file($path . '/system/Boot.php')
+        );
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param string $dir
+     * @param string $separator
+     * @return string
+     */
+    private static function toPath(
+        string $dir, 
+        string $separator = '/',
+        bool $trimEnd = true
+    ): string 
+    {
+        $path = preg_replace(
+            '~[/\\\\]+~', 
+            $separator, 
+            $dir
+        );
+
+        return $trimEnd ? rtrim($path, '/\\') : $path;
+    }
+
+    /**
      * Build termination response and output.
      *
      * @param int $status
@@ -1048,9 +1058,9 @@ final class Luminova
      *
      * @param string $path
      * @param array $scope
-     * @param boolean $once
-     * @param boolean $require
-     * @param boolean $promise
+     * @param bool $once
+     * @param bool $require
+     * @param bool $promise
      * 
      * @return mixed
      */

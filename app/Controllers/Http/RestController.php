@@ -1,4 +1,5 @@
-<?php 
+<?php
+declare(strict_types=1);
 /**
  * Luminova Framework
  *
@@ -20,7 +21,10 @@ use \App\Errors\Controllers\AppError;
  * Demonstrates how to implement a REST API endpoint 
  * using Luminova's standard MVC (non-HMVC) structure.
  */
-#[Prefix(pattern: '/api/(:root)', onError: [AppError::class, 'onTrigger'])]
+#[Prefix(
+    pattern: '/api/(:root)', 
+    onError: [AppError::class, 'onTrigger']
+)]
 class RestController extends Controller 
 {
     /**

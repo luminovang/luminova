@@ -1,3 +1,12 @@
+<?php 
+/**
+ * Default production template for application maintenance mode.
+ * 
+ * This template is showing when `env(app.maintenance.mode)` is set to `true`.
+ * 
+ * > It is recommended to use a minimal module to avoid errors on failure.
+ */
+?>
 <!doctype html>
 <html lang="en">
 <head>
