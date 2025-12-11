@@ -13,7 +13,7 @@
  */
 namespace App\Config\Templates\Smarty;
 
-use \Luminova\Template\Extensions\SmartyFunction;
+use \Luminova\Template\Engines\Extensions\SmartyFunction;
 
 /**
  * Smarty helper template functions.
@@ -121,14 +121,11 @@ final class Extensions
      * ```php
      * return [
      *      new SmartyFunction(
-     *          'flash', static fn(string $status):string => \App\Utils\Messages\flash($status)
+     *          'flash', 
+     *          static fn(string $status):string => \App\Utils\Messages\flash($status), 
+     *          format: false
      *      ),
-     *      new SmartyFunction(
-     *          'hello', static fn(string $name) => "Hello {$name}!"
-     *      ),
-     *      new SmartyFunction(
-     *          'dump', static fn(array $params) => var_dump($params), positional: false
-     *      )
+     *      new SmartyFunction('hello', static fn(string $name) => "Hello {$name}!")
      * ]
      * ```
      * 

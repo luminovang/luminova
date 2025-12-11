@@ -1,6 +1,6 @@
 <?php 
 /**
- * Luminova Framework application background tasks handler.
+ * Luminova Framework application background tasks controller.
  *
  * @package Luminova
  * @author Ujah Chigozie Peter
@@ -42,7 +42,7 @@ class TaskQueue extends Queue
     /**
      * {@inheritDoc}
      */
-    protected bool $supportOpisClosure = true;
+    protected bool $isClosureSupported = true;
 
     /**
      * {@inheritDoc}
@@ -60,6 +60,9 @@ class TaskQueue extends Queue
     //    };
     // }
 
+    /**
+     * {@inheritDoc}
+     */
     protected function onCreate(): void 
     {
         // $this->stage(

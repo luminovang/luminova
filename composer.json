@@ -2,15 +2,28 @@
     "name": "luminovang/luminova",
     "description": "Luminova is a fast, modular PHP framework designed for simplicity, performance, and modern web application development.",
     "keywords": [
-        "php", "framework", "mvc", "hmvc", "luminova", "php luminova", "luminova ng", "novakit cli",
-        "php framework", "web development", "modern php", "modular framework", "novakit"
+        "php", 
+        "mvc",
+        "hmvc",
+        "novakit",
+        "luminova",
+        "framework",
+        "modern php", 
+        "novakit cli",
+        "luminova ng",
+        "php luminova",
+        "php framework", 
+        "web development", 
+        "modular framework"
     ],
     "license": "MIT",
     "type": "project",
     "homepage": "https://luminova.ng",
-    
+    "readme": "README.md",
+
     "support": {
         "email": "dev@luminova.ng",
+        "issues": "https://github.com/luminovang/luminova/issues",
         "source": "https://github.com/luminovang/luminova/",
         "docs": "https://luminova.ng/docs"
     },
@@ -24,11 +37,18 @@
         }
     ],
 
+    "funding": [
+        {
+            "type": "github",
+            "url": "https://github.com/sponsors/luminovang"
+        }
+    ],
+
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "ext-json": "*",
         "ext-mbstring": "*",
-        "luminovang/framework": "^3.0",
+        "luminovang/framework": "^3.7",
         "psr/http-client": "^1.0",
         "psr/log": "^1.1"
     },
@@ -64,7 +84,7 @@
         "peterujah/nano-image": "Required for image resizing when using the FileDelivery::outputImage() method.",
         "endroid/qr-code": "Generates inline Base64 or SVG QRcodes when using TOTP class.",
         "luminovang/array-functions": "Backports PHP 8.4 array_* functions for older versions.",
-        "opis/closure": "Required for storing closures in the BackgroundTaskQueue system."
+        "opis/closure": "Required for storing string-closures for Background or Queue system task."
     },
 
     "autoload": {
@@ -95,7 +115,7 @@
 
     "extra": {
         "branch-alias": {
-            "dev-develop": "1.x-dev"
+            "dev-develop": "2.x-dev"
         }
     },
 
