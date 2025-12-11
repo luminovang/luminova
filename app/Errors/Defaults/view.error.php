@@ -1,9 +1,9 @@
 <?php 
 /**
- * @var \Luminova\Exceptions\AppException<\T>|null $error
+ * @var \Luminova\Exceptions\LuminovaException<\T>|null $error
  */
 use \Luminova\Foundation\Error\Message;
-use function \Luminova\Funcs\{href, filter_paths, get_class_name};
+use function \Luminova\Funcs\{href, display_path, get_class_name};
 
 $message = $error->getDescription();
 $searchable = urlencode($message . ' PHP Luminova Framework');
@@ -27,7 +27,7 @@ $eTitle = $error?->getName() ?? get_class_name($error::class);
                 <?= htmlspecialchars($eTitle, ENT_QUOTES); ?> #<?= $error->getCode(); ?>
                 <span class="subtitle"><?= $title ? htmlspecialchars("($title)", ENT_QUOTES) : ''; ?></span>
             </h1>
-            <p><?= nl2br(Message::prettify(rtrim($message, '.'))) ?>. Thrown in file: <?= filter_paths($error->getFile());?> on line: <?= $error->getLine();?></p>
+            <p><?= nl2br(Message::prettify(rtrim($message, '.'))) ?>. Thrown in file: <?= display_path($error->getFile());?> on line: <?= $error->getLine();?></p>
             <p class="mt-2">
                 <a class="button" href="https://www.duckduckgo.com/?q=<?= $searchable; ?>" rel="noreferrer" target="_blank">Search Online &rarr;</a>
                 <a class="button" href="https://luminova.ng/forum/search?q=<?= $searchable;?>" rel="noreferrer" target="_blank">Search Forum &#128270;</a>
@@ -39,7 +39,7 @@ $eTitle = $error?->getName() ?? get_class_name($error::class);
     <?php 
     if (SHOW_DEBUG_BACKTRACE) : 
         include_once __DIR__ . DIRECTORY_SEPARATOR . 'tracer.php';
-        onErrorShowDebugTracer($error->getBacktrace());
+        __show_html_debug_tracer($error->getBacktrace());
     endif;
     ?>
 
