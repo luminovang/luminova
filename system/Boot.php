@@ -191,7 +191,7 @@ final class Boot
      *
      * @return KernelInterface|\App\Config\Kernel|null The kernel instance, or null to use the default.
      */
-   /* public static function kernel(): ?KernelInterface
+   /* public static function kernel(): ?KernelInterface 
     {
         if(!Kernel::shouldShareObject()){
             return Kernel::create();
