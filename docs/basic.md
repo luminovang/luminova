@@ -42,7 +42,7 @@ Extending [Luminova\Base\Controller](https://luminova.ng/docs/0.0.0/base/view-co
 <?php 
 namespace App\Controllers;
 
-use Luminova\Base\Controller;
+use Luminova\Base\Controller\Http;
 
 class MyController extends Controller 
 {
@@ -54,16 +54,16 @@ class MyController extends Controller
 
 ### Base Command
 
-Extending [Luminova\Base\BaseCommand](https://luminova.ng/docs/0.0.0/base/command) allows the controller to handle command line operations in a manner similar to HTTP controllers. For more details on command line implementation, [see examples](https://luminova.ng/docs/0.0.0/commands/examples).
+Extending [Luminova\Base\Command](https://luminova.ng/docs/0.0.0/base/command) allows the controller to handle command line operations in a manner similar to HTTP controllers. For more details on command line implementation, [see examples](https://luminova.ng/docs/0.0.0/commands/examples).
 
 ```php
 // /app/Controllers/MyCommand.php
 <?php 
-namespace App\Controllers;
+namespace App\Controllers\Cli;
 
-use Luminova\Base\BaseCommand;
+use Luminova\Base\Command;
 
-class MyCommand extends BaseCommand 
+class MyCommand extends Command 
 {
     //...
 }
@@ -85,7 +85,7 @@ The `Response` class allows you to handle any type of response rendering without
 ```php
 // /app/Controllers/BookController.php
 <?php 
-namespace App\Controllers;
+namespace App\Controllers\Http;
 
 use Luminova\Base\Controller;
 use Luminova\Attributes\Route;
@@ -146,9 +146,9 @@ When you pass the template file name without the extension, the `View` object au
 #### Books Template Controller Handler Example
 
 ```php
-// /app/Controllers/BookController.php
+// /app/Controllers/Http/BookController.php
 <?php 
-namespace App\Controllers;
+namespace App\Controllers\Http;
 
 use Luminova\Base\Controller;
 use Luminova\Attributes\Route;
@@ -185,7 +185,7 @@ There may be cases where you want to generate a template's output without displa
 Here's how you can achieve this:
 
 ```php
-// /app/Controllers/BookController.php
+// /app/Controllers/Http/BookController.php
 <?php
 namespace App\Controllers;
 
@@ -239,7 +239,7 @@ Here's how you can do it:
 
 ```php
 <?php 
-namespace App\Controllers;
+namespace App\Controllers\Http;
 
 use Luminova\Base\Controller;
 use Luminova\Attributes\Route;
@@ -298,7 +298,7 @@ This method allows you to render cached content if it is still valid. The callba
 
 ```php
 <?php 
-namespace App\Controllers;
+namespace App\Controllers\Http;
 
 use Luminova\Base\Controller;
 use Luminova\Attributes\Route;
@@ -334,7 +334,7 @@ This approach uses a traditional if-else check to first verify if the cache has 
 
 ```php
 <?php 
-namespace App\Controllers;
+namespace App\Controllers\Http;
 
 use Luminova\Base\Controller;
 use Luminova\Attributes\Route;
@@ -429,7 +429,7 @@ If you have many views but only want to cache one, you can use the `cacheOnly` m
 <?php 
 namespace App;
 
-use Luminova\Core\CoreApplication;
+use Luminova\Foundation\Core\Application as CoreApplication;
 
 class Application extends CoreApplication
 {
