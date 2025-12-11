@@ -7,56 +7,68 @@
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
  */
-use \Luminova\Command\Terminal;
-use \Luminova\Command\Utils\{Color, Text};
-use \Luminova\Foundation\Error\Message;
-use function \Luminova\Funcs\filter_paths;
+use Luminova\Command\Terminal;
+use Luminova\Foundation\Error\Message;
+use Luminova\Command\Utils\{Color, Text};
+use function Luminova\Funcs\display_path;
+
+Terminal::init();
 
 /**
  * @var Message|\Throwable<\T>|null $error
  */
 
-// Initialize terminal
-Terminal::init();
+/**
+ * Render a single exception block.
+ */
+if (!function_exists('__render_cli_exception')) {
+    function __render_cli_exception(Throwable $e, bool $isRoot = false): void
+    {
+        $label = $isRoot ? 'Exception' : 'Caused by';
 
-if ($error instanceof Throwable) {
-    $parts = explode(" File:", $error->getMessage());
-    Terminal::writeln(Color::apply('Exception: [' . $error::class . ']', Text::FONT_BOLD, 'red'));
-    Terminal::newLine();
-    Terminal::error(Message::prettify($parts[0]));
-    Terminal::newLine();
-    $fileLine = Color::style(isset($parts[1]) 
-        ? filter_paths($parts[1])
-        : filter_paths($error->getFile() . ' Line: ' . $error->getLine())
-    , 'green');
-    Terminal::writeln('File: ' . $fileLine);
+        Terminal::writeln(Color::apply(
+            sprintf('%s: [%s]', $label, $e::class),
+            Text::FONT_BOLD,
+            'red'
+        ));
 
-    $last = $error;
-
-    while ($previous = $last->getPrevious()) {
-        $last = $previous;
-        $part = explode(" File:", $previous->getMessage());
-        Terminal::writeln('Caused by: [' . $previous::class . ']', 'red');
         Terminal::newLine();
-        Terminal::error(Message::prettify($part[0]));
-        $fileLine = Color::style(isset($part[1]) 
-            ? filter_paths($part[1])
-            : filter_paths($previous->getFile() . ' Line: ' . $previous->getLine())
-        , 'green');
-        Terminal::writeln('File: ' . $fileLine);
+
+        Terminal::error(Message::prettify($e->getMessage()));
+
+        $fileLine = display_path(
+            $e->getFile() . ' Line: ' . $e->getLine()
+        );
+
+        Terminal::writeln('File: ' . Color::style($fileLine, 'green'));
         Terminal::newLine();
     }
+}
+
+if ($error instanceof Throwable) {
+    __render_cli_exception($error, true);
+
+    $current = $error;
+
+    while ($current = $current->getPrevious()) {
+        __render_cli_exception($current);
+    }
+
     return;
 }
 
 if ($error instanceof Message) {
     Terminal::writeln(Color::apply(
-        'Error: [' . $error->getCode() . '] [' . $error->getName() . ']',
-        Text::FONT_BOLD, 'red'
+        sprintf('Error: [%d] [%s]', $error->getCode(), $error->getName()),
+        Text::FONT_BOLD,
+        'red'
     ));
+
     Terminal::newLine();
+
     Terminal::error(Message::prettify($error->getMessage()));
     Terminal::newLine();
+
     return;
 }
 

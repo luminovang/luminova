@@ -9,6 +9,9 @@
  * > It is recommended to create your own template, as modifying this file 
  * > may be overwritten in future updates.
  */
+$title ??= 'Unknown Error';
+$message ??= '';
+$description ??= $title;
 ?>
 <!doctype html>
 <html lang="en">
@@ -30,7 +33,6 @@
             <p>
                 Displayed at <?= date('H:i:sA'); ?> &mdash;
                 PHP: <?= PHP_VERSION ?>  &mdash;
-                Luminova: <?= \Luminova\Luminova::VERSION; ?> &mdash;
                 Environment: <?= ENVIRONMENT; ?>
             </p>
         </div>

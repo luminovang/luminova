@@ -3,11 +3,11 @@
  * Replace this template with your custom 5xx error page design
  * to better match your application's layout and branding. 
  */
-use \Luminova\Http\HttpCode;
+use \Luminova\Http\HttpStatus;
 use function \Luminova\Funcs\{locale, href, asset};
 
 $status = ($this->getOption('details')['code'] ?? 500);
-$title = "{$status} " . HttpCode::phrase($status);
+$title = "{$status} " . HttpStatus::phrase($status);
 ?>
 <!DOCTYPE html>
 <html lang="<?= locale();?>">

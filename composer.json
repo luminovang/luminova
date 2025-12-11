@@ -2,19 +2,30 @@
     "name": "luminovang/luminova",
     "description": "Luminova is a fast, modular PHP framework designed for simplicity, performance, and modern web application development.",
     "keywords": [
-        "php", "framework", "mvc", "hmvc", "luminova", "php luminova", "luminova ng", "novakit cli",
-        "php framework", "web development", "modern php", "modular framework", "novakit"
+        "php",
+        "mvc",
+        "hmvc",
+        "novakit",
+        "luminova",
+        "framework",
+        "modern php",
+        "novakit cli",
+        "luminova ng",
+        "php luminova",
+        "php framework",
+        "web development",
+        "modular framework"
     ],
     "license": "MIT",
     "type": "project",
     "homepage": "https://luminova.ng",
-    
+    "readme": "README.md",
     "support": {
         "email": "dev@luminova.ng",
+        "issues": "https://github.com/luminovang/luminova/issues",
         "source": "https://github.com/luminovang/luminova/",
         "docs": "https://luminova.ng/docs"
     },
-
     "authors": [
         {
             "name": "Ujah Chigozie Peter",
@@ -23,25 +34,28 @@
             "role": "developer"
         }
     ],
-
+    "funding": [
+        {
+            "type": "github",
+            "url": "https://github.com/sponsors/luminovang"
+        }
+    ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "ext-json": "*",
         "ext-mbstring": "*",
-        "luminovang/framework": "^3.0",
+        "psr/log": "^1.1",
         "psr/http-client": "^1.0",
-        "psr/log": "^1.1"
+        "luminovang/framework": "^3.8"
     },
-
     "require-dev": {
-        "nikic/php-parser": "^4.17.1",
-        "phpstan/extension-installer": "^1.3",
-        "phpstan/phpstan": "^1.10.2",
         "phpunit/phpunit": "^9.1",
         "rector/rector": "0.18.3",
-        "friendsofphp/php-cs-fixer": "^3.64"
+        "phpstan/phpstan": "^1.10.2",
+        "nikic/php-parser": "^4.17.1",
+        "friendsofphp/php-cs-fixer": "^3.64",
+        "phpstan/extension-installer": "^1.3"
     },
-    
     "suggest": {
         "ext-curl": "Required if using the CURLRequest class.",
         "ext-exif": "Required for image handling with the Image class.",
@@ -49,6 +63,7 @@
         "ext-gd": "Required for image manipulation using GDHandler.",
         "ext-imagick": "Required for image manipulation using ImageMagickHandler.",
         "ext-memcached": "Required if using Memcached with the MemcachedHandler.",
+        "ext-pdo": "Required for PDO database support.",
         "ext-mysqli": "Required for MySQL database support.",
         "ext-intl": "Required for locale and internationalization features.",
         "psr/log": "Needed for applications using PSR-compatible logging.",
@@ -60,29 +75,29 @@
         "twig/twig": "Required to enable Twig as a template engine.",
         "league/flysystem": "Required for using cloud storage drivers via Flysystem.",
         "nanoblocktech/psr-cache": "Enables support for PSR-6 and PSR-16 caching.",
-        "peterujah/php-search-controller": "Provides support for model search with BaseModel::doSearch().",
-        "peterujah/nano-image": "Required for image resizing when using the FileDelivery::outputImage() method.",
+        "peterujah/nano-image": "Required for image resizing when using FileResponse::outputImage() method.",
         "endroid/qr-code": "Generates inline Base64 or SVG QRcodes when using TOTP class.",
         "luminovang/array-functions": "Backports PHP 8.4 array_* functions for older versions.",
-        "opis/closure": "Required for storing closures in the BackgroundTaskQueue system."
+        "opis/closure": "Required for storing a secure string-closures for Background or Queue system task."
     },
-
     "autoload": {
         "psr-4": {
-            "App\\": "app/",
-            "Luminova\\": "system/"
+            "Luminova\\Funcs\\": "bootstrap/Funcs/",
+            "Luminova\\": "system/",
+            "App\\": "app/"
         },
         "exclude-from-classmap": [
             "system/plugins/luminovang/framework/"
         ]
-    }, 
-
+    },
     "autoload-dev": {
         "psr-4": {
-            "Luminova\\Tests\\": "tests/"
+            "Luminova\\Funcs\\": "bootstrap/Funcs/",
+            "Luminova\\Tests\\": "tests/",
+            "Luminova\\": "system/",
+            "App\\": "app/"
         }
     },
-
     "config": {
         "allow-plugins": {
             "phpstan/extension-installer": true
@@ -92,28 +107,26 @@
         "preferred-install": "dist",
         "vendor-dir": "system/plugins"
     },
-
     "extra": {
         "branch-alias": {
-            "dev-develop": "1.x-dev"
+            "dev-develop": "2.x-dev"
         }
     },
-
     "scripts": {
         "post-update-cmd": [
             "Composer\\Config::disableProcessTimeout",
             "Luminova\\Composer\\Updater::update"
-        ],                        
+        ],
         "post-create-project-cmd": [
             "Composer\\Config::disableProcessTimeout",
             "Luminova\\Composer\\Updater::install",
             "@php novakit generate:key"
         ],
-        "analyze-app": [
+        "analyse": [
             "Composer\\Config::disableProcessTimeout",
             "bash -c \"XDEBUG_MODE=off phpstan analyse --memory-limit 3000M\""
         ],
-        "analyze-code": [
+        "check": [
             "Composer\\Config::disableProcessTimeout",
             "rector process --dry-run"
         ],
@@ -121,15 +134,13 @@
             "php-cs-fixer fix --ansi"
         ]
     },
-
     "scripts-descriptions": {
-        "post-update-cmd": "Runs after 'composer update' to apply Luminova-specific updates and configurations.",
-        "post-create-project-cmd": "Initializes project setup after installation, including application key generation.",
-        "analyze-app": "Runs PHPStan to statically analyze the application and framework codebase.",
-        "analyze-code": "Performs code quality checks and detects structural issues using Rector in dry-run mode.",
+        "post-update-cmd": "Runs after 'composer update' to apply luminova updates and configurations.",
+        "post-create-project-cmd": "Initializes project setup after installation, including app key generation.",
+        "analyse": "Runs PHPStan to statically analyze the application and framework codebase.",
+        "check": "Performs code quality checks and detects structural issues using rector dry-run mode.",
         "cs-fix": "Automatically fixes PHP coding style issues using PHP-CS-Fixer."
     },
-
     "minimum-stability": "stable",
     "prefer-stable": true
 }

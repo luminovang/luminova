@@ -2,104 +2,95 @@
 /**
  * Luminova Framework backend session configuration.
  *
- * Controls how sessions are named, stored, secured, and expired.
- *
- * @package   Luminova
- * @author     Ujah Chigozie Peter
+ * @package Luminova
+ * @author Ujah Chigozie Peter
  * @copyright (c) Nanoblock Technology Ltd
- * @license   See LICENSE file
+ * @license See LICENSE file
  */
 namespace App\Config;
 
-use \Luminova\Base\Configuration;
+use Luminova\Base\Configuration;
 
 final class Session extends Configuration
 {
     /**
-     * Name of the session cookie sent to the browser.
-     * 
-     * - Default is usually 'PHPSESSID'.
-     * - You can rename it for security or branding.
+     * The name of the session cookie.
      *
      * @var string $cookieName
      */
     public string $cookieName = 'PHPSESSID'; 
 
     /**
-     * Identifier used to store session data on the server.
+     * The default storage namespace for user session data.
      * 
-     * - Should be a fixed, unique string (e.g., an MD5 hash).
-     * - Do not generate dynamically, or sessions may break.
+     * A fixed unique identifier (e.g., an MD5 hash string).
      *
-     * @var string $tableIndex
+     * @var string $namespace
+     * > Avoid dynamically generating this value.
      */
-    public string $tableIndex = '__server_side_session_table';
+    public string $namespace = 'user_session';
 
     /**
-     * Directory path where session files are stored (server-side).
-     * 
-     * - If empty, PHP’s default session save path will be used.
-     * - This does not affect the cookie sent to the client.
+     * The directory where session files are stored on the server.
+     * This does not affect the session cookie sent to the client.
      *
      * @var string $savePath
      */
     public string $savePath = ''; 
 
     /**
-     * Session lifetime in seconds.
-     * 
-     * - After this period, sessions will expire.
-     * - Example: 365 days → 365 * 24 * 60 * 60.
+     * The session lifetime in seconds.
      *
      * @var int $expiration
      */
     public int $expiration = 365 * 24 * 60 * 60; 
 
     /**
-     * Path under which the session cookie is valid.
-     * 
-     * - '/' means the cookie is available site-wide.
-     * - You can limit it to a subdirectory if needed.
+     * The path on the server where the session cookie is accessible.
+     * It determines the URL path under which the cookie is available.
      *
      * @var string $sessionPath
      */
     public string $sessionPath = '/'; 
 
     /**
-     * Domain where the session cookie is valid.
-     * 
-     * - Example: '.example.com' will work on all subdomains.
-     * - For local development: '.localhost' is typical.
+     * The domain for which the session cookie is valid.
      *
      * @var string $sessionDomain
      */
     public string $sessionDomain = '.localhost';
 
     /**
-     * SameSite policy for session cookies.
-     * 
-     * - Options: 'None', 'Lax', 'Strict'.
-     * - 'None' requires cookies to be sent over HTTPS (Secure flag).
+     * The SameSite policy for session cookies.
+     * Available options: 'None', 'Lax', 'Strict'.
      *
      * @var string $sameSite
      */
     public string $sameSite = 'Lax';
 
     /**
-     * Whether to tie sessions to a fixed IP address.
+     * Enable strict session IP authentication.
      * 
-     * - If true, sessions are invalidated when the user’s IP changes.
-     * - Useful for high-security apps, but may affect mobile users.
+     * If enabled, the session will be invalidated if the user's IP address changes.
      *
      * @var bool $strictSessionIp
      */
-    public bool $strictSessionIp = false;
+    public bool $strictSessionIp = true;
 
     /**
-     * Whether to encrypt session data stored in cookies.
-     * 
-     * - If enabled, data is encrypted using your app’s encryption settings.
-     * - Recommended if you store sensitive data client-side.
+     * Whether to enable strict session ID validation.
+     *
+     * When enabled, PHP rejects session IDs that do not already exist in the
+     * configured session storage and generates a new session ID instead.
+     *
+     * @var bool $useStrictMode
+     * @see https://www.php.net/manual/en/session.configuration.php#ini.session.use-strict-mode
+     */
+    public bool $useStrictMode = true;
+
+    /**
+     * Enable encryption for session data stored in cookies.
+     * If enabled, the data will be encrypted using the application's encryption key and algorithm.
      *
      * @var bool $encryptCookieData
      */
@@ -107,12 +98,19 @@ final class Session extends Configuration
 
     /**
      * Storage method for CSRF tokens.
-     * 
-     * - 'cookie': token stored in a cookie.
-     * - 'session': token stored in session data.
+     * Available options: 'cookie', 'session'.
      *
      * @var string $csrfStorage
-     * @see https://luminova.ng/docs/0.0.0/security/csrf
      */
     public string $csrfStorage = 'session';
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function onCreate(): void 
+    {
+        if(PRODUCTION){
+            $this->sessionDomain = '.' . APP_HOSTNAME;
+        }
+    }
 }

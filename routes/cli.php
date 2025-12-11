@@ -13,5 +13,5 @@ use \Luminova\Routing\Router;
  */
 
 Router::group('demo', static function(): void {
-   Router::command('hello', 'CommandController::hello');
+   Router::command('hello', 'DemoController::hello');
 });

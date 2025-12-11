@@ -9,18 +9,18 @@
  */
 namespace App\Controllers\Cli;
 
-use \Luminova\Base\Command;
+use Luminova\Attributes\Group;
+use Luminova\Command\Terminal;
 use Luminova\Sessions\Session;
-use \Luminova\Attributes\Group;
-use \Luminova\Attributes\Route;
-use \Luminova\Command\Utils\Color;
+use Luminova\Attributes\Command;
+use Luminova\Command\Utils\Color;
 
 /**
  * Example CLI controller demonstrating how to implement
  * command-line tools using Luminova.
  */
 #[Group(name: 'demo')]
-class CommandController extends Command 
+class DemoController extends \Luminova\Base\Command
 {
     /**
      * {@inheritdoc}
@@ -59,14 +59,14 @@ class CommandController extends Command
      * Command options.
      */
     protected array $options = [
-        '--help' => 'Show command help information.',
-        '--hello' => 'Display a "hello world" message.',
-        '-l, --login' => 'CLI session login and persist session data.',
-        '--logout' => 'Logout user session.',
-        '-c, --color' => 'Apply color to hello world or custom message.',
-        '-s, --select' => 'Prompt user to select an option.',
-        '-p, --password' => 'Prompt user to enter a password.',
-        '-m, --message' => 'Specify a custom message to display.'
+        '--hello'           => 'Display a "hello world" message.',
+        '--login'           => 'CLI session login and persist session data.',
+        '--logout'          => 'Logout user session.',
+        '-c, --color'       => 'Apply color to hello world or custom message.',
+        '-s, --select'      => 'Prompt user to select an option.',
+        '-p, --password'    => 'Prompt user to enter a password.',
+        '-m, --message'     => 'Specify a custom message to display.',
+        '-h, --help'        => 'Show command help information.',
     ];
 
     /**
@@ -75,15 +75,17 @@ class CommandController extends Command
      * Command examples.
      */
     protected array $examples = [
-        'php index.php demo --help' => 'Show this help message.',
-        'php index.php demo app --hello' => 'Show hello world message.',
-        'php index.php demo app --password' => 'Prompt for a password.',
-        'php index.php demo app --select' => 'Prompt to choose an option.',
+        'php index.php demo --help'             => 'Show this help message.',
+        'php index.php demo app --hello'        => 'Show hello world message.',
+        'php index.php demo app --password'     => 'Prompt for a password.',
+        'php index.php demo app --select'       => 'Prompt to choose an option.',
         'php index.php demo app --message="Hi"' => 'Show a custom message.',
-        'php index.php demo app --color="red"' => 'Show message with a specific color.',
+        'php index.php demo app --color="red"'  => 'Show message with a specific color.',
     ];
 
     /**
+     * {@inheritdoc}
+     * 
      * Called when the command is created.
      */
     protected function onCreate(): void 
@@ -92,9 +94,7 @@ class CommandController extends Command
     }
 
     /**
-     * Display help message.
-     * 
-     * @return int STATUS_ERROR
+     * {@inheritdoc}
      */
     public function help(array $helps): int
     {
@@ -102,8 +102,9 @@ class CommandController extends Command
     }
 
     /**
-     * Demo "hello" command.
-     * Handles color, select, password, and custom message options.
+     * Demo command handler.
+     * 
+     * This method handles color, select, password, and custom message options.
      *
      * @return int STATUS_SUCCESS or STATUS_ERROR
      * @see /routes/cli.php Command line route context.
@@ -111,39 +112,45 @@ class CommandController extends Command
      * @example - Command:
      * 
      * ```bash
-     * php index.php demo hello <arguments>
+     * php index.php demo app <arguments>
      * ```
      */
-    #[Route('app', group: 'demo')]
-    public function hello(): int
+    #[Command('app')]
+    public function handler(): int
     {
-        $hello = $this->getOption('hello', null);
-        $logout = $this->getOption('logout', null);
-        $login = $this->getAnyOption('login', 'l');
-        $color = $this->getAnyOption('color', 'c', null);
-        $select = $this->getAnyOption('select', 's');
-        $password = $this->getAnyOption('password', 'p');
-        $message = $this->getAnyOption('message', 'm', 'Hello! This is the default message.');
+        $login  = $this->input->getOption('login');
+        $logout = $this->input->getOption('logout');
+        $hello  = $this->input->getOption('hello', null);
+        $color  = $this->input->getAnyOption('color', 'c', null);
 
-        if ($login === true) {
-            $this->write($this->loginUser());
-            return STATUS_SUCCESS;
+        $result = match(true) {
+            $login === true  => Terminal::write($this->loginUser()),
+            $logout === true => Terminal::write($this->logoutUser()),
+            $hello === true  => Terminal::write('Hello World!', $color),
+            $color !== null && $color === '' 
+                => $this->error('You need to provide a color for argument --color.'),
+            default          => $this->showPromptMessage($color)
+        };
+
+        if($result === STATUS_ERROR){
+            return STATUS_ERROR;
         }
 
-        if ($logout === true) {
-            $this->write($this->logoutUser());
-            return STATUS_SUCCESS;
-        }
+        return STATUS_SUCCESS;
+    }
 
-        if ($color !== null && $color === '') {
-            $this->error('You need to provide a color for argument --color.');
-            return STATUS_SUCCESS;
-        }
-
-        if($hello === true){
-            $this->write('Hello World!', $color);
-            return STATUS_SUCCESS;
-        }
+    /**
+     * Handle custom message or prompts.
+     *
+     * @param string|null $color The color display option.
+     * 
+     * @return int Return status code
+     */
+    private function showPromptMessage(?string $color): int
+    {
+        $select = $this->input->getAnyOption('select', 's');
+        $password = $this->input->getAnyOption('password', 'p');
+        $message = $this->input->getAnyOption('message', 'm', 'Hello! This is the default message.');
 
         if ($select === true) {
             $message = $this->askForLanguages();
@@ -152,34 +159,41 @@ class CommandController extends Command
         }
 
         if ($message === true) {
-            $this->error('You need to provide a message for argument --message.');
+            Terminal::error('You need to provide a message for argument --message.');
             return STATUS_SUCCESS;
         }
 
         if($message){
-            $this->write($message, $color);
+            Terminal::write($message, $color);
             return STATUS_SUCCESS;
         }
 
-        $this->error(sprintf(
+        Terminal::error(sprintf(
             'Invalid command: "%s" not supported.',
-            $this->getCaller()
+            $this->input->getInput()
         ));
 
         return STATUS_ERROR;
     }
 
     /**
-     * Start PHP session in cli and persist id.
+     * Handle command login session logic.
+     * 
+     * This starts a PHP session in cli and persist id.
      * 
      * @return string Return message.
      */
     private function loginUser(): string
     {
-        $sid = Session::toSessionId($this->getSystemId());
+        $id = Terminal::getSystemId();
+        $sid = Session::toSessionId($id);
 
         $session = new Session();
         $session->setStorage('cli');
+
+        if($session->isStrictMode()){
+            $session->useStrictMode(false);
+        }
 
         if(!$session->start($sid)){
             return Color::style('Unable to start session in CLI', 'red');
@@ -194,7 +208,7 @@ class CommandController extends Command
             );
         }
 
-        $username = $this->input('Enter your username to login: ');
+        $username = Terminal::input('Enter your username to login: ');
 
         if(!$username){
             return Color::style('Username is required', 'red');
@@ -209,16 +223,23 @@ class CommandController extends Command
         }
 
         return sprintf(
-            "Login successful.\nUsername: %s\nLogin Date: %s\nSID: %s",
+            "Login successful.\nUsername: %s\nLogin Date: %s\nSID: %s\nID: %s",
             $username,
             $date,
-            $sid
+            $sid,
+            $id
         );
     }
 
+    /**
+     * Handle command logout logic.
+     *
+     * @return string Return logout status message.
+     */
     private function logoutUser(): string
     {
-        $sid = Session::toSessionId($this->getSystemId());
+        $id = Terminal::getSystemId();
+        $sid = Session::toSessionId($id);
 
         $session = new Session();
         $session->setStorage('cli');
@@ -257,7 +278,7 @@ class CommandController extends Command
             "red" => 'HTML'
         ];
 
-        $input = $this->prompt(
+        $input = Terminal::prompt(
             'Enter your preferred programming language', 
             $options,
             'required|in_array(' . implode(',', $options) . ')'
@@ -273,7 +294,7 @@ class CommandController extends Command
      */
     private function askForPassword(): string 
     {
-        $input = $this->password('Enter your password `12345`');
+        $input = Terminal::password('Enter your password `12345`');
 
         if ($input === '12345') {
             return sprintf(
