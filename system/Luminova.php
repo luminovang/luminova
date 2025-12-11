@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * Luminova Framework foundation.
  * 
@@ -10,7 +11,7 @@
  * ╚══════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝
  *
  * @package Luminova
- * @author Ujah Chigozie Peter
+ * @author Ujah Chigozie Peter 
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
  * @link https://luminova.ng
@@ -18,20 +19,36 @@
 namespace Luminova;
 
 use \Throwable;
+use \App\Kernel;
+use \App\Application;
 use \ReflectionClass;
-use \Luminova\Logger\Logger;
-use \Luminova\Debugger\Performance;
-use \Luminova\Exceptions\{ErrorCode, FileException};
-use function \Luminova\Funcs\root;
+use Luminova\Http\Header;
+use Luminova\Logger\Logger;
+use Luminova\Routing\Router;
+use \Psr\Log\LoggerInterface;
+use Luminova\Http\HttpStatus;
+use Luminova\Command\Terminal;
+use Luminova\Sessions\Session;
+use Luminova\Http\Client\Novio;
+use Luminova\Logger\NovaLogger;
+use function Luminova\Funcs\root;
+use Luminova\Interface\ClientInterface;
+use Luminova\Interface\MailerInterface;
+use Luminova\Interface\RouterInterface;
+use Luminova\Interface\SessionInterface;
+use Luminova\Interface\ServiceKernelInterface;
+use Luminova\Components\Email\Clients\NovaMailer;
+use Luminova\Cache\{FileCache, RedisCache, MemoryCache};
+use Luminova\Exceptions\{ErrorCode, FileException, ClassException, RuntimeException, InvalidArgumentException};
 
 final class Luminova 
 {
     /**
-     * Framework version code.
+     * Framework version code. 
      * 
      * @var string VERSION
      */
-    public const VERSION = '3.6.9';
+    public const VERSION = '3.8.6';
 
     /**
      * Framework version name.
@@ -45,7 +62,7 @@ final class Luminova
      * 
      * @var string MIN_PHP_VERSION 
      */
-    public const MIN_PHP_VERSION = '8.0';
+    public const MIN_PHP_VERSION = '8.1';
 
     /**
      * Command line tool version.
@@ -88,19 +105,23 @@ final class Luminova
     ];
 
     /**
-     * Controller class information.
-     * 
-     * @var array<string,string> $routedClassMetadata
+     * Hold termination state.
+     *
+     * @var bool $isTerminated
      */
-    private static array $routedClassMetadata = [
-        'filename'    => null,
-        'uri'         => null,
-        'namespace'   => null,
-        'method'      => null,
-        'controllers' => 0,
-        'cache'       => false,
-        'staticCache' => false,
-    ];
+    private static bool $isTerminated = false;
+
+    /**
+     * PHP disabled functions.
+     *
+     * @var string[]|null $disabledFunctions
+     */
+    private static ?array $disabledFunctions = null;
+
+    /**
+     * Prevent initialization
+     */
+    private function __construct(){}
 
     /**
      * Get the framework copyright information.
@@ -112,17 +133,17 @@ final class Luminova
      */
     public static final function copyright(bool $userAgent = false): string
     {
-        if ($userAgent) {
-            return sprintf(
-                'LuminovaFramework-%s/%s (PHP; %s; %s) - https://luminova.ng',
-                self::VERSION_NAME, 
-                self::VERSION,
-                PHP_VERSION,
-                PHP_OS_FAMILY
-            );
+        if (!$userAgent) {
+            return sprintf('PHP Luminova (%s)', self::VERSION);
         }
 
-        return sprintf('PHP Luminova (%s)', self::VERSION);
+        return sprintf(
+            'LuminovaFramework-%s/%s (PHP; %s; %s) - https://luminova.ng',
+            self::VERSION_NAME, 
+            self::VERSION,
+            PHP_VERSION,
+            PHP_OS_FAMILY
+        );
     }
 
     /**
@@ -135,25 +156,335 @@ final class Luminova
     public static final function version(bool $integer = false): string|int
     {
         return $integer 
-            ? (int) \Luminova\Common\Helpers::toStrictInput(self::VERSION, 'int') 
+            ? (int) str_replace('.', '', self::VERSION)
             : self::VERSION;
     }
 
     /**
-     * Start or stop application profiling.
+	 * Generate a hash using the requested algorithm with optional fallback support.
+	 *
+	 * The method attempts to use the requested hashing algorithm. If the algorithm
+	 * is unavailable in the current PHP environment, a fallback algorithm is used.
+	 *
+	 * This is useful when applications run across different environments where
+	 * optional hash algorithms may not be compiled or enabled.
+	 *
+	 * @param string $algo Preferred hashing algorithm.
+	 * @param string $data Data to hash.
+	 * @param bool $binary Whether to return raw binary output instead of hex.
+	 * @param array $options Reserved options for future hash algorithm settings.
+	 * @param string|null $fallbackAlgo Algorithm to use when the preferred one is unavailable.
+	 *
+	 * @return string Return generated hash output.
+	 * @throws InvalidArgumentException If neither the requested algorithm nor
+	 *                                  the fallback algorithm is supported.
+	 * 
+	 * @see \hash()
+	 * @link https://php.net/manual/en/function.hash.php
+	 */
+	public static function hash(
+		string $algo,
+		string $data,
+		bool $binary = false,
+		array $options = [],
+		?string $fallbackAlgo = 'sha256'
+	): string
+	{
+		static $algorithms = null;
+
+		$algorithms ??= array_flip(hash_algos());
+
+		$algo = strtolower($algo);
+
+		if (!isset($algorithms[$algo])) {
+			$algo = strtolower((string) $fallbackAlgo);
+
+			if (!isset($algorithms[$algo])) {
+				throw new InvalidArgumentException(
+					sprintf(
+						'Unsupported hash algorithm: "%s".',
+						$algo
+					)
+				);
+			}
+		}
+
+		return hash($algo, $data, $binary, $options);
+	}
+    
+    /**
+     * Resolve a service from the kernel or create a new instance.
+     *
+     * This method provides a unified way to access core services like HTTP client,
+     * logger, mailer, session, router, and application instance. It first checks
+     * if the service is registered in the kernel, then falls back to default
+     * implementations if available.
      * 
-     * @param string $action The name of the action (e.g, start or stop).
-     * @param array|null $context Additional information to pass to profiling (default: null).
+     * **Service Name Aliases:**
+     * - `http.client` - HTTP client service.
+     * - `logger`    - Logger service.
+     * - `mailer`    - Mailer service.
+     * - `session`   - Session client service.
+     * - `router`    - Routing system service.
+     * - `app` or `application` - Application instance.
+     * - `memcached` - Memcached servers.
+     * - `redis` - Redis servers.
+     * - `cache` - Cache system.
+     *
+     * @param string|null $service The service name or interface to resolve (e.g. 'http.client', 'logger').
+     * @param bool $shared Whether to return a shared instance (default: true).
+     * @param mixed ...$arguments Optional arguments passed to the service constructor.
+     *
+     * @return ServiceKernelInterface|mixed The resolved service instance 
+     *      or application service kernel instance if service is null.
+     *
+     * @throws RuntimeException If an unregistered service is requested.
+     * @throws ClassException If the resolved class for a service does not exist.
      * 
+     * @see Kernel::create() To create or retrieve the kernel instance.
+     * @see Kernel::shouldShareObject() To determine if services should be shared by default.
+     * @see Kernel::has() To check if a service is registered in the kernel.
+     * @see Kernel::get() To retrieve a service from the kernel.
+     * 
+     * @example - Example Usage:
+     * ```php
+     * $http = Luminova::kernel('http.client');
+     * ```
+     * 
+     * ```php
+     * $logger = Luminova::kernel('logger');
+     * ```
+     * 
+     * @link https://luminova.ng/docs/0.0.0/foundation/kernel
+     */
+    public static function kernel(?string $service = null, bool $shared = true, mixed ...$arguments): mixed
+    {
+        static $services = [];
+
+        if($shared && $service && isset($services[$service])){
+            return $services[$service];
+        }
+
+        $resolve = Kernel::create(
+            $shared && Kernel::shouldShareObject($service)
+        );
+
+        if($service === null){
+            return $resolve;
+        }
+
+        if($resolve->has($service)){
+            return $resolve->get($service, ...$arguments);
+        }
+
+        $class = match($service){
+            'http.client', ClientInterface::class, \Psr\Http\Client\ClientInterface::class 
+                => $resolve->getHttpClient(...$arguments) ?? Novio::class,
+            'logger', LoggerInterface::class 
+                => $resolve->getLogger(...$arguments) ?? NovaLogger::class,
+            'mailer', MailerInterface::class 
+                => $resolve->getMailer(...$arguments) ?? NovaMailer::class,
+            'session', SessionInterface::class 
+                => $resolve->getSessionClient(...$arguments) ?? Session::class,
+            'router', 'routing', RouterInterface::class 
+                => $resolve->getRoutingSystem(...$arguments) ?? Router::class,
+            'app', 'application', Application::class 
+                => $resolve->getApplication() ?? Application::getInstance(),
+            'memcached', \Memcached::class,
+                => $resolve->getMemcached(...$arguments) ?? \Memcached::class,
+            'redis', \Redis::class,
+                => $resolve->getRedis(...$arguments) ?? \Redis::class,
+            'cache', \Luminova\Base\Cache::class => $resolve->getCacheProvider(...$arguments) 
+                ?? match($arguments[0] ?? env('system.cache.driver', 'filecache')) { 
+                    'filecache' => new FileCache(
+                        $arguments[1] ?? null, $arguments[2] ?? null
+                    ),
+                    'memcached'  => new MemoryCache(
+                        $arguments[1] ?? null, $arguments[2] ?? null
+                    ),
+                    'redis'  => new RedisCache(
+                        $arguments[1] ?? null, $arguments[2] ?? null
+                    ),
+                    default => null
+                },
+            default => throw new RuntimeException(
+                sprintf('Service "%s" is not registered in the kernel.', $service)
+            )
+        };
+
+        if($class && is_object($class)){
+            if(!$shared){
+                return $class;
+            }
+
+            return $services[$service] = $class;
+        }
+
+        if($class === null || !class_exists($class)) {
+            throw new ClassException(
+                sprintf('Class "%s" for service "%s" does not exist.', (string) $class, $service)
+            );
+        }
+
+        if(!$shared){
+            return new $class(...$arguments);
+        }
+
+        return $services[$service] = new $class(...$arguments);
+    }
+
+    /**
+     * Terminates the request by sending a status and formatted message.
+     *
+     * Responds according to the `Accept` header:
+     * - `application/json` → JSON response
+     * - `application/xml` / `text/xml` → XML response
+     * - `text/html` → HTML page
+     * - fallback → plain text
+     *
+     * @param int $status HTTP status code.
+     * @param string $message Termination message.
+     * @param string|null $title Optional error title.
+     * @param int $retry Optional cache retry duration in seconds (default: 3600).
+     *
      * @return void
      */
-    public static final function profiling(string $action, ?array $context = null): void
+    public static function terminate(
+        int $status, 
+        string $message, 
+        ?string $title = null,
+        int $retry = 3600
+    ): void
     {
-        if((!PRODUCTION || STAGING) && env('debug.show.performance.profiling', false)){
-            ($action === 'start')
-                ? Performance::start() 
-                : Performance::stop(null, $context);
+        if(self::$isTerminated){
+            return;
         }
+
+        self::$isTerminated = true;
+
+        $title ??= HttpStatus::phrase($status, 'Terminated');
+        $exitCode = STATUS_ERROR;
+        
+        if($message !== '' && !HttpStatus::isNoContent($status)){
+            $exitCode = self::sendTermination(
+                $status,
+                $message,
+                $title,
+                $retry
+            );
+        } else{
+            Header::sendNoContentHeaders($retry);
+            Header::clearOutputBuffers('all');
+        }
+       
+        try {
+            ob_start();
+            self::kernel('app', shared: true)->trigger('onTerminated', [
+                'context'  => self::isCommand() ? 'CLI' : 'HTTP',
+                'status'   => $status,
+                'message'  => $message,
+                'title'    => $title
+            ]);
+            ob_end_flush();
+        } catch (Throwable){
+        } finally{
+            self::$isTerminated = true;
+            NovaLogger::close();
+
+            exit($exitCode);
+        }
+    }
+
+    /**
+     * Call a PHP function if it exists and is not disabled.
+     *
+     * Returns `false` when the function is unavailable due to being undefined
+     * or disabled by PHP configuration.
+     *
+     * @param string $function Function name to call.
+     * @param mixed ...$arguments Arguments passed to the function.
+     *
+     * @return mixed Function result, or false if the function is unavailable.
+     *
+     * @example - Example:
+     * ```php
+     * $result = Luminova::tryFunction('set_time_limit', 300);
+     *
+     * if ($result === false) {
+     *     echo 'Function is unavailable.';
+     * }
+     * ```
+     */
+    public static function tryFunction(string $function, mixed ...$arguments): mixed
+    {
+        if (!function_exists($function) || self::isFunctionDisabled($function)) {
+            return false;
+        }
+
+        return $function(...$arguments);
+    }
+
+    /**
+     * Check whether a PHP function is disabled by the server configuration.
+     *
+     * Reads the configured disabled function list and checks if the specified
+     * function is unavailable due to PHP's `disable_functions` setting.
+     *
+     * @param string $function The PHP function name to check.
+     *
+     * @return bool True if the function is disabled, otherwise false.
+     */
+    public static function isFunctionDisabled(string $function): bool
+    {
+        static $disabled = null;
+        $disabled ??= self::getDisabledFunctions(true);
+
+        return isset($disabled[strtolower($function)]);
+    }
+
+    /**
+     * Returns the list of disabled PHP functions (via `disable_functions` directive).
+     *
+     * This method retrieves the list of functions that are disabled in the PHP configuration. 
+     * It can return the list as a simple array of function names or as an associative array
+     * with function names as keys and `true` as values.
+     * 
+     * @param bool $flip If true, returns an associative array with function names as keys and true as values.
+     *
+     * @return string[]|array<string,true>> Returns an array of disabled function names 
+     *          or an associative array if `$flip` is true.
+     */
+    public static function getDisabledFunctions(bool $flip = false): array
+    {
+        if (self::$disabledFunctions !== null) {
+            return ($flip && isset(self::$disabledFunctions[0])) 
+                ? array_flip(self::$disabledFunctions) 
+                : self::$disabledFunctions;
+        }
+
+        $list = ini_get('disable_functions') ?: '';
+
+        if ($list === '') {
+            return self::$disabledFunctions = [];
+        }
+
+        $disabled = [];
+
+        foreach (explode(',', $list) as $function) {
+            $function = trim($function);
+            if($function === ''){
+                continue;
+            }
+
+            if ($flip) {
+                $disabled[$function] = true;
+                continue;
+            }
+
+            $disabled[] = $function;
+        }
+
+        return self::$disabledFunctions = $disabled;
     }
 
     /**
@@ -178,40 +509,136 @@ final class Luminova
 
         $script = str_replace('\\', '/', $script);
         $lastSlash = strrpos($script, '/');
-        
-        return self::$base = ($lastSlash > 0) 
+
+        $path = ($lastSlash > 0) 
             ? substr($script, 0, $lastSlash) . '/' 
             : '/';
+        
+        return self::$base = $path;
     }
 
     /**
-     * Convert a relative path to a full absolute URL.
+     * Convert a relative application path to a fully qualified URL.
      *
-     * Automatically removes system-relative parts like `public/`, and resolves base URL 
-     * based on the current environment (development vs production).
+     * Normalizes system paths (like `public/`), then builds a full URL
+     * based on the environment (development or production).
      *
-     * @param string $path Relative file path to convert.
+     * @param string $path Application-relative file or route path.
+     *
+     * @return string Returns the fully qualified absolute URL.
      * 
-     * @return string Return fully qualified URL.
+     * @example - Absolute URL Example:
+     * ```php
+     * // Development environment
+     * echo Luminova::toAbsoluteUrl('public/images/logo.png');
+     * // http://localhost/my-project-path/public/images/logo.png
+     *
+     * // Production environment
+     * echo Luminova::toAbsoluteUrl('public/images/logo.png');
+     * // https://example.com/images/logo.png
+     * ```
+     *
+     * @example - Route Example:
+     * ```php
+     * echo Luminova::toAbsoluteUrl('about');
+     * // Dev:  http://localhost/my-project-path/public/about
+     * // Prod: https://example.com/about
+     * ```
      */
     public static function toAbsoluteUrl(string $path): string
     {
         if (NOVAKIT_ENV === null && !PRODUCTION) {
             $base = rtrim(self::getBase(), 'public/');
-            $basePos = strpos($path, $base);
+            $pos = strpos($path, $base);
 
-            if ($basePos !== false) {
-                $path = trim(substr($path, $basePos + strlen($base)), TRIM_DS);
+            if ($pos !== false) {
+                $path = substr($path, $pos + strlen($base));
             }
         } else {
-            $path = trim(self::filterPath($path), TRIM_DS);
+            $path = self::toDisplayPath($path);
         }
+
+        $path = trim($path, TRIM_DS);
 
         if (str_starts_with($path, 'public/')) {
-            $path = ltrim($path, 'public/');
+            $path = substr($path, strlen('public/'));
         }
 
-        return \Luminova\Funcs\start_url($path);
+        return self::toBaseUrl($path);
+    }
+
+    /**
+     * Build a URL relative to the application base path.
+     *
+     * Generates an absolute or relative URL using the application
+     * base path or front controller directory.
+     *
+     * Useful for generating links to routes, assets, and internal pages.
+     *
+     * - In development, the front controller path is included.
+     * - In production, URLs are resolved from the application root.
+     * - Host and port are preserved when available.
+     *
+     * @param string|null $route Optional route path to append.
+     * @param bool $relative Whether to return a relative URL.
+     *
+     * @return string Returns the constructed application URL.
+     *
+     * @example - Example:
+     * 
+     * Assuming your application path is like: `/Some/Path/To/htdocs/my-project-path/public/`.
+     * 
+     * ```php
+     * echo Luminova::toBaseUrl('about');
+     * ```
+     * 
+     * It returns depending on your development environment:
+     * 
+     * **On Development:**
+     * - http://localhost:8080/about
+     * - http://localhost/my-project-path/public/about
+     * - http://localhost/public/about
+     * 
+     * **In Production:**
+     * - http://example.com:8080/about
+     * - http://example.com/about
+     * 
+     * @example - Relative URL Example:
+     * 
+     * ```php
+     * echo Luminova::toBaseUrl('about', true); 
+     * // /my-project-path/public/about
+     * // /about
+     * ```
+     */
+    public static function toBaseUrl(?string $route = null, bool $relative = false): string
+    {
+        $route = '/' . ltrim((string) $route, '/');
+
+        if(PRODUCTION){
+            return $relative ? $route : APP_URL . $route;
+        }
+
+        $script = trim(APP_CONTROLLER_INDEX, TRIM_DS);
+
+        if ($relative) {
+            return ($script === '') 
+                ? $route 
+                : "/{$script}{$route}";
+        }
+
+        $hostname = $_SERVER['HTTP_HOST'] 
+            ?? $_SERVER['HOST'] 
+            ?? $_SERVER['SERVER_NAME'] 
+            ?? 'localhost';
+
+        $base = URL_SCHEME . '://' . $hostname;
+
+        if ($script !== '') {
+            $base .= '/' . $script;
+        }
+
+        return $base . $route;
     }
 
     /**
@@ -223,18 +650,20 @@ final class Luminova
      */
     public static function getUriSegments(): string
     {
-        if (self::$segments === null) {
-            self::$segments = '/';
+        if (self::$segments !== null) {
+            return self::$segments;
+        }
 
-            if (!empty($_SERVER['REQUEST_URI'])) {
-                $uri = substr(rawurldecode($_SERVER['REQUEST_URI']), strlen(self::getBase()));
+        self::$segments = '/';
 
-                if ($uri !== '' && ($pos = strpos($uri, '?')) !== false) {
-                    $uri = substr($uri, 0, $pos);
-                }
+        if (!empty($_SERVER['REQUEST_URI'])) {
+            $uri = substr(rawurldecode($_SERVER['REQUEST_URI']), strlen(self::getBase()));
 
-                self::$segments = '/' . trim($uri, '/');
+            if ($uri !== '' && ($pos = strpos($uri, '?')) !== false) {
+                $uri = substr($uri, 0, $pos);
             }
+
+            self::$segments = '/' . trim($uri, '/');
         }
 
         return self::$segments;
@@ -280,84 +709,226 @@ final class Luminova
     }
 
     /**
-     * Generate a unique URL based cache key for the current request.
+     * Generate a cache identifier for the current request.
      *
-     * This method creates a normalized identifier for caching based on:
-     * - The HTTP request method (`GET`, `POST`, etc.).
-     * - The request URI (path and optionally query parameters).
-     * - Stripping file extensions for static cache formats if configured.
-     * - Replacing special URL characters with dashes for safe storage.
+     * Creates a normalized cache key using the request method and URI. The URI may
+     * optionally include query parameters and can be normalized by removing known
+     * static file extensions to prevent duplicate cache entries for the same
+     * resource.
      *
-     * The resulting string is hashed with MD5 to produce a fixed-length cache ID.
+     * The generated identifier can be returned as either a raw key or an XXH3 hash.
      *
-     * @param string|null $salt Optional cache salt to include in key hashing (default: null).
-     * @param bool|null $uriQueryParams Whether to include query parameters in the cache ID (default: false).
-     *                  If set to null, it uses default from `env(page.cache.query.params)`
-     *                  If explicitly set, it overrides the default env.
+     * @param string|null $prefix Optional prefix to prepend to the generated key.
+     * @param bool|null $withUriQuery Whether to include query parameters in the key.
+     *                                When null, the value is determined by
+     *                                `env('page.cache.query.params', false)`.
+     * @param bool $hashValue Whether to return the generated key as an XXH3 hash.
      *
-     * @return string Return a unique MD5 hash representing the cache ID for this request.
+     * @return string The generated cache identifier or its XXH3 hash.
      *
-     * @example - Example:
+     * @example - Example
      * ```php
-     * $cacheId = Luminova::getCacheId(); // e.g., "d41d8cd98f00b204e9800998ecf8427e"
+     * $cacheId = Luminova::getCacheId();
+     *
+     * $cacheIdWithoutQuery = Luminova::getCacheId(
+     *     withUriQuery: false
+     * );
+     *
+     * $rawCacheId = Luminova::getCacheId(
+     *     hashValue: false
+     * );
      * 
-     * $cacheIdWithoutQuery = Luminova::getCacheId(uriQuery: false); // ignores query string
+     * $userCacheId = Luminova::getCacheId(
+     *     prefix: 'user-1',
+     *     hashValue: true
+     * );
      * ```
      */
-    public static function getCacheId(?string $salt = null, ?bool $uriQuery = null): string 
+    public static function getCacheId(
+        ?string $prefix = null,
+        ?bool $withUriQuery = null,
+        bool $hashValue = true
+    ): string
     {
-        $salt ??= '';
-        $uriQuery ??= (bool) env('page.cache.query.params', false);
-        $uri = ($_SERVER['REQUEST_URI'] ?? 'index');
-        $id = ($_SERVER['REQUEST_METHOD'] ?? 'CLI');
-        $id .= ($uriQuery ? $uri : (parse_url($uri, PHP_URL_PATH) ?: ''));
+        static $types = null;
 
-        $id = strtr($id, [
-            '/' => '-', 
-            '?' => '-', 
-            '&' => '-', 
-            '=' => '-', 
-            '#' => '-'
-        ]);
+        $withUriQuery ??= (bool) env('page.cache.query.params', false);
 
-        // Remove file extension for static cache formats
-        // To avoid creating 2 versions of same cache
-        // While serving static content (e.g, .html).
-        if (($types = env('page.caching.statics', null)) !== null) {
-            $id = preg_replace('/\.(' . $types . ')$/i', '', $id);
+        $method = $_SERVER['REQUEST_METHOD'] ?? 'CLI';
+        $uri = $_SERVER['REQUEST_URI'] ?? '/';
+
+        $id = $method . (
+            $withUriQuery
+                ? $uri
+                : (parse_url($uri, PHP_URL_PATH) ?: '')
+        );
+
+        $types ??= env('page.caching.statics', '');
+
+        if ($types) {
+            // Remove file extension for static cache formats
+            // To avoid creating 2 versions of same cache
+            // While serving static content (e.g, .html).
+            $id = preg_replace(
+                '/\.(' . preg_quote($types, '/') . ')(?=$|[?#])/i',
+                '',
+                $id
+            );
         }
 
-        return md5($salt . $id);
+        $id = strtr($id, [
+            '/' => ':',
+            '?' => ':',
+            '&' => ':',
+            '=' => ':',
+            '#' => ':',
+            ' ' => ':'
+        ]);
+
+        $prefix = ($prefix !== null && $prefix !== '') 
+            ? trim($prefix, " \t\n\r\0\x0B:") 
+            : '';
+
+        return $hashValue 
+            ? self::hash('xxh3', "{$prefix}:{$id}", fallbackAlgo: 'md5') 
+            : str_replace("\0", ':', "{$prefix}:{$id}");
     }
 
     /**
-     * Determines if the current request is an API request.
-     * 
-     * Checks if the first URI segment matches the API prefix 
-     * (e.g., `/example.com/api`, `public/api` or custom api prefix based on env(app.api.prefix)),
-     * and optionally treats AJAX requests as API calls.
-     * 
-     * @param bool $includeAjax If true, treats XMLHttpRequest (AJAX) as an API request.
-     * 
-     * @return bool Return true if the request starts with the API prefix or is AJAX (when enabled).
+     * Get the API route prefix.
+     *
+     * Reads the `app.api.prefix` configuration once and caches the result
+     * for subsequent calls to avoid repeated environment lookups.
+     *
+     * Falls back to `'api'` if the value is not defined or empty.
+     *
+     * @return string Return the default application API prefix used for routing.
      */
-    public static function isApiPrefix(bool $includeAjax = false): bool
+    public static function getApiPrefix(): string
     {
-        static $prefix = null;
+        static $api;
 
-        if ($prefix === null) {
-            $prefix = defined('IS_UP') ? env('app.api.prefix', 'api') : 'api';
+        if ($api === null) {
+            $value = env('app.api.prefix', 'api');
+            $api = ($value === '')
+                ? 'api'
+                : (string) $value;
         }
 
-        $segments = self::getSegments();
+        return $api;
+    }
 
-        if ($segments !== [] && $segments[0] === $prefix) {
+    /**
+     * Determine whether the application is running in HMVC mode.
+     *
+     * This method reads the `feature.app.hmvc` configuration once and caches
+     * the result for subsequent calls to avoid repeated environment lookups.
+     *
+     * @return bool Return true if HMVC mode is enabled, otherwise false.
+     */
+    public static function isHmvc(): bool
+    {
+        static $enabled;
+
+        if ($enabled === null) {
+            $enabled = (bool) env('feature.app.hmvc', false);
+        }
+
+        return $enabled;
+    }
+
+    /**
+     * Determine whether the current request matches application API URI prefix.
+     *
+     * A request is considered an API-prefixed request when the first URI segment
+     * matches the configured API prefix (for example: `/api` or a custom prefix
+     * set in `app.api.prefix`).
+     *
+     * @return bool Return true if the first URI segment matches the API prefix.
+     * 
+     * @see self::isApiRequest()
+     * @see self::isUriPrefix()
+     */
+    public static function isApiPrefix(): bool
+    {
+        return self::isUriPrefix(self::getApiPrefix());
+    }
+
+    /**
+     * Determine whether the current request should be treated as an API request.
+     *
+     * A request is considered an API request when:
+     * - the first URI segment matches the configured API prefix, or
+     * - AJAX requests are allowed to be treated as API requests.
+     *
+     * When `$ajaxAsApi` is null, the value is resolved from
+     * `app.validate.ajax.asapi` if the application has booted.
+     *
+     * @param bool|null $ajaxAsApi Whether to treat AJAX requests as API requests.
+     *                             If null, uses `env(app.validate.ajax.asapi)`.
+     *
+     * @return bool Return true if the request matches the API prefix or qualifies as an AJAX request.
+     * 
+     * @see self::isApiPrefix()
+     * @see self::isUriPrefix()
+     */
+    public static function isApiRequest(?bool $ajaxAsApi = null): bool
+    {
+        if (self::isApiPrefix()) {
             return true;
         }
 
-        return $includeAjax 
+        if($ajaxAsApi === null ){
+            if(!defined('APP_BOOTED')){
+                return false;
+            }
+
+            $ajaxAsApi = env('app.validate.ajax.asapi', false);
+        }
+
+        return $ajaxAsApi
             && isset($_SERVER['HTTP_X_REQUESTED_WITH']) 
             && strcasecmp($_SERVER['HTTP_X_REQUESTED_WITH'], 'XMLHttpRequest') === 0;
+    }
+
+    /**
+     * Determine whether the first URI segment matches any given prefix.
+     *
+     * This checks only the first segment of the current request URI, making it
+     * useful for route grouping such as `/admin`, `/api`, or `/webhook`.
+     *
+     * @param array|string $prefix One or more URI prefixes to match.
+     *
+     * @return bool Return true if the first URI segment matches any given prefix.
+     * 
+     * @see self::isApiPrefix()
+     * @see self::isApiRequest()
+     *
+     * @example - Match a single prefix.
+     * ```php
+     * if (Luminova::isUriPrefix('admin')) {
+     *     // Matches: /admin or /admin/users
+     * }
+     * ```
+     *
+     * @example - Match multiple prefixes.
+     * ```php
+     * if (Luminova::isUriPrefix(['api', 'webhook'])) {
+     *     // Matches: /api/* or /webhook/*
+     * }
+     * ```
+     */
+    public static function isUriPrefix(array|string $prefix): bool
+    {
+        $segment = trim(self::getSegments()[0] ?? '', '/');
+
+        foreach ((array) $prefix as $uri) {
+            if ($segment === trim($uri, '/')) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -379,9 +950,9 @@ final class Luminova
         }
 
         return $cli = PHP_SAPI === 'cli'
+            || isset($_SERVER['argv'])
             || defined('STDIN')
-            || !empty($_ENV['SHELL'])
-            || isset($_SERVER['argv']);
+            || !empty(getenv('SHELL'));
     }
 
     /**
@@ -411,19 +982,29 @@ final class Luminova
     }
 
     /**
-     * Filters a full file path by removing everything before the first known system directory.
-     * 
-     * Useful for hiding sensitive server paths when displaying errors or logs. The resulting path
-     * will always start from one of the known system directories (like `app`, `system`, etc.).
+     * Mask a file path by trimming everything before the first known system directory.
      *
-     * @param string $path Full file path to filter.
-     * 
-     * @return string Return filtered path starting from project root, or original path if no match found.
+     * This method removes leading path segments before the first matched system
+     * directory (for example, `app` or `system`). It helps hide sensitive server
+     * paths in error messages, logs, and debug output.
+     *
+     * If no known system directory is found, the normalized original path is returned.
+     *
+     * @param string $path The full file path to mask.
+     *
+     * @return string Return the masked path starting from the matched system directory,
+     *                or the normalized original path if no match is found.
+     *
+     * @example - Mask an absolute file path.
+     * ```php
+     * Luminova::toDisplayPath('/var/www/project/app/Controllers/Home.php');
+     * // Returns: app/Controllers/Home.php
+     * ```
      */
-    public static function filterPath(string $path): string 
+    public static function toDisplayPath(string $path): string
     {
-        // normalize for cross-platform support
-        $normalized = str_replace('\\', '/', $path); 
+        // Normalize path for cross-platform support
+        $normalized = str_replace('\\', '/', $path);
 
         foreach (self::$systemPaths as $dir) {
             $needle = '/' . trim($dir, '/') . '/';
@@ -437,42 +1018,58 @@ final class Luminova
     }
 
     /**
-     * Check if file has read or write permission is granted.
+     * Check if the specified file or directory has the required access permissions.
      * 
-     * @param string $permission File access permission.
-     * @param string|null $file File name or file path to check permissions (default: writeable dir).
-     * @param bool $throw Indicate whether to throws an exception if permission is not granted.
+     * This method checks for read and/or write permissions on a given file or directory.
+     * Throws a `FileException` if the required permissions are not met and `$silent` is false.
      * 
-     * @return bool Returns true if permission is granted otherwise false.
-     * @throws FileException If permission is not granted and quiet is not passed true.
+     * @param string $permission File access permission to check ('r' for read, 'w' for write, 'rw' for both).
+     * @param string|null $file The file or directory path to check. 
+     *              If null, defaults to the application's writeable directory.
+     * @param bool $silent Whether to suppress exceptions and return false instead (default: true).
+     * 
+     * @return bool Returns true if the file has the required permissions, false otherwise.
+     * @throws FileException If the file does not have the required permissions and $silent is false.
      */
-    public static function permission(string $permission = 'rw', ?string $file = null, bool $throw = false): bool
+    public static function permission(
+        string $permission = 'rw', 
+        ?string $file = null, 
+        bool $silent = true)
+    : bool
     {
         $file ??= root('writeable');
-        
-        if ($permission === 'rw' && (!is_readable($file) || !is_writable($file))) {
-            $error = "Read and Write permission denied for '%s, please grant 'read' and 'write' permission.";
-            $code = ErrorCode::READ_WRITE_PERMISSION_DENIED;
-        } elseif ($permission === 'r' && !is_readable($file)) {
-            $error = "Read permission denied for '%s', please grant 'read' permission.";
-            $code = ErrorCode::READ_PERMISSION_DENIED;
-        } elseif ($permission === 'w' && !is_writable($file)) {
-            $error = "Write permission denied for '%s', please grant 'write' permission.";
-            $code = ErrorCode::WRITE_PERMISSION_DENIED;
-        } else {
+  
+        [$error, $code] = match (true) {
+            $permission === 'rw' && (!is_readable($file) || !is_writable($file)) => [
+                "Read and write permission denied for: '%s'.",
+                ErrorCode::READ_WRITE_PERMISSION_DENIED
+            ],
+            $permission === 'r' && !is_readable($file) => [
+                "Read permission denied for: '%s'.",
+                ErrorCode::READ_PERMISSION_DENIED
+            ],
+            $permission === 'w' && !is_writable($file) => [
+                "Write permission denied for: '%s'.",
+                ErrorCode::WRITE_PERMISSION_DENIED
+            ],
+            default => [null, null],
+        };
+
+        if ($error === null) {
             return true;
         }
 
-        if(!$throw){
+        if($silent){
             return false;
         }
 
-        if (PRODUCTION) {
-            Logger::dispatch('critical', sprintf($error, $file));
+        $error = sprintf($error, $file);
+
+        if (PRODUCTION && Logger::tryDispatch('critical', $error)) {
             return false;
         }
 
-        throw new FileException(sprintf($error, $file), $code);
+        throw new FileException($error, $code);
     }
 
     /**
@@ -494,128 +1091,159 @@ final class Luminova
      * ```
      */
     public static function isPropertyExists(
-        string|object $objectOrClass, 
-        string $property, 
+        string|object $objectOrClass,
+        string $property,
         bool $staticOnly = false
     ): bool 
     {
-        if (property_exists($objectOrClass, $property)) {
+        if (!property_exists($objectOrClass, $property)) {
+            return false;
+        }
+
+        if (!$staticOnly) {
             return true;
         }
 
-        if($staticOnly){
-            try {
-                $ref = new ReflectionClass($objectOrClass);
+        try {
+            $ref = new ReflectionClass($objectOrClass);
 
-                if(!$ref->hasProperty($property)){
-                    return false;
-                }
+            $prop = $ref->getProperty($property);
 
-                $prop = $ref->getProperty($property);
-
-                return $prop->isStatic() && ($prop->isPublic() || $prop->isProtected());
-            } catch (Throwable) {
-                return false;
-            }
+            return $prop->isStatic()
+                && ($prop->isPublic() || $prop->isProtected());
+        } catch (Throwable) {
+            return false;
         }
-
-        return false;
     }
 
     /**
-     * Get the base name(s) from fully qualified class name(s).
+     * Get the base class name(s) from fully qualified class name(s).
      *
-     * Accepts a single FQCN (e.g., `App\Controllers\HomeController`) or a comma-separated list.
-     * Removes leading slashes and namespace paths, returning just the class names.
+     * Accepts:
+     * - A single fully qualified class name (FQCN), e.g. `App\Controllers\HomeController`
+     * - A comma-separated string of FQCNs, e.g. `App\Models\User, App\Services\Log`
+     * - An array of FQCNs
      *
-     * @param string $class One or more fully qualified class names, separated by commas if multiple.
-     * 
-     * @return string Return the base class name, or comma-separated base class names (e.g., `HomeController, UserModel`).
+     * Returns the base class name(s) while preserving the input format:
+     * - Single string input → returns a single string
+     * - Comma-separated string → returns a comma-separated string
+     * - Array → returns an array of base names
      *
-     * @example - Usages:
-     * 
+     * @param string[]|string $class One or more fully qualified class names.
+     *
+     * @return string[]|string Base class name(s), format matches the input.
+     *
+     * @example - Examples:
      * ```php
-     * Luminova::getClassBaseNames('\App\Controllers\HomeController'); // HomeController
-     * Luminova::getClassBaseNames('App\Models\User, App\Services\Log'); // User, Log
+     * Luminova::getClassBaseName('\App\Controllers\HomeController'); 
+     * // Returns: 'HomeController'
+     *
+     * Luminova::getClassBaseName('App\Models\User, App\Services\Log'); 
+     * // Returns: 'User, Log'
+     *
+     * Luminova::getClassBaseName(['App\Models\User', 'App\Services\Log']); 
+     * // Returns: ['User', 'Log']
      * ```
      */
-    public static function getClassBaseNames(string $class): string
+    public static function getClassBaseName(array|string $class): array|string
     {
         if (!$class) {
-            return '';
+            return is_array($class) ? [] : '';
         }
 
-        if (str_contains($class, ',')) {
-            return implode(', ', array_map(function (string $ns): string {
-                return basename(str_replace('\\', '/', trim($ns, " \t\n\r\0\x0B\\")));
-            }, explode(',', $class)));
+        $isArray = is_array($class);
+        $classes = $isArray ? $class : explode(',', $class);
+
+        $bases = array_map(function (string $ns): string {
+            return basename(str_replace('\\', '/', trim($ns, " \t\n\r\0\x0B\\")));
+        }, $classes);
+
+        return $isArray ? $bases : implode(', ', $bases);
+    }
+
+    /**
+     * Build termination response and output.
+     *
+     * @param int $status
+     * @param string $message
+     * @param string $title
+     * @param int $retry
+     * 
+     * @return int
+     */
+    private static function sendTermination(
+        int $status, 
+        string $message, 
+        string $title,
+        int $retry,
+    ): int 
+    {
+        $exitCode = ($status === STATUS_SUCCESS || HttpStatus::isAccepted($status)) 
+            ? STATUS_SUCCESS : STATUS_ERROR;
+
+         if(self::isCommand()){
+            Terminal::writeln(
+                sprintf(
+                    "(%d) [%s] %s\nRetry After: %d", 
+                    $status, 
+                    $title, 
+                    strip_tags(
+                        str_replace(['<br/>', '<br>'], PHP_EOL, $message)
+                    ), 
+                    $retry
+                ), 
+                stream: ($exitCode === STATUS_SUCCESS) 
+                    ? Terminal::STD_OUT 
+                    : Terminal::STD_ERR
+            );
+            return $exitCode;
+        }
+        
+        $output = '';
+        $type = 'text/plain; charset=utf-8';
+        $accept = $_SERVER['HTTP_LMV_SENT_CONTENT_TYPE'] 
+            ?? '';
+
+        if (
+            ($message[0] === '{' || $message[0] === '[')
+            || str_contains($accept, 'application/json') 
+            || (!$accept && self::isApiRequest())
+        ) {
+            $type = 'application/json; charset=utf-8';
+            $output =  json_validate($message)
+                ? $message 
+                : json_encode(
+                    ['status' => $status, 'error' => $title, 'message' => $message], 
+                    JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
+                 );
+        } elseif ($accept && str_contains($accept, 'text/html')) {
+            $title = htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
+            $message = nl2br(htmlspecialchars($message, ENT_QUOTES, 'UTF-8'));
+            $type = 'text/html; charset=utf-8';
+
+            $output = "<!DOCTYPE html><html><head><meta charset='UTF-8'><title>{$title}</title></head><body>";
+            $output .= "<h1>{$status} {$title}</h1><p>{$message}</p>";
+            $output .= "</body></html>";
+        } elseif ($accept && str_contains($accept, 'xml')) {
+            $type = 'application/xml; charset=utf-8';
+            $output = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+            $output .= "<response>\n";
+            $output .= "  <status>{$status}</status>\n";
+
+            if($title){
+                $output .= "  <error>" . htmlspecialchars($title, ENT_XML1 | ENT_QUOTES, 'UTF-8') . "</error>\n";
+            }
+
+            $output .= "  <message>" . htmlspecialchars($message, ENT_XML1 | ENT_QUOTES, 'UTF-8') . "</message>\n";
+            $output .= "</response>";
+        } else {
+            $output = sprintf('(%d) [%s] %s', $status, $title, $message);
         }
 
-        $class = ltrim($class, '\\');
-        return basename(str_replace('\\', '/', $class));
-    }
+        Header::sendNoCacheHeaders($status, $type, $retry);
+        Header::clearOutputBuffers('all');
+        echo $output;
 
-    /**
-     * Retrieve all metadata related to the currently routed controller class.
-     *
-     * This data typically includes controller name, method, namespace, etc.
-     * 
-     * **The returned array includes:**
-     * 
-     * - `filename`:    (string|null) The resolved full path to the controller file.
-     * - `uri`:         (string|null) The matched route URI.
-     * - `namespace`:   (string|null) The fully qualified controller class name.
-     * - `method`:      (string|null) The controller class method that was executed.
-     * - `controllers`:   (int) The number of controllers was discovered via attribute routing.
-     * - `cache`:       (bool) Whether this route was cached.
-     * - `staticCache`: (bool) Whether this route was serve from static cache.
-     *
-     * @return array<string,string> Return an associative array of routed class information.
-     *
-     * @internal Used by the routing system to track resolved route details.
-     */
-    public static function getClassMetadata(): array
-    {
-        return self::$routedClassMetadata;
-    }
-
-    /**
-     * Sets or updates a single metadata entry for the routed controller class.
-     *
-     * Common keys include:
-     * - `filename`, `uri`, `namespace`, `method`, `controllers`, `cache`, `staticCache`
-     * 
-     * @param string $key Metadata key (e.g., 'namespace', 'method').
-     * @param mixed  $value Corresponding value to assign.
-     *
-     * @return void
-     *
-     * @internal Used by the routing system to assign individual route values.
-     */
-    public static function addClassMetadata(string $key, mixed $value): void
-    {
-        self::$routedClassMetadata[$key] = $value;
-    }
-
-    /**
-     * Merge a new set of metadata into the existing routed controller class info.
-     * 
-     * This method replaces existing keys with the provided ones.
-     * 
-     * All expected keys are:
-     * - `filename`, `uri`, `namespace`, `method`, `controllers`, `cache`, `staticCache`
-     *
-     * @param array<string,mixed> $metadata An associative array Key-value pairs of controller routing metadata.
-     *
-     * @return void
-     *
-     * @internal Used by the routing system to initialize class routing context.
-     */
-    public static function setClassMetadata(array $metadata): void
-    {
-        self::$routedClassMetadata = array_replace(
-            self::$routedClassMetadata, 
-            $metadata
-        );
+        return $exitCode;
     }
 }

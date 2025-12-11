@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 /**
- * Luminova Framework NovaKit Command Line Tool.
+ * Luminova Framework Novakit Command Line Tool.
  * 
  * ██╗     ██╗   ██╗███╗   ███╗██╗███╗   ██╗ ██████╗ ██╗   ██╗ █████╗ 
  * ██║     ██║   ██║████╗ ████║██║████╗  ██║██╔═══██╗██║   ██║██╔══██╗
@@ -10,23 +10,35 @@
  * ███████╗╚██████╔╝██║ ╚═╝ ██║██║██║ ╚████║╚██████╔╝╚██████╔╝██║  ██║
  * ╚══════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝
  *
+ * Bootstraps the CLI environment:
+ *  - Handles background future child process worker {@see \Luminova\Component\Async::background()}.
+ *  - Handles novakit and application commands.
+ *
  * @package Luminova
- * @author Ujah Chigozie Peter 
+ * @author Ujah Chigozie Peter
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
  * @link https://luminova.ng
  */
-use \Luminova\Command\Novakit;
-use \Luminova\Boot;
+use Luminova\Boot;
+use Luminova\Command\Worker;
+use Luminova\Command\Novakit;
 
-// Autoload framework models.
+// Autoload framework models
 require __DIR__ . '/system/Boot.php';
 
-// Bool novakit framework CLI configurations.
+// Register CLI initializations
 Boot::cli();
 
-// Ensure the current directory is pointing to the front controller's directory.
-chdir(DOCUMENT_ROOT);
+// Pointing to project root
+chdir(APP_ROOT);
 
-// Initialize Novakit CLI Console and run command.
-(new Novakit())->run($_SERVER['argv'] ?? $argv ?? []);
+// Run background async future task
+if(($argv[1] ?? null) === 'async'){
+    ini_set('error_log', 'php://stderr');
+
+    exit(Worker::run($argv ?? [], (int) getmypid()));
+}
+
+// Run Novakit CLI Console or Background Future task
+Novakit::run($argv ?? []);

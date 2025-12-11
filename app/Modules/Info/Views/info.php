@@ -1,6 +1,8 @@
 <?php 
-use \Luminova\Common\Maths;
-use function \Luminova\Funcs\{locale, href, asset, shared};
+use \Luminova\Boot;
+use \Luminova\Utility\Math;
+use function \Luminova\Funcs\{locale, href, asset};
+$dbTime = Boot::get(Boot::QUERY_PROFILING);
 ?>
 <!DOCTYPE html>
 <html lang="<?= locale();?>">
@@ -162,20 +164,22 @@ use function \Luminova\Funcs\{locale, href, asset, shared};
                             <tbody>
                                 <tr>
                                     <td>Memory Usage</td>
-                                    <td><?= htmlspecialchars(Maths::toUnit(memory_get_usage(true), true), ENT_QUOTES) ?></td>
+                                    <td><?= Math::toUnit(memory_get_usage(true), 2, true); ?></td>
                                 </tr>
                                 <tr>
                                     <td style="width: 12em">Peak Memory Usage:</td>
-                                    <td><?= htmlspecialchars(Maths::toUnit(memory_get_peak_usage(true), true), ENT_QUOTES) ?></td>
+                                    <td><?= Math::toUnit(memory_get_peak_usage(true), 2, true); ?></td>
                                 </tr>
                                 <tr>
                                     <td>Memory Limit:</td>
                                     <td><?= htmlspecialchars((string) ini_get('memory_limit'), ENT_QUOTES) ?></td>
                                 </tr>
-                                <?php if(defined('IS_UP') && ($dbTime = shared('__DB_QUERY_EXECUTION_TIME__', null, 0)) > 0): ?>
+                                <?php if(isset($dbTime['global']['time'])): ?>
                                 <tr>
-                                    <td>Last Database Executions:</td>
-                                    <td><?= htmlspecialchars(($dbTime < 1) ? sprintf('%.2f ms', $dbTime * 1000) : sprintf('%.4f s', $dbTime), ENT_QUOTES) ?></td>
+                                    <td>Database Executions:</td>
+                                    <td>
+                                        <?= Math::toTimeUnit(($dbTime['global']['time'] ?? 0) * 1_000, withName: true); ?>
+                                    </td>
                                 </tr>
                                 <?php endif;?>
                             </tbody>

@@ -118,14 +118,14 @@ app/
     │── Models/          # Application data models
     │── Views/           # UI templates
     │── Modules/         # HMVC modules (optional)
-bootstrap/      # Core Helper Functions
-bin/            # Novakit Console Commands
-public/         # Front Controller (Framework entry point)
+bootstrap/               # Core Helper Functions
+bin/                     # Novakit Console Commands
+public/                  # Front Controller (Framework entry point)
 resources/
         │── Views/     # MVC Template files
-routes/         # Routes for Method-Based Routing
-writeable/      # Private Storage, Logs, cache, Sessions, and Temp Files
-system/         # Core Modules
+routes/                # Routes for Method-Based Routing
+writeable/             # Private Storage, Logs, cache, Sessions, and Temp Files
+system/                # Core Modules
     │── plugins/       # ThirdParty Vendor Files
 ```
 

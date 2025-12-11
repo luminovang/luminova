@@ -10,12 +10,11 @@
 namespace App\Config;
 
 use \Luminova\Time\Time;
-use \Luminova\Utility\IP;
 use \Psr\Log\AbstractLogger;
-use \Psr\Log\LoggerInterface;
+use \Luminova\Http\Network\IP;
 use \Luminova\Logger\NovaLogger;
 use \Luminova\Base\Configuration;
-use \Luminova\Interface\HttpRequestInterface;
+use \Luminova\Interface\RequestInterface;
 
 final class Logger extends Configuration
 {
@@ -26,7 +25,7 @@ final class Logger extends Configuration
      *
      * @var string|null $contextHeaderName
      *
-     * @example
+     * @example - Example:
      * ```php
      * $contextHeaderName = 'X-API-User-Id';
      * ```
@@ -48,16 +47,21 @@ final class Logger extends Configuration
     public static ?string $contextFieldName = null;
     
     /**
-     * Enables asynchronous logging using Fibers to log messages 
-     * in a background thread without blocking the UI.
+     * Enables non-blocking background asynchronous logging.
      * 
-     * @var bool $asyncLogging Whether to enable asynchronous logging.
+     * This setting determines whether remote logging operations are performed asynchronously.
+     * Optionally set in environment variable: `logger.remote.async`.
+     * 
+     * @var bool $remoteAsyncLogging Whether to enable asynchronous logging.
+     * > **Note:**
+     * > curl maybe disabled in CLI mode on some servers.
      * > Supported for \Luminova\Logger\NovaLogger only.
      */
-    public static bool $asyncLogging = false;
+    public static bool $remoteAsyncLogging = false;
 
     /**
      * Specify the maximum size (in bytes) for each log level (e.g., 10485760 for 10 MB). 
+     * 
      * When this limit is reached, a backup of the log file is created 
      * if `logger.create.backup` or `$autoBackup` is set to true; otherwise, the logs are cleared.
      * 
@@ -66,8 +70,13 @@ final class Logger extends Configuration
     public static int $maxSize = 0;
 
     /**
-     * Indicate whether a backup of log file should be created when the `logger.max.size` or `$maxSize` limit is reached. 
-     * Set to 'true' to automatically create a backup and empty the current log file, 'false' to empty the log file only.
+     * Indicate whether to automatically create a backup of log files.
+     * 
+     * The backup will be created when the `env(logger.max.size)` or `$maxSize` limit is reached.
+     * 
+     * Set to:
+     * - 'true' to create a backup and empty the current log file in background.
+     * - 'false' to empty the log file only.
      * 
      * @var bool $autoBackup Whether to automatically create backup.
      */
@@ -75,35 +84,19 @@ final class Logger extends Configuration
 
     /**
      * Determines whether log context information should be included 
-     * when sending logs to the Telegram bot.
+     * when sending logs to the Telegram bot or Slack webhook.
      * 
-     * This can also be configured via the environment variable: `logger.telegram.send.context`.
+     * This can also be configured via the environment variable: `logger.remote.send.context`.
      *
      * @var bool
      */
-    public static bool $telegramSendContext = false;
-
-    /**
-     * Returns an instance of the preferred logger class, which must 
-     * implement the PSR `LoggerInterface`.
-     * 
-     * @example Return instance of logger class.
-     * 
-     * ```php 
-     * return new MyLogger(config);
-     * ```
-     * @return class-object<LoggerInterface>|null Preferred logger instance, or `null` to use the default logger.
-     */
-    public function getLogger(): ?LoggerInterface 
-    {
-        return null;
-    }
+    public static bool $remoteSendContext = false;
 
     /**
      * {@inheritdoc}
      */
     public static function getEmailLogTemplate(
-        HttpRequestInterface $request, 
+        RequestInterface $request, 
         AbstractLogger $logger,
         string $message, 
         string $level, 

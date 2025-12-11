@@ -1,11 +1,25 @@
 <?php 
-use \Luminova\Common\Maths;
-use \Luminova\Debugger\Performance;
-use \Luminova\Http\Request;
-use function \Luminova\Funcs\{ip_address, is_command, shared};
+use Luminova\Boot;
+use Luminova\Http\Request;
+use Luminova\Http\Network\IP;
+use Luminova\Utility\Converter;
+use Luminova\Debugger\Performance;
+use function Luminova\Funcs\is_command;
 include_once __DIR__ . '/tracing.php';
 
-function onErrorShowDebugTracer(array $trace, ?array $timelines = null): void{
+if (!function_exists('__show_html_debug_tracer')) {
+/**
+ * @param array $trace
+ * @param array|null $timelines
+ * @param string|null $file
+ * 
+ * @return void
+ */
+function __show_html_debug_tracer(
+    array $trace, 
+    ?array $timelines = null, 
+    ?string $file = null
+): void { 
 ?>
 <div class="tracer-container container main-container">
     <div class="tab-content">
@@ -36,14 +50,23 @@ function onErrorShowDebugTracer(array $trace, ?array $timelines = null): void{
         <div class="trace-tab-contents">
 
             <div class="content active" id="backtrace">
-                <?= getDebugTracing($trace); ?>
+                <?= __get_debug_tracing($trace, $file); ?>
             </div>
 
             <?php if($timelines): ?>
                 <div class="content" id="timeline">
-                    <?php foreach($timelines as $tl): ?>
+                    <?php foreach(array_unique(array_reverse($timelines)) as $tl): ?>
                         <?php if(str_ends_with($tl, 'thrown')){continue;}?>
-                        <p class="entry text-timeline"><?= htmlspecialchars($tl, ENT_QUOTES); ?></p>
+                        <?php 
+                            $tl = htmlspecialchars(preg_replace('/^#\d+/', '', $tl), ENT_QUOTES); 
+
+                            if(str_starts_with($tl, 'Stack trace:')){
+                                echo '<h2 class="entry text-danger">' . $tl . '</h2>';
+                                continue;
+                            }
+                        ?>
+
+                        <p class="entry text-timeline"><?= $tl; ?></p>
                     <?php endforeach; ?>
                 </div>
             <?php endif;?>
@@ -117,7 +140,7 @@ function onErrorShowDebugTracer(array $trace, ?array $timelines = null): void{
                     <tbody>
                         <tr>
                             <td style="width: 10em">URI</td>
-                            <td><?= htmlspecialchars($request->getUri(), ENT_QUOTES) ?></td>
+                            <td><?= htmlspecialchars((string) $request->getUri(), ENT_QUOTES) ?></td>
                         </tr>
                         <tr>
                             <td>HTTP Method</td>
@@ -125,7 +148,7 @@ function onErrorShowDebugTracer(array $trace, ?array $timelines = null): void{
                         </tr>
                         <tr>
                             <td>IP Address</td>
-                            <td><?= htmlspecialchars(ip_address(), ENT_QUOTES) ?></td>
+                            <td><?= htmlspecialchars(IP::get(), ENT_QUOTES) ?></td>
                         </tr>
                         <tr>
                             <td style="width: 10em">Is AJAX Request?</td>
@@ -146,7 +169,6 @@ function onErrorShowDebugTracer(array $trace, ?array $timelines = null): void{
 
                     </tbody>
                 </table>
-
 
                 <?php $empty = true; ?>
                 <?php foreach(['_GET', '_POST', '_COOKIE'] as $var):?>
@@ -185,7 +207,7 @@ function onErrorShowDebugTracer(array $trace, ?array $timelines = null): void{
                     </div>
                 <?php endif; ?>
 
-                <?php if(($headers = $request->getHeaders()) !== []): ?>
+                <?php if(($headers = $request->header->getHeaders()) !== []): ?>
                     <h3>Headers</h3>
 
                     <table>
@@ -220,20 +242,26 @@ function onErrorShowDebugTracer(array $trace, ?array $timelines = null): void{
                     <tbody>
                         <tr>
                             <td>Memory Usage</td>
-                            <td><?= htmlspecialchars(Maths::toUnit(memory_get_usage(true), true), ENT_QUOTES) ?></td>
+                            <td><?= htmlspecialchars(Converter::toUnit(memory_get_usage(true), 2, true), ENT_QUOTES) ?></td>
                         </tr>
                         <tr>
                             <td style="width: 12em">Peak Memory Usage:</td>
-                            <td><?= htmlspecialchars(Maths::toUnit(memory_get_peak_usage(true), true), ENT_QUOTES) ?></td>
+                            <td><?= htmlspecialchars(Converter::toUnit(memory_get_peak_usage(true), 2, true), ENT_QUOTES) ?></td>
                         </tr>
                         <tr>
                             <td>Memory Limit:</td>
                             <td><?= htmlspecialchars((string) ini_get('memory_limit'), ENT_QUOTES) ?></td>
                         </tr>
-                        <?php if(defined('IS_UP') && ($dbTime = shared('__DB_QUERY_EXECUTION_TIME__', default: 0)) > 0): ?>
+                        <?php $dbTime = Boot::get(Boot::QUERY_PROFILING); ?>
+                        <?php if(isset($dbTime['global']['time'])): ?>
                         <tr>
-                            <td>Last Database Executions:</td>
-                            <td><?= htmlspecialchars(($dbTime < 1) ? sprintf('%.2f ms', $dbTime * 1000) : sprintf('%.4f s', $dbTime), ENT_QUOTES) ?></td>
+                            <td>Database Executions:</td>
+                            <td>
+                            <?= Converter::toTimeUnit(
+                                ($dbTime['global']['time'] ?? 0) * 1_000, 
+                                withName: true
+                            ); ?>
+                            </td>
                         </tr>
                         <?php endif;?>
                     </tbody>
@@ -262,4 +290,4 @@ document.querySelectorAll('.trace-trigger').forEach(function(trigger) {
     });
 });
 </script>
-<?php }
+<?php } } ?>

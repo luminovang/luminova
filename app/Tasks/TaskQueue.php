@@ -1,6 +1,6 @@
 <?php 
 /**
- * Luminova Framework application background tasks handler.
+ * Luminova Framework application background tasks controller.
  *
  * @package Luminova
  * @author Ujah Chigozie Peter
@@ -42,7 +42,7 @@ class TaskQueue extends Queue
     /**
      * {@inheritDoc}
      */
-    protected bool $supportOpisClosure = true;
+    protected bool $isClosureSupported = true;
 
     /**
      * {@inheritDoc}
@@ -60,6 +60,17 @@ class TaskQueue extends Queue
     //    };
     // }
 
+    /**
+     * {@inheritDoc}
+     */
+    public static function __callStatic(string $method, array $arguments): mixed
+    {
+        return parent::__callStatic($method, $arguments);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     protected function onCreate(): void 
     {
         // $this->stage(
@@ -92,6 +103,13 @@ class TaskQueue extends Queue
         //      [new Luminova\Models\Task(['handler' => 'App\Utils\Cleaner::purgeTemp', 'forever' => 1440])
         // ];
 
-        return null;
+        return [
+            [
+                'handler' => '\App\Tasks\Workers\Job@run', 
+                'arguments' => [],
+                'forever' => 720,
+                'priority' => 3
+            ]
+        ];
     }
 }
