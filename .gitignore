@@ -12,12 +12,17 @@ cli.help
 .fleet
 .idea
 .vscode
+package.json
+.phpvci.admin.php
 Dockerfile
 docker-compose.yml
+/docker
 /builds/*/
 !/build/.gitkeep
 # Ignore all folders within /system/
 /system/*/
+/node/src/*
+/node/app.js
 
 # Except for 
 !.gitkeep

@@ -9,7 +9,7 @@
  */
 namespace App\Config;
 
-use \Luminova\Base\Configuration;
+use \Luminova\Config\Configuration;
 
 final class IPConfig extends Configuration
 {

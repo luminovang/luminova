@@ -1,6 +1,7 @@
 <?php 
+declare(strict_types=1);
 /**
- * Luminova Framework Bootstrapping.
+ * Luminova Framework Autoloder.
  *
  * @package Luminova
  * @author Ujah Chigozie Peter
@@ -10,129 +11,124 @@
  */
 namespace Luminova;
 
+use \App\Kernel;
 use \Throwable;
-use \Luminova\Http\Header;
-use \Luminova\Logger\Logger;
-use \Luminova\Routing\Router;
-use \Luminova\Command\Terminal;
-use \Luminova\Cache\StaticCache;
-use \Luminova\Foundation\Error\Guard;
-use \Luminova\Foundation\Module\Factory;
-use \Luminova\Exceptions\RuntimeException;
-use \Luminova\Foundation\Core\Application;
-use \Luminova\Foundation\Module\Autoloader;
-use function \Luminova\Funcs\{root, import};
-use \Luminova\Interface\{KernelInterface, RouterInterface, LazyObjectInterface};
+use Luminova\Runtime;
+use Luminova\Luminova;
+use Luminova\Config\Env;
+use Luminova\Http\Header;
+use Luminova\Logger\Entry;
+use Luminova\Routing\Router;
+use Luminova\Cache\ViewCache;
+use Luminova\Utility\Version;
+use Luminova\Command\Terminal;
+use Luminova\Foundation\Error\Error;
+use Luminova\Foundation\Module\Factory;
+use Luminova\Foundation\Core\Application;
+use Luminova\Foundation\Module\Autoloader;
 
 /**
- * Luminova framework autoloader helper class.
+ * Luminova framework bootstrapping and autoloading helper.
  *
- * Luminova relies on Composer for autoloading. This class simplifies the process 
- * of loading both Composer and framework modules without needing to manually include 
- * `plugins/vendor/autoload.php` and other boot files.
- * 
- * To autoload required files, include `/system/Boot.php` and call the appropriate 
- * static method based on your environment (`http()`, `cli()`, or `autoload()`).
- * 
+ * This class provides static methods for initializing the Luminova framework
+ * and resolving its autoloading environment. It supports Composer and Luminova
+ * VCI autoloading without requiring applications to manually include
+ * `vendor/autoload.php` or other framework bootstrap files.
+ *
+ * Use the appropriate boot method for the application environment:
+ *
+ * - {@see Boot::http()}     Bootstrap the application for HTTP requests.
+ * - {@see Boot::cli()}      Bootstrap the application for CLI commands.
+ * - {@see Boot::autoload()} Resolve and initialize the application autoloader.
+ *
  * @see https://luminova.ng/docs/0.0.0/boot/autoload
- * 
- * Boot Shared Memory
- *
- * Lightweight in-memory storage for application key/value data.
- * Works as a static runtime registry. Comparable in concept to Swift's
- * `UserDefaults` or Android/Java `SharedPreferences`, but not persistent.
- *
- * @see \Luminova\Funcs\shared() Global helper for quick access.
- *
- * @example - Usages:
- * ```php
- * use Luminova\Boot;
- *
- * Boot::set('THEME', true);
- *
- * $context = Boot::get('THEME', false);
- *
- * if (Boot::has('THEME')) {
- *     // Key exists...
- * }
- *
- * Boot::remove('THEME');
- * Boot::clear();
- * ```
- *
- * > **Note**
- * > This storage is runtime-only:
- * > - Data is lost at the end of each request.
- * > - Values are not shared across processes or workers.
- * > - Nothing is written to disk.
  */
 final class Boot
 {
     /**
-     * Storage for shared keys and values.
+     * Luminova phpvci configuration loaded.
      *
-     * @var array<string,mixed> $storage
-     */
-    private static array $storage = [];
-
-    /**
-     * Indicates whether warmup initialization has already been performed.
-     *
-     * @var bool $isWarmed
-     */
-    private static bool $isWarmed = false;
-
-    /**
-     * If all features are registered.
+     * @var array{
+     *      status: 0|1|2,
+     *      enabled: bool,
+     *      version: string,
+     *      paths: array{
+     *          target: string
+     *      }
+     * }|null $phpvci
      * 
-     * @var bool $registered 
+     * @see ../.phpvci.php
      */
-    private static bool $registered = false;
+    private static ?array $phpvci = null;
 
     /**
-     * Initializes the HTTP environment for web and API applications.
+     * Prevent initialization.
+     */
+    private function __construct() {}
+
+    /**
+     * Initialize the application for HTTP requests.
      *
-     * Warms up the application, registers error handlers, and loads core modules.
-     * 
-     * > Similar to the `http()` method but does not return the application instance.
+     * Warms up the framework, registers error handlers, completes the boot
+     * process, and returns the application instance for further configuration
+     * and execution.
      *
-     * @example Usage:
+     * This method is intended for web and API entry points, typically
+     * `public/index.php`.
+     *
+     * @return Application|\App\Application<Application> The application instance.
+     *
+     * @example - Usage (public/index.php):
      * ```php
-     * use \Luminova\Boot;
-     * 
-     * require_once __DIR__ . '/system/Boot.php';
-     * 
-     * Boot::init();
+     * use Luminova\Boot;
+     *
+     * require_once __DIR__ . '/../system/Boot.php';
+     *
+     * Boot::http()->router->context(...)->run();
      * ```
-     * @see http()
-     * @see autoload()
+     *
+     * @see self::init()
+     * @see self::cli()
+     * @see ../public/index.php
      */
-    public static function init(): void
+    public static function http(): Application
     {
-        self::warmup();
-        Guard::register();
-        self::finish();
+        self::init();
+
+        if (!PRODUCTION && !STAGING && !Runtime::isLocalhost()) {
+            exit(
+                'Invalid environment mode for production. '
+                . 'Set "app.environment.mode=production" or "staging".'
+            );
+        }
+
+        return Kernel::resolve(Kernel::SERVICE_APPLICATION, true);
     }
 
     /**
-     * Initializes all required autoload modules.
+     * Initialize the framework without configuring an HTTP or CLI environment.
      *
-     * Wrapper for `warmup()` and `finish()`. Loads core modules and prepares the application 
-     * context without registering error handlers or configuring the CLI environment.
-     * 
-     * > Use this to ensure Composer and framework modules are available in the current context.
+     * Loads the required framework modules by running the warmup and completion
+     * phases of the boot process. Error handlers and CLI-specific configuration
+     * are not initialized.
      *
-     * @example Usage:
+     * Use this method when Composer and framework modules need to be available
+     * without starting a complete application environment.
+     *
+     * @return void
+     *
+     * @example - Usage:
      * ```php
-     * use \Luminova\Boot;
-     * 
+     * use Luminova\Boot;
+     *
      * require_once __DIR__ . '/system/Boot.php';
-     * 
+     *
      * Boot::autoload();
      * ```
-     * @see init()
-     * @see http()
-     * @see cli()
+     *
+     * @see self::init()
+     * @see self::http()
+     * @see self::cli()
      */
     public static function autoload(): void
     {
@@ -141,105 +137,101 @@ final class Boot
     }
 
     /**
-     * Prepares the HTTP environment for web and API applications.
+     * Initialize the HTTP boot environment.
      *
-     * Typically used in `public/index.php`. Ensures the application is warmed up, 
-     * registers error handlers, and loads required core modules before returning 
-     * the application instance.
+     * Warms up the framework, registers the application error handlers, and
+     * completes the boot process. Unlike {@see self::http()}, this method does
+     * not create or return the application instance.
      *
-     * @return Application|\App\Application<Application> Return the application instance.
-     * @example - Usage (public/index.php)
-     * 
+     * @return void
+     *
+     * @example - Usage:
      * ```php
-     * use \Luminova\Boot;
-     * 
-     * require_once __DIR__ . '/../system/Boot.php';
-     * 
-     * Boot::http()->router->context(...)->run();
+     * use Luminova\Boot;
+     *
+     * require_once __DIR__ . '/system/Boot.php';
+     *
+     * Boot::init();
      * ```
-     * @see init()
+     *
+     * @see self::http()
+     * @see self::autoload()
      */
-    public static function http(): Application
+    public static function init(): void
     {
-        self::init();
+        self::warmup();
+        Error::register();
+        self::finish();
+    }
 
-        if(!PRODUCTION && !IS_LOCALHOST){
-           exit('Invalid environment mode for production. Set "app.environment.mood=production" or "staging".');
+    /**
+     * Initialize the CLI environment.
+     *
+     * Validates that the application is running under PHP CLI, loads the required
+     * framework modules, enables CLI-friendly error reporting, defines the CLI
+     * environment, initializes the standard CLI streams, and completes the boot
+     * process.
+     *
+     * This method is intended for custom CLI entry points and scripts.
+     *
+     * @return void
+     *
+     * @example - Usage (/bin/script.php):
+     * ```php
+     * #!/usr/bin/env php
+     * <?php
+     *
+     * use Luminova\Boot;
+     *
+     * require __DIR__ . '/system/Boot.php';
+     *
+     * Boot::cli();
+     *
+     * // Your CLI implementation.
+     * ```
+     *
+     * @see ../novakit
+     * @see self::autoload()
+     */
+    public static function cli(): void
+    {
+        if (!in_array(PHP_SAPI, ['cli', 'phpdbg'], true)) {
+            self::onError(sprintf(
+                'Method "Boot::cli()" can only be called in CLI context. '
+                . 'Use "Boot::http()" instead. Current SAPI: %s.',
+                PHP_SAPI
+            ), 'Logic Error');
         }
 
-        return self::application();
+        self::warmup();
+
+        error_reporting(E_ALL);
+
+        ini_set('display_errors', '1');
+        ini_set('display_startup_errors', '1');
+        ini_set('html_errors', '0');
+        ini_set('log_errors', '1');
+        ini_set('error_log', 'php://stderr');
+
+        defined('CLI_ENVIRONMENT')
+            || define('CLI_ENVIRONMENT', Env::get('cli.environment.mode', 'testing'));
+
+        Runtime::defineStandardStreams();
+
+        Error::register();
+        self::finish();
     }
 
     /**
      * Get the shared application instance.
      *
-     * Returns the current CoreApplication singleton.  
-     * This provides a single, global access point to the running application.
-     *
      * @return Application|\App\Application<Application> Returns the application instance.
-     * > **Note:**
-     * > Future versions may introduce parameters so the method can return
-     * > context-specific or module-specific application instances.
+     * 
+     * @deprecated
      */
     public static function application(): Application
     {
-        return \App\Application::getInstance();
-    }
-
-    /**
-     * Return the kernel instance for this application.
-     *
-     * @return KernelInterface|\App\Config\Kernel|null The kernel instance, or null to use the default.
-     */
-   /* public static function kernel(): ?KernelInterface 
-    {
-        if(!Kernel::shouldShareObject()){
-            return Kernel::create();
-        }
-
-        if(!self::$kernel instanceof KernelInterface){
-            self::$kernel = Kernel::create();
-        }
-
-        return self::$kernel;
-    }*/
-
-    /**
-     * Prepares the CLI environment.
-     *
-     * Intended for use in custom CLI scripts. Autoloads required files, 
-     * enables error reporting, validates the SAPI type, defines CLI constants, 
-     * and completes the bootstrapping process.
-     *
-     * @return void
-     * @example - Usage (/bin/script.php)
-     * ```php
-     * #!/usr/bin/env php
-     * <?php
-     * use \Luminova\Boot;
-     * 
-     * require __DIR__ . '/system/Boot.php';
-     * 
-     * Boot::cli();
-     * 
-     * // Your cli implementation
-     * ```
-     */
-    public static function cli(): void
-    {
-        self::warmup();
-        ini_set('display_errors', '1');
-        error_reporting(E_ALL);
-
-        if (str_starts_with(PHP_SAPI, 'cgi')) {
-            echo 'Novakit CLI tool requires php-cli. php-cgi is not supported.';
-            exit(1);
-        }
-
-        defined('CLI_ENVIRONMENT') || define('CLI_ENVIRONMENT', env('cli.environment.mood', 'testing'));
-
-        self::shouldDefineCommandStreams();
-        self::finish();
+        return Kernel::resolve(Kernel::SERVICE_APPLICATION, true);
     }
 
     /**
@@ -251,304 +243,710 @@ final class Boot
      *
      * @return void
      * @ignore
+     * @codeCoverageIgnore
      */
     public static function warmup(): void
     {
-        if (self::$isWarmed) {
+        defined('APP_BASE_PATH') || define(
+            'APP_BASE_PATH',
+            rtrim(
+                getenv('APP_BASE_PATH') ?: ($_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)),
+                '/\\'
+            )
+        );
+
+        if (defined('BOOT_WARMUP_STARTED')) {
             self::override();
             return;
         }
 
-        require_once __DIR__ . '/../bootstrap/constants.php';
+        self::resolvePhpVciConfig();
+        
+        self::import('autoload.php', from: 'plugins', resolvable: false);
+        self::import('polyfills.php', from: 'bootstrap');
+        self::import('Luminova.php');
+        self::import('Runtime.php');
+        self::import('Config/Env.php');
+
+        /**
+         * Register environment variables from a `.env` file.
+         */
+        try{
+            Env::register();
+        } catch (Throwable $e) {
+            self::onError(
+                $e->getMessage(), 
+                'Configuration Error #500', 
+                'Failed to parse environment configuration.'
+            );
+        }
+
+        self::import('constants.php', from: 'bootstrap');
         self::override();
 
-        require_once __DIR__ . '/../bootstrap/functions.php';
-        require_once __DIR__ . '/Foundation/Error/Guard.php';
-        require_once __DIR__ . '/Foundation/Error/Message.php';
-        require_once __DIR__ . '/Luminova.php';
+        self::import('Funcs/functions.php', from: 'bootstrap');
+        self::import('Funcs/strings.php', from: 'bootstrap');
+        self::import('Funcs/arrays.php', from: 'bootstrap');
 
-        self::$isWarmed = true;
+        self::setAppDefaults();
+
+        define('BOOT_WARMUP_STARTED', true);
+
+        // start recording
+        Runtime::profiling('start');
     }
 
     /**
-     * Opens a file using `fopen()` with exception handling.
+     * Determines whether Luminova VCI autoloading is enabled.
      *
-     * If the file can't be opened or an error occurs, a RuntimeException is thrown.
+     * Loads the 'phpvci.php' configuration and checks whether a target path is configured.
+     * Returns false if the configuration cannot be loaded or is invalid.
      *
-     * @param string $filename Path to the file.
-     * @param string $mode File access mode (e.g., 'r', 'w').
+     * @return bool Returns true if VCI autoloading is enabled, otherwise false.
      *
-     * @return resource|null Return a valid stream resource.
-     * @throws RuntimeException If the file can't be opened.
+     * @see ../.phpvci.php
      */
-    public static function tryFopen(string $filename, string $mode): mixed
+   public static function isPhpVciAutoload(): bool
     {
-        $error = null;
-        $handle = null;
+        self::$phpvci ??= self::readPhpVciConfig();
 
-        try {
-            $handle = fopen($filename, $mode);
-        } catch (Throwable $e) {
-            $error = $e;
+        if (self::$phpvci === []) {
+            return false;
         }
 
-        if ($handle === false || !is_resource($handle)) {
-            throw new RuntimeException(sprintf(
-                'Failed to open file "%s" with mode "%s"%s',
-                $filename,
-                $mode,
-                $error ? ': ' . $error->getMessage() : ''
-            ), previous: $error);
+        if ((self::$phpvci['status'] ?? 0) === 2) {
+            return true;
         }
 
-        return $handle;
+        return !empty(self::$phpvci['version'])
+            && !empty(self::$phpvci['paths']['target']);
     }
 
     /**
-     * Ensures CLI standard streams (STDIN, STDOUT, STDERR) are defined.
+     * Resolves a file path using the PHPVCI boot configuration or the default
+     * application directory.
      *
-     * Uses `tryFopen()` to safely define them if not already set.
+     * PHPVCI resolution is used for system files except `Boot.php`. Bootstrap
+     * and plugin files are resolved from the default application directory.
      *
-     * @return void
-     * @throws RuntimeException If any stream cannot be defined.
+     * @param string $file The relative file path.
+     * @param 'system'|'bootstrap'|'plugins' $from The source directory.
+     *
+     * @return string|null Returns the resolved absolute file path if the file
+     *                     exists, or null otherwise.
      */
-    public static function shouldDefineCommandStreams(): void 
+    public static function resolveFilepath(string $file, string $from = 'system'): ?string
     {
-        defined('STDIN') || define('STDIN', self::tryFopen('php://stdin', 'r'));
-        defined('STDOUT') || define('STDOUT', self::tryFopen('php://stdout', 'w'));
-        defined('STDERR') || define('STDERR', self::tryFopen('php://stderr', 'w'));
+        $file = ltrim($file, '/');
+
+        if ($file === '' || !in_array($from, ['system', 'bootstrap', 'plugins'], true)) {
+            return null;
+        }
+
+        $usePhpVci = $from !== 'plugins'
+            && !($from === 'system' && $file === 'Boot.php')
+            && self::isPhpVciAutoload();
+
+        $base = $usePhpVci
+            ? self::toPath(self::$phpvci['paths']['target'])
+            : '/';
+
+        $root = match ($from) {
+            'system'    => $base . 'system/',
+            'bootstrap' => $base . 'bootstrap/',
+            default     => '/system/plugins/'
+        };
+
+        $filepath = $usePhpVci
+            ? $root . $file
+            : Luminova::root($root, $file);
+
+        return @is_file($filepath) ? $filepath : null;
     }
 
     /**
-     * Set a shared value.
+     * Normalize a path and append a trailing suffix.
      *
-     * Stores the given value under the specified key.
+     * Converts backslashes to forward slashes, trims any trailing slashes,
+     * and appends the given suffix (e.g., '/' for directories or '.php' for files).
      *
-     * @param string $key The key to store the value under.
-     * @param mixed  $value The value to store.
+     * Notes:
+     * - Does not validate path existence.
+     * - Always forces a single trailing suffix.
      *
-     * @return mixed Returns the stored value.
+     * @param string $path Input path (namespace or filesystem path).
+     * @param string $suffix Suffix to append (default: '/').
      *
+     * @return string Normalized path with suffix applied.
      * @example - Example:
-     * ```php
-     * use Luminova\Boot;
      * 
-     * Boot::set('theme', 'dark');
+     * ```php
+     * Boot::toPath('App\\Core')            // App/Core/
+     * Boot::toPath('App\\Core', '.php')    // App/Core.php
+     * Boot::toPath('/var/www/', '/')       // /var/www/
      * ```
      */
-    public static function set(string $key, mixed $value): mixed
+    private static function toPath(string $path, string $suffix = '/'): string
     {
-        return self::$storage[$key] = $value;
+        return rtrim(str_replace('\\', '/', $path), '/') . $suffix;
     }
 
     /**
-     * Get a shared value.
+     * Handle boot error response based on environment context.
      *
-     * Retrieves a value stored under the specified key.
-     * Returns `null` if the key does not exist.
+     * - CLI: writes error to STDERR and exits
+     * - HTTP: returns a generic HTML error response
      *
-     * @param string $key The key to retrieve.
-     *
-     * @return mixed Returns the stored value or `null` if not found.
-     *
-     * @example - Example:
-     * ```php
-     * use Luminova\Boot;
+     * @param string $message Error message to display or log.
+     * @param string|null $title
+     * @param string|null $description
      * 
-     * $theme = Boot::get('theme') ?? 'light';
-     * ```
+     * @return never
+     * @throws \RuntimeException When not in production mode.
      */
-    public static function get(string $key): mixed
+    private static function onError(
+        string $message,
+        ?string $title = null,
+        ?string $description = null
+    ): never
     {
-        return self::$storage[$key] ?? null;
+        if (in_array(PHP_SAPI, ['cli', 'phpdbg'], true)) {
+            fwrite(STDERR, preg_replace(
+                '/<br\s*\/?>/i',
+                PHP_EOL,
+                strip_tags($message)
+            ) ?? $message);
+
+            exit(1);
+        }
+
+        while (ob_get_level() > 0 && @ob_end_clean()) {}
+        http_response_code(500);
+
+        if (!headers_sent()) {
+            header('Content-Type: text/html; charset=UTF-8');
+            header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+            header('Cache-Control: post-check=0, pre-check=0', false);
+            header('Pragma: no-cache');
+            header('Expires: Thu, 01 Jan 1970 00:00:00 GMT');
+        }
+
+        $title ??= 'Application Autoload Error';
+        $description ??= 'Boot Error #500';
+        $escaped = htmlspecialchars($message, ENT_QUOTES, 'UTF-8');
+        $file = APP_BASE_PATH . '/app/Errors/Defaults/xxx.php';
+
+        if (is_file($file)) {
+            $description = $title;
+            $message = preg_replace(
+                '/&lt;br\s*\/?&gt;/i',
+                ' ',
+                $escaped
+            ) ?? $escaped;
+
+
+            include $file;
+            exit(1);
+        }
+
+        $message = preg_replace(
+            '/&lt;br\s*\/?&gt;/i',
+            '<br>',
+            $escaped
+        ) ?? $escaped;
+
+        echo '<!DOCTYPE html><html lang="en"><head>'
+            . '<meta charset="UTF-8">'
+            . '<meta name="viewport" content="width=device-width, initial-scale=1">'
+            . '<title>' .  $title . '</title>'
+            . '<style>'
+            . 'body{margin:0;padding:40px;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:#f6f7f9;color:#333;}'
+            . '.error{max-width:600px;margin:0 auto;background:#fff;border:1px solid #ddd;padding:20px;border-radius:6px;}'
+            . 'h1{margin-top:0;font-size:20px;color:#c0392b;}'
+            . 'p{margin:10px 0 0;overflow-wrap:anywhere;}'
+            . '@media(prefers-color-scheme:dark){body{background:#161616}.error{background:#000;border-color:#2f2d2d;color:#fff}}'
+            . '</style></head><body><div class="error">'
+            . '<h1>' . $description . '</h1>'
+            . '<p>' . $message . '</p>'
+            . '</div></body></html>';
+
+        exit(1);
     }
 
     /**
-     * Check if a key exists in the shared storage.
+     * Register class aliases from configuration.
      *
-     * @param string $key The key to check.
+     * Loads alias definitions from `/app/Config/Modules.php` and registers
+     * them using PHP `class_alias()`.
      *
-     * @return bool Return true if the key exists, false otherwise.
-     *
-     * @example - Example:
-     * ```php
-     * use Luminova\Boot;
+     * @param bool $autoload Whether to allow autoloading of target classes.
+     * @param int &$registered The number of registered class aliases passed by reference.
      * 
-     * if (Boot::has('theme')) { ... }
-     * ```
+     * @return bool True if at least one alias was successfully registered.
      */
-    public static function has(string $key): bool
+    private static function registerAliases(bool $autoload = true, int &$registered = 0): bool
     {
-        return array_key_exists($key, self::$storage);
-    }
+        static $modules = null;
+        $registered = 0;
 
-    /**
-     * Remove a key from the shared storage.
-     *
-     * @param string $key The key to remove.
-     *
-     * @return void
-     * @example - Example:
-     * ```php
-     * use Luminova\Boot;
-     * 
-     * Boot::remove('theme');
-     * ```
-     */
-    public static function remove(string $key): void
-    {
-        unset(self::$storage[$key]);
-    }
+        if (Env::get('feature.app.class.alias', false)) {
+            $modules ??= self::import(
+                'Config/Modules.php', 
+                from:       'app', 
+                resolvable: false, 
+                return:     true
+            );
+        }
 
-    /**
-     * Clear all keys from the shared storage.
-     *
-     * @return void 
-     * 
-     * @example - Example:
-     * ```php
-     * use Luminova\Boot;
-     * 
-     * Boot::clear();
-     * ```
-     */
-    public static function clear(): void
-    {
-        self::$storage = [];
-    }
+        $aliases = ($modules && is_array($modules)) 
+            ? $modules['alias'] ?? []
+            : [];
 
-    /**
-     * Count the number of keys currently stored.
-     *
-     * @return int Return the number of stored keys.
-     *
-     * @example - Example:
-     * ```php
-     * use Luminova\Boot;
-     * 
-     * $count = Boot::count();
-     * ```
-     */
-    public static function count(): int
-    {
-        return count(self::$storage);
-    }
+        if ($aliases === [] || !is_array($aliases)) {
+            return false;
+        }
 
-    /**
-     * Display performance-related warnings during production.
-     *
-     * This method checks for common configuration issues that slow the
-     * framework down and logs a warning when something important is not
-     * enabled. 
-     *
-     * Warnings are only shown when:
-     * - The application is running in production, and
-     * - The "debug.alert.performance.tips" feature is turned on.
-     *
-     * This feature does **not** disable any PHP setting. It only reports
-     * problems so developers can fix them. Nothing is modified.
-     *
-     * Current checks:
-     * - OPcache is installed but not enabled.
-     * - Route attribute scanning is active but attribute caching is off.
-     *
-     * @return void
-     */
-    public static function tips(): void
-    {
-        $entry = '';
+        $entry = new Entry('warning');
 
-        if (PRODUCTION && env('debug.alert.performance.tips', false)) {
-            $off = 'Disable this warning by setting "debug.alert.performance.tips=false" in your .env file.';
-
-            if (function_exists('opcache_get_status') && !ini_get('opcache.enable')) {
-                $entry .= Logger::entry(
-                    'warning',
-                    "OPcache is installed but disabled. Enable it to improve performance. {$off}"
-                );
+        foreach ($aliases as $alias => $namespace) {
+            if (class_alias($namespace, $alias, $autoload)) {
+                $registered++;
+                continue;
             }
 
-            if (env('feature.route.attributes') && !env('feature.route.cache.attributes', false)) {
-                $entry .= Logger::entry(
-                    'warning',
-                    "Route attribute caching is disabled. Turn it on to avoid repeated reflection scans. {$off}"
-                );
-            }
+            $entry->add(sprintf(
+                'Failed to register alias [%s] for class [%s]',
+                $alias,
+                $namespace
+            ));
         }
 
-        if($entry !== ''){
-            Logger::warning($entry);
+        if (!$entry->isEmpty()) {
+            try{
+                $entry->log();
+            } catch(Throwable) {}
         }
+
+        return $registered > 0;
+    }
+
+    /**
+     * Finalizes the bootstrapping process.
+     *
+     * Loads composer module and custom framework feature. 
+     * Sets `APP_BOOTED` constant if not defined.
+     *
+     * @return void
+     */
+    private static function finish(): void
+    {
+        self::phpVciVersionCompare();
+        self::features();
+
+        defined('APP_BOOTED') || define('APP_BOOTED', true);
+
+        // If application is undergoing maintenance.
+        if(MAINTENANCE){
+            self::maintenance();
+        }else if(!Runtime::isCommand() && self::cache()){
+            // If the view uri ends with `.extension`, 
+            // then try serving the cached static version.
+            exit(STATUS_SUCCESS);
+        }
+    }
+
+    /**
+     * Loads PHPVCI boot configuration.
+     *
+     * @return array{
+     *      status: 0,
+     *      enabled: bool,
+     *      version: string,
+     *      paths: array{
+     *          target: string
+     *      }
+     * } Return configurations.
+     */
+    private static function readPhpVciConfig(): array
+    {
+        $path = APP_BASE_PATH . '/.phpvci.php';
+
+        if (!@is_file($path)) {
+            return [];
+        }
+
+        $config = include $path;
+
+        if (
+            !is_array($config) 
+            || empty($config['enabled'])
+        ) {
+            return [];
+        }
+        
+        $config['status'] = 0;
+        $config['version'] = trim($config['version'] ?? '');
+
+        return $config;
+    }
+
+    /**
+     * Loads and validates the PHPVCI boot configuration.
+     *
+     * @return void
+     */
+    private static function resolvePhpVciConfig(): void
+    {
+        self::$phpvci ??= self::readPhpVciConfig();
+
+        if (self::$phpvci === []) {
+            return;
+        }
+
+        if((self::$phpvci['status'] ?? 0) >= 0){
+            return;
+        }
+
+        self::$phpvci['status'] = 1;
+
+        foreach (['version', 'paths', 'target'] as $key) {
+            $isTarget = $key === 'target';
+            $isMissing = $isTarget 
+                ? empty(self::$phpvci['paths'][$key]) 
+                : empty(self::$phpvci[$key]);
+
+            if (!$isMissing) {
+                continue;
+            }
+
+            self::onError(
+                sprintf(
+                    'Invalid PHPVCI configuration: missing "%s".', 
+                    $isTarget ? "paths.{$key}" : $key
+                ),
+                sprintf('Missing %s', ucfirst($key))
+            );
+        }
+
+        self::$phpvci['status'] = 2;
+    }
+
+    /**
+     * Configure default PHP runtime settings for the application.
+     *
+     * This method initializes core environment behavior such as:
+     * - Script execution time limit
+     * - Default timezone
+     * - Internal multibyte encoding
+     * - Client abort handling
+     *
+     * Values are resolved from environment configuration using `env`.
+     *
+     * @return void
+     */
+    private static function setAppDefaults(): void
+    {
+        $isLive = (PRODUCTION && !STAGING);
+
+        /**
+         * Set error reporting.
+         */
+        if(PHP_SAPI !== 'cli'){
+            error_reporting($isLive
+                ? E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_USER_NOTICE & ~E_USER_DEPRECATED
+                : E_ALL
+            );
+            ini_set(
+                'display_errors', 
+                ((STAGING || !PRODUCTION) && Env::get('debug.display.errors', false)) ? '1' : '0'
+            );
+
+            ini_set('error_prepend_string', '<span class="php-core-error">');
+            ini_set('error_append_string', '</span>');
+            ini_set('log_errors', '1');
+            ini_set('error_log', APP_BASE_PATH . '/writeable/logs/php-errors.log');
+        }
+
+        /**
+         * Set exception tracing arguments reporting.
+         */
+        ini_set('zend.exception_ignore_args', $isLive ? '1' : '0');
+
+        // Set max execution time (seconds)
+        $limit = Env::get('script.execution.limit');
+
+        if($limit !== null){
+            Runtime::setExecutionTime((int) $limit);
+        }
+
+        // Set default timezone
+        $tz = (string) Env::get('app.timezone');
+
+        if($tz !== ''){
+            Runtime::setTimezone($tz);
+        }
+
+        // Set internal encoding (if defined)
+        $enc = (string) Env::get('app.mb.encoding');
+
+        if($enc !== ''){
+            Runtime::setEncoding($enc);
+        }
+
+        // Control behavior on client disconnect
+        $abort = Env::get('script.ignore.abort');
+        
+        if($abort !== null){
+            Runtime::setIgnoreUserAbort((bool) $abort);
+        }
+    }
+
+    /**
+     * Safely includes a PHP module from the configured boot or application directory.
+     *
+     * When resolvable loading is enabled, system and bootstrap modules are loaded
+     * from the PHPVCI target if its configuration is available.
+     *
+     * @param string $file The relative module file path.
+     * @param 'app'|'system'|'bootstrap'|'plugins' $from The source directory.
+     * @param bool $resolvable Whether to resolve system and bootstrap modules through PHPVCI.
+     * @param bool $return Whether to return the included file's result.
+     * @param bool $throw Whether to throw an exception if the file is missing.
+     *
+     * @return mixed Returns the included file's result when $return is true,
+     *               0 when successfully included without returning its result,
+     *               or false if the file cannot be included.
+     *
+     * @throws \RuntimeException If the file is missing and $throw is true.
+     */
+    private static function import(
+        string $file,
+        string $from = 'system',
+        bool $resolvable = true,
+        bool $return = false,
+        bool $throw = false
+    ): mixed 
+    {
+        if (
+            $resolvable
+            && in_array($from, ['system', 'bootstrap'], true)
+            && self::isPhpVciAutoload()
+        ) {
+            $base = self::toPath(self::$phpvci['paths']['target']);
+            $root = $base . $from . '/';
+        } else {
+            $root = match ($from) {
+                'app'       => APP_BASE_PATH . '/app/',
+                'bootstrap' => APP_BASE_PATH . '/bootstrap/',
+                'system'    => __DIR__ . '/',
+                'plugins'   => __DIR__ . '/plugins/',
+                default     => null,
+            };
+        }
+
+        $file = ltrim($file, '/');
+        $filepath = $root . $file;
+
+        if ($root !== null && @is_file($filepath)) {
+            if ($return) {
+                return require $filepath;
+            }
+
+            require_once $filepath;
+
+            return 0;
+        }
+
+        $message = ($file === 'autoload.php')
+            ? sprintf('Luminova requires Composer "%s" for autoloading.', $file)
+            : sprintf(
+                'Module file "%s" not found.%s',
+                $file,
+                self::isProduction()
+                    ? ''
+                    : sprintf(' Checked path: %s', $filepath)
+            );
+
+        if ($throw) {
+            throw new \RuntimeException($message);
+        }
+
+        self::onError(
+            $message,
+            'Autoload Error',
+            'Failed to resolve module path.'
+        );
+
+        return false;
+    }
+
+    /**
+     * Determine if the application is running in production mode.
+     *
+     * This method checks defined constants to determine if the application is in production.
+     * It first checks for a `Runtime::isLocalhost()` constant, then falls back to `PRODUCTION`.
+     * If neither constant is defined, it defaults to true (production mode).
+     *
+     * @return bool True if in production mode, false otherwise.
+     */
+    private static function isProduction(): bool 
+    {
+        if(defined('PRODUCTION')){
+            return PRODUCTION === true;
+        }
+
+        return !Runtime::isLocalhost();
     }
 
     /**
      * Load application is undergoing maintenance.
      * 
-     * @return bool Return true.
+     * @return never
      */
-    private static function maintenance(bool $isCommand): bool 
+    private static function maintenance(): never 
     {
-        $err = 'Error: (503) System undergoing maintenance!';
+        $message = 'Error: (503) System undergoing maintenance!';
 
-        if($isCommand){
-            Terminal::error($err);
-            return true;
+        if(Runtime::isCommand()){
+            Terminal::error($message);
+            exit(STATUS_ERROR);
         }
 
-        Header::headerNoCache(503, null, env('app.maintenance.retry', '3600'));
-        
+        error_reporting(0);
+        ini_set('display_errors', 0);
+
+        $retry = Env::get('app.maintenance.retry', 3600);
+
         try{
-            import(path: 'app:Errors/Defaults/maintenance.php', once: true, throw: true);
+            Header::sendNoCacheHeaders(503, retry: $retry);
+            self::import(
+                file:       'Errors/Defaults/maintenance.php',
+                from:       'app',
+                resolvable: false,
+                throw:      true
+            );
         }catch(Throwable){
-            echo $err;
+            Luminova::terminate(
+                503, 
+                $message, 
+                'Service Unavailable', 
+                $retry,
+                hookOnTerminated: false
+            );
+        } finally{
+            exit(STATUS_ERROR);
         }
-
-        return true;
     }
 
     /**
-     * Serve static cached pages.
+     * Check luminova shared module version compatibility.
      * 
-     * If cache is enabled and the request is not in CLI mode, check if the cache is still valid.
-     * If valid, render the cache and terminate further router execution.
-     *
-     * @return bool Return true if cache is rendered, otherwise false.
+     * @return void
      */
-    private static function cache(bool $isCommand): bool
+    private static function phpVciVersionCompare(): void
     {
-        if ($isCommand || !env('page.caching', false)) {
+        if(!self::isPhpVciAutoload()){
+            return;
+        }
+
+        $isSatisfies = false;
+        $version = self::$phpvci['version'];
+
+        if($version === Luminova::VERSION){
+            return;
+        }
+
+        if($version !== ''){
+            $first = $version[0] ?? '';
+
+            if (str_contains($version, ' ')
+                || $first === '^'
+                || $first === '~'
+            ) {
+                $isSatisfies = Version::satisfies(Luminova::VERSION, $version);
+            } else{
+                $op = '=';
+                $target = $version;
+                $second = $version[1] ?? '';
+
+                if (in_array($first, ['>', '<', '!', '='], true)) {
+                    if ($second === '=') {
+                        $op = $first . '=';
+                        $target = substr($version, 2);
+                    } elseif (
+                        ($first === '!' && $second === '=')
+                        || ($first === '<' && $second === '>')
+                    ) {
+                        $op = '!=';
+                        $target = substr($version, 2);
+                    } else {
+                        $op = $first;
+                        $target = substr($version, 1);
+                    }
+                }
+
+                $isSatisfies = version_compare(
+                    Luminova::VERSION,
+                    trim($target),
+                    $op
+                );
+            }
+        }
+
+        if (!$isSatisfies) {
+            self::onError(sprintf(
+                'Luminova version constraint not satisfied the required phpvci.version: %s, current %s.',
+                $version,
+                Luminova::VERSION
+            ), 'phpvci version mismatch');
+        }
+    }
+
+    /**
+     * Attempt to serve a static cached page for the current request.
+     *
+     * If static page caching is enabled and the request URI matches a configured
+     * cache file extension, this method checks whether a valid cached version
+     * exists. When a valid cache file is found, it is rendered and request
+     * processing is terminated.
+     *
+     * If no valid cache is available, the matched file extension is removed from
+     * the request URI so the route can be processed normally.
+     *
+     * @return bool Returns true if a cached response was rendered; otherwise false.
+     */
+    private static function cache(): bool
+    {
+        if (!Env::get('page.caching', false)) {
             return false;
         }
 
         // Supported extension types to match.
-        $types = env('page.caching.statics', null);
+        $types = Runtime::getStaticCacheTypes();
 
-        if(!$types){
-           return false;
+        if ($types === '') {
+            return false;
         }
 
-        $uri =  Luminova::getUriSegments();
+        $uri = Router::getUriPath();
 
         if (preg_match('/\.(' . $types . ')$/iu', $uri, $matches)) {
-            $cache = new StaticCache(
-                directory: root('/writeable/caches/templates/')
+            $cache = new ViewCache(
+                directory: Luminova::root('/writeable/caches/templates/')
             );
 
             $rendered = false;
-            $expired = $cache->setKey(Luminova::getCacheId())
+            $isExpired = $cache->setKey(Kernel::getCacheId())
                 ->setUri($uri)
                 ->expired($matches[1]);
 
-            if ($expired === false) {
+            if ($isExpired === false) {
                 $rendered = $cache->read(
                     $matches[1],
-                    onBeforeRender: fn() => Luminova::profiling('start'),
-                    onRendered: function() {
-                        Luminova::setClassMetadata([
-                            'staticCache' => true, 
-                            'cache' => true
-                        ]);
-                        Luminova::profiling('stop');
+                    onRendered: function(): void {
+                        Runtime::add(Runtime::CLASS_METADATA, 'isStaticCache', true);
+                        Runtime::add(Runtime::CLASS_METADATA, 'isCache', true);
+                        Runtime::profiling('stop');
                     }
                 );
             }
@@ -560,36 +958,10 @@ final class Boot
             }
 
             // Remove the matched file extension to render the request normally
-            Router::$staticCacheUri = substr($uri, 0, -strlen($matches[0]));
+            Router::$uriPath = substr($uri, 0, -strlen($matches[0]));
         }
         
         return false;
-    }
-
-    /**
-     * Finalizes the bootstrapping process.
-     *
-     * Loads plugin autoloaders and custom framework feature. Sets `IS_UP` constant if not defined.
-     *
-     * @return void
-     */
-    private static function finish(): void
-    {
-        require_once __DIR__ . '/plugins/autoload.php';
-
-        self::features();
-        defined('IS_UP') || define('IS_UP', true);
-        $isCommand = Luminova::isCommand();
-
-        // If application is undergoing maintenance.
-        if(MAINTENANCE && self::maintenance($isCommand)){
-            exit(STATUS_SUCCESS);
-        }
-
-        // If the view uri ends with `.extension`, then try serving the cached static version.
-        if(self::cache($isCommand)){
-            exit(STATUS_SUCCESS);
-        }
     }
 
     /**
@@ -601,7 +973,7 @@ final class Boot
      */
     private static function override(): void 
     {
-        if (PRODUCTION || php_sapi_name() === 'cli') {
+        if (PRODUCTION || PHP_SAPI === 'cli') {
             return;
         }
 
@@ -632,75 +1004,50 @@ final class Boot
      * 2. Registers application service classes if `feature.app.services` is enabled.
      * 3. Initializes class aliases from `app/Config/Modules.php` if `feature.app.class.alias` is enabled.
      *    - Logs a warning if an alias cannot be created.
-     *    - Prevents re-initialization using the `__INIT_DEV_MODULES__` flag.
+     *    - Prevents re-initialization using the `USER_MODULE_AUTOLOAD` flag.
      * 4. Loads and initializes developer global functions from `app/Utils/Global.php` if
      *    `feature.app.dev.functions` is enabled.
-     *    - Prevents re-initialization using the `__INIT_DEV_FUNCTIONS__` flag.
+     *    - Prevents re-initialization using the `USER_DEFINED_GLOBAL_HELPER` flag.
      *
      * @return void
      */
     private static function features(): void 
     {
-        if(self::$registered){
+        if(defined('APP_BOOTED')){
             return;
+        }
+
+        /**
+         * Load and initialize dev global functions.
+         */
+        if (
+            !defined('USER_DEFINED_GLOBAL_HELPER') 
+            && Env::get('feature.app.dev.functions', false)
+        ) {
+            self::import('Utils/Global.php', from: 'app', resolvable: false);
+            define('USER_DEFINED_GLOBAL_HELPER', true);
         }
 
         /**
          * Autoload register PSR-4 classes.
          */
-        if (env('feature.app.autoload.psr4', false)) {
+        if (Env::get('feature.app.autoload.psr4', false)) {
             Autoloader::register();
         }
 
         /**
          * Register application services.
          */
-        if (env('feature.app.services', false)) {
+        if (Env::get('feature.app.services', false)) {
             Factory::register();
         }
 
         /**
          * Initialize and register class modules and aliases.
          */
-        if (env('feature.app.class.alias', false) && !defined('__INIT_DEV_MODULES__')) {
-            $config = import('app:Config/Modules.php', true, true);
-
-            if($config && $config !== []){
-                if (is_array($config['alias'] ?? null)) {
-                    $entry = '';
-                    foreach ($config['alias'] as $alias => $namespace) {
-                        if (!class_alias($namespace, $alias)) {
-                            $entry = Logger::entry(
-                                'warning', 
-                                "Failed to create alias [{$alias}] for class [{$namespace}]"
-                            );
-                        }
-                    }
-
-                    if($entry !== ''){
-                        Logger::warning($entry);
-                    }
-                }
-
-                define('__INIT_DEV_MODULES__', true);
-                $config = null;
-            }
+        if (!defined('USER_MODULE_AUTOLOAD') && self::registerAliases()) {
+            define('USER_MODULE_AUTOLOAD', true);
         }
-
-        /**
-         * Load and initialize dev global functions.
-         */
-        if (env('feature.app.dev.functions', false) && !defined('__INIT_DEV_FUNCTIONS__')) {
-            import('app:Utils/Global.php', true, true);
-            define('__INIT_DEV_FUNCTIONS__', true);
-        }
-
-        self::$registered = true;
     }
-
-    // Prevent instantiation, cloning, and unserialization
-    private function __construct() {}
-    private function __clone() {}
-    public function __wakeup() {}
 }
 Boot::warmup();

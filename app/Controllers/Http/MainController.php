@@ -12,7 +12,7 @@ namespace App\Controllers\Http;
 use \Luminova\Base\Controller;
 use \Luminova\Attributes\Route;
 use \Luminova\Attributes\Prefix;
-use \App\Errors\Controllers\ErrorController;
+use \App\Errors\Controllers\AppError;
 
 /**
  * Example: Default Luminova MVC controller.
@@ -20,7 +20,7 @@ use \App\Errors\Controllers\ErrorController;
  * Demonstrates how to implement a basic HTTP page controller 
  * using Luminova's standard MVC (non-HMVC) structure.
  */
-#[Prefix(pattern: '/(:base)', exclude: ['api'], onError: [ErrorController::class, 'onWebError'])]
+#[Prefix(pattern: '/(:base)', exclude: ['api', 'webhook'], onError: [AppError::class, 'onWebError'])]
 class MainController extends Controller 
 {
     /**

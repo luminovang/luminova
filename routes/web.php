@@ -21,4 +21,4 @@ Router::get('/', 'MainController::home');
 // });
 
 // HMVC info view
-Router::get('/info', 'InfoController::info');
+Router::get('/info', 'MainInfoController::info');

@@ -92,7 +92,7 @@ use Luminova\Attributes\Route;
 use Luminova\Attributes\Error;
 use App\Errors\Controllers\Views;
 
-#[Error('api', onError: [Views::class, 'onApiError'])]
+#[Error('api', onError: [Views::class, 'onTrigger'])]
 class BookController extends Controller 
 {
     #[Route('/api/books', methods: ['POST'])]
@@ -340,9 +340,8 @@ use Luminova\Base\Controller;
 use Luminova\Attributes\Route;
 use Luminova\Attributes\Error;
 use App\Errors\Controllers\Views;
-use Luminova\Core\CoreApplication;
 
-#[Error(onError: [Views::class, 'onWebError'])]
+#[Error(onError: [Views::class, 'onTrigger'])]
 class MyController extends Controller 
 {
     #[Route('/books', methods: ['GET'])]
@@ -404,7 +403,7 @@ To exclude views from caching, define them as follows:
 <?php 
 namespace App;
 
-use Luminova\Core\CoreApplication;
+use Luminova\Foundation\Core\Application as CoreApplication;
 
 class Application extends CoreApplication
 {

@@ -9,9 +9,9 @@
  */
 namespace App\Config;
 
-use \Luminova\Foundation\Core\CronTasks;
+use \Luminova\Config\CronTaskConfig;
 
-final class Cron extends CronTasks
+final class Cron extends CronTaskConfig
 {
   /**
    * {@inheritdoc}

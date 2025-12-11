@@ -26,7 +26,6 @@
  * @var \Luminova\Template\View<\App\Application> $this
  */
 $view = new \Luminova\Template\View(new \App\Application());
-$this = $view;
 
 /**
  * `$self` refers to the scope engine wrapper inside templates.
@@ -41,7 +40,7 @@ $self = new \Luminova\Template\Engines\Scope($view);
  * Assigning type helps IDE understand chained methods.
  *
  * @global \Luminova\Template\View<\App\Application> $this
- * @global \Luminova\Template\Engines\Scop $self
+ * @global \Luminova\Template\Engines\Scope $self
  * @example - Example 
  * ```php
  * // /resources/Views/index.php 

@@ -9,7 +9,7 @@
  */
 namespace App\Config;
 
-use \Luminova\Base\Configuration;
+use \Luminova\Config\Configuration;
 
 final class Cookie extends Configuration
 {
@@ -86,4 +86,14 @@ final class Cookie extends Configuration
      * @see https://datatracker.ietf.org/doc/html/rfc2616#section-2.2
      */
     public bool $cookieRaw = false;
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function onCreate(): void 
+    {
+        if(PRODUCTION){
+            $this->cookieDomain = '.' . APP_HOSTNAME;
+        }
+    }
 }

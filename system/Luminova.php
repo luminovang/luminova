@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * Luminova Framework foundation.
  * 
@@ -10,7 +11,7 @@
  * ╚══════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝
  *
  * @package Luminova
- * @author Ujah Chigozie Peter
+ * @author Ujah Chigozie Peter 
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
  * @link https://luminova.ng
@@ -18,20 +19,30 @@
 namespace Luminova;
 
 use \Throwable;
+use \App\Kernel;
 use \ReflectionClass;
-use \Luminova\Logger\Logger;
-use \Luminova\Debugger\Performance;
-use \Luminova\Exceptions\{ErrorCode, FileException};
-use function \Luminova\Funcs\root;
+use Luminova\Runtime;
+use Luminova\Config\Env;
+use Luminova\Http\Header;
+use Luminova\Logger\Logger;
+use Luminova\Routing\Router;
+use Luminova\Http\HttpStatus;
+use Luminova\Command\Terminal;
+use Luminova\Promise\{Rejected, Fulfilled};
+use Luminova\Exceptions\{
+    ClassException, 
+    RuntimeException, 
+    InvalidArgumentException
+};
 
 final class Luminova 
 {
     /**
-     * Framework version code.
+     * Framework version code. 
      * 
      * @var string VERSION
      */
-    public const VERSION = '3.6.9';
+    public const VERSION = '3.9.1';
 
     /**
      * Framework version name.
@@ -45,7 +56,7 @@ final class Luminova
      * 
      * @var string MIN_PHP_VERSION 
      */
-    public const MIN_PHP_VERSION = '8.0';
+    public const MIN_PHP_VERSION = '8.1';
 
     /**
      * Command line tool version.
@@ -55,25 +66,11 @@ final class Luminova
     public const NOVAKIT_VERSION = '3.0.0';
 
     /**
-     * Server base path for router.
+     * Luminova directory parent names.
      * 
-     * @var ?string $base
+     * @var string[] SYSTEM_PATHS
      */
-    private static ?string $base = null;
-
-    /**
-     * Request URL segments.
-     * 
-     * @var ?string $segments
-     */
-    private static ?string $segments = null;
-
-    /**
-     * System paths for filtering.
-     * 
-     * @var array<int,string> $systemPaths
-     */
-    public static array $systemPaths = [
+    public const SYSTEM_PATHS = [
         'public',
         'node',
         'bin',
@@ -88,19 +85,23 @@ final class Luminova
     ];
 
     /**
-     * Controller class information.
+     * Application document root uri.
      * 
-     * @var array<string,string> $routedClassMetadata
+     * @var ?string $rootUri
      */
-    private static array $routedClassMetadata = [
-        'filename'    => null,
-        'uri'         => null,
-        'namespace'   => null,
-        'method'      => null,
-        'controllers' => 0,
-        'cache'       => false,
-        'staticCache' => false,
-    ];
+    private static ?string $rootUri = null;
+
+    /**
+     * Hold termination state.
+     *
+     * @var bool $isTerminated
+     */
+    private static bool $isTerminated = false;
+
+    /**
+     * Prevent initialization
+     */
+    private function __construct(){}
 
     /**
      * Get the framework copyright information.
@@ -112,17 +113,17 @@ final class Luminova
      */
     public static final function copyright(bool $userAgent = false): string
     {
-        if ($userAgent) {
-            return sprintf(
-                'LuminovaFramework-%s/%s (PHP; %s; %s) - https://luminova.ng',
-                self::VERSION_NAME, 
-                self::VERSION,
-                PHP_VERSION,
-                PHP_OS_FAMILY
-            );
+        if (!$userAgent) {
+            return sprintf('PHP Luminova (%s)', self::VERSION);
         }
 
-        return sprintf('PHP Luminova (%s)', self::VERSION);
+        return sprintf(
+            'LuminovaFramework-%s/%s (PHP; %s; %s) - https://luminova.ng',
+            self::VERSION_NAME, 
+            self::VERSION,
+            PHP_VERSION,
+            PHP_OS_FAMILY
+        );
     }
 
     /**
@@ -135,350 +136,710 @@ final class Luminova
     public static final function version(bool $integer = false): string|int
     {
         return $integer 
-            ? (int) \Luminova\Common\Helpers::toStrictInput(self::VERSION, 'int') 
+            ? (int) str_replace('.', '', self::VERSION)
             : self::VERSION;
     }
 
     /**
-     * Start or stop application profiling.
+	 * Generate a hash using the requested algorithm with optional fallback support.
+	 *
+	 * The method attempts to use the requested hashing algorithm. If the algorithm
+	 * is unavailable in the current PHP environment, a fallback algorithm is used.
+	 *
+	 * This is useful when applications run across different environments where
+	 * optional hash algorithms may not be compiled or enabled.
+	 *
+	 * @param string $algo Preferred hashing algorithm.
+	 * @param string $data Data to hash.
+	 * @param bool $binary Whether to return raw binary output instead of hex.
+	 * @param array $options Reserved options for future hash algorithm settings.
+	 * @param string|null $fallbackAlgo Algorithm to use when the preferred one is unavailable.
+	 *
+	 * @return string Return generated hash output.
+	 * @throws InvalidArgumentException If neither the requested algorithm nor
+	 *                                  the fallback algorithm is supported.
+	 * 
+	 * @see \hash()
+	 * @link https://php.net/manual/en/function.hash.php
+	 */
+	public static function hash(
+		string $algo,
+		string $data,
+		bool $binary = false,
+		array $options = [],
+		?string $fallbackAlgo = 'sha256'
+	): string
+	{
+		static $algorithms = null;
+
+		$algorithms ??= array_flip(hash_algos());
+
+		$algo = strtolower($algo);
+
+		if (!isset($algorithms[$algo])) {
+			$algo = strtolower((string) $fallbackAlgo);
+
+			if (!isset($algorithms[$algo])) {
+				throw new InvalidArgumentException(
+					sprintf(
+						'Unsupported hash algorithm: "%s".',
+						$algo
+					)
+				);
+			}
+		}
+
+		return hash($algo, $data, $binary, $options);
+	}
+
+    /**
+     * Resolve an application kernel service or return the kernel instance.
+     *
+     * When `$service` is `null`, the kernel instance is returned. Otherwise,
+     * the requested service is resolved through the application kernel.
      * 
-     * @param string $action The name of the action (e.g, start or stop).
-     * @param array|null $context Additional information to pass to profiling (default: null).
-     * 
-     * @return void
+     * @deprecated Use Kernel::resolve(), global helper kernel() or Application::make() instead
+     *
+     * @param string|null $service The service identifier,
+     *        class/interface name, or `null` to return the kernel instance.
+     * @param bool $shared Whether to reuse a shared instance when supported.
+     * @param mixed ...$arguments Arguments passed to the service resolver.
+     *
+     * @return Kernel|mixed The resolved service or kernel result.
+     *
+     * @throws RuntimeException If the requested service cannot be resolved.
+     * @throws ClassException If the service/abstract is not available.
      */
-    public static final function profiling(string $action, ?array $context = null): void
+    public static function kernel(
+        ?string $service = null,
+        bool $shared = true,
+        mixed ...$arguments
+    ): mixed 
     {
-        if((!PRODUCTION || STAGING) && env('debug.show.performance.profiling', false)){
-            ($action === 'start')
-                ? Performance::start() 
-                : Performance::stop(null, $context);
-        }
+        return \Luminova\Funcs\kernel(
+            $service,
+            $shared,
+            ...$arguments
+        );
     }
 
     /**
-     * Returns the base public controller directory.
+     * Build an absolute path from the application root directory.
      * 
-     * This strips the controller script name from `SCRIPT_NAME` and normalizes
-     * the path using forward slashes.
+     * Generates a normalized path based on `APP_ROOT`, with optional
+     * subdirectory and filename appended. All input paths are sanitized
+     * to ensure consistent separators.
+     * 
+     * When `$normalize` is enabled, the final path is converted to the
+     * operating system directory separator for filesystem usage.
      *
-     * @return string Return the base path ending with a forward slash (e.g. `/`, `/admin/`).
+     * @param string|null $path Optional subdirectory relative to the application root (e.g., 'writeable/logs').
+     * @param string|null $filename Optional filename to append to the path (e.g., 'debug.log').
+     * @param bool $normalize When true, the final path is normalized to OS-specific separators
+     *        for filesystem operations (default: `false` uses `/`).
+     *
+     * @return string Returns a normalized absolute path based on `APP_ROOT`.
+     * 
+     * @see self::appRoot()
+     *
+     * @example - Usage:
+     *
+     * ```php
+     * $file = Luminova::root('writeable/logs', 'debug.log');
+     *
+     * // Output:
+     * /var/www/app/writeable/logs/debug.log
+     * ```
+     * 
+     * @example - With OS Compatible:
+     *
+     * ```php
+     * $file = Luminova::root('writeable/logs', 'debug.log', true);
+     *
+     * // Example outputs:
+     * // Linux:  /var/www/app/writeable/logs/debug.log
+     * // macOS:  /Applications/XAMPP/htdocs/app/writeable/logs/debug.log
+     * // Windows: C:\wamp64\www\app\writeable\logs\debug.log
+     * ```
+     *
+     * > **Note:**
+     * >
+     * > - Input separators (`\` and `/`) are automatically normalized.
+     * > - The function does not validate whether the path exists.
+     * > - Use `$normalize = true` only for direct filesystem access.
      */
-    public static function getBase(): string
+    public static function root(
+        ?string $path = null, 
+        ?string $filename = null, 
+        bool $normalize = false
+    ): string
     {
-        if (self::$base !== null) {
-            return self::$base;
+        $ds = '/';
+        $fullPath = self::appRoot();
+
+        if(
+            $path !== null 
+            && $path !== '' 
+            && str_starts_with(ltrim($path, '/\\'), ltrim($fullPath, '/\\'))
+        ){
+            $fullPath = '/';
         }
 
-        $script = $_SERVER['SCRIPT_NAME'] ?? '/';
-
-        if($script === '/'){
-            return self::$base = $script;
+        if($path !== null && $path !== '' && $path !== $ds){
+            $fullPath .= \trim($path, '/\\') . '/';
         }
 
-        $script = str_replace('\\', '/', $script);
-        $lastSlash = strrpos($script, '/');
+        if ($filename !== null && $filename !== '') {
+            $fullPath .= \trim($filename, '/\\');
+        }
+
+        if (!$normalize) {
+            return \str_replace(
+                ['\\', '/'], 
+                '/', 
+                $fullPath
+            );
+        }
+
+        return \str_replace(['/', '\\'], \DIRECTORY_SEPARATOR, $fullPath);
+    }
+
+    /**
+     * Resolves an application configuration class and returns its instance.
+     *
+     * Accepts a configuration name (e.g., `session`) or a fully qualified class
+     * name (e.g., `App\Config\Session`). Configuration names are resolved relative
+     * to the `App\Config` namespace.
+     *
+     * @param string $class Configuration basename or fully qualified class name.
+     * @param bool $shared Whether to reuse a shared instance (default: true).
+     * @param string|null $abstract Optional parent class or interface the instance must satisfy.
+     *
+     * @return \Luminova\Config\Configuration|\Luminova\Config\CronTaskConfig
+     *      |\App\Config\Template|\Luminova\Config\DatabaseConfig|object|null 
+     * Returns the configuration instance, or null if the class does not exist.
+     *
+     * @throws InvalidArgumentException If the resolved instance does not satisfy
+     *                                  the required parent class or interface.
+     * @throws Throwable If the class is not instantiable.
+     * 
+     * @see self::import() To import/include files.
+     */
+    public static function config(
+        string $class, 
+        bool $shared = true, 
+        ?string $abstract = null
+    ): ?object
+    {
+        static $configs = [];
+
+        $class = ltrim(trim($class), '\\');
+
+        if ($class === '') {
+            return null;
+        }
+
+        if (!str_contains($class, '\\')) {
+            $class = 'App\\Config\\' . ucfirst($class);
+        } elseif (!str_starts_with($class, 'App\\Config\\')) {
+            return null;
+        }
+
+        $class = "\\{$class}";
+
+        if ($shared && isset($configs[$class])) {
+            $config = $configs[$class];
+        } else {
+            if (!class_exists($class)) {
+                return null;
+            }
+
+            $config = new $class();
+        }
+
+        if ($abstract !== null && !$config instanceof $abstract) {
+            throw new InvalidArgumentException(sprintf(
+                'Configuration class "%s" must implement or extend "%s".',
+                $class,
+                $abstract
+            ));
+        }
+
+        if (!$shared) {
+            return $config;
+        }
+
+        return $configs[$class] = $config;
+    }
+
+    /**
+     * Import a PHP file using a physical path or virtual path scheme.
+     *
+     * Supports framework virtual path aliases and direct paths. Imported files are loaded once
+     * by default using require_once.
+     *
+     * Available schemes:
+     *
+     * - `root`       → `root/*`
+     * - `app`        → `root/app/*`
+     * - `plugins`    → `root/system/plugins/*`
+     * - `system`     → `root/system/*`
+     * - `view`       → `root/resources/Views/*`
+     * - `public`     → `root/public/*`
+     * - `writeable`  → `root/writeable/*`
+     * - `libraries`  → `root/libraries/*`
+     * - `resources`  → `root/resources/*`
+     * - `routes`     → `root/routes/*`
+     * - `bootstrap`  → `root/bootstrap/*`
+     * - `bin`        → `root/bin/*`
+     * - `node`       → `root/node/*`
+     *
+     * The imported file may receive variables through `$scope`. Array keys are
+     * extracted as local variables inside the imported file.
+     *
+     * @param string $path File path or scheme path to import.
+     * @param bool $throw Throw an exception when the file does not exist (default: `true`).
+     * @param bool $once Load the file only once using `*_once` (default: `true`).
+     * @param bool $useRequire Use `require` instead of `include` (default: `false`).
+     * @param array<string,mixed> $scope Variables to expose inside the imported file.
+     * @param bool $promise Return a promise result instead of the raw value (default: `false`).
+     *
+     * @return \Luminova\Interface\PromiseInterface|mixed|null Imported file return value, promise result,
+     *                                    or null when file is missing.
+     *
+     * @throws RuntimeException If file does not exist and `$throw` is enabled.
+     * @throws InvalidArgumentException If `$scope` is a list array.
+     * 
+     * @see self::config() To resolve config class.
+     * @see \Luminova\Funcs\import() A global helper function.
+     *
+     * @example - Examples:
+     * ```php
+     * Luminova::import('app:Config/settings.php');
+     * Luminova::import(__DIR__ . '/app/Config/settings.php');
+     * 
+     * Luminova::import('plugins:brick/math/src/BigNumber.php');
+     * Luminova::import('routes:api.php', once: false);
+     * Luminova::import('system:Bootstrap/init.php', require: false);
+     * ```
+     * 
+     * @example - Promise Example:
+     * ```php
+     * Luminova::import('app:Config/settings.php', promise: true)
+     *      ->then(function(mixed $settings){
+     *          echo $settings['name'];
+     *      })->catch(function(Throwable $e){
+     *          echo $e->getMessage()
+     *      });
+     * ```
+     */
+    public static function import(
+        string $path,
+        bool $throw = true,
+        bool $once = true,
+        bool $useRequire = false,
+        array $scope = [],
+        bool $promise = false
+    ): mixed
+    {
+        if (preg_match('/^([a-z]+):(.+)$/i', $path, $match)) {
+            $scheme = strtolower($match[1]);
+            $scheme = in_array($scheme, ['packages', 'package', 'plugin'], true) 
+                ? 'plugins' 
+                : $scheme;
+
+            $path = match ($scheme) {
+                'system',
+                'plugins',
+                'bootstrap' => Boot::resolveFilepath($match[2], $scheme),
+                'root'      => self::root(filename: $match[2]),
+                default     => in_array($scheme, self::SYSTEM_PATHS, true)
+                    ? self::root($scheme, $match[2])
+                    : $path,
+            };
+        }
+
+        if (@is_file($path)) {
+            return self::resolveImport(
+                $path,
+                $scope,
+                $once,
+                $useRequire,
+                $promise
+            );
+        }
+
+        if (!$throw) {
+            return null;
+        }
+
+        $e = new RuntimeException(
+            "Unable to import file: {$path} does not exist."
+        );
+
+        if($promise){
+            return new Rejected($e);
+        }
         
-        return self::$base = ($lastSlash > 0) 
-            ? substr($script, 0, $lastSlash) . '/' 
-            : '/';
+        throw $e;
     }
 
     /**
-     * Convert a relative path to a full absolute URL.
+     * Terminates the current request with a formatted response.
      *
-     * Automatically removes system-relative parts like `public/`, and resolves base URL 
-     * based on the current environment (development vs production).
+     * The response format is determined by the request `Accept` header:
+     * - `application/json` → JSON
+     * - `application/xml` or `text/xml` → XML
+     * - `text/html` → HTML
+     * - otherwise → plain text
      *
-     * @param string $path Relative file path to convert.
-     * 
-     * @return string Return fully qualified URL.
+     * The optional termination hook is triggered before the process exits.
+     *
+     * @param int $status HTTP status code.
+     * @param string $message Termination message.
+     * @param string|null $title Optional response title.
+     * @param int $retry Cache retry duration in seconds.
+     * @param null|'html'|'xml'|'json'|'plain' $httpOutput HTTP output format.
+     * @param bool $hookOnTerminated Whether to trigger the `onTerminated` hook.
+     *
+     * @return never This method always terminates the current process.
+     */
+    public static function terminate(
+        int $status,
+        string $message,
+        ?string $title = null,
+        int $retry = 3600,
+        ?string $httpOutput = null,
+        bool $hookOnTerminated = true
+    ): never 
+    {
+        if (self::$isTerminated) {
+            exit(STATUS_ERROR);
+        }
+
+        self::$isTerminated = true;
+
+        $title ??= HttpStatus::phrase($status, 'Terminated');
+        $exitCode = STATUS_ERROR;
+
+        if ($message !== '' && !HttpStatus::isNoContent($status)) {
+            $exitCode = self::sendTermination(
+                $status,
+                $message,
+                $title,
+                $retry,
+                $httpOutput
+            );
+        } else {
+            Header::sendNoContentHeaders($retry);
+            Runtime::cleanOutputBuffers('all');
+        }
+
+        if ($hookOnTerminated) {
+            try {
+                ob_start();
+                Kernel::resolve(Kernel::SERVICE_APPLICATION)
+                    ->trigger('onTerminated', [
+                        'context' => Runtime::isCommand() ? 'CLI' : 'HTTP',
+                        'status'  => $status,
+                        'message' => $message,
+                        'title'   => $title,
+                    ]);
+                ob_end_flush();
+            } catch (Throwable) {}
+        }
+
+        Logger::close();
+        exit($exitCode);
+    }
+
+    /**
+     * Get the application document root URI.
+     *
+     * The URI is derived from `SCRIPT_NAME` by removing the entry script name
+     * and normalizing path separators to forward slashes. The returned URI
+     * always ends with `/`.
+     *
+     * @return string The application document root URI, such as `/` or `/admin/`.
+     */
+    public static function documentRootUri(): string
+    {
+        if (self::$rootUri !== null) {
+            return self::$rootUri;
+        }
+
+        $script = str_replace('\\', '/', $_SERVER['SCRIPT_NAME'] ?? '/');
+
+        if ($script === '/') {
+            return self::$rootUri = '/';
+        }
+
+        $lastSlash = strrpos($script, '/');
+
+        return self::$rootUri = ($lastSlash === false)
+            ? '/'
+            : substr($script, 0, $lastSlash + 1);
+    }
+
+    /**
+     * Get the application document root filesystem path.
+     *
+     * The document root is the public directory exposed by the web server.
+     *
+     * @return string The absolute filesystem path to the application document root.
+     */
+    public static function documentRoot(): string
+    {
+        return DOCUMENT_ROOT;
+    }
+
+    /**
+     * Get the application project root filesystem path.
+     *
+     * The project root contains the application source code and configuration,
+     * including the public document root.
+     *
+     * @return string The absolute filesystem path to the application project root.
+     */
+    public static function appRoot(): string
+    {
+        static $root;
+
+        if ($root !== null) {
+            return $root;
+        }
+
+        $ds = DIRECTORY_SEPARATOR;
+        $dir = APP_BASE_PATH;
+
+        while ($dir !== DIRECTORY_SEPARATOR) {
+            if (
+                @is_file($dir . '/.env')
+                || @is_file($dir . '/.dev.env')
+                || @is_file($dir . '/system/Boot.php')
+            ) {
+                return $root = str_replace(['/', '\\'], $ds, $dir) . $ds;
+            }
+
+            $parent = dirname($dir);
+
+            if ($parent === $dir) {
+                break;
+            }
+
+            $dir = $parent;
+        }
+
+        return $root = str_replace(
+            ['/', '\\'], 
+            $ds, 
+            APP_BASE_PATH
+        ) . $ds;
+    }
+
+    /**
+     * Get the application entry script path or URI.
+     *
+     * @param bool $uri Whether to return the web URI instead of the filesystem path.
+     *
+     * @return string The application entry script URI or absolute filesystem path.
+     */
+    public static function entryScript(bool $uri = true): string
+    {
+        return ($uri ? self::documentRootUri() : self::documentRoot()) 
+            . 'index.php';
+    }
+
+    /**
+     * Convert an application path to a fully qualified URL.
+     *
+     * Normalizes the path by removing the application and public directory
+     * prefixes as needed, then resolves it against the application base URL.
+     *
+     * @param string $path The application-relative file or route path.
+     *
+     * @return string The fully qualified URL.
+     *
+     * @example - Examples:
+     * ```php
+     * Luminova::toAbsoluteUrl('public/images/logo.png');
+     *
+     * // Development:
+     * // http://localhost/my-project/public/images/logo.png
+     *
+     * // Production:
+     * // https://example.com/images/logo.png
+     *
+     * Luminova::toAbsoluteUrl('about');
+     *
+     * // Development:
+     * // http://localhost/my-project/public/about
+     *
+     * // Production:
+     * // https://example.com/about
+     * ```
      */
     public static function toAbsoluteUrl(string $path): string
     {
-        if (NOVAKIT_ENV === null && !PRODUCTION) {
-            $base = rtrim(self::getBase(), 'public/');
-            $basePos = strpos($path, $base);
+        if (!PRODUCTION && Runtime::isOutsideContainer()) {
+            $base = self::documentRootUri();
 
-            if ($basePos !== false) {
-                $path = trim(substr($path, $basePos + strlen($base)), TRIM_DS);
+            if (str_starts_with($path, $base)) {
+                $path = substr($path, strlen($base));
             }
         } else {
-            $path = trim(self::filterPath($path), TRIM_DS);
+            $path = self::toDisplayPath($path);
         }
+
+        $path = trim($path, TRIM_DS);
 
         if (str_starts_with($path, 'public/')) {
-            $path = ltrim($path, 'public/');
+            $path = substr($path, 7);
         }
 
-        return \Luminova\Funcs\start_url($path);
+        return self::toBaseUrl($path);
     }
 
     /**
-     * Get the request url segments as relative.
+     * Build a URL relative to the application base path.
+     *
+     * Generates an absolute or relative URL using the application
+     * base path or front controller directory.
+     *
+     * Useful for generating links to routes, assets, and internal pages.
+     *
+     * - In development, the front controller path is included.
+     * - In production, URLs are resolved from the application root.
+     * - Host and port are preserved when available.
+     *
+     * @param string|null $route Optional route path to append.
+     * @param bool $relative Whether to return a relative URL.
+     *
+     * @return string Returns the constructed application URL.
+     *
+     * @example - Example:
      * 
-     * Resolves the request URI as a relative path, without query string or base path.
-     *
-     * @return string Return the normalized URI segment path (e.g., `/products/view/10`)
-     */
-    public static function getUriSegments(): string
-    {
-        if (self::$segments === null) {
-            self::$segments = '/';
-
-            if (!empty($_SERVER['REQUEST_URI'])) {
-                $uri = substr(rawurldecode($_SERVER['REQUEST_URI']), strlen(self::getBase()));
-
-                if ($uri !== '' && ($pos = strpos($uri, '?')) !== false) {
-                    $uri = substr($uri, 0, $pos);
-                }
-
-                self::$segments = '/' . trim($uri, '/');
-            }
-        }
-
-        return self::$segments;
-    }
-
-    /**
-     * Get the URI segments as an array.
+     * Assuming your application path is like: `/Some/Path/To/htdocs/my-project-path/public/`.
      * 
-     * Splits the request URI into individual segments. 
-     * Automatically removes the "public" prefix if it appears at the start of the URI.
-     *
-     * Examples:
-     * - `/public/foo/bar` → `['foo', 'bar']`
-     * - `/public` → `['']`
-     * - `/products/view/10` → `['products', 'view', '10']`
-     * - `/` → `['']`
-     *
-     * @return array<int,string> Return an array of URI segments.
+     * ```php
+     * echo Luminova::toBaseUrl('about');
+     * ```
+     * 
+     * It returns depending on your development environment:
+     * 
+     * **On Development:**
+     * - http://localhost:8080/about
+     * - http://localhost/my-project-path/public/about
+     * - http://localhost/public/about
+     * 
+     * **In Production:**
+     * - http://example.com:8080/about
+     * - http://example.com/about
+     * 
+     * @example - Relative URL Example:
+     * 
+     * ```php
+     * echo Luminova::toBaseUrl('about', true); 
+     * // /my-project-path/public/about
+     * // /about
+     * ```
      */
-    public static function getSegments(): array
+    public static function toBaseUrl(?string $route = null, bool $relative = false): string
     {
-        $segments = self::getUriSegments();
+        $route = '/' . ltrim((string) $route, '/');
 
-        if ($segments === '/') {
-            return [''];
+        if(PRODUCTION){
+            return $relative ? $route : APP_URL . $route;
         }
 
-        $segments = trim($segments, '/');
+        $uri = trim(self::documentRootUri(), '/');
 
-        if($segments === 'public'){
-            return [''];
+        if ($relative) {
+            return ($uri === '') 
+                ? $route 
+                : "/{$uri}{$route}";
         }
 
-        if (str_starts_with($segments, 'public/')) {
-            $segments = substr($segments, 7);
+        $hostname = $_SERVER['HTTP_HOST'] 
+            ?? $_SERVER['HOST'] 
+            ?? $_SERVER['SERVER_NAME'] 
+            ?? 'localhost';
+
+        $base = URL_SCHEME . '://' . $hostname;
+
+        if ($uri !== '') {
+            $base .= '/' . $uri;
         }
 
-        if ($segments === '') {
-            return [''];
-        }
-
-        return explode('/', $segments);
+        return $base . $route;
     }
 
     /**
-     * Generate a unique URL based cache key for the current request.
+     * Get the application API route prefix.
      *
-     * This method creates a normalized identifier for caching based on:
-     * - The HTTP request method (`GET`, `POST`, etc.).
-     * - The request URI (path and optionally query parameters).
-     * - Stripping file extensions for static cache formats if configured.
-     * - Replacing special URL characters with dashes for safe storage.
+     * Reads the `app.api.prefix` configuration once and caches the result
+     * for subsequent calls.
      *
-     * The resulting string is hashed with MD5 to produce a fixed-length cache ID.
+     * Falls back to `'api'` when the configured value is undefined or empty.
      *
-     * @param string|null $salt Optional cache salt to include in key hashing (default: null).
-     * @param bool|null $uriQueryParams Whether to include query parameters in the cache ID (default: false).
-     *                  If set to null, it uses default from `env(page.cache.query.params)`
-     *                  If explicitly set, it overrides the default env.
+     * @return string The application API route prefix.
+     */
+    public static function apiPrefix(): string
+    {
+        static $api;
+
+        if ($api === null) {
+            $value = Env::get('app.api.prefix', 'api');
+
+            $api = ($value === '')
+                ? 'api'
+                : (string) $value;
+        }
+
+        return $api;
+    }
+
+    /**
+     * Convert a file path to a display-friendly path.
      *
-     * @return string Return a unique MD5 hash representing the cache ID for this request.
+     * Removes the leading path up to the first known application directory,
+     * such as `app` or `system`, to avoid exposing the full server filesystem
+     * path in errors, logs, and debug output.
+     *
+     * If no known directory is found, the normalized original path is returned.
+     *
+     * @param string $path The file path to convert.
+     *
+     * @return string The display path starting at the matched application directory,
+     *                or the normalized original path when no match is found.
      *
      * @example - Example:
      * ```php
-     * $cacheId = Luminova::getCacheId(); // e.g., "d41d8cd98f00b204e9800998ecf8427e"
-     * 
-     * $cacheIdWithoutQuery = Luminova::getCacheId(uriQuery: false); // ignores query string
+     * Luminova::toDisplayPath('/var/www/project/app/Controllers/Home.php');
+     * // app/Controllers/Home.php
      * ```
      */
-    public static function getCacheId(?string $salt = null, ?bool $uriQuery = null): string 
+    public static function toDisplayPath(string $path): string
     {
-        $salt ??= '';
-        $uriQuery ??= (bool) env('page.cache.query.params', false);
-        $uri = ($_SERVER['REQUEST_URI'] ?? 'index');
-        $id = ($_SERVER['REQUEST_METHOD'] ?? 'CLI');
-        $id .= ($uriQuery ? $uri : (parse_url($uri, PHP_URL_PATH) ?: ''));
+        $path = str_replace('\\', '/', $path);
 
-        $id = strtr($id, [
-            '/' => '-', 
-            '?' => '-', 
-            '&' => '-', 
-            '=' => '-', 
-            '#' => '-'
-        ]);
+        foreach (self::SYSTEM_PATHS as $directory) {
+            $needle = '/' . trim($directory, '/') . '/';
 
-        // Remove file extension for static cache formats
-        // To avoid creating 2 versions of same cache
-        // While serving static content (e.g, .html).
-        if (($types = env('page.caching.statics', null)) !== null) {
-            $id = preg_replace('/\.(' . $types . ')$/i', '', $id);
-        }
-
-        return md5($salt . $id);
-    }
-
-    /**
-     * Determines if the current request is an API request.
-     * 
-     * Checks if the first URI segment matches the API prefix 
-     * (e.g., `/example.com/api`, `public/api` or custom api prefix based on env(app.api.prefix)),
-     * and optionally treats AJAX requests as API calls.
-     * 
-     * @param bool $includeAjax If true, treats XMLHttpRequest (AJAX) as an API request.
-     * 
-     * @return bool Return true if the request starts with the API prefix or is AJAX (when enabled).
-     */
-    public static function isApiPrefix(bool $includeAjax = false): bool
-    {
-        static $prefix = null;
-
-        if ($prefix === null) {
-            $prefix = defined('IS_UP') ? env('app.api.prefix', 'api') : 'api';
-        }
-
-        $segments = self::getSegments();
-
-        if ($segments !== [] && $segments[0] === $prefix) {
-            return true;
-        }
-
-        return $includeAjax 
-            && isset($_SERVER['HTTP_X_REQUESTED_WITH']) 
-            && strcasecmp($_SERVER['HTTP_X_REQUESTED_WITH'], 'XMLHttpRequest') === 0;
-    }
-
-    /**
-     * Determines if the application is running in CLI (Command-Line Interface) mode.
-     *
-     * @return bool Return true if running via CLI; false if it's a web request.
-     */
-    public static function isCommand(): bool
-    {
-        static $cli = null;
-
-        if ($cli !== null) {
-            return $cli;
-        }
-
-        // If typical web environment vars are set, it's not CLI
-        if (isset($_SERVER['REMOTE_ADDR']) || isset($_SERVER['HTTP_USER_AGENT'])) {
-            return $cli = false;
-        }
-
-        return $cli = PHP_SAPI === 'cli'
-            || defined('STDIN')
-            || !empty($_ENV['SHELL'])
-            || isset($_SERVER['argv']);
-    }
-
-    /**
-     * Check if the given input can be called as a function or method.
-     * 
-     * This method detects standard callables, closures, function names, 
-     * and array-style class/method pairs. If `$strict` is true, 
-     * it will also verify that the class in an array callable exists.
-     *
-     * @param mixed $input The value to check (string, array, closure, object, etc.).
-     * @param bool $strict If true, array callables are valid only if the class exists.
-     *
-     * @return bool Return true if the input is callable, false otherwise.
-     */
-    public static function isCallable(mixed $input, bool $strict = false): bool
-    {
-        if (is_callable($input)) {
-            return true;
-        }
-
-        if (is_array($input) && count($input) === 2) {
-            [$class, $method] = $input;
-            return $strict ? class_exists($class) && method_exists($class, $method) : true;
-        }
-
-        return false;
-    }
-
-    /**
-     * Filters a full file path by removing everything before the first known system directory.
-     * 
-     * Useful for hiding sensitive server paths when displaying errors or logs. The resulting path
-     * will always start from one of the known system directories (like `app`, `system`, etc.).
-     *
-     * @param string $path Full file path to filter.
-     * 
-     * @return string Return filtered path starting from project root, or original path if no match found.
-     */
-    public static function filterPath(string $path): string 
-    {
-        // normalize for cross-platform support
-        $normalized = str_replace('\\', '/', $path); 
-
-        foreach (self::$systemPaths as $dir) {
-            $needle = '/' . trim($dir, '/') . '/';
-
-            if (($pos = strpos($normalized, $needle)) !== false) {
-                return substr($normalized, $pos + 1);
+            if (($position = strpos($path, $needle)) !== false) {
+                return substr($path, $position + 1);
             }
         }
 
-        return $normalized;
-    }
-
-    /**
-     * Check if file has read or write permission is granted.
-     * 
-     * @param string $permission File access permission.
-     * @param string|null $file File name or file path to check permissions (default: writeable dir).
-     * @param bool $throw Indicate whether to throws an exception if permission is not granted.
-     * 
-     * @return bool Returns true if permission is granted otherwise false.
-     * @throws FileException If permission is not granted and quiet is not passed true.
-     */
-    public static function permission(string $permission = 'rw', ?string $file = null, bool $throw = false): bool
-    {
-        $file ??= root('writeable');
-        
-        if ($permission === 'rw' && (!is_readable($file) || !is_writable($file))) {
-            $error = "Read and Write permission denied for '%s, please grant 'read' and 'write' permission.";
-            $code = ErrorCode::READ_WRITE_PERMISSION_DENIED;
-        } elseif ($permission === 'r' && !is_readable($file)) {
-            $error = "Read permission denied for '%s', please grant 'read' permission.";
-            $code = ErrorCode::READ_PERMISSION_DENIED;
-        } elseif ($permission === 'w' && !is_writable($file)) {
-            $error = "Write permission denied for '%s', please grant 'write' permission.";
-            $code = ErrorCode::WRITE_PERMISSION_DENIED;
-        } else {
-            return true;
-        }
-
-        if(!$throw){
-            return false;
-        }
-
-        if (PRODUCTION) {
-            Logger::dispatch('critical', sprintf($error, $file));
-            return false;
-        }
-
-        throw new FileException(sprintf($error, $file), $code);
+        return $path;
     }
 
     /**
      * Check whether a class or object has a property, with optional static-only filtering.
      *
-     * Uses `ReflectionClass` when `$staticOnly` is true to determine if a property is declared as `static`.
+     * Uses `ReflectionClass` when `$staticOnly` is true to determine 
+     * if a property is declared as `static`.
+     * 
      * For general use, it falls back to `property_exists()` for better performance.
      *
      * @param class-string|object $objectOrClass The class name or object to check.
@@ -494,128 +855,241 @@ final class Luminova
      * ```
      */
     public static function isPropertyExists(
-        string|object $objectOrClass, 
-        string $property, 
+        string|object $objectOrClass,
+        string $property,
         bool $staticOnly = false
     ): bool 
     {
-        if (property_exists($objectOrClass, $property)) {
+        if (!property_exists($objectOrClass, $property)) {
+            return false;
+        }
+
+        if (!$staticOnly) {
             return true;
         }
 
-        if($staticOnly){
-            try {
-                $ref = new ReflectionClass($objectOrClass);
+        try {
+            $ref = new ReflectionClass($objectOrClass);
 
-                if(!$ref->hasProperty($property)){
-                    return false;
-                }
+            $prop = $ref->getProperty($property);
 
-                $prop = $ref->getProperty($property);
-
-                return $prop->isStatic() && ($prop->isPublic() || $prop->isProtected());
-            } catch (Throwable) {
-                return false;
-            }
+            return $prop->isStatic()
+                && ($prop->isPublic() || $prop->isProtected());
+        } catch (Throwable) {
+            return false;
         }
-
-        return false;
     }
 
     /**
-     * Get the base name(s) from fully qualified class name(s).
+     * Get the base name from one or more fully qualified class names.
      *
-     * Accepts a single FQCN (e.g., `App\Controllers\HomeController`) or a comma-separated list.
-     * Removes leading slashes and namespace paths, returning just the class names.
+     * Accepts a single class name, a comma-separated list of class names, or
+     * an array of class names. The return format matches the input format.
      *
-     * @param string $class One or more fully qualified class names, separated by commas if multiple.
-     * 
-     * @return string Return the base class name, or comma-separated base class names (e.g., `HomeController, UserModel`).
+     * When validation is enabled, each class name must refer to an already
+     * loaded class and must not contain a static class member reference such
+     * as `ClassName::method()`.
      *
-     * @example - Usages:
-     * 
+     * @param string[]|string $class One or more fully qualified class names.
+     * @param bool $validate Whether to validate that each class is already loaded.
+     *
+     * @return string[]|string Base class name(s), preserving the input format.
+     *
+     * @example - Single class:
      * ```php
-     * Luminova::getClassBaseNames('\App\Controllers\HomeController'); // HomeController
-     * Luminova::getClassBaseNames('App\Models\User, App\Services\Log'); // User, Log
+     * Luminova::getClassBasename('\App\Controllers\HomeController');
+     * // Returns: 'HomeController'
+     * ```
+     *
+     * @example - Comma-separated classes:
+     * ```php
+     * Luminova::getClassBasename('App\Models\User, App\Services\Log');
+     * // Returns: 'User, Log'
+     * ```
+     *
+     * @example - Array:
+     * ```php
+     * Luminova::getClassBasename([
+     *     'App\Models\User',
+     *     'App\Services\Log',
+     * ]);
+     * // Returns: ['User', 'Log']
+     * ```
+     *
+     * @example - Validate classes:
+     * ```php
+     * Luminova::getClassBasename('App\Models\User', true);
+     * // Returns: 'User' if the class is already loaded, otherwise ''.
      * ```
      */
-    public static function getClassBaseNames(string $class): string
+    public static function getClassBasename(
+        array|string $class, 
+        bool $validate = false
+    ): array|string
     {
-        if (!$class) {
-            return '';
-        }
+        $isArray = is_array($class);
+        $classes = $isArray ? $class : explode(',', $class);
 
-        if (str_contains($class, ',')) {
-            return implode(', ', array_map(function (string $ns): string {
-                return basename(str_replace('\\', '/', trim($ns, " \t\n\r\0\x0B\\")));
-            }, explode(',', $class)));
-        }
+        $baseNames = array_map(
+            static function (string $class) use ($validate): string {
+                $class = trim($class, " \t\n\r\0\x0B\\");
 
-        $class = ltrim($class, '\\');
-        return basename(str_replace('\\', '/', $class));
-    }
+                if ($validate && (
+                    str_contains($class, '::') ||
+                    !class_exists($class)
+                )) {
+                    return '';
+                }
 
-    /**
-     * Retrieve all metadata related to the currently routed controller class.
-     *
-     * This data typically includes controller name, method, namespace, etc.
-     * 
-     * **The returned array includes:**
-     * 
-     * - `filename`:    (string|null) The resolved full path to the controller file.
-     * - `uri`:         (string|null) The matched route URI.
-     * - `namespace`:   (string|null) The fully qualified controller class name.
-     * - `method`:      (string|null) The controller class method that was executed.
-     * - `controllers`:   (int) The number of controllers was discovered via attribute routing.
-     * - `cache`:       (bool) Whether this route was cached.
-     * - `staticCache`: (bool) Whether this route was serve from static cache.
-     *
-     * @return array<string,string> Return an associative array of routed class information.
-     *
-     * @internal Used by the routing system to track resolved route details.
-     */
-    public static function getClassMetadata(): array
-    {
-        return self::$routedClassMetadata;
-    }
+                $position = strrpos($class, '\\');
 
-    /**
-     * Sets or updates a single metadata entry for the routed controller class.
-     *
-     * Common keys include:
-     * - `filename`, `uri`, `namespace`, `method`, `controllers`, `cache`, `staticCache`
-     * 
-     * @param string $key Metadata key (e.g., 'namespace', 'method').
-     * @param mixed  $value Corresponding value to assign.
-     *
-     * @return void
-     *
-     * @internal Used by the routing system to assign individual route values.
-     */
-    public static function addClassMetadata(string $key, mixed $value): void
-    {
-        self::$routedClassMetadata[$key] = $value;
-    }
-
-    /**
-     * Merge a new set of metadata into the existing routed controller class info.
-     * 
-     * This method replaces existing keys with the provided ones.
-     * 
-     * All expected keys are:
-     * - `filename`, `uri`, `namespace`, `method`, `controllers`, `cache`, `staticCache`
-     *
-     * @param array<string,mixed> $metadata An associative array Key-value pairs of controller routing metadata.
-     *
-     * @return void
-     *
-     * @internal Used by the routing system to initialize class routing context.
-     */
-    public static function setClassMetadata(array $metadata): void
-    {
-        self::$routedClassMetadata = array_replace(
-            self::$routedClassMetadata, 
-            $metadata
+                return ($position === false)
+                    ? $class
+                    : substr($class, $position + 1);
+            },
+            $classes
         );
+
+        return $isArray ? $baseNames : implode(', ', $baseNames);
+    }
+
+    /**
+     * Build termination response and output.
+     *
+     * @param int $status
+     * @param string $message
+     * @param string $title
+     * @param int $retry
+     * @param string|null $httpOutput
+     * 
+     * @return int
+     */
+    private static function sendTermination(
+        int $status, 
+        string $message, 
+        string $title,
+        int $retry,
+        ?string $httpOutput = null
+    ): int 
+    {
+        $exitCode = ($status === STATUS_SUCCESS || HttpStatus::isAccepted($status)) 
+            ? STATUS_SUCCESS : STATUS_ERROR;
+
+         if(Runtime::isCommand()){
+            Terminal::writeln(
+                sprintf(
+                    "(%d) [%s] %s\nRetry After: %d", 
+                    $status, 
+                    $title, 
+                    strip_tags(
+                        str_replace(['<br/>', '<br>'], PHP_EOL, $message)
+                    ), 
+                    $retry
+                ), 
+                stream: ($exitCode === STATUS_SUCCESS) 
+                    ? Terminal::STD_OUT 
+                    : Terminal::STD_ERR
+            );
+            return $exitCode;
+        }
+        
+        $output = '';
+        $type = 'text/plain; charset=utf-8';
+        $accept = $_SERVER['HTTP_LMV_SENT_CONTENT_TYPE'] 
+            ?? $httpOutput
+            ?? '';
+
+        if (
+            $accept === 'json'
+            || ($message[0] === '{' || $message[0] === '[')
+            || str_contains($accept, 'json') 
+            || (!$accept && Router::isApiRequest())
+        ) {
+            $type = 'application/json; charset=utf-8';
+            $output =  json_validate($message)
+                ? $message 
+                : json_encode(
+                    ['status' => $status, 'error' => $title, 'message' => $message], 
+                    JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
+                 );
+        } elseif ($accept === 'html' || ($accept && str_contains($accept, 'html'))) {
+            $title = htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
+            $message = nl2br(htmlspecialchars($message, ENT_QUOTES, 'UTF-8'));
+            $type = 'text/html; charset=utf-8';
+
+            $output = "<!DOCTYPE html><html><head><meta charset='UTF-8'><title>{$title}</title></head><body>";
+            $output .= "<h1>{$status} {$title}</h1><p>{$message}</p>";
+            $output .= "</body></html>";
+        } elseif ($accept === 'xml' || ($accept && str_contains($accept, 'xml'))) {
+            $type = 'application/xml; charset=utf-8';
+            $output = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+            $output .= "<response>\n";
+            $output .= "  <status>{$status}</status>\n";
+
+            if($title){
+                $output .= "  <error>" . htmlspecialchars($title, ENT_XML1 | ENT_QUOTES, 'UTF-8') . "</error>\n";
+            }
+
+            $output .= "  <message>" . htmlspecialchars($message, ENT_XML1 | ENT_QUOTES, 'UTF-8') . "</message>\n";
+            $output .= "</response>";
+        } else {
+            $output = sprintf('(%d) [%s] %s', $status, $title, $message);
+        }
+
+        Header::sendNoCacheHeaders($status, $type, $retry);
+        Runtime::cleanOutputBuffers('all');
+        echo $output;
+
+        return $exitCode;
+    }
+
+    /**
+     * Resolve import file.
+     *
+     * @param string $path
+     * @param array $scope
+     * @param boolean $once
+     * @param boolean $require
+     * @param boolean $promise
+     * 
+     * @return mixed
+     */
+    private static function resolveImport(
+        string $path,
+        array $scope,
+        bool $once,
+        bool $require,
+        bool $promise
+    ): mixed
+    {
+        if ($scope !== []) {
+            if (array_is_list($scope)) {
+                $e = new InvalidArgumentException(
+                    'import(scope: ...) scope must be an associative array.'
+                );
+
+                return $promise
+                    ? new Rejected($e)
+                    : throw $e;
+            }
+
+            extract($scope, \EXTR_SKIP);
+        }
+
+        try{
+            $result = $require
+                ? ($once ? require_once $path : require $path)
+                : ($once ? include_once $path : include $path);
+
+            return $promise
+                ? new Fulfilled($result)
+                : $result;
+        } catch(Throwable $e){
+            if(!$promise){
+                throw $e;
+            }
+
+            return new Rejected($e);
+        }
     }
 }

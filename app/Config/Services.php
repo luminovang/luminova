@@ -11,7 +11,6 @@
 namespace App\Config;
 
 use \Luminova\Foundation\Core\Services as CoreServices;
-use \Luminova\Exceptions\RuntimeException;
 
 class Services extends CoreServices
 {
@@ -27,7 +26,7 @@ class Services extends CoreServices
      *     - Services::config()
      * 
      * @return void
-     * @throws RuntimeException Throws If the service already exists causing duplicate service.
+     * @throws \Luminova\Exceptions\RuntimeException If the service already exists causing duplicate service.
     */
     public function bootstrap(): void 
     {
