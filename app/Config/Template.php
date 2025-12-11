@@ -52,9 +52,11 @@ final class Template
      *
      * @example - Example:
      * ```php
-     * <?= $this->layout->template('/layouts/scaffolding')->extend('head'); ?>
-     * <?= $this->layout->template('/layouts/scaffolding')->extend('section'); ?>
-     * <?= $this->layout->template('/layouts/scaffolding')->extend('footer'); ?>
+     * <?php $tpl = $this->layout->template('/layouts/scaffolding'); ?>
+     * 
+     * <?= $tpl->extend('head'); ?>
+     * <?= $tpl->extend('section'); ?>
+     * <?= $tpl->extend('footer'); ?>
      * ```
      *
      * > When disabled (`false`), the `$this->layout` object in templates will be `NULL`.
@@ -78,14 +80,6 @@ final class Template
      * @var bool|null $variablePrefixing (default: `true`)
      */
     public ?bool $variablePrefixing = true;
-
-    /** 
-     * Directory for cached template files.
-     * 
-     * @var string $cacheFolder (default: `writeable/caches/`)
-     * @deprecated Template cache is strictly store in `'/writeable/caches/templates/`
-     */
-    public string $cacheFolder = 'writeable/caches/';
 
     /** 
      * Directory for compiled template files.
