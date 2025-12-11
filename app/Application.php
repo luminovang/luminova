@@ -30,22 +30,6 @@ use \Luminova\Foundation\Core\Application as CoreApplication;
  * }
  * ```
  * 
- * @example - Register global classes for use throughout the application lifecycle.
- * 
- * - Once exported, you can access the method in the application template view files using `$this->Foo`.
- * - Use the `export` method when the property visibility is **not protected or public**,
- *   or when **view isolation** is enabled.
- *
- * ```php 
- * protected function onCreate(): void 
- * {
- *      $this->view->export($object, 'foo');
- *      $this->view->export(MyClass::class);
- *      $this->view->export(new MyClass(arguments));
- *      $this->view->export(new MyClass(arguments), 'MyClass');
- * }
- * ```
- * 
  * @example - Set the canonical URL version for your application.
  * 
  * - Ensure the `Meta` class is registered before setting this.
@@ -81,6 +65,7 @@ class Application extends CoreApplication
          * 
          * @see https://luminova.ng/docs/0.0.0/introduction/hmvc-design
          * @see https://luminova.ng/docs/0.0.0/routing/system#lmv-docs-addnamespace
+         * @see App\Modules\Info\Controllers\Http\MainInfoController
          */
         if(self::$isHmvcModule){
             $this->router->addNamespace('\\App\\Modules\\Info\\Controllers\\');
