@@ -21,7 +21,7 @@ Within Luminova templates, `View` objects are accessible directly in your view f
 Ready to try Luminova with your next projects? Explore the [official documentation](https://luminova.ng/docs) or join the community for tips, tutorials, and coding insights on our [YouTube channel](https://www.youtube.com/@luminovang).
 
 
-> **Luminova Skeleton**
+> **Luminova Skeleton** 
 > This repository gives you everything you need to start a new Luminova project: a clean directory structure, essential configuration files, and the core bootstrapping setup.
 
 ---
