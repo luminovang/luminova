@@ -9,7 +9,7 @@
  */
 use function \Luminova\Funcs\{
     root,
-    start_url,
+    base_url,
 };
 
 /**
@@ -41,7 +41,7 @@ $__CLOUD_STORAGE_CONFIG['local'] = [
     'base' => root('writeable/storages/'),
     'assets' => root('public/assets/'),
     'urls' => [
-        'public_url' => start_url('assets/')
+        'public_url' => base_url('assets/')
     ],
     'lock_flags' => LOCK_EX,
     'disallow_links' => true,
