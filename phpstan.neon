@@ -2,12 +2,12 @@ includes:
 	- phpstan.includes.php
 
 parameters:
-	phpVersion: 80000
+	phpVersion: 80100
 	tmpDir: builds/phpstan
 	level: 6
+	reportUnmatchedIgnoredErrors: true
 	bootstrapFiles:
-		- bootstrap/constants.php
-		- bootstrap/functions.php
+		- system/Boot.php
 	paths:
 		- app
 		- bin
@@ -29,7 +29,6 @@ parameters:
 	scanDirectories:
 		- samples/
 		- resources/Views/
-	checkMissingIterableValueType: false
 	checkGenericClassInNonGenericObjectType: false
 	checkMissingCallableSignature: true
 	treatPhpDocTypesAsCertain: false

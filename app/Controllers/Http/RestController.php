@@ -13,7 +13,6 @@ use \Luminova\Base\Controller;
 use \Luminova\Attributes\Route;
 use \Luminova\Attributes\Prefix;
 use \App\Errors\Controllers\ErrorController;
-use function \Luminova\Funcs\response;
 
 /**
  * Example: Default Luminova MVC API controller.
@@ -33,7 +32,7 @@ class RestController extends Controller
     #[Route('/api/info', methods: ['POST'])]
     public function info(): int
     {
-        return response(200)->json([
+        return $this->send([
             'welcome' => [
                 'status' => 'OK',
                 'code' => 200,

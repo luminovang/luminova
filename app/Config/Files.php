@@ -34,17 +34,4 @@ final class Files extends Configuration
      * @var int $dirPermissions Default: `0755`
      */
     public static int $dirPermissions = 0755;
-
-    /**
-     * Maps MIME types to preferred file extensions.
-     * 
-     * - Lets you define custom file extensions for uploaded or generated files.  
-     * - Example: `'image/jpeg' => 'jpg'` will save JPEG files with a `.jpg` extension.  
-     * - Leave empty if you don’t need custom mappings — defaults are already handled.
-     *
-     * @var array<string,string> $extensions
-     */
-    protected static array $extensions = [
-        // 'image/jpeg' => 'jpg',
-    ];
 }

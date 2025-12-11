@@ -20,7 +20,7 @@ use \App\Errors\Controllers\ErrorController;
  * Demonstrates how to implement a basic HTTP page controller 
  * using Luminova's standard MVC (non-HMVC) structure.
  */
-#[Prefix(pattern: '/(:base)', exclude: ['api'], onError: [ErrorController::class, 'onWebError'])]
+#[Prefix(pattern: '/(:base)', exclude: ['api', 'webhook'], onError: [ErrorController::class, 'onWebError'])]
 class MainController extends Controller 
 {
     /**

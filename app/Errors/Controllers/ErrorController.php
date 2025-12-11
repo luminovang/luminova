@@ -10,10 +10,10 @@
 namespace App\Errors\Controllers;
 
 use \Luminova\Time\Time;
-use function \Luminova\Funcs\response;
 use \Luminova\Foundation\Core\Application;
 use \Luminova\Interface\RoutableInterface;
 use \Luminova\Interface\ErrorHandlerInterface;
+use function \Luminova\Funcs\{view, response};
 
 class ErrorController implements RoutableInterface, ErrorHandlerInterface
 {
@@ -40,7 +40,7 @@ class ErrorController implements RoutableInterface, ErrorHandlerInterface
             default => '4xx'
         };
 
-        return $app->view->view($template)->render(
+        return view($template)->render(
             ['data' => $arguments], 
             $status
         );
@@ -57,7 +57,7 @@ class ErrorController implements RoutableInterface, ErrorHandlerInterface
      */
     public static function onWebError(Application $app): int 
     {
-        return $app->view->view('4xx')->render(status: 404);
+        return view('4xx')->render(status: 404);
     }
 
     /**

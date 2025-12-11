@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 /**
- * Luminova Framework NovaKit Command Line Tool.
+ * Luminova Framework Novakit Command Line Tool.
  * 
  * ██╗     ██╗   ██╗███╗   ███╗██╗███╗   ██╗ ██████╗ ██╗   ██╗ █████╗ 
  * ██║     ██║   ██║████╗ ████║██║████╗  ██║██╔═══██╗██║   ██║██╔══██╗
@@ -10,8 +10,8 @@
  * ███████╗╚██████╔╝██║ ╚═╝ ██║██║██║ ╚████║╚██████╔╝╚██████╔╝██║  ██║
  * ╚══════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝
  *
- * @package Luminova
- * @author Ujah Chigozie Peter 
+ * @package Luminova 
+ * @author Ujah Chigozie Peter
  * @copyright (c) Nanoblock Technology Ltd
  * @license See LICENSE file
  * @link https://luminova.ng
@@ -19,14 +19,14 @@
 use \Luminova\Command\Novakit;
 use \Luminova\Boot;
 
-// Autoload framework models.
+// Autoload framework models
 require __DIR__ . '/system/Boot.php';
 
-// Bool novakit framework CLI configurations.
+// Bool novakit framework CLI configurations
 Boot::cli();
 
-// Ensure the current directory is pointing to the front controller's directory.
+// Ensure the current directory is pointing to the front controller's directory
 chdir(DOCUMENT_ROOT);
 
-// Initialize Novakit CLI Console and run command.
+// Initialize Novakit CLI Console and run command
 (new Novakit())->run($_SERVER['argv'] ?? $argv ?? []);
