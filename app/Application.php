@@ -9,6 +9,8 @@
  */
 namespace App;
 
+use \Luminova\Luminova;
+use \Luminova\Logger\Logger;
 use \Luminova\Foundation\Core\Application as CoreApplication;
 
 /**
@@ -27,22 +29,6 @@ use \Luminova\Foundation\Core\Application as CoreApplication;
  *      $this->session = new Session(new SessionManager());
  *      $this->session->setStorage("my_storage");
  *      $this->session->start();
- * }
- * ```
- * 
- * @example - Register global classes for use throughout the application lifecycle.
- * 
- * - Once exported, you can access the method in the application template view files using `$this->Foo`.
- * - Use the `export` method when the property visibility is **not protected or public**,
- *   or when **view isolation** is enabled.
- *
- * ```php 
- * protected function onCreate(): void 
- * {
- *      $this->view->export($object, 'foo');
- *      $this->view->export(MyClass::class);
- *      $this->view->export(new MyClass(arguments));
- *      $this->view->export(new MyClass(arguments), 'MyClass');
  * }
  * ```
  * 
@@ -81,11 +67,22 @@ class Application extends CoreApplication
          * 
          * @see https://luminova.ng/docs/0.0.0/introduction/hmvc-design
          * @see https://luminova.ng/docs/0.0.0/routing/system#lmv-docs-addnamespace
+         * @see App\Modules\Info\Controllers\Http\MainInfoController
          */
-        if(self::$isHmvcModule){
+        if(Luminova::isHmvc()){
             $this->router->addNamespace('\\App\\Modules\\Info\\Controllers\\');
         }
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function onPreCreate(): void {}
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function onRouteResolved(string $context): void {}
 
     /**
      * {@inheritdoc}
@@ -95,17 +92,10 @@ class Application extends CoreApplication
     /**
      * {@inheritdoc}
      */
-    protected function onContextInstalled(string $context): void {}
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function onViewPresent(string $uri): void {}
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function onCommandPresent(array $options): void {}
+    protected function onTerminated(array $info = []): void 
+    {
+       Logger::debug('Application was terminated', $info);
+    }
 
     /**
      * {@inheritdoc}

@@ -10,12 +10,12 @@
 namespace App\Errors\Controllers;
 
 use \Luminova\Time\Time;
-use function \Luminova\Funcs\response;
 use \Luminova\Foundation\Core\Application;
 use \Luminova\Interface\RoutableInterface;
 use \Luminova\Interface\ErrorHandlerInterface;
+use function \Luminova\Funcs\{view, response};
 
-class ErrorController implements RoutableInterface, ErrorHandlerInterface
+class AppError implements RoutableInterface, ErrorHandlerInterface
 {
     /**
      * {@inheritDoc} 
@@ -26,7 +26,7 @@ class ErrorController implements RoutableInterface, ErrorHandlerInterface
      * // app/Controllers/Http/FooController.php
      * // app/Modules/<?module>/Controllers/Http/FooController.php
      * 
-     * $this->app->router->trigger(500);
+     * Luminova\Router\Router::trigger(500);
      * ```
      * 
      * > This is the global fallback handler for manually triggered errors.
@@ -40,7 +40,7 @@ class ErrorController implements RoutableInterface, ErrorHandlerInterface
             default => '4xx'
         };
 
-        return $app->view->view($template)->render(
+        return view($template)->render(
             ['data' => $arguments], 
             $status
         );
@@ -57,7 +57,7 @@ class ErrorController implements RoutableInterface, ErrorHandlerInterface
      */
     public static function onWebError(Application $app): int 
     {
-        return $app->view->view('4xx')->render(status: 404);
+        return view('4xx')->render(status: 404);
     }
 
     /**

@@ -1,12 +1,13 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maintenance Mode</title>
     <meta charset="utf-8">
-    <meta name="robots" content="noindex">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="robots" content="noindex"/>
     <meta http-equiv="Cache-Control" content="no-store, max-age=0, no-cache"/>
+    <meta http-equiv="refresh" content="3600"/>
     <link rel="shortcut icon" type="image/png" href="./favicon.png">
+    <title>System on Maintenance</title>
     <style>
         <?= preg_replace('#[\r\n\t ]+#', ' ', file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'maintenance.css')) ?>
     </style>

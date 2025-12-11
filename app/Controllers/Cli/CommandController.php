@@ -10,9 +10,10 @@
 namespace App\Controllers\Cli;
 
 use \Luminova\Base\Command;
-use Luminova\Sessions\Session;
 use \Luminova\Attributes\Group;
 use \Luminova\Attributes\Route;
+use \Luminova\Command\Terminal;
+use \Luminova\Sessions\Session;
 use \Luminova\Command\Utils\Color;
 
 /**
@@ -117,21 +118,21 @@ class CommandController extends Command
     #[Route('app', group: 'demo')]
     public function hello(): int
     {
-        $hello = $this->getOption('hello', null);
-        $logout = $this->getOption('logout', null);
-        $login = $this->getAnyOption('login', 'l');
-        $color = $this->getAnyOption('color', 'c', null);
-        $select = $this->getAnyOption('select', 's');
-        $password = $this->getAnyOption('password', 'p');
-        $message = $this->getAnyOption('message', 'm', 'Hello! This is the default message.');
+        $hello = $this->input->getOption('hello', null);
+        $logout = $this->input->getOption('logout', null);
+        $login = $this->input->getAnyOption('login', 'l');
+        $color = $this->input->getAnyOption('color', 'c', null);
+        $select = $this->input->getAnyOption('select', 's');
+        $password = $this->input->getAnyOption('password', 'p');
+        $message = $this->input->getAnyOption('message', 'm', 'Hello! This is the default message.');
 
         if ($login === true) {
-            $this->write($this->loginUser());
+            Terminal::write($this->loginUser());
             return STATUS_SUCCESS;
         }
 
         if ($logout === true) {
-            $this->write($this->logoutUser());
+            Terminal::write($this->logoutUser());
             return STATUS_SUCCESS;
         }
 
@@ -141,7 +142,7 @@ class CommandController extends Command
         }
 
         if($hello === true){
-            $this->write('Hello World!', $color);
+            Terminal::write('Hello World!', $color);
             return STATUS_SUCCESS;
         }
 
@@ -152,18 +153,18 @@ class CommandController extends Command
         }
 
         if ($message === true) {
-            $this->error('You need to provide a message for argument --message.');
+            Terminal::error('You need to provide a message for argument --message.');
             return STATUS_SUCCESS;
         }
 
         if($message){
-            $this->write($message, $color);
+            Terminal::write($message, $color);
             return STATUS_SUCCESS;
         }
 
-        $this->error(sprintf(
+        Terminal::error(sprintf(
             'Invalid command: "%s" not supported.',
-            $this->getCaller()
+            $this->input->getInput()
         ));
 
         return STATUS_ERROR;
@@ -194,7 +195,7 @@ class CommandController extends Command
             );
         }
 
-        $username = $this->input('Enter your username to login: ');
+        $username = Terminal::input('Enter your username to login: ');
 
         if(!$username){
             return Color::style('Username is required', 'red');
@@ -257,7 +258,7 @@ class CommandController extends Command
             "red" => 'HTML'
         ];
 
-        $input = $this->prompt(
+        $input = Terminal::prompt(
             'Enter your preferred programming language', 
             $options,
             'required|in_array(' . implode(',', $options) . ')'
@@ -273,7 +274,7 @@ class CommandController extends Command
      */
     private function askForPassword(): string 
     {
-        $input = $this->password('Enter your password `12345`');
+        $input = Terminal::password('Enter your password `12345`');
 
         if ($input === '12345') {
             return sprintf(

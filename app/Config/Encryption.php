@@ -26,9 +26,23 @@ final class Encryption extends Configuration
     public string $handler = 'openssl';
 
     /**
+     * Sodium cipher algorithm selector.
+     *
+     * Determines which libsodium construction is used:
+     * - 'secretbox' → sodium_crypto_secretbox_* (simple symmetric encryption)
+     * - 'aead'      → sodium_crypto_aead_xchacha20poly1305_ietf_* (supports associated data)
+     *
+     * This value controls encryption. Decryption should rely on the
+     * algorithm stored in the payload, not this config.
+     *
+     * @var string $sodiumCipher (`Sodium::SECRETBOX` or `Sodium::AEAD`)
+     */
+    public string $sodiumCipher = 'aead';
+
+    /**
      * The specific encryption algorithm when using OpenSSL.
      * 
-     * Examples: 'AES-128-CBC', 'AES-192-CBC', 'AES-128-CFB', 'AES-128-ECB'.
+     * Examples: 'AES-128-CBC', 'AES-192-CBC', 'AES-128-CFB', 'AES-128-ECB', 'AES-256-GCM'.
      * 
      * If you don't know which to pick, stick with 'AES-128-CBC' — it’s secure 
      * and widely supported. This setting is ignored if you use 'sodium'.

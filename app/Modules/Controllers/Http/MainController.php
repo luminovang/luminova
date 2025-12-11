@@ -12,7 +12,7 @@ namespace App\Modules\Controllers\Http;
 use \Luminova\Base\Controller;
 use \Luminova\Attributes\Route;
 use \Luminova\Attributes\Prefix;
-use \App\Errors\Controllers\ErrorController;
+use \App\Errors\Controllers\AppError;
 
 /**
  * Example: Luminova HMVC root controller.
@@ -20,7 +20,7 @@ use \App\Errors\Controllers\ErrorController;
  * Serves as the main module controller for handling 
  * the root ("/") web page in Luminova's HMVC architecture.
  */
-#[Prefix(pattern: '/(:base)', onError: [ErrorController::class, 'onWebError'])]
+#[Prefix(pattern: '/(:base)', onError: [AppError::class, 'onWebError'])]
 class MainController extends Controller
 {
     /**

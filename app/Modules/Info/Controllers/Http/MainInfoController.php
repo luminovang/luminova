@@ -10,9 +10,9 @@
 namespace App\Modules\Info\Controllers\Http;
 
 use \Luminova\Base\Controller;
-use \Luminova\Attributes\Prefix;
 use \Luminova\Attributes\Route;
-use \App\Errors\Controllers\ErrorController;
+use \Luminova\Attributes\Prefix;
+use \App\Errors\Controllers\AppError;
 
 /**
  * Example: Luminova HMVC module controller.
@@ -21,8 +21,8 @@ use \App\Errors\Controllers\ErrorController;
  * 
  * @see /app/Application.php - For module namespace registration.
  */
-#[Prefix(pattern: '/info/(:root)', onError: [ErrorController::class, 'onWebError'])]
-class InfoController extends Controller
+#[Prefix(pattern: '/info/(:root)', onError: [AppError::class, 'onWebError'])]
+class MainInfoController extends Controller
 {
     /**
      * {@inheritDoc}
@@ -34,7 +34,7 @@ class InfoController extends Controller
     protected function onCreate(): void 
     {
         // Matches directory name (app/Modules/Info), use 'Info' not 'Infos'
-        $this->app->tpl->setModule('Info');
+        $this->tpl->setModule('Info');
     }
 
     /**
@@ -43,7 +43,7 @@ class InfoController extends Controller
      * @return int Return one of STATUS_SUCCESS, STATUS_ERROR, or STATUS_SILENCE.
      */
     #[Route('/info', methods: ['GET'])]
-    public function info(): int
+    public function home(): int
     {
         return $this->view('info');
     }
