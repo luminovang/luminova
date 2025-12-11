@@ -51,7 +51,7 @@ Boot::http()->router->context()->run();
 
 /**
  * Uncomment below if you don't want to use attribute routing.
- * And import these two namespace:
+ * And import these two namespace: 
  * ```php
  * use \Luminova\Routing\Prefix;
  * use \App\Errors\Controllers\ErrorController;
