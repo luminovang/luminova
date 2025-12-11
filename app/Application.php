@@ -77,7 +77,7 @@ class Application extends CoreApplication
     {
         /**
          * Register namespace for HMVC custom Info module controllers
-         * You can remove the below line, if you are not using HMVC
+         * You can remove the below line, if you are not using HMVC 
          * 
          * @see https://luminova.ng/docs/0.0.0/introduction/hmvc-design
          * @see https://luminova.ng/docs/0.0.0/routing/system#lmv-docs-addnamespace
