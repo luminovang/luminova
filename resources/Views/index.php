@@ -64,7 +64,7 @@
     <pre><code>app/Controllers/Http/MainController.php</code></pre>
     <p>Development Server Context</p>
     <pre><code><?= $_SERVER['SERVER_SOFTWARE']??'Unknown Development Server';?></code></pre>
-    <p>Enable HMVC Design Pattern in environment configuration file (.env)</p>
+    <p>Enable HMVC Design Pattern in environment configuration file (<?= basename(__env_file(false)); ?>)</p>
     <pre><code>feature.app.hmvc = enable</code></pre>
 </section>
 

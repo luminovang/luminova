@@ -76,10 +76,24 @@ final class Session extends Configuration
     public string $sessionDomain = '.localhost';
 
     /**
-     * SameSite policy for session cookies.
-     * 
-     * - Options: 'None', 'Lax', 'Strict'.
-     * - 'None' requires cookies to be sent over HTTPS (Secure flag).
+     * SameSite policy for the session cookie.
+     *
+     * Controls when the browser is allowed to send the session cookie
+     * along with cross-site requests.
+     *
+     * Allowed values:
+     * - 'Strict' : Cookie is sent only for same-site requests.
+     *              Best protection against CSRF, but breaks
+     *              cross-site logins and external redirects.
+     *
+     * - 'Lax'    : Cookie is sent for same-site requests and
+     *              top-level navigations (e.g. clicking a link).
+     *              Good balance between security and usability.
+     *
+     * - 'None'   : Cookie is sent for all requests, including
+     *              cross-site requests.
+     *              Requires the Secure flag and HTTPS, or the
+     *              browser will reject the cookie.
      *
      * @var string $sameSite
      */

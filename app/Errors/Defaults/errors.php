@@ -1,12 +1,9 @@
 <?php 
-/**
- * For more extended error information in development.
- * This allows you to view full error details and the line error was triggered.
- * 
- * @var \Luminova\Exceptions\AppException<\T>|Luminova\Foundation\Error\Message|Throwable|null $error
- */
 use \Luminova\Foundation\Error\Message;
-use function \Luminova\Funcs\filter_paths;
+use function \Luminova\Funcs\display_path;
+/**
+ * @var \Luminova\Exceptions\LuminovaException<\T>|Luminova\Foundation\Error\Message|null $error
+ */
 
 $lines = explode(PHP_EOL, $error->getMessage());
 $messages = explode(' called in ', $error->getMessage());
@@ -30,7 +27,7 @@ $searchable = urlencode($message . ' PHP Luminova Framework');
         <?php if (defined('PRODUCTION') && !PRODUCTION): ?>
             <div class="error-details">
                 <h2>Error Details:</h2>
-                <p class="entry"><?= Message::prettify($message); ?>. Thrown in: <?= htmlspecialchars(filter_paths($error->getFile()), ENT_QUOTES); ?>, Line: <?= $error->getLine(); ?></p>
+                <p class="entry"><?= Message::prettify($message); ?>. Thrown in: <?= htmlspecialchars(display_path($error->getFile()), ENT_QUOTES); ?>, Line: <?= $error->getLine(); ?></p>
                 <?php if(isset($lines[2]) || isset($messages[1])): ?>
                     <p class="entry text-warning">Caller: <?= htmlspecialchars($lines[2] ?? $messages[1] ?? '', ENT_QUOTES); ?></p>
                 <?php endif;?>
@@ -42,7 +39,11 @@ $searchable = urlencode($message . ' PHP Luminova Framework');
                     <?php 
                         if (SHOW_DEBUG_BACKTRACE) : 
                             include_once __DIR__ . DIRECTORY_SEPARATOR . 'tracer.php';
-                            onErrorShowDebugTracer($error->getBacktrace(), array_slice($lines, 3));
+                            __show_html_debug_tracer(
+                                $error->getBacktrace(), 
+                                array_slice($lines, 3),
+                                $error->getFile()
+                            );
                         endif;
                     ?>
                 </div>
